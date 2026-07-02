@@ -58,7 +58,7 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
      *
      * @throws IllegalStateException if the two operands have different [exponent]s (e.g. adding an
      * area to a plain length), since they are then not the same physical dimension - delegates to
-     * [KUnitInstance.plus], which enforces this via [KUnitInstance.hasSameUnits].
+     * [KUnitInstance.plus], which enforces this.
      *
      * Example:
      * ```kotlin

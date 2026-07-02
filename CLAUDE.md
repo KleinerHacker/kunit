@@ -112,9 +112,12 @@
   * Two "pure" units (wrapper classes such as `KLengthUnitInstance`) of the same unit group are calculated
     (e.g. meter + mile is allowed, automatic conversion via normalization) **and** have the same
     exponent (e.g. area must not be calculated with volume)
-  * Two mixed units (`KUnitInstance`) are calculated with each other with exactly the same `KUnit`s and their
-    exponents (no automatic conversion)
-    * Even with the same `KUnit`s but different exponents, the operation fails
+  * Two mixed units (`KUnitInstance`) are calculated with each other if, for every term on one side, there
+    is exactly one term on the other side belonging to the same unit group with the same exponent
+    (order-independent) - the `KUnit`s themselves do not need to match, since matching terms are
+    automatically converted via normalization (analogous to the "pure" wrapper classes)
+    * Even with matching unit groups, if any pair of matching terms has different exponents, the operation fails
+    * If a term has no matching unit group on the other side (e.g. mixing length with time), the operation fails
     * Result: `IllegalStateException`
 
 ## Tests

@@ -63,10 +63,12 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 
 ## Addition and subtraction
 
-Unlike `*`/`/`, `+` and `-` are only allowed between two `KUnitInstance`s that have **exactly** the same
-`units` - the same `KUnit`s with the same exponents (order-independent). There is **no** automatic conversion
-between different units here, since `KUnitInstance` doesn't know which units belong to the same group;
-that is precisely what the group-specific wrapper classes (`KLengthUnitInstance`, etc.) add on top.
+Unlike `*`/`/`, `+` and `-` are only allowed between two `KUnitInstance`s that describe the **same physical
+dimension**: for every term on one side there must be exactly one term on the other side belonging to the
+same unit group (e.g. all `KLengthUnit` values) with the same exponent (order-independent). The `KUnit`s
+themselves do **not** need to be identical - matching terms are automatically converted via normalization,
+the same way the group-specific wrapper classes (`KLengthUnitInstance`, etc.) do it for "pure" units. The
+result is expressed in the left-hand operand's `units`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -78,10 +80,20 @@ val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 (a + b).value // 8.0
 
 val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
-a + c // throws IllegalStateException: KLengthUnit.METER != KLengthUnit.MILE, even though both are "length"
+(a + c).value // 4832.032 (3 miles converted to meters, then added), units=[METER^1]
 ```
 
-Use `hasSameUnits` to check compatibility up front:
+Mismatched unit groups or mismatched exponents still fail:
+
+```kotlin
+val time = KUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
+a + time // throws IllegalStateException: no matching unit group for TimeUnit.SECOND
+
+val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+a + area // throws IllegalStateException: mismatched exponents (1 vs 2)
+```
+
+Use `hasSameUnits` to check for an **exact** match (same `KUnit`s, not just the same group) up front:
 
 ```kotlin
 val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))

@@ -81,12 +81,16 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
     /**
      * Adds two mixed units.
      *
-     * Only allowed when both instances have exactly the same [units] (same [KUnit]s with the same
-     * exponents, order-independent) - see [hasSameUnits]. This is a stricter rule than the one used
-     * by "pure" unit wrapper classes (e.g. `KLengthUnitInstance`), which additionally allow automatic
-     * conversion between different units of the same group.
+     * Allowed as long as `this` and [other] describe the same physical dimension: for every term in
+     * [units] there must be exactly one term in `other.units` belonging to the same unit group (i.e.
+     * the same runtime [KUnit] type, e.g. all `KLengthUnit` values) with the same exponent, and vice
+     * versa. Matching terms do **not** need to be the exact same [KUnit] - [other]'s value is
+     * automatically converted into `this`'s units first, using each matched pair's [KUnit.baseValue]
+     * ratio (analogous to the automatic conversion performed by "pure" unit wrapper classes like
+     * `KLengthUnitInstance`). The result is expressed in `this`'s [units].
      *
-     * @throws IllegalStateException if `this` and [other] do not have the same [units].
+     * @throws IllegalStateException if `this` and [other] do not describe the same physical dimension
+     * (different unit groups, or different exponents for a matching group).
      *
      * Example:
      * ```kotlin
@@ -95,22 +99,51 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      * (a + b).value // 8.0
      *
      * val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
-     * a + c // throws IllegalStateException: different KUnit (METER vs MILE)
+     * (a + c).value // 4832.032 (3 miles converted to meters, then added), units=[METER^1]
+     *
+     * val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+     * val length = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * area + length // throws IllegalStateException: different exponents (2 vs 1)
      * ```
      */
     operator fun plus(other: KUnitInstance): KUnitInstance {
-        check(hasSameUnits(other)) { "Cannot add KUnitInstance with different units: $units vs ${other.units}" }
-        return KUnitInstance(value + other.value, units)
+        val convertedOtherValue = other.value * conversionFactorTo(other)
+        return KUnitInstance(value + convertedOtherValue, units)
     }
 
     /**
      * Subtracts two mixed units. Same rules as [plus].
      *
-     * @throws IllegalStateException if `this` and [other] do not have the same [units].
+     * @throws IllegalStateException if `this` and [other] do not describe the same physical dimension.
      */
     operator fun minus(other: KUnitInstance): KUnitInstance {
-        check(hasSameUnits(other)) { "Cannot subtract KUnitInstance with different units: $units vs ${other.units}" }
-        return KUnitInstance(value - other.value, units)
+        val convertedOtherValue = other.value * conversionFactorTo(other)
+        return KUnitInstance(value - convertedOtherValue, units)
+    }
+
+    /**
+     * Matches each term in [units] to exactly one term in `other.units` of the same unit group (i.e.
+     * the same runtime [KUnit] type) and exponent, then computes the factor that converts a value
+     * expressed in `other`'s units into a value expressed in `this`'s units.
+     *
+     * @throws IllegalStateException if `this` and [other] do not have the same number of terms, or a
+     * term has no group-and-exponent match in the other's [units].
+     */
+    private fun conversionFactorTo(other: KUnitInstance): Double {
+        check(units.size == other.units.size) {
+            "Cannot combine KUnitInstance with different dimensions: $units vs ${other.units}"
+        }
+        val remaining = other.units.toMutableList()
+        var factor = 1.0
+        for (term in units) {
+            val index = remaining.indexOfFirst { it.unit.javaClass == term.unit.javaClass && it.exponent == term.exponent }
+            check(index >= 0) {
+                "Cannot combine KUnitInstance with different dimensions: $units vs ${other.units}"
+            }
+            val matched = remaining.removeAt(index)
+            factor *= Math.pow(matched.unit.baseValue / term.unit.baseValue, term.exponent.toDouble())
+        }
+        return factor
     }
 
     /**

@@ -80,9 +80,20 @@ class KUnitInstanceTest {
     }
 
     @Test
-    fun `plus fails when units differ`() {
+    fun `plus converts different units of the same group automatically`() {
         val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
         val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
+
+        val result = a + b
+
+        assertEquals(5.0 + 3.0 * KLengthUnit.MILE.baseValue, result.value, 1e-9)
+        assertEquals(listOf(KUnitTerm(KLengthUnit.METER, 1)), result.units)
+    }
+
+    @Test
+    fun `plus fails when unit groups differ`() {
+        val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+        val b = KUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
 
         assertFailsWith<IllegalStateException> { a + b }
     }
@@ -104,9 +115,20 @@ class KUnitInstanceTest {
     }
 
     @Test
-    fun `minus fails when units differ`() {
+    fun `minus converts different units of the same group automatically`() {
         val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
         val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
+
+        val result = a - b
+
+        assertEquals(5.0 - 3.0 * KLengthUnit.MILE.baseValue, result.value, 1e-9)
+        assertEquals(listOf(KUnitTerm(KLengthUnit.METER, 1)), result.units)
+    }
+
+    @Test
+    fun `minus fails when unit groups differ`() {
+        val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+        val b = KUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
 
         assertFailsWith<IllegalStateException> { a - b }
     }

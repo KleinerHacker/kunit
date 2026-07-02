@@ -63,9 +63,10 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 
 ## 加法与减法
 
-与 `*`/`/` 不同，`+` 和 `-` 只有在两个 `KUnitInstance` 拥有**完全相同**的 `units`（相同的 `KUnit` 且指数
-相同，顺序无关）时才被允许。这里**没有**不同单位之间的自动换算，因为 `KUnitInstance` 并不知道哪些单位属于
-同一个组——这正是特定于分组的包装类（`KLengthUnitInstance` 等）额外提供的功能。
+与 `*`/`/` 不同，`+` 和 `-` 只有在两个 `KUnitInstance` 表示**相同的物理维度**时才被允许——一侧的每个项，
+必须在另一侧恰好有一个属于同一单位组（例如所有 `KLengthUnit` 值）且指数相同的项（顺序无关）。`KUnit`
+本身**不需要**完全一致——匹配的项会自动进行归一化换算，这与特定于分组的包装类（`KLengthUnitInstance` 等）
+对"pure"单位所做的完全一样。结果以左侧操作数的 `units` 表示。
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -77,10 +78,20 @@ val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 (a + b).value // 8.0
 
 val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
-a + c // 抛出 IllegalStateException：METER != MILE，尽管两者都属于"长度"
+(a + c).value // 4832.032（3英里换算为米后相加），units=[METER^1]
 ```
 
-使用 `hasSameUnits` 可以预先检查兼容性：
+单位组或指数不匹配时仍会失败：
+
+```kotlin
+val time = KUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
+a + time // 抛出 IllegalStateException：找不到 TimeUnit.SECOND 对应的单位组
+
+val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+a + area // 抛出 IllegalStateException：指数不匹配（1 与 2）
+```
+
+使用 `hasSameUnits` 可以预先检查是否**完全一致**（而不仅仅是同一分组）：
 
 ```kotlin
 val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))

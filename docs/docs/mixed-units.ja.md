@@ -68,10 +68,11 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 
 ## 加算と減算
 
-`*`/`/` とは異なり、`+` と `-` は2つの `KUnitInstance` が**まったく同じ** `units` を持つ場合にのみ
-許可されます - 同じ `KUnit` が同じ指数を持つ必要があります(順序は問いません)。`KUnitInstance` はどの単位が
-同じグループに属するかを知らないため、ここでは異なる単位間の自動変換は**ありません** - これはまさに
-グループごとのラッパークラス(`KLengthUnitInstance` など)が上乗せして提供する機能です。
+`*`/`/` とは異なり、`+` と `-` は2つの `KUnitInstance` が**同じ物理次元**を表す場合にのみ許可されます -
+片方の各項に対し、もう片方に同じ単位グループ(例えば `KLengthUnit` の値すべて)かつ同じ指数を持つ項が
+ちょうど1つ存在する必要があります(順序は問いません)。`KUnit` 自体が完全に一致している必要は**ありません** -
+一致した項は自動的に正規化変換されます。これはグループごとのラッパークラス(`KLengthUnitInstance` など)が
+「pure」単位に対して行っているのと同じ仕組みです。結果は左辺オペランドの `units` で表現されます。
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -83,10 +84,20 @@ val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 (a + b).value // 8.0
 
 val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
-a + c // IllegalStateException が発生: 両方とも「長さ」であるにもかかわらず METER != MILE
+(a + c).value // 4832.032 (3マイルをメートルに変換してから加算), units=[METER^1]
 ```
 
-`hasSameUnits` を使用すると、事前に互換性を確認できます。
+単位グループや指数が一致しない場合は失敗します:
+
+```kotlin
+val time = KUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
+a + time // IllegalStateException が発生: TimeUnit.SECOND に対応する単位グループがない
+
+val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+a + area // IllegalStateException が発生: 指数の不一致 (1 vs 2)
+```
+
+`hasSameUnits` を使用すると、(グループではなく)**完全一致**であることを事前に確認できます。
 
 ```kotlin
 val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))

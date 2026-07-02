@@ -66,10 +66,11 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 
 ## 덧셈과 뺄셈
 
-`*`/`/`와 달리, `+`와 `-`는 두 `KUnitInstance`가 **정확히** 동일한 `units`를 가질 때만 허용됩니다 - 동일한
-`KUnit`이 동일한 지수를 가지고 있어야 합니다(순서는 무관). `KUnitInstance`는 어떤 단위가 같은 그룹에
-속하는지 알지 못하기 때문에 여기서는 서로 다른 단위 간 자동 변환이 **없습니다** - 이것이 바로 그룹별 래퍼
-클래스(`KLengthUnitInstance` 등)가 추가로 제공하는 기능입니다.
+`*`/`/`와 달리, `+`와 `-`는 두 `KUnitInstance`가 **동일한 물리적 차원**을 나타낼 때만 허용됩니다 - 한쪽의
+각 항에 대해, 다른 쪽에 동일한 단위 그룹(예: 모든 `KLengthUnit` 값)이면서 동일한 지수를 가진 항이 정확히
+하나 존재해야 합니다(순서는 무관). `KUnit` 자체가 완전히 동일할 필요는 **없습니다** - 일치하는 항은
+자동으로 정규화되어 변환됩니다. 이는 그룹별 래퍼 클래스(`KLengthUnitInstance` 등)가 "pure" 단위에 대해
+수행하는 것과 동일한 방식입니다. 결과는 왼쪽 피연산자의 `units`로 표현됩니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -81,10 +82,20 @@ val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 (a + b).value // 8.0
 
 val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
-a + c // IllegalStateException 발생: METER != MILE, 둘 다 "길이"임에도 불구하고
+(a + c).value // 4832.032 (3마일을 미터로 변환한 뒤 더함), units=[METER^1]
 ```
 
-`hasSameUnits`를 사용해 사전에 호환성을 확인할 수 있습니다.
+단위 그룹이나 지수가 일치하지 않으면 여전히 실패합니다.
+
+```kotlin
+val time = KUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
+a + time // IllegalStateException 발생: TimeUnit.SECOND에 대응하는 단위 그룹이 없음
+
+val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+a + area // IllegalStateException 발생: 지수 불일치 (1 vs 2)
+```
+
+`hasSameUnits`를 사용하면 (그룹이 아닌) **완전히 동일한지** 사전에 확인할 수 있습니다.
 
 ```kotlin
 val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
