@@ -14,14 +14,14 @@ private enum class TimeUnit(override val symbol: String, override val baseValue:
 
 private fun Number.seconds(): KUnitInstance = KUnitInstance(toDouble(), listOf(KUnitTerm(TimeUnit.SECOND, 1)))
 
-class LengthMixedUnitTest {
+class KLengthMixedUnitTest {
 
     @Test
     fun `dividing a length by a mixed unit produces speed`() {
         val speed = 10.meters() / 2.seconds()
 
         assertEquals(5.0, speed.value, 1e-9)
-        assertEquals(setOf(KUnitTerm(LengthUnit.BASE, 1), KUnitTerm(TimeUnit.SECOND, -1)), speed.units.toSet())
+        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(TimeUnit.SECOND, -1)), speed.units.toSet())
     }
 
     @Test
@@ -31,7 +31,7 @@ class LengthMixedUnitTest {
         val speed = 10.meters() * perSecond
 
         assertEquals(20.0, speed.value, 1e-9)
-        assertEquals(setOf(KUnitTerm(LengthUnit.BASE, 1), KUnitTerm(TimeUnit.SECOND, -1)), speed.units.toSet())
+        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(TimeUnit.SECOND, -1)), speed.units.toSet())
     }
 
     @Test
@@ -41,13 +41,13 @@ class LengthMixedUnitTest {
 
         val distance = speed * time
 
-        assertEquals(10.0, distance.toLengthUnit().value, 1e-9)
+        assertEquals(10.0, distance.toKLengthUnit().value, 1e-9)
     }
 
     @Test
-    fun `toLengthUnit throws for an instance that is not a pure length`() {
+    fun `toKLengthUnit throws for an instance that is not a pure length`() {
         val speed = 10.meters() / 2.seconds()
 
-        assertFailsWith<IllegalStateException> { speed.toLengthUnit() }
+        assertFailsWith<IllegalStateException> { speed.toKLengthUnit() }
     }
 }

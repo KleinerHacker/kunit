@@ -8,10 +8,10 @@ import org.pcsoft.framework.kunit.KUnit
  *
  * Example:
  * ```kotlin
- * LengthUnit.MILE.baseValue // 1609.344 (1 mile = 1609.344 meters)
+ * KLengthUnit.MILE.baseValue // 1609.344 (1 mile = 1609.344 meters)
  * ```
  */
-enum class LengthUnit(override val symbol: String, override val baseValue: Double) : KUnit {
+enum class KLengthUnit(override val symbol: String, override val baseValue: Double) : KUnit {
     /** Meter, the SI base unit of length; [baseValue] = 1.0 by definition. */
     METER("m", 1.0),
 
@@ -50,9 +50,9 @@ enum class LengthUnit(override val symbol: String, override val baseValue: Doubl
 
     companion object {
         /**
-         * The base unit of the length group; all internal values of [LengthUnitInstance] are
+         * The base unit of the length group; all internal values of [KLengthUnitInstance] are
          * normalized to this unit.
          */
-        val BASE: LengthUnit = METER
+        val BASE: KLengthUnit = METER
     }
 }

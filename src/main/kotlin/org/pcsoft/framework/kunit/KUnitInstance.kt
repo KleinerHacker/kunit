@@ -9,8 +9,8 @@ package org.pcsoft.framework.kunit
  * subtraction of exponents), which is what all arithmetic in this library relies on.
  *
  * Example: a pure length value (e.g. `5.meters()`) is represented internally as a single
- * `KUnitTerm(LengthUnit.METER, 1)`. Multiplying two lengths together (`5.meters() * 3.meters()`)
- * yields a single term `KUnitTerm(LengthUnit.METER, 2)` (an area, in square meters).
+ * `KUnitTerm(KLengthUnit.METER, 1)`. Multiplying two lengths together (`5.meters() * 3.meters()`)
+ * yields a single term `KUnitTerm(KLengthUnit.METER, 2)` (an area, in square meters).
  */
 data class KUnitTerm(val unit: KUnit, val exponent: Int)
 
@@ -19,7 +19,7 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
  * ([KUnitTerm]s) describing its physical dimension, e.g. "10.0 m/s" (a length term and a time term).
  *
  * [KUnitInstance] is the generic engine underlying every "pure" unit wrapper class (e.g.
- * `LengthUnitInstance`); those wrappers always normalize their [value] to their group's base unit,
+ * `KLengthUnitInstance`); those wrappers always normalize their [value] to their group's base unit,
  * but [KUnitInstance] itself performs **no** normalization - [value] is only meaningful together
  * with its exact [units], in the scale they were constructed with.
  *
@@ -83,18 +83,18 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Only allowed when both instances have exactly the same [units] (same [KUnit]s with the same
      * exponents, order-independent) - see [hasSameUnits]. This is a stricter rule than the one used
-     * by "pure" unit wrapper classes (e.g. `LengthUnitInstance`), which additionally allow automatic
+     * by "pure" unit wrapper classes (e.g. `KLengthUnitInstance`), which additionally allow automatic
      * conversion between different units of the same group.
      *
      * @throws IllegalStateException if `this` and [other] do not have the same [units].
      *
      * Example:
      * ```kotlin
-     * val a = KUnitInstance(5.0, listOf(KUnitTerm(LengthUnit.METER, 1)))
-     * val b = KUnitInstance(3.0, listOf(KUnitTerm(LengthUnit.METER, 1)))
+     * val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
      * (a + b).value // 8.0
      *
-     * val c = KUnitInstance(3.0, listOf(KUnitTerm(LengthUnit.MILE, 1)))
+     * val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
      * a + c // throws IllegalStateException: different KUnit (METER vs MILE)
      * ```
      */
@@ -120,8 +120,8 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Example:
      * ```kotlin
-     * val a = KUnitInstance(5.0, listOf(KUnitTerm(LengthUnit.METER, 1), KUnitTerm(TimeUnit.SECOND, -1)))
-     * val b = KUnitInstance(9.0, listOf(KUnitTerm(TimeUnit.SECOND, -1), KUnitTerm(LengthUnit.METER, 1)))
+     * val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(TimeUnit.SECOND, -1)))
+     * val b = KUnitInstance(9.0, listOf(KUnitTerm(TimeUnit.SECOND, -1), KUnitTerm(KLengthUnit.METER, 1)))
      * a.hasSameUnits(b) // true, even though value and term order differ
      * ```
      */
@@ -134,7 +134,7 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      * own [KUnit].
      *
      * Each target must match exactly one term in [units] by unit group (i.e. the runtime type of
-     * the term's [KUnit], e.g. all `LengthUnit` values belong to the same group) and, for
+     * the term's [KUnit], e.g. all `KLengthUnit` values belong to the same group) and, for
      * [KDerivedUnit]/[KScaledDerivedUnit] targets, by exponent as well; every term must have exactly
      * one matching target and vice versa (the number of [targets] must equal `units.size`).
      *
@@ -144,10 +144,10 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      * Example:
      * ```kotlin
      * val speed = 10.meters() / 1.seconds() // KUnitInstance: value=10.0, units=[METER^1, SECOND^-1]
-     * speed.valueAs(KUnitPrefix.KILO with LengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
+     * speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
      *
      * val area = (200.meters() * 50.meters()) // units=[METER^2]
-     * area.valueAs(LengthDerivedUnit.HECTARE)  // 1.0
+     * area.valueAs(KLengthDerivedUnit.HECTARE)  // 1.0
      * ```
      */
     fun valueAs(vararg targets: KUnitTarget): Double {
@@ -188,7 +188,7 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      * Example:
      * ```kotlin
      * val speed = 10.meters() / 1.seconds()
-     * speed.toString(KUnitPrefix.KILO with LengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
+     * speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
      * ```
      */
     fun toString(vararg targets: KUnitTarget): String {
@@ -196,7 +196,12 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
         val convertedValue = valueAs(*targets)
         val symbolPart = units.joinToString("*") { term ->
             val resolved = matches.getValue(term)
-            resolved.symbol + if (term.exponent != 1) "^${term.exponent}" else ""
+            // Only append the exponent suffix for "linear" targets (a plain KUnit/KScaledUnit, whose
+            // symbol represents one dimension raised to the term's exponent, e.g. "km^2"). A derived
+            // unit's symbol (e.g. "ha") already represents the full, exponentiated quantity, so no
+            // suffix must be appended there (it would wrongly read "ha^2" instead of "ha").
+            val suffix = if (resolved.isLinearPerDimension && term.exponent != 1) "^${term.exponent}" else ""
+            resolved.symbol + suffix
         }
         return "$convertedValue $symbolPart"
     }
