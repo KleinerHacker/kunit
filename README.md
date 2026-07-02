@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/docs/assets/images/logo.png" alt="KUnit logo" width="320">
+</p>
+
 # kunit
 
 Kotlin Unit Framework to calculate with different units in Kotlin (and Java) - calculate with real physical
