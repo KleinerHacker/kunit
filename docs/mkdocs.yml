@@ -1,0 +1,89 @@
+site_name: KUnit
+site_description: Kotlin Unit Framework to calculate with different units in Kotlin (and Java)
+repo_name: kunit
+repo_url: https://github.com/KleinerHacker/kunit
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+        - locale: ko
+          name: 한국어
+          build: true
+          nav_translations:
+            Overview: 개요
+            Mixed Units: 혼합 단위
+            Adding Custom Units: 사용자 정의 단위 추가
+            Predefined Units: 미리 정의된 단위
+            Length: 길이
+        - locale: zh
+          name: 中文
+          build: true
+          nav_translations:
+            Overview: 概述
+            Mixed Units: 混合单位
+            Adding Custom Units: 添加自定义单位
+            Predefined Units: 预定义单位
+            Length: 长度
+        - locale: ja
+          name: 日本語
+          build: true
+          nav_translations:
+            Overview: 概要
+            Mixed Units: 混合単位
+            Adding Custom Units: カスタム単位の追加
+            Predefined Units: 定義済み単位
+            Length: 長さ
+
+nav:
+  - Overview: index.md
+  - Mixed Units: mixed-units.md
+  - Adding Custom Units: custom-units.md
+  - Predefined Units:
+      - Length: units/length.md

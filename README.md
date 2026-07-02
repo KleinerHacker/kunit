@@ -23,6 +23,23 @@ The project uses Gradle (the wrapper is included in the repository, no local Gra
 A JDK capable of resolving toolchain 25 is required (the `foojay-resolver` plugin downloads it automatically
 if needed).
 
+## Documentation Site
+
+The full documentation (overview, quick start, mixed units, adding custom units, predefined units) is built
+with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and available in English, Korean,
+Chinese and Japanese via [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n), with a
+light/dark mode toggle.
+
+```bash
+pip install -r docs/requirements.txt
+
+# Serve locally with live-reload
+mkdocs serve
+
+# Build the static site into ./site
+mkdocs build
+```
+
 ## Architecture
 
 * **`KUnitInstance`** - represents a *mixed unit*: a normalized `Double` base value plus a set of `KUnit`s,
