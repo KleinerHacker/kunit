@@ -187,11 +187,13 @@ tasks {
 
     register<Exec>("deployDocs") {
         group = "MKDocs"
-        description = "Deploy a versioned docs snapshot via mike. Requires -Pversion=<tag> and a pre-configured git push target."
+        description = "Deploy a versioned docs snapshot via mike. Pass -PdocsVersion=<tag>; falls back to \"snapshot\" if no tag is given. Requires a pre-configured git push target."
         workingDir = file("docs")
-        val ver = (project.findProperty("version") as String?)
-            ?: error("Pass -Pversion=<tag> to deployDocs")
-        val setLatest = (project.findProperty("setLatest") as String?) != "false"
+        // Use -PdocsVersion=<tag> for a real release; otherwise deploy under the "snapshot" alias.
+        // A "snapshot" deploy is never promoted to "latest".
+        val ver = (project.findProperty("docsVersion") as String?)?.takeIf { it.isNotBlank() }
+            ?: "snapshot"
+        val setLatest = ver != "snapshot" && (project.findProperty("setLatest") as String?) != "false"
         val args = buildList {
             add("python"); add("-c"); add("from mike.driver import main; main()"); add("deploy"); add("--push")
             if (setLatest) { add("--update-aliases"); add(ver); add("latest") } else add(ver)

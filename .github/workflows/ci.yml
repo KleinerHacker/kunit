@@ -86,9 +86,15 @@ jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     needs: validate-docs
+    # Only deploy on pushes to main/master — never on pull requests (fork PRs have a
+    # read-only token, and deploying docs per PR is undesirable anyway).
+    if: github.event_name == 'push'
     steps:
         - name: Checkout repository
           uses: actions/checkout@v4
+          with:
+            # Full history so mike can read/update the gh-pages branch reliably.
+            fetch-depth: 0
 
         - name: Set up Python
           uses: actions/setup-python@v5
@@ -107,6 +113,11 @@ jobs:
 
         - name: Make Gradle wrapper executable
           run: chmod +x ./gradlew
+
+        - name: Configure Git identity for mike
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
         - name: Deploy
           run: ./gradlew deployDocs --stacktrace --info
