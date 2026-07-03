@@ -1,5 +1,11 @@
 site_name: KUnit
 site_description: Kotlin Unit Framework to calculate with different units in Kotlin (and Java)
+# Must include the mike version segment (here the "latest" alias). mkdocs-static-i18n
+# derives the language-selector links on the landing pages from site_url's path; without
+# the version segment those links point to /ko/, /zh/, ... at the domain root (404 under
+# mike, which deploys every version under /kunit/<version>/). Deep pages use relative
+# links and are unaffected.
+site_url: https://kleinerhacker.github.io/kunit/latest/
 repo_name: kunit
 repo_url: https://github.com/KleinerHacker/kunit
 docs_dir: docs
