@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.0]
+
 ### Added
 
 - Core mixed-unit engine (`KUnitInstance`, `KUnitTerm`) supporting arbitrary combinations of units and
