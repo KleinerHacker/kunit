@@ -45,12 +45,6 @@ jobs:
       - name: Build
         run: ./gradlew build --stacktrace
 
-      - name: Upload library artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: kunit-jar
-          path: build/libs/*.jar
-
   # Build the docs as a generation test (mkdocs --strict) before they get deployed.
   validate-docs:
     runs-on: ubuntu-latest
@@ -113,7 +107,10 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Deploy docs
-        run: ./gradlew deployDocs --stacktrace --info
+        run: ./gradlew deployDocs -PdocsVersion="${{ github.ref_name }}" --stacktrace --info
+
+      - name: Set default docs version
+        run: ./gradlew setDefaultDocs --stacktrace --info
 
   release:
     runs-on: ubuntu-latest
@@ -124,12 +121,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
-
-      - name: Download library artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: kunit-jar
-          path: build/release/
 
       - name: Extract changelog
         run: |
@@ -150,13 +141,13 @@ jobs:
         run: |
           TAG="${{ github.ref_name }}"
           if [[ "$TAG" =~ ^(0|[a-zA-Z]) ]]; then
-            gh release create "$TAG" build/release/*.jar \
+            gh release create "$TAG" \
               --title "$TAG" \
               --notes "$RELEASE_NOTES" \
               --prerelease \
               --latest=false
           else
-            gh release create "$TAG" build/release/*.jar \
+            gh release create "$TAG" \
               --title "$TAG" \
               --notes "$RELEASE_NOTES" \
               --latest
