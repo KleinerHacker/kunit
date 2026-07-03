@@ -71,6 +71,23 @@
 * The documentation should be comprehensive and, where useful, contain examples
   * especially for operators
 
+### MkDocs site
+
+* Every new unit group must ship a dedicated MkDocs page at `docs/docs/units/<group>.md`, following the
+  existing `docs/docs/units/length.md` as the template (units table, operators, comparisons, SI prefixes,
+  `toString` formatting, mixing with other units, plus any group-specific sections)
+* The page must be provided in **every** language the site supports (the `mkdocs-static-i18n` suffix
+  structure: the default `<group>.md` plus `<group>.ko.md`, `<group>.zh.md`, `<group>.ja.md`), mirroring
+  the translation coverage of the `length` page
+* `docs/mkdocs.yml` must be updated accordingly: add a `nav` entry under `Predefined Units` and a matching
+  label in every locale's `nav_translations`
+
+### Changelog
+
+* `CHANGELOG.md` must always be kept up to date: every change (new unit groups, features, fixes, breaking
+  changes, ...) is recorded under the `[Unreleased]` section, grouped as `Added`/`Changed`/`Fixed`/`Removed`,
+  as part of the same change - never leave it for later
+
 ## Operators
 
 * All standard operators '+', '-', '*', '/' must be supported for:

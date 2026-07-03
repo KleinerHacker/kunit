@@ -72,6 +72,7 @@ plugins:
             Adding Custom Units: 사용자 정의 단위 추가
             Predefined Units: 미리 정의된 단위
             Length: 길이
+            Time: 시간
             API Docs: API 문서
             Licences: 라이선스
         - locale: zh
@@ -83,6 +84,7 @@ plugins:
             Adding Custom Units: 添加自定义单位
             Predefined Units: 预定义单位
             Length: 长度
+            Time: 时间
             API Docs: API 文档
             Licences: 许可证
         - locale: ja
@@ -94,6 +96,7 @@ plugins:
             Adding Custom Units: カスタム単位の追加
             Predefined Units: 定義済み単位
             Length: 長さ
+            Time: 時間
             API Docs: API ドキュメント
             Licences: ライセンス
 
@@ -103,5 +106,6 @@ nav:
   - Adding Custom Units: custom-units.md
   - Predefined Units:
       - Length: units/length.md
+      - Time: units/time.md
   - API Docs: dokka/html/index.html
   - Licences: licences/index.html

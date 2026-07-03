@@ -1,21 +1,17 @@
 package org.pcsoft.framework.kunit.length
 
 import org.pcsoft.framework.kunit.KDerivedUnit
-import org.pcsoft.framework.kunit.KUnit
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.with
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-
-private enum class NonLengthUnit(override val symbol: String, override val baseValue: Double) : KUnit {
-    SECOND("s", 1.0)
-}
 
 /** All length-unit generator functions paired with the [KLengthUnit] they construct, shared with [KLengthUnitPrefixTest]. */
 internal val lengthUnitGenerators: List<Pair<(Number) -> KLengthUnitInstance, KLengthUnit>> = listOf(
@@ -215,7 +211,7 @@ class KLengthUnitInstanceTest {
 
     @Test
     fun `toKLengthUnit fails for a non-length unit`() {
-        val notLength = KUnitInstance(5.0, listOf(KUnitTerm(NonLengthUnit.SECOND, 1)))
+        val notLength = KUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
 
         assertFailsWith<IllegalStateException> { notLength.toKLengthUnit() }
     }
