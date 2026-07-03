@@ -57,6 +57,93 @@ class KMixedUnitInstanceTest {
     }
 
     @Test
+    fun `times adds exponents of matching unit`() {
+        val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+        val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 3)))
+
+        val result = a * b
+
+        assertEquals(6.0, result.value)
+        assertEquals(listOf(KUnitTerm(KLengthUnit.METER, 5)), result.units)
+    }
+
+    @Test
+    fun `times drives exponent through zero from negative to positive`() {
+        // METER^-2 * METER^3 => METER^1 (crossing the 0-point upwards)
+        val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, -2)))
+        val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 3)))
+
+        val result = a * b
+
+        assertEquals(6.0, result.value)
+        assertEquals(listOf(KUnitTerm(KLengthUnit.METER, 1)), result.units)
+    }
+
+    @Test
+    fun `times removes term when exponents cancel to exactly zero`() {
+        // METER^-2 * METER^2 => METER^0 => term removed entirely
+        val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, -2)))
+        val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+
+        val result = a * b
+
+        assertEquals(6.0, result.value)
+        assertTrue(result.units.isEmpty())
+    }
+
+    @Test
+    fun `times against a mixed unit adds exponents across the zero point`() {
+        // (METER^1 * SECOND^-1) * (METER^-1 * SECOND^-1)
+        //   METER:  1 + (-1) = 0   -> removed
+        //   SECOND: -1 + (-1) = -2 -> kept
+        val a = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
+        val b = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, -1), KUnitTerm(KTimeUnit.SECOND, -1)))
+
+        val result = a * b
+
+        assertEquals(20.0, result.value)
+        assertEquals(listOf(KUnitTerm(KTimeUnit.SECOND, -2)), result.units)
+    }
+
+    @Test
+    fun `div drives exponent through zero from positive to negative`() {
+        // METER^1 / METER^3 => METER^-2 (crossing the 0-point downwards)
+        val a = KMixedUnitInstance(6.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+        val b = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, 3)))
+
+        val result = a / b
+
+        assertEquals(3.0, result.value)
+        assertEquals(listOf(KUnitTerm(KLengthUnit.METER, -2)), result.units)
+    }
+
+    @Test
+    fun `div removes term when exponents cancel to exactly zero`() {
+        // METER^2 / METER^2 => METER^0 => term removed entirely
+        val a = KMixedUnitInstance(8.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+        val b = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+
+        val result = a / b
+
+        assertEquals(4.0, result.value)
+        assertTrue(result.units.isEmpty())
+    }
+
+    @Test
+    fun `div against a mixed unit subtracts exponents across the zero point`() {
+        // (METER^1 * SECOND^1) / (METER^1 * SECOND^-1)
+        //   METER:  1 - 1      = 0 -> removed
+        //   SECOND: 1 - (-1)   = 2 -> kept
+        val a = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, 1)))
+        val b = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
+
+        val result = a / b
+
+        assertEquals(5.0, result.value)
+        assertEquals(listOf(KUnitTerm(KTimeUnit.SECOND, 2)), result.units)
+    }
+
+    @Test
     fun `div subtracts exponent of matching unit`() {
         val distance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
         val time = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1)))

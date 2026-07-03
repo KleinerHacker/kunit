@@ -4,6 +4,11 @@
 
 ### Added
 
+- Test coverage in `KMixedUnitInstanceTest` verifying that `KMixedUnitInstance` term exponents are
+  added on `*` and subtracted on `/` — including crossings of the 0-point (negative→positive and
+  positive→negative) and the removal of a term whose exponent cancels to exactly `0` — both for pure
+  terms and when combining with other mixed units.
+
 - New light-distance units in the **Length** group: light-second (`ls`), light-minute (`lmin`),
   light-hour (`lh`), light-day (`ld`) and light-week (`lw`), complementing the existing light-year.
   Defined via the speed of light (`c = 299 792 458 m/s`) and the Julian time base, with matching
