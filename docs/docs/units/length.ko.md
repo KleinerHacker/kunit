@@ -125,15 +125,15 @@ tank + cube.toKLengthUnit()                        // 허용됨: 둘 다 지수 
 ## SI 접두어
 
 모든 `KLengthUnit`은 24개의 SI 접두어(`KUnitPrefix`, 루트 패키지, Quetta/Q부터 Quecto/q까지) 중 어떤
-것과도 범용 infix 생성 함수와 `with`(valueAs/toString 대상용)를 사용해 결합할 수 있습니다.
+것과도 그룹별 infix 생성 함수(구체 단위를 바로 반환)와 `with`(valueAs/toString 대상용)를 사용해 결합할 수 있습니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-// 생성: "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
+// 생성: "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+val fiveKm = 5 kilo meters
 fiveKm.value // 5000.0
 
 // 접두어가 붙은 대상을 사용해 값을 다시 읽기

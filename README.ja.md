@@ -65,8 +65,9 @@ mkdocs build
   カプセル化し、値を常にそのグループの基準単位に正規化して保持します。指数 1 に限定されず、同じグループの
   導出量（例：面積 = 長さ²、体積 = 長さ³）もカバーします。
 * **`KUnitPrefix`** —— 完全な SI 接頭辞表（Quetta/Q ～ Quecto/q）を持つルートパッケージのジェネリック
-  列挙型です。接頭辞は `KUnit` 自体の一部ではなく、値の読み書き時にのみ意味を持ち、ジェネリックな
-  `infix` 関数（例：`5 kilo meters`）に続く `KPrefixBuilder.toKMixedUnitInstance()` で組み合わせます。
+  列挙型です。接頭辞は `KUnit` 自体の一部ではなく、値の読み書き時にのみ意味を持ち、
+  グループごとの `infix` 関数（例：`5 kilo meters`）で組み合わせ、そのグループの具体単位を直接返します
+  （`5 kilo meters` は `KLengthUnitInstance`、`5000.meters()` と同等）。
 * **特殊単位**（`KDerivedUnit` / `KScaledDerivedUnit`）—— 独自の名前/記号を持ち、グループと指数に
   紐付いた追加の換算先（例：面積のヘクタール、体積のリットル）で、基本メカニズムを置き換えるのではなく
   補完します。
@@ -99,14 +100,10 @@ classDiagram
         +exponent: Int
         +baseValue: Double
     }
-    class KPrefixBuilder {
-        +toKMixedUnitInstance()
-    }
 
     KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
-    KUnitPrefix ..> KPrefixBuilder : builds
 
     class KLengthUnit {
         <<enum>>
@@ -131,7 +128,8 @@ classDiagram
 ### パッケージ構造
 
 * ルートパッケージ `org.pcsoft.framework.kunit` には基本型 `KUnit`、`KMixedUnitInstance`、`KUnitPrefix`、
-  `KDerivedUnit`、`KPrefixBuilder`、… が含まれます。
+  `KDerivedUnit`、… が含まれます。各単位サブパッケージは独自の接頭辞 `infix` 関数（例：
+  `KLengthUnitPrefix.kt`）を追加で宣言します。
 * すべての「純粋」単位グループは独自のサブパッケージ（例：`org.pcsoft.framework.kunit.length`）を持ち、
   それぞれ独自の `KXxxUnit`、`KXxxUnitInstance`、`KXxxDerivedUnit` と関連する生成拡張関数を含みます。
 
@@ -151,7 +149,7 @@ classDiagram
 
 * 完全な演算子と `toString` 換算を備えた `KMixedUnitInstance`/`KUnitTerm` 混合単位エンジン
 * `KUnitPrefix` による完全な SI 接頭辞表（24 個の値、Quetta/Q ～ Quecto/q）
-* ジェネリックでグループに依存しない接頭辞の構築（`5 kilo meters`）
+* 具体単位を直接返すグループごとの接頭辞の構築（`5 kilo meters`）
 * 特殊/導出単位のためのジェネリックなメカニズム（`KScaledUnit`、`KDerivedUnit`、`KScaledDerivedUnit`）
 
 ### 単位グループ
@@ -218,12 +216,11 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ### SI 接頭辞
 
 ```kotlin
-import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
-import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0（メートルに正規化）
 ```
 

@@ -125,15 +125,16 @@ tank + cube.toKLengthUnit()                        // allowed: both exponent 3 (
 ## SI prefixes
 
 Any `KLengthUnit` can be combined with any of the 24 SI prefixes (`KUnitPrefix`, root package, Quetta/Q to
-Quecto/q) using the generic `infix` construction functions and `with` (for `valueAs`/`toString` targets):
+Quecto/q) using the length-group `infix` construction functions (which return a `KLengthUnitInstance`
+directly) and `with` (for `valueAs`/`toString` targets):
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-// Construction: "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
+// Construction: "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+val fiveKm = 5 kilo meters
 fiveKm.value // 5000.0
 
 // Reading back a value using a prefixed target

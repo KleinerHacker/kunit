@@ -4,7 +4,6 @@ import org.pcsoft.framework.kunit.KUnit
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.with
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -201,8 +200,8 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `construction via prefix builder round trips`() {
-        val fiveMillis = (5 milli KTimeUnit.SECOND).toKMixedUnitInstance().toKTimeUnit()
+    fun `construction via prefix infix round trips`() {
+        val fiveMillis = 5 milli KTimeUnit.SECOND
         assertEquals(0.005, fiveMillis.value, 1e-12)
     }
 }

@@ -5,8 +5,8 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 
 // Bare unit references, usable both as a KUnitTarget (e.g. `d.valueAs(meters)`) and as the `unit`
-// argument of the generic, root-level prefix `infix` functions (e.g. `5 kilo meters`, see
-// `KUnitPrefix.kt`). Only METER is an SI unit and therefore sensibly combinable with a prefix, but
+// argument of the length-group prefix `infix` functions (e.g. `5 kilo meters`, see
+// `KLengthUnitPrefix.kt`). Only METER is an SI unit and therefore sensibly combinable with a prefix, but
 // the others are still accepted since KUnitPrefix is a purely mathematical scale factor.
 
 /** Bare reference to [KLengthUnit.METER], for use with [valueAs][KLengthUnitInstance.valueAs] or the prefix `infix` functions. */

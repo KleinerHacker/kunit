@@ -63,8 +63,9 @@ mkdocs build
   값을 항상 해당 그룹의 기준 단위로 정규화하여 보관합니다. 지수 1에 국한되지 않고 같은 그룹의 파생량
   (예: 넓이 = 길이², 부피 = 길이³)도 다룹니다.
 * **`KUnitPrefix`** - 완전한 SI 접두어 표(Quetta/Q ~ Quecto/q)를 담은 루트 패키지의 제네릭 열거형입니다.
-  접두어는 `KUnit` 자체의 일부가 아니라 값의 읽기/쓰기 시에만 의미가 있으며, 제네릭 `infix` 함수
-  (예: `5 kilo meters`)와 이어지는 `KPrefixBuilder.toKMixedUnitInstance()`로 결합됩니다.
+  접두어는 `KUnit` 자체의 일부가 아니라 값의 읽기/쓰기 시에만 의미가 있으며, 그룹별 `infix` 함수
+  (예: `5 kilo meters`)로 결합되어 해당 그룹의 구체 단위를 바로 반환합니다(`5 kilo meters` 는
+  `KLengthUnitInstance`, `5000.meters()` 와 동일).
 * **특수 단위**(`KDerivedUnit` / `KScaledDerivedUnit`) - 고유한 이름/기호를 가진, 그룹 및 지수에 종속된
   추가 변환 대상(예: 넓이의 헥타르, 부피의 리터)으로, 기본 메커니즘을 대체하지 않고 보완합니다.
 
@@ -96,14 +97,10 @@ classDiagram
         +exponent: Int
         +baseValue: Double
     }
-    class KPrefixBuilder {
-        +toKMixedUnitInstance()
-    }
 
     KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
-    KUnitPrefix ..> KPrefixBuilder : builds
 
     class KLengthUnit {
         <<enum>>
@@ -128,7 +125,8 @@ classDiagram
 ### 패키지 구조
 
 * 루트 패키지 `org.pcsoft.framework.kunit`는 기본 타입 `KUnit`, `KMixedUnitInstance`, `KUnitPrefix`,
-  `KDerivedUnit`, `KPrefixBuilder`, ... 를 포함합니다.
+  `KDerivedUnit`, ... 를 포함합니다. 각 단위 하위 패키지는 자체 접두어 `infix` 함수(예:
+  `KLengthUnitPrefix.kt`)를 추가로 선언합니다.
 * 모든 "순수" 단위 그룹은 자체 하위 패키지(예: `org.pcsoft.framework.kunit.length`)를 가지며 고유한
   `KXxxUnit`, `KXxxUnitInstance`, `KXxxDerivedUnit` 및 관련 생성 확장 함수를 포함합니다.
 
@@ -148,7 +146,7 @@ classDiagram
 
 * 완전한 연산자 및 `toString` 변환을 갖춘 `KMixedUnitInstance`/`KUnitTerm` 혼합 단위 엔진
 * `KUnitPrefix`를 통한 완전한 SI 접두어 표(24개 값, Quetta/Q ~ Quecto/q)
-* 제네릭하고 그룹에 독립적인 접두어 생성(`5 kilo meters`)
+* 구체 단위를 바로 반환하는 그룹별 접두어 생성(`5 kilo meters`)
 * 특수/파생 단위를 위한 제네릭 메커니즘(`KScaledUnit`, `KDerivedUnit`, `KScaledDerivedUnit`)
 
 ### 단위 그룹
@@ -214,12 +212,11 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ### SI 접두어
 
 ```kotlin
-import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
-import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0 (미터로 정규화됨)
 ```
 

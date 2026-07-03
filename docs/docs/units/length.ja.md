@@ -125,7 +125,7 @@ tank + cube.toKLengthUnit()                        // 許可される: 両方と
 ## SI 接頭辞
 
 任意の `KLengthUnit` は、24種類の SI 接頭辞(`KUnitPrefix`、ルートパッケージ、Quetta/Q から
-Quecto/q まで)のいずれとも、汎用の infix 構築関数と `with`(valueAs/toString ターゲット用)を使って
+Quecto/q まで)のいずれとも、グループごとの infix 構築関数（具体単位を直接返す）と `with`(valueAs/toString ターゲット用)を使って
 組み合わせることができます。
 
 ```kotlin
@@ -133,8 +133,8 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-// 構築: "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
+// 構築: "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+val fiveKm = 5 kilo meters
 fiveKm.value // 5000.0
 
 // 接頭辞付きのターゲットを使って値を読み戻す

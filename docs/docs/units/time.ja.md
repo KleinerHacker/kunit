@@ -89,18 +89,17 @@ t.dividedBy(30.minutes()) // 3
 
 ## SI 接頭辞
 
-任意の `KTimeUnit` は、汎用の infix 構築関数と `with`（valueAs/toString のターゲット用）を使って、24 個の
+任意の `KTimeUnit` は、グループごとの infix 構築関数（具体単位を直接返す）と `with`（valueAs/toString のターゲット用）を使って、24 個の
 SI 接頭辞（`KUnitPrefix`、ルートパッケージ、Quetta/Q から Quecto/q まで）のいずれとも組み合わせられます。
 サブ秒（および日を超える）スケールはこの方法で表現します。
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.time.*
 
-// 構築: "5 milli seconds" -> KPrefixBuilder -> KMixedUnitInstance -> KTimeUnitInstance
-val fiveMillis = (5 milli seconds).toKMixedUnitInstance().toKTimeUnit()
+// 構築: "5 milli seconds" -> KTimeUnitInstance (direct)
+val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (秒)
 
 // 接頭辞付きターゲットを使って値を読み戻す

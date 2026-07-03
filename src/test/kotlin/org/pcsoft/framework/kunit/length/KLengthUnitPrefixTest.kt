@@ -3,63 +3,39 @@ package org.pcsoft.framework.kunit.length
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.atto
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.deca
-import org.pcsoft.framework.kunit.deci
-import org.pcsoft.framework.kunit.exa
-import org.pcsoft.framework.kunit.femto
-import org.pcsoft.framework.kunit.giga
-import org.pcsoft.framework.kunit.hecto
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.peta
-import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.quecto
-import org.pcsoft.framework.kunit.quetta
-import org.pcsoft.framework.kunit.ronna
-import org.pcsoft.framework.kunit.ronto
-import org.pcsoft.framework.kunit.tera
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.yocto
-import org.pcsoft.framework.kunit.yotta
-import org.pcsoft.framework.kunit.zepto
-import org.pcsoft.framework.kunit.zetta
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Applies the generic, root-level prefix `infix` function for \[prefix] and converts the resulting
- * [org.pcsoft.framework.kunit.KPrefixBuilder] all the way to a [KLengthUnitInstance].
+ * The length-group prefix `infix` functions (e.g. `5 kilo meters`), each returning a
+ * [KLengthUnitInstance] directly.
  */
 private val prefixFunctions: List<Pair<(Number, KLengthUnit) -> KLengthUnitInstance, KUnitPrefix>> = listOf(
-    ({ n: Number, u: KLengthUnit -> (n quetta u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.QUETTA,
-    ({ n: Number, u: KLengthUnit -> (n ronna u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.RONNA,
-    ({ n: Number, u: KLengthUnit -> (n yotta u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.YOTTA,
-    ({ n: Number, u: KLengthUnit -> (n zetta u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.ZETTA,
-    ({ n: Number, u: KLengthUnit -> (n exa u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.EXA,
-    ({ n: Number, u: KLengthUnit -> (n peta u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.PETA,
-    ({ n: Number, u: KLengthUnit -> (n tera u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.TERA,
-    ({ n: Number, u: KLengthUnit -> (n giga u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.GIGA,
-    ({ n: Number, u: KLengthUnit -> (n mega u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.MEGA,
-    ({ n: Number, u: KLengthUnit -> (n kilo u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.KILO,
-    ({ n: Number, u: KLengthUnit -> (n hecto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.HECTO,
-    ({ n: Number, u: KLengthUnit -> (n deca u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.DECA,
-    ({ n: Number, u: KLengthUnit -> (n deci u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.DECI,
-    ({ n: Number, u: KLengthUnit -> (n centi u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.CENTI,
-    ({ n: Number, u: KLengthUnit -> (n milli u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.MILLI,
-    ({ n: Number, u: KLengthUnit -> (n micro u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.MICRO,
-    ({ n: Number, u: KLengthUnit -> (n nano u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.NANO,
-    ({ n: Number, u: KLengthUnit -> (n pico u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.PICO,
-    ({ n: Number, u: KLengthUnit -> (n femto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.FEMTO,
-    ({ n: Number, u: KLengthUnit -> (n atto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.ATTO,
-    ({ n: Number, u: KLengthUnit -> (n zepto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.ZEPTO,
-    ({ n: Number, u: KLengthUnit -> (n yocto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.YOCTO,
-    ({ n: Number, u: KLengthUnit -> (n ronto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.RONTO,
-    ({ n: Number, u: KLengthUnit -> (n quecto u).toKMixedUnitInstance().toKLengthUnit() }) to KUnitPrefix.QUECTO
+    ({ n: Number, u: KLengthUnit -> n quetta u }) to KUnitPrefix.QUETTA,
+    ({ n: Number, u: KLengthUnit -> n ronna u }) to KUnitPrefix.RONNA,
+    ({ n: Number, u: KLengthUnit -> n yotta u }) to KUnitPrefix.YOTTA,
+    ({ n: Number, u: KLengthUnit -> n zetta u }) to KUnitPrefix.ZETTA,
+    ({ n: Number, u: KLengthUnit -> n exa u }) to KUnitPrefix.EXA,
+    ({ n: Number, u: KLengthUnit -> n peta u }) to KUnitPrefix.PETA,
+    ({ n: Number, u: KLengthUnit -> n tera u }) to KUnitPrefix.TERA,
+    ({ n: Number, u: KLengthUnit -> n giga u }) to KUnitPrefix.GIGA,
+    ({ n: Number, u: KLengthUnit -> n mega u }) to KUnitPrefix.MEGA,
+    ({ n: Number, u: KLengthUnit -> n kilo u }) to KUnitPrefix.KILO,
+    ({ n: Number, u: KLengthUnit -> n hecto u }) to KUnitPrefix.HECTO,
+    ({ n: Number, u: KLengthUnit -> n deca u }) to KUnitPrefix.DECA,
+    ({ n: Number, u: KLengthUnit -> n deci u }) to KUnitPrefix.DECI,
+    ({ n: Number, u: KLengthUnit -> n centi u }) to KUnitPrefix.CENTI,
+    ({ n: Number, u: KLengthUnit -> n milli u }) to KUnitPrefix.MILLI,
+    ({ n: Number, u: KLengthUnit -> n micro u }) to KUnitPrefix.MICRO,
+    ({ n: Number, u: KLengthUnit -> n nano u }) to KUnitPrefix.NANO,
+    ({ n: Number, u: KLengthUnit -> n pico u }) to KUnitPrefix.PICO,
+    ({ n: Number, u: KLengthUnit -> n femto u }) to KUnitPrefix.FEMTO,
+    ({ n: Number, u: KLengthUnit -> n atto u }) to KUnitPrefix.ATTO,
+    ({ n: Number, u: KLengthUnit -> n zepto u }) to KUnitPrefix.ZEPTO,
+    ({ n: Number, u: KLengthUnit -> n yocto u }) to KUnitPrefix.YOCTO,
+    ({ n: Number, u: KLengthUnit -> n ronto u }) to KUnitPrefix.RONTO,
+    ({ n: Number, u: KLengthUnit -> n quecto u }) to KUnitPrefix.QUECTO
 )
 
 class KLengthUnitPrefixTest {
@@ -72,85 +48,84 @@ class KLengthUnitPrefixTest {
     }
 
     @Test
-    fun `quetta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.QUETTA) { n, u -> (n quetta u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `quetta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.QUETTA) { n, u -> n quetta u }
 
     @Test
-    fun `ronna scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.RONNA) { n, u -> (n ronna u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `ronna scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.RONNA) { n, u -> n ronna u }
 
     @Test
-    fun `yotta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.YOTTA) { n, u -> (n yotta u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `yotta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.YOTTA) { n, u -> n yotta u }
 
     @Test
-    fun `zetta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ZETTA) { n, u -> (n zetta u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `zetta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ZETTA) { n, u -> n zetta u }
 
     @Test
-    fun `exa scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.EXA) { n, u -> (n exa u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `exa scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.EXA) { n, u -> n exa u }
 
     @Test
-    fun `peta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.PETA) { n, u -> (n peta u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `peta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.PETA) { n, u -> n peta u }
 
     @Test
-    fun `tera scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.TERA) { n, u -> (n tera u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `tera scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.TERA) { n, u -> n tera u }
 
     @Test
-    fun `giga scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.GIGA) { n, u -> (n giga u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `giga scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.GIGA) { n, u -> n giga u }
 
     @Test
-    fun `mega scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MEGA) { n, u -> (n mega u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `mega scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MEGA) { n, u -> n mega u }
 
     @Test
-    fun `kilo scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.KILO) { n, u -> (n kilo u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `kilo scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.KILO) { n, u -> n kilo u }
 
     @Test
-    fun `hecto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.HECTO) { n, u -> (n hecto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `hecto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.HECTO) { n, u -> n hecto u }
 
     @Test
-    fun `deca scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.DECA) { n, u -> (n deca u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `deca scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.DECA) { n, u -> n deca u }
 
     @Test
-    fun `deci scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.DECI) { n, u -> (n deci u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `deci scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.DECI) { n, u -> n deci u }
 
     @Test
-    fun `centi scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.CENTI) { n, u -> (n centi u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `centi scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.CENTI) { n, u -> n centi u }
 
     @Test
-    fun `milli scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MILLI) { n, u -> (n milli u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `milli scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MILLI) { n, u -> n milli u }
 
     @Test
-    fun `micro scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MICRO) { n, u -> (n micro u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `micro scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MICRO) { n, u -> n micro u }
 
     @Test
-    fun `nano scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.NANO) { n, u -> (n nano u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `nano scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.NANO) { n, u -> n nano u }
 
     @Test
-    fun `pico scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.PICO) { n, u -> (n pico u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `pico scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.PICO) { n, u -> n pico u }
 
     @Test
-    fun `femto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.FEMTO) { n, u -> (n femto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `femto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.FEMTO) { n, u -> n femto u }
 
     @Test
-    fun `atto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ATTO) { n, u -> (n atto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `atto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ATTO) { n, u -> n atto u }
 
     @Test
-    fun `zepto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ZEPTO) { n, u -> (n zepto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `zepto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ZEPTO) { n, u -> n zepto u }
 
     @Test
-    fun `yocto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.YOCTO) { n, u -> (n yocto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `yocto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.YOCTO) { n, u -> n yocto u }
 
     @Test
-    fun `ronto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.RONTO) { n, u -> (n ronto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `ronto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.RONTO) { n, u -> n ronto u }
 
     @Test
-    fun `quecto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.QUECTO) { n, u -> (n quecto u).toKMixedUnitInstance().toKLengthUnit() }
+    fun `quecto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.QUECTO) { n, u -> n quecto u }
 
     @Test
-    fun `KPrefixBuilder is an intermediate type, not yet a KLengthUnitInstance`() {
-        val builder = 5 kilo KLengthUnit.METER
+    fun `prefix infix returns a KLengthUnitInstance directly`() {
+        val km: KLengthUnitInstance = 5 kilo meters
 
-        val mixed = builder.toKMixedUnitInstance()
-
-        assertEquals(5000.0, mixed.value, 1e-9)
-        assertEquals(listOf(KUnitTerm(KLengthUnit.METER, 1)), mixed.units)
+        assertEquals(5000.0, km.value, 1e-9)
+        assertEquals(5.0, km.valueAs(KUnitPrefix.KILO with KLengthUnit.METER), 1e-9)
+        assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), km.toKMixedUnitInstance().units)
     }
 
     @Test

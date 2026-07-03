@@ -90,17 +90,16 @@ t.dividedBy(30.minutes()) // 3
 ## SI 접두어
 
 모든 `KTimeUnit`은 24개의 SI 접두어(`KUnitPrefix`, 루트 패키지, Quetta/Q부터 Quecto/q까지) 중 어떤
-것과도 범용 infix 생성 함수와 `with`(valueAs/toString 대상용)를 사용해 결합할 수 있습니다. 하위 초(및
+것과도 그룹별 infix 생성 함수(구체 단위를 바로 반환)와 `with`(valueAs/toString 대상용)를 사용해 결합할 수 있습니다. 하위 초(및
 일 이상) 단위는 이렇게 표현합니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.time.*
 
-// 생성: "5 milli seconds" -> KPrefixBuilder -> KMixedUnitInstance -> KTimeUnitInstance
-val fiveMillis = (5 milli seconds).toKMixedUnitInstance().toKTimeUnit()
+// 생성: "5 milli seconds" -> KTimeUnitInstance (direct)
+val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (초)
 
 // 접두어가 붙은 대상을 사용해 값을 다시 읽기

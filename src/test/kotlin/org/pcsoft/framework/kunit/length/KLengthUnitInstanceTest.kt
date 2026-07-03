@@ -4,7 +4,6 @@ import org.pcsoft.framework.kunit.KDerivedUnit
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.with
 import kotlin.test.Test
@@ -54,7 +53,7 @@ class KLengthUnitInstanceTest {
         assertEquals(1500.0, result.value, 1e-9)
     }
 
-    private fun Number.kilometers(): KLengthUnitInstance = (this kilo KLengthUnit.METER).toKMixedUnitInstance().toKLengthUnit()
+    private fun Number.kilometers(): KLengthUnitInstance = this kilo KLengthUnit.METER
 
     @Test
     fun `plus works for every pair of distinct length units`() {

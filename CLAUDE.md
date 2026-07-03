@@ -39,19 +39,31 @@
   future wrapper) is strictly immutable - only `val` state, no mutable fields; every operator/conversion
   returns a **new** instance
 * **Creation invariant**: the "pure" wrapper constructors are `internal`. Concrete units may **only** be
-  created via number-extension creators (e.g. `5.meters()`, `2.hours()`), operator results, or the
-  conversion extensions (`KMixedUnitInstance.toXxxUnit()`, `Duration.toKTimeUnit()`). A wrapper must
+  created via number-extension creators (e.g. `5.meters()`, `2.hours()`), the group prefix `infix`
+  constructors (e.g. `5 kilo meters`), operator results, or the conversion extensions
+  (`KMixedUnitInstance.toXxxUnit()`, `Duration.toKTimeUnit()`). A wrapper must
   **never** be constructed directly from a `KMixedUnitInstance` by callers - the only `KMixedUnitInstance`→
   wrapper path is the `toXxxUnit()` extension
 * SI prefixes (the complete SI prefix table, from Quetta/Q to Quecto/q) are not part of
   `KUnit`/the (KUnit, exponent) pair, since they are only relevant when reading/writing values. They are
   represented via a generic `KUnitPrefix` enum (root package)
-  * The prefix `infix` functions for construction (e.g. `5 kilo meters`) are **defined generically in the
-    root package** (parameterized over `KUnit`, not over a concrete group unit) - not duplicated per group.
-    They return an intermediate type `KPrefixBuilder`, **not** a concrete "pure" unit directly, since the
-    root package does not know the wrapper classes of the sub-packages. The conversion to the concrete
-    "pure" unit happens explicitly via `KPrefixBuilder.toKMixedUnitInstance()` followed by the group-specific
-    `KMixedUnitInstance.toXxxUnit()` conversion (e.g. `toKLengthUnit()`)
+  * The prefix `infix` functions for construction (e.g. `5 kilo meters`) are **defined per group**, in
+    each unit sub-package, over that group's own unit type (e.g. `Number.kilo(KLengthUnit): KLengthUnitInstance`
+    in `KLengthUnitPrefix.kt`, `Number.kilo(KTimeUnit): KTimeUnitInstance` in `KTimeUnitPrefix.kt`). Each
+    returns that group's concrete "pure" unit **directly** (`5 kilo meters` is a `KLengthUnitInstance`, not
+    an intermediate) - this is the **preferred** construction form. `5 kilo meters` is exactly equivalent to
+    `5000.meters()`.
+    * Rationale: the wrapper classes live in the sub-packages, so only the group package can build its
+      concrete wrapper. Returning the concrete type (rather than a group-agnostic intermediate that the
+      caller must convert with `toXxxUnit()`) keeps the call site free of boilerplate. The cost is that the
+      24 prefix functions are declared once per group instead of once globally - accepted deliberately, and
+      consistent with each group already owning its own creator/`val`-alias DSL.
+    * There is intentionally **only one** prefix construction syntax: the bare-unit form `5 kilo meters`
+      (`meters` is the `KLengthUnit` alias). No `KPrefixBuilder` intermediate and no `5 kilo meters()`
+      wrapper-literal variant exist - a single, unambiguous way to write it.
+    * For Duration-backed groups (e.g. `time`), the result is subject to that wrapper's representable range
+      (see `KTimeUnitInstance`): extreme prefixes on a multi-unit base (e.g. `5 quetta seconds`) exceed
+      `java.time.Duration`'s `Long`-seconds range and are not representable
 * For certain combinations of unit group and exponent, **special units** exist with their own
   name/symbol and their own conversion factor (e.g. hectare for area = length², liter for volume = length³).
   These do **not** replace the normal mechanism (e.g. the base unit with exponent 2 remains the
@@ -74,7 +86,7 @@
 
 * All public types (classes, interfaces, enums, objects) start with `K` project-wide - in the
   root package (`KUnit`, `KMixedUnitInstance`, `KUnitMeasurable`, `KUnitInstance`, `KUnitPrefix`,
-  `KDerivedUnit`, `KPrefixBuilder`, ...) just as
+  `KDerivedUnit`, ...) just as
   in every sub-package (e.g. `KLengthUnit`, `KLengthUnitInstance`, `KLengthDerivedUnit` in `length`)
 * Extension functions and bare `val` aliases (DSL vocabulary such as `meters()`, `kilo`, `meters`) are
   exempt from this rule - they remain named in a language-natural way

@@ -23,9 +23,8 @@ import kotlin.math.roundToLong
  * `s^-1`), just like length's `*`/`/`.
  *
  * Instances are created via the extension functions in `KTimeUnitExtensions.kt` (e.g. `5.seconds()`,
- * `2.hours()`), from a [Duration] via [toKTimeUnit], or by constructing values with the generic,
- * root-level prefix `infix` functions and converting them via [toKTimeUnit] (e.g.
- * `(5 milli seconds).toKMixedUnitInstance().toKTimeUnit()`).
+ * `2.hours()`), the SI-prefix `infix` constructors in `KTimeUnitPrefix.kt` (e.g. `5 milli seconds`),
+ * or from a [Duration] via [toKTimeUnit].
  *
  * Example:
  * ```kotlin
@@ -232,9 +231,8 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
  * with [KTimeUnit.HOUR] is converted to the equivalent number of seconds). The term's exponent is
  * irrelevant to this conversion: a `KTimeUnit` term is a time-typed unit regardless of exponent (even
  * a "square second"), and the resulting [KTimeUnitInstance] simply wraps the numeric value as a
- * [Duration]. This is what lets [org.pcsoft.framework.kunit.KPrefixBuilder] (which, being generic,
- * tags terms with whichever [org.pcsoft.framework.kunit.KUnit] it was given) be converted into a
- * [KTimeUnitInstance].
+ * [Duration]. This is what lets an arbitrary single-[KTimeUnit] mixed instance (whose term may be
+ * tagged with any [KTimeUnit]) be converted into a [KTimeUnitInstance].
  *
  * @throws IllegalStateException if this instance does not consist of exactly one term of a [KTimeUnit]
  * (i.e. it is not a single time-typed term).
@@ -244,7 +242,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
  * val speed = 10.meters() / 2.seconds()
  * val time = speed.toKMixedUnitInstance() // NOT a single time term -> would throw
  *
- * (5 milli KTimeUnit.SECOND).toKMixedUnitInstance().toKTimeUnit().value // 0.005
+ * (5 milli seconds).value // 0.005
  * ```
  */
 fun KMixedUnitInstance.toKTimeUnit(): KTimeUnitInstance {

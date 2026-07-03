@@ -91,17 +91,18 @@ t.dividedBy(30.minutes()) // 3
 ## SI prefixes
 
 Any `KTimeUnit` can be combined with any of the 24 SI prefixes (`KUnitPrefix`, root package, Quetta/Q to
-Quecto/q) using the generic `infix` construction functions and `with` (for `valueAs`/`toString` targets).
-This is how sub-second (and super-day) scales are expressed:
+Quecto/q) using the time-group `infix` construction functions (which return a `KTimeUnitInstance` directly)
+and `with` (for `valueAs`/`toString` targets). This is how sub-second scales are expressed. Note that the
+`Duration` backing limits the representable range (see the note below), so extreme prefixes on a multi-second
+base are not representable:
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.time.*
 
-// Construction: "5 milli seconds" -> KPrefixBuilder -> KMixedUnitInstance -> KTimeUnitInstance
-val fiveMillis = (5 milli seconds).toKMixedUnitInstance().toKTimeUnit()
+// Construction: "5 milli seconds" -> KTimeUnitInstance (direct)
+val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (seconds)
 
 // Reading back a value using a prefixed target

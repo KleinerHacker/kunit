@@ -7,8 +7,9 @@
   * `KMixedUnitInstance`, `KUnitTerm` (mixed-unit engine incl. `+`, `-`, `*`, `/`, `hasSameUnits`, `valueAs`, `toString` overload)
   * `KUnitPrefix` (complete SI prefix table, Quetta/Q to Quecto/q, 24 values) as well as `KScaledUnit`,
     `KDerivedUnit`, `KScaledDerivedUnit` and the `with` infix functions (output conversion)
-  * `KPrefixBuilder` + 24 generic, group-independent prefix `infix` functions for construction
-    (e.g. `5 kilo meters`), followed by `toKMixedUnitInstance()` and the group-specific `toXxxUnit()` conversion
+  * `KUnitPrefix` prefixes are applied via **per-group** prefix `infix` functions (24 per group, declared
+    in each sub-package over that group's unit type, e.g. `KLengthUnitPrefix.kt`, `KTimeUnitPrefix.kt`),
+    each returning that group's concrete "pure" unit directly (e.g. `5 kilo meters` -> `KLengthUnitInstance`)
 * Sub-package `org.pcsoft.framework.kunit.length` (prototype for the physical quantity length):
   * `KLengthUnit` (meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit, light-year, parsec)
   * `KLengthUnitInstance` (incl. `+`, `-`, `*`, `/`, comparison operators, `valueAs`, `toString` overload,

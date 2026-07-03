@@ -87,16 +87,15 @@ t.dividedBy(30.minutes()) // 3
 ## SI 前缀
 
 任何 `KTimeUnit` 都可以与 24 个 SI 前缀（`KUnitPrefix`，根包，从 Quetta/Q 到 Quecto/q）中的任意一个结合，
-使用通用的 infix 构造函数和 `with`（用于 valueAs/toString 目标）。亚秒（以及超天）刻度即由此表达。
+使用每组各自的 infix 构造函数（直接返回具体单位）和 `with`（用于 valueAs/toString 目标）。亚秒（以及超天）刻度即由此表达。
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.time.*
 
-// 构造: "5 milli seconds" -> KPrefixBuilder -> KMixedUnitInstance -> KTimeUnitInstance
-val fiveMillis = (5 milli seconds).toKMixedUnitInstance().toKTimeUnit()
+// 构造: "5 milli seconds" -> KTimeUnitInstance (direct)
+val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (秒)
 
 // 使用带前缀的目标读回值

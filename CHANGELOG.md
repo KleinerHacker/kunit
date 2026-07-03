@@ -4,6 +4,10 @@
 
 ### Added
 
+- Per-group SI-prefix `infix` constructors (`KLengthUnitPrefix.kt`, `KTimeUnitPrefix.kt`): `5 kilo meters`
+  now returns a `KLengthUnitInstance` directly (and `5 milli seconds` a `KTimeUnitInstance`), rather than an
+  intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters()` and is the preferred
+  construction form.
 - Test coverage in `KMixedUnitInstanceTest` verifying that `KMixedUnitInstance` term exponents are
   added on `*` and subtracted on `/` — including crossings of the 0-point (negative→positive and
   positive→negative) and the removal of a term whose exponent cancels to exactly `0` — both for pure
@@ -32,6 +36,10 @@
 
 ### Changed
 
+- **Breaking:** the prefix `infix` functions are now declared **per group** (over the group's own unit
+  type) and return the concrete "pure" unit directly, replacing the single set of generic root-package
+  functions that returned a `KPrefixBuilder`. `(5 kilo meters).toKMixedUnitInstance().toKLengthUnit()`
+  becomes simply `5 kilo meters`.
 - Migrated the throwaway private `TimeUnit` test enums to the official `KTimeUnit`.
 - **Breaking:** renamed the mixed-unit class `KUnitInstance` → `KMixedUnitInstance` (the name
   `KUnitInstance` is now the "pure" wrapper interface) and its conversion accessor
@@ -42,6 +50,12 @@
   wrapper classes (`KLengthUnitInstance`, `KTimeUnitInstance`). Externally, mixed units may only be
   obtained via `toKMixedUnitInstance()`, operator results, or the number-extension creators — never by
   constructing `KMixedUnitInstance(...)` directly.
+
+### Removed
+
+- **Breaking:** the `KPrefixBuilder` class and the generic, root-package prefix `infix` functions that
+  returned it. Prefix construction now goes through the per-group functions that return the concrete unit
+  directly (see _Changed_).
 
 ## [0.1.0]
 

@@ -84,12 +84,11 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ### SI 접두어
 
 ```kotlin
-import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
-import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0 (미터로 정규화됨)
 ```
 

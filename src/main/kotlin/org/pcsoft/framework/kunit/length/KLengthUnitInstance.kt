@@ -13,8 +13,8 @@ import org.pcsoft.framework.kunit.KUnitTerm
  * it was constructed with.
  *
  * Instances are created via the extension functions in `KLengthUnitExtensions.kt`
- * (e.g. `5.meters()`, `5.hectares()`), or by constructing values with the generic, root-level prefix
- * `infix` functions and converting them via [toKLengthUnit] (e.g. `(3 kilo meters).toKMixedUnitInstance().toKLengthUnit()`).
+ * (e.g. `5.meters()`, `5.hectares()`) or the SI-prefix `infix` constructors in `KLengthUnitPrefix.kt`
+ * (e.g. `3 kilo meters`).
  *
  * Example:
  * ```kotlin
@@ -137,9 +137,9 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
  * Converts this mixed unit to a "pure" length-based value (length, area, volume, ...), as long as it
  * consists of exactly one term of any [KLengthUnit], at any exponent - normalizing it to
  * [KLengthUnit.BASE] if it isn't already (e.g. a term tagged with `KLengthUnit.MILE` is converted to
- * the equivalent value in meters). This is what lets [org.pcsoft.framework.kunit.KPrefixBuilder]
- * (which, being generic, tags terms with whichever [org.pcsoft.framework.kunit.KUnit] it was given,
- * not necessarily the group's base unit) be converted into a [KLengthUnitInstance].
+ * the equivalent value in meters). This is what lets an arbitrary single-[KLengthUnit] mixed instance
+ * (whose term may be tagged with any [KLengthUnit], not necessarily the group's base unit) be
+ * converted into a [KLengthUnitInstance].
  *
  * @throws IllegalStateException if this instance does not consist of exactly one term of a
  * [KLengthUnit] (i.e. it is not a pure length-based value).
@@ -153,7 +153,7 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
  * val area = 200.meters() * 50.meters() // units=[METER^2]
  * area.toKLengthUnit().value // 10000.0
  *
- * (5 kilo KLengthUnit.MILE).toKMixedUnitInstance().toKLengthUnit().value // 5000 * 1609.344 (normalized to meters)
+ * (5 kilo miles).value // 5000 * 1609.344 (normalized to meters)
  *
  * speed.toKMixedUnitInstance().toKLengthUnit() // throws IllegalStateException (mixed length/time, not pure length)
  * ```

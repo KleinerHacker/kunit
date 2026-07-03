@@ -2,8 +2,9 @@ package org.pcsoft.framework.kunit
 
 /**
  * A SI-style magnitude prefix (e.g. kilo, milli) usable when reading a [KMixedUnitInstance] or a "pure"
- * unit value (e.g. `KLengthUnitInstance`) in a scaled unit, or when constructing one via the generic
- * prefix `infix` functions declared below (e.g. `kilo`, `milli`), which work for any [KUnit].
+ * unit value (e.g. `KLengthUnitInstance`) in a scaled unit, or when constructing one via the
+ * group-specific prefix `infix` functions (e.g. `5 kilo meters`), which each group declares over its
+ * own unit type and which return that group's concrete "pure" unit directly.
  *
  * Prefixes are **not** stored as part of a [KUnitTerm]/[KUnit] - they only scale a raw value at the
  * input/output boundary; once a value has been constructed, the prefix used to construct it is no
@@ -11,7 +12,7 @@ package org.pcsoft.framework.kunit
  *
  * Example:
  * ```kotlin
- * val d = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit() // 5 km, "meters" is the KLengthUnit.METER alias
+ * val d = 5 kilo meters // KLengthUnitInstance, "meters" is the KLengthUnit.METER alias
  * d.value                 // 5000.0 (normalized to meters)
  * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // 5.0 (read back in kilometers)
  * ```
@@ -89,179 +90,6 @@ enum class KUnitPrefix(val symbol: String, val factor: Double) {
     /** Quecto: factor 10^-30, the smallest SI prefix (2022 standard). */
     QUECTO("q", 1e-30)
 }
-
-/**
- * Intermediate result of applying a [KUnitPrefix] to a [Number] together with a concrete [KUnit],
- * not yet a "pure" unit value. The root package does not know about the "pure" unit wrapper classes
- * defined by each unit sub-package (e.g. `KLengthUnitInstance`), so the prefix `infix` functions
- * below can only build this generic, group-agnostic intermediate; converting it into a concrete
- * "pure" unit is done explicitly via the group's own conversion (e.g. `KMixedUnitInstance.toKLengthUnit()`
- * in the `length` package).
- *
- * Obtained via the prefix `infix` functions, e.g. `5 kilo KLengthUnit.METER`.
- *
- * Example:
- * ```kotlin
- * val builder = 5 kilo KLengthUnit.METER // KPrefixBuilder, not yet a KLengthUnitInstance
- * val mixed = builder.toKMixedUnitInstance()  // KMixedUnitInstance: value=5000.0, units=[METER^1]
- * val length = mixed.toKLengthUnit()     // KLengthUnitInstance: value=5000.0
- * ```
- */
-class KPrefixBuilder internal constructor(private val instance: KMixedUnitInstance) {
-    /**
-     * The generic mixed-unit representation of this builder (single term, exponent 1, prefix-scaled
-     * value). Use this together with a group-specific `toXxxUnit()` extension (e.g.
-     * `KMixedUnitInstance.toKLengthUnit()`) to obtain the concrete "pure" unit.
-     */
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
-}
-
-private fun buildPrefixed(value: Number, prefix: KUnitPrefix, unit: KUnit): KPrefixBuilder =
-    KPrefixBuilder(KMixedUnitInstance(value.toDouble() * prefix.factor, listOf(KUnitTerm(unit, 1))))
-
-/**
- * Scales this number by [KUnitPrefix.QUETTA] and pairs it with [unit], e.g.
- * `(5 quetta KLengthUnit.METER).toKMixedUnitInstance().value // 5e30`.
- */
-infix fun Number.quetta(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.QUETTA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.RONNA] and pairs it with [unit], e.g.
- * `(5 ronna KLengthUnit.METER).toKMixedUnitInstance().value // 5e27`.
- */
-infix fun Number.ronna(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.RONNA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.YOTTA] and pairs it with [unit], e.g.
- * `(5 yotta KLengthUnit.METER).toKMixedUnitInstance().value // 5e24`.
- */
-infix fun Number.yotta(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.YOTTA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.ZETTA] and pairs it with [unit], e.g.
- * `(5 zetta KLengthUnit.METER).toKMixedUnitInstance().value // 5e21`.
- */
-infix fun Number.zetta(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.ZETTA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.EXA] and pairs it with [unit], e.g.
- * `(5 exa KLengthUnit.METER).toKMixedUnitInstance().value // 5e18`.
- */
-infix fun Number.exa(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.EXA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.PETA] and pairs it with [unit], e.g.
- * `(5 peta KLengthUnit.METER).toKMixedUnitInstance().value // 5e15`.
- */
-infix fun Number.peta(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.PETA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.TERA] and pairs it with [unit], e.g.
- * `(5 tera KLengthUnit.METER).toKMixedUnitInstance().value // 5e12`.
- */
-infix fun Number.tera(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.TERA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.GIGA] and pairs it with [unit], e.g.
- * `(5 giga KLengthUnit.METER).toKMixedUnitInstance().value // 5.0e9`.
- */
-infix fun Number.giga(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.GIGA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.MEGA] and pairs it with [unit], e.g.
- * `(5 mega KLengthUnit.METER).toKMixedUnitInstance().value // 5000000.0`.
- */
-infix fun Number.mega(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.MEGA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.KILO] and pairs it with [unit], e.g.
- * `(5 kilo KLengthUnit.METER).toKMixedUnitInstance().value // 5000.0`.
- */
-infix fun Number.kilo(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.KILO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.HECTO] and pairs it with [unit], e.g.
- * `(5 hecto KLengthUnit.METER).toKMixedUnitInstance().value // 500.0`.
- */
-infix fun Number.hecto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.HECTO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.DECA] and pairs it with [unit], e.g.
- * `(5 deca KLengthUnit.METER).toKMixedUnitInstance().value // 50.0`.
- */
-infix fun Number.deca(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.DECA, unit)
-
-/**
- * Scales this number by [KUnitPrefix.DECI] and pairs it with [unit], e.g.
- * `(5 deci KLengthUnit.METER).toKMixedUnitInstance().value // 0.5`.
- */
-infix fun Number.deci(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.DECI, unit)
-
-/**
- * Scales this number by [KUnitPrefix.CENTI] and pairs it with [unit], e.g.
- * `(5 centi KLengthUnit.METER).toKMixedUnitInstance().value // 0.05`.
- */
-infix fun Number.centi(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.CENTI, unit)
-
-/**
- * Scales this number by [KUnitPrefix.MILLI] and pairs it with [unit], e.g.
- * `(5 milli KLengthUnit.METER).toKMixedUnitInstance().value // 0.005`.
- */
-infix fun Number.milli(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.MILLI, unit)
-
-/**
- * Scales this number by [KUnitPrefix.MICRO] and pairs it with [unit], e.g.
- * `(5 micro KLengthUnit.METER).toKMixedUnitInstance().value // 0.000005`.
- */
-infix fun Number.micro(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.MICRO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.NANO] and pairs it with [unit], e.g.
- * `(5 nano KLengthUnit.METER).toKMixedUnitInstance().value // 5e-9`.
- */
-infix fun Number.nano(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.NANO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.PICO] and pairs it with [unit], e.g.
- * `(5 pico KLengthUnit.METER).toKMixedUnitInstance().value // 5e-12`.
- */
-infix fun Number.pico(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.PICO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.FEMTO] and pairs it with [unit], e.g.
- * `(5 femto KLengthUnit.METER).toKMixedUnitInstance().value // 5e-15`.
- */
-infix fun Number.femto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.FEMTO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.ATTO] and pairs it with [unit], e.g.
- * `(5 atto KLengthUnit.METER).toKMixedUnitInstance().value // 5e-18`.
- */
-infix fun Number.atto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.ATTO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.ZEPTO] and pairs it with [unit], e.g.
- * `(5 zepto KLengthUnit.METER).toKMixedUnitInstance().value // 5e-21`.
- */
-infix fun Number.zepto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.ZEPTO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.YOCTO] and pairs it with [unit], e.g.
- * `(5 yocto KLengthUnit.METER).toKMixedUnitInstance().value // 5e-24`.
- */
-infix fun Number.yocto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.YOCTO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.RONTO] and pairs it with [unit], e.g.
- * `(5 ronto KLengthUnit.METER).toKMixedUnitInstance().value // 5e-27`.
- */
-infix fun Number.ronto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.RONTO, unit)
-
-/**
- * Scales this number by [KUnitPrefix.QUECTO] and pairs it with [unit], e.g.
- * `(5 quecto KLengthUnit.METER).toKMixedUnitInstance().value // 5e-30`.
- */
-infix fun Number.quecto(unit: KUnit): KPrefixBuilder = buildPrefixed(this, KUnitPrefix.QUECTO, unit)
 
 /**
  * A [KUnit] combined with a [KUnitPrefix], e.g. "km" = `KILO with METER`.
