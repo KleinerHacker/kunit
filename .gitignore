@@ -43,3 +43,7 @@ bin/
 
 ### Claude Code ###
 .claude
+
+### MkDocs ###
+docs/docs/dokka
+docs/docs/licences
