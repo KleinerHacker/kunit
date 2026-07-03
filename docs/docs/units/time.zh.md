@@ -5,11 +5,11 @@
 
 `KTimeUnitInstance` 是对 [`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)
 的 100% 封装：`Duration` 是唯一的数据来源（纳秒级精确），并转发完整的 `Duration` API。在此之上，它提供
-与其他所有"纯"单位包装器相同的接口（`value`/`valueIn`/`+`/`-`/`*`/`/`/`toString`/`toKUnitInstance`），
+与其他所有"纯"单位包装器相同的接口（`value`/`valueAs`/`+`/`-`/`*`/`/`/`toString`/`toKMixedUnitInstance`），
 因此时间值可直接接入通用的混合单位引擎（例如 `length / time` = 速度）。值始终以秒为单位归一化存储。
 
 由于 `Duration` 只表示一段普通的时长，时间值始终为指数 1 —— 没有 time² 或 1/time 包装器（乘法/除法会像
-长度那样"逃逸"为原始的 `KUnitInstance`）。因此 `KUnitInstance.toKTimeUnit()` 只接受**指数为 1 的**单个
+长度那样"逃逸"为原始的 `KMixedUnitInstance`）。因此 `KMixedUnitInstance.toKTimeUnit()` 只接受**指数为 1 的**单个
 `KTimeUnit` 项。
 
 ## 单位
@@ -23,7 +23,7 @@
 
 仅建模物理时间刻度；基于日历的单位（周、年）被有意省略，因为它们由日历定义，而非固定的物理量。
 
-上述每个单位都有对应的裸 `val` 别名，可用作 `valueIn`/`toString` 的目标，或作为前缀 infix 函数的 `unit`
+上述每个单位都有对应的裸 `val` 别名，可用作 `valueAs`/`toString` 的目标，或作为前缀 infix 函数的 `unit`
 参数：`seconds`、`minutes`、`hours`、`days`。
 
 毫秒、微秒、纳秒等亚秒级刻度**不是**专门的单位，而是通过对 `second` 施加 SI 前缀来通用地表达（见下方
@@ -34,8 +34,8 @@ import org.pcsoft.framework.kunit.time.*
 
 val t = 2.hours()
 t.value                      // 7200.0 (归一化为秒)
-t.valueIn(KTimeUnit.HOUR)    // 2.0 (以小时读回)
-t.valueIn(minutes)           // 120.0
+t.valueAs(KTimeUnit.HOUR)    // 2.0 (以小时读回)
+t.valueAs(minutes)           // 120.0
 ```
 
 ## 运算符
@@ -51,9 +51,9 @@ val b = 2.hours() - 30.minutes()
 2.hours() > 90.minutes()            // true
 1.hours() == 60.minutes()           // true (归一化值相同)
 
-// * / / : 始终允许，生成具有新指数的 KUnitInstance
-val secondsSquared = 3.seconds() * 4.seconds()   // KUnitInstance: value=12.0, units=[SECOND^2]
-val ratio = 10.seconds() / 2.seconds()           // KUnitInstance: value=5.0, 无量纲
+// * / / : 始终允许，生成具有新指数的 KMixedUnitInstance
+val secondsSquared = 3.seconds() * 4.seconds()   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
+val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.0, 无量纲
 ```
 
 ## 比较与相等
@@ -72,10 +72,10 @@ import org.pcsoft.framework.kunit.time.*
 
 val t = 90.minutes()
 t.toDuration()                       // PT1H30M
-Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueIn(HOUR) == 1.5
+Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
 // 转发的修改方法返回 KTimeUnitInstance
-t.plusHours(1).valueIn(KTimeUnit.HOUR) // 2.5
+t.plusHours(1).valueAs(KTimeUnit.HOUR) // 2.5
 t.negated().isNegative()               // true
 
 // 转发的查询方法原样透传
@@ -87,7 +87,7 @@ t.dividedBy(30.minutes()) // 3
 ## SI 前缀
 
 任何 `KTimeUnit` 都可以与 24 个 SI 前缀（`KUnitPrefix`，根包，从 Quetta/Q 到 Quecto/q）中的任意一个结合，
-使用通用的 infix 构造函数和 `with`（用于 valueIn/toString 目标）。亚秒（以及超天）刻度即由此表达。
+使用通用的 infix 构造函数和 `with`（用于 valueAs/toString 目标）。亚秒（以及超天）刻度即由此表达。
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
@@ -95,20 +95,20 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.time.*
 
-// 构造: "5 milli seconds" -> KPrefixBuilder -> KUnitInstance -> KTimeUnitInstance
-val fiveMillis = (5 milli seconds).toKUnitInstance().toKTimeUnit()
+// 构造: "5 milli seconds" -> KPrefixBuilder -> KMixedUnitInstance -> KTimeUnitInstance
+val fiveMillis = (5 milli seconds).toKMixedUnitInstance().toKTimeUnit()
 fiveMillis.value // 0.005 (秒)
 
 // 使用带前缀的目标读回值
 val t = 2.hours()
-t.valueIn(KUnitPrefix.MILLI with KTimeUnit.SECOND)  // 7 200 000.0 (ms)
+t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND)  // 7 200 000.0 (ms)
 t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```
 
 !!! note "Duration 范围"
     由于值以 `java.time.Duration`（整秒以 `Long` 存储，纳秒分辨率）为后盾，`KTimeUnitInstance` 只能精确
     表示大约 `[1 ns, Long.MAX 秒]`（≈ 2920 亿年）范围内的量级。对天施加 `quetta` 等极端前缀会超出该范围，
-    而亚纳秒的值会舍入为零。通用的 `KUnitInstance`/前缀层本身基于 `Double`，不受影响 —— 只有转换为
+    而亚纳秒的值会舍入为零。通用的 `KMixedUnitInstance`/前缀层本身基于 `Double`，不受影响 —— 只有转换为
     Duration 后盾的包装器时才受范围限制。
 
 ## toString 格式化
@@ -129,10 +129,10 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters() / 1.seconds().toKUnitInstance()          // KUnitInstance, units=[METER^1, SECOND^-1]
+val speed = 10.meters() / 1.seconds().toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // 将速度再乘以时间可恢复为纯长度
-val distance = speed * 2.seconds().toKUnitInstance()
+val distance = speed * 2.seconds().toKMixedUnitInstance()
 distance.toKLengthUnit().value // 20.0
 ```

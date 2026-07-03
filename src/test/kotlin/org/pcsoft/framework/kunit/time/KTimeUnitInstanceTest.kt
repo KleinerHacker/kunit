@@ -1,7 +1,7 @@
 package org.pcsoft.framework.kunit.time
 
 import org.pcsoft.framework.kunit.KUnit
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.milli
@@ -54,7 +54,7 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `times with KTimeUnitInstance produces second squared as KUnitInstance`() {
+    fun `times with KTimeUnitInstance produces second squared as KMixedUnitInstance`() {
         val product = 3.seconds() * 4.seconds()
 
         assertEquals(12.0, product.value, 1e-9)
@@ -62,7 +62,7 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `div with KTimeUnitInstance cancels out to dimensionless KUnitInstance`() {
+    fun `div with KTimeUnitInstance cancels out to dimensionless KMixedUnitInstance`() {
         val result = 10.seconds() / 2.seconds()
 
         assertEquals(5.0, result.value, 1e-9)
@@ -70,8 +70,8 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `times with KUnitInstance delegates to KUnitInstance times`() {
-        val perSecond = KUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)))
+    fun `times with KMixedUnitInstance delegates to KMixedUnitInstance times`() {
+        val perSecond = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)))
 
         val result = 10.seconds() * perSecond
 
@@ -80,8 +80,8 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `div with KUnitInstance delegates to KUnitInstance div`() {
-        val dimensionless = KUnitInstance(2.0, listOf())
+    fun `div with KMixedUnitInstance delegates to KMixedUnitInstance div`() {
+        val dimensionless = KMixedUnitInstance(2.0, listOf())
 
         val result = 10.seconds() / dimensionless
 
@@ -122,26 +122,26 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `every generator function round trips through valueIn`() {
+    fun `every generator function round trips through valueAs`() {
         for ((generator, unit) in timeUnitGenerators) {
             val instance = generator(5)
             assertEquals(5.0 * unit.baseValue, instance.value, instance.value.coerceAtLeast(1.0) * 1e-9,
                 "value mismatch for $unit")
-            assertEquals(5.0, instance.valueIn(unit), 5.0 * 1e-9, "valueIn round trip mismatch for $unit")
+            assertEquals(5.0, instance.valueAs(unit), 5.0 * 1e-9, "valueAs round trip mismatch for $unit")
         }
     }
 
     @Test
-    fun `valueIn converts across units`() {
-        assertEquals(2.0, 2.hours().valueIn(KTimeUnit.HOUR), 1e-9)
-        assertEquals(120.0, 2.hours().valueIn(KTimeUnit.MINUTE), 1e-9)
-        assertEquals(1.0 / 3600.0, 1.seconds().valueIn(KTimeUnit.HOUR), 1e-12)
+    fun `valueAs converts across units`() {
+        assertEquals(2.0, 2.hours().valueAs(KTimeUnit.HOUR), 1e-9)
+        assertEquals(120.0, 2.hours().valueAs(KTimeUnit.MINUTE), 1e-9)
+        assertEquals(1.0 / 3600.0, 1.seconds().valueAs(KTimeUnit.HOUR), 1e-12)
     }
 
     @Test
-    fun `valueIn supports scaled unit targets`() {
+    fun `valueAs supports scaled unit targets`() {
         val t = 2.hours()
-        assertEquals(t.value * 1000.0, t.valueIn(KUnitPrefix.MILLI with KTimeUnit.SECOND), 1e-6)
+        assertEquals(t.value * 1000.0, t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND), 1e-6)
     }
 
     @Test
@@ -162,45 +162,47 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `toKUnitInstance and toKTimeUnit round trip`() {
+    fun `toKMixedUnitInstance and toKTimeUnit round trip`() {
         val original = 2.hours()
 
-        val roundTripped = original.toKUnitInstance().toKTimeUnit()
+        val roundTripped = original.toKMixedUnitInstance().toKTimeUnit()
 
         assertEquals(original, roundTripped)
     }
 
     @Test
     fun `toKTimeUnit normalizes a non-base time unit to seconds`() {
-        val twoHours = KUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.HOUR, 1)))
+        val twoHours = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.HOUR, 1)))
 
         assertEquals(7200.0, twoHours.toKTimeUnit().value, 1e-9)
     }
 
     @Test
     fun `toKTimeUnit fails for a non-time unit`() {
-        val notTime = KUnitInstance(5.0, listOf(KUnitTerm(NonTimeUnit.METER, 1)))
+        val notTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(NonTimeUnit.METER, 1)))
 
         assertFailsWith<IllegalStateException> { notTime.toKTimeUnit() }
     }
 
     @Test
     fun `toKTimeUnit fails for a mixed unit with more than one term`() {
-        val notPure = KUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1), KUnitTerm(NonTimeUnit.METER, 1)))
+        val notPure = KMixedUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1), KUnitTerm(NonTimeUnit.METER, 1)))
 
         assertFailsWith<IllegalStateException> { notPure.toKTimeUnit() }
     }
 
     @Test
-    fun `toKTimeUnit fails for an exponent other than one`() {
-        val secondSquared = KUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 2)))
+    fun `toKTimeUnit ignores the exponent since a time term stays time-typed`() {
+        // The exponent is irrelevant to this conversion: a KTimeUnit term is a time-typed unit
+        // regardless of exponent, and the resulting duration simply wraps the numeric value.
+        val secondSquared = KMixedUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 2)))
 
-        assertFailsWith<IllegalStateException> { secondSquared.toKTimeUnit() }
+        assertEquals(5.0, secondSquared.toKTimeUnit().value, 1e-12)
     }
 
     @Test
     fun `construction via prefix builder round trips`() {
-        val fiveMillis = (5 milli KTimeUnit.SECOND).toKUnitInstance().toKTimeUnit()
+        val fiveMillis = (5 milli KTimeUnit.SECOND).toKMixedUnitInstance().toKTimeUnit()
         assertEquals(0.005, fiveMillis.value, 1e-12)
     }
 }

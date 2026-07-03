@@ -1,6 +1,6 @@
 # 添加自定义单位
 
-kunit 目前只提供一个单位组([长度](units/length.md))，但整个引擎（`KUnit`、`KUnitInstance`、前缀、
+kunit 目前只提供一个单位组([长度](units/length.md))，但整个引擎（`KUnit`、`KMixedUnitInstance`、前缀、
 派生单位）都是通用的、与组无关的。添加一个新的物理量意味着遵循 `length` 包已经建立的模式。本页从零开始
 演示如何添加一个示范性的**质量**（Mass）组（`org.pcsoft.framework.kunit.mass`）。
 
@@ -40,32 +40,32 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. 创建包装类
 
-包装类（`KMassUnitInstance`）通过**委托**（而非继承）封装一个 `KUnitInstance`，并始终将其值归一化到该组
+包装类（`KMassUnitInstance`）通过**委托**（而非继承）封装一个 `KMixedUnitInstance`，并始终将其值归一化到该组
 的基础单位。直接复制 `KLengthUnitInstance` 的结构即可——它在指数上是通用的，因此同一个包装类以后如果需要
 也可以服务于质量的派生量。
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 
-class KMassUnitInstance internal constructor(internal val instance: KUnitInstance) {
+class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) {
 
     private val exponent: Int get() = instance.units.single().exponent
 
     val value: Double get() = instance.value
 
-    fun valueIn(target: KUnitTarget): Double = instance.valueAs(target)
+    fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
 
     operator fun plus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance + other.instance)
     operator fun minus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance - other.instance)
 
-    operator fun times(other: KMassUnitInstance): KUnitInstance = instance * other.instance
-    operator fun div(other: KMassUnitInstance): KUnitInstance = instance / other.instance
-    operator fun times(other: KUnitInstance): KUnitInstance = instance * other
-    operator fun div(other: KUnitInstance): KUnitInstance = instance / other
+    operator fun times(other: KMassUnitInstance): KMixedUnitInstance = instance * other.instance
+    operator fun div(other: KMassUnitInstance): KMixedUnitInstance = instance / other.instance
+    operator fun times(other: KMixedUnitInstance): KMixedUnitInstance = instance * other
+    operator fun div(other: KMixedUnitInstance): KMixedUnitInstance = instance / other
 
     operator fun compareTo(other: KMassUnitInstance): Int {
         check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
@@ -83,33 +83,33 @@ class KMassUnitInstance internal constructor(internal val instance: KUnitInstanc
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKUnitInstance(): KUnitInstance = instance
+    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
 }
 
-/** 将纯质量的 [KUnitInstance] 转换回 [KMassUnitInstance]，并归一化到 [KMassUnit.BASE]。 */
-fun KUnitInstance.toKMassUnit(): KMassUnitInstance {
+/** 将纯质量的 [KMixedUnitInstance] 转换回 [KMassUnitInstance]，并归一化到 [KMassUnit.BASE]。 */
+fun KMixedUnitInstance.toKMassUnit(): KMassUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KMassUnit) {
-        "KUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
+        "KMixedUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
     }
     val normalizedValue = value * Math.pow(unit.baseValue, term.exponent.toDouble())
-    return KMassUnitInstance(KUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
+    return KMassUnitInstance(KMixedUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
 }
 
 internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
-    KMassUnitInstance(KUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
+    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
 ## 3. 添加创建者扩展函数
 
 遵循 `K...UnitExtensions.kt` 的模式，为每个单位添加一个裸 `val` 别名以及一个 `Number` 扩展函数，这样
-调用方就可以写 `5.kilograms()` 或 `1 kilo grams`，也可以把 `kilograms` 作为纯粹的 `valueIn` 目标传入：
+调用方就可以写 `5.kilograms()` 或 `1 kilo grams`，也可以把 `kilograms` 作为纯粹的 `valueAs` 目标传入：
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-/** [KMassUnit.KILOGRAM] 的裸引用，用于 [valueIn][KMassUnitInstance.valueIn] 或前缀 infix 函数。 */
+/** [KMassUnit.KILOGRAM] 的裸引用，用于 [valueAs][KMassUnitInstance.valueAs] 或前缀 infix 函数。 */
 val kilograms: KMassUnit = KMassUnit.KILOGRAM
 
 /** [KMassUnit.GRAM] 的裸引用。 */
@@ -138,7 +138,7 @@ fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
 
 到这里就完成了——由于所有逻辑都位于通用的根包中，只需要 `KMassUnit : KUnit` 即可工作，你已经免费获得了
 完整的 `+`、`-`、`*`、`/`、比较运算、SI 前缀（`5 kilo grams`），以及
-`toKUnitInstance()`/`toKMassUnit()` 之间的往返转换。
+`toKMixedUnitInstance()`/`toKMassUnit()` 之间的往返转换。
 
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
@@ -146,8 +146,8 @@ import org.pcsoft.framework.kunit.mass.*
 val a = 500.grams()
 val b = 2.pounds()
 val total = a + b            // KMassUnitInstance，归一化为千克
-println(total.valueIn(kilograms))
-println(total.valueIn(grams))
+println(total.valueAs(kilograms))
+println(total.valueAs(grams))
 
 val heavier = b > a          // true
 ```
@@ -169,13 +169,13 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKUnitInstance().toKMassUnit() // 仅作说明用
-println(2500.grams().valueIn(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // 仅作说明用
+println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. 与其他组结合
 
-由于所有内容最终都会流经通用的 `KUnitInstance` 引擎，你的新组可以立即通过 `*`/`/` 与任何其他组
+由于所有内容最终都会流经通用的 `KMixedUnitInstance` 引擎，你的新组可以立即通过 `*`/`/` 与任何其他组
 （例如长度）组合——完整规则请参见[混合单位](mixed-units.md)：
 
 ```kotlin
@@ -183,7 +183,7 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 密度 = 质量 / 体积
-val density = 5.kilograms().toKUnitInstance() / 2.liters().toKUnitInstance()
+val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
 ```
 
 ## 6. 命名与测试检查清单

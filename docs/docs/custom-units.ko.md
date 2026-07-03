@@ -1,6 +1,6 @@
 # 사용자 정의 단위 추가
 
-kunit은 현재 하나의 단위 그룹([길이](units/length.md))만 제공하지만, 전체 엔진(`KUnit`, `KUnitInstance`,
+kunit은 현재 하나의 단위 그룹([길이](units/length.md))만 제공하지만, 전체 엔진(`KUnit`, `KMixedUnitInstance`,
 접두어, 파생 단위)은 범용적이며 그룹에 독립적입니다. 새로운 물리량을 추가한다는 것은 `length` 패키지가
 이미 확립한 패턴을 따르는 것을 의미합니다. 이 페이지에서는 처음부터 예시로 **질량**(Mass) 그룹
 (`org.pcsoft.framework.kunit.mass`)을 추가하는 과정을 안내합니다.
@@ -42,32 +42,32 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. 래퍼 클래스 생성
 
-래퍼 클래스(`KMassUnitInstance`)는 **위임**(상속이 아닌)을 통해 `KUnitInstance`를 캡슐화하며, 항상
+래퍼 클래스(`KMassUnitInstance`)는 **위임**(상속이 아닌)을 통해 `KMixedUnitInstance`를 캡슐화하며, 항상
 그룹의 기본 단위로 값을 정규화합니다. `KLengthUnitInstance`의 형태를 그대로 복사하세요 - 이는 지수에
 대해 범용적이므로, 나중에 필요하다면 동일한 래퍼가 질량의 파생 물리량도 처리할 수 있습니다.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 
-class KMassUnitInstance internal constructor(internal val instance: KUnitInstance) {
+class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) {
 
     private val exponent: Int get() = instance.units.single().exponent
 
     val value: Double get() = instance.value
 
-    fun valueIn(target: KUnitTarget): Double = instance.valueAs(target)
+    fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
 
     operator fun plus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance + other.instance)
     operator fun minus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance - other.instance)
 
-    operator fun times(other: KMassUnitInstance): KUnitInstance = instance * other.instance
-    operator fun div(other: KMassUnitInstance): KUnitInstance = instance / other.instance
-    operator fun times(other: KUnitInstance): KUnitInstance = instance * other
-    operator fun div(other: KUnitInstance): KUnitInstance = instance / other
+    operator fun times(other: KMassUnitInstance): KMixedUnitInstance = instance * other.instance
+    operator fun div(other: KMassUnitInstance): KMixedUnitInstance = instance / other.instance
+    operator fun times(other: KMixedUnitInstance): KMixedUnitInstance = instance * other
+    operator fun div(other: KMixedUnitInstance): KMixedUnitInstance = instance / other
 
     operator fun compareTo(other: KMassUnitInstance): Int {
         check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
@@ -85,34 +85,34 @@ class KMassUnitInstance internal constructor(internal val instance: KUnitInstanc
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKUnitInstance(): KUnitInstance = instance
+    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
 }
 
-/** 순수 질량 [KUnitInstance]를 [KMassUnit.BASE]로 정규화하여 [KMassUnitInstance]로 다시 변환합니다. */
-fun KUnitInstance.toKMassUnit(): KMassUnitInstance {
+/** 순수 질량 [KMixedUnitInstance]를 [KMassUnit.BASE]로 정규화하여 [KMassUnitInstance]로 다시 변환합니다. */
+fun KMixedUnitInstance.toKMassUnit(): KMassUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KMassUnit) {
-        "KUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
+        "KMixedUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
     }
     val normalizedValue = value * Math.pow(unit.baseValue, term.exponent.toDouble())
-    return KMassUnitInstance(KUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
+    return KMassUnitInstance(KMixedUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
 }
 
 internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
-    KMassUnitInstance(KUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
+    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
 ## 3. 생성자 확장 함수 추가
 
 `K...UnitExtensions.kt` 패턴을 따라, 단위마다 bare `val` 별칭과 `Number` 확장 함수를 추가하세요. 이렇게
-하면 호출부에서 `5.kilograms()` 또는 `1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueIn` 대상
+하면 호출부에서 `5.kilograms()` 또는 `1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상
 으로도 전달할 수 있습니다.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-/** [KMassUnit.KILOGRAM]에 대한 bare 참조, [valueIn][KMassUnitInstance.valueIn]이나 접두어 infix 함수에 사용. */
+/** [KMassUnit.KILOGRAM]에 대한 bare 참조, [valueAs][KMassUnitInstance.valueAs]이나 접두어 infix 함수에 사용. */
 val kilograms: KMassUnit = KMassUnit.KILOGRAM
 
 /** [KMassUnit.GRAM]에 대한 bare 참조. */
@@ -141,7 +141,7 @@ fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
 
 이것으로 충분합니다 - 모든 로직이 범용 루트 패키지에 있고 `KMassUnit : KUnit`만 있으면 동작하기 때문에,
 이미 완전한 `+`, `-`, `*`, `/`, 비교 연산, SI 접두어(`5 kilo grams`), 그리고
-`toKUnitInstance()`/`toKMassUnit()` 왕복 변환을 무료로 얻게 됩니다.
+`toKMixedUnitInstance()`/`toKMassUnit()` 왕복 변환을 무료로 얻게 됩니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
@@ -149,8 +149,8 @@ import org.pcsoft.framework.kunit.mass.*
 val a = 500.grams()
 val b = 2.pounds()
 val total = a + b            // KMassUnitInstance, 킬로그램으로 정규화됨
-println(total.valueIn(kilograms))
-println(total.valueIn(grams))
+println(total.valueAs(kilograms))
+println(total.valueAs(grams))
 
 val heavier = b > a          // true
 ```
@@ -172,13 +172,13 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKUnitInstance().toKMassUnit() // 예시 목적으로만
-println(2500.grams().valueIn(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // 예시 목적으로만
+println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. 다른 그룹과 결합
 
-모든 것이 결국 범용 `KUnitInstance` 엔진을 통해 흐르기 때문에, 새 그룹은 `*`/`/`를 통해 즉시 다른
+모든 것이 결국 범용 `KMixedUnitInstance` 엔진을 통해 흐르기 때문에, 새 그룹은 `*`/`/`를 통해 즉시 다른
 그룹(예: 길이)과 결합됩니다 - 전체 규칙은 [혼합 단위](mixed-units.md)를 참고하세요.
 
 ```kotlin
@@ -186,7 +186,7 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 밀도 = 질량 / 부피
-val density = 5.kilograms().toKUnitInstance() / 2.liters().toKUnitInstance()
+val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
 ```
 
 ## 6. 네이밍과 테스트 체크리스트

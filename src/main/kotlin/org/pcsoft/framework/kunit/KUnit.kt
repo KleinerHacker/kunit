@@ -9,14 +9,14 @@ package org.pcsoft.framework.kunit
  * - a [KDerivedUnit] (a named unit bound to a specific unit group and exponent, e.g. `KLengthDerivedUnit.HECTARE`), or
  * - a [KScaledDerivedUnit] (a [KDerivedUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.MILLI with KLengthDerivedUnit.LITER`).
  *
- * This lets conversion/formatting functions such as `KUnitInstance.valueAs`, `KUnitInstance.toString`,
- * or `KLengthUnitInstance.valueIn` accept any of these interchangeably at the same call site.
+ * This lets conversion/formatting functions such as `KMixedUnitInstance.valueAs`, `KMixedUnitInstance.toString`,
+ * or `KLengthUnitInstance.valueAs` accept any of these interchangeably at the same call site.
  *
  * Example:
  * ```kotlin
  * val d = 5.miles()
- * d.valueIn(KLengthUnit.MILE)                       // plain KUnit target
- * d.valueIn(KUnitPrefix.KILO with KLengthUnit.METER) // KScaledUnit target
+ * d.valueAs(KLengthUnit.MILE)                       // plain KUnit target
+ * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // KScaledUnit target
  * ```
  */
 interface KUnitTarget

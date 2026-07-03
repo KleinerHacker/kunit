@@ -25,18 +25,25 @@
 
 kunit は2つの中心的な型を中心に構築されています。
 
-- **`KUnitInstance`** - *混合単位*(Mischeinheit): `Double` の基本値と、それぞれ整数の指数と対になった
+- **`KMixedUnitInstance`** - *混合単位*(Mischeinheit): `Double` の基本値と、それぞれ整数の指数と対になった
   1つ以上の `KUnit`(例: 速度の `m^1 * s^-1`)。これは他のすべてを支える汎用エンジンです。
 - **`KUnit`** - 単位グループに属する単一の「純粋な」単位(例: メートルは長さグループに属する)。具体的な
   単位グループは `enum class ... : KUnit`(例: `KLengthUnit`)としてモデル化されます。
 
 すべての単位グループは、さらに**ラッパークラス**(例: `KLengthUnitInstance`)を提供します。これは単一の
-単位グループに限定された `KUnitInstance` をカプセル化し、常にそのグループの基本単位に正規化されます。
+単位グループに限定された `KMixedUnitInstance` をカプセル化し、常にそのグループの基本単位に正規化されます。
 これはほとんどの場合に使用する型です - 現在提供されている単位については[定義済み単位](units/length.md)を、
-汎用の `KUnitInstance` エンジンを直接使用すべき場合については[混合単位](mixed-units.md)を参照してください。
+汎用の `KMixedUnitInstance` エンジンを直接使用すべき場合については[混合単位](mixed-units.md)を参照してください。
 
 新しい物理量(質量や時間など)のサポートを追加したい場合は、[カスタム単位の追加](custom-units.md)の
 ステップバイステップの説明を参照してください。
+
+!!! note "単位オブジェクトはイミュータブルです"
+    すべての単位値 - `KMixedUnitInstance` エンジンだけでなく、`KLengthUnitInstance` や
+    `KTimeUnitInstance` のようなあらゆる「純粋な」ラッパーも - は**イミュータブル(不変)**です。
+    どの操作も既存のインスタンスを変更することはなく、演算子(`+`、`-`、`*`、`/`)や変換は常に
+    **新しい**オブジェクトを返し、オペランドはそのまま保たれます。そのため単位値は自由に共有でき、
+    キーや定数として使っても安全です。
 
 ## クイックスタート
 
@@ -62,18 +69,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // 特定の単位で値を読み取る
-println(total.valueIn(KUnitPrefix.KILO with meters)) // 例: 21.0467...
-println(total.valueIn(yards))                         // 例: 23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // 例: 21.0467...
+println(total.valueAs(yards))                         // 例: 23018.4...
 
-// 純粋な単位の乗算・除算は混合単位(KUnitInstance)を生成する
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// 純粋な単位の乗算・除算は混合単位(KMixedUnitInstance)を生成する
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面積(指数2)と体積(指数3)のための特殊単位
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI 接頭辞
@@ -83,20 +90,20 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0(メートルに正規化)
 ```
 
 ### 混合単位
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // 混合単位を手動で構成する例、平方メートル(長さ^1 * 長さ^1)
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // 指数が加算される -> 長さ^2
 ```
 

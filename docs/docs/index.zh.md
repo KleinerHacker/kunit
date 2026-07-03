@@ -25,18 +25,24 @@
 
 kunit 围绕两个核心类型构建：
 
-- **`KUnitInstance`** —— *混合单位*（Mischeinheit）：一个 `Double` 基础值加上一个或多个 `KUnit`，每个都
+- **`KMixedUnitInstance`** —— *混合单位*（Mischeinheit）：一个 `Double` 基础值加上一个或多个 `KUnit`，每个都
   搭配一个整数指数（例如速度的 `m^1 * s^-1`）。这是驱动一切的通用引擎。
 - **`KUnit`** —— 属于某个单位组的单一"纯"单位（例如米属于长度组）。具体的单位组以
   `enum class ... : KUnit`（例如 `KLengthUnit`）的形式建模。
 
 每个单位组还额外提供一个 **包装类**（例如 `KLengthUnitInstance`），它封装了一个限定于单个单位组的
-`KUnitInstance`，并始终归一化到该组的基础单位。这是你在大多数情况下会使用的类型——目前提供的单位请参见
-[预定义单位](units/length.md)，何时以及如何直接使用通用的 `KUnitInstance` 引擎请参见
+`KMixedUnitInstance`，并始终归一化到该组的基础单位。这是你在大多数情况下会使用的类型——目前提供的单位请参见
+[预定义单位](units/length.md)，何时以及如何直接使用通用的 `KMixedUnitInstance` 引擎请参见
 [混合单位](mixed-units.md)。
 
 如果你想为新的物理量（例如质量或时间）添加支持，请参阅
 [添加自定义单位](custom-units.md) 中的完整分步说明。
+
+!!! note "单位对象是不可变的"
+    每个单位值 —— 无论是 `KMixedUnitInstance` 引擎，还是诸如 `KLengthUnitInstance`、
+    `KTimeUnitInstance` 之类的各种“纯”包装类 —— 都是**不可变的（immutable）**。任何操作都不会修改
+    现有实例；运算符（`+`、`-`、`*`、`/`）和转换始终返回一个**新**对象，而保持操作数不变。因此单位值
+    可以放心地自由共享，也可以用作键或常量。
 
 ## 快速开始
 
@@ -61,18 +67,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // 以指定单位读取数值
-println(total.valueIn(KUnitPrefix.KILO with meters)) // 例如 21.0467...
-println(total.valueIn(yards))                         // 例如 23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // 例如 21.0467...
+println(total.valueAs(yards))                         // 例如 23018.4...
 
-// 纯单位相乘/相除会产生一个混合单位（KUnitInstance）
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// 纯单位相乘/相除会产生一个混合单位（KMixedUnitInstance）
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面积（指数 2）和体积（指数 3）的特殊单位
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI 前缀
@@ -82,20 +88,20 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0（归一化为米）
 ```
 
 ### 混合单位
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // 手动组合一个混合单位，例如平方米（长度^1 * 长度^1）
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // 指数相加 -> 长度^2
 ```
 

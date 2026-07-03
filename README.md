@@ -57,17 +57,17 @@ mkdocs build
 
 ## Architecture
 
-* **`KUnitInstance`** - represents a *mixed unit*: a normalized `Double` base value plus a set of `KUnit`s,
+* **`KMixedUnitInstance`** - represents a *mixed unit*: a normalized `Double` base value plus a set of `KUnit`s,
   each combined with an exponent (positive = numerator, negative = denominator) that are thought of as
   multiplied together.
 * **`KUnit`** - interface for a single "pure" unit (symbol + conversion factor to the base unit of its group).
   Implemented per unit group as `enum class ... : KUnit` (e.g. `KLengthUnit`).
-* **Wrapper classes** (e.g. `KLengthUnitInstance`) - encapsulate a `KUnitInstance` via delegation for a
+* **Wrapper classes** (e.g. `KLengthUnitInstance`) - encapsulate a `KMixedUnitInstance` via delegation for a
   concrete group and always keep their value normalized to that group's base unit. They are not limited to
   exponent 1 - they also cover derived quantities of the same group (e.g. area = length², volume = length³).
 * **`KUnitPrefix`** - generic root-package enum with the complete SI prefix table (Quetta/Q to Quecto/q).
   Prefixes are not part of `KUnit` itself, they only matter for reading/writing values, and are combined via
-  generic `infix` functions (e.g. `5 kilo meters`) followed by `KPrefixBuilder.toKUnitInstance()`.
+  generic `infix` functions (e.g. `5 kilo meters`) followed by `KPrefixBuilder.toKMixedUnitInstance()`.
 * **Special units** (`KDerivedUnit` / `KScaledDerivedUnit`) - additional, group- and exponent-bound conversion
   targets with their own name/symbol (e.g. hectare for area, liter for volume), complementing rather than
   replacing the normal mechanism.
@@ -79,7 +79,7 @@ classDiagram
         +symbol: String
         +baseValue: Double
     }
-    class KUnitInstance {
+    class KMixedUnitInstance {
         +value: Double
         +units: List~KUnitTerm~
         +valueAs(...)
@@ -101,10 +101,10 @@ classDiagram
         +baseValue: Double
     }
     class KPrefixBuilder {
-        +toKUnitInstance()
+        +toKMixedUnitInstance()
     }
 
-    KUnitInstance "1" o-- "many" KUnitTerm
+    KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
     KUnitPrefix ..> KPrefixBuilder : builds
@@ -115,7 +115,7 @@ classDiagram
     }
     class KLengthUnitInstance {
         +value: Double
-        +valueIn(unit)
+        +valueAs(unit)
         +plus() minus() times() div()
     }
     class KLengthDerivedUnit {
@@ -125,13 +125,13 @@ classDiagram
 
     KUnit <|.. KLengthUnit
     KDerivedUnit <|.. KLengthDerivedUnit
-    KLengthUnitInstance *-- KUnitInstance : delegates to
+    KLengthUnitInstance *-- KMixedUnitInstance : delegates to
     KLengthDerivedUnit --> KLengthUnit : referenceUnit
 ```
 
 ### Package Structure
 
-* Root package `org.pcsoft.framework.kunit` contains the base types `KUnit`, `KUnitInstance`, `KUnitPrefix`,
+* Root package `org.pcsoft.framework.kunit` contains the base types `KUnit`, `KMixedUnitInstance`, `KUnitPrefix`,
   `KDerivedUnit`, `KPrefixBuilder`, ...
 * Every "pure" unit group gets its own sub-package (e.g. `org.pcsoft.framework.kunit.length`) with its own
   `KXxxUnit`, `KXxxUnitInstance`, `KXxxDerivedUnit` and the associated creator extensions.
@@ -150,7 +150,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 
 ### Root Engine
 
-* `KUnitInstance`/`KUnitTerm` mixed-unit engine with full operators and `toString` conversion
+* `KMixedUnitInstance`/`KUnitTerm` mixed-unit engine with full operators and `toString` conversion
 * Complete SI prefix table (24 values, Quetta/Q to Quecto/q) via `KUnitPrefix`
 * Generic, group-independent prefix construction (`5 kilo meters`)
 * Generic mechanism for special/derived units (`KScaledUnit`, `KDerivedUnit`, `KScaledDerivedUnit`)
@@ -202,18 +202,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // Read the value in a specific unit
-println(total.valueIn(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
-println(total.valueIn(yards))         // e.g. 23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
+println(total.valueAs(yards))         // e.g. 23018.4...
 
-// Multiplying/dividing pure units builds a mixed unit (KUnitInstance)
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// Multiplying/dividing pure units builds a mixed unit (KMixedUnitInstance)
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // Special units for area (exponent 2) and volume (exponent 3)
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI prefixes
@@ -223,19 +223,19 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0 (normalized to meters)
 ```
 
 ### Mixed units
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // Manually composing a mixed unit, e.g. meters per second (length^1 * time^-1 once a time group exists)
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // exponents are added -> length^2
 ```

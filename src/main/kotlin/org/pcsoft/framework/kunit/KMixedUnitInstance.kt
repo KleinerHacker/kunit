@@ -1,11 +1,11 @@
 package org.pcsoft.framework.kunit
 
 /**
- * One (unit, exponent) pair inside a [KUnitInstance].
+ * One (unit, exponent) pair inside a [KMixedUnitInstance].
  *
  * Per the project convention, a positive exponent conceptually represents the denominator of a
  * physical formula and a negative exponent the numerator; in practice, what matters is that
- * exponents combine consistently through [KUnitInstance.times]/[KUnitInstance.div] (addition /
+ * exponents combine consistently through [KMixedUnitInstance.times]/[KMixedUnitInstance.div] (addition /
  * subtraction of exponents), which is what all arithmetic in this library relies on.
  *
  * Example: a pure length value (e.g. `5.meters()`) is represented internally as a single
@@ -18,24 +18,31 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
  * Represents a "mixed unit" (Mischeinheit): a numeric [value] together with one or more [units]
  * ([KUnitTerm]s) describing its physical dimension, e.g. "10.0 m/s" (a length term and a time term).
  *
- * [KUnitInstance] is the generic engine underlying every "pure" unit wrapper class (e.g.
+ * [KMixedUnitInstance] is the generic engine underlying every "pure" unit wrapper class (e.g.
  * `KLengthUnitInstance`); those wrappers always normalize their [value] to their group's base unit,
- * but [KUnitInstance] itself performs **no** normalization - [value] is only meaningful together
+ * but [KMixedUnitInstance] itself performs **no** normalization - [value] is only meaningful together
  * with its exact [units], in the scale they were constructed with.
  *
  * Example:
  * ```kotlin
- * val speed = 10.meters() / 2.seconds() // KUnitInstance: value = 5.0, units = [METER^1, SECOND^-1]
+ * val speed = 10.meters() / 2.seconds() // KMixedUnitInstance: value = 5.0, units = [METER^1, SECOND^-1]
  * ```
  */
-class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
+class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>) : KUnitMeasurable {
 
     /**
      * The normalized value, always stored/exposed as [Double] regardless of the [Number] type
-     * passed to the constructor (e.g. `KUnitInstance(5, ...)` and `KUnitInstance(5.0, ...)` produce
+     * passed to the constructor (e.g. `KMixedUnitInstance(5, ...)` and `KMixedUnitInstance(5.0, ...)` produce
      * the same [value]).
      */
-    val value: Double = value.toDouble()
+    override val value: Double = value.toDouble()
+
+    /**
+     * Returns `this`. A [KMixedUnitInstance] is already the generic mixed-unit representation, so the
+     * [KUnitMeasurable] conversion is the identity here (it is the "pure" unit wrappers that produce a
+     * genuinely new [KMixedUnitInstance] from their internal state).
+     */
+    override fun toKMixedUnitInstance(): KMixedUnitInstance = this
 
     /**
      * Multiplies two mixed units. Always allowed.
@@ -47,18 +54,18 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Example:
      * ```kotlin
-     * val a = 5.meters().toKUnitInstance()       // value=5.0, units=[METER^1]
-     * val b = 3.meters().toKUnitInstance()       // value=3.0, units=[METER^1]
+     * val a = 5.meters().toKMixedUnitInstance()       // value=5.0, units=[METER^1]
+     * val b = 3.meters().toKMixedUnitInstance()       // value=3.0, units=[METER^1]
      * (a * b).value                              // 15.0
      * (a * b).units                              // [METER^2]
      *
      * val speed = 10.meters() / 2.seconds()      // units=[METER^1, SECOND^-1]
-     * val time = 4.seconds().toKUnitInstance()   // units=[SECOND^1]
-     * (speed.toKUnitInstance() * time).units     // [METER^1] (SECOND^-1 + SECOND^1 = SECOND^0, removed)
+     * val time = 4.seconds().toKMixedUnitInstance()   // units=[SECOND^1]
+     * (speed.toKMixedUnitInstance() * time).units     // [METER^1] (SECOND^-1 + SECOND^1 = SECOND^0, removed)
      * ```
      */
-    operator fun times(other: KUnitInstance): KUnitInstance =
-        KUnitInstance(value * other.value, combineUnits(units, other.units, +1))
+    override operator fun times(other: KMixedUnitInstance): KMixedUnitInstance =
+        KMixedUnitInstance(value * other.value, combineUnits(units, other.units, +1))
 
     /**
      * Divides two mixed units. Always allowed.
@@ -70,13 +77,13 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Example:
      * ```kotlin
-     * val distance = 10.meters().toKUnitInstance() // units=[METER^1]
-     * val time = 2.seconds().toKUnitInstance()     // units=[SECOND^1]
+     * val distance = 10.meters().toKMixedUnitInstance() // units=[METER^1]
+     * val time = 2.seconds().toKMixedUnitInstance()     // units=[SECOND^1]
      * val speed = distance / time                  // value=5.0, units=[METER^1, SECOND^-1]
      * ```
      */
-    operator fun div(other: KUnitInstance): KUnitInstance =
-        KUnitInstance(value / other.value, combineUnits(units, other.units, -1))
+    override operator fun div(other: KMixedUnitInstance): KMixedUnitInstance =
+        KMixedUnitInstance(value / other.value, combineUnits(units, other.units, -1))
 
     /**
      * Adds two mixed units.
@@ -94,21 +101,21 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Example:
      * ```kotlin
-     * val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
-     * val b = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
      * (a + b).value // 8.0
      *
-     * val c = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
+     * val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
      * (a + c).value // 4832.032 (3 miles converted to meters, then added), units=[METER^1]
      *
-     * val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
-     * val length = KUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
+     * val length = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
      * area + length // throws IllegalStateException: different exponents (2 vs 1)
      * ```
      */
-    operator fun plus(other: KUnitInstance): KUnitInstance {
+    operator fun plus(other: KMixedUnitInstance): KMixedUnitInstance {
         val convertedOtherValue = other.value * conversionFactorTo(other)
-        return KUnitInstance(value + convertedOtherValue, units)
+        return KMixedUnitInstance(value + convertedOtherValue, units)
     }
 
     /**
@@ -116,9 +123,9 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * @throws IllegalStateException if `this` and [other] do not describe the same physical dimension.
      */
-    operator fun minus(other: KUnitInstance): KUnitInstance {
+    operator fun minus(other: KMixedUnitInstance): KMixedUnitInstance {
         val convertedOtherValue = other.value * conversionFactorTo(other)
-        return KUnitInstance(value - convertedOtherValue, units)
+        return KMixedUnitInstance(value - convertedOtherValue, units)
     }
 
     /**
@@ -129,21 +136,19 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      * @throws IllegalStateException if `this` and [other] do not have the same number of terms, or a
      * term has no group-and-exponent match in the other's [units].
      */
-    private fun conversionFactorTo(other: KUnitInstance): Double {
+    private fun conversionFactorTo(other: KMixedUnitInstance): Double {
         check(units.size == other.units.size) {
-            "Cannot combine KUnitInstance with different dimensions: $units vs ${other.units}"
+            "Cannot combine KMixedUnitInstance with different dimensions: $units vs ${other.units}"
         }
-        val remaining = other.units.toMutableList()
-        var factor = 1.0
-        for (term in units) {
+        return units.fold(other.units to 1.0) { (remaining, factor), term ->
             val index = remaining.indexOfFirst { it.unit.javaClass == term.unit.javaClass && it.exponent == term.exponent }
             check(index >= 0) {
-                "Cannot combine KUnitInstance with different dimensions: $units vs ${other.units}"
+                "Cannot combine KMixedUnitInstance with different dimensions: $units vs ${other.units}"
             }
-            val matched = remaining.removeAt(index)
-            factor *= Math.pow(matched.unit.baseValue / term.unit.baseValue, term.exponent.toDouble())
-        }
-        return factor
+            val matched = remaining[index]
+            val nextFactor = factor * Math.pow(matched.unit.baseValue / term.unit.baseValue, term.exponent.toDouble())
+            remaining.filterIndexed { i, _ -> i != index } to nextFactor
+        }.second
     }
 
     /**
@@ -153,12 +158,12 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Example:
      * ```kotlin
-     * val a = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(TimeUnit.SECOND, -1)))
-     * val b = KUnitInstance(9.0, listOf(KUnitTerm(TimeUnit.SECOND, -1), KUnitTerm(KLengthUnit.METER, 1)))
+     * val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(TimeUnit.SECOND, -1)))
+     * val b = KMixedUnitInstance(9.0, listOf(KUnitTerm(TimeUnit.SECOND, -1), KUnitTerm(KLengthUnit.METER, 1)))
      * a.hasSameUnits(b) // true, even though value and term order differ
      * ```
      */
-    fun hasSameUnits(other: KUnitInstance): Boolean = unitSignature() == other.unitSignature()
+    fun hasSameUnits(other: KMixedUnitInstance): Boolean = unitSignature() == other.unitSignature()
 
     private fun unitSignature(): Map<KUnit, Int> = units.associate { it.unit to it.exponent }
 
@@ -176,7 +181,7 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      *
      * Example:
      * ```kotlin
-     * val speed = 10.meters() / 1.seconds() // KUnitInstance: value=10.0, units=[METER^1, SECOND^-1]
+     * val speed = 10.meters() / 1.seconds() // KMixedUnitInstance: value=10.0, units=[METER^1, SECOND^-1]
      * speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
      *
      * val area = (200.meters() * 50.meters()) // units=[METER^2]
@@ -185,14 +190,13 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
      */
     fun valueAs(vararg targets: KUnitTarget): Double {
         val matches = matchTargets(targets)
-        var divisor = 1.0
-        for ((term, resolved) in matches) {
+        val divisor = matches.entries.fold(1.0) { acc, (term, resolved) ->
             // For a plain per-dimension unit, baseValue scales linearly per unit of exponent (e.g. km²
             // needs baseValue^2). For a unit already bound to a specific exponent (derived units, e.g.
             // hectare), baseValue already represents the full, exponentiated conversion factor - only
             // its sign (numerator vs. denominator) still needs to be respected.
             val power = if (resolved.isLinearPerDimension) term.exponent.toDouble() else if (term.exponent >= 0) 1.0 else -1.0
-            divisor *= Math.pow(resolved.baseValue, power)
+            acc * Math.pow(resolved.baseValue, power)
         }
         return value / divisor
     }
@@ -240,7 +244,7 @@ class KUnitInstance(value: Number, val units: List<KUnitTerm>) {
     }
 
     override fun equals(other: Any?): Boolean =
-        other is KUnitInstance && value == other.value && hasSameUnits(other)
+        other is KMixedUnitInstance && value == other.value && hasSameUnits(other)
 
     override fun hashCode(): Int = value.hashCode() * 31 + unitSignature().hashCode()
 

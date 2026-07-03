@@ -3,7 +3,7 @@
 Package: `org.pcsoft.framework.kunit.length`
 Base unit: **meter** (`KLengthUnit.BASE == KLengthUnit.METER`)
 
-`KLengthUnitInstance` wraps a `KUnitInstance` restricted to a single term of `KLengthUnit.BASE`, at any
+`KLengthUnitInstance` wraps a `KMixedUnitInstance` restricted to a single term of `KLengthUnit.BASE`, at any
 exponent - exponent 1 for a plain length, 2 for an area, 3 for a volume. The value is always stored
 normalized to meters (or square/cubic meters), regardless of which unit it was created from.
 
@@ -24,7 +24,7 @@ normalized to meters (or square/cubic meters), regardless of which unit it was c
 | Light-year | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
 | Parsec | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
 
-Every unit above has a matching bare `val` alias for use as a `valueIn`/`toString` target or as the `unit`
+Every unit above has a matching bare `val` alias for use as a `valueAs`/`toString` target or as the `unit`
 argument of a prefix `infix` function, e.g. `meters`, `miles`, `nauticalMiles`, `yards`, `feet`, `inches`,
 `fathoms`, `chains`, `furlongs`, `astronomicalUnits`, `lightYears`, `parsecs`.
 
@@ -33,9 +33,9 @@ import org.pcsoft.framework.kunit.length.*
 
 val d = 5.miles()
 d.value                        // 8046.72 (normalized to meters)
-d.valueIn(KLengthUnit.MILE)    // 5.0 (read back in miles)
-d.valueIn(feet)                 // 26400.0
-d.valueIn(nauticalMiles)        // ≈ 4.3452 (read back as nautical miles)
+d.valueAs(KLengthUnit.MILE)    // 5.0 (read back in miles)
+d.valueAs(feet)                 // 26400.0
+d.valueAs(nauticalMiles)        // ≈ 4.3452 (read back as nautical miles)
 ```
 
 ### Operators
@@ -52,9 +52,9 @@ val b = 2.miles() - 800.meters()
 1.miles() == 1609.344.meters()      // true (same normalized value)
 5.hectares() > 5.meters()           // throws IllegalStateException (area vs. length, different exponent)
 
-// * / / : always allowed, produces a KUnitInstance with a new exponent
-val area = 200.meters() * 50.meters()   // KUnitInstance: value=10000.0, units=[METER^2]
-val lengthAgain = area / 50.meters().toKUnitInstance() // KUnitInstance: value=200.0, units=[METER^1]
+// * / / : always allowed, produces a KMixedUnitInstance with a new exponent
+val area = 200.meters() * 50.meters()   // KMixedUnitInstance: value=10000.0, units=[METER^2]
+val lengthAgain = area / 50.meters().toKMixedUnitInstance() // KMixedUnitInstance: value=200.0, units=[METER^1]
 ```
 
 ### Comparisons and equality
@@ -80,11 +80,11 @@ import org.pcsoft.framework.kunit.length.*
 
 val plot = 3.hectares()
 plot.value                                   // 30000.0 (m²)
-plot.valueIn(KLengthDerivedUnit.ARE)          // 300.0
-plot.valueIn(KLengthDerivedUnit.ACRE)         // ≈ 7.4132
+plot.valueAs(KLengthDerivedUnit.ARE)          // 300.0
+plot.valueAs(KLengthDerivedUnit.ACRE)         // ≈ 7.4132
 
-val computed = 200.meters() * 50.meters()     // KUnitInstance, units=[METER^2]
-computed.toKLengthUnit().valueIn(KLengthDerivedUnit.HECTARE) // 1.0
+val computed = 200.meters() * 50.meters()     // KMixedUnitInstance, units=[METER^2]
+computed.toKLengthUnit().valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 
 plot + computed.toKLengthUnit()                // allowed: both exponent 2 (area)
 plot + 5.meters()                              // throws IllegalStateException (area vs. length)
@@ -108,10 +108,10 @@ import org.pcsoft.framework.kunit.length.*
 
 val tank = 200.liters()
 tank.value                                        // 0.2 (m³)
-tank.valueIn(KLengthDerivedUnit.US_GALLON)        // ≈ 52.834
+tank.valueAs(KLengthDerivedUnit.US_GALLON)        // ≈ 52.834
 
-val cube = 2.meters() * 2.meters() * 2.meters()   // KUnitInstance, units=[METER^3]
-cube.toKLengthUnit().valueIn(KLengthDerivedUnit.LITER) // 8000.0
+val cube = 2.meters() * 2.meters() * 2.meters()   // KMixedUnitInstance, units=[METER^3]
+cube.toKLengthUnit().valueAs(KLengthDerivedUnit.LITER) // 8000.0
 
 tank + cube.toKLengthUnit()                        // allowed: both exponent 3 (volume)
 ```
@@ -119,25 +119,25 @@ tank + cube.toKLengthUnit()                        // allowed: both exponent 3 (
 ## SI prefixes
 
 Any `KLengthUnit` can be combined with any of the 24 SI prefixes (`KUnitPrefix`, root package, Quetta/Q to
-Quecto/q) using the generic `infix` construction functions and `with` (for `valueIn`/`toString` targets):
+Quecto/q) using the generic `infix` construction functions and `with` (for `valueAs`/`toString` targets):
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-// Construction: "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// Construction: "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 fiveKm.value // 5000.0
 
 // Reading back a value using a prefixed target
 val d = 5.miles()
-d.valueIn(KUnitPrefix.KILO with KLengthUnit.METER)  // 8.04672 (km)
+d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER)  // 8.04672 (km)
 d.toString(KUnitPrefix.KILO with KLengthUnit.METER) // "8.04672 km"
 
 // Prefixes also combine with derived units (area/volume)
 val tank = 200.liters()
-tank.valueIn(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 200000.0 (mL)
+tank.valueAs(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 200000.0 (mL)
 ```
 
 ## toString formatting

@@ -7,7 +7,7 @@
 
 # Architecture
 
-* `KUnitInstance` - Represents a mixed unit.
+* `KMixedUnitInstance` - Represents a mixed unit.
   * Consists of a Double (base value)
   * Consists of one or more `KUnit`s, each as a pair with its exponent
     * The exponent is an Integer, which is positive (for the numerator) or negative (for the denominator)
@@ -20,13 +20,29 @@
   * Belongs to a group of units, e.g. Length (which then includes e.g. Metric, Miles, Yards, ...)
     * For each "pure" unit, a dedicated `enum class` is used (e.g. `KLengthUnit`)
     * A group explicitly declares its base unit (e.g. `KLengthUnit.BASE`)
-* A `KUnitInstance` is wrapped for each group of units for "pure units"
-  * The wrapper classes (e.g. `KLengthUnitInstance`) encapsulate a `KUnitInstance` via delegation
+* A `KMixedUnitInstance` is wrapped for each group of units for "pure units"
+  * The wrapper classes (e.g. `KLengthUnitInstance`) encapsulate a `KMixedUnitInstance` via delegation
     (no inheritance relationship) and always store their value **normalized to the base unit of the group**
   * A wrapper class is not necessarily limited to exponent 1 - it can also encapsulate derived quantities
     of the same group with a different exponent (e.g. area = exponent 2, volume = exponent 3 for length).
     The rules for `+`/`-`/comparison operators (only allowed for the same group **and** the same exponent,
     otherwise `IllegalStateException`) apply for each exponent, not only for exponent 1
+* **Common interface hierarchy** (root package) for every unit-value type:
+  * `KUnitMeasurable` - the group-agnostic surface shared by **all** values (`value`,
+    `toKMixedUnitInstance()`, `*`/`/` against a `KMixedUnitInstance`). `KMixedUnitInstance` implements it
+    directly; the "pure" wrappers implement it via Kotlin `by` delegation to their internal
+    `KMixedUnitInstance` (so `value`/`times`/`div`/`toKMixedUnitInstance` are never hand-written there)
+  * `KUnitInstance<SELF : KUnitInstance<SELF>>` - the self-typed (F-bounded) interface of the "pure"
+    wrappers, extending `KUnitMeasurable` with same-type `+`/`-`/comparison, same-group `*`/`/`, and
+    single-target `valueAs`/`toString`. Each wrapper implements `KUnitInstance<ItsOwnType>`
+* **Immutability invariant**: every instance type (`KMixedUnitInstance`, the "pure" wrappers, and any
+  future wrapper) is strictly immutable - only `val` state, no mutable fields; every operator/conversion
+  returns a **new** instance
+* **Creation invariant**: the "pure" wrapper constructors are `internal`. Concrete units may **only** be
+  created via number-extension creators (e.g. `5.meters()`, `2.hours()`), operator results, or the
+  conversion extensions (`KMixedUnitInstance.toXxxUnit()`, `Duration.toKTimeUnit()`). A wrapper must
+  **never** be constructed directly from a `KMixedUnitInstance` by callers - the only `KMixedUnitInstance`→
+  wrapper path is the `toXxxUnit()` extension
 * SI prefixes (the complete SI prefix table, from Quetta/Q to Quecto/q) are not part of
   `KUnit`/the (KUnit, exponent) pair, since they are only relevant when reading/writing values. They are
   represented via a generic `KUnitPrefix` enum (root package)
@@ -34,15 +50,15 @@
     root package** (parameterized over `KUnit`, not over a concrete group unit) - not duplicated per group.
     They return an intermediate type `KPrefixBuilder`, **not** a concrete "pure" unit directly, since the
     root package does not know the wrapper classes of the sub-packages. The conversion to the concrete
-    "pure" unit happens explicitly via `KPrefixBuilder.toKUnitInstance()` followed by the group-specific
-    `KUnitInstance.toXxxUnit()` conversion (e.g. `toKLengthUnit()`)
+    "pure" unit happens explicitly via `KPrefixBuilder.toKMixedUnitInstance()` followed by the group-specific
+    `KMixedUnitInstance.toXxxUnit()` conversion (e.g. `toKLengthUnit()`)
 * For certain combinations of unit group and exponent, **special units** exist with their own
   name/symbol and their own conversion factor (e.g. hectare for area = length², liter for volume = length³).
   These do **not** replace the normal mechanism (e.g. the base unit with exponent 2 remains the
   "raw" representation of an area) - they are purely additional, group- and exponent-bound conversion targets
   for input/output, generic over the referenced unit type (compile-time group safety), combinable analogously
   to the prefixes
-* Creation (only constructor and creator extension functions) of `KUnitInstance`/the wrapper classes is possible
+* Creation (only constructor and creator extension functions) of `KMixedUnitInstance`/the wrapper classes is possible
   from any `Number` type (`Int`, `Long`, `Float`, `Double`, ...), not only `Double`; internally it is always
   normalized to `Double`. All outputs (value, conversions, text representation) are, without exception, `Double`.
   Operators and comparison operators, on the other hand, **never** work directly with raw `Number` values - only
@@ -52,17 +68,24 @@
 
 * The root package is called `org.pcsoft.framework.kunit`
 * A sub-package is created for each "pure" unit
-* The base classes `KUnit` and `KUnitInstance` are located in the root package
+* The base classes `KUnit` and `KMixedUnitInstance` are located in the root package
 
 ## Naming Scheme
 
 * All public types (classes, interfaces, enums, objects) start with `K` project-wide - in the
-  root package (`KUnit`, `KUnitInstance`, `KUnitPrefix`, `KDerivedUnit`, `KPrefixBuilder`, ...) just as
+  root package (`KUnit`, `KMixedUnitInstance`, `KUnitMeasurable`, `KUnitInstance`, `KUnitPrefix`,
+  `KDerivedUnit`, `KPrefixBuilder`, ...) just as
   in every sub-package (e.g. `KLengthUnit`, `KLengthUnitInstance`, `KLengthDerivedUnit` in `length`)
 * Extension functions and bare `val` aliases (DSL vocabulary such as `meters()`, `kilo`, `meters`) are
   exempt from this rule - they remain named in a language-natural way
 
 # Implementation
+
+## Coding Style
+
+* Use `val` throughout - for properties **and** local variables. Express accumulations functionally
+  (`fold`/`map`/`reduce`) rather than mutating a `var`. Only fall back to `var` where it is genuinely
+  unavoidable. This complements the immutability invariant (see Architecture)
 
 ## Documentation
 
@@ -98,7 +121,7 @@
   * "pure" units
   * In addition to the classic equals, there must be a method to check the unit (`KUnit` + exponent)
     for mixed units
-* Both `KUnitInstance` and the "pure" wrapper classes offer, in addition to the normalized raw value, a
+* Both `KMixedUnitInstance` and the "pure" wrapper classes offer, in addition to the normalized raw value, a
   way to read a converted value for a desired target unit, as well as a `toString` overload that
   takes this target unit(s) into account in the text output. Target units can be a pure unit or
   a unit scaled by a prefix/special unit
@@ -110,26 +133,30 @@
 
 ## Conversion
 
-* Every "pure" unit offers, via an extension method, a way to convert it into a `KUnitInstance`
+* Every "pure" unit offers, via an extension method, a way to convert it into a `KMixedUnitInstance`
 * When calculating with the same "pure" unit, that same unit is returned again
-* When calculating with different "pure" units, a new `KUnitInstance` is returned
-* When calculating a "pure" unit with a mixed unit, or mixed units with each other, new `KUnitInstance`s are returned
+* When calculating with different "pure" units, a new `KMixedUnitInstance` is returned
+* When calculating a "pure" unit with a mixed unit, or mixed units with each other, new `KMixedUnitInstance`s are returned
 
 ### Error Handling
 
 * Every conversion to a "pure" unit must check whether it is also present in a mixed unit
   * If not: `IllegalStateException`
+  * The term's **exponent is irrelevant** to this group check: a term is time-typed / length-typed
+    purely by its `KUnit` group, regardless of exponent (even a "square second" is still a time unit).
+    `KMixedUnitInstance.toKTimeUnit()` therefore accepts any single `KTimeUnit` term (any exponent) and
+    just wraps the numeric value as a `Duration` - it must **not** reject non-1 exponents
 * Calculations with '*' are always allowed
   * For every unit that is already present, both exponents are added
-  * For every unit that is not yet present, a new one is created in `KUnitInstance` with exponent 1
+  * For every unit that is not yet present, a new one is created in `KMixedUnitInstance` with exponent 1
 * Calculations with '/' are always allowed
   * For every unit that is already present, both exponents are subtracted
-  * For every unit that is not yet present, a new one is created in `KUnitInstance` with exponent -1
+  * For every unit that is not yet present, a new one is created in `KMixedUnitInstance` with exponent -1
 * Calculations with '+' or '-' are only allowed if
   * Two "pure" units (wrapper classes such as `KLengthUnitInstance`) of the same unit group are calculated
     (e.g. meter + mile is allowed, automatic conversion via normalization) **and** have the same
     exponent (e.g. area must not be calculated with volume)
-  * Two mixed units (`KUnitInstance`) are calculated with each other if, for every term on one side, there
+  * Two mixed units (`KMixedUnitInstance`) are calculated with each other if, for every term on one side, there
     is exactly one term on the other side belonging to the same unit group with the same exponent
     (order-independent) - the `KUnit`s themselves do not need to match, since matching terms are
     automatically converted via normalization (analogous to the "pure" wrapper classes)

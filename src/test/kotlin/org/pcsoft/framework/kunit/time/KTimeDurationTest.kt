@@ -14,7 +14,7 @@ class KTimeDurationTest {
 
         val instance = duration.toKTimeUnit()
 
-        assertEquals(1.5, instance.valueIn(KTimeUnit.HOUR), 1e-12)
+        assertEquals(1.5, instance.valueAs(KTimeUnit.HOUR), 1e-12)
         assertEquals(duration, instance.toDuration())
     }
 

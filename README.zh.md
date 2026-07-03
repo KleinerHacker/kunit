@@ -54,16 +54,16 @@ mkdocs build
 
 ## 架构
 
-* **`KUnitInstance`** —— 表示一个*混合单位*：一个归一化的 `Double` 基准值，加上一组 `KUnit`，
+* **`KMixedUnitInstance`** —— 表示一个*混合单位*：一个归一化的 `Double` 基准值，加上一组 `KUnit`，
   每个都与一个指数（正 = 分子，负 = 分母）结合，被视为彼此相乘。
 * **`KUnit`** —— 单个“纯”单位的接口（符号 + 到所属组基准单位的换算系数）。
   每个单位组以 `enum class ... : KUnit`（例如 `KLengthUnit`）实现。
-* **包装类**（例如 `KLengthUnitInstance`）—— 为具体单位组通过委托封装一个 `KUnitInstance`，
+* **包装类**（例如 `KLengthUnitInstance`）—— 为具体单位组通过委托封装一个 `KMixedUnitInstance`，
   并始终将其值归一化到该组的基准单位。它不局限于指数 1，也涵盖同组的导出量
   （例如 面积 = 长度²，体积 = 长度³）。
 * **`KUnitPrefix`** —— 根包中的泛型枚举，包含完整的 SI 词头表（Quetta/Q 到 Quecto/q）。
   词头不是 `KUnit` 本身的一部分，仅在读写数值时才有意义，通过泛型 `infix` 函数
-  （例如 `5 kilo meters`）后接 `KPrefixBuilder.toKUnitInstance()` 进行组合。
+  （例如 `5 kilo meters`）后接 `KPrefixBuilder.toKMixedUnitInstance()` 进行组合。
 * **特殊单位**（`KDerivedUnit` / `KScaledDerivedUnit`）—— 具有自身名称/符号的、绑定到组与指数的
   附加换算目标（例如 面积的公顷、体积的升），是对基本机制的补充而非替代。
 
@@ -74,7 +74,7 @@ classDiagram
         +symbol: String
         +baseValue: Double
     }
-    class KUnitInstance {
+    class KMixedUnitInstance {
         +value: Double
         +units: List~KUnitTerm~
         +valueAs(...)
@@ -96,10 +96,10 @@ classDiagram
         +baseValue: Double
     }
     class KPrefixBuilder {
-        +toKUnitInstance()
+        +toKMixedUnitInstance()
     }
 
-    KUnitInstance "1" o-- "many" KUnitTerm
+    KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
     KUnitPrefix ..> KPrefixBuilder : builds
@@ -110,7 +110,7 @@ classDiagram
     }
     class KLengthUnitInstance {
         +value: Double
-        +valueIn(unit)
+        +valueAs(unit)
         +plus() minus() times() div()
     }
     class KLengthDerivedUnit {
@@ -120,13 +120,13 @@ classDiagram
 
     KUnit <|.. KLengthUnit
     KDerivedUnit <|.. KLengthDerivedUnit
-    KLengthUnitInstance *-- KUnitInstance : delegates to
+    KLengthUnitInstance *-- KMixedUnitInstance : delegates to
     KLengthDerivedUnit --> KLengthUnit : referenceUnit
 ```
 
 ### 包结构
 
-* 根包 `org.pcsoft.framework.kunit` 包含基础类型 `KUnit`、`KUnitInstance`、`KUnitPrefix`、
+* 根包 `org.pcsoft.framework.kunit` 包含基础类型 `KUnit`、`KMixedUnitInstance`、`KUnitPrefix`、
   `KDerivedUnit`、`KPrefixBuilder`……
 * 每个“纯”单位组都有自己的子包（例如 `org.pcsoft.framework.kunit.length`），其中包含各自的
   `KXxxUnit`、`KXxxUnitInstance`、`KXxxDerivedUnit` 以及相关的创建扩展函数。
@@ -145,7 +145,7 @@ classDiagram
 
 ### 根引擎
 
-* 具备完整运算符和 `toString` 换算的 `KUnitInstance`/`KUnitTerm` 混合单位引擎
+* 具备完整运算符和 `toString` 换算的 `KMixedUnitInstance`/`KUnitTerm` 混合单位引擎
 * 通过 `KUnitPrefix` 提供的完整 SI 词头表（24 个值，Quetta/Q 到 Quecto/q）
 * 泛型、与组无关的词头构造（`5 kilo meters`）
 * 用于特殊/导出单位的泛型机制（`KScaledUnit`、`KDerivedUnit`、`KScaledDerivedUnit`）
@@ -196,18 +196,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // 以特定单位读取数值
-println(total.valueIn(KUnitPrefix.KILO with meters)) // 例如 21.0467...
-println(total.valueIn(yards))         // 例如 23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // 例如 21.0467...
+println(total.valueAs(yards))         // 例如 23018.4...
 
-// 纯单位相乘/相除会构建混合单位（KUnitInstance）
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// 纯单位相乘/相除会构建混合单位（KMixedUnitInstance）
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面积（指数 2）和体积（指数 3）的特殊单位
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI 词头
@@ -217,19 +217,19 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0（归一化为米）
 ```
 
 ### 混合单位
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // 手动组合一个混合单位，例如 米每秒（当存在时间组时为 length^1 * time^-1）
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // 指数相加 -> length^2
 ```

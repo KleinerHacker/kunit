@@ -1,6 +1,6 @@
 package org.pcsoft.framework.kunit.length
 
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.with
@@ -8,11 +8,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-private fun area(sideA: Number, sideB: Number): KUnitInstance = sideA.meters() * sideB.meters()
+private fun area(sideA: Number, sideB: Number): KMixedUnitInstance = sideA.meters() * sideB.meters()
 
-private fun volume(a: Number, b: Number, c: Number): KUnitInstance = (a.meters() * b.meters()) * c.meters().toKUnitInstance()
+private fun volume(a: Number, b: Number, c: Number): KMixedUnitInstance = (a.meters() * b.meters()) * c.meters().toKMixedUnitInstance()
 
-private fun volumeOf(cubicMeters: Double): KUnitInstance = KUnitInstance(cubicMeters, listOf(KUnitTerm(KLengthUnit.BASE, 3)))
+private fun volumeOf(cubicMeters: Double): KMixedUnitInstance = KMixedUnitInstance(cubicMeters, listOf(KUnitTerm(KLengthUnit.BASE, 3)))
 
 class KLengthDerivedUnitTest {
 
@@ -21,7 +21,7 @@ class KLengthDerivedUnitTest {
         val a = area(10, 10) // 100 m^2
         assertEquals(1.0, a.valueAs(KLengthDerivedUnit.ARE), 1e-9)
 
-        val back = 5.ares().toKUnitInstance() // 5 are, via the generator function
+        val back = 5.ares().toKMixedUnitInstance() // 5 are, via the generator function
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.ARE), 1e-9)
     }
 
@@ -30,16 +30,16 @@ class KLengthDerivedUnitTest {
         val a = area(200, 50) // 10 000 m^2
         assertEquals(1.0, a.valueAs(KLengthDerivedUnit.HECTARE), 1e-9)
 
-        val back = 5.hectares().toKUnitInstance() // 5 ha
+        val back = 5.hectares().toKMixedUnitInstance() // 5 ha
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.HECTARE), 1e-9)
     }
 
     @Test
     fun `acre - forward and backward conversion`() {
-        val a = KUnitInstance(4046.8564224, listOf(KUnitTerm(KLengthUnit.BASE, 2))) // exactly 1 acre
+        val a = KMixedUnitInstance(4046.8564224, listOf(KUnitTerm(KLengthUnit.BASE, 2))) // exactly 1 acre
         assertEquals(1.0, a.valueAs(KLengthDerivedUnit.ACRE), 1e-9)
 
-        val back = 5.acres().toKUnitInstance() // 5 ac
+        val back = 5.acres().toKMixedUnitInstance() // 5 ac
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.ACRE), 1e-9)
     }
 
@@ -48,7 +48,7 @@ class KLengthDerivedUnitTest {
         val v = volume(2, 2, 2) // 8 m^3
         assertEquals(8000.0, v.valueAs(KLengthDerivedUnit.LITER), 1e-6)
 
-        val back = 5.liters().toKUnitInstance() // 5 L
+        val back = 5.liters().toKMixedUnitInstance() // 5 L
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.LITER), 1e-9)
     }
 
@@ -57,7 +57,7 @@ class KLengthDerivedUnitTest {
         val v = volumeOf(1.0) // 1 m^3
         assertEquals(1.0 / KLengthDerivedUnit.US_GALLON.baseValue, v.valueAs(KLengthDerivedUnit.US_GALLON), 1e-6)
 
-        val back = 5.usGallons().toKUnitInstance() // 5 US gal
+        val back = 5.usGallons().toKMixedUnitInstance() // 5 US gal
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.US_GALLON), 1e-9)
     }
 
@@ -66,7 +66,7 @@ class KLengthDerivedUnitTest {
         val v = volumeOf(1.0)
         assertEquals(1.0 / KLengthDerivedUnit.IMPERIAL_GALLON.baseValue, v.valueAs(KLengthDerivedUnit.IMPERIAL_GALLON), 1e-6)
 
-        val back = 5.imperialGallons().toKUnitInstance()
+        val back = 5.imperialGallons().toKMixedUnitInstance()
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.IMPERIAL_GALLON), 1e-9)
     }
 
@@ -75,7 +75,7 @@ class KLengthDerivedUnitTest {
         val v = volumeOf(1.0)
         assertEquals(1.0 / KLengthDerivedUnit.US_FLUID_OUNCE.baseValue, v.valueAs(KLengthDerivedUnit.US_FLUID_OUNCE), 1e-3)
 
-        val back = 5.usFluidOunces().toKUnitInstance()
+        val back = 5.usFluidOunces().toKMixedUnitInstance()
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.US_FLUID_OUNCE), 1e-9)
     }
 
@@ -84,13 +84,13 @@ class KLengthDerivedUnitTest {
         val v = volumeOf(1.0)
         assertEquals(1.0 / KLengthDerivedUnit.OIL_BARREL.baseValue, v.valueAs(KLengthDerivedUnit.OIL_BARREL), 1e-6)
 
-        val back = 5.oilBarrels().toKUnitInstance()
+        val back = 5.oilBarrels().toKMixedUnitInstance()
         assertEquals(5.0, back.valueAs(KLengthDerivedUnit.OIL_BARREL), 1e-9)
     }
 
     @Test
     fun `hectare fails against a pure length exponent`() {
-        val length = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 1)))
+        val length = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 1)))
 
         assertFailsWith<IllegalStateException> { length.valueAs(KLengthDerivedUnit.HECTARE) }
     }
@@ -114,19 +114,19 @@ class KLengthDerivedUnitTest {
     }
 
     @Test
-    fun `valueIn and toString work directly on KLengthUnitInstance for a derived unit target`() {
+    fun `valueAs and toString work directly on KLengthUnitInstance for a derived unit target`() {
         val liters = 5.liters()
 
-        assertEquals(5.0, liters.valueIn(KLengthDerivedUnit.LITER), 1e-9)
+        assertEquals(5.0, liters.valueAs(KLengthDerivedUnit.LITER), 1e-9)
         assertEquals("5.0 L", liters.toString(KLengthDerivedUnit.LITER))
     }
 
     @Test
-    fun `valueIn and toString work directly on KLengthUnitInstance for a scaled derived unit target`() {
+    fun `valueAs and toString work directly on KLengthUnitInstance for a scaled derived unit target`() {
         val liters = 5.liters()
         val milliliter = KUnitPrefix.MILLI with KLengthDerivedUnit.LITER
 
-        assertEquals(5000.0, liters.valueIn(milliliter), 1e-6)
+        assertEquals(5000.0, liters.valueAs(milliliter), 1e-6)
         assertEquals("5000.0 mL", liters.toString(milliliter))
     }
 }

@@ -55,16 +55,16 @@ mkdocs build
 
 ## 아키텍처
 
-* **`KUnitInstance`** - *혼합 단위*를 나타냅니다: 정규화된 `Double` 기준값과, 각각 지수(양수 = 분자,
+* **`KMixedUnitInstance`** - *혼합 단위*를 나타냅니다: 정규화된 `Double` 기준값과, 각각 지수(양수 = 분자,
   음수 = 분모)와 결합된 `KUnit` 집합으로 구성되며 서로 곱해진 것으로 간주됩니다.
 * **`KUnit`** - 하나의 "순수" 단위(기호 + 그룹 기준 단위로의 변환 계수)를 위한 인터페이스입니다.
   단위 그룹별로 `enum class ... : KUnit`(예: `KLengthUnit`)로 구현됩니다.
-* **래퍼 클래스**(예: `KLengthUnitInstance`) - 특정 그룹을 위해 `KUnitInstance`를 위임으로 캡슐화하며,
+* **래퍼 클래스**(예: `KLengthUnitInstance`) - 특정 그룹을 위해 `KMixedUnitInstance`를 위임으로 캡슐화하며,
   값을 항상 해당 그룹의 기준 단위로 정규화하여 보관합니다. 지수 1에 국한되지 않고 같은 그룹의 파생량
   (예: 넓이 = 길이², 부피 = 길이³)도 다룹니다.
 * **`KUnitPrefix`** - 완전한 SI 접두어 표(Quetta/Q ~ Quecto/q)를 담은 루트 패키지의 제네릭 열거형입니다.
   접두어는 `KUnit` 자체의 일부가 아니라 값의 읽기/쓰기 시에만 의미가 있으며, 제네릭 `infix` 함수
-  (예: `5 kilo meters`)와 이어지는 `KPrefixBuilder.toKUnitInstance()`로 결합됩니다.
+  (예: `5 kilo meters`)와 이어지는 `KPrefixBuilder.toKMixedUnitInstance()`로 결합됩니다.
 * **특수 단위**(`KDerivedUnit` / `KScaledDerivedUnit`) - 고유한 이름/기호를 가진, 그룹 및 지수에 종속된
   추가 변환 대상(예: 넓이의 헥타르, 부피의 리터)으로, 기본 메커니즘을 대체하지 않고 보완합니다.
 
@@ -75,7 +75,7 @@ classDiagram
         +symbol: String
         +baseValue: Double
     }
-    class KUnitInstance {
+    class KMixedUnitInstance {
         +value: Double
         +units: List~KUnitTerm~
         +valueAs(...)
@@ -97,10 +97,10 @@ classDiagram
         +baseValue: Double
     }
     class KPrefixBuilder {
-        +toKUnitInstance()
+        +toKMixedUnitInstance()
     }
 
-    KUnitInstance "1" o-- "many" KUnitTerm
+    KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
     KUnitPrefix ..> KPrefixBuilder : builds
@@ -111,7 +111,7 @@ classDiagram
     }
     class KLengthUnitInstance {
         +value: Double
-        +valueIn(unit)
+        +valueAs(unit)
         +plus() minus() times() div()
     }
     class KLengthDerivedUnit {
@@ -121,13 +121,13 @@ classDiagram
 
     KUnit <|.. KLengthUnit
     KDerivedUnit <|.. KLengthDerivedUnit
-    KLengthUnitInstance *-- KUnitInstance : delegates to
+    KLengthUnitInstance *-- KMixedUnitInstance : delegates to
     KLengthDerivedUnit --> KLengthUnit : referenceUnit
 ```
 
 ### 패키지 구조
 
-* 루트 패키지 `org.pcsoft.framework.kunit`는 기본 타입 `KUnit`, `KUnitInstance`, `KUnitPrefix`,
+* 루트 패키지 `org.pcsoft.framework.kunit`는 기본 타입 `KUnit`, `KMixedUnitInstance`, `KUnitPrefix`,
   `KDerivedUnit`, `KPrefixBuilder`, ... 를 포함합니다.
 * 모든 "순수" 단위 그룹은 자체 하위 패키지(예: `org.pcsoft.framework.kunit.length`)를 가지며 고유한
   `KXxxUnit`, `KXxxUnitInstance`, `KXxxDerivedUnit` 및 관련 생성 확장 함수를 포함합니다.
@@ -146,7 +146,7 @@ classDiagram
 
 ### 루트 엔진
 
-* 완전한 연산자 및 `toString` 변환을 갖춘 `KUnitInstance`/`KUnitTerm` 혼합 단위 엔진
+* 완전한 연산자 및 `toString` 변환을 갖춘 `KMixedUnitInstance`/`KUnitTerm` 혼합 단위 엔진
 * `KUnitPrefix`를 통한 완전한 SI 접두어 표(24개 값, Quetta/Q ~ Quecto/q)
 * 제네릭하고 그룹에 독립적인 접두어 생성(`5 kilo meters`)
 * 특수/파생 단위를 위한 제네릭 메커니즘(`KScaledUnit`, `KDerivedUnit`, `KScaledDerivedUnit`)
@@ -197,18 +197,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // 특정 단위로 값 읽기
-println(total.valueIn(KUnitPrefix.KILO with meters)) // 예: 21.0467...
-println(total.valueIn(yards))         // 예: 23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // 예: 21.0467...
+println(total.valueAs(yards))         // 예: 23018.4...
 
-// 순수 단위의 곱셈/나눗셈은 혼합 단위(KUnitInstance)를 만듭니다
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// 순수 단위의 곱셈/나눗셈은 혼합 단위(KMixedUnitInstance)를 만듭니다
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 넓이(지수 2)와 부피(지수 3)를 위한 특수 단위
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI 접두어
@@ -218,19 +218,19 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0 (미터로 정규화됨)
 ```
 
 ### 혼합 단위
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // 혼합 단위를 수동으로 구성, 예: 초당 미터 (시간 그룹이 존재하면 length^1 * time^-1)
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // 지수가 더해짐 -> length^2
 ```

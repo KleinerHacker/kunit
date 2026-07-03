@@ -1,7 +1,7 @@
 package org.pcsoft.framework.kunit.length
 
 import org.pcsoft.framework.kunit.KDerivedUnit
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.kilo
@@ -49,7 +49,7 @@ class KLengthUnitInstanceTest {
         assertEquals(1500.0, result.value, 1e-9)
     }
 
-    private fun Number.kilometers(): KLengthUnitInstance = (this kilo KLengthUnit.METER).toKUnitInstance().toKLengthUnit()
+    private fun Number.kilometers(): KLengthUnitInstance = (this kilo KLengthUnit.METER).toKMixedUnitInstance().toKLengthUnit()
 
     @Test
     fun `plus works for every pair of distinct length units`() {
@@ -79,7 +79,7 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `times with KLengthUnitInstance produces area as KUnitInstance`() {
+    fun `times with KLengthUnitInstance produces area as KMixedUnitInstance`() {
         val area = 200.meters() * 50.meters()
 
         assertEquals(10_000.0, area.value, 1e-9)
@@ -87,7 +87,7 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `div with KLengthUnitInstance cancels out to dimensionless KUnitInstance`() {
+    fun `div with KLengthUnitInstance cancels out to dimensionless KMixedUnitInstance`() {
         val result = 10.meters() / 2.meters()
 
         assertEquals(5.0, result.value, 1e-9)
@@ -95,8 +95,8 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `times with KUnitInstance delegates to KUnitInstance times`() {
-        val speedPerSecond = KUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.BASE, -1)))
+    fun `times with KMixedUnitInstance delegates to KMixedUnitInstance times`() {
+        val speedPerSecond = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.BASE, -1)))
 
         val result = 10.meters() * speedPerSecond
 
@@ -105,8 +105,8 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `div with KUnitInstance delegates to KUnitInstance div`() {
-        val time = KUnitInstance(2.0, listOf())
+    fun `div with KMixedUnitInstance delegates to KMixedUnitInstance div`() {
+        val time = KMixedUnitInstance(2.0, listOf())
 
         val result = 10.meters() / time
 
@@ -147,26 +147,26 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `every generator function round trips through valueIn`() {
+    fun `every generator function round trips through valueAs`() {
         for ((generator, unit) in lengthUnitGenerators) {
             val instance = generator(5)
             assertEquals(5.0 * unit.baseValue, instance.value, instance.value.coerceAtLeast(1.0) * 1e-9,
                 "value mismatch for $unit")
-            assertEquals(5.0, instance.valueIn(unit), 5.0 * 1e-9, "valueIn round trip mismatch for $unit")
+            assertEquals(5.0, instance.valueAs(unit), 5.0 * 1e-9, "valueAs round trip mismatch for $unit")
         }
     }
 
     @Test
-    fun `valueIn converts across units`() {
-        assertEquals(5.0, 5.miles().valueIn(KLengthUnit.MILE), 1e-6)
-        assertEquals(KLengthUnit.MILE.baseValue / KLengthUnit.METER.baseValue, 1.miles().valueIn(KLengthUnit.METER), 1e-6)
-        assertEquals(1.0 / KLengthUnit.MILE.baseValue, 1.meters().valueIn(KLengthUnit.MILE), 1e-9)
+    fun `valueAs converts across units`() {
+        assertEquals(5.0, 5.miles().valueAs(KLengthUnit.MILE), 1e-6)
+        assertEquals(KLengthUnit.MILE.baseValue / KLengthUnit.METER.baseValue, 1.miles().valueAs(KLengthUnit.METER), 1e-6)
+        assertEquals(1.0 / KLengthUnit.MILE.baseValue, 1.meters().valueAs(KLengthUnit.MILE), 1e-9)
     }
 
     @Test
-    fun `valueIn supports scaled unit targets`() {
+    fun `valueAs supports scaled unit targets`() {
         val d = 5.miles()
-        assertEquals(d.value / 1000.0, d.valueIn(KUnitPrefix.KILO with KLengthUnit.METER), 1e-9)
+        assertEquals(d.value / 1000.0, d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER), 1e-9)
     }
 
     @Test
@@ -187,38 +187,38 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `toKUnitInstance and toKLengthUnit round trip`() {
+    fun `toKMixedUnitInstance and toKLengthUnit round trip`() {
         val original = 5.miles()
 
-        val roundTripped = original.toKUnitInstance().toKLengthUnit()
+        val roundTripped = original.toKMixedUnitInstance().toKLengthUnit()
 
         assertEquals(original, roundTripped)
     }
 
     @Test
     fun `toKLengthUnit succeeds for any exponent of the length base unit`() {
-        val area = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 2)))
+        val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 2)))
 
         assertEquals(5.0, area.toKLengthUnit().value, 1e-9)
     }
 
     @Test
     fun `toKLengthUnit normalizes a non-base length unit to the base unit`() {
-        val fiveMiles = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
+        val fiveMiles = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
 
         assertEquals(5.0 * KLengthUnit.MILE.baseValue, fiveMiles.toKLengthUnit().value, 1e-6)
     }
 
     @Test
     fun `toKLengthUnit fails for a non-length unit`() {
-        val notLength = KUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
+        val notLength = KMixedUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
 
         assertFailsWith<IllegalStateException> { notLength.toKLengthUnit() }
     }
 
     @Test
     fun `toKLengthUnit fails for a mixed unit with more than one term`() {
-        val notPure = KUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KLengthUnit.BASE, 2)))
+        val notPure = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KLengthUnit.BASE, 2)))
 
         assertFailsWith<IllegalStateException> { notPure.toKLengthUnit() }
     }
@@ -234,18 +234,18 @@ class KLengthUnitInstanceTest {
     }
 
     @Test
-    fun `every derived unit generator round trips through valueIn`() {
+    fun `every derived unit generator round trips through valueAs`() {
         for ((generator, derived) in lengthDerivedUnitGenerators) {
             val instance = generator(5)
-            assertEquals(5.0, instance.valueIn(derived), 5.0 * 1e-6, "valueIn round trip mismatch for $derived")
+            assertEquals(5.0, instance.valueAs(derived), 5.0 * 1e-6, "valueAs round trip mismatch for $derived")
         }
     }
 
     @Test
-    fun `valueIn and toString support derived unit targets`() {
+    fun `valueAs and toString support derived unit targets`() {
         val area = 5.hectares()
 
-        assertEquals(5.0, area.valueIn(KLengthDerivedUnit.HECTARE), 1e-9)
+        assertEquals(5.0, area.valueAs(KLengthDerivedUnit.HECTARE), 1e-9)
         assertEquals("5.0 ha", area.toString(KLengthDerivedUnit.HECTARE))
     }
 }

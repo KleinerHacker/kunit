@@ -3,7 +3,7 @@
 パッケージ: `org.pcsoft.framework.kunit.length`
 基本単位: **メートル**(`KLengthUnit.BASE == KLengthUnit.METER`)
 
-`KLengthUnitInstance` は `KLengthUnit.BASE` の単一の項に限定された `KUnitInstance` を、任意の指数で
+`KLengthUnitInstance` は `KLengthUnit.BASE` の単一の項に限定された `KMixedUnitInstance` を、任意の指数で
 ラップします - 純粋な長さは指数1、面積は2、体積は3です。値は作成に使用された単位に関係なく、常にメートル
 (または平方/立方メートル)に正規化されて保存されます。
 
@@ -24,7 +24,7 @@
 | 光年 | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
 | パーセク | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
 
-上記のすべての単位には、`valueIn`/`toString` のターゲットや接頭辞 infix 関数の `unit` 引数として
+上記のすべての単位には、`valueAs`/`toString` のターゲットや接頭辞 infix 関数の `unit` 引数として
 使用できる bare な `val` エイリアスがあります: `meters`、`miles`、`nauticalMiles`、`yards`、
 `feet`、`inches`、`fathoms`、`chains`、`furlongs`、`astronomicalUnits`、`lightYears`、`parsecs`。
 
@@ -33,9 +33,9 @@ import org.pcsoft.framework.kunit.length.*
 
 val d = 5.miles()
 d.value                        // 8046.72(メートルに正規化)
-d.valueIn(KLengthUnit.MILE)    // 5.0(マイルに戻して読み取り)
-d.valueIn(feet)                 // 26400.0
-d.valueIn(nauticalMiles)        // ≈ 4.3452(海里として読み取り)
+d.valueAs(KLengthUnit.MILE)    // 5.0(マイルに戻して読み取り)
+d.valueAs(feet)                 // 26400.0
+d.valueAs(nauticalMiles)        // ≈ 4.3452(海里として読み取り)
 ```
 
 ### 演算子
@@ -52,9 +52,9 @@ val b = 2.miles() - 800.meters()
 1.miles() == 1609.344.meters()      // true(正規化された値が同じ)
 5.hectares() > 5.meters()           // IllegalStateException が発生(面積 vs 長さ、指数が異なる)
 
-// * / / : 常に許可され、新しい指数を持つ KUnitInstance を生成
-val area = 200.meters() * 50.meters()   // KUnitInstance: value=10000.0, units=[METER^2]
-val lengthAgain = area / 50.meters().toKUnitInstance() // KUnitInstance: value=200.0, units=[METER^1]
+// * / / : 常に許可され、新しい指数を持つ KMixedUnitInstance を生成
+val area = 200.meters() * 50.meters()   // KMixedUnitInstance: value=10000.0, units=[METER^2]
+val lengthAgain = area / 50.meters().toKMixedUnitInstance() // KMixedUnitInstance: value=200.0, units=[METER^1]
 ```
 
 ### 比較と等価性
@@ -80,11 +80,11 @@ import org.pcsoft.framework.kunit.length.*
 
 val plot = 3.hectares()
 plot.value                                   // 30000.0(m²)
-plot.valueIn(KLengthDerivedUnit.ARE)          // 300.0
-plot.valueIn(KLengthDerivedUnit.ACRE)         // ≈ 7.4132
+plot.valueAs(KLengthDerivedUnit.ARE)          // 300.0
+plot.valueAs(KLengthDerivedUnit.ACRE)         // ≈ 7.4132
 
-val computed = 200.meters() * 50.meters()     // KUnitInstance, units=[METER^2]
-computed.toKLengthUnit().valueIn(KLengthDerivedUnit.HECTARE) // 1.0
+val computed = 200.meters() * 50.meters()     // KMixedUnitInstance, units=[METER^2]
+computed.toKLengthUnit().valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 
 plot + computed.toKLengthUnit()                // 許可される: 両方とも指数2(面積)
 plot + 5.meters()                              // IllegalStateException が発生(面積 vs 長さ)
@@ -108,10 +108,10 @@ import org.pcsoft.framework.kunit.length.*
 
 val tank = 200.liters()
 tank.value                                        // 0.2(m³)
-tank.valueIn(KLengthDerivedUnit.US_GALLON)        // ≈ 52.834
+tank.valueAs(KLengthDerivedUnit.US_GALLON)        // ≈ 52.834
 
-val cube = 2.meters() * 2.meters() * 2.meters()   // KUnitInstance, units=[METER^3]
-cube.toKLengthUnit().valueIn(KLengthDerivedUnit.LITER) // 8000.0
+val cube = 2.meters() * 2.meters() * 2.meters()   // KMixedUnitInstance, units=[METER^3]
+cube.toKLengthUnit().valueAs(KLengthDerivedUnit.LITER) // 8000.0
 
 tank + cube.toKLengthUnit()                        // 許可される: 両方とも指数3(体積)
 ```
@@ -119,7 +119,7 @@ tank + cube.toKLengthUnit()                        // 許可される: 両方と
 ## SI 接頭辞
 
 任意の `KLengthUnit` は、24種類の SI 接頭辞(`KUnitPrefix`、ルートパッケージ、Quetta/Q から
-Quecto/q まで)のいずれとも、汎用の infix 構築関数と `with`(valueIn/toString ターゲット用)を使って
+Quecto/q まで)のいずれとも、汎用の infix 構築関数と `with`(valueAs/toString ターゲット用)を使って
 組み合わせることができます。
 
 ```kotlin
@@ -127,18 +127,18 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-// 構築: "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// 構築: "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 fiveKm.value // 5000.0
 
 // 接頭辞付きのターゲットを使って値を読み戻す
 val d = 5.miles()
-d.valueIn(KUnitPrefix.KILO with KLengthUnit.METER)  // 8.04672(km)
+d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER)  // 8.04672(km)
 d.toString(KUnitPrefix.KILO with KLengthUnit.METER) // "8.04672 km"
 
 // 接頭辞は派生単位(面積/体積)とも組み合わせ可能
 val tank = 200.liters()
-tank.valueIn(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 200000.0(mL)
+tank.valueAs(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 200000.0(mL)
 ```
 
 ## toString フォーマット

@@ -1,11 +1,11 @@
 package org.pcsoft.framework.kunit.time
 
-// Bare unit references, usable both as a KUnitTarget (e.g. `t.valueIn(hours)`) and as the `unit`
+// Bare unit references, usable both as a KUnitTarget (e.g. `t.valueAs(hours)`) and as the `unit`
 // argument of the generic, root-level prefix `infix` functions (e.g. `5 milli seconds`, see
 // `KUnitPrefix.kt`). Only SECOND is an SI unit and therefore sensibly combinable with a prefix, but
 // the others are still accepted since KUnitPrefix is a purely mathematical scale factor.
 
-/** Bare reference to [KTimeUnit.SECOND], for use with [valueIn][KTimeUnitInstance.valueIn] or the prefix `infix` functions. */
+/** Bare reference to [KTimeUnit.SECOND], for use with [valueAs][KTimeUnitInstance.valueAs] or the prefix `infix` functions. */
 val seconds: KTimeUnit = KTimeUnit.SECOND
 
 /** Bare reference to [KTimeUnit.MINUTE]. */

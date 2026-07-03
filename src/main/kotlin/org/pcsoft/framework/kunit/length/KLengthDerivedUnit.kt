@@ -5,7 +5,7 @@ import org.pcsoft.framework.kunit.KDerivedUnit
 /**
  * Named units for length-derived physical quantities (area, volume), each bound to a fixed exponent
  * of [KLengthUnit.BASE]. Usable as a `KUnitTarget` wherever a plain [KLengthUnit] or `KScaledUnit`
- * would be accepted, e.g. with `KUnitInstance.valueAs`/`toString`.
+ * would be accepted, e.g. with `KMixedUnitInstance.valueAs`/`toString`.
  *
  * These do **not** replace the normal per-unit exponent mechanism - e.g. `KLengthUnit.METER` at
  * exponent 2 is still a perfectly valid, "raw" area representation - they only add friendlier,
@@ -13,10 +13,10 @@ import org.pcsoft.framework.kunit.KDerivedUnit
  *
  * Example:
  * ```kotlin
- * val area = 200.meters() * 50.meters()          // KUnitInstance, 10 000 m² (METER^2)
+ * val area = 200.meters() * 50.meters()          // KMixedUnitInstance, 10 000 m² (METER^2)
  * area.valueAs(KLengthDerivedUnit.HECTARE)         // 1.0
  *
- * val volume = 2.meters() * 2.meters() * 2.meters() // KUnitInstance, 8 m³ (METER^3)
+ * val volume = 2.meters() * 2.meters() * 2.meters() // KMixedUnitInstance, 8 m³ (METER^3)
  * volume.valueAs(KLengthDerivedUnit.LITER)         // 8000.0
  * ```
  */

@@ -27,20 +27,27 @@ type:
 
 kunit is built around two central types:
 
-- **`KUnitInstance`** - a *mixed unit* ("Mischeinheit"): a `Double` base value plus one or more `KUnit`s,
+- **`KMixedUnitInstance`** - a *mixed unit* ("Mischeinheit"): a `Double` base value plus one or more `KUnit`s,
   each paired with an integer exponent (e.g. `m^1 * s^-1` for a speed). This is the generic engine that
   powers everything else.
 - **`KUnit`** - a single "pure" unit belonging to a unit group (e.g. meter belongs to the length group).
   Concrete unit groups are modeled as `enum class ... : KUnit` (e.g. `KLengthUnit`).
 
 Every unit group additionally provides a **wrapper class** (e.g. `KLengthUnitInstance`) that encapsulates a
-`KUnitInstance` restricted to a single unit group, always normalized to that group's base unit. This is the
+`KMixedUnitInstance` restricted to a single unit group, always normalized to that group's base unit. This is the
 type you will use most of the time - see [Predefined Units](units/length.md) for the units shipped today,
-and [Mixed Units](mixed-units.md) for when and how to drop down to the generic `KUnitInstance` engine
+and [Mixed Units](mixed-units.md) for when and how to drop down to the generic `KMixedUnitInstance` engine
 directly.
 
 If you want to add support for a new physical quantity (e.g. mass or time), see
 [Adding Custom Units](custom-units.md) for a full, step-by-step walkthrough.
+
+!!! note "Unit objects are immutable"
+    Every unit value - the `KMixedUnitInstance` engine as well as every "pure" wrapper such as
+    `KLengthUnitInstance` or `KTimeUnitInstance` - is **immutable**. No operation ever mutates an
+    existing instance; operators (`+`, `-`, `*`, `/`) and conversions always return a **new** object,
+    leaving the operands untouched. This makes unit values safe to share freely and to use as keys or
+    constants.
 
 ## Quick Start
 
@@ -66,18 +73,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // Read the value in a specific unit
-println(total.valueIn(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
-println(total.valueIn(yards))                         // e.g. 23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
+println(total.valueAs(yards))                         // e.g. 23018.4...
 
-// Multiplying/dividing pure units builds a mixed unit (KUnitInstance)
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// Multiplying/dividing pure units builds a mixed unit (KMixedUnitInstance)
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // Special units for area (exponent 2) and volume (exponent 3)
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI prefixes
@@ -87,20 +94,20 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0 (normalized to meters)
 ```
 
 ### Mixed units
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // Manually composing a mixed unit, e.g. meters squared (length^1 * length^1)
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // exponents are added -> length^2
 ```
 

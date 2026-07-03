@@ -57,16 +57,16 @@ mkdocs build
 
 ## アーキテクチャ
 
-* **`KUnitInstance`** —— *混合単位*を表します：正規化された `Double` の基準値と、それぞれ指数
+* **`KMixedUnitInstance`** —— *混合単位*を表します：正規化された `Double` の基準値と、それぞれ指数
   （正 = 分子、負 = 分母）と結び付いた `KUnit` の集合からなり、互いに掛け合わされているとみなされます。
 * **`KUnit`** —— 単一の「純粋」単位（記号 + 所属グループの基準単位への換算係数）のためのインターフェイス
   です。単位グループごとに `enum class ... : KUnit`（例：`KLengthUnit`）として実装されます。
-* **ラッパークラス**（例：`KLengthUnitInstance`）—— 具体的なグループのために `KUnitInstance` を委譲で
+* **ラッパークラス**（例：`KLengthUnitInstance`）—— 具体的なグループのために `KMixedUnitInstance` を委譲で
   カプセル化し、値を常にそのグループの基準単位に正規化して保持します。指数 1 に限定されず、同じグループの
   導出量（例：面積 = 長さ²、体積 = 長さ³）もカバーします。
 * **`KUnitPrefix`** —— 完全な SI 接頭辞表（Quetta/Q ～ Quecto/q）を持つルートパッケージのジェネリック
   列挙型です。接頭辞は `KUnit` 自体の一部ではなく、値の読み書き時にのみ意味を持ち、ジェネリックな
-  `infix` 関数（例：`5 kilo meters`）に続く `KPrefixBuilder.toKUnitInstance()` で組み合わせます。
+  `infix` 関数（例：`5 kilo meters`）に続く `KPrefixBuilder.toKMixedUnitInstance()` で組み合わせます。
 * **特殊単位**（`KDerivedUnit` / `KScaledDerivedUnit`）—— 独自の名前/記号を持ち、グループと指数に
   紐付いた追加の換算先（例：面積のヘクタール、体積のリットル）で、基本メカニズムを置き換えるのではなく
   補完します。
@@ -78,7 +78,7 @@ classDiagram
         +symbol: String
         +baseValue: Double
     }
-    class KUnitInstance {
+    class KMixedUnitInstance {
         +value: Double
         +units: List~KUnitTerm~
         +valueAs(...)
@@ -100,10 +100,10 @@ classDiagram
         +baseValue: Double
     }
     class KPrefixBuilder {
-        +toKUnitInstance()
+        +toKMixedUnitInstance()
     }
 
-    KUnitInstance "1" o-- "many" KUnitTerm
+    KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
     KUnitPrefix ..> KPrefixBuilder : builds
@@ -114,7 +114,7 @@ classDiagram
     }
     class KLengthUnitInstance {
         +value: Double
-        +valueIn(unit)
+        +valueAs(unit)
         +plus() minus() times() div()
     }
     class KLengthDerivedUnit {
@@ -124,13 +124,13 @@ classDiagram
 
     KUnit <|.. KLengthUnit
     KDerivedUnit <|.. KLengthDerivedUnit
-    KLengthUnitInstance *-- KUnitInstance : delegates to
+    KLengthUnitInstance *-- KMixedUnitInstance : delegates to
     KLengthDerivedUnit --> KLengthUnit : referenceUnit
 ```
 
 ### パッケージ構造
 
-* ルートパッケージ `org.pcsoft.framework.kunit` には基本型 `KUnit`、`KUnitInstance`、`KUnitPrefix`、
+* ルートパッケージ `org.pcsoft.framework.kunit` には基本型 `KUnit`、`KMixedUnitInstance`、`KUnitPrefix`、
   `KDerivedUnit`、`KPrefixBuilder`、… が含まれます。
 * すべての「純粋」単位グループは独自のサブパッケージ（例：`org.pcsoft.framework.kunit.length`）を持ち、
   それぞれ独自の `KXxxUnit`、`KXxxUnitInstance`、`KXxxDerivedUnit` と関連する生成拡張関数を含みます。
@@ -149,7 +149,7 @@ classDiagram
 
 ### ルートエンジン
 
-* 完全な演算子と `toString` 換算を備えた `KUnitInstance`/`KUnitTerm` 混合単位エンジン
+* 完全な演算子と `toString` 換算を備えた `KMixedUnitInstance`/`KUnitTerm` 混合単位エンジン
 * `KUnitPrefix` による完全な SI 接頭辞表（24 個の値、Quetta/Q ～ Quecto/q）
 * ジェネリックでグループに依存しない接頭辞の構築（`5 kilo meters`）
 * 特殊/導出単位のためのジェネリックなメカニズム（`KScaledUnit`、`KDerivedUnit`、`KScaledDerivedUnit`）
@@ -201,18 +201,18 @@ val diff = trip - distance
 val isFarther = trip > distance      // true
 
 // 特定の単位で値を読み取る
-println(total.valueIn(KUnitPrefix.KILO with meters)) // 例：21.0467...
-println(total.valueIn(yards))         // 例：23018.4...
+println(total.valueAs(KUnitPrefix.KILO with meters)) // 例：21.0467...
+println(total.valueAs(yards))         // 例：23018.4...
 
-// 純粋単位の乗算/除算は混合単位（KUnitInstance）を構築します
-val area = distance.toKUnitInstance() * trip.toKUnitInstance()
+// 純粋単位の乗算/除算は混合単位（KMixedUnitInstance）を構築します
+val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面積（指数 2）と体積（指数 3）のための特殊単位
 val plot = 3.hectares()
-println(plot.valueIn(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters()
-println(tank.valueIn(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
 ### SI 接頭辞
@@ -222,19 +222,19 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.length.toKLengthUnit
 
-// "5 kilo meters" -> KPrefixBuilder -> KUnitInstance -> KLengthUnitInstance
-val fiveKm = (5 kilo meters).toKUnitInstance().toKLengthUnit()
+// "5 kilo meters" -> KPrefixBuilder -> KMixedUnitInstance -> KLengthUnitInstance
+val fiveKm = (5 kilo meters).toKMixedUnitInstance().toKLengthUnit()
 println(fiveKm.value) // 5000.0（メートルに正規化）
 ```
 
 ### 混合単位
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.length.KLengthUnit
 
 // 混合単位を手動で構成、例：メートル毎秒（時間グループが存在すれば length^1 * time^-1）
-val speed = KUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
 val doubled = speed * speed // 指数が加算される -> length^2
 ```

@@ -1,40 +1,40 @@
 package org.pcsoft.framework.kunit.length
 
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 
 /**
- * Wraps a [KUnitInstance] with exactly one term of [KLengthUnit.BASE] (meter), at any exponent -
+ * Wraps a [KMixedUnitInstance] with exactly one term of [KLengthUnit.BASE] (meter), at any exponent -
  * exponent 1 for a "pure" length, 2 for an area, 3 for a volume, etc. The value is always normalized
  * internally to [KLengthUnit.BASE], regardless of which unit or [org.pcsoft.framework.kunit.KUnitPrefix]
  * it was constructed with.
  *
  * Instances are created via the extension functions in `KLengthUnitExtensions.kt`
  * (e.g. `5.meters()`, `5.hectares()`), or by constructing values with the generic, root-level prefix
- * `infix` functions and converting them via [toKLengthUnit] (e.g. `(3 kilo meters).toKUnitInstance().toKLengthUnit()`).
+ * `infix` functions and converting them via [toKLengthUnit] (e.g. `(3 kilo meters).toKMixedUnitInstance().toKLengthUnit()`).
  *
  * Example:
  * ```kotlin
  * val d = 5.miles()
  * d.value             // 8046.72 (normalized to meters)
- * d.valueIn(KLengthUnit.MILE) // 5.0 (read back in miles)
+ * d.valueAs(KLengthUnit.MILE) // 5.0 (read back in miles)
  *
  * val area = 5.hectares()
  * area.value          // 50000.0 (normalized to square meters)
  * ```
  */
-class KLengthUnitInstance internal constructor(internal val instance: KUnitInstance) {
+class KLengthUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
+    KUnitInstance<KLengthUnitInstance>, KUnitMeasurable by instance {
 
     /** The single term's exponent (1 for a pure length, 2 for an area, 3 for a volume, ...). */
     private val exponent: Int get() = instance.units.single().exponent
 
-    /** Value expressed in the base unit ([KLengthUnit.BASE], meter), raised to [exponent]. */
-    val value: Double get() = instance.value
-
     /**
      * Converts [value] into the given unit, prefixed unit, or (for the matching exponent) derived
-     * unit - see [KUnitInstance.valueAs] for the exact matching rules.
+     * unit - see [KMixedUnitInstance.valueAs] for the exact matching rules.
      *
      * @throws IllegalStateException if [target] does not belong to the length group, or (for a
      * [org.pcsoft.framework.kunit.KDerivedUnit]/[org.pcsoft.framework.kunit.KScaledDerivedUnit]
@@ -43,14 +43,14 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
      * Example:
      * ```kotlin
      * val d = 5.miles()
-     * d.valueIn(KLengthUnit.MILE)                        // 5.0
-     * d.valueIn(KUnitPrefix.KILO with KLengthUnit.METER) // 8.04672 (km)
+     * d.valueAs(KLengthUnit.MILE)                        // 5.0
+     * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // 8.04672 (km)
      *
      * val area = 5.hectares()
-     * area.valueIn(KLengthDerivedUnit.HECTARE) // 5.0
+     * area.valueAs(KLengthDerivedUnit.HECTARE) // 5.0
      * ```
      */
-    fun valueIn(target: KUnitTarget): Double = instance.valueAs(target)
+    override fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
 
     /**
      * Adds two values of the same physical dimension, automatically converting between different
@@ -58,7 +58,7 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
      *
      * @throws IllegalStateException if the two operands have different [exponent]s (e.g. adding an
      * area to a plain length), since they are then not the same physical dimension - delegates to
-     * [KUnitInstance.plus], which enforces this.
+     * [KMixedUnitInstance.plus], which enforces this.
      *
      * Example:
      * ```kotlin
@@ -67,30 +67,24 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
      * 5.hectares() + 5.meters() // throws IllegalStateException (area vs. length)
      * ```
      */
-    operator fun plus(other: KLengthUnitInstance): KLengthUnitInstance = KLengthUnitInstance(instance + other.instance)
+    override operator fun plus(other: KLengthUnitInstance): KLengthUnitInstance = KLengthUnitInstance(instance + other.instance)
 
     /** Subtracts two values of the same physical dimension. See [plus] for the automatic unit conversion and exponent check. */
-    operator fun minus(other: KLengthUnitInstance): KLengthUnitInstance = KLengthUnitInstance(instance - other.instance)
+    override operator fun minus(other: KLengthUnitInstance): KLengthUnitInstance = KLengthUnitInstance(instance - other.instance)
 
     /**
-     * Multiplies two length-based values, producing a new [KUnitInstance] whose exponent is the sum
+     * Multiplies two length-based values, producing a new [KMixedUnitInstance] whose exponent is the sum
      * of both operands' exponents (no longer necessarily a "pure" length).
      *
      * Example:
      * ```kotlin
-     * val area = 200.meters() * 50.meters() // KUnitInstance: value=10000.0, units=[METER^2]
+     * val area = 200.meters() * 50.meters() // KMixedUnitInstance: value=10000.0, units=[METER^2]
      * ```
      */
-    operator fun times(other: KLengthUnitInstance): KUnitInstance = instance * other.instance
+    override operator fun times(other: KLengthUnitInstance): KMixedUnitInstance = instance * other.instance
 
-    /** Divides two length-based values, producing a new [KUnitInstance] whose exponent is the difference of both operands' exponents. */
-    operator fun div(other: KLengthUnitInstance): KUnitInstance = instance / other.instance
-
-    /** Multiplies this value with an arbitrary mixed unit, producing a new [KUnitInstance]. */
-    operator fun times(other: KUnitInstance): KUnitInstance = instance * other
-
-    /** Divides this value by an arbitrary mixed unit, producing a new [KUnitInstance]. */
-    operator fun div(other: KUnitInstance): KUnitInstance = instance / other
+    /** Divides two length-based values, producing a new [KMixedUnitInstance] whose exponent is the difference of both operands' exponents. */
+    override operator fun div(other: KLengthUnitInstance): KMixedUnitInstance = instance / other.instance
 
     /**
      * Compares two values of the same physical dimension by their normalized [value].
@@ -99,7 +93,7 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
      * an area to a plain length) - per CLAUDE.md, comparing values of a different unit/exponent must
      * fail rather than silently comparing unrelated magnitudes.
      */
-    operator fun compareTo(other: KLengthUnitInstance): Int {
+    override operator fun compareTo(other: KLengthUnitInstance): Int {
         check(exponent == other.exponent) { "Cannot compare KLengthUnitInstance with different exponents: $exponent vs ${other.exponent}" }
         return value.compareTo(other.value)
     }
@@ -125,9 +119,9 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
 
     /**
      * Representation in the given unit, prefixed unit, or (for the matching exponent) derived unit -
-     * see [valueIn] for the exact matching rules.
+     * see [valueAs] for the exact matching rules.
      *
-     * @throws IllegalStateException under the same conditions as [valueIn].
+     * @throws IllegalStateException under the same conditions as [valueAs].
      *
      * Example:
      * ```kotlin
@@ -136,10 +130,7 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
      * 5.hectares().toString(KLengthDerivedUnit.HECTARE)           // "5.0 ha"
      * ```
      */
-    fun toString(target: KUnitTarget): String = instance.toString(target)
-
-    /** The underlying generic [KUnitInstance] representation (single term: `KLengthUnit.BASE^exponent`). */
-    fun toKUnitInstance(): KUnitInstance = instance
+    override fun toString(target: KUnitTarget): String = instance.toString(target)
 }
 
 /**
@@ -156,26 +147,26 @@ class KLengthUnitInstance internal constructor(internal val instance: KUnitInsta
  * Example:
  * ```kotlin
  * val speed = 10.meters() / 2.seconds()
- * val distance = speed.toKUnitInstance() * 2.seconds() // units=[METER^1]
+ * val distance = speed.toKMixedUnitInstance() * 2.seconds() // units=[METER^1]
  * distance.toKLengthUnit().value // 10.0
  *
  * val area = 200.meters() * 50.meters() // units=[METER^2]
  * area.toKLengthUnit().value // 10000.0
  *
- * (5 kilo KLengthUnit.MILE).toKUnitInstance().toKLengthUnit().value // 5000 * 1609.344 (normalized to meters)
+ * (5 kilo KLengthUnit.MILE).toKMixedUnitInstance().toKLengthUnit().value // 5000 * 1609.344 (normalized to meters)
  *
- * speed.toKUnitInstance().toKLengthUnit() // throws IllegalStateException (mixed length/time, not pure length)
+ * speed.toKMixedUnitInstance().toKLengthUnit() // throws IllegalStateException (mixed length/time, not pure length)
  * ```
  */
-fun KUnitInstance.toKLengthUnit(): KLengthUnitInstance {
+fun KMixedUnitInstance.toKLengthUnit(): KLengthUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KLengthUnit) {
-        "KUnitInstance $this does not represent a pure length-based value (expected exactly one term of a KLengthUnit)"
+        "KMixedUnitInstance $this does not represent a pure length-based value (expected exactly one term of a KLengthUnit)"
     }
     val normalizedValue = value * Math.pow(unit.baseValue, term.exponent.toDouble())
-    return KLengthUnitInstance(KUnitInstance(normalizedValue, listOf(KUnitTerm(KLengthUnit.BASE, term.exponent))))
+    return KLengthUnitInstance(KMixedUnitInstance(normalizedValue, listOf(KUnitTerm(KLengthUnit.BASE, term.exponent))))
 }
 
 internal fun lengthUnitInstanceOf(value: Double): KLengthUnitInstance =
-    KLengthUnitInstance(KUnitInstance(value, listOf(KUnitTerm(KLengthUnit.BASE, 1))))
+    KLengthUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KLengthUnit.BASE, 1))))

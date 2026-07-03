@@ -1,13 +1,13 @@
 package org.pcsoft.framework.kunit.length
 
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-private fun Number.seconds(): KUnitInstance = KUnitInstance(toDouble(), listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
+private fun Number.seconds(): KMixedUnitInstance = KMixedUnitInstance(toDouble(), listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
 
 class KLengthMixedUnitTest {
 
@@ -21,7 +21,7 @@ class KLengthMixedUnitTest {
 
     @Test
     fun `multiplying a length with a mixed unit`() {
-        val perSecond = KUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.SECOND, -1)))
+        val perSecond = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.SECOND, -1)))
 
         val speed = 10.meters() * perSecond
 

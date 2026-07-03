@@ -1,6 +1,6 @@
 # Adding Custom Units
 
-kunit ships one unit group today ([Length](units/length.md)), but the whole engine (`KUnit`, `KUnitInstance`,
+kunit ships one unit group today ([Length](units/length.md)), but the whole engine (`KUnit`, `KMixedUnitInstance`,
 prefixes, derived units) is generic and group-independent. Adding a new physical quantity means following
 the same pattern the `length` package already establishes. This page walks through adding a demonstrative
 **Mass** group (`org.pcsoft.framework.kunit.mass`) from scratch.
@@ -42,32 +42,32 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. Create the wrapper class
 
-The wrapper class (`KMassUnitInstance`) encapsulates a `KUnitInstance` by **delegation** (not inheritance)
+The wrapper class (`KMassUnitInstance`) encapsulates a `KMixedUnitInstance` by **delegation** (not inheritance)
 and always normalizes its value to the group's base unit. Copy the shape of `KLengthUnitInstance` - it is
 generic in the exponent, so the same wrapper also serves derived quantities of mass if you ever need them.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 
-class KMassUnitInstance internal constructor(internal val instance: KUnitInstance) {
+class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) {
 
     private val exponent: Int get() = instance.units.single().exponent
 
     val value: Double get() = instance.value
 
-    fun valueIn(target: KUnitTarget): Double = instance.valueAs(target)
+    fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
 
     operator fun plus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance + other.instance)
     operator fun minus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance - other.instance)
 
-    operator fun times(other: KMassUnitInstance): KUnitInstance = instance * other.instance
-    operator fun div(other: KMassUnitInstance): KUnitInstance = instance / other.instance
-    operator fun times(other: KUnitInstance): KUnitInstance = instance * other
-    operator fun div(other: KUnitInstance): KUnitInstance = instance / other
+    operator fun times(other: KMassUnitInstance): KMixedUnitInstance = instance * other.instance
+    operator fun div(other: KMassUnitInstance): KMixedUnitInstance = instance / other.instance
+    operator fun times(other: KMixedUnitInstance): KMixedUnitInstance = instance * other
+    operator fun div(other: KMixedUnitInstance): KMixedUnitInstance = instance / other
 
     operator fun compareTo(other: KMassUnitInstance): Int {
         check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
@@ -85,34 +85,34 @@ class KMassUnitInstance internal constructor(internal val instance: KUnitInstanc
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKUnitInstance(): KUnitInstance = instance
+    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
 }
 
-/** Converts a pure-mass [KUnitInstance] back into a [KMassUnitInstance], normalizing to [KMassUnit.BASE]. */
-fun KUnitInstance.toKMassUnit(): KMassUnitInstance {
+/** Converts a pure-mass [KMixedUnitInstance] back into a [KMassUnitInstance], normalizing to [KMassUnit.BASE]. */
+fun KMixedUnitInstance.toKMassUnit(): KMassUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KMassUnit) {
-        "KUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
+        "KMixedUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
     }
     val normalizedValue = value * Math.pow(unit.baseValue, term.exponent.toDouble())
-    return KMassUnitInstance(KUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
+    return KMassUnitInstance(KMixedUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
 }
 
 internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
-    KMassUnitInstance(KUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
+    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
 ## 3. Add creator extension functions
 
 Following the `K...UnitExtensions.kt` pattern, add a bare `val` alias plus a `Number` extension function per
-unit, so callers can write `5.kilograms()` or `1 kilo grams` and also pass `kilograms` as a plain `valueIn`
+unit, so callers can write `5.kilograms()` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs`
 target:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-/** Bare reference to [KMassUnit.KILOGRAM], for use with [valueIn][KMassUnitInstance.valueIn] or the prefix `infix` functions. */
+/** Bare reference to [KMassUnit.KILOGRAM], for use with [valueAs][KMassUnitInstance.valueAs] or the prefix `infix` functions. */
 val kilograms: KMassUnit = KMassUnit.KILOGRAM
 
 /** Bare reference to [KMassUnit.GRAM]. */
@@ -140,7 +140,7 @@ fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
 ```
 
 That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, SI prefixes (`5 kilo grams`), and
-`toKUnitInstance()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
+`toKMixedUnitInstance()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
 package and only needs `KMassUnit : KUnit` to work.
 
 ```kotlin
@@ -149,8 +149,8 @@ import org.pcsoft.framework.kunit.mass.*
 val a = 500.grams()
 val b = 2.pounds()
 val total = a + b            // KMassUnitInstance, normalized to kilograms
-println(total.valueIn(kilograms))
-println(total.valueIn(grams))
+println(total.valueAs(kilograms))
+println(total.valueAs(grams))
 
 val heavier = b > a          // true
 ```
@@ -172,13 +172,13 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKUnitInstance().toKMassUnit() // just for illustration
-println(2500.grams().valueIn(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // just for illustration
+println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. Combine with other groups
 
-Because everything ultimately funnels through the generic `KUnitInstance` engine, your new group immediately
+Because everything ultimately funnels through the generic `KMixedUnitInstance` engine, your new group immediately
 composes with any other group (e.g. length) via `*`/`/` - see [Mixed Units](mixed-units.md) for the full
 rules:
 
@@ -187,7 +187,7 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // density = mass / volume
-val density = 5.kilograms().toKUnitInstance() / 2.liters().toKUnitInstance()
+val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
 ```
 
 ## 6. Naming and testing checklist

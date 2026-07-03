@@ -1,15 +1,15 @@
 package org.pcsoft.framework.kunit.length
 
 import org.pcsoft.framework.kunit.KDerivedUnit
-import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 
-// Bare unit references, usable both as a KUnitTarget (e.g. `d.valueIn(meters)`) and as the `unit`
+// Bare unit references, usable both as a KUnitTarget (e.g. `d.valueAs(meters)`) and as the `unit`
 // argument of the generic, root-level prefix `infix` functions (e.g. `5 kilo meters`, see
 // `KUnitPrefix.kt`). Only METER is an SI unit and therefore sensibly combinable with a prefix, but
 // the others are still accepted since KUnitPrefix is a purely mathematical scale factor.
 
-/** Bare reference to [KLengthUnit.METER], for use with [valueIn][KLengthUnitInstance.valueIn] or the prefix `infix` functions. */
+/** Bare reference to [KLengthUnit.METER], for use with [valueAs][KLengthUnitInstance.valueAs] or the prefix `infix` functions. */
 val meters: KLengthUnit = KLengthUnit.METER
 
 /** Bare reference to [KLengthUnit.MILE]. */
@@ -93,11 +93,11 @@ fun Number.lightYears(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_YEAR)
 fun Number.parsecs(): KLengthUnitInstance = of(this, KLengthUnit.PARSEC)
 
 private fun of(value: Number, derived: KDerivedUnit<KLengthUnit>): KLengthUnitInstance =
-    KLengthUnitInstance(KUnitInstance(value.toDouble() * derived.baseValue, listOf(KUnitTerm(derived.referenceUnit, derived.exponent))))
+    KLengthUnitInstance(KMixedUnitInstance(value.toDouble() * derived.baseValue, listOf(KUnitTerm(derived.referenceUnit, derived.exponent))))
 
 /**
  * Creates a pure area value (exponent 2 of [KLengthUnit.BASE]) in ares. Example:
- * `5.ares().valueIn(KLengthDerivedUnit.ARE) // 5.0`.
+ * `5.ares().valueAs(KLengthDerivedUnit.ARE) // 5.0`.
  */
 fun Number.ares(): KLengthUnitInstance = of(this, KLengthDerivedUnit.ARE)
 
