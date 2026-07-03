@@ -28,7 +28,7 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
  * val speed = 10.meters() / 2.seconds() // KMixedUnitInstance: value = 5.0, units = [METER^1, SECOND^-1]
  * ```
  */
-class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>) : KUnitMeasurable {
+class KMixedUnitInstance internal constructor(value: Number, val units: List<KUnitTerm>) : KUnitMeasurable {
 
     /**
      * The normalized value, always stored/exposed as [Double] regardless of the [Number] type

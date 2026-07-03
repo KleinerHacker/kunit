@@ -38,6 +38,10 @@
   `toKUnitInstance()` → `toKMixedUnitInstance()`.
 - **Breaking:** renamed the "pure" wrapper accessor `valueIn(target)` → `valueAs(target)`, matching
   `KMixedUnitInstance.valueAs`.
+- **Breaking:** the `KMixedUnitInstance` primary constructor is now `internal`, matching the "pure"
+  wrapper classes (`KLengthUnitInstance`, `KTimeUnitInstance`). Externally, mixed units may only be
+  obtained via `toKMixedUnitInstance()`, operator results, or the number-extension creators — never by
+  constructing `KMixedUnitInstance(...)` directly.
 
 ## [0.1.0]
 
