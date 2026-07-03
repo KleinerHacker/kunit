@@ -25,6 +25,11 @@ internal val lengthUnitGenerators: List<Pair<(Number) -> KLengthUnitInstance, KL
     ({ n: Number -> n.chains() }) to KLengthUnit.CHAIN,
     ({ n: Number -> n.furlongs() }) to KLengthUnit.FURLONG,
     ({ n: Number -> n.astronomicalUnits() }) to KLengthUnit.ASTRONOMICAL_UNIT,
+    ({ n: Number -> n.lightSeconds() }) to KLengthUnit.LIGHT_SECOND,
+    ({ n: Number -> n.lightMinutes() }) to KLengthUnit.LIGHT_MINUTE,
+    ({ n: Number -> n.lightHours() }) to KLengthUnit.LIGHT_HOUR,
+    ({ n: Number -> n.lightDays() }) to KLengthUnit.LIGHT_DAY,
+    ({ n: Number -> n.lightWeeks() }) to KLengthUnit.LIGHT_WEEK,
     ({ n: Number -> n.lightYears() }) to KLengthUnit.LIGHT_YEAR,
     ({ n: Number -> n.parsecs() }) to KLengthUnit.PARSEC
 )
@@ -154,6 +159,22 @@ class KLengthUnitInstanceTest {
                 "value mismatch for $unit")
             assertEquals(5.0, instance.valueAs(unit), 5.0 * 1e-9, "valueAs round trip mismatch for $unit")
         }
+    }
+
+    @Test
+    fun `light units are defined via the speed of light`() {
+        assertEquals(299792458.0, 1.lightSeconds().value, 1e-3)
+        // Larger light units are exact multiples of the light-second.
+        assertEquals(60.lightSeconds().value, 1.lightMinutes().value, 1e-3)
+        assertEquals(60.lightMinutes().value, 1.lightHours().value, 1.0)
+        assertEquals(24.lightHours().value, 1.lightDays().value, 1.0)
+        assertEquals(7.lightDays().value, 1.lightWeeks().value, 1.0)
+    }
+
+    @Test
+    fun `light unit mixes with another length unit via plus`() {
+        val result = 1.lightSeconds() + 299792458.meters()
+        assertEquals(2.0, result.valueAs(KLengthUnit.LIGHT_SECOND), 1e-6)
     }
 
     @Test

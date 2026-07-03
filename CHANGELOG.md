@@ -4,6 +4,10 @@
 
 ### Added
 
+- New light-distance units in the **Length** group: light-second (`ls`), light-minute (`lmin`),
+  light-hour (`lh`), light-day (`ld`) and light-week (`lw`), complementing the existing light-year.
+  Defined via the speed of light (`c = 299 792 458 m/s`) and the Julian time base, with matching
+  `Number.lightSeconds()` … `Number.lightWeeks()` creators and bare `val` aliases.
 - New unit group **Time** (`org.pcsoft.framework.kunit.time`):
   - Units: second (base), minute, hour, day. Calendar-based units (week, year) are intentionally
     excluded, since they are defined by calendars rather than by a fixed physical quantity.

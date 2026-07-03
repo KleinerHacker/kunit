@@ -21,12 +21,18 @@
 | 链 | `KLengthUnit.CHAIN` | `ch` | `Number.chains()` | 20.1168 |
 | 弗隆 | `KLengthUnit.FURLONG` | `fur` | `Number.furlongs()` | 201.168 |
 | 天文单位 | `KLengthUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits()` | 1.495978707e11 |
+| 光秒 | `KLengthUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds()` | 299792458.0 |
+| 光分 | `KLengthUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes()` | 1.798754748e10 |
+| 光时 | `KLengthUnit.LIGHT_HOUR` | `lh` | `Number.lightHours()` | 1.0792528488e12 |
+| 光日 | `KLengthUnit.LIGHT_DAY` | `ld` | `Number.lightDays()` | 2.59020683712e13 |
+| 光周 | `KLengthUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks()` | 1.813144785984e14 |
 | 光年 | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
 | 秒差距 | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
 
 以上每个单位都有对应的裸 `val` 别名，可用作 `valueAs`/`toString` 的目标，或作为前缀 infix 函数的 `unit`
 参数：`meters`、`miles`、`nauticalMiles`、`yards`、`feet`、`inches`、`fathoms`、`chains`、
-`furlongs`、`astronomicalUnits`、`lightYears`、`parsecs`。
+`furlongs`、`astronomicalUnits`、`lightSeconds`、`lightMinutes`、`lightHours`、`lightDays`、
+`lightWeeks`、`lightYears`、`parsecs`。
 
 ```kotlin
 import org.pcsoft.framework.kunit.length.*

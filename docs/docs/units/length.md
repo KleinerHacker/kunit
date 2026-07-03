@@ -21,12 +21,18 @@ normalized to meters (or square/cubic meters), regardless of which unit it was c
 | Chain | `KLengthUnit.CHAIN` | `ch` | `Number.chains()` | 20.1168 |
 | Furlong | `KLengthUnit.FURLONG` | `fur` | `Number.furlongs()` | 201.168 |
 | Astronomical unit | `KLengthUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits()` | 1.495978707e11 |
+| Light-second | `KLengthUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds()` | 299792458.0 |
+| Light-minute | `KLengthUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes()` | 1.798754748e10 |
+| Light-hour | `KLengthUnit.LIGHT_HOUR` | `lh` | `Number.lightHours()` | 1.0792528488e12 |
+| Light-day | `KLengthUnit.LIGHT_DAY` | `ld` | `Number.lightDays()` | 2.59020683712e13 |
+| Light-week | `KLengthUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks()` | 1.813144785984e14 |
 | Light-year | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
 | Parsec | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
 
 Every unit above has a matching bare `val` alias for use as a `valueAs`/`toString` target or as the `unit`
 argument of a prefix `infix` function, e.g. `meters`, `miles`, `nauticalMiles`, `yards`, `feet`, `inches`,
-`fathoms`, `chains`, `furlongs`, `astronomicalUnits`, `lightYears`, `parsecs`.
+`fathoms`, `chains`, `furlongs`, `astronomicalUnits`, `lightSeconds`, `lightMinutes`, `lightHours`,
+`lightDays`, `lightWeeks`, `lightYears`, `parsecs`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.length.*

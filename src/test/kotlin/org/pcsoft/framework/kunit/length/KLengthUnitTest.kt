@@ -67,6 +67,36 @@ class KLengthUnitTest {
     }
 
     @Test
+    fun `light second symbol and baseValue`() {
+        assertEquals("ls", KLengthUnit.LIGHT_SECOND.symbol)
+        assertEquals(299792458.0, KLengthUnit.LIGHT_SECOND.baseValue)
+    }
+
+    @Test
+    fun `light minute symbol and baseValue`() {
+        assertEquals("lmin", KLengthUnit.LIGHT_MINUTE.symbol)
+        assertEquals(17987547480.0, KLengthUnit.LIGHT_MINUTE.baseValue)
+    }
+
+    @Test
+    fun `light hour symbol and baseValue`() {
+        assertEquals("lh", KLengthUnit.LIGHT_HOUR.symbol)
+        assertEquals(1079252848800.0, KLengthUnit.LIGHT_HOUR.baseValue)
+    }
+
+    @Test
+    fun `light day symbol and baseValue`() {
+        assertEquals("ld", KLengthUnit.LIGHT_DAY.symbol)
+        assertEquals(25902068371200.0, KLengthUnit.LIGHT_DAY.baseValue)
+    }
+
+    @Test
+    fun `light week symbol and baseValue`() {
+        assertEquals("lw", KLengthUnit.LIGHT_WEEK.symbol)
+        assertEquals(181314478598400.0, KLengthUnit.LIGHT_WEEK.baseValue)
+    }
+
+    @Test
     fun `light year symbol and baseValue`() {
         assertEquals("ly", KLengthUnit.LIGHT_YEAR.symbol)
         assertEquals(9.4607304725808e15, KLengthUnit.LIGHT_YEAR.baseValue)
@@ -80,6 +110,6 @@ class KLengthUnitTest {
 
     @Test
     fun `all enum values are covered`() {
-        assertEquals(12, KLengthUnit.entries.size)
+        assertEquals(17, KLengthUnit.entries.size)
     }
 }

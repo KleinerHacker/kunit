@@ -39,6 +39,21 @@ val furlongs: KLengthUnit = KLengthUnit.FURLONG
 /** Bare reference to [KLengthUnit.ASTRONOMICAL_UNIT]. */
 val astronomicalUnits: KLengthUnit = KLengthUnit.ASTRONOMICAL_UNIT
 
+/** Bare reference to [KLengthUnit.LIGHT_SECOND]. */
+val lightSeconds: KLengthUnit = KLengthUnit.LIGHT_SECOND
+
+/** Bare reference to [KLengthUnit.LIGHT_MINUTE]. */
+val lightMinutes: KLengthUnit = KLengthUnit.LIGHT_MINUTE
+
+/** Bare reference to [KLengthUnit.LIGHT_HOUR]. */
+val lightHours: KLengthUnit = KLengthUnit.LIGHT_HOUR
+
+/** Bare reference to [KLengthUnit.LIGHT_DAY]. */
+val lightDays: KLengthUnit = KLengthUnit.LIGHT_DAY
+
+/** Bare reference to [KLengthUnit.LIGHT_WEEK]. */
+val lightWeeks: KLengthUnit = KLengthUnit.LIGHT_WEEK
+
 /** Bare reference to [KLengthUnit.LIGHT_YEAR]. */
 val lightYears: KLengthUnit = KLengthUnit.LIGHT_YEAR
 
@@ -85,6 +100,21 @@ fun Number.furlongs(): KLengthUnitInstance = of(this, KLengthUnit.FURLONG)
 
 /** Creates a pure length value in astronomical units. Example: `1.astronomicalUnits().value // 1.495978707e11`. */
 fun Number.astronomicalUnits(): KLengthUnitInstance = of(this, KLengthUnit.ASTRONOMICAL_UNIT)
+
+/** Creates a pure length value in light-seconds. Example: `1.lightSeconds().value // 299792458.0`. */
+fun Number.lightSeconds(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_SECOND)
+
+/** Creates a pure length value in light-minutes. Example: `1.lightMinutes().value // 1.798754748e10`. */
+fun Number.lightMinutes(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_MINUTE)
+
+/** Creates a pure length value in light-hours. Example: `1.lightHours().value // 1.0792528488e12`. */
+fun Number.lightHours(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_HOUR)
+
+/** Creates a pure length value in light-days. Example: `1.lightDays().value // 2.59020683712e13`. */
+fun Number.lightDays(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_DAY)
+
+/** Creates a pure length value in light-weeks. Example: `1.lightWeeks().value // 1.813144785984e14`. */
+fun Number.lightWeeks(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_WEEK)
 
 /** Creates a pure length value in light-years. Example: `1.lightYears().value // 9.4607304725808e15`. */
 fun Number.lightYears(): KLengthUnitInstance = of(this, KLengthUnit.LIGHT_YEAR)

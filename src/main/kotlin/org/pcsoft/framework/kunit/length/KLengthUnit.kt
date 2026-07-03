@@ -42,6 +42,21 @@ enum class KLengthUnit(override val symbol: String, override val baseValue: Doub
     /** Astronomical unit, 1 AU = 149 597 870 700 m (mean Earth-Sun distance). */
     ASTRONOMICAL_UNIT("AU", 1.495978707e11),
 
+    /** Light-second, 1 ls = 299 792 458 m (distance light travels in one second; c = 299 792 458 m/s). */
+    LIGHT_SECOND("ls", 299792458.0),
+
+    /** Light-minute, 1 lmin = 17 987 547 480 m (distance light travels in one minute, c · 60 s). */
+    LIGHT_MINUTE("lmin", 17987547480.0),
+
+    /** Light-hour, 1 lh = 1 079 252 848 800 m (distance light travels in one hour, c · 3600 s). */
+    LIGHT_HOUR("lh", 1079252848800.0),
+
+    /** Light-day, 1 ld = 25 902 068 371 200 m (distance light travels in one day, c · 86 400 s). */
+    LIGHT_DAY("ld", 25902068371200.0),
+
+    /** Light-week, 1 lw = 181 314 478 598 400 m (distance light travels in one week, c · 604 800 s). */
+    LIGHT_WEEK("lw", 181314478598400.0),
+
     /** Light-year, 1 ly = 9 460 730 472 580 800 m (distance light travels in one Julian year). */
     LIGHT_YEAR("ly", 9.4607304725808e15),
 

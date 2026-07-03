@@ -21,12 +21,18 @@
 | チェーン | `KLengthUnit.CHAIN` | `ch` | `Number.chains()` | 20.1168 |
 | ファーロング | `KLengthUnit.FURLONG` | `fur` | `Number.furlongs()` | 201.168 |
 | 天文単位 | `KLengthUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits()` | 1.495978707e11 |
+| 光秒 | `KLengthUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds()` | 299792458.0 |
+| 光分 | `KLengthUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes()` | 1.798754748e10 |
+| 光時 | `KLengthUnit.LIGHT_HOUR` | `lh` | `Number.lightHours()` | 1.0792528488e12 |
+| 光日 | `KLengthUnit.LIGHT_DAY` | `ld` | `Number.lightDays()` | 2.59020683712e13 |
+| 光週 | `KLengthUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks()` | 1.813144785984e14 |
 | 光年 | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
 | パーセク | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
 
 上記のすべての単位には、`valueAs`/`toString` のターゲットや接頭辞 infix 関数の `unit` 引数として
 使用できる bare な `val` エイリアスがあります: `meters`、`miles`、`nauticalMiles`、`yards`、
-`feet`、`inches`、`fathoms`、`chains`、`furlongs`、`astronomicalUnits`、`lightYears`、`parsecs`。
+`feet`、`inches`、`fathoms`、`chains`、`furlongs`、`astronomicalUnits`、`lightSeconds`、
+`lightMinutes`、`lightHours`、`lightDays`、`lightWeeks`、`lightYears`、`parsecs`。
 
 ```kotlin
 import org.pcsoft.framework.kunit.length.*

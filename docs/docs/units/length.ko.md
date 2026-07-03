@@ -21,12 +21,18 @@
 | 체인 | `KLengthUnit.CHAIN` | `ch` | `Number.chains()` | 20.1168 |
 | 펄롱 | `KLengthUnit.FURLONG` | `fur` | `Number.furlongs()` | 201.168 |
 | 천문단위 | `KLengthUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits()` | 1.495978707e11 |
+| 광초 | `KLengthUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds()` | 299792458.0 |
+| 광분 | `KLengthUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes()` | 1.798754748e10 |
+| 광시 | `KLengthUnit.LIGHT_HOUR` | `lh` | `Number.lightHours()` | 1.0792528488e12 |
+| 광일 | `KLengthUnit.LIGHT_DAY` | `ld` | `Number.lightDays()` | 2.59020683712e13 |
+| 광주 | `KLengthUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks()` | 1.813144785984e14 |
 | 광년 | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
 | 파섹 | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
 
 위의 모든 단위는 `valueAs`/`toString` 대상이나 접두어 infix 함수의 `unit` 인자로 사용할 수 있는 bare
 `val` 별칭을 가지고 있습니다: `meters`, `miles`, `nauticalMiles`, `yards`, `feet`, `inches`, `fathoms`,
-`chains`, `furlongs`, `astronomicalUnits`, `lightYears`, `parsecs`.
+`chains`, `furlongs`, `astronomicalUnits`, `lightSeconds`, `lightMinutes`, `lightHours`,
+`lightDays`, `lightWeeks`, `lightYears`, `parsecs`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
