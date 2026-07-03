@@ -4,6 +4,15 @@
 
 # kunit
 
+> 🌐 **English** · [한국어](README.ko.md) · [中文](README.zh.md) · [日本語](README.ja.md)
+>
+> The full documentation is also available in all four languages on
+> [GitHub Pages](https://kleinerhacker.github.io/kunit/)
+> ([EN](https://kleinerhacker.github.io/kunit/) ·
+> [KO](https://kleinerhacker.github.io/kunit/ko/) ·
+> [ZH](https://kleinerhacker.github.io/kunit/zh/) ·
+> [JA](https://kleinerhacker.github.io/kunit/ja/)).
+
 Kotlin Unit Framework to calculate with different units in Kotlin (and Java) - calculate with real physical
 units in `Double` precision instead of bare numbers.
 
@@ -28,6 +37,8 @@ A JDK capable of resolving toolchain 25 is required (the `foojay-resolver` plugi
 if needed).
 
 ## Documentation Site
+
+📖 **[Read the documentation on GitHub Pages](https://kleinerhacker.github.io/kunit/)**
 
 The full documentation (overview, quick start, mixed units, adding custom units, predefined units) is built
 with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and available in English, Korean,
