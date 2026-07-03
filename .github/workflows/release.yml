@@ -45,11 +45,11 @@ jobs:
       - name: Build
         run: ./gradlew build --stacktrace
 
-      - name: Upload CLI artifact
+      - name: Upload library artifact
         uses: actions/upload-artifact@v7
         with:
-          name: cli-jar
-          path: apps/cli/build/libs/*.jar
+          name: kunit-jar
+          path: build/libs/*.jar
 
   # Build the docs as a generation test (mkdocs --strict) before they get deployed.
   validate-docs:
@@ -125,10 +125,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Download CLI artifact
+      - name: Download library artifact
         uses: actions/download-artifact@v8
         with:
-          name: cli-jar
+          name: kunit-jar
           path: build/release/
 
       - name: Extract changelog
