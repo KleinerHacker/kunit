@@ -1,7 +1,7 @@
 import com.github.jk1.license.render.ReportRenderer
 
 plugins {
-    kotlin("jvm") version "2.3.21"
+    kotlin("jvm") version "2.4.0"
     id("org.jetbrains.kotlinx.kover") version "0.9.8"
     id("org.jetbrains.dokka") version "2.2.0"
     id("com.github.jk1.dependency-license-report") version "3.1.4"
