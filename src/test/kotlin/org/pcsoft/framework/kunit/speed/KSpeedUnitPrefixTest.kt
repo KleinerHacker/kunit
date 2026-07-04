@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.with
 import kotlin.test.Test
@@ -93,8 +93,8 @@ class KSpeedUnitPrefixTest {
         assertEquals(5000.0, kmps.value, 1e-9)
         assertEquals(5.0, kmps.valueAs(KUnitPrefix.KILO with KSpeedUnit.METERS_PER_SECOND), 1e-9)
         assertEquals(
-            setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
-            kmps.toKMixedUnitInstance().units.toSet()
+            setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
+            kmps.toUnit().units.toSet()
         )
     }
 }

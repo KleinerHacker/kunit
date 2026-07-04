@@ -85,7 +85,7 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
+    fun toUnit(): KMixedUnitInstance = instance
 }
 
 /** Converts a pure-mass [KMixedUnitInstance] back into a [KMassUnitInstance], normalizing to [KMassUnit.BASE]. */
@@ -140,7 +140,7 @@ val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 ```
 
 That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, SI prefixes (`5 kilo grams`), and
-`toKMixedUnitInstance()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
+`toUnit()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
 package and only needs `KMassUnit : KUnit` to work.
 
 ```kotlin
@@ -158,7 +158,7 @@ val heavier = b > a          // true
 ## 4. (Optional) Add special/derived units
 
 If your group has commonly used named units bound to a specific exponent (like hectare for area), add a
-`KDerivedUnit` object analogous to `KLengthDerivedUnit`:
+`KDerivedUnit` object analogous to `KDistanceDerivedUnit`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -172,7 +172,7 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // just for illustration
+val truckLoad = 3.pounds.toUnit().toKMassUnit() // just for illustration
 println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
@@ -183,11 +183,11 @@ composes with any other group (e.g. length) via `*`/`/` - see [Mixed Units](mixe
 rules:
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
 // density = mass / volume
-val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
+val density = 5.kilograms.toUnit() / 2.liters.toUnit()
 ```
 
 ## 6. Naming and testing checklist

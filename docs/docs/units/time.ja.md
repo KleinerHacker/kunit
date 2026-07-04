@@ -6,12 +6,12 @@
 `KTimeUnitInstance` は [`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)
 を 100% ラップします。`Duration` が唯一の情報源（ナノ秒精度）であり、`Duration` の全 API が転送されます。
 その上で、他のすべての「純粋」単位ラッパーと同じインターフェース（`value`/`valueAs`/`+`/`-`/`*`/`/`/
-`toString`/`toKMixedUnitInstance`）を提供するため、時間値は汎用の混合単位エンジンにそのまま接続できます
+`toString`/`toUnit`）を提供するため、時間値は汎用の混合単位エンジンにそのまま接続できます
 （例: `length / time` = 速度）。値は常に秒に正規化して保持されます。
 
 `Duration` は常に単純な期間のみを表すため、時間値は常に指数 1 です —— time² や 1/time のラッパーはあり
 ません（乗算/除算は長さと同様に生の `KMixedUnitInstance` へ「エスケープ」します）。したがって
-`KMixedUnitInstance.toKTimeUnit()` は**指数 1 の**単一 `KTimeUnit` 項のみを受け付けます。
+`KMixedUnitInstance.toTime()` は**指数 1 の**単一 `KTimeUnit` 項のみを受け付けます。
 
 ## 単位
 
@@ -75,7 +75,7 @@ import org.pcsoft.framework.kunit.time.*
 
 val t = 90.minutes
 t.toDuration()                       // PT1H30M
-Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
+Duration.ofMinutes(90).toTime() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
 // 転送された変更メソッドは KTimeUnitInstance を返す
 t.plusHours(1).valueAs(KTimeUnit.HOUR) // 2.5
@@ -130,13 +130,13 @@ import org.pcsoft.framework.kunit.time.*
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters / 1.seconds.toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
-speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
+val speed = 10.meters / 1.seconds.toUnit()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
+speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // 速度に時間を掛け戻すと純粋な長さが復元される
-val distance = speed * 2.seconds.toKMixedUnitInstance()
-distance.toKLengthUnit().value // 20.0
+val distance = speed * 2.seconds.toUnit()
+distance.toDistance().value // 20.0
 ```

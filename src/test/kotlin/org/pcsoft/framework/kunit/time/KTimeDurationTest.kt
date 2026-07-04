@@ -21,10 +21,10 @@ import kotlin.test.assertTrue
 class KTimeDurationTest {
 
     @Test
-    fun `toDuration and Duration_toKTimeUnit round trip`() {
+    fun `toDuration and Duration_toTime round trip`() {
         val duration = Duration.ofMinutes(90)
 
-        val instance = duration.toKTimeUnit()
+        val instance = duration.toTime()
 
         assertEquals(1.5, instance.valueAs(KTimeUnit.HOUR), 1e-12)
         assertEquals(duration, instance.toDuration())

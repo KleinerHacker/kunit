@@ -19,7 +19,7 @@ package org.pcsoft.framework.kunit
  *
  * It captures exactly the surface that is identical across all of them:
  * - a normalized [value] (always a [Double]),
- * - a conversion into the generic [KMixedUnitInstance] engine ([toKMixedUnitInstance]),
+ * - a conversion into the generic [KMixedUnitInstance] engine ([toUnit]),
  * - multiplication and division against an arbitrary [KMixedUnitInstance] ([times]/[div]).
  *
  * The "pure" wrappers do **not** implement these members by hand - they delegate this interface to
@@ -34,7 +34,7 @@ package org.pcsoft.framework.kunit
  * ```kotlin
  * val values: List<KUnitMeasurable> = listOf(5.meters, 2.hours, 10.meters / 2.seconds)
  * values.map { it.value }                 // normalized base values
- * values.map { it.toKMixedUnitInstance() } // uniform generic representation
+ * values.map { it.toUnit() } // uniform generic representation
  * ```
  */
 interface KUnitMeasurable {
@@ -55,7 +55,7 @@ interface KUnitMeasurable {
      * For [KMixedUnitInstance] this returns `this`; for a "pure" wrapper it returns the underlying
      * single-term instance (e.g. `METER^1`, `SECOND^1`).
      */
-    fun toKMixedUnitInstance(): KMixedUnitInstance
+    fun toUnit(): KMixedUnitInstance
 
     /**
      * Multiplies this measure with an arbitrary mixed unit, producing a new [KMixedUnitInstance] whose
@@ -65,7 +65,7 @@ interface KUnitMeasurable {
      * Example:
      * ```kotlin
      * val speed = 10.meters / 2.seconds          // [METER^1, SECOND^-1]
-     * (speed * 4.seconds.toKMixedUnitInstance())   // [METER^1] (SECOND^-1 + SECOND^1 cancels)
+     * (speed * 4.seconds.toUnit())   // [METER^1] (SECOND^-1 + SECOND^1 cancels)
      * ```
      */
     operator fun times(other: KMixedUnitInstance): KMixedUnitInstance
@@ -77,8 +77,8 @@ interface KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * val distance = 10.meters.toKMixedUnitInstance() // [METER^1]
-     * val time = 2.seconds.toKMixedUnitInstance()     // [SECOND^1]
+     * val distance = 10.meters.toUnit() // [METER^1]
+     * val time = 2.seconds.toUnit()     // [SECOND^1]
      * (distance / time)                                 // value=5.0, [METER^1, SECOND^-1]
      * ```
      */
@@ -121,7 +121,7 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * 5.miles.valueAs(KLengthUnit.MILE)                        // 5.0
+     * 5.miles.valueAs(KDistanceUnit.MILE)                        // 5.0
      * 2.hours.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND) // 7_200_000.0
      * ```
      */
@@ -157,25 +157,6 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      * @throws IllegalStateException under the same conditions as [plus].
      */
     operator fun minus(other: SELF): SELF
-
-    /**
-     * Multiplies two values of the same group, producing a new [KMixedUnitInstance] whose exponent is
-     * the sum of both operands' exponents (e.g. length × length = area). The result is no longer
-     * necessarily a "pure" value, hence a [KMixedUnitInstance].
-     *
-     * Example:
-     * ```kotlin
-     * val area = 200.meters * 50.meters // [METER^2], value=10000.0
-     * ```
-     */
-    operator fun times(other: SELF): KMixedUnitInstance
-
-    /**
-     * Divides two values of the same group, producing a new [KMixedUnitInstance] whose exponent is the
-     * difference of both operands' exponents (e.g. area / length = length, length / length =
-     * dimensionless).
-     */
-    operator fun div(other: SELF): KMixedUnitInstance
 
     /**
      * Compares two values of the same unit type by their normalized [value].

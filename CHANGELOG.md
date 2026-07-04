@@ -2,6 +2,40 @@
 
 ## [Unreleased]
 
+### Added
+
+- **Dimensioned distance subtypes.** The distance group now models exponents as their own types under an
+  open base `KDistanceUnitInstance` (any exponent): `KLengthUnitInstance` (exponent 1),
+  `KAreaUnitInstance` (2) and `KVolumeUnitInstance` (3). Results whose exponent leaves `{1,2,3}` fall back
+  to `KDistanceUnitInstance`; a dimensionless result (exponent 0) is a `KMixedUnitInstance`.
+  - Same-group `*`/`/` are now **strongly typed**: `length * length = area`, `area / length = length`,
+    `volume / area = length`, etc., instead of always returning a raw `KMixedUnitInstance`.
+  - Cross-dimension `+`/`-`/comparison (`length + area`, `length < volume`, …) are now a **compile
+    error** — no such operator exists — rather than a runtime `IllegalStateException`.
+- **Area and volume creators** for every distance unit: `200.squareMeters`, `3.cubicMiles`, … plus the
+  SI-prefix `infix` forms `5 kilo squareMeters` / `3 kilo cubicMeters` (the prefix scales the linear base
+  unit, then it is squared/cubed, so `5 kilo squareMeters` == 5 square kilometers == 5 000 000 m²). The
+  existing named derived units (`ares`/`hectares`/`acres`, `liters`/… ) now return
+  `KAreaUnitInstance`/`KVolumeUnitInstance`.
+- New conversions `KMixedUnitInstance.toDistance()`/`toLength()`/`toArea()`/`toVolume()`.
+
+### Changed
+
+- **Breaking:** the length group was renamed to **distance** — package
+  `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
+  `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the
+  exponent-1 leaf (a length); the general "any exponent" wrapper is the new `KDistanceUnitInstance`.
+- **Breaking:** conversion accessors dropped their hard class names for a natural DSL:
+  `toKMixedUnitInstance()` → `toUnit()`, `toKTimeUnit()` → `toTime()`, `toKSpeedUnit()` → `toSpeed()`,
+  `toKLengthUnit()` → `toDistance()` (plus the new exponent-checked `toLength()`/`toArea()`/`toVolume()`).
+- **Breaking:** `KUnitInstance<SELF>` no longer declares `times(SELF)`/`div(SELF)`. Same-group
+  multiplication/division comes from `KUnitMeasurable` (against a `KMixedUnitInstance`) plus the
+  group-specific typed overloads; this split is what lets the distance leaves narrow their `*`/`/` return
+  types without a signature clash.
+- The general `KDistanceUnitInstance` is intentionally **not additive** (no `plus`/`minus`/`compareTo`):
+  cross-dimension addition lives only on the leaf types, which is what makes `length + area` a compile
+  error. Add two `m⁴` values through the mixed engine instead.
+
 ## [0.2.0]
 
 ### Added

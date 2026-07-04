@@ -100,6 +100,6 @@ class KTimeUnitPrefixTest {
 
         assertEquals(0.005, ms.value, 1e-12)
         assertEquals(5.0, ms.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND), 1e-9)
-        assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), ms.toKMixedUnitInstance().units)
+        assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), ms.toUnit().units)
     }
 }

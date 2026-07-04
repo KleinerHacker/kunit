@@ -27,7 +27,7 @@ import kotlin.math.roundToLong
  * [duration] is the single source of truth: `+`, `-`, comparison and equality operate directly on it
  * (nanosecond-exact), and the full [Duration] API is forwarded (see the `plusXxx`/`minusXxx`/`toXxx`
  * members below). On top of that, it offers the same surface as every other "pure" unit wrapper (e.g.
- * `KLengthUnitInstance`): [value]/[valueAs]/`*`/`/`/[toString]/[toKMixedUnitInstance], so it plugs into the
+ * `KLengthUnitInstance`): [value]/[valueAs]/`*`/`/`/[toString]/[toUnit], so it plugs into the
  * generic mixed-unit engine (e.g. `length / time` = speed).
  *
  * Unlike the other wrappers, a time value always represents exponent 1 (a [Duration] cannot represent a
@@ -36,7 +36,7 @@ import kotlin.math.roundToLong
  *
  * Instances are created via the creator extension properties in `KTimeUnitExtensions.kt` (e.g. `5.seconds`,
  * `2.hours`), the SI-prefix `infix` constructors in `KTimeUnitPrefix.kt` (e.g. `5 milli seconds`),
- * or from a [Duration] via [toKTimeUnit].
+ * or from a [Duration] via [toTime].
  *
  * Example:
  * ```kotlin
@@ -62,7 +62,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
      * t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND) // 7 200 000.0 (ms)
      * ```
      */
-    override fun valueAs(target: KUnitTarget): Double = toKMixedUnitInstance().valueAs(target)
+    override fun valueAs(target: KUnitTarget): Double = toUnit().valueAs(target)
 
     /**
      * Adds two durations, automatically converting between different [KTimeUnit]s since both operands
@@ -82,10 +82,10 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
      * Multiplies two time values, producing a new [KMixedUnitInstance] whose exponent is the sum of both
      * operands' exponents (`SECOND^2`, no longer a "pure" duration).
      */
-    override operator fun times(other: KTimeUnitInstance): KMixedUnitInstance = toKMixedUnitInstance() * other.toKMixedUnitInstance()
+    operator fun times(other: KTimeUnitInstance): KMixedUnitInstance = toUnit() * other.toUnit()
 
     /** Divides two time values, producing a new (dimensionless) [KMixedUnitInstance]. */
-    override operator fun div(other: KTimeUnitInstance): KMixedUnitInstance = toKMixedUnitInstance() / other.toKMixedUnitInstance()
+    operator fun div(other: KTimeUnitInstance): KMixedUnitInstance = toUnit() / other.toUnit()
 
     /** Compares two durations chronologically (delegates to [Duration.compareTo]). */
     override operator fun compareTo(other: KTimeUnitInstance): Int = duration.compareTo(other.duration)
@@ -96,7 +96,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
     override fun hashCode(): Int = duration.hashCode()
 
     /** Base-unit representation, e.g. `"7200.0 s"` for two hours. */
-    override fun toString(): String = toKMixedUnitInstance().toString()
+    override fun toString(): String = toUnit().toString()
 
     /**
      * Representation in the given unit or prefixed unit - see [valueAs] for the matching rules.
@@ -109,7 +109,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
      * 2.hours.toString(KTimeUnit.MINUTE) // "120.0 min"
      * ```
      */
-    override fun toString(target: KUnitTarget): String = toKMixedUnitInstance().toString(target)
+    override fun toString(target: KUnitTarget): String = toUnit().toString(target)
 
     // --- java.time.Duration facade -------------------------------------------------------------
 
@@ -252,12 +252,12 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
  * Example:
  * ```kotlin
  * val speed = 10.meters / 2.seconds
- * val time = speed.toKMixedUnitInstance() // NOT a single time term -> would throw
+ * val time = speed.toUnit() // NOT a single time term -> would throw
  *
  * (5 milli seconds).value // 0.005
  * ```
  */
-fun KMixedUnitInstance.toKTimeUnit(): KTimeUnitInstance {
+fun KMixedUnitInstance.toTime(): KTimeUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KTimeUnit) {
@@ -272,10 +272,10 @@ fun KMixedUnitInstance.toKTimeUnit(): KTimeUnitInstance {
  *
  * Example:
  * ```kotlin
- * java.time.Duration.ofMinutes(90).toKTimeUnit().valueAs(KTimeUnit.HOUR) // 1.5
+ * java.time.Duration.ofMinutes(90).toTime().valueAs(KTimeUnit.HOUR) // 1.5
  * ```
  */
-fun Duration.toKTimeUnit(): KTimeUnitInstance = KTimeUnitInstance(this)
+fun Duration.toTime(): KTimeUnitInstance = KTimeUnitInstance(this)
 
 internal fun timeUnitInstanceOf(seconds: Double): KTimeUnitInstance = KTimeUnitInstance(secondsToDuration(seconds))
 

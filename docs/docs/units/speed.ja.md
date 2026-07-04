@@ -5,7 +5,7 @@
 
 速度は最初の**構成された(constructed)**単位です。長さや時間とは異なり、単一の「実在する」物理量では
 なく、`長さ · 時間⁻¹` (`m/s`) の組み合わせです。そのため `KSpeedUnitInstance` は、ちょうど 2 つの項 -
-指数 `+1` の `KLengthUnit.BASE`(メートル)と指数 `-1` の `KTimeUnit.BASE`(秒)- からなる
+指数 `+1` の `KDistanceUnit.BASE`(メートル)と指数 `-1` の `KTimeUnit.BASE`(秒)- からなる
 `KMixedUnitInstance` をラップします。値は、どの単位・接頭辞・長さ/時間の組み合わせで生成されても、常に
 メートル毎秒に正規化されて保存されます。
 
@@ -57,12 +57,12 @@ v.valueAs(mach)                             // ≈ 0.0408 (音速に対する割
 | `length / speed` | `KTimeUnitInstance` | 時間 = 距離 / 速度 |
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.speed.*
 
 // --- 核心単位 -> 速度 ---------------------------------------------------
-val v = 100.meters / 10.seconds          // KSpeedUnitInstance (.toKSpeedUnit() 不要!)
+val v = 100.meters / 10.seconds          // KSpeedUnitInstance (.toSpeed() 不要!)
 v.value                                     // 10.0 (m/s)
 v.valueAs(KSpeedUnit.KILOMETERS_PER_HOUR)   // 36.0
 v.valueAs(KSpeedUnit.MILES_PER_HOUR)        // ≈ 22.37
@@ -77,7 +77,7 @@ val explicit: KSpeedUnitInstance = 100.meters / 10.seconds
 // --- 速度 -> 長さ (時間を掛ける) ----------------------------------------
 val distance = v * 60.seconds             // KLengthUnitInstance
 distance.value                              // 600.0 (m)
-distance.valueAs(KLengthUnit.METER)         // 600.0
+distance.valueAs(KDistanceUnit.METER)         // 600.0
 distance.valueAs(feet)                      // ≈ 1968.5 (任意の長さ単位で読み戻し)
 distance.valueAs(miles)                     // ≈ 0.373
 60.seconds * v                            // 同じ結果(可換)
@@ -100,12 +100,12 @@ time.valueAs(KTimeUnit.HOUR)                // ≈ 0.0167
 
 Kotlin の演算子はコンパイル時に単一の戻り値型を持つため、`KLengthUnitInstance / KTimeUnitInstance` は
 型付きの速度を構築するために**予約**されており、代わりに `m²/s` を生むことはできません。ただしその中間
-結果が**失われるわけではありません** - 一方のオペランドを `toKMixedUnitInstance()` で混合レベルに落とすと、
+結果が**失われるわけではありません** - 一方のオペランドを `toUnit()` で混合レベルに落とすと、
 汎用の `KMixedUnitInstance` の `/` 演算子(任意の指数、速度チェックなし)が選ばれます。この明示的な
-`toKMixedUnitInstance()` こそ、強く型付けされた経路から離れるという意図的な合図です。
+`toUnit()` こそ、強く型付けされた経路から離れるという意図的な合図です。
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
 val area = 2.hectares                 // KLengthUnitInstance、指数 2 (20 000 m²)
@@ -113,12 +113,12 @@ val area = 2.hectares                 // KLengthUnitInstance、指数 2 (20 000 
 // area / 2.seconds                   // ❌ IllegalStateException をスロー(m²/s であって速度でない)
 
 // ✅ 意図的な m²/s の中間結果: 一方のオペランドを混合レベルへ
-val areaPerTime = area.toKMixedUnitInstance() / 2.seconds.toKMixedUnitInstance()
+val areaPerTime = area.toUnit() / 2.seconds.toUnit()
 areaPerTime.value                       // 10000.0
 areaPerTime.units                       // [METER^2, SECOND^-1]
 
 // ...そして任意の KMixedUnitInstance と同様に連鎖します
-val backToArea = areaPerTime * 4.seconds.toKMixedUnitInstance() // units=[METER^2], value=40000.0
+val backToArea = areaPerTime * 4.seconds.toUnit() // units=[METER^2], value=40000.0
 ```
 
 ## 演算子
@@ -170,13 +170,13 @@ v.valueAs(KUnitPrefix.KILO with KSpeedUnit.METERS_PER_SECOND)  // 0.005
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.speed.*
 
 val v = 10.metersPerSecond
-v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
-v.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
+v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
+v.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
 ```
 
 ## toString フォーマット

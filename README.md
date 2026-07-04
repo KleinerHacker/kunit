@@ -61,7 +61,7 @@ mkdocs build
   each combined with an exponent (positive = numerator, negative = denominator) that are thought of as
   multiplied together.
 * **`KUnit`** - interface for a single "pure" unit (symbol + conversion factor to the base unit of its group).
-  Implemented per unit group as `enum class ... : KUnit` (e.g. `KLengthUnit`).
+  Implemented per unit group as `enum class ... : KUnit` (e.g. `KDistanceUnit`).
 * **Wrapper classes** (e.g. `KLengthUnitInstance`) - encapsulate a `KMixedUnitInstance` via delegation for a
   concrete group and always keep their value normalized to that group's base unit. They are not limited to
   exponent 1 - they also cover derived quantities of the same group (e.g. area = length², volume = length³).
@@ -106,7 +106,7 @@ classDiagram
     KUnitTerm --> KUnit
     KDerivedUnit --> KUnit : referenceUnit
 
-    class KLengthUnit {
+    class KDistanceUnit {
         <<enum>>
         METER, MILE, YARD, ...
     }
@@ -115,23 +115,23 @@ classDiagram
         +valueAs(unit)
         +plus() minus() times() div()
     }
-    class KLengthDerivedUnit {
+    class KDistanceDerivedUnit {
         <<enum>>
         HECTARE, ARE, ACRE, LITER, ...
     }
 
-    KUnit <|.. KLengthUnit
-    KDerivedUnit <|.. KLengthDerivedUnit
+    KUnit <|.. KDistanceUnit
+    KDerivedUnit <|.. KDistanceDerivedUnit
     KLengthUnitInstance *-- KMixedUnitInstance : delegates to
-    KLengthDerivedUnit --> KLengthUnit : referenceUnit
+    KDistanceDerivedUnit --> KDistanceUnit : referenceUnit
 ```
 
 ### Package Structure
 
 * Root package `org.pcsoft.framework.kunit` contains the base types `KUnit`, `KMixedUnitInstance`, `KUnitPrefix`,
   `KDerivedUnit`, ...
-  * each unit sub-package additionally declares its own prefix `infix` functions (e.g. `KLengthUnitPrefix.kt`)
-* Every "pure" unit group gets its own sub-package (e.g. `org.pcsoft.framework.kunit.length`) with its own
+  * each unit sub-package additionally declares its own prefix `infix` functions (e.g. `KDistanceUnitPrefix.kt`)
+* Every "pure" unit group gets its own sub-package (e.g. `org.pcsoft.framework.kunit.distance`) with its own
   `KXxxUnit`, `KXxxUnitInstance`, `KXxxDerivedUnit` and the associated creator extensions.
 
 ### Operators
@@ -157,19 +157,27 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 
 | Group | Sub-package | Base unit |
 |---|---|---|
-| Length | `org.pcsoft.framework.kunit.length` | Meter (`KLengthUnit.BASE`) |
+| Distance | `org.pcsoft.framework.kunit.distance` | Meter (`KDistanceUnit.BASE`) |
 
-#### Length (`KLengthUnit`)
+#### Distance (`KDistanceUnit`)
 
-Meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit, light-year, parsec.
+Meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit, light-second …
+light-year, parsec.
 
-#### Multi-dimensional support (exponent > 1)
+#### Dimensioned subtypes (exponent as a type)
 
-`KLengthUnitInstance` encapsulates arbitrary exponents of `KLengthUnit.BASE`, including:
+The distance group models exponents as their own compile-time-safe types under an open base
+`KDistanceUnitInstance` (any exponent):
 
-* **Exponent 2 (area)** - incl. special units (`KLengthDerivedUnit`): are, hectare, acre
-* **Exponent 3 (volume)** - incl. special units (`KLengthDerivedUnit`): liter, US gallon, imperial gallon,
-  US fluid ounce, oil barrel
+* **`KLengthUnitInstance`** - exponent 1 (a length): `5.meters`, `3 kilo meters`
+* **`KAreaUnitInstance`** - exponent 2 (an area): `200.squareMeters`, `5 kilo squareMeters`, plus the
+  special units (`KDistanceDerivedUnit`) are, hectare, acre
+* **`KVolumeUnitInstance`** - exponent 3 (a volume): `2.cubicMeters`, `3 kilo cubicMeters`, plus liter,
+  US gallon, imperial gallon, US fluid ounce, oil barrel
+
+`*`/`/` stay in this family where possible (`length * length = area`, `area / length = length`); a
+resulting exponent outside `{1,2,3}` falls back to `KDistanceUnitInstance`. Cross-dimension `+`/`-`/
+comparison (`length + area`) are a **compile error**, not a runtime failure.
 
 ### Still Open
 
@@ -181,20 +189,22 @@ Meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomic
 Add the module as a dependency (or include it as a project/source set) and import the vocabulary of the unit
 group you need.
 
-### Length
+### Distance
 
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 
 // Create pure length values from any Number type
-val distance = 5.meters
+val distance = 5.meters              // KLengthUnitInstance (exponent 1)
 val trip = 10.miles
 
 // Operators: automatic conversion within the same group and exponent
 val total = distance + trip          // KLengthUnitInstance, normalized to meters
 val diff = trip - distance
+
+// distance + 3.squareMeters          // does NOT compile: length + area is a compile error
 
 // Comparisons
 val isFarther = trip > distance      // true
@@ -203,22 +213,24 @@ val isFarther = trip > distance      // true
 println(total.valueAs(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
 println(total.valueAs(yards))         // e.g. 23018.4...
 
-// Multiplying/dividing pure units builds a mixed unit (KMixedUnitInstance)
-val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
+// Multiplying two lengths yields a strongly typed area; area / length yields a length again
+val area = 200.meters * 50.meters    // KAreaUnitInstance (10 000 m²)
+val side = area / 100.meters         // KLengthUnitInstance (100 m)
 
-// Special units for area (exponent 2) and volume (exponent 3)
-val plot = 3.hectares
-println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
-
-val tank = 200.liters
-println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
+// Area / volume creators (per unit) and their special named units
+val plot = 3.hectares                // KAreaUnitInstance
+println(plot.valueAs(KDistanceDerivedUnit.ARE))   // 300.0
+val hall = 12.squareMeters           // KAreaUnitInstance
+val tank = 200.liters                // KVolumeUnitInstance
+val box = 2.cubicMeters              // KVolumeUnitInstance
+println(tank.valueAs(KDistanceDerivedUnit.US_GALLON))
 ```
 
 ### SI prefixes
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.kilo
-import org.pcsoft.framework.kunit.length.meters
+import org.pcsoft.framework.kunit.distance.kilo
+import org.pcsoft.framework.kunit.distance.meters
 
 // "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
@@ -230,9 +242,9 @@ println(fiveKm.value) // 5000.0 (normalized to meters)
 ```kotlin
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 
 // Manually composing a mixed unit, e.g. meters per second (length^1 * time^-1 once a time group exists)
-val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
 val doubled = speed * speed // exponents are added -> length^2
 ```

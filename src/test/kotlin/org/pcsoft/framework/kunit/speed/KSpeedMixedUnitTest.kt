@@ -18,10 +18,10 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
-import org.pcsoft.framework.kunit.length.KLengthUnitInstance
-import org.pcsoft.framework.kunit.length.lengthOf
-import org.pcsoft.framework.kunit.length.lengthUnitGenerators
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.distance.mkLength
+import org.pcsoft.framework.kunit.distance.lengthUnitGenerators
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.time.timeOf
@@ -52,24 +52,24 @@ class KSpeedMixedUnitTest {
 
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("lengthTimePairs")
-    fun `dividing a length by a time yields a typed speed`(length: KLengthUnit, time: KTimeUnit) {
-        val speed: KSpeedUnitInstance = lengthOf(length, 10) / timeOf(time, 2)
+    fun `dividing a length by a time yields a typed speed`(length: KDistanceUnit, time: KTimeUnit) {
+        val speed: KSpeedUnitInstance = mkLength(length, 10) / timeOf(time, 2)
 
         val expected = 10.0 * length.baseValue / (2.0 * time.baseValue)
         assertEquals(expected, speed.value, delta(expected), "$length / $time value mismatch")
         assertEquals(expected, speedOf(KSpeedUnit.METERS_PER_SECOND, expected).value, delta(expected))
         assertEquals(
-            setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
-            speed.toKMixedUnitInstance().units.toSet(),
+            setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
+            speed.toUnit().units.toSet(),
             "$length / $time term signature mismatch"
         )
     }
 
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("lengthTimePairs")
-    fun `the raw mixed division agrees with toKSpeedUnit`(length: KLengthUnit, time: KTimeUnit) {
-        val viaOperator = lengthOf(length, 10) / timeOf(time, 2)
-        val viaConversion = (lengthOf(length, 10).toKMixedUnitInstance() / timeOf(time, 2).toKMixedUnitInstance()).toKSpeedUnit()
+    fun `the raw mixed division agrees with toSpeed`(length: KDistanceUnit, time: KTimeUnit) {
+        val viaOperator = mkLength(length, 10) / timeOf(time, 2)
+        val viaConversion = (mkLength(length, 10).toUnit() / timeOf(time, 2).toUnit()).toSpeed()
 
         assertEquals(viaConversion.value, viaOperator.value, delta(viaConversion.value), "$length / $time mismatch")
     }
@@ -80,7 +80,7 @@ class KSpeedMixedUnitTest {
 
     @ParameterizedTest(name = "speed * time read back in {0}")
     @MethodSource("lengths")
-    fun `speed times time decomposes back into every length unit`(readBack: KLengthUnit) {
+    fun `speed times time decomposes back into every length unit`(readBack: KDistanceUnit) {
         val speed = speedOf(KSpeedUnit.KILOMETERS_PER_HOUR, 36) // 10 m/s
 
         timeUnitGenerators.forEach { (_, timeUnit) ->
@@ -91,7 +91,7 @@ class KSpeedMixedUnitTest {
             val expectedReadBack = expectedMeters / readBack.baseValue
             assertEquals(expectedReadBack, distance.valueAs(readBack), delta(expectedReadBack),
                 "read-back mismatch into $readBack for $timeUnit")
-            assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), distance.toKMixedUnitInstance().units)
+            assertEquals(listOf(KUnitTerm(KDistanceUnit.BASE, 1)), distance.toUnit().units)
         }
     }
 
@@ -105,13 +105,13 @@ class KSpeedMixedUnitTest {
         val speed = speedOf(KSpeedUnit.METERS_PER_SECOND, 10)
 
         lengthUnitGenerators.forEach { (_, lengthUnit) ->
-            val time: KTimeUnitInstance = lengthOf(lengthUnit, 100) / speed
+            val time: KTimeUnitInstance = mkLength(lengthUnit, 100) / speed
             val expectedSeconds = 100.0 * lengthUnit.baseValue / 10.0
             assertEquals(expectedSeconds, time.value, delta(expectedSeconds), "value mismatch for $lengthUnit")
             val expectedReadBack = expectedSeconds / readBack.baseValue
             assertEquals(expectedReadBack, time.valueAs(readBack), delta(expectedReadBack),
                 "read-back mismatch into $readBack for $lengthUnit")
-            assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), time.toKMixedUnitInstance().units)
+            assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), time.toUnit().units)
         }
     }
 
@@ -129,14 +129,14 @@ class KSpeedMixedUnitTest {
     @Test
     fun `dividing an area by a time is not a speed`() {
         // an area (m^2) divided by a time is m^2/s, not a speed - must fail rather than mislead
-        val areaPerTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -1)))
+        val areaPerTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -1)))
 
-        assertFailsWith<IllegalStateException> { areaPerTime.toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { areaPerTime.toSpeed() }
     }
 
     @Test
     fun `a plain length is not a speed`() {
-        assertFailsWith<IllegalStateException> { lengthOf(KLengthUnit.METER, 5).toKMixedUnitInstance().toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { mkLength(KDistanceUnit.METER, 5).toUnit().toSpeed() }
     }
 
     // endregion

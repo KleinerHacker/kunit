@@ -219,42 +219,42 @@ class KTimeUnitInstanceTest {
     }
 
     @Test
-    fun `toKMixedUnitInstance and toKTimeUnit round trip`() {
+    fun `toUnit and toTime round trip`() {
         val original = 2.hours
 
-        val roundTripped = original.toKMixedUnitInstance().toKTimeUnit()
+        val roundTripped = original.toUnit().toTime()
 
         assertEquals(original, roundTripped)
     }
 
     @Test
-    fun `toKTimeUnit normalizes a non-base time unit to seconds`() {
+    fun `toTime normalizes a non-base time unit to seconds`() {
         val twoHours = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.HOUR, 1)))
 
-        assertEquals(7200.0, twoHours.toKTimeUnit().value, 1e-9)
+        assertEquals(7200.0, twoHours.toTime().value, 1e-9)
     }
 
     @Test
-    fun `toKTimeUnit fails for a non-time unit`() {
+    fun `toTime fails for a non-time unit`() {
         val notTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(NonTimeUnit.METER, 1)))
 
-        assertFailsWith<IllegalStateException> { notTime.toKTimeUnit() }
+        assertFailsWith<IllegalStateException> { notTime.toTime() }
     }
 
     @Test
-    fun `toKTimeUnit fails for a mixed unit with more than one term`() {
+    fun `toTime fails for a mixed unit with more than one term`() {
         val notPure = KMixedUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1), KUnitTerm(NonTimeUnit.METER, 1)))
 
-        assertFailsWith<IllegalStateException> { notPure.toKTimeUnit() }
+        assertFailsWith<IllegalStateException> { notPure.toTime() }
     }
 
     @Test
-    fun `toKTimeUnit ignores the exponent since a time term stays time-typed`() {
+    fun `toTime ignores the exponent since a time term stays time-typed`() {
         // The exponent is irrelevant to this conversion: a KTimeUnit term is a time-typed unit
         // regardless of exponent, and the resulting duration simply wraps the numeric value.
         val secondSquared = KMixedUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 2)))
 
-        assertEquals(5.0, secondSquared.toKTimeUnit().value, 1e-12)
+        assertEquals(5.0, secondSquared.toTime().value, 1e-12)
     }
 
     // endregion

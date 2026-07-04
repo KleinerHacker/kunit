@@ -31,7 +31,7 @@ kunit is built around two central types:
   each paired with an integer exponent (e.g. `m^1 * s^-1` for a speed). This is the generic engine that
   powers everything else.
 - **`KUnit`** - a single "pure" unit belonging to a unit group (e.g. meter belongs to the length group).
-  Concrete unit groups are modeled as `enum class ... : KUnit` (e.g. `KLengthUnit`).
+  Concrete unit groups are modeled as `enum class ... : KUnit` (e.g. `KDistanceUnit`).
 
 Every unit group additionally provides a **wrapper class** (e.g. `KLengthUnitInstance`) that encapsulates a
 `KMixedUnitInstance` restricted to a single unit group, always normalized to that group's base unit. This is the
@@ -59,7 +59,7 @@ group you need.
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 
 // Create pure length values from any Number type
 val distance = 5.meters
@@ -77,21 +77,21 @@ println(total.valueAs(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
 println(total.valueAs(yards))                         // e.g. 23018.4...
 
 // Multiplying/dividing pure units builds a mixed unit (KMixedUnitInstance)
-val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
+val area = distance.toUnit() * trip.toUnit()
 
 // Special units for area (exponent 2) and volume (exponent 3)
 val plot = 3.hectares
-println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KDistanceDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters
-println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KDistanceDerivedUnit.US_GALLON))
 ```
 
 ### SI prefixes
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.kilo
-import org.pcsoft.framework.kunit.length.meters
+import org.pcsoft.framework.kunit.distance.kilo
+import org.pcsoft.framework.kunit.distance.meters
 
 // "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
@@ -103,10 +103,10 @@ println(fiveKm.value) // 5000.0 (normalized to meters)
 ```kotlin
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 
 // Manually composing a mixed unit, e.g. meters squared (length^1 * length^1)
-val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
 val doubled = speed * speed // exponents are added -> length^2
 ```
 

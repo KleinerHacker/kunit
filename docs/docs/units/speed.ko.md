@@ -5,7 +5,7 @@
 
 속도는 최초의 **구성된(constructed)** 단위입니다. 길이나 시간과 달리 단일한 "실제" 물리량이 아니라
 `길이 · 시간⁻¹` (`m/s`)의 조합입니다. 따라서 `KSpeedUnitInstance`는 정확히 두 개의 항 - 지수 `+1`의
-`KLengthUnit.BASE`(미터)와 지수 `-1`의 `KTimeUnit.BASE`(초) - 으로 이루어진 `KMixedUnitInstance`를
+`KDistanceUnit.BASE`(미터)와 지수 `-1`의 `KTimeUnit.BASE`(초) - 으로 이루어진 `KMixedUnitInstance`를
 래핑합니다. 값은 어떤 단위, 접두어, 또는 길이/시간 조합으로 생성되었든 항상 초당 미터로 정규화되어
 저장됩니다.
 
@@ -57,12 +57,12 @@ v.valueAs(mach)                             // ≈ 0.0408 (음속의 비율)
 | `length / speed` | `KTimeUnitInstance` | 시간 = 거리 / 속도 |
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.speed.*
 
 // --- 핵심 단위 -> 속도 ---------------------------------------------------
-val v = 100.meters / 10.seconds          // KSpeedUnitInstance (.toKSpeedUnit() 불필요!)
+val v = 100.meters / 10.seconds          // KSpeedUnitInstance (.toSpeed() 불필요!)
 v.value                                     // 10.0 (m/s)
 v.valueAs(KSpeedUnit.KILOMETERS_PER_HOUR)   // 36.0
 v.valueAs(KSpeedUnit.MILES_PER_HOUR)        // ≈ 22.37
@@ -77,7 +77,7 @@ val explicit: KSpeedUnitInstance = 100.meters / 10.seconds
 // --- 속도 -> 길이 (시간을 곱함) -----------------------------------------
 val distance = v * 60.seconds             // KLengthUnitInstance
 distance.value                              // 600.0 (m)
-distance.valueAs(KLengthUnit.METER)         // 600.0
+distance.valueAs(KDistanceUnit.METER)         // 600.0
 distance.valueAs(feet)                      // ≈ 1968.5 (임의의 길이 단위로 다시 읽기)
 distance.valueAs(miles)                     // ≈ 0.373
 60.seconds * v                            // 동일한 결과 (교환법칙)
@@ -99,12 +99,12 @@ time.valueAs(KTimeUnit.HOUR)                // ≈ 0.0167
 
 Kotlin 연산자는 컴파일 타임에 단일 반환 타입을 가지므로, `KLengthUnitInstance / KTimeUnitInstance`는
 타입이 지정된 속도를 만드는 데 **예약**되어 있으며 대신 `m²/s`를 만들 수는 없습니다. 하지만 그 중간
-결과가 **사라지는 것은 아닙니다** - 한 피연산자를 `toKMixedUnitInstance()`로 혼합 레벨로 낮추면 범용
+결과가 **사라지는 것은 아닙니다** - 한 피연산자를 `toUnit()`로 혼합 레벨로 낮추면 범용
 `KMixedUnitInstance`의 `/` 연산자(임의의 지수, 속도 검사 없음)가 선택됩니다. 이 명시적인
-`toKMixedUnitInstance()`가 바로 강타입 경로를 벗어난다는 의도된 신호입니다.
+`toUnit()`가 바로 강타입 경로를 벗어난다는 의도된 신호입니다.
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
 val area = 2.hectares                 // KLengthUnitInstance, 지수 2 (20 000 m²)
@@ -112,12 +112,12 @@ val area = 2.hectares                 // KLengthUnitInstance, 지수 2 (20 000 m
 // area / 2.seconds                   // ❌ IllegalStateException 발생 (m²/s일 뿐 속도 아님)
 
 // ✅ 의도적인 m²/s 중간 결과: 한 피연산자를 혼합 레벨로
-val areaPerTime = area.toKMixedUnitInstance() / 2.seconds.toKMixedUnitInstance()
+val areaPerTime = area.toUnit() / 2.seconds.toUnit()
 areaPerTime.value                       // 10000.0
 areaPerTime.units                       // [METER^2, SECOND^-1]
 
 // ...그리고 임의의 KMixedUnitInstance처럼 계속 연결됩니다
-val backToArea = areaPerTime * 4.seconds.toKMixedUnitInstance() // units=[METER^2], value=40000.0
+val backToArea = areaPerTime * 4.seconds.toUnit() // units=[METER^2], value=40000.0
 ```
 
 ## 연산자
@@ -169,13 +169,13 @@ v.valueAs(KUnitPrefix.KILO with KSpeedUnit.METERS_PER_SECOND)  // 0.005
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.speed.*
 
 val v = 10.metersPerSecond
-v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
-v.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
+v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
+v.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
 ```
 
 ## toString 포맷팅

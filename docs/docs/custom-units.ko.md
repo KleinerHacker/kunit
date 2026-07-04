@@ -85,7 +85,7 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
+    fun toUnit(): KMixedUnitInstance = instance
 }
 
 /** 순수 질량 [KMixedUnitInstance]를 [KMassUnit.BASE]로 정규화하여 [KMassUnitInstance]로 다시 변환합니다. */
@@ -141,7 +141,7 @@ val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 
 이것으로 충분합니다 - 모든 로직이 범용 루트 패키지에 있고 `KMassUnit : KUnit`만 있으면 동작하기 때문에,
 이미 완전한 `+`, `-`, `*`, `/`, 비교 연산, SI 접두어(`5 kilo grams`), 그리고
-`toKMixedUnitInstance()`/`toKMassUnit()` 왕복 변환을 무료로 얻게 됩니다.
+`toUnit()`/`toKMassUnit()` 왕복 변환을 무료로 얻게 됩니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
@@ -158,7 +158,7 @@ val heavier = b > a          // true
 ## 4. (선택 사항) 특수/파생 단위 추가
 
 그룹에 특정 지수에 고정된, 흔히 사용되는 명명된 단위(면적의 헥타르와 같은)가 있다면,
-`KLengthDerivedUnit`과 유사한 `KDerivedUnit` 객체를 추가하세요.
+`KDistanceDerivedUnit`과 유사한 `KDerivedUnit` 객체를 추가하세요.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -172,7 +172,7 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 예시 목적으로만
+val truckLoad = 3.pounds.toUnit().toKMassUnit() // 예시 목적으로만
 println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
@@ -182,11 +182,11 @@ println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 그룹(예: 길이)과 결합됩니다 - 전체 규칙은 [혼합 단위](mixed-units.md)를 참고하세요.
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 밀도 = 질량 / 부피
-val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
+val density = 5.kilograms.toUnit() / 2.liters.toUnit()
 ```
 
 ## 6. 네이밍과 테스트 체크리스트

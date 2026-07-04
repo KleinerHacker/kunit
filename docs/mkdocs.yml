@@ -72,7 +72,7 @@ plugins:
             Adding Custom Units: 사용자 정의 단위 추가
             Predefined Units: 미리 정의된 단위
             Constructed Units: 구성된 단위
-            Length: 길이
+            Distance: 거리
             Time: 시간
             Speed: 속도
             API Docs: API 문서
@@ -86,7 +86,7 @@ plugins:
             Adding Custom Units: 添加自定义单位
             Predefined Units: 预定义单位
             Constructed Units: 构造单位
-            Length: 长度
+            Distance: 距离
             Time: 时间
             Speed: 速度
             API Docs: API 文档
@@ -100,7 +100,7 @@ plugins:
             Adding Custom Units: カスタム単位の追加
             Predefined Units: 定義済み単位
             Constructed Units: 構成単位
-            Length: 長さ
+            Distance: 距離
             Time: 時間
             Speed: 速度
             API Docs: API ドキュメント
@@ -111,7 +111,7 @@ nav:
   - Mixed Units: mixed-units.md
   - Adding Custom Units: custom-units.md
   - Predefined Units:
-      - Length: units/length.md
+      - Distance: units/distance.md
       - Time: units/time.md
   - Constructed Units:
       - Speed: units/speed.md

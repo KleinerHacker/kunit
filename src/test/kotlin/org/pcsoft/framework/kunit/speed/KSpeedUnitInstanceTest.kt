@@ -19,7 +19,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.with
 import kotlin.math.abs
@@ -81,7 +81,7 @@ class KSpeedUnitInstanceTest {
         val result = speedOf(a, 5) + speedOf(b, 3)
         val expected = 5.0 * a.baseValue + 3.0 * b.baseValue
         assertEquals(expected, result.value, speedDelta(expected), "$a + $b mismatch")
-        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)), result.toKMixedUnitInstance().units.toSet())
+        assertEquals(setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)), result.toUnit().units.toSet())
     }
 
     @ParameterizedTest(name = "{0} - {1}")
@@ -90,7 +90,7 @@ class KSpeedUnitInstanceTest {
         val result = speedOf(a, 5) - speedOf(b, 3)
         val expected = 5.0 * a.baseValue - 3.0 * b.baseValue
         assertEquals(expected, result.value, speedDelta(expected), "$a - $b mismatch")
-        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)), result.toKMixedUnitInstance().units.toSet())
+        assertEquals(setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)), result.toUnit().units.toSet())
     }
 
     @ParameterizedTest(name = "{0} * {1}")
@@ -99,7 +99,7 @@ class KSpeedUnitInstanceTest {
         val result = speedOf(a, 5) * speedOf(b, 3)
         val expected = (5.0 * a.baseValue) * (3.0 * b.baseValue)
         assertEquals(expected, result.value, speedDelta(expected), "$a * $b mismatch")
-        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -2)), result.units.toSet())
+        assertEquals(setOf(KUnitTerm(KDistanceUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -2)), result.units.toSet())
     }
 
     @ParameterizedTest(name = "{0} / {1}")
@@ -173,8 +173,8 @@ class KSpeedUnitInstanceTest {
     @MethodSource("units")
     fun `toString with a length-per-time pair target renders the composed symbol`(unit: KSpeedUnit) {
         val instance = speedOf(unit, 5)
-        val kmh = instance.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)
-        assertEquals("$kmh km*h^-1", instance.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR))
+        val kmh = instance.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)
+        assertEquals("$kmh km*h^-1", instance.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR))
     }
 
     // endregion
@@ -204,47 +204,47 @@ class KSpeedUnitInstanceTest {
     @Test
     fun `valueAs as a length per time pair works in any order`() {
         val v = 10.metersPerSecond
-        assertEquals(36.0, v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR), 1e-9)
-        assertEquals(36.0, v.valueAs(KTimeUnit.HOUR, KUnitPrefix.KILO with KLengthUnit.METER), 1e-9)
+        assertEquals(36.0, v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR), 1e-9)
+        assertEquals(36.0, v.valueAs(KTimeUnit.HOUR, KUnitPrefix.KILO with KDistanceUnit.METER), 1e-9)
     }
 
     @Test
-    fun `toKMixedUnitInstance and toKSpeedUnit round trip`() {
+    fun `toUnit and toSpeed round trip`() {
         val original = 50.kilometersPerHour
 
-        val roundTripped = original.toKMixedUnitInstance().toKSpeedUnit()
+        val roundTripped = original.toUnit().toSpeed()
 
         assertEquals(original, roundTripped)
     }
 
     @Test
-    fun `toKSpeedUnit normalizes non-base length and time terms`() {
+    fun `toSpeed normalizes non-base length and time terms`() {
         // a raw [MILE^1, HOUR^-1] instance == miles per hour
-        val mph = KMixedUnitInstance(60.0, listOf(KUnitTerm(KLengthUnit.MILE, 1), KUnitTerm(KTimeUnit.HOUR, -1)))
+        val mph = KMixedUnitInstance(60.0, listOf(KUnitTerm(KDistanceUnit.MILE, 1), KUnitTerm(KTimeUnit.HOUR, -1)))
 
-        assertEquals(60.0, mph.toKSpeedUnit().valueAs(KSpeedUnit.MILES_PER_HOUR), 1e-9)
+        assertEquals(60.0, mph.toSpeed().valueAs(KSpeedUnit.MILES_PER_HOUR), 1e-9)
     }
 
     @Test
-    fun `toKSpeedUnit fails for a non-speed mixed unit`() {
-        val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 2)))
+    fun `toSpeed fails for a non-speed mixed unit`() {
+        val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.BASE, 2)))
 
-        assertFailsWith<IllegalStateException> { area.toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { area.toSpeed() }
     }
 
     @Test
-    fun `toKSpeedUnit fails when the length exponent is not one`() {
+    fun `toSpeed fails when the length exponent is not one`() {
         // an "area per time" (m^2 / s) is not a speed
-        val areaPerTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -1)))
+        val areaPerTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -1)))
 
-        assertFailsWith<IllegalStateException> { areaPerTime.toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { areaPerTime.toSpeed() }
     }
 
     @Test
-    fun `toKSpeedUnit fails when the time exponent is not minus one`() {
-        val lengthTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, 1)))
+    fun `toSpeed fails when the time exponent is not minus one`() {
+        val lengthTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, 1)))
 
-        assertFailsWith<IllegalStateException> { lengthTime.toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { lengthTime.toSpeed() }
     }
 
     // endregion

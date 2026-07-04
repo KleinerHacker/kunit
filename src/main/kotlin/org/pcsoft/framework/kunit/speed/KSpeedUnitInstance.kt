@@ -18,11 +18,11 @@ import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 
 /**
- * Wraps a [KMixedUnitInstance] representing a speed, i.e. exactly two terms - one [KLengthUnit.BASE]
+ * Wraps a [KMixedUnitInstance] representing a speed, i.e. exactly two terms - one [KDistanceUnit.BASE]
  * (meter) at exponent `+1` and one [KTimeUnit.BASE] (second) at exponent `-1` (`m·s⁻¹`). The [value]
  * is always normalized internally to meters per second ([KSpeedUnit.BASE]), regardless of which
  * [KSpeedUnit], SI [org.pcsoft.framework.kunit.KUnitPrefix], or length/time combination it was
@@ -36,14 +36,14 @@ import org.pcsoft.framework.kunit.time.KTimeUnit
  * Instances are created via the creator extension properties in `KSpeedUnitExtensions.kt` (e.g.
  * `100.metersPerSecond`, `50.kilometersPerHour`), the SI-prefix `infix` constructors in
  * `KSpeedUnitPrefix.kt` (e.g. `5 kilo metersPerSecond`), the cross-group operators in
- * `KSpeedUnitOperators.kt` (e.g. `100.meters / 10.seconds`), or [toKSpeedUnit].
+ * `KSpeedUnitOperators.kt` (e.g. `100.meters / 10.seconds`), or [toSpeed].
  *
  * Example:
  * ```kotlin
  * val v = 100.meters / 10.seconds
  * v.value                                       // 10.0 (normalized to m/s)
  * v.valueAs(KSpeedUnit.KILOMETERS_PER_HOUR)     // 36.0 (read back in km/h)
- * v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // 36.0 (as km per h)
+ * v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // 36.0 (as km per h)
  * ```
  */
 class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
@@ -78,7 +78,7 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
      * Example:
      * ```kotlin
      * val v = 100.meters / 10.seconds
-     * v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // 36.0 (km per h)
+     * v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // 36.0 (km per h)
      * ```
      */
     fun valueAs(vararg targets: KUnitTarget): Double = instance.valueAs(*targets)
@@ -101,10 +101,10 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
      * Multiplies two speeds, producing a new [KMixedUnitInstance] (`m²·s⁻²`, no longer a "pure" speed).
      * To turn a speed back into a length, multiply it by a *time* instead (see `KSpeedUnitOperators.kt`).
      */
-    override operator fun times(other: KSpeedUnitInstance): KMixedUnitInstance = instance * other.instance
+    operator fun times(other: KSpeedUnitInstance): KMixedUnitInstance = instance * other.instance
 
     /** Divides two speeds, producing a new (dimensionless) [KMixedUnitInstance]. */
-    override operator fun div(other: KSpeedUnitInstance): KMixedUnitInstance = instance / other.instance
+    operator fun div(other: KSpeedUnitInstance): KMixedUnitInstance = instance / other.instance
 
     /** Compares two speeds by their normalized [value] (meters per second). */
     override operator fun compareTo(other: KSpeedUnitInstance): Int = value.compareTo(other.value)
@@ -148,7 +148,7 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
      *
      * Example:
      * ```kotlin
-     * (100.meters / 10.seconds).toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
+     * (100.meters / 10.seconds).toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
      * ```
      */
     fun toString(vararg targets: KUnitTarget): String = instance.toString(*targets)
@@ -156,8 +156,8 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
 
 /**
  * Converts this mixed unit to a "pure" speed value, as long as it consists of exactly two terms: one
- * [KLengthUnit] term at exponent `+1` and one [KTimeUnit] term at exponent `-1` (order independent).
- * The terms are normalized to [KLengthUnit.BASE]/[KTimeUnit.BASE], so the resulting speed is expressed
+ * [KDistanceUnit] term at exponent `+1` and one [KTimeUnit] term at exponent `-1` (order independent).
+ * The terms are normalized to [KDistanceUnit.BASE]/[KTimeUnit.BASE], so the resulting speed is expressed
  * in meters per second regardless of which length/time units the terms were tagged with (e.g. a
  * `[MILE^1, HOUR^-1]` instance is converted to the equivalent m/s).
  *
@@ -166,17 +166,17 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
  *
  * Example:
  * ```kotlin
- * val raw = 100.meters.toKMixedUnitInstance() / 10.seconds.toKMixedUnitInstance() // [METER^1, SECOND^-1]
- * raw.toKSpeedUnit().valueAs(KSpeedUnit.KILOMETERS_PER_HOUR) // 36.0
+ * val raw = 100.meters.toUnit() / 10.seconds.toUnit() // [METER^1, SECOND^-1]
+ * raw.toSpeed().valueAs(KSpeedUnit.KILOMETERS_PER_HOUR) // 36.0
  *
- * (200.meters * 50.meters).toKSpeedUnit() // throws IllegalStateException (an area, not a speed)
+ * (200.meters * 50.meters).toSpeed() // throws IllegalStateException (an area, not a speed)
  * ```
  */
-fun KMixedUnitInstance.toKSpeedUnit(): KSpeedUnitInstance {
-    val lengthTerm = units.singleOrNull { it.unit is KLengthUnit && it.exponent == 1 }
+fun KMixedUnitInstance.toSpeed(): KSpeedUnitInstance {
+    val lengthTerm = units.singleOrNull { it.unit is KDistanceUnit && it.exponent == 1 }
     val timeTerm = units.singleOrNull { it.unit is KTimeUnit && it.exponent == -1 }
     check(units.size == 2 && lengthTerm != null && timeTerm != null) {
-        "KMixedUnitInstance $this does not represent a pure speed (expected one KLengthUnit^1 and one KTimeUnit^-1 term)"
+        "KMixedUnitInstance $this does not represent a pure speed (expected one KDistanceUnit^1 and one KTimeUnit^-1 term)"
     }
     val metersPerSecond = value * lengthTerm.unit.baseValue / timeTerm.unit.baseValue
     return speedUnitInstanceOf(metersPerSecond)
@@ -184,4 +184,4 @@ fun KMixedUnitInstance.toKSpeedUnit(): KSpeedUnitInstance {
 
 /** Builds a [KSpeedUnitInstance] from a value already expressed in meters per second ([KSpeedUnit.BASE]). */
 internal fun speedUnitInstanceOf(metersPerSecond: Double): KSpeedUnitInstance =
-    KSpeedUnitInstance(KMixedUnitInstance(metersPerSecond, listOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))))
+    KSpeedUnitInstance(KMixedUnitInstance(metersPerSecond, listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))))

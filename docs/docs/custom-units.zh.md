@@ -83,7 +83,7 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
+    fun toUnit(): KMixedUnitInstance = instance
 }
 
 /** 将纯质量的 [KMixedUnitInstance] 转换回 [KMassUnitInstance]，并归一化到 [KMassUnit.BASE]。 */
@@ -138,7 +138,7 @@ val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 
 到这里就完成了——由于所有逻辑都位于通用的根包中，只需要 `KMassUnit : KUnit` 即可工作，你已经免费获得了
 完整的 `+`、`-`、`*`、`/`、比较运算、SI 前缀（`5 kilo grams`），以及
-`toKMixedUnitInstance()`/`toKMassUnit()` 之间的往返转换。
+`toUnit()`/`toKMassUnit()` 之间的往返转换。
 
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
@@ -155,7 +155,7 @@ val heavier = b > a          // true
 ## 4.（可选）添加特殊/派生单位
 
 如果你的组有常用的、绑定到特定指数的命名单位（如面积中的公顷），可以添加一个类似
-`KLengthDerivedUnit` 的 `KDerivedUnit` 对象：
+`KDistanceDerivedUnit` 的 `KDerivedUnit` 对象：
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -169,7 +169,7 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 仅作说明用
+val truckLoad = 3.pounds.toUnit().toKMassUnit() // 仅作说明用
 println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
@@ -179,11 +179,11 @@ println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 （例如长度）组合——完整规则请参见[混合单位](mixed-units.md)：
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 密度 = 质量 / 体积
-val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
+val density = 5.kilograms.toUnit() / 2.liters.toUnit()
 ```
 
 ## 6. 命名与测试检查清单

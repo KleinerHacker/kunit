@@ -6,12 +6,12 @@ Base unit: **second** (`KTimeUnit.BASE == KTimeUnit.SECOND`)
 `KTimeUnitInstance` is a 100 % wrapper around [`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html):
 the `Duration` is the single source of truth (nanosecond-exact), and the full `Duration` API is
 forwarded. On top of that it offers the same surface as every other "pure" unit wrapper
-(`value`/`valueAs`/`+`/`-`/`*`/`/`/`toString`/`toKMixedUnitInstance`), so a time value plugs into the generic
+(`value`/`valueAs`/`+`/`-`/`*`/`/`/`toString`/`toUnit`), so a time value plugs into the generic
 mixed-unit engine (e.g. `length / time` = speed). The value is always stored normalized to seconds.
 
 Because a `Duration` only ever represents a plain duration, a time value is always exponent 1 - there is
 no time² or 1/time wrapper (multiplying/dividing "escapes" to a raw `KMixedUnitInstance`, exactly like
-length). Consequently `KMixedUnitInstance.toKTimeUnit()` accepts only a single `KTimeUnit` term **at exponent 1**.
+length). Consequently `KMixedUnitInstance.toTime()` accepts only a single `KTimeUnit` term **at exponent 1**.
 
 ## Units
 
@@ -76,7 +76,7 @@ import org.pcsoft.framework.kunit.time.*
 
 val t = 90.minutes
 t.toDuration()                       // PT1H30M
-Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
+Duration.ofMinutes(90).toTime() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
 // forwarded mutators return KTimeUnitInstance
 t.plusHours(1).valueAs(KTimeUnit.HOUR) // 2.5
@@ -134,13 +134,13 @@ import org.pcsoft.framework.kunit.time.*
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters / 1.seconds.toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
-speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
+val speed = 10.meters / 1.seconds.toUnit()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
+speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // multiplying speed back by a time recovers a pure length
-val distance = speed * 2.seconds.toKMixedUnitInstance()
-distance.toKLengthUnit().value // 20.0
+val distance = speed * 2.seconds.toUnit()
+distance.toDistance().value // 20.0
 ```
