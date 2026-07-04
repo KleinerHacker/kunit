@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0]
+
 ### Added
 
 - New **constructed** unit group **Speed** (`org.pcsoft.framework.kunit.speed`) — the first composed
