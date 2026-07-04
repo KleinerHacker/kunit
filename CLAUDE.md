@@ -106,6 +106,8 @@
 * The documentation should be formatted in Markdown
 * The documentation should be comprehensive and, where useful, contain examples
   * especially for operators
+* Documentation for units is split into real units category (like length, time, ...) and 
+  constructed units category (like speed, force, ...)
 
 ### MkDocs site
 
@@ -195,6 +197,18 @@
   * Every "pure" unit is tested together with a mixed unit
   * For a "pure" unit that itself consists of a mixed unit (e.g. Newton), a test exists that
     calculates to this unit, or from the unit to another "pure" unit
+* **Constructed/composed units (e.g. speed = length·time⁻¹, force, ...) must be decomposed in *both*
+  directions.** It is not enough to build the composed unit from its core units; the tests must also
+  break the composed unit back down into **every** core unit of **each** involved group. Concretely, for
+  a composed unit built from groups A and B:
+  * **core → composed**: for every unit of A against every unit of B (a full cross-matrix), verify that
+    combining them produces the composed unit with the correct value and term/exponent signature
+    (e.g. `length / time == speed`).
+  * **composed → core**: from the composed unit, recover each core quantity via the inverse operators
+    and read it back through `valueAs` in **every** unit of the respective group
+    (e.g. `speed * time == length` read back in every length unit; `length / speed == time` read back in
+    every time unit). Also verify the direct, strongly-typed cross-group operators return the right
+    wrapper type, and that non-matching shapes (e.g. `area / time`) fail with `IllegalStateException`.
 
 Fundamentally, all tests verify the correctness of the values and calculations.
 

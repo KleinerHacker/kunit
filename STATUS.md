@@ -37,8 +37,20 @@
 * Every group and the mixed unit are covered by parameterized cross-matrix tests (JUnit Jupiter
   `@ParameterizedTest`/`@MethodSource`) per the procedure in CLAUDE.md
 
+* Sub-package `org.pcsoft.framework.kunit.speed` (first **constructed** quantity: speed = length·time⁻¹):
+  * `KSpeedUnit` (meter per second (base), kilometer per hour, mile per hour, knot, foot per second, Mach,
+    speed of light) — each carrying a single factor to m/s so it doubles as a plain `KUnit`/target
+  * `KSpeedUnitInstance` — wraps a two-term `[m¹, s⁻¹]` `KMixedUnitInstance` normalized to m/s; offers the
+    standard "pure" unit surface and reads back either as a whole speed unit or as a length-per-time pair,
+    plus `KMixedUnitInstance.toKSpeedUnit()` (validates the two-term speed signature)
+  * `KSpeedUnitExtensions` (creator properties + bare `val` aliases), `KSpeedUnitPrefix` (24 prefixes)
+  * `KSpeedUnitOperators` — direct cross-group operators `length / time → speed`, `speed * time → length`,
+    `time * speed → length`, `length / speed → time` (each re-wrapping the mixed-unit result)
+  * Complete parameterized test suite incl. the mandatory **bidirectional** decomposition (core → speed
+    and speed → every core unit) and a dedicated MkDocs page (`docs/docs/units/speed.md` + ko/zh/ja)
+
 ## Open
 
 * Further unit groups (e.g. mass, temperature, ...) following the pattern established here for `length`/`time`
-* Composite "pure" units that are themselves composed of a mixed unit (e.g. Newton), including back- and
-  forward conversion (see the "Tests" section in CLAUDE.md)
+* Further composite "pure" units that are themselves composed of a mixed unit (e.g. Newton, force =
+  mass·length·time⁻²), following the pattern established here for `speed` (see the "Tests" section in CLAUDE.md)

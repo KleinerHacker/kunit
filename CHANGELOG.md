@@ -4,6 +4,23 @@
 
 ### Added
 
+- New **constructed** unit group **Speed** (`org.pcsoft.framework.kunit.speed`) — the first composed
+  quantity (length·time⁻¹):
+  - Units: meter per second (base), kilometer per hour, mile per hour, knot, foot per second, Mach
+    (ISA sea-level speed of sound, `Ma = 340.29 m/s`) and the speed of light (`c = 299 792 458 m/s`),
+    with matching `Number.metersPerSecond` … `Number.speedOfLight` creators, bare `val` aliases and
+    the 24 SI-prefix `infix` constructors (`5 kilo metersPerSecond`).
+  - `KSpeedUnitInstance` stores a two-term `[m¹, s⁻¹]` mixed instance normalized to m/s and offers the
+    standard "pure" unit surface (`value`, `valueAs`, `+`/`-`/`*`/`/`, comparisons, `toString`,
+    `toKMixedUnitInstance`), reading back either as a whole speed unit or as a length-per-time pair,
+    plus `KMixedUnitInstance.toKSpeedUnit()`.
+  - **Direct cross-group operators** so the core units combine straight into a typed speed and back,
+    without touching a raw `KMixedUnitInstance`: `length / time → speed`, `speed * time → length`,
+    `time * speed → length`, `length / speed → time`. Non-speed shapes (e.g. `area / time`) fail with
+    `IllegalStateException` rather than producing a misleading value.
+  - Dedicated MkDocs page (`docs/docs/units/speed.md`) with Korean, Chinese and Japanese translations,
+    under a new "Constructed Units" navigation section, including a thorough "computing with the core
+    units" section.
 - Comprehensive **parameterized cross-matrix tests** for every unit group and the mixed unit, built on
   JUnit Jupiter `@ParameterizedTest`/`@MethodSource` (new `junit-jupiter-params` test dependency): a full
   prefix × unit matrix plus one standalone test per SI prefix, a unit → every-other-unit conversion
