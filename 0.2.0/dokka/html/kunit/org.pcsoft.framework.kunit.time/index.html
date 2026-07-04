@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.time</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.time////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.time</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1548039265%2FClasslikes%2F-251573632" anchor-label="KTimeUnit" id="1548039265%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-time-unit/index.html"><span>KTime</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1548039265%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-time-unit/index.html">KTimeUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-time-unit/index.html">KTimeUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of time. <span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-time-unit/-companion/-b-a-s-e.html">BASE</a>, second): <code class="lang-kotlin">1 unit = baseValue * second</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1483091636%2FClasslikes%2F-251573632" anchor-label="KTimeUnitInstance" id="-1483091636%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-time-unit-instance/index.html"><span>KTime</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1483091636%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">A 100 % wrapper around <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">java.time.Duration</a>, exposed as the &quot;pure&quot; unit of the time group. The <span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance//#java.time.Duration/PointingToCallableParameters(0)/">duration</span> is the single source of truth: <code class="lang-kotlin">+</code>, <code class="lang-kotlin">-</code>, comparison and equality operate directly on it (nanosecond-exact), and the full <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> API is forwarded (see the <code class="lang-kotlin">plusXxx</code>/<code class="lang-kotlin">minusXxx</code>/<code class="lang-kotlin">toXxx</code> members below). On top of that, it offers the same surface as every other &quot;pure&quot; unit wrapper (e.g. <code class="lang-kotlin">KLengthUnitInstance</code>): <span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance/value/#/PointingToDeclaration/">value</span>/<a href="-k-time-unit-instance/value-as.html">valueAs</a>/<code class="lang-kotlin">*</code>/<code class="lang-kotlin">/</code>/<a href="-k-time-unit-instance/to-string.html">toString</a>/<span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance/toKMixedUnitInstance/#/PointingToDeclaration/">toKMixedUnitInstance</span>, so it plugs into the generic mixed-unit engine (e.g. <code class="lang-kotlin">length / time</code> = speed).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-657042045%2FProperties%2F-251573632" anchor-label="days" id="-657042045%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="days.html"><span><span>days</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-657042045%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="days.html">days</a><span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-time-unit/-d-a-y/index.html">KTimeUnit.DAY</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1769439407%2FProperties%2F-251573632" anchor-label="days" id="1769439407%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="days.html"><span><span>days</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1769439407%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="days.html">days</a><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure time value in days. Example: <code class="lang-kotlin">1.days.value // 86400.0</code> (normalized to seconds).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-406093583%2FProperties%2F-251573632" anchor-label="hours" id="-406093583%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hours.html"><span><span>hours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-406093583%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hours.html">hours</a><span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-time-unit/-h-o-u-r/index.html">KTimeUnit.HOUR</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1590482945%2FProperties%2F-251573632" anchor-label="hours" id="1590482945%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hours.html"><span><span>hours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1590482945%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="hours.html">hours</a><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure time value in hours. Example: <code class="lang-kotlin">2.hours.value // 7200.0</code> (normalized to seconds).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1063880801%2FProperties%2F-251573632" anchor-label="minutes" id="1063880801%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minutes.html"><span><span>minutes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1063880801%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="minutes.html">minutes</a><span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-time-unit/-m-i-n-u-t-e/index.html">KTimeUnit.MINUTE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1183160687%2FProperties%2F-251573632" anchor-label="minutes" id="-1183160687%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minutes.html"><span><span>minutes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1183160687%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="minutes.html">minutes</a><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure time value in minutes. Example: <code class="lang-kotlin">2.minutes.value // 120.0</code> (normalized to seconds).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1063644865%2FProperties%2F-251573632" anchor-label="seconds" id="1063644865%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="seconds.html"><span><span>seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1063644865%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="seconds.html">seconds</a><span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-time-unit/-s-e-c-o-n-d/index.html">KTimeUnit.SECOND</a>, for use with <a href="-k-time-unit-instance/value-as.html">valueAs</a> or the prefix <code class="lang-kotlin">infix</code> functions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1535157199%2FProperties%2F-251573632" anchor-label="seconds" id="-1535157199%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="seconds.html"><span><span>seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1535157199%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="seconds.html">seconds</a><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure time value in seconds from any <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a> type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="785265899%2FFunctions%2F-251573632" anchor-label="atto" id="785265899%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="atto.html"><span><span>atto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="785265899%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="atto.html"><span class="token function">atto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="atto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-a-t-t-o/index.html">KUnitPrefix.ATTO</a>, e.g. <code class="lang-kotlin">(5 atto seconds).value // 5e-18</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1976182110%2FFunctions%2F-251573632" anchor-label="centi" id="1976182110%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="centi.html"><span><span>centi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1976182110%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="centi.html"><span class="token function">centi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="centi.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-c-e-n-t-i/index.html">KUnitPrefix.CENTI</a>, e.g. <code class="lang-kotlin">(5 centi seconds).value // 0.05</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1568555546%2FFunctions%2F-251573632" anchor-label="deca" id="1568555546%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deca.html"><span><span>deca</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1568555546%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="deca.html"><span class="token function">deca</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="deca.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-d-e-c-a/index.html">KUnitPrefix.DECA</a>, e.g. <code class="lang-kotlin">(5 deca seconds).value // 50.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1293512978%2FFunctions%2F-251573632" anchor-label="deci" id="1293512978%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deci.html"><span><span>deci</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1293512978%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="deci.html"><span class="token function">deci</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="deci.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-d-e-c-i/index.html">KUnitPrefix.DECI</a>, e.g. <code class="lang-kotlin">(5 deci seconds).value // 0.5</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="680794161%2FFunctions%2F-251573632" anchor-label="exa" id="680794161%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exa.html"><span><span>exa</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="680794161%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="exa.html"><span class="token function">exa</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="exa.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-e-x-a/index.html">KUnitPrefix.EXA</a>, e.g. <code class="lang-kotlin">(5 exa seconds).value // 5e18</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1389050262%2FFunctions%2F-251573632" anchor-label="femto" id="1389050262%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="femto.html"><span><span>femto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1389050262%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="femto.html"><span class="token function">femto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="femto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-f-e-m-t-o/index.html">KUnitPrefix.FEMTO</a>, e.g. <code class="lang-kotlin">(5 femto seconds).value // 5e-15</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1868771363%2FFunctions%2F-251573632" anchor-label="giga" id="-1868771363%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="giga.html"><span><span>giga</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1868771363%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="giga.html"><span class="token function">giga</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="giga.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-g-i-g-a/index.html">KUnitPrefix.GIGA</a>, e.g. <code class="lang-kotlin">(5 giga seconds).value // 5.0e9</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="266064158%2FFunctions%2F-251573632" anchor-label="hecto" id="266064158%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hecto.html"><span><span>hecto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="266064158%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="hecto.html"><span class="token function">hecto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="hecto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-h-e-c-t-o/index.html">KUnitPrefix.HECTO</a>, e.g. <code class="lang-kotlin">(5 hecto seconds).value // 500.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1271236840%2FFunctions%2F-251573632" anchor-label="kilo" id="-1271236840%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilo.html"><span><span>kilo</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1271236840%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="kilo.html"><span class="token function">kilo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="kilo.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-k-i-l-o/index.html">KUnitPrefix.KILO</a>, e.g. <code class="lang-kotlin">(5 kilo seconds).value // 5000.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1027718681%2FFunctions%2F-251573632" anchor-label="mega" id="-1027718681%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mega.html"><span><span>mega</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1027718681%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="mega.html"><span class="token function">mega</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="mega.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-m-e-g-a/index.html">KUnitPrefix.MEGA</a>, e.g. <code class="lang-kotlin">(5 mega seconds).value // 5000000.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1423270907%2FFunctions%2F-251573632" anchor-label="micro" id="1423270907%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="micro.html"><span><span>micro</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1423270907%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="micro.html"><span class="token function">micro</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="micro.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-m-i-c-r-o/index.html">KUnitPrefix.MICRO</a>, e.g. <code class="lang-kotlin">(5 micro seconds).value // 0.000005</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2105165870%2FFunctions%2F-251573632" anchor-label="milli" id="-2105165870%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="milli.html"><span><span>milli</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2105165870%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="milli.html"><span class="token function">milli</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="milli.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-m-i-l-l-i/index.html">KUnitPrefix.MILLI</a>, e.g. <code class="lang-kotlin">(5 milli seconds).value // 0.005</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-166371483%2FFunctions%2F-251573632" anchor-label="nano" id="-166371483%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nano.html"><span><span>nano</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-166371483%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="nano.html"><span class="token function">nano</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="nano.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-n-a-n-o/index.html">KUnitPrefix.NANO</a>, e.g. <code class="lang-kotlin">(5 nano seconds).value // 5e-9</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="526069047%2FFunctions%2F-251573632" anchor-label="peta" id="526069047%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="peta.html"><span><span>peta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="526069047%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="peta.html"><span class="token function">peta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="peta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-p-e-t-a/index.html">KUnitPrefix.PETA</a>, e.g. <code class="lang-kotlin">(5 peta seconds).value // 5e15</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="358724052%2FFunctions%2F-251573632" anchor-label="pico" id="358724052%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pico.html"><span><span>pico</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="358724052%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="pico.html"><span class="token function">pico</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="pico.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-p-i-c-o/index.html">KUnitPrefix.PICO</a>, e.g. <code class="lang-kotlin">(5 pico seconds).value // 5e-12</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1862622204%2FFunctions%2F-251573632" anchor-label="quecto" id="1862622204%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="quecto.html"><span><span>quecto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1862622204%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="quecto.html"><span class="token function">quecto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="quecto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-q-u-e-c-t-o/index.html">KUnitPrefix.QUECTO</a>, e.g. <code class="lang-kotlin">(5 quecto seconds).value // 5e-30</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1702745561%2FFunctions%2F-251573632" anchor-label="quetta" id="1702745561%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="quetta.html"><span><span>quetta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1702745561%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="quetta.html"><span class="token function">quetta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="quetta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-q-u-e-t-t-a/index.html">KUnitPrefix.QUETTA</a>, e.g. <code class="lang-kotlin">(5 quetta seconds).value // 5e30</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="103021435%2FFunctions%2F-251573632" anchor-label="ronna" id="103021435%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ronna.html"><span><span>ronna</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="103021435%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="ronna.html"><span class="token function">ronna</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="ronna.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-r-o-n-n-a/index.html">KUnitPrefix.RONNA</a>, e.g. <code class="lang-kotlin">(5 ronna seconds).value // 5e27</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1816891827%2FFunctions%2F-251573632" anchor-label="ronto" id="1816891827%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ronto.html"><span><span>ronto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1816891827%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="ronto.html"><span class="token function">ronto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="ronto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-r-o-n-t-o/index.html">KUnitPrefix.RONTO</a>, e.g. <code class="lang-kotlin">(5 ronto seconds).value // 5e-27</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-61347783%2FFunctions%2F-251573632" anchor-label="tera" id="-61347783%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tera.html"><span><span>tera</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-61347783%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="tera.html"><span class="token function">tera</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="tera.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-t-e-r-a/index.html">KUnitPrefix.TERA</a>, e.g. <code class="lang-kotlin">(5 tera seconds).value // 5e12</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1005631192%2FFunctions%2F-251573632" anchor-label="toKTimeUnit" id="1005631192%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-k-time-unit.html"><span>to</span><wbr></wbr><span>KTime</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1005631192%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a><span class="token punctuation">.</span><a href="to-k-time-unit.html"><span class="token function">toKTimeUnit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Wraps this <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">java.time.Duration</a> as a <a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a>, the entry point for interoperating with <code class="lang-kotlin">java.time</code>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-k-time-unit.html"><span class="token function">toKTimeUnit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; time value, as long as it consists of exactly one term of any <a href="-k-time-unit/index.html">KTimeUnit</a> - normalizing it to <a href="-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a> (second) if it isn't already (e.g. a term tagged with <a href="-k-time-unit/-h-o-u-r/index.html">KTimeUnit.HOUR</a> is converted to the equivalent number of seconds). The term's exponent is irrelevant to this conversion: a <code class="lang-kotlin">KTimeUnit</code> term is a time-typed unit regardless of exponent (even a &quot;square second&quot;), and the resulting <a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a> simply wraps the numeric value as a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a>. This is what lets an arbitrary single-<a href="-k-time-unit/index.html">KTimeUnit</a> mixed instance (whose term may be tagged with any <a href="-k-time-unit/index.html">KTimeUnit</a>) be converted into a <a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1655150327%2FFunctions%2F-251573632" anchor-label="yocto" id="1655150327%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yocto.html"><span><span>yocto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1655150327%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="yocto.html"><span class="token function">yocto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="yocto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-y-o-c-t-o/index.html">KUnitPrefix.YOCTO</a>, e.g. <code class="lang-kotlin">(5 yocto seconds).value // 5e-24</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1495273684%2FFunctions%2F-251573632" anchor-label="yotta" id="1495273684%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yotta.html"><span><span>yotta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1495273684%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="yotta.html"><span class="token function">yotta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="yotta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-y-o-t-t-a/index.html">KUnitPrefix.YOTTA</a>, e.g. <code class="lang-kotlin">(5 yotta seconds).value // 5e24</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2127746911%2FFunctions%2F-251573632" anchor-label="zepto" id="2127746911%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zepto.html"><span><span>zepto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2127746911%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="zepto.html"><span class="token function">zepto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="zepto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-z-e-p-t-o/index.html">KUnitPrefix.ZEPTO</a>, e.g. <code class="lang-kotlin">(5 zepto seconds).value // 5e-21</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="373878185%2FFunctions%2F-251573632" anchor-label="zetta" id="373878185%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zetta.html"><span><span>zetta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="373878185%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="zetta.html"><span class="token function">zetta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-time-unit/index.html">KTimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="zetta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-z-e-t-t-a/index.html">KUnitPrefix.ZETTA</a>, e.g. <code class="lang-kotlin">(5 zetta seconds).value // 5e21</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

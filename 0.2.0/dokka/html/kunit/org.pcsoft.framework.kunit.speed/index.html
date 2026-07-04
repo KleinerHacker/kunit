@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.speed</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.speed////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.speed</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1972741907%2FClasslikes%2F-251573632" anchor-label="KSpeedUnit" id="1972741907%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-speed-unit/index.html"><span>KSpeed</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1972741907%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-speed-unit/index.html">KSpeedUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-speed-unit/index.html">KSpeedUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of speed (a <i>constructed</i> quantity: length · time⁻¹). <span data-unresolved-link="org.pcsoft.framework.kunit.speed/KSpeedUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-speed-unit/-companion/-b-a-s-e.html">BASE</a>, meter per second): <code class="lang-kotlin">1 unit = baseValue * m/s</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="32338430%2FClasslikes%2F-251573632" anchor-label="KSpeedUnitInstance" id="32338430%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-speed-unit-instance/index.html"><span>KSpeed</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="32338430%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing a speed, i.e. exactly two terms - one <a href="../org.pcsoft.framework.kunit.length/-k-length-unit/-companion/-b-a-s-e.html">KLengthUnit.BASE</a> (meter) at exponent <code class="lang-kotlin">+1</code> and one <a href="../org.pcsoft.framework.kunit.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a> (second) at exponent <code class="lang-kotlin">-1</code> (<code class="lang-kotlin">m·s⁻¹</code>). The <span data-unresolved-link="org.pcsoft.framework.kunit.speed/KSpeedUnitInstance/value/#/PointingToDeclaration/">value</span> is always normalized internally to meters per second (<a href="-k-speed-unit/-companion/-b-a-s-e.html">KSpeedUnit.BASE</a>), regardless of which <a href="-k-speed-unit/index.html">KSpeedUnit</a>, SI <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/index.html">org.pcsoft.framework.kunit.KUnitPrefix</a>, or length/time combination it was constructed from.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-684535189%2FProperties%2F-251573632" anchor-label="feetPerSecond" id="-684535189%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="feet-per-second.html"><span>feet</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-684535189%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="feet-per-second.html">feetPerSecond</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-f-e-e-t_-p-e-r_-s-e-c-o-n-d/index.html">KSpeedUnit.FEET_PER_SECOND</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1086112569%2FProperties%2F-251573632" anchor-label="feetPerSecond" id="-1086112569%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="feet-per-second.html"><span>feet</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1086112569%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="feet-per-second.html">feetPerSecond</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value in feet per second. Example: <code class="lang-kotlin">1.feetPerSecond.value // 0.3048</code> (normalized to m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="256926136%2FProperties%2F-251573632" anchor-label="kilometersPerHour" id="256926136%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilometers-per-hour.html"><span>kilometers</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="256926136%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="kilometers-per-hour.html">kilometersPerHour</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-k-i-l-o-m-e-t-e-r-s_-p-e-r_-h-o-u-r/index.html">KSpeedUnit.KILOMETERS_PER_HOUR</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="832287386%2FProperties%2F-251573632" anchor-label="kilometersPerHour" id="832287386%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilometers-per-hour.html"><span>kilometers</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="832287386%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="kilometers-per-hour.html">kilometersPerHour</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value in kilometers per hour. Example: <code class="lang-kotlin">36.kilometersPerHour.value // 10.0</code> (normalized to m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-81928349%2FProperties%2F-251573632" anchor-label="knots" id="-81928349%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="knots.html"><span><span>knots</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-81928349%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="knots.html">knots</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-k-n-o-t/index.html">KSpeedUnit.KNOT</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-981007665%2FProperties%2F-251573632" anchor-label="knots" id="-981007665%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="knots.html"><span><span>knots</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-981007665%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="knots.html">knots</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value in knots. Example: <code class="lang-kotlin">1.knots.value // 0.514444...</code> (normalized to m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-755269997%2FProperties%2F-251573632" anchor-label="mach" id="-755269997%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mach.html"><span><span>mach</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-755269997%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="mach.html">mach</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-m-a-c-h/index.html">KSpeedUnit.MACH</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1989775775%2FProperties%2F-251573632" anchor-label="mach" id="1989775775%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mach.html"><span><span>mach</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1989775775%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="mach.html">mach</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value in Mach (ISA sea-level speed of sound). Example: <code class="lang-kotlin">1.mach.value // 340.29</code> (normalized to m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="680956807%2FProperties%2F-251573632" anchor-label="metersPerSecond" id="680956807%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="meters-per-second.html"><span>meters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="680956807%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="meters-per-second.html">metersPerSecond</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-m-e-t-e-r-s_-p-e-r_-s-e-c-o-n-d/index.html">KSpeedUnit.METERS_PER_SECOND</a>, for use with <a href="-k-speed-unit-instance/value-as.html">valueAs</a> or the prefix <code class="lang-kotlin">infix</code> functions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-268228309%2FProperties%2F-251573632" anchor-label="metersPerSecond" id="-268228309%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="meters-per-second.html"><span>meters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-268228309%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="meters-per-second.html">metersPerSecond</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value in meters per second from any <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a> type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1905686537%2FProperties%2F-251573632" anchor-label="milesPerHour" id="1905686537%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="miles-per-hour.html"><span>miles</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1905686537%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="miles-per-hour.html">milesPerHour</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-m-i-l-e-s_-p-e-r_-h-o-u-r/index.html">KSpeedUnit.MILES_PER_HOUR</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1214896151%2FProperties%2F-251573632" anchor-label="milesPerHour" id="-1214896151%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="miles-per-hour.html"><span>miles</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1214896151%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="miles-per-hour.html">milesPerHour</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value in miles per hour. Example: <code class="lang-kotlin">1.milesPerHour.value // 0.44704</code> (normalized to m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1075759668%2FProperties%2F-251573632" anchor-label="speedOfLight" id="1075759668%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="speed-of-light.html"><span>speed</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Light</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1075759668%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="speed-of-light.html">speedOfLight</a><span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></div><div class="brief "><p class="paragraph">Bare reference to <a href="-k-speed-unit/-l-i-g-h-t_-s-p-e-e-d/index.html">KSpeedUnit.LIGHT_SPEED</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1058802786%2FProperties%2F-251573632" anchor-label="speedOfLight" id="-1058802786%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="speed-of-light.html"><span>speed</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Light</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1058802786%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="speed-of-light.html">speedOfLight</a><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Creates a pure speed value as a multiple of the speed of light. Example: <code class="lang-kotlin">1.speedOfLight.value // 299792458.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1405733553%2FFunctions%2F-251573632" anchor-label="atto" id="1405733553%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="atto.html"><span><span>atto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1405733553%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="atto.html"><span class="token function">atto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="atto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-a-t-t-o/index.html">KUnitPrefix.ATTO</a>, e.g. <code class="lang-kotlin">(5 atto metersPerSecond).value // 5e-18</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-614871616%2FFunctions%2F-251573632" anchor-label="centi" id="-614871616%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="centi.html"><span><span>centi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-614871616%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="centi.html"><span class="token function">centi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="centi.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-c-e-n-t-i/index.html">KUnitPrefix.CENTI</a>, e.g. <code class="lang-kotlin">(5 centi metersPerSecond).value // 0.05</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1767159776%2FFunctions%2F-251573632" anchor-label="deca" id="-1767159776%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deca.html"><span><span>deca</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1767159776%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="deca.html"><span class="token function">deca</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="deca.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-d-e-c-a/index.html">KUnitPrefix.DECA</a>, e.g. <code class="lang-kotlin">(5 deca metersPerSecond).value // 50.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="204904728%2FFunctions%2F-251573632" anchor-label="deci" id="204904728%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deci.html"><span><span>deci</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="204904728%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="deci.html"><span class="token function">deci</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="deci.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-d-e-c-i/index.html">KUnitPrefix.DECI</a>, e.g. <code class="lang-kotlin">(5 deci metersPerSecond).value // 0.5</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="849826578%2FFunctions%2F-251573632" anchor-label="div" id="849826578%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="849826578%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.length/-k-length-unit-instance/index.html">KLengthUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a length by a speed to obtain the required time (<code class="lang-kotlin">length / speed = time</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.length/-k-length-unit-instance/index.html">KLengthUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a length by a time to obtain a <a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a> (<code class="lang-kotlin">length / time = speed</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1446654803%2FFunctions%2F-251573632" anchor-label="exa" id="1446654803%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exa.html"><span><span>exa</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1446654803%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="exa.html"><span class="token function">exa</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="exa.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-e-x-a/index.html">KUnitPrefix.EXA</a>, e.g. <code class="lang-kotlin">(5 exa metersPerSecond).value // 5e18</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2087105528%2FFunctions%2F-251573632" anchor-label="femto" id="2087105528%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="femto.html"><span><span>femto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2087105528%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="femto.html"><span class="token function">femto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="femto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-f-e-m-t-o/index.html">KUnitPrefix.FEMTO</a>, e.g. <code class="lang-kotlin">(5 femto metersPerSecond).value // 5e-15</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2086498595%2FFunctions%2F-251573632" anchor-label="giga" id="2086498595%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="giga.html"><span><span>giga</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2086498595%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="giga.html"><span class="token function">giga</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="giga.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-g-i-g-a/index.html">KUnitPrefix.GIGA</a>, e.g. <code class="lang-kotlin">(5 giga metersPerSecond).value // 5.0e9</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="934250880%2FFunctions%2F-251573632" anchor-label="hecto" id="934250880%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hecto.html"><span><span>hecto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="934250880%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="hecto.html"><span class="token function">hecto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="hecto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-h-e-c-t-o/index.html">KUnitPrefix.HECTO</a>, e.g. <code class="lang-kotlin">(5 hecto metersPerSecond).value // 500.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="791557534%2FFunctions%2F-251573632" anchor-label="kilo" id="791557534%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilo.html"><span><span>kilo</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="791557534%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="kilo.html"><span class="token function">kilo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="kilo.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-k-i-l-o/index.html">KUnitPrefix.KILO</a>, e.g. <code class="lang-kotlin">(5 kilo metersPerSecond).value // 5000.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1410692947%2FFunctions%2F-251573632" anchor-label="mega" id="-1410692947%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mega.html"><span><span>mega</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1410692947%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="mega.html"><span class="token function">mega</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="mega.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-m-e-g-a/index.html">KUnitPrefix.MEGA</a>, e.g. <code class="lang-kotlin">(5 mega metersPerSecond).value // 5000000.0</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="613407005%2FFunctions%2F-251573632" anchor-label="micro" id="613407005%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="micro.html"><span><span>micro</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="613407005%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="micro.html"><span class="token function">micro</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="micro.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-m-i-c-r-o/index.html">KUnitPrefix.MICRO</a>, e.g. <code class="lang-kotlin">(5 micro metersPerSecond).value // 0.000005</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1485139148%2FFunctions%2F-251573632" anchor-label="milli" id="-1485139148%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="milli.html"><span><span>milli</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1485139148%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="milli.html"><span class="token function">milli</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="milli.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-m-i-l-l-i/index.html">KUnitPrefix.MILLI</a>, e.g. <code class="lang-kotlin">(5 milli metersPerSecond).value // 0.005</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1710243499%2FFunctions%2F-251573632" anchor-label="nano" id="1710243499%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nano.html"><span><span>nano</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1710243499%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="nano.html"><span class="token function">nano</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="nano.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-n-a-n-o/index.html">KUnitPrefix.NANO</a>, e.g. <code class="lang-kotlin">(5 nano metersPerSecond).value // 5e-9</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1425661949%2FFunctions%2F-251573632" anchor-label="peta" id="1425661949%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="peta.html"><span><span>peta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1425661949%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="peta.html"><span class="token function">peta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="peta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-p-e-t-a/index.html">KUnitPrefix.PETA</a>, e.g. <code class="lang-kotlin">(5 peta metersPerSecond).value // 5e15</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-479088294%2FFunctions%2F-251573632" anchor-label="pico" id="-479088294%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pico.html"><span><span>pico</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-479088294%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="pico.html"><span class="token function">pico</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="pico.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-p-i-c-o/index.html">KUnitPrefix.PICO</a>, e.g. <code class="lang-kotlin">(5 pico metersPerSecond).value // 5e-12</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1553980674%2FFunctions%2F-251573632" anchor-label="quecto" id="1553980674%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="quecto.html"><span><span>quecto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1553980674%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="quecto.html"><span class="token function">quecto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="quecto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-q-u-e-c-t-o/index.html">KUnitPrefix.QUECTO</a>, e.g. <code class="lang-kotlin">(5 quecto metersPerSecond).value // 5e-30</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1763617889%2FFunctions%2F-251573632" anchor-label="quetta" id="-1763617889%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="quetta.html"><span><span>quetta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1763617889%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="quetta.html"><span class="token function">quetta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="quetta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-q-u-e-t-t-a/index.html">KUnitPrefix.QUETTA</a>, e.g. <code class="lang-kotlin">(5 quetta metersPerSecond).value // 5e30</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1130983267%2FFunctions%2F-251573632" anchor-label="ronna" id="-1130983267%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ronna.html"><span><span>ronna</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1130983267%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="ronna.html"><span class="token function">ronna</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="ronna.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-r-o-n-n-a/index.html">KUnitPrefix.RONNA</a>, e.g. <code class="lang-kotlin">(5 ronna metersPerSecond).value // 5e27</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="925989077%2FFunctions%2F-251573632" anchor-label="ronto" id="925989077%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ronto.html"><span><span>ronto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="925989077%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="ronto.html"><span class="token function">ronto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="ronto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-r-o-n-t-o/index.html">KUnitPrefix.RONTO</a>, e.g. <code class="lang-kotlin">(5 ronto metersPerSecond).value // 5e-27</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-441195905%2FFunctions%2F-251573632" anchor-label="tera" id="-441195905%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tera.html"><span><span>tera</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-441195905%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="tera.html"><span class="token function">tera</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="tera.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-t-e-r-a/index.html">KUnitPrefix.TERA</a>, e.g. <code class="lang-kotlin">(5 tera metersPerSecond).value // 5e12</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1771389600%2FFunctions%2F-251573632" anchor-label="times" id="-1771389600%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1771389600%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.length/-k-length-unit-instance/index.html">KLengthUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a speed by a time to obtain the travelled length (<code class="lang-kotlin">speed * time = length</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.length/-k-length-unit-instance/index.html">KLengthUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a time by a speed to obtain the travelled length (<code class="lang-kotlin">time * speed = length</code>); the commutative counterpart of <a href="-k-speed-unit-instance/times.html">KSpeedUnitInstance.times</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1067974730%2FFunctions%2F-251573632" anchor-label="toKSpeedUnit" id="1067974730%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-k-speed-unit.html"><span>to</span><wbr></wbr><span>KSpeed</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1067974730%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-k-speed-unit.html"><span class="token function">toKSpeedUnit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; speed value, as long as it consists of exactly two terms: one <a href="../org.pcsoft.framework.kunit.length/-k-length-unit/index.html">KLengthUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-1</code> (order independent). The terms are normalized to <a href="../org.pcsoft.framework.kunit.length/-k-length-unit/-companion/-b-a-s-e.html">KLengthUnit.BASE</a>/<a href="../org.pcsoft.framework.kunit.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a>, so the resulting speed is expressed in meters per second regardless of which length/time units the terms were tagged with (e.g. a <code class="lang-kotlin">[MILE^1, HOUR^-1]</code> instance is converted to the equivalent m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="111230233%2FFunctions%2F-251573632" anchor-label="yocto" id="111230233%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yocto.html"><span><span>yocto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="111230233%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="yocto.html"><span class="token function">yocto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="yocto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-y-o-c-t-o/index.html">KUnitPrefix.YOCTO</a>, e.g. <code class="lang-kotlin">(5 yocto metersPerSecond).value // 5e-24</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1088598966%2FFunctions%2F-251573632" anchor-label="yotta" id="1088598966%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yotta.html"><span><span>yotta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1088598966%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="yotta.html"><span class="token function">yotta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="yotta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-y-o-t-t-a/index.html">KUnitPrefix.YOTTA</a>, e.g. <code class="lang-kotlin">(5 yotta metersPerSecond).value // 5e24</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-989985919%2FFunctions%2F-251573632" anchor-label="zepto" id="-989985919%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zepto.html"><span><span>zepto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-989985919%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="zepto.html"><span class="token function">zepto</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="zepto.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-z-e-p-t-o/index.html">KUnitPrefix.ZEPTO</a>, e.g. <code class="lang-kotlin">(5 zepto metersPerSecond).value // 5e-21</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1464315723%2FFunctions%2F-251573632" anchor-label="zetta" id="1464315723%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zetta.html"><span><span>zetta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1464315723%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="zetta.html"><span class="token function">zetta</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="-k-speed-unit/index.html">KSpeedUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Scales <a href="zetta.html">unit</a> by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/-z-e-t-t-a/index.html">KUnitPrefix.ZETTA</a>, e.g. <code class="lang-kotlin">(5 zetta metersPerSecond).value // 5e21</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1054 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Kotlin Unit Framework to calculate with different units in Kotlin (and Java)">
+      
+      
+      
+        <link rel="canonical" href="https://kleinerhacker.github.io/kunit/latest/0.2.0/zh/">
+      
+      
+      
+        <link rel="next" href="mixed-units/">
+      
+      
+        
+          <link rel="alternate" href="/kunit/latest/0.2.0/" hreflang="en">
+        
+          <link rel="alternate" href="/kunit/latest/0.2.0/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/kunit/latest/0.2.0/zh/" hreflang="zh">
+        
+          <link rel="alternate" href="/kunit/latest/0.2.0/ja/" hreflang="ja">
+        
+      
+      
+      <link rel="icon" href="../assets/images/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>首页 - KUnit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kunit" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="./" title="KUnit" class="md-header__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KUnit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              首页
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/kunit/latest/0.2.0/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/kunit/latest/0.2.0/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/kunit/latest/0.2.0/zh/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/kunit/latest/0.2.0/ja/" hreflang="ja" class="md-select__link">
+              日本語
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KleinerHacker/kunit" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./" title="KUnit" class="md-nav__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    KUnit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KleinerHacker/kunit" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kunit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么选择 kunit？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        快速开始
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        长度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#si" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SI 前缀
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        混合单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        检出与构建
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mixed-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    混合单位
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="custom-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    添加自定义单位
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    预定义单位
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    预定义单位
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="units/length/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    长度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="units/time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    构造单位
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    构造单位
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="units/speed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    速度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dokka/html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 文档
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    许可证
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kunit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么选择 kunit？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        快速开始
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        长度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#si" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SI 前缀
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        混合单位
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        检出与构建
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="kunit">kunit<a class="headerlink" href="#kunit" title="Permanent link">&para;</a></h1>
+<p><strong>kunit</strong> 是一个用于在 Kotlin（也可在 Java 中使用）中以物理单位而非裸数字进行计算的框架。与其把米、英里或
+平方米当作普通的 <code>Double</code> 值处理、并寄希望于每一处调用都使用相同的单位，kunit 会让值始终携带单位信息，并为你
+处理换算、乘法以及量纲的记录。</p>
+<h2 id="kunit_1">为什么选择 kunit？<a class="headerlink" href="#kunit_1" title="Permanent link">&para;</a></h2>
+<p>用裸数字处理物理量很容易出错：可能会在没有换算的情况下把米和英里相加，或者把面积和长度相加。kunit 通过把单位
+变成类型的一部分来解决这个问题：</p>
+<ul>
+<li><strong>类型安全的运算。</strong> 在不兼容的单位组或指数之间进行 <code>+</code>、<code>-</code> 运算会抛出 <code>IllegalStateException</code>，
+  而不是悄悄地产生一个错误的数字。</li>
+<li><strong>自动换算。</strong> <code>5.meters + 3.miles</code> 直接可用——两个操作数在内部都会被归一化，因此在组合之前无需手动
+  换算单位。</li>
+<li><strong>自由的乘法与除法。</strong> 单位之间的乘除 <em>始终</em> 被允许，并会自动跟踪结果的物理量纲（指数），例如
+  <code>长度 * 长度</code> 得到面积。</li>
+<li><strong>完整支持 <code>Number</code> 类型。</strong> 可以从 <code>Int</code>、<code>Long</code>、<code>Float</code>、<code>Double</code> 以及其他任意 <code>Number</code> 类型构造
+  数值；内部始终归一化为 <code>Double</code>。</li>
+<li><strong>完整的 SI 前缀表</strong>，从 Quetta（Q）到 Quecto（q），可以通用地与任意单位组合。</li>
+<li><strong>命名的特殊单位</strong>（如公顷、升、英亩），作为方便的、绑定到特定组和指数的输入/输出目标，并不会取代底层的原始
+  指数表示方式。</li>
+</ul>
+<h2 id="_1">核心概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>kunit 围绕两个核心类型构建：</p>
+<ul>
+<li><strong><code>KMixedUnitInstance</code></strong> —— <em>混合单位</em>（Mischeinheit）：一个 <code>Double</code> 基础值加上一个或多个 <code>KUnit</code>，每个都
+  搭配一个整数指数（例如速度的 <code>m^1 * s^-1</code>）。这是驱动一切的通用引擎。</li>
+<li><strong><code>KUnit</code></strong> —— 属于某个单位组的单一"纯"单位（例如米属于长度组）。具体的单位组以
+  <code>enum class ... : KUnit</code>（例如 <code>KLengthUnit</code>）的形式建模。</li>
+</ul>
+<p>每个单位组还额外提供一个 <strong>包装类</strong>（例如 <code>KLengthUnitInstance</code>），它封装了一个限定于单个单位组的
+<code>KMixedUnitInstance</code>，并始终归一化到该组的基础单位。这是你在大多数情况下会使用的类型——目前提供的单位请参见
+<a href="units/length/">预定义单位</a>，何时以及如何直接使用通用的 <code>KMixedUnitInstance</code> 引擎请参见
+<a href="mixed-units/">混合单位</a>。</p>
+<p>如果你想为新的物理量（例如质量或时间）添加支持，请参阅
+<a href="custom-units/">添加自定义单位</a> 中的完整分步说明。</p>
+<div class="admonition note">
+<p class="admonition-title">单位对象是不可变的</p>
+<p>每个单位值 —— 无论是 <code>KMixedUnitInstance</code> 引擎，还是诸如 <code>KLengthUnitInstance</code>、
+<code>KTimeUnitInstance</code> 之类的各种“纯”包装类 —— 都是<strong>不可变的（immutable）</strong>。任何操作都不会修改
+现有实例；运算符（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>）和转换始终返回一个<strong>新</strong>对象，而保持操作数不变。因此单位值
+可以放心地自由共享，也可以用作键或常量。</p>
+</div>
+<h2 id="_2">快速开始<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>将该模块添加为依赖（或作为项目/源代码集引入），并导入所需单位组的词汇。</p>
+<h3 id="_3">长度<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KUnitPrefix</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.with</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.length.*</span>
+
+<span class="c1">// 从任意 Number 类型创建纯长度值</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5.</span><span class="n">meters</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">trip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10.</span><span class="n">miles</span>
+
+<span class="c1">// 运算符：同一组、同一指数内自动换算</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trip</span><span class="w">          </span><span class="c1">// KLengthUnitInstance，归一化为米</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trip</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">distance</span>
+
+<span class="c1">// 比较</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">isFarther</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trip</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">distance</span><span class="w">      </span><span class="c1">// true</span>
+
+<span class="c1">// 以指定单位读取数值</span>
+<span class="n">println</span><span class="p">(</span><span class="n">total</span><span class="p">.</span><span class="na">valueAs</span><span class="p">(</span><span class="n">KUnitPrefix</span><span class="p">.</span><span class="na">KILO</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">meters</span><span class="p">))</span><span class="w"> </span><span class="c1">// 例如 21.0467...</span>
+<span class="n">println</span><span class="p">(</span><span class="n">total</span><span class="p">.</span><span class="na">valueAs</span><span class="p">(</span><span class="n">yards</span><span class="p">))</span><span class="w">                         </span><span class="c1">// 例如 23018.4...</span>
+
+<span class="c1">// 纯单位相乘/相除会产生一个混合单位（KMixedUnitInstance）</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distance</span><span class="p">.</span><span class="na">toKMixedUnitInstance</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trip</span><span class="p">.</span><span class="na">toKMixedUnitInstance</span><span class="p">()</span>
+
+<span class="c1">// 面积（指数 2）和体积（指数 3）的特殊单位</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.</span><span class="n">hectares</span>
+<span class="n">println</span><span class="p">(</span><span class="n">plot</span><span class="p">.</span><span class="na">valueAs</span><span class="p">(</span><span class="n">KLengthDerivedUnit</span><span class="p">.</span><span class="na">ARE</span><span class="p">))</span><span class="w">   </span><span class="c1">// 300.0</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">tank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200.l</span><span class="n">iters</span>
+<span class="n">println</span><span class="p">(</span><span class="n">tank</span><span class="p">.</span><span class="na">valueAs</span><span class="p">(</span><span class="n">KLengthDerivedUnit</span><span class="p">.</span><span class="na">US_GALLON</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="si">SI 前缀<a class="headerlink" href="#si" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.length.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.length.meters</span>
+
+<span class="c1">// &quot;5 kilo meters&quot; -&gt; KLengthUnitInstance (direct, == 5000.meters)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">fiveKm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">kilo</span><span class="w"> </span><span class="n">meters</span>
+<span class="n">println</span><span class="p">(</span><span class="n">fiveKm</span><span class="p">.</span><span class="na">value</span><span class="p">)</span><span class="w"> </span><span class="c1">// 5000.0（归一化为米）</span>
+</code></pre></div>
+<h3 id="_4">混合单位<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KMixedUnitInstance</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KUnitTerm</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.length.KLengthUnit</span>
+
+<span class="c1">// 手动组合一个混合单位，例如平方米（长度^1 * 长度^1）</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KMixedUnitInstance</span><span class="p">(</span><span class="m">10.0</span><span class="p">,</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="n">KUnitTerm</span><span class="p">(</span><span class="n">KLengthUnit</span><span class="p">.</span><span class="na">METER</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">doubled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="c1">// 指数相加 -&gt; 长度^2</span>
+</code></pre></div>
+<h2 id="_5">检出与构建<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>&lt;repository-url&gt;
+<span class="nb">cd</span><span class="w"> </span>kunit
+</code></pre></div>
+<p>kunit 使用 Gradle（仓库中已包含 wrapper，无需本地安装 Gradle）：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 构建</span>
+./gradlew<span class="w"> </span>build<span class="w">          </span><span class="c1"># Windows: gradlew.bat build</span>
+
+<span class="c1"># 仅运行测试</span>
+./gradlew<span class="w"> </span><span class="nb">test</span><span class="w">            </span><span class="c1"># Windows: gradlew.bat test</span>
+</code></pre></div>
+<p>需要一个能够解析 toolchain 25 的 JDK（<code>foojay-resolver</code> 插件会在需要时自动下载）。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

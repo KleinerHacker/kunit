@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>KTimeUnitInstance</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="kunit::org.pcsoft.framework.kunit.time/KTimeUnitInstance///PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../../index.html">kunit</a><span class="delimiter">/</span><a href="../index.html">org.pcsoft.framework.kunit.time</a><span class="delimiter">/</span><span class="current">KTimeUnitInstance</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>KTime</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">KTimeUnitInstance</a> : <a href="../../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="index.html">KTimeUnitInstance</a><span class="token operator">&gt; </span>, <a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><p class="paragraph">A 100 % wrapper around <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">java.time.Duration</a>, exposed as the &quot;pure&quot; unit of the time group. The <span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance//#java.time.Duration/PointingToCallableParameters(0)/">duration</span> is the single source of truth: <code class="lang-kotlin">+</code>, <code class="lang-kotlin">-</code>, comparison and equality operate directly on it (nanosecond-exact), and the full <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> API is forwarded (see the <code class="lang-kotlin">plusXxx</code>/<code class="lang-kotlin">minusXxx</code>/<code class="lang-kotlin">toXxx</code> members below). On top of that, it offers the same surface as every other &quot;pure&quot; unit wrapper (e.g. <code class="lang-kotlin">KLengthUnitInstance</code>): <span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance/value/#/PointingToDeclaration/">value</span>/<a href="value-as.html">valueAs</a>/<code class="lang-kotlin">*</code>/<code class="lang-kotlin">/</code>/<a href="to-string.html">toString</a>/<span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance/toKMixedUnitInstance/#/PointingToDeclaration/">toKMixedUnitInstance</span>, so it plugs into the generic mixed-unit engine (e.g. <code class="lang-kotlin">length / time</code> = speed).</p><p class="paragraph">Unlike the other wrappers, a time value always represents exponent 1 (a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> cannot represent a time² or 1/time). Multiplying/dividing therefore &quot;escapes&quot; to a raw <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> (e.g. <code class="lang-kotlin">s^2</code>, <code class="lang-kotlin">s^-1</code>), just like length's <code class="lang-kotlin">*</code>/<code class="lang-kotlin">/</code>.</p><p class="paragraph">Instances are created via the creator extension properties in <code class="lang-kotlin">KTimeUnitExtensions.kt</code> (e.g. <code class="lang-kotlin">5.seconds</code>, <code class="lang-kotlin">2.hours</code>), the SI-prefix <code class="lang-kotlin">infix</code> constructors in <code class="lang-kotlin">KTimeUnitPrefix.kt</code> (e.g. <code class="lang-kotlin">5 milli seconds</code>), or from a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> via <a href="../to-k-time-unit.html">toKTimeUnit</a>.</p><p class="paragraph">Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val t = 2.hours<br>t.value               // 7200.0 (normalized to seconds)<br>t.valueAs(KTimeUnit.HOUR) // 2.0 (read back in hours)<br>t.toDuration()        // PT2H</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="36194626%2FProperties%2F-251573632" anchor-label="value" id="36194626%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/value.html"><span><span>value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="36194626%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">The value normalized to the base unit(s) of this measure, always exposed as a <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-917137195%2FFunctions%2F-251573632" anchor-label="abs" id="-917137195%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="abs.html"><span><span>abs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-917137195%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="abs.html"><span class="token function">abs</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with an absolute (non-negative) length (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#abs()">Duration.abs</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1309598325%2FFunctions%2F-251573632" anchor-label="compareTo" id="1309598325%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="compare-to.html"><span>compare</span><wbr></wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1309598325%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="compare-to.html"><span class="token function">compareTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Compares two durations chronologically (delegates to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#compareTo(java.time.Duration)">Duration.compareTo</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="489294139%2FFunctions%2F-251573632" anchor-label="div" id="489294139%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="489294139%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Divides this measure by an arbitrary mixed unit, producing a new <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> whose unit terms are this side's terms combined with <code class="lang-kotlin">other</code>'s terms with their exponents negated (a resulting exponent of <code class="lang-kotlin">0</code> drops that unit). Always allowed.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Divides two time values, producing a new (dimensionless) <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="178556911%2FFunctions%2F-251573632" anchor-label="dividedBy" id="178556911%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="divided-by.html"><span>divided</span><wbr></wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="178556911%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="divided-by.html"><span class="token function">dividedBy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">divisor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy divided by the given scalar (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#dividedBy(kotlin.Long)">Duration.dividedBy</a>).</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="divided-by.html"><span class="token function">dividedBy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">divisor<span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">How many times the given <a href="divided-by.html">divisor</a> fits into this duration (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#dividedBy(kotlin.Long)">Duration.dividedBy</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1637157934%2FFunctions%2F-251573632" anchor-label="equals" id="1637157934%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1637157934%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Structural equality by the underlying <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> (nanosecond-exact).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-188123107%2FFunctions%2F-251573632" anchor-label="getNano" id="-188123107%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-nano.html"><span>get</span><wbr></wbr><span><span>Nano</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-188123107%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-nano.html"><span class="token function">getNano</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The nanosecond-of-second part of the duration, <code class="lang-kotlin">0..999_999_999</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#getNano()">Duration.getNano</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="622199050%2FFunctions%2F-251573632" anchor-label="getSeconds" id="622199050%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-seconds.html"><span>get</span><wbr></wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="622199050%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-seconds.html"><span class="token function">getSeconds</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The whole-seconds part of the duration (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#getSeconds()">Duration.getSeconds</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-460451592%2FFunctions%2F-251573632" anchor-label="hashCode" id="-460451592%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hash-code.html"><span>hash</span><wbr></wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-460451592%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1621490836%2FFunctions%2F-251573632" anchor-label="isNegative" id="1621490836%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-negative.html"><span>is</span><wbr></wbr><span><span>Negative</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1621490836%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="is-negative.html"><span class="token function">isNegative</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">true</code> if the duration is negative (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#isNegative()">Duration.isNegative</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-597608575%2FFunctions%2F-251573632" anchor-label="isZero" id="-597608575%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-zero.html"><span>is</span><wbr></wbr><span><span>Zero</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-597608575%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="is-zero.html"><span class="token function">isZero</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">true</code> if the duration is zero length (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#isZero()">Duration.isZero</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1946307125%2FFunctions%2F-251573632" anchor-label="minus" id="-1946307125%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus.html"><span><span>minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1946307125%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">amount<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minus(java.time.Duration)">Duration.minus</a>).</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Subtracts two durations. See <a href="plus.html">plus</a> for the automatic unit conversion; implemented as exact <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> subtraction.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">amountToSubtract<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unit<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/temporal/TemporalUnit.html">TemporalUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given amount of the given <a href="minus.html">unit</a> subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minus(java.time.Duration)">Duration.minus</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1171394375%2FFunctions%2F-251573632" anchor-label="minusDays" id="-1171394375%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus-days.html"><span>minus</span><wbr></wbr><span><span>Days</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1171394375%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus-days.html"><span class="token function">minusDays</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">days<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of days subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minusDays(kotlin.Long)">Duration.minusDays</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1349614373%2FFunctions%2F-251573632" anchor-label="minusHours" id="1349614373%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus-hours.html"><span>minus</span><wbr></wbr><span><span>Hours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1349614373%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus-hours.html"><span class="token function">minusHours</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hours<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of hours subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minusHours(kotlin.Long)">Duration.minusHours</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1472038312%2FFunctions%2F-251573632" anchor-label="minusMillis" id="1472038312%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus-millis.html"><span>minus</span><wbr></wbr><span><span>Millis</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1472038312%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus-millis.html"><span class="token function">minusMillis</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">millis<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of milliseconds subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minusMillis(kotlin.Long)">Duration.minusMillis</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1843069557%2FFunctions%2F-251573632" anchor-label="minusMinutes" id="1843069557%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus-minutes.html"><span>minus</span><wbr></wbr><span><span>Minutes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1843069557%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus-minutes.html"><span class="token function">minusMinutes</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">minutes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of minutes subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minusMinutes(kotlin.Long)">Duration.minusMinutes</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="898676821%2FFunctions%2F-251573632" anchor-label="minusNanos" id="898676821%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus-nanos.html"><span>minus</span><wbr></wbr><span><span>Nanos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="898676821%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus-nanos.html"><span class="token function">minusNanos</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">nanos<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of nanoseconds subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minusNanos(kotlin.Long)">Duration.minusNanos</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2099191787%2FFunctions%2F-251573632" anchor-label="minusSeconds" id="-2099191787%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus-seconds.html"><span>minus</span><wbr></wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2099191787%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="minus-seconds.html"><span class="token function">minusSeconds</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">seconds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of seconds subtracted (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#minusSeconds(kotlin.Long)">Duration.minusSeconds</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="427739152%2FFunctions%2F-251573632" anchor-label="multipliedBy" id="427739152%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="multiplied-by.html"><span>multiplied</span><wbr></wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="427739152%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="multiplied-by.html"><span class="token function">multipliedBy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">multiplicand<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy multiplied by the given scalar (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#multipliedBy(kotlin.Long)">Duration.multipliedBy</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2107103397%2FFunctions%2F-251573632" anchor-label="negated" id="2107103397%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="negated.html"><span><span>negated</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2107103397%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="negated.html"><span class="token function">negated</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the length negated (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#negated()">Duration.negated</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-961921599%2FFunctions%2F-251573632" anchor-label="plus" id="-961921599%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus.html"><span><span>plus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-961921599%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">amount<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plus(java.time.Duration)">Duration.plus</a>).</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Adds two durations, automatically converting between different <a href="../-k-time-unit/index.html">KTimeUnit</a>s since both operands are always normalized to <a href="../-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a> internally. Implemented as exact <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a> addition.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">amountToAdd<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unit<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/temporal/TemporalUnit.html">TemporalUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given amount of the given <a href="plus.html">unit</a> added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plus(java.time.Duration)">Duration.plus</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1341151945%2FFunctions%2F-251573632" anchor-label="plusDays" id="-1341151945%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus-days.html"><span>plus</span><wbr></wbr><span><span>Days</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1341151945%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus-days.html"><span class="token function">plusDays</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">days<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of days added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plusDays(kotlin.Long)">Duration.plusDays</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="382096999%2FFunctions%2F-251573632" anchor-label="plusHours" id="382096999%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus-hours.html"><span>plus</span><wbr></wbr><span><span>Hours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="382096999%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus-hours.html"><span class="token function">plusHours</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hours<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of hours added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plusHours(kotlin.Long)">Duration.plusHours</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1543770790%2FFunctions%2F-251573632" anchor-label="plusMillis" id="1543770790%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus-millis.html"><span>plus</span><wbr></wbr><span><span>Millis</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1543770790%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus-millis.html"><span class="token function">plusMillis</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">millis<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of milliseconds added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plusMillis(kotlin.Long)">Duration.plusMillis</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-228190921%2FFunctions%2F-251573632" anchor-label="plusMinutes" id="-228190921%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus-minutes.html"><span>plus</span><wbr></wbr><span><span>Minutes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-228190921%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus-minutes.html"><span class="token function">plusMinutes</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">minutes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of minutes added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plusMinutes(kotlin.Long)">Duration.plusMinutes</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-68840553%2FFunctions%2F-251573632" anchor-label="plusNanos" id="-68840553%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus-nanos.html"><span>plus</span><wbr></wbr><span><span>Nanos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-68840553%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus-nanos.html"><span class="token function">plusNanos</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">nanos<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of nanoseconds added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plusNanos(kotlin.Long)">Duration.plusNanos</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="124515031%2FFunctions%2F-251573632" anchor-label="plusSeconds" id="124515031%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus-seconds.html"><span>plus</span><wbr></wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="124515031%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="plus-seconds.html"><span class="token function">plusSeconds</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">seconds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the given number of seconds added (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#plusSeconds(kotlin.Long)">Duration.plusSeconds</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2089284827%2FFunctions%2F-251573632" anchor-label="times" id="-2089284827%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2089284827%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies this measure with an arbitrary mixed unit, producing a new <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> whose unit terms are the union of both sides' terms with their exponents added (a resulting exponent of <code class="lang-kotlin">0</code> drops that unit). Always allowed.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies two time values, producing a new <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> whose exponent is the sum of both operands' exponents (<code class="lang-kotlin">SECOND^2</code>, no longer a &quot;pure&quot; duration).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1759705622%2FFunctions%2F-251573632" anchor-label="times" id="1759705622%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.speed/times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1759705622%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="index.html">KTimeUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.speed/times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.speed/-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.length/-k-length-unit-instance/index.html">KLengthUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a time by a speed to obtain the travelled length (<code class="lang-kotlin">time * speed = length</code>); the commutative counterpart of <a href="../../org.pcsoft.framework.kunit.speed/-k-speed-unit-instance/times.html">KSpeedUnitInstance.times</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="136979713%2FFunctions%2F-251573632" anchor-label="toDays" id="136979713%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-days.html"><span>to</span><wbr></wbr><span><span>Days</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="136979713%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-days.html"><span class="token function">toDays</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total number of whole days (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toDays()">Duration.toDays</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="830355022%2FFunctions%2F-251573632" anchor-label="toDaysPart" id="830355022%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-days-part.html"><span>to</span><wbr></wbr><span>Days</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="830355022%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-days-part.html"><span class="token function">toDaysPart</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The days part of <code class="lang-kotlin">d:h:m:s</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toDaysPart()">Duration.toDaysPart</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-713367324%2FFunctions%2F-251573632" anchor-label="toDuration" id="-713367324%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-duration.html"><span>to</span><wbr></wbr><span><span>Duration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-713367324%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-duration.html"><span class="token function">toDuration</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a></div><div class="brief "><p class="paragraph">The wrapped <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">java.time.Duration</a> (nanosecond-exact backing store of this value).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1561222861%2FFunctions%2F-251573632" anchor-label="toHours" id="-1561222861%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-hours.html"><span>to</span><wbr></wbr><span><span>Hours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1561222861%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-hours.html"><span class="token function">toHours</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total number of whole hours (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toHours()">Duration.toHours</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-420984448%2FFunctions%2F-251573632" anchor-label="toHoursPart" id="-420984448%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-hours-part.html"><span>to</span><wbr></wbr><span>Hours</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-420984448%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-hours-part.html"><span class="token function">toHoursPart</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The hours part <code class="lang-kotlin">0..23</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toHoursPart()">Duration.toHoursPart</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-530947805%2FFunctions%2F-251573632" anchor-label="toKMixedUnitInstance" id="-530947805%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/to-k-mixed-unit-instance.html"><span>to</span><wbr></wbr><span>KMixed</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-530947805%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../../org.pcsoft.framework.kunit/-k-unit-measurable/to-k-mixed-unit-instance.html"><span class="token function">toKMixedUnitInstance</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">The generic <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representation of this measure, the common currency of the mixed-unit engine (<code class="lang-kotlin">*</code>, <code class="lang-kotlin">/</code>, <code class="lang-kotlin">+</code>, <code class="lang-kotlin">-</code>, conversion, formatting).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="658354994%2FFunctions%2F-251573632" anchor-label="toMillis" id="658354994%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-millis.html"><span>to</span><wbr></wbr><span><span>Millis</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="658354994%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-millis.html"><span class="token function">toMillis</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total number of whole milliseconds (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toMillis()">Duration.toMillis</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1657619455%2FFunctions%2F-251573632" anchor-label="toMillisPart" id="1657619455%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-millis-part.html"><span>to</span><wbr></wbr><span>Millis</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1657619455%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-millis-part.html"><span class="token function">toMillisPart</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The milliseconds part <code class="lang-kotlin">0..999</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toMillisPart()">Duration.toMillisPart</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-913792989%2FFunctions%2F-251573632" anchor-label="toMinutes" id="-913792989%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-minutes.html"><span>to</span><wbr></wbr><span><span>Minutes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-913792989%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-minutes.html"><span class="token function">toMinutes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total number of whole minutes (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toMinutes()">Duration.toMinutes</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-620343184%2FFunctions%2F-251573632" anchor-label="toMinutesPart" id="-620343184%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-minutes-part.html"><span>to</span><wbr></wbr><span>Minutes</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-620343184%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-minutes-part.html"><span class="token function">toMinutesPart</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The minutes part <code class="lang-kotlin">0..59</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toMinutesPart()">Duration.toMinutesPart</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="586465795%2FFunctions%2F-251573632" anchor-label="toNanos" id="586465795%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-nanos.html"><span>to</span><wbr></wbr><span><span>Nanos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="586465795%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-nanos.html"><span class="token function">toNanos</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total number of nanoseconds (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toNanos()">Duration.toNanos</a>); may overflow for very large durations.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2077131344%2FFunctions%2F-251573632" anchor-label="toNanosPart" id="2077131344%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-nanos-part.html"><span>to</span><wbr></wbr><span>Nanos</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2077131344%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-nanos-part.html"><span class="token function">toNanosPart</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The nanoseconds part <code class="lang-kotlin">0..999_999_999</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toNanosPart()">Duration.toNanosPart</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-914028925%2FFunctions%2F-251573632" anchor-label="toSeconds" id="-914028925%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-seconds.html"><span>to</span><wbr></wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-914028925%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-seconds.html"><span class="token function">toSeconds</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total number of whole seconds (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toSeconds()">Duration.toSeconds</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="531138256%2FFunctions%2F-251573632" anchor-label="toSecondsPart" id="531138256%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-seconds-part.html"><span>to</span><wbr></wbr><span>Seconds</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="531138256%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="to-seconds-part.html"><span class="token function">toSecondsPart</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The seconds part <code class="lang-kotlin">0..59</code> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#toSecondsPart()">Duration.toSecondsPart</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="365883266%2FFunctions%2F-251573632" anchor-label="toString" id="365883266%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="365883266%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Base-unit representation, e.g. <code class="lang-kotlin">&quot;7200.0 s&quot;</code> for two hours.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-unit-target/index.html">KUnitTarget</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Representation in the given unit or prefixed unit - see <a href="value-as.html">valueAs</a> for the matching rules.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1859336055%2FFunctions%2F-251573632" anchor-label="truncatedTo" id="1859336055%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="truncated-to.html"><span>truncated</span><wbr></wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1859336055%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="truncated-to.html"><span class="token function">truncatedTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/temporal/TemporalUnit.html">TemporalUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy truncated to the given <a href="truncated-to.html">unit</a> (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#truncatedTo(java.time.temporal.TemporalUnit)">Duration.truncatedTo</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="675925242%2FFunctions%2F-251573632" anchor-label="valueAs" id="675925242%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="value-as.html"><span>value</span><wbr></wbr><span><span>As</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="675925242%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="value-as.html"><span class="token function">valueAs</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit/-k-unit-target/index.html">KUnitTarget</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="org.pcsoft.framework.kunit.time/KTimeUnitInstance/value/#/PointingToDeclaration/">value</span> into the given unit or prefixed unit - see <a href="../../org.pcsoft.framework.kunit/-k-mixed-unit-instance/value-as.html">KMixedUnitInstance.valueAs</a> for the exact matching rules.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-343948116%2FFunctions%2F-251573632" anchor-label="withNanos" id="-343948116%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-nanos.html"><span>with</span><wbr></wbr><span><span>Nanos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-343948116%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-nanos.html"><span class="token function">withNanos</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">nanoOfSecond<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the nanosecond-of-second part replaced (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#withNanos(kotlin.Int)">Duration.withNanos</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="378735659%2FFunctions%2F-251573632" anchor-label="withSeconds" id="378735659%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-seconds.html"><span>with</span><wbr></wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="378735659%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-seconds.html"><span class="token function">withSeconds</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">seconds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">A copy with the whole-seconds part replaced (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html#withSeconds(kotlin.Long)">Duration.withSeconds</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
