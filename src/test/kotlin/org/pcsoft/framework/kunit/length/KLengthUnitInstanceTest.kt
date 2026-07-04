@@ -12,109 +12,252 @@
 
 package org.pcsoft.framework.kunit.length
 
-import org.pcsoft.framework.kunit.KDerivedUnit
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.time.KTimeUnit
-import org.pcsoft.framework.kunit.with
+import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-/** All length-unit generator functions paired with the [KLengthUnit] they construct, shared with [KLengthUnitPrefixTest]. */
+/** All length-unit creator properties paired with the [KLengthUnit] they construct, shared across the length tests. */
 internal val lengthUnitGenerators: List<Pair<(Number) -> KLengthUnitInstance, KLengthUnit>> = listOf(
-    ({ n: Number -> n.meters() }) to KLengthUnit.METER,
-    ({ n: Number -> n.miles() }) to KLengthUnit.MILE,
-    ({ n: Number -> n.nauticalMiles() }) to KLengthUnit.NAUTICAL_MILE,
-    ({ n: Number -> n.yards() }) to KLengthUnit.YARD,
-    ({ n: Number -> n.feet() }) to KLengthUnit.FOOT,
-    ({ n: Number -> n.inches() }) to KLengthUnit.INCH,
-    ({ n: Number -> n.fathoms() }) to KLengthUnit.FATHOM,
-    ({ n: Number -> n.chains() }) to KLengthUnit.CHAIN,
-    ({ n: Number -> n.furlongs() }) to KLengthUnit.FURLONG,
-    ({ n: Number -> n.astronomicalUnits() }) to KLengthUnit.ASTRONOMICAL_UNIT,
-    ({ n: Number -> n.lightSeconds() }) to KLengthUnit.LIGHT_SECOND,
-    ({ n: Number -> n.lightMinutes() }) to KLengthUnit.LIGHT_MINUTE,
-    ({ n: Number -> n.lightHours() }) to KLengthUnit.LIGHT_HOUR,
-    ({ n: Number -> n.lightDays() }) to KLengthUnit.LIGHT_DAY,
-    ({ n: Number -> n.lightWeeks() }) to KLengthUnit.LIGHT_WEEK,
-    ({ n: Number -> n.lightYears() }) to KLengthUnit.LIGHT_YEAR,
-    ({ n: Number -> n.parsecs() }) to KLengthUnit.PARSEC
+    ({ n: Number -> n.meters }) to KLengthUnit.METER,
+    ({ n: Number -> n.miles }) to KLengthUnit.MILE,
+    ({ n: Number -> n.nauticalMiles }) to KLengthUnit.NAUTICAL_MILE,
+    ({ n: Number -> n.yards }) to KLengthUnit.YARD,
+    ({ n: Number -> n.feet }) to KLengthUnit.FOOT,
+    ({ n: Number -> n.inches }) to KLengthUnit.INCH,
+    ({ n: Number -> n.fathoms }) to KLengthUnit.FATHOM,
+    ({ n: Number -> n.chains }) to KLengthUnit.CHAIN,
+    ({ n: Number -> n.furlongs }) to KLengthUnit.FURLONG,
+    ({ n: Number -> n.astronomicalUnits }) to KLengthUnit.ASTRONOMICAL_UNIT,
+    ({ n: Number -> n.lightSeconds }) to KLengthUnit.LIGHT_SECOND,
+    ({ n: Number -> n.lightMinutes }) to KLengthUnit.LIGHT_MINUTE,
+    ({ n: Number -> n.lightHours }) to KLengthUnit.LIGHT_HOUR,
+    ({ n: Number -> n.lightDays }) to KLengthUnit.LIGHT_DAY,
+    ({ n: Number -> n.lightWeeks }) to KLengthUnit.LIGHT_WEEK,
+    ({ n: Number -> n.lightYears }) to KLengthUnit.LIGHT_YEAR,
+    ({ n: Number -> n.parsecs }) to KLengthUnit.PARSEC
 )
 
-/** All length-derived-unit generator functions paired with the [KDerivedUnit] they construct, shared with [KLengthUnitPrefixTest]. */
+/** All length-derived-unit creator properties paired with the [KDerivedUnit] they construct, shared across the length tests. */
 internal val lengthDerivedUnitGenerators: List<Pair<(Number) -> KLengthUnitInstance, KDerivedUnit<KLengthUnit>>> = listOf(
-    ({ n: Number -> n.ares() }) to KLengthDerivedUnit.ARE,
-    ({ n: Number -> n.hectares() }) to KLengthDerivedUnit.HECTARE,
-    ({ n: Number -> n.acres() }) to KLengthDerivedUnit.ACRE,
-    ({ n: Number -> n.liters() }) to KLengthDerivedUnit.LITER,
-    ({ n: Number -> n.usGallons() }) to KLengthDerivedUnit.US_GALLON,
-    ({ n: Number -> n.imperialGallons() }) to KLengthDerivedUnit.IMPERIAL_GALLON,
-    ({ n: Number -> n.usFluidOunces() }) to KLengthDerivedUnit.US_FLUID_OUNCE,
-    ({ n: Number -> n.oilBarrels() }) to KLengthDerivedUnit.OIL_BARREL
+    ({ n: Number -> n.ares }) to KLengthDerivedUnit.ARE,
+    ({ n: Number -> n.hectares }) to KLengthDerivedUnit.HECTARE,
+    ({ n: Number -> n.acres }) to KLengthDerivedUnit.ACRE,
+    ({ n: Number -> n.liters }) to KLengthDerivedUnit.LITER,
+    ({ n: Number -> n.usGallons }) to KLengthDerivedUnit.US_GALLON,
+    ({ n: Number -> n.imperialGallons }) to KLengthDerivedUnit.IMPERIAL_GALLON,
+    ({ n: Number -> n.usFluidOunces }) to KLengthDerivedUnit.US_FLUID_OUNCE,
+    ({ n: Number -> n.oilBarrels }) to KLengthDerivedUnit.OIL_BARREL
 )
 
+/** Builds a [KLengthUnitInstance] of [n] in [unit] via that unit's creator property (exercises the property creators). */
+internal fun lengthOf(unit: KLengthUnit, n: Number): KLengthUnitInstance =
+    lengthUnitGenerators.first { it.second == unit }.first(n)
+
+/** Relative tolerance that stays meaningful across the enormous magnitude span (inch … parsec). */
+internal fun lengthDelta(expected: Double): Double = (abs(expected) * 1e-9).coerceAtLeast(1e-12)
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KLengthUnitInstanceTest {
 
-    @Test
-    fun `plus converts between same-group units`() {
-        val result = 1.kilometers() + 500.meters()
-        assertEquals(1500.0, result.value, 1e-9)
+    private fun units(): List<Arguments> = lengthUnitGenerators.map { Arguments.of(it.second) }
+
+    private fun unitPairs(): List<Arguments> =
+        lengthUnitGenerators.flatMap { (_, a) -> lengthUnitGenerators.map { (_, b) -> Arguments.of(a, b) } }
+
+    // region construction / conversion matrix
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("units")
+    fun `every creator property round trips through valueAs`(unit: KLengthUnit) {
+        val instance = lengthOf(unit, 5)
+        assertEquals(5.0 * unit.baseValue, instance.value, lengthDelta(5.0 * unit.baseValue), "value mismatch for $unit")
+        assertEquals(5.0, instance.valueAs(unit), 5.0 * 1e-9, "valueAs round trip mismatch for $unit")
     }
 
-    private fun Number.kilometers(): KLengthUnitInstance = this kilo KLengthUnit.METER
+    @ParameterizedTest(name = "{0} -> {1}")
+    @MethodSource("unitPairs")
+    fun `every unit converts into every other unit`(from: KLengthUnit, to: KLengthUnit) {
+        val expected = 5.0 * from.baseValue / to.baseValue
+        assertEquals(expected, lengthOf(from, 5).valueAs(to), lengthDelta(expected), "$from -> $to mismatch")
+    }
+
+    // endregion
+
+    // region operator matrix (every unit against every other unit)
+
+    @ParameterizedTest(name = "{0} + {1}")
+    @MethodSource("unitPairs")
+    fun `plus combines every pair of units`(a: KLengthUnit, b: KLengthUnit) {
+        val result = lengthOf(a, 5) + lengthOf(b, 3)
+        val expected = 5.0 * a.baseValue + 3.0 * b.baseValue
+        assertEquals(expected, result.value, lengthDelta(expected), "$a + $b mismatch")
+        assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), result.toKMixedUnitInstance().units)
+    }
+
+    @ParameterizedTest(name = "{0} - {1}")
+    @MethodSource("unitPairs")
+    fun `minus combines every pair of units`(a: KLengthUnit, b: KLengthUnit) {
+        val result = lengthOf(a, 5) - lengthOf(b, 3)
+        val expected = 5.0 * a.baseValue - 3.0 * b.baseValue
+        assertEquals(expected, result.value, lengthDelta(expected), "$a - $b mismatch")
+        assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), result.toKMixedUnitInstance().units)
+    }
+
+    @ParameterizedTest(name = "{0} * {1}")
+    @MethodSource("unitPairs")
+    fun `times combines every pair of units into an area`(a: KLengthUnit, b: KLengthUnit) {
+        val result = lengthOf(a, 5) * lengthOf(b, 3)
+        val expected = (5.0 * a.baseValue) * (3.0 * b.baseValue)
+        assertEquals(expected, result.value, lengthDelta(expected), "$a * $b mismatch")
+        assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 2)), result.units)
+    }
+
+    @ParameterizedTest(name = "{0} / {1}")
+    @MethodSource("unitPairs")
+    fun `div combines every pair of units into a dimensionless ratio`(a: KLengthUnit, b: KLengthUnit) {
+        val result = lengthOf(a, 5) / lengthOf(b, 3)
+        val expected = (5.0 * a.baseValue) / (3.0 * b.baseValue)
+        assertEquals(expected, result.value, lengthDelta(expected), "$a / $b mismatch")
+        assertTrue(result.units.isEmpty(), "$a / $b should be dimensionless")
+    }
+
+    // endregion
+
+    // region comparison matrix (every unit against every other unit)
+
+    @ParameterizedTest(name = "{0} == {1}")
+    @MethodSource("unitPairs")
+    fun `equals holds exactly when normalized values match`(a: KLengthUnit, b: KLengthUnit) {
+        val av = lengthOf(a, 5).value
+        val bv = lengthOf(b, 3).value
+        assertEquals(av == bv, lengthOf(a, 5) == lengthOf(b, 3), "$a == $b mismatch")
+    }
+
+    @ParameterizedTest(name = "{0} != {1}")
+    @MethodSource("unitPairs")
+    fun `not equals is the negation of equals`(a: KLengthUnit, b: KLengthUnit) {
+        val av = lengthOf(a, 5).value
+        val bv = lengthOf(b, 3).value
+        assertEquals(av != bv, lengthOf(a, 5) != lengthOf(b, 3), "$a != $b mismatch")
+    }
+
+    @ParameterizedTest(name = "{0} < {1}")
+    @MethodSource("unitPairs")
+    fun `less than follows normalized values`(a: KLengthUnit, b: KLengthUnit) {
+        val av = lengthOf(a, 5).value
+        val bv = lengthOf(b, 3).value
+        assertEquals(av < bv, lengthOf(a, 5) < lengthOf(b, 3), "$a < $b mismatch")
+    }
+
+    @ParameterizedTest(name = "{0} <= {1}")
+    @MethodSource("unitPairs")
+    fun `less than or equal follows normalized values`(a: KLengthUnit, b: KLengthUnit) {
+        val av = lengthOf(a, 5).value
+        val bv = lengthOf(b, 3).value
+        assertEquals(av <= bv, lengthOf(a, 5) <= lengthOf(b, 3), "$a <= $b mismatch")
+    }
+
+    @ParameterizedTest(name = "{0} > {1}")
+    @MethodSource("unitPairs")
+    fun `greater than follows normalized values`(a: KLengthUnit, b: KLengthUnit) {
+        val av = lengthOf(a, 5).value
+        val bv = lengthOf(b, 3).value
+        assertEquals(av > bv, lengthOf(a, 5) > lengthOf(b, 3), "$a > $b mismatch")
+    }
+
+    @ParameterizedTest(name = "{0} >= {1}")
+    @MethodSource("unitPairs")
+    fun `greater than or equal follows normalized values`(a: KLengthUnit, b: KLengthUnit) {
+        val av = lengthOf(a, 5).value
+        val bv = lengthOf(b, 3).value
+        assertEquals(av >= bv, lengthOf(a, 5) >= lengthOf(b, 3), "$a >= $b mismatch")
+    }
+
+    // endregion
+
+    // region toString matrix (every unit)
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("units")
+    fun `toString default renders the value in the base unit`(unit: KLengthUnit) {
+        val instance = lengthOf(unit, 5)
+        assertEquals("${instance.value} ${KLengthUnit.BASE.symbol}", instance.toString())
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("units")
+    fun `toString with the own unit renders that symbol`(unit: KLengthUnit) {
+        val instance = lengthOf(unit, 5)
+        assertEquals("${instance.valueAs(unit)} ${unit.symbol}", instance.toString(unit))
+    }
+
+    @ParameterizedTest(name = "kilo {0}")
+    @MethodSource("units")
+    fun `toString with a scaled target renders the prefixed symbol`(unit: KLengthUnit) {
+        val instance = lengthOf(unit, 5)
+        val scaled = KUnitPrefix.KILO with unit
+        assertEquals("${instance.valueAs(scaled)} k${unit.symbol}", instance.toString(scaled))
+    }
+
+    // endregion
+
+    // region error cases (representative — mixing exponents)
 
     @Test
-    fun `plus works for every pair of distinct length units`() {
-        val a = 1.miles() + 1.yards()
-        assertEquals(KLengthUnit.MILE.baseValue + KLengthUnit.YARD.baseValue, a.value, 1e-6)
-
-        val b = 1.fathoms() + 1.chains()
-        assertEquals(KLengthUnit.FATHOM.baseValue + KLengthUnit.CHAIN.baseValue, b.value, 1e-9)
-
-        val c = 1.furlongs() + 1.feet()
-        assertEquals(KLengthUnit.FURLONG.baseValue + KLengthUnit.FOOT.baseValue, c.value, 1e-9)
-
-        val d = 1.lightYears() + 1.astronomicalUnits()
-        assertEquals(KLengthUnit.LIGHT_YEAR.baseValue + KLengthUnit.ASTRONOMICAL_UNIT.baseValue, d.value, 1.0)
+    fun `plus fails for different exponents`() {
+        assertFailsWith<IllegalStateException> { 5.hectares + 5.meters }
     }
 
     @Test
-    fun `minus converts between same-group units`() {
-        val result = 1.kilometers() - 500.meters()
-        assertEquals(500.0, result.value, 1e-9)
+    fun `minus fails for different exponents`() {
+        assertFailsWith<IllegalStateException> { 5.hectares - 5.meters }
     }
 
     @Test
-    fun `minus works for two different units`() {
-        val result = 2.miles() - 1.yards()
-        assertEquals(2 * KLengthUnit.MILE.baseValue - KLengthUnit.YARD.baseValue, result.value, 1e-6)
+    fun `equals throws for different exponents`() {
+        assertFailsWith<IllegalStateException> { 5.hectares == 5.meters }
     }
 
     @Test
-    fun `times with KLengthUnitInstance produces area as KMixedUnitInstance`() {
-        val area = 200.meters() * 50.meters()
+    fun `compareTo throws for different exponents`() {
+        assertFailsWith<IllegalStateException> { 5.hectares < 5.meters }
+    }
 
-        assertEquals(10_000.0, area.value, 1e-9)
-        assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 2)), area.units)
+    // endregion
+
+    // region group-specific behaviour retained from the original suite
+
+    @Test
+    fun `construction from non-Double Number types`() {
+        assertEquals(5.0, 5.meters.value, 1e-9)
+        assertEquals(5.0, 5L.meters.value, 1e-9)
+        assertEquals(5.0, 5.0f.meters.value, 1e-9)
+        assertEquals(5.0, 5.0.meters.value, 1e-9)
     }
 
     @Test
-    fun `div with KLengthUnitInstance cancels out to dimensionless KMixedUnitInstance`() {
-        val result = 10.meters() / 2.meters()
-
-        assertEquals(5.0, result.value, 1e-9)
-        assertTrue(result.units.isEmpty())
+    fun `light units are defined via the speed of light`() {
+        assertEquals(299792458.0, 1.lightSeconds.value, 1e-3)
+        // Larger light units are exact multiples of the light-second.
+        assertEquals(60.lightSeconds.value, 1.lightMinutes.value, 1e-3)
+        assertEquals(60.lightMinutes.value, 1.lightHours.value, 1.0)
+        assertEquals(24.lightHours.value, 1.lightDays.value, 1.0)
+        assertEquals(7.lightDays.value, 1.lightWeeks.value, 1.0)
     }
 
     @Test
     fun `times with KMixedUnitInstance delegates to KMixedUnitInstance times`() {
         val speedPerSecond = KMixedUnitInstance(2.0, listOf(KUnitTerm(KLengthUnit.BASE, -1)))
 
-        val result = 10.meters() * speedPerSecond
+        val result = 10.meters * speedPerSecond
 
         assertEquals(20.0, result.value, 1e-9)
         assertTrue(result.units.isEmpty())
@@ -124,103 +267,21 @@ class KLengthUnitInstanceTest {
     fun `div with KMixedUnitInstance delegates to KMixedUnitInstance div`() {
         val time = KMixedUnitInstance(2.0, listOf())
 
-        val result = 10.meters() / time
+        val result = 10.meters / time
 
         assertEquals(5.0, result.value, 1e-9)
         assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), result.units)
     }
 
     @Test
-    fun `equals and not equals`() {
-        assertTrue(1.kilometers() == 1000.meters())
-        assertFalse(1.kilometers() == 999.meters())
-    }
-
-    @Test
-    fun `less than and less than or equal`() {
-        assertTrue(500.meters() < 1.kilometers())
-        assertFalse(1.kilometers() < 1000.meters())
-        assertTrue(1.kilometers() <= 1000.meters())
-        assertTrue(500.meters() <= 1.kilometers())
-        assertFalse(1.kilometers() <= 500.meters())
-    }
-
-    @Test
-    fun `greater than and greater than or equal`() {
-        assertTrue(1.kilometers() > 500.meters())
-        assertFalse(500.meters() > 1.kilometers())
-        assertTrue(1.kilometers() >= 1000.meters())
-        assertTrue(1.kilometers() >= 500.meters())
-        assertFalse(500.meters() >= 1.kilometers())
-    }
-
-    @Test
-    fun `construction from non-Double Number types`() {
-        assertEquals(5.0, 5.meters().value, 1e-9)
-        assertEquals(5.0, 5L.meters().value, 1e-9)
-        assertEquals(5.0, 5.0f.meters().value, 1e-9)
-        assertEquals(5.0, 5.0.meters().value, 1e-9)
-    }
-
-    @Test
-    fun `every generator function round trips through valueAs`() {
-        for ((generator, unit) in lengthUnitGenerators) {
-            val instance = generator(5)
-            assertEquals(5.0 * unit.baseValue, instance.value, instance.value.coerceAtLeast(1.0) * 1e-9,
-                "value mismatch for $unit")
-            assertEquals(5.0, instance.valueAs(unit), 5.0 * 1e-9, "valueAs round trip mismatch for $unit")
-        }
-    }
-
-    @Test
-    fun `light units are defined via the speed of light`() {
-        assertEquals(299792458.0, 1.lightSeconds().value, 1e-3)
-        // Larger light units are exact multiples of the light-second.
-        assertEquals(60.lightSeconds().value, 1.lightMinutes().value, 1e-3)
-        assertEquals(60.lightMinutes().value, 1.lightHours().value, 1.0)
-        assertEquals(24.lightHours().value, 1.lightDays().value, 1.0)
-        assertEquals(7.lightDays().value, 1.lightWeeks().value, 1.0)
-    }
-
-    @Test
-    fun `light unit mixes with another length unit via plus`() {
-        val result = 1.lightSeconds() + 299792458.meters()
-        assertEquals(2.0, result.valueAs(KLengthUnit.LIGHT_SECOND), 1e-6)
-    }
-
-    @Test
-    fun `valueAs converts across units`() {
-        assertEquals(5.0, 5.miles().valueAs(KLengthUnit.MILE), 1e-6)
-        assertEquals(KLengthUnit.MILE.baseValue / KLengthUnit.METER.baseValue, 1.miles().valueAs(KLengthUnit.METER), 1e-6)
-        assertEquals(1.0 / KLengthUnit.MILE.baseValue, 1.meters().valueAs(KLengthUnit.MILE), 1e-9)
-    }
-
-    @Test
     fun `valueAs supports scaled unit targets`() {
-        val d = 5.miles()
+        val d = 5.miles
         assertEquals(d.value / 1000.0, d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER), 1e-9)
     }
 
     @Test
-    fun `toString default uses base unit`() {
-        assertEquals("5.0 m", 5.meters().toString())
-    }
-
-    @Test
-    fun `toString with target unit`() {
-        assertEquals("5.0 mi", 5.miles().toString(KLengthUnit.MILE))
-    }
-
-    @Test
-    fun `toString with scaled target unit`() {
-        val d = 5.miles()
-        val expected = "${d.value / 1000.0} km"
-        assertEquals(expected, d.toString(KUnitPrefix.KILO with KLengthUnit.METER))
-    }
-
-    @Test
     fun `toKMixedUnitInstance and toKLengthUnit round trip`() {
-        val original = 5.miles()
+        val original = 5.miles
 
         val roundTripped = original.toKMixedUnitInstance().toKLengthUnit()
 
@@ -255,29 +316,5 @@ class KLengthUnitInstanceTest {
         assertFailsWith<IllegalStateException> { notPure.toKLengthUnit() }
     }
 
-    @Test
-    fun `equals throws for different exponents`() {
-        assertFailsWith<IllegalStateException> { 5.hectares() == 5.meters() }
-    }
-
-    @Test
-    fun `compareTo throws for different exponents`() {
-        assertFailsWith<IllegalStateException> { 5.hectares() < 5.meters() }
-    }
-
-    @Test
-    fun `every derived unit generator round trips through valueAs`() {
-        for ((generator, derived) in lengthDerivedUnitGenerators) {
-            val instance = generator(5)
-            assertEquals(5.0, instance.valueAs(derived), 5.0 * 1e-6, "valueAs round trip mismatch for $derived")
-        }
-    }
-
-    @Test
-    fun `valueAs and toString support derived unit targets`() {
-        val area = 5.hectares()
-
-        assertEquals(5.0, area.valueAs(KLengthDerivedUnit.HECTARE), 1e-9)
-        assertEquals("5.0 ha", area.toString(KLengthDerivedUnit.HECTARE))
-    }
+    // endregion
 }

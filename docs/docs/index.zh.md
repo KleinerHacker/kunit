@@ -11,7 +11,7 @@
 
 - **类型安全的运算。** 在不兼容的单位组或指数之间进行 `+`、`-` 运算会抛出 `IllegalStateException`，
   而不是悄悄地产生一个错误的数字。
-- **自动换算。** `5.meters() + 3.miles()` 直接可用——两个操作数在内部都会被归一化，因此在组合之前无需手动
+- **自动换算。** `5.meters + 3.miles` 直接可用——两个操作数在内部都会被归一化，因此在组合之前无需手动
   换算单位。
 - **自由的乘法与除法。** 单位之间的乘除 *始终* 被允许，并会自动跟踪结果的物理量纲（指数），例如
   `长度 * 长度` 得到面积。
@@ -56,8 +56,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // 从任意 Number 类型创建纯长度值
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // 运算符：同一组、同一指数内自动换算
 val total = distance + trip          // KLengthUnitInstance，归一化为米
@@ -74,10 +74,10 @@ println(total.valueAs(yards))                         // 例如 23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面积（指数 2）和体积（指数 3）的特殊单位
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -87,7 +87,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0（归一化为米）
 ```

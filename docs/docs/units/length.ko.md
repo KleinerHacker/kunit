@@ -11,23 +11,23 @@
 
 | 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (미터) |
 |---|---|---|---:|---:|
-| 미터 | `KLengthUnit.METER` | `m` | `Number.meters()` | 1.0 |
-| 마일 | `KLengthUnit.MILE` | `mi` | `Number.miles()` | 1609.344 |
-| 해리 | `KLengthUnit.NAUTICAL_MILE` | `nmi` | `Number.nauticalMiles()` | 1852.0 |
-| 야드 | `KLengthUnit.YARD` | `yd` | `Number.yards()` | 0.9144 |
-| 피트 | `KLengthUnit.FOOT` | `ft` | `Number.feet()` | 0.3048 |
-| 인치 | `KLengthUnit.INCH` | `in` | `Number.inches()` | 0.0254 |
-| 패덤 | `KLengthUnit.FATHOM` | `ftm` | `Number.fathoms()` | 1.8288 |
-| 체인 | `KLengthUnit.CHAIN` | `ch` | `Number.chains()` | 20.1168 |
-| 펄롱 | `KLengthUnit.FURLONG` | `fur` | `Number.furlongs()` | 201.168 |
-| 천문단위 | `KLengthUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits()` | 1.495978707e11 |
-| 광초 | `KLengthUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds()` | 299792458.0 |
-| 광분 | `KLengthUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes()` | 1.798754748e10 |
-| 광시 | `KLengthUnit.LIGHT_HOUR` | `lh` | `Number.lightHours()` | 1.0792528488e12 |
-| 광일 | `KLengthUnit.LIGHT_DAY` | `ld` | `Number.lightDays()` | 2.59020683712e13 |
-| 광주 | `KLengthUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks()` | 1.813144785984e14 |
-| 광년 | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears()` | 9.4607304725808e15 |
-| 파섹 | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs()` | 3.0856775814913673e16 |
+| 미터 | `KLengthUnit.METER` | `m` | `Number.meters` | 1.0 |
+| 마일 | `KLengthUnit.MILE` | `mi` | `Number.miles` | 1609.344 |
+| 해리 | `KLengthUnit.NAUTICAL_MILE` | `nmi` | `Number.nauticalMiles` | 1852.0 |
+| 야드 | `KLengthUnit.YARD` | `yd` | `Number.yards` | 0.9144 |
+| 피트 | `KLengthUnit.FOOT` | `ft` | `Number.feet` | 0.3048 |
+| 인치 | `KLengthUnit.INCH` | `in` | `Number.inches` | 0.0254 |
+| 패덤 | `KLengthUnit.FATHOM` | `ftm` | `Number.fathoms` | 1.8288 |
+| 체인 | `KLengthUnit.CHAIN` | `ch` | `Number.chains` | 20.1168 |
+| 펄롱 | `KLengthUnit.FURLONG` | `fur` | `Number.furlongs` | 201.168 |
+| 천문단위 | `KLengthUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits` | 1.495978707e11 |
+| 광초 | `KLengthUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds` | 299792458.0 |
+| 광분 | `KLengthUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes` | 1.798754748e10 |
+| 광시 | `KLengthUnit.LIGHT_HOUR` | `lh` | `Number.lightHours` | 1.0792528488e12 |
+| 광일 | `KLengthUnit.LIGHT_DAY` | `ld` | `Number.lightDays` | 2.59020683712e13 |
+| 광주 | `KLengthUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks` | 1.813144785984e14 |
+| 광년 | `KLengthUnit.LIGHT_YEAR` | `ly` | `Number.lightYears` | 9.4607304725808e15 |
+| 파섹 | `KLengthUnit.PARSEC` | `pc` | `Number.parsecs` | 3.0856775814913673e16 |
 
 위의 모든 단위는 `valueAs`/`toString` 대상이나 접두어 infix 함수의 `unit` 인자로 사용할 수 있는 bare
 `val` 별칭을 가지고 있습니다: `meters`, `miles`, `nauticalMiles`, `yards`, `feet`, `inches`, `fathoms`,
@@ -37,7 +37,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val d = 5.miles()
+val d = 5.miles
 d.value                        // 8046.72 (미터로 정규화됨)
 d.valueAs(KLengthUnit.MILE)    // 5.0 (마일로 다시 읽기)
 d.valueAs(feet)                 // 26400.0
@@ -50,17 +50,17 @@ d.valueAs(nauticalMiles)        // ≈ 4.3452 (해리로 다시 읽기)
 import org.pcsoft.framework.kunit.length.*
 
 // + / - : 같은 그룹, 서로 다른 길이 단위 간 자동 변환
-val a = 1.miles() + 500.meters()   // KLengthUnitInstance, 미터로 정규화됨
-val b = 2.miles() - 800.meters()
+val a = 1.miles + 500.meters   // KLengthUnitInstance, 미터로 정규화됨
+val b = 2.miles - 800.meters
 
 // 비교
-2.miles() > 1.miles()               // true
-1.miles() == 1609.344.meters()      // true (정규화된 값이 같음)
-5.hectares() > 5.meters()           // IllegalStateException 발생 (면적 vs 길이, 지수가 다름)
+2.miles > 1.miles               // true
+1.miles == 1609.344.meters      // true (정규화된 값이 같음)
+5.hectares > 5.meters           // IllegalStateException 발생 (면적 vs 길이, 지수가 다름)
 
 // * / / : 항상 허용되며, 새로운 지수를 가진 KMixedUnitInstance를 생성
-val area = 200.meters() * 50.meters()   // KMixedUnitInstance: value=10000.0, units=[METER^2]
-val lengthAgain = area / 50.meters().toKMixedUnitInstance() // KMixedUnitInstance: value=200.0, units=[METER^1]
+val area = 200.meters * 50.meters   // KMixedUnitInstance: value=10000.0, units=[METER^2]
+val lengthAgain = area / 50.meters.toKMixedUnitInstance() // KMixedUnitInstance: value=200.0, units=[METER^1]
 ```
 
 ### 비교와 동등성
@@ -77,23 +77,23 @@ val lengthAgain = area / 50.meters().toKMixedUnitInstance() // KMixedUnitInstanc
 
 | 특수 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (m²) |
 |---|---:|---:|---:|---:|
-| 아르 | `KLengthDerivedUnit.ARE` | `a` | `Number.ares()` | 100.0 |
-| 헥타르 | `KLengthDerivedUnit.HECTARE` | `ha` | `Number.hectares()` | 10 000.0 |
-| 에이커 | `KLengthDerivedUnit.ACRE` | `ac` | `Number.acres()` | 4046.8564224 |
+| 아르 | `KLengthDerivedUnit.ARE` | `a` | `Number.ares` | 100.0 |
+| 헥타르 | `KLengthDerivedUnit.HECTARE` | `ha` | `Number.hectares` | 10 000.0 |
+| 에이커 | `KLengthDerivedUnit.ACRE` | `ac` | `Number.acres` | 4046.8564224 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val plot = 3.hectares()
+val plot = 3.hectares
 plot.value                                   // 30000.0 (m²)
 plot.valueAs(KLengthDerivedUnit.ARE)          // 300.0
 plot.valueAs(KLengthDerivedUnit.ACRE)         // ≈ 7.4132
 
-val computed = 200.meters() * 50.meters()     // KMixedUnitInstance, units=[METER^2]
+val computed = 200.meters * 50.meters     // KMixedUnitInstance, units=[METER^2]
 computed.toKLengthUnit().valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 
 plot + computed.toKLengthUnit()                // 허용됨: 둘 다 지수 2 (면적)
-plot + 5.meters()                              // IllegalStateException 발생 (면적 vs 길이)
+plot + 5.meters                              // IllegalStateException 발생 (면적 vs 길이)
 ```
 
 ## 지수 3 - 부피
@@ -103,20 +103,20 @@ plot + 5.meters()                              // IllegalStateException 발생 (
 
 | 특수 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (m³) |
 |---|---:|---:|---:|---:|
-| 리터 | `KLengthDerivedUnit.LITER` | `L` | `Number.liters()` | 0.001 |
-| 미국 액량 갤런 | `KLengthDerivedUnit.US_GALLON` | `gal (US)` | `Number.usGallons()` | 0.003785411784 |
-| 영국 갤런 | `KLengthDerivedUnit.IMPERIAL_GALLON` | `gal (UK)` | `Number.imperialGallons()` | 0.00454609 |
-| 미국 액량 온스 | `KLengthDerivedUnit.US_FLUID_OUNCE` | `fl oz` | `Number.usFluidOunces()` | 2.95735295625e-5 |
-| 오일 배럴 | `KLengthDerivedUnit.OIL_BARREL` | `bbl` | `Number.oilBarrels()` | 0.158987294928 |
+| 리터 | `KLengthDerivedUnit.LITER` | `L` | `Number.liters` | 0.001 |
+| 미국 액량 갤런 | `KLengthDerivedUnit.US_GALLON` | `gal (US)` | `Number.usGallons` | 0.003785411784 |
+| 영국 갤런 | `KLengthDerivedUnit.IMPERIAL_GALLON` | `gal (UK)` | `Number.imperialGallons` | 0.00454609 |
+| 미국 액량 온스 | `KLengthDerivedUnit.US_FLUID_OUNCE` | `fl oz` | `Number.usFluidOunces` | 2.95735295625e-5 |
+| 오일 배럴 | `KLengthDerivedUnit.OIL_BARREL` | `bbl` | `Number.oilBarrels` | 0.158987294928 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val tank = 200.liters()
+val tank = 200.liters
 tank.value                                        // 0.2 (m³)
 tank.valueAs(KLengthDerivedUnit.US_GALLON)        // ≈ 52.834
 
-val cube = 2.meters() * 2.meters() * 2.meters()   // KMixedUnitInstance, units=[METER^3]
+val cube = 2.meters * 2.meters * 2.meters   // KMixedUnitInstance, units=[METER^3]
 cube.toKLengthUnit().valueAs(KLengthDerivedUnit.LITER) // 8000.0
 
 tank + cube.toKLengthUnit()                        // 허용됨: 둘 다 지수 3 (부피)
@@ -132,17 +132,17 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-// 생성: "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// 생성: "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 fiveKm.value // 5000.0
 
 // 접두어가 붙은 대상을 사용해 값을 다시 읽기
-val d = 5.miles()
+val d = 5.miles
 d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER)  // 8.04672 (km)
 d.toString(KUnitPrefix.KILO with KLengthUnit.METER) // "8.04672 km"
 
 // 접두어는 파생 단위(면적/부피)와도 결합됨
-val tank = 200.liters()
+val tank = 200.liters
 tank.valueAs(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 200000.0 (mL)
 ```
 
@@ -151,7 +151,7 @@ tank.valueAs(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 200000.0 (mL)
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-5.meters().toString()                        // "5.0 m" (기본 단위 표현)
-5.miles().toString(KLengthUnit.MILE)          // "5.0 mi"
-(200.meters() * 50.meters()).toKLengthUnit().toString(KLengthDerivedUnit.HECTARE) // "1.0 ha"
+5.meters.toString()                        // "5.0 m" (기본 단위 표현)
+5.miles.toString(KLengthUnit.MILE)          // "5.0 mi"
+(200.meters * 50.meters).toKLengthUnit().toString(KLengthDerivedUnit.HECTARE) // "1.0 ha"
 ```

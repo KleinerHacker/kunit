@@ -103,10 +103,10 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
     KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
-## 3. Add creator extension functions
+## 3. Add creator extension properties
 
-Following the `K...UnitExtensions.kt` pattern, add a bare `val` alias plus a `Number` extension function per
-unit, so callers can write `5.kilograms()` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs`
+Following the `K...UnitExtensions.kt` pattern, add a bare `val` alias plus a `Number` extension **property** per
+unit, so callers can write `5.kilograms` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs`
 target:
 
 ```kotlin
@@ -127,16 +127,16 @@ val ounces: KMassUnit = KMassUnit.OUNCE
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
 /** Creates a pure mass value in kilograms from any [Number] type. */
-fun Number.kilograms(): KMassUnitInstance = of(this, KMassUnit.KILOGRAM)
+val Number.kilograms: KMassUnitInstance get() = of(this, KMassUnit.KILOGRAM)
 
 /** Creates a pure mass value in grams. */
-fun Number.grams(): KMassUnitInstance = of(this, KMassUnit.GRAM)
+val Number.grams: KMassUnitInstance get() = of(this, KMassUnit.GRAM)
 
 /** Creates a pure mass value in pounds. */
-fun Number.pounds(): KMassUnitInstance = of(this, KMassUnit.POUND)
+val Number.pounds: KMassUnitInstance get() = of(this, KMassUnit.POUND)
 
 /** Creates a pure mass value in ounces. */
-fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
+val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 ```
 
 That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, SI prefixes (`5 kilo grams`), and
@@ -146,8 +146,8 @@ package and only needs `KMassUnit : KUnit` to work.
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
 
-val a = 500.grams()
-val b = 2.pounds()
+val a = 500.grams
+val b = 2.pounds
 val total = a + b            // KMassUnitInstance, normalized to kilograms
 println(total.valueAs(kilograms))
 println(total.valueAs(grams))
@@ -172,8 +172,8 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // just for illustration
-println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // just for illustration
+println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. Combine with other groups
@@ -187,14 +187,17 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // density = mass / volume
-val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
+val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
 ```
 
 ## 6. Naming and testing checklist
 
 - All public types start with `K` (`KMassUnit`, `KMassUnitInstance`, `KMassDerivedUnit`, ...); creator
-  extension functions and bare `val` aliases (`kilograms()`, `grams`, ...) are exempt and stay
+  extension properties and bare `val` aliases (`kilograms`, `grams`, ...) are exempt and stay
   language-natural.
+- Cover the group with the parameterized cross-matrix test procedure (prefix × unit, unit → unit
+  conversion, one method per operator and per comparison over every unit pair, `toString`) — see the
+  "Parameterized cross-matrix test procedure" section in `CLAUDE.md`.
 - Document every public member in English, in Markdown, with examples where useful - especially operators.
 - Write a full test suite per group, mirroring the structure under `length`:
     - a dedicated test class for the `KUnit` enum values themselves,

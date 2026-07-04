@@ -137,7 +137,7 @@ data class KScaledUnit(val prefix: KUnitPrefix, val unit: KUnit) : KUnitTarget {
  * Example:
  * ```kotlin
  * val km = KUnitPrefix.KILO with KLengthUnit.METER
- * 5.miles().valueAs(km) // ≈ 8.046722 (miles expressed in kilometers)
+ * 5.miles.valueAs(km) // ≈ 8.046722 (miles expressed in kilometers)
  * ```
  */
 infix fun KUnitPrefix.with(unit: KUnit): KScaledUnit = KScaledUnit(this, unit)
@@ -162,7 +162,7 @@ infix fun KUnitPrefix.with(unit: KUnit): KScaledUnit = KScaledUnit(this, unit)
  * Example:
  * ```kotlin
  * val hectare = KDerivedUnit(symbol = "ha", exponent = 2, baseValue = 10_000.0, referenceUnit = KLengthUnit.BASE)
- * val area = 200.meters() * 50.meters() // KMixedUnitInstance, 10 000 m²
+ * val area = 200.meters * 50.meters // KMixedUnitInstance, 10 000 m²
  * area.valueAs(hectare) // 1.0
  * ```
  */
@@ -213,7 +213,7 @@ data class KScaledDerivedUnit<U : KUnit>(val prefix: KUnitPrefix, val derivedUni
  *
  * Example:
  * ```kotlin
- * val volume = 2.meters() * 2.meters() * 2.meters() // 8 m³
+ * val volume = 2.meters * 2.meters * 2.meters // 8 m³
  * volume.valueAs(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 8 000 000.0 (mL)
  * ```
  */

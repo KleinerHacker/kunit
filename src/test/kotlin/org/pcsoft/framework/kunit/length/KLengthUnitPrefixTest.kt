@@ -12,6 +12,11 @@
 
 package org.pcsoft.framework.kunit.length
 
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.KDerivedUnit
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -21,7 +26,7 @@ import kotlin.test.assertEquals
 
 /**
  * The length-group prefix `infix` functions (e.g. `5 kilo meters`), each returning a
- * [KLengthUnitInstance] directly.
+ * [KLengthUnitInstance] directly. All 24 SI prefixes are representable for length.
  */
 private val prefixFunctions: List<Pair<(Number, KLengthUnit) -> KLengthUnitInstance, KUnitPrefix>> = listOf(
     ({ n: Number, u: KLengthUnit -> n quetta u }) to KUnitPrefix.QUETTA,
@@ -50,86 +55,49 @@ private val prefixFunctions: List<Pair<(Number, KLengthUnit) -> KLengthUnitInsta
     ({ n: Number, u: KLengthUnit -> n quecto u }) to KUnitPrefix.QUECTO
 )
 
+private fun applyPrefix(prefix: KUnitPrefix, n: Number, unit: KLengthUnit): KLengthUnitInstance =
+    prefixFunctions.first { it.second == prefix }.first(n, unit)
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KLengthUnitPrefixTest {
 
-    /** Verifies that applying [prefix] via [apply] to 5 meters matches the equivalent unprefixed calculation. */
-    private fun assertPrefixScales(prefix: KUnitPrefix, apply: (Number, KLengthUnit) -> KLengthUnitInstance) {
-        val expected = (5.0 * prefix.factor).meters().value
-        val actual = apply(5, KLengthUnit.METER).value
+    private fun prefixes(): List<Arguments> = prefixFunctions.map { Arguments.of(it.second) }
+
+    private fun prefixUnitPairs(): List<Arguments> =
+        prefixFunctions.flatMap { (_, prefix) -> lengthUnitGenerators.map { (_, unit) -> Arguments.of(prefix, unit) } }
+
+    private fun prefixDerivedPairs(): List<Arguments> =
+        KUnitPrefix.entries.flatMap { prefix -> lengthDerivedUnitGenerators.map { (_, derived) -> Arguments.of(prefix, derived) } }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("prefixes")
+    fun `every prefix scales against the equivalent unprefixed calculation`(prefix: KUnitPrefix) {
+        val expected = (5.0 * prefix.factor).meters.value
+        val actual = applyPrefix(prefix, 5, KLengthUnit.METER).value
         assertEquals(expected, actual, expected.coerceAtLeast(1.0) * 1e-9, "prefix $prefix mismatch")
     }
 
-    @Test
-    fun `quetta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.QUETTA) { n, u -> n quetta u }
+    @ParameterizedTest(name = "{0} {1}")
+    @MethodSource("prefixUnitPairs")
+    fun `every prefix combined with every unit round trips`(prefix: KUnitPrefix, unit: KLengthUnit) {
+        val result = applyPrefix(prefix, 5, unit)
+        val expectedBase = 5.0 * prefix.factor * unit.baseValue
 
-    @Test
-    fun `ronna scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.RONNA) { n, u -> n ronna u }
+        assertEquals(expectedBase, result.value, expectedBase.coerceAtLeast(1.0) * 1e-9,
+            "prefix $prefix with unit $unit mismatch")
+        assertEquals(5.0 * prefix.factor, result.valueAs(unit), (5.0 * prefix.factor).coerceAtLeast(1.0) * 1e-9,
+            "prefix $prefix with unit $unit valueAs mismatch")
+    }
 
-    @Test
-    fun `yotta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.YOTTA) { n, u -> n yotta u }
+    @ParameterizedTest(name = "{0} {1}")
+    @MethodSource("prefixDerivedPairs")
+    fun `every prefix combined with every derived unit round trips`(prefix: KUnitPrefix, derived: KDerivedUnit<KLengthUnit>) {
+        val scaled = prefix with derived
+        // A KMixedUnitInstance whose value is exactly 1 scaled-derived-unit, expressed in the base unit.
+        val instance = KMixedUnitInstance(scaled.baseValue, listOf(KUnitTerm(KLengthUnit.BASE, derived.exponent)))
 
-    @Test
-    fun `zetta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ZETTA) { n, u -> n zetta u }
-
-    @Test
-    fun `exa scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.EXA) { n, u -> n exa u }
-
-    @Test
-    fun `peta scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.PETA) { n, u -> n peta u }
-
-    @Test
-    fun `tera scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.TERA) { n, u -> n tera u }
-
-    @Test
-    fun `giga scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.GIGA) { n, u -> n giga u }
-
-    @Test
-    fun `mega scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MEGA) { n, u -> n mega u }
-
-    @Test
-    fun `kilo scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.KILO) { n, u -> n kilo u }
-
-    @Test
-    fun `hecto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.HECTO) { n, u -> n hecto u }
-
-    @Test
-    fun `deca scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.DECA) { n, u -> n deca u }
-
-    @Test
-    fun `deci scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.DECI) { n, u -> n deci u }
-
-    @Test
-    fun `centi scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.CENTI) { n, u -> n centi u }
-
-    @Test
-    fun `milli scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MILLI) { n, u -> n milli u }
-
-    @Test
-    fun `micro scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.MICRO) { n, u -> n micro u }
-
-    @Test
-    fun `nano scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.NANO) { n, u -> n nano u }
-
-    @Test
-    fun `pico scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.PICO) { n, u -> n pico u }
-
-    @Test
-    fun `femto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.FEMTO) { n, u -> n femto u }
-
-    @Test
-    fun `atto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ATTO) { n, u -> n atto u }
-
-    @Test
-    fun `zepto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.ZEPTO) { n, u -> n zepto u }
-
-    @Test
-    fun `yocto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.YOCTO) { n, u -> n yocto u }
-
-    @Test
-    fun `ronto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.RONTO) { n, u -> n ronto u }
-
-    @Test
-    fun `quecto scales against the equivalent unprefixed calculation`() = assertPrefixScales(KUnitPrefix.QUECTO) { n, u -> n quecto u }
+        assertEquals(1.0, instance.valueAs(scaled), 1e-6, "prefix $prefix with derived unit $derived mismatch")
+    }
 
     @Test
     fun `prefix infix returns a KLengthUnitInstance directly`() {
@@ -138,35 +106,5 @@ class KLengthUnitPrefixTest {
         assertEquals(5000.0, km.value, 1e-9)
         assertEquals(5.0, km.valueAs(KUnitPrefix.KILO with KLengthUnit.METER), 1e-9)
         assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), km.toKMixedUnitInstance().units)
-    }
-
-    @Test
-    fun `every length unit combined with every prefix round trips`() {
-        for ((applyPrefix, prefix) in prefixFunctions) {
-            for ((_, unit) in lengthUnitGenerators) {
-                val result = applyPrefix(5, unit)
-                val expectedBase = 5.0 * prefix.factor * unit.baseValue
-
-                assertEquals(expectedBase, result.value, expectedBase.coerceAtLeast(1.0) * 1e-9,
-                    "prefix $prefix with unit $unit mismatch")
-                assertEquals(5.0 * prefix.factor, result.valueAs(unit), (5.0 * prefix.factor).coerceAtLeast(1.0) * 1e-9,
-                    "prefix $prefix with unit $unit valueAs mismatch")
-            }
-        }
-    }
-
-    @Test
-    fun `every derived unit combined with every prefix round trips`() {
-        for (prefix in KUnitPrefix.entries) {
-            for ((_, derived) in lengthDerivedUnitGenerators) {
-                val scaled = prefix with derived
-                // A KMixedUnitInstance whose value is exactly 1 scaled-derived-unit, expressed in the base unit.
-                val instance = KMixedUnitInstance(scaled.baseValue, listOf(KUnitTerm(KLengthUnit.BASE, derived.exponent)))
-
-                val convertedBack = instance.valueAs(scaled)
-
-                assertEquals(1.0, convertedBack, 1e-6, "prefix $prefix with derived unit $derived mismatch")
-            }
-        }
     }
 }

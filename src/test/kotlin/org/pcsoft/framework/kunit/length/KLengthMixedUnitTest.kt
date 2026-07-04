@@ -19,13 +19,15 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-private fun Number.seconds(): KMixedUnitInstance = KMixedUnitInstance(toDouble(), listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
+// Test-local helper: a time term as a raw KMixedUnitInstance (not the time-group creator), so that
+// `length / this` exercises KLengthUnitInstance.div(KMixedUnitInstance).
+private val Number.seconds: KMixedUnitInstance get() = KMixedUnitInstance(toDouble(), listOf(KUnitTerm(KTimeUnit.SECOND, 1)))
 
 class KLengthMixedUnitTest {
 
     @Test
     fun `dividing a length by a mixed unit produces speed`() {
-        val speed = 10.meters() / 2.seconds()
+        val speed = 10.meters / 2.seconds
 
         assertEquals(5.0, speed.value, 1e-9)
         assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.SECOND, -1)), speed.units.toSet())
@@ -35,7 +37,7 @@ class KLengthMixedUnitTest {
     fun `multiplying a length with a mixed unit`() {
         val perSecond = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.SECOND, -1)))
 
-        val speed = 10.meters() * perSecond
+        val speed = 10.meters * perSecond
 
         assertEquals(20.0, speed.value, 1e-9)
         assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.SECOND, -1)), speed.units.toSet())
@@ -43,8 +45,8 @@ class KLengthMixedUnitTest {
 
     @Test
     fun `multiplying speed back by time converts back to a pure length`() {
-        val speed = 10.meters() / 2.seconds() // 5 m/s
-        val time = 2.seconds()
+        val speed = 10.meters / 2.seconds // 5 m/s
+        val time = 2.seconds
 
         val distance = speed * time
 
@@ -53,7 +55,7 @@ class KLengthMixedUnitTest {
 
     @Test
     fun `toKLengthUnit throws for an instance that is not a pure length`() {
-        val speed = 10.meters() / 2.seconds()
+        val speed = 10.meters / 2.seconds
 
         assertFailsWith<IllegalStateException> { speed.toKLengthUnit() }
     }

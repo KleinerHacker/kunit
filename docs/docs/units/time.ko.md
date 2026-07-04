@@ -17,10 +17,10 @@
 
 | 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (초) |
 |---|---|---|---:|---:|
-| 초 | `KTimeUnit.SECOND` | `s` | `Number.seconds()` | 1.0 |
-| 분 | `KTimeUnit.MINUTE` | `min` | `Number.minutes()` | 60.0 |
-| 시간 | `KTimeUnit.HOUR` | `h` | `Number.hours()` | 3600.0 |
-| 일 | `KTimeUnit.DAY` | `d` | `Number.days()` | 86 400.0 |
+| 초 | `KTimeUnit.SECOND` | `s` | `Number.seconds` | 1.0 |
+| 분 | `KTimeUnit.MINUTE` | `min` | `Number.minutes` | 60.0 |
+| 시간 | `KTimeUnit.HOUR` | `h` | `Number.hours` | 3600.0 |
+| 일 | `KTimeUnit.DAY` | `d` | `Number.days` | 86 400.0 |
 
 물리적 시간 척도만 모델링합니다. 달력 기반 단위(주, 년)는 고정된 물리량이 아니라 달력에 의해 정의되므로
 의도적으로 제외했습니다.
@@ -34,7 +34,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.time.*
 
-val t = 2.hours()
+val t = 2.hours
 t.value                      // 7200.0 (초로 정규화됨)
 t.valueAs(KTimeUnit.HOUR)    // 2.0 (시간으로 다시 읽기)
 t.valueAs(minutes)           // 120.0
@@ -46,16 +46,16 @@ t.valueAs(minutes)           // 120.0
 import org.pcsoft.framework.kunit.time.*
 
 // + / - : 같은 그룹, 서로 다른 시간 단위 간 자동 변환 (정확한 Duration 산술)
-val a = 1.hours() + 30.minutes()   // KTimeUnitInstance, 초로 정규화됨 (5400.0)
-val b = 2.hours() - 30.minutes()
+val a = 1.hours + 30.minutes   // KTimeUnitInstance, 초로 정규화됨 (5400.0)
+val b = 2.hours - 30.minutes
 
 // 비교
-2.hours() > 90.minutes()            // true
-1.hours() == 60.minutes()           // true (정규화된 값이 같음)
+2.hours > 90.minutes            // true
+1.hours == 60.minutes           // true (정규화된 값이 같음)
 
 // * / / : 항상 허용되며, 새로운 지수를 가진 KMixedUnitInstance를 생성
-val secondsSquared = 3.seconds() * 4.seconds()   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
-val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.0, 무차원
+val secondsSquared = 3.seconds * 4.seconds   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
+val ratio = 10.seconds / 2.seconds           // KMixedUnitInstance: value=5.0, 무차원
 ```
 
 ## 비교와 동등성
@@ -73,7 +73,7 @@ val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.
 import java.time.Duration
 import org.pcsoft.framework.kunit.time.*
 
-val t = 90.minutes()
+val t = 90.minutes
 t.toDuration()                       // PT1H30M
 Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
@@ -84,7 +84,7 @@ t.negated().isNegative()               // true
 // 전달된 조회 메서드는 그대로 통과
 t.toHours()      // 1
 t.toMinutesPart() // 30
-t.dividedBy(30.minutes()) // 3
+t.dividedBy(30.minutes) // 3
 ```
 
 ## SI 접두어
@@ -103,7 +103,7 @@ val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (초)
 
 // 접두어가 붙은 대상을 사용해 값을 다시 읽기
-val t = 2.hours()
+val t = 2.hours
 t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND)  // 7 200 000.0 (ms)
 t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```
@@ -120,9 +120,9 @@ t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```kotlin
 import org.pcsoft.framework.kunit.time.*
 
-2.hours().toString()               // "7200.0 s" (기본 단위 표현)
-2.hours().toString(KTimeUnit.HOUR) // "2.0 h"
-2.hours().toString(minutes)        // "120.0 min"
+2.hours.toString()               // "7200.0 s" (기본 단위 표현)
+2.hours.toString(KTimeUnit.HOUR) // "2.0 h"
+2.hours.toString(minutes)        // "120.0 min"
 ```
 
 ## 다른 단위와의 혼합
@@ -133,10 +133,10 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters() / 1.seconds().toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
+val speed = 10.meters / 1.seconds.toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // 속도에 시간을 다시 곱하면 순수한 길이를 복원
-val distance = speed * 2.seconds().toKMixedUnitInstance()
+val distance = speed * 2.seconds.toKMixedUnitInstance()
 distance.toKLengthUnit().value // 20.0
 ```

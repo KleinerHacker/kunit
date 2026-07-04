@@ -26,7 +26,7 @@ class KTimeMixedUnitTest {
 
     @Test
     fun `dividing a length by a time produces speed`() {
-        val speed = 10.meters() / 2.seconds().toKMixedUnitInstance()
+        val speed = 10.meters / 2.seconds.toKMixedUnitInstance()
 
         assertEquals(5.0, speed.value, 1e-9)
         assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.SECOND, -1)), speed.units.toSet())
@@ -34,7 +34,7 @@ class KTimeMixedUnitTest {
 
     @Test
     fun `speed converts to kilometers per hour`() {
-        val speed = 10.meters() / 1.seconds().toKMixedUnitInstance() // 10 m/s
+        val speed = 10.meters / 1.seconds.toKMixedUnitInstance() // 10 m/s
 
         val kmh = speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)
 
@@ -44,8 +44,8 @@ class KTimeMixedUnitTest {
 
     @Test
     fun `multiplying speed back by time recovers a pure length`() {
-        val speed = 10.meters() / 2.seconds().toKMixedUnitInstance() // 5 m/s
-        val time = 2.seconds()
+        val speed = 10.meters / 2.seconds.toKMixedUnitInstance() // 5 m/s
+        val time = 2.seconds
 
         val distance = speed * time.toKMixedUnitInstance()
 
@@ -54,7 +54,7 @@ class KTimeMixedUnitTest {
 
     @Test
     fun `dividing a length by a time and multiplying back is not a pure time`() {
-        val speed = 10.meters() / 2.seconds().toKMixedUnitInstance()
+        val speed = 10.meters / 2.seconds.toKMixedUnitInstance()
 
         assertFailsWith<IllegalStateException> { speed.toKTimeUnit() }
     }

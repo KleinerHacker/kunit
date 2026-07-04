@@ -39,7 +39,8 @@
   future wrapper) is strictly immutable - only `val` state, no mutable fields; every operator/conversion
   returns a **new** instance
 * **Creation invariant**: the "pure" wrapper constructors are `internal`. Concrete units may **only** be
-  created via number-extension creators (e.g. `5.meters()`, `2.hours()`), the group prefix `infix`
+  created via number-extension creator **properties** (e.g. `5.meters`, `2.hours` - `val Number.meters`,
+  not a function), the group prefix `infix`
   constructors (e.g. `5 kilo meters`), operator results, or the conversion extensions
   (`KMixedUnitInstance.toXxxUnit()`, `Duration.toKTimeUnit()`). A wrapper must
   **never** be constructed directly from a `KMixedUnitInstance` by callers - the only `KMixedUnitInstance`→
@@ -52,7 +53,7 @@
     in `KLengthUnitPrefix.kt`, `Number.kilo(KTimeUnit): KTimeUnitInstance` in `KTimeUnitPrefix.kt`). Each
     returns that group's concrete "pure" unit **directly** (`5 kilo meters` is a `KLengthUnitInstance`, not
     an intermediate) - this is the **preferred** construction form. `5 kilo meters` is exactly equivalent to
-    `5000.meters()`.
+    `5000.meters`.
     * Rationale: the wrapper classes live in the sub-packages, so only the group package can build its
       concrete wrapper. Returning the concrete type (rather than a group-agnostic intermediate that the
       caller must convert with `toXxxUnit()`) keeps the call site free of boilerplate. The cost is that the
@@ -70,7 +71,7 @@
   "raw" representation of an area) - they are purely additional, group- and exponent-bound conversion targets
   for input/output, generic over the referenced unit type (compile-time group safety), combinable analogously
   to the prefixes
-* Creation (only constructor and creator extension functions) of `KMixedUnitInstance`/the wrapper classes is possible
+* Creation (only constructor and creator extension properties) of `KMixedUnitInstance`/the wrapper classes is possible
   from any `Number` type (`Int`, `Long`, `Float`, `Double`, ...), not only `Double`; internally it is always
   normalized to `Double`. All outputs (value, conversions, text representation) are, without exception, `Double`.
   Operators and comparison operators, on the other hand, **never** work directly with raw `Number` values - only
@@ -88,7 +89,7 @@
   root package (`KUnit`, `KMixedUnitInstance`, `KUnitMeasurable`, `KUnitInstance`, `KUnitPrefix`,
   `KDerivedUnit`, ...) just as
   in every sub-package (e.g. `KLengthUnit`, `KLengthUnitInstance`, `KLengthDerivedUnit` in `length`)
-* Extension functions and bare `val` aliases (DSL vocabulary such as `meters()`, `kilo`, `meters`) are
+* Extension properties/functions and bare `val` aliases (DSL vocabulary such as the `meters` creator property, `kilo`, and the `meters` unit alias) are
   exempt from this rule - they remain named in a language-natural way
 
 # Implementation
@@ -196,6 +197,32 @@
     calculates to this unit, or from the unit to another "pure" unit
 
 Fundamentally, all tests verify the correctness of the values and calculations.
+
+### Parameterized cross-matrix test procedure (mandatory for every unit group)
+
+Every unit group (and the mixed unit) is covered by **real parameterized tests** — JUnit Jupiter
+`@ParameterizedTest` with `@MethodSource` (the `junit-jupiter-params` dependency), the test class
+annotated `@TestInstance(TestInstance.Lifecycle.PER_CLASS)` so the `@MethodSource` provider methods
+can be non-static instance methods. Assertions stay `kotlin.test.*` with explicit deltas (a relative
+tolerance for the wide magnitude span); instances are built through the group's creator **properties**
+via a shared `internal val xxxUnitGenerators: List<Pair<(Number) -> KXxxUnitInstance, KXxxUnit>>` list
+and a `xxxOf(unit, n)` helper. For each new group provide, each as its **own** parameterized method:
+
+* **Prefix × unit** — every SI prefix combined with every unit of the group (construction +
+  back-conversion round trip), **plus** one standalone test per individual prefix (all 24). For
+  `Duration`-backed groups (e.g. time) restrict the prefix × unit matrix to the representable band and
+  apply the standalone tests to a `1 / factor` count so every prefix stays representable.
+* **Conversion matrix** — every unit converted into every other unit of the same group (`valueAs`),
+  checked against `n * from.baseValue / to.baseValue`.
+* **Operator matrix** — one parameterized method **per operator** (`+`, `-`, `*`, `/`), each covering
+  every unit against every other unit of the group (value + resulting exponent/`units` verified).
+* **Comparison matrix** — one parameterized method **per comparison operator** (`==`, `!=`, `<`, `<=`,
+  `>`, `>=`), each covering every unit against every other unit, expectations derived from the
+  normalized base values. Plus representative `IllegalStateException` cases (e.g. mixing exponents).
+* **`toString`** — `toString()` (default/base unit) and `toString(target)` for every unit, including a
+  scaled (prefixed) target and, where applicable, a derived-unit target.
+* The same matrices apply to the group's **derived units**, and the mixed unit is exercised with a
+  **cross-group** matrix (every unit of one group against every unit of another, e.g. length × time).
 
 ## Implementation
 

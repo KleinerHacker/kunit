@@ -64,7 +64,7 @@ mkdocs build
 * **`KUnitPrefix`** —— 根包中的泛型枚举，包含完整的 SI 词头表（Quetta/Q 到 Quecto/q）。
   词头不是 `KUnit` 本身的一部分，仅在读写数值时才有意义，通过每组各自的 `infix` 函数
   （例如 `5 kilo meters`）组合，直接返回该组的具体单位（`5 kilo meters` 即 `KLengthUnitInstance`，
-  等价于 `5000.meters()`）。
+  等价于 `5000.meters`）。
 * **特殊单位**（`KDerivedUnit` / `KScaledDerivedUnit`）—— 具有自身名称/符号的、绑定到组与指数的
   附加换算目标（例如 面积的公顷、体积的升），是对基本机制的补充而非替代。
 
@@ -182,8 +182,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // 从任意 Number 类型创建纯长度值
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // 运算符：在同一组和指数内自动换算
 val total = distance + trip          // KLengthUnitInstance，归一化为米
@@ -200,10 +200,10 @@ println(total.valueAs(yards))         // 例如 23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面积（指数 2）和体积（指数 3）的特殊单位
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -213,7 +213,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0（归一化为米）
 ```

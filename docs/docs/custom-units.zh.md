@@ -104,7 +104,7 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 ## 3. 添加创建者扩展函数
 
 遵循 `K...UnitExtensions.kt` 的模式，为每个单位添加一个裸 `val` 别名以及一个 `Number` 扩展函数，这样
-调用方就可以写 `5.kilograms()` 或 `1 kilo grams`，也可以把 `kilograms` 作为纯粹的 `valueAs` 目标传入：
+调用方就可以写 `5.kilograms` 或 `1 kilo grams`，也可以把 `kilograms` 作为纯粹的 `valueAs` 目标传入：
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -124,16 +124,16 @@ val ounces: KMassUnit = KMassUnit.OUNCE
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
 /** 从任意 [Number] 类型创建以千克为单位的纯质量值。 */
-fun Number.kilograms(): KMassUnitInstance = of(this, KMassUnit.KILOGRAM)
+val Number.kilograms: KMassUnitInstance get() = of(this, KMassUnit.KILOGRAM)
 
 /** 创建以克为单位的纯质量值。 */
-fun Number.grams(): KMassUnitInstance = of(this, KMassUnit.GRAM)
+val Number.grams: KMassUnitInstance get() = of(this, KMassUnit.GRAM)
 
 /** 创建以磅为单位的纯质量值。 */
-fun Number.pounds(): KMassUnitInstance = of(this, KMassUnit.POUND)
+val Number.pounds: KMassUnitInstance get() = of(this, KMassUnit.POUND)
 
 /** 创建以盎司为单位的纯质量值。 */
-fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
+val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 ```
 
 到这里就完成了——由于所有逻辑都位于通用的根包中，只需要 `KMassUnit : KUnit` 即可工作，你已经免费获得了
@@ -143,8 +143,8 @@ fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
 
-val a = 500.grams()
-val b = 2.pounds()
+val a = 500.grams
+val b = 2.pounds
 val total = a + b            // KMassUnitInstance，归一化为千克
 println(total.valueAs(kilograms))
 println(total.valueAs(grams))
@@ -169,8 +169,8 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // 仅作说明用
-println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 仅作说明用
+println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. 与其他组结合
@@ -183,7 +183,7 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 密度 = 质量 / 体积
-val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
+val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
 ```
 
 ## 6. 命名与测试检查清单

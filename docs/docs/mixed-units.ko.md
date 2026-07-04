@@ -24,12 +24,12 @@ class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val d = 5.meters()
+val d = 5.meters
 val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
 !!! note
-    아래 예시 중 `seconds()`/`TimeUnit`을 참조하는 부분은 "시간" 단위 그룹이 길이와 결합될 때의 모습을
+    아래 예시 중 `seconds`/`TimeUnit`을 참조하는 부분은 "시간" 단위 그룹이 길이와 결합될 때의 모습을
     보여주기 위한 것입니다 - kunit은 현재 `length` 그룹만 제공합니다([미리 정의된 단위](units/length.md)
     참고). 직접 추가하려면 [사용자 정의 단위 추가](custom-units.md)를 따르세요.
 
@@ -46,8 +46,8 @@ val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[ME
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 10.meters().toKMixedUnitInstance()   // units=[METER^1]
-val width = 4.meters().toKMixedUnitInstance()       // units=[METER^1]
+val distance = 10.meters.toKMixedUnitInstance()   // units=[METER^1]
+val width = 4.meters.toKMixedUnitInstance()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
@@ -58,8 +58,8 @@ val backToLength = area / width                 // value=10.0, units=[METER^1]
 
 ```kotlin
 // "시간" 단위 그룹이 존재한다고 가정 (사용자 정의 단위 추가 문서의 패턴을 따름):
-val distance = 100.meters().toKMixedUnitInstance()
-val time = 10.seconds().toKMixedUnitInstance()
+val distance = 100.meters.toKMixedUnitInstance()
+val time = 10.seconds.toKMixedUnitInstance()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
@@ -113,12 +113,12 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters().toKMixedUnitInstance() / 1.seconds().toKMixedUnitInstance()
+val speed = 10.meters.toKMixedUnitInstance() / 1.seconds.toKMixedUnitInstance()
 
 speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
 
-val area = 200.meters().toKMixedUnitInstance() * 50.meters().toKMixedUnitInstance()
+val area = 200.meters.toKMixedUnitInstance() * 50.meters.toKMixedUnitInstance()
 area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```
 
@@ -133,7 +133,7 @@ area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 100.meters()                 // KLengthUnitInstance
+val distance = 100.meters                 // KLengthUnitInstance
 val mixed = distance.toKMixedUnitInstance()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
@@ -147,11 +147,11 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters() / 2.seconds()          // KMixedUnitInstance (시간 그룹이 존재한다고 가정)
-val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds() // units=[METER^1]
+val speed = 10.meters / 2.seconds          // KMixedUnitInstance (시간 그룹이 존재한다고 가정)
+val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds // units=[METER^1]
 distanceAgain.toKLengthUnit().value             // 10.0
 
-val area = 200.meters() * 50.meters()           // units=[METER^2]
+val area = 200.meters * 50.meters           // units=[METER^2]
 area.toKLengthUnit().value                        // 10000.0 (면적, 지수 2)
 ```
 

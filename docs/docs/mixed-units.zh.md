@@ -24,12 +24,12 @@ class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val d = 5.meters()
+val d = 5.meters
 val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
 !!! note
-    下面示例中引用 `seconds()`/`TimeUnit` 的部分仅用于说明"时间"单位组与长度组合时的样子——kunit 目前
+    下面示例中引用 `seconds`/`TimeUnit` 的部分仅用于说明"时间"单位组与长度组合时的样子——kunit 目前
     只提供 `length` 组（参见[预定义单位](units/length.md)）。要自行添加，请参阅
     [添加自定义单位](custom-units.md)。
 
@@ -44,8 +44,8 @@ val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[ME
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 10.meters().toKMixedUnitInstance()   // units=[METER^1]
-val width = 4.meters().toKMixedUnitInstance()       // units=[METER^1]
+val distance = 10.meters.toKMixedUnitInstance()   // units=[METER^1]
+val width = 4.meters.toKMixedUnitInstance()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
@@ -55,8 +55,8 @@ val backToLength = area / width                 // value=10.0, units=[METER^1]
 
 ```kotlin
 // 假设已按照《添加自定义单位》中的模式存在一个"时间"单位组：
-val distance = 100.meters().toKMixedUnitInstance()
-val time = 10.seconds().toKMixedUnitInstance()
+val distance = 100.meters.toKMixedUnitInstance()
+val time = 10.seconds.toKMixedUnitInstance()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
@@ -109,12 +109,12 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters().toKMixedUnitInstance() / 1.seconds().toKMixedUnitInstance()
+val speed = 10.meters.toKMixedUnitInstance() / 1.seconds.toKMixedUnitInstance()
 
 speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
 
-val area = 200.meters().toKMixedUnitInstance() * 50.meters().toKMixedUnitInstance()
+val area = 200.meters.toKMixedUnitInstance() * 50.meters.toKMixedUnitInstance()
 area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```
 
@@ -128,7 +128,7 @@ area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 100.meters()                 // KLengthUnitInstance
+val distance = 100.meters                 // KLengthUnitInstance
 val mixed = distance.toKMixedUnitInstance()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
@@ -142,11 +142,11 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters() / 2.seconds()          // KMixedUnitInstance（假设时间组存在）
-val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds() // units=[METER^1]
+val speed = 10.meters / 2.seconds          // KMixedUnitInstance（假设时间组存在）
+val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds // units=[METER^1]
 distanceAgain.toKLengthUnit().value             // 10.0
 
-val area = 200.meters() * 50.meters()           // units=[METER^2]
+val area = 200.meters * 50.meters           // units=[METER^2]
 area.toKLengthUnit().value                        // 10000.0（面积，指数为2）
 ```
 

@@ -25,12 +25,12 @@ class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val d = 5.meters()
+val d = 5.meters
 val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
 !!! note
-    以下の例で `seconds()`/`TimeUnit` を参照している部分は、「時間」単位グループが長さと組み合わされた
+    以下の例で `seconds`/`TimeUnit` を参照している部分は、「時間」単位グループが長さと組み合わされた
     場合の姿を示すためのものです - kunit は現在 `length` グループのみを提供しています
     ([定義済み単位](units/length.md) を参照)。自分で追加するには
     [カスタム単位の追加](custom-units.md) に従ってください。
@@ -48,8 +48,8 @@ val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[ME
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 10.meters().toKMixedUnitInstance()   // units=[METER^1]
-val width = 4.meters().toKMixedUnitInstance()       // units=[METER^1]
+val distance = 10.meters.toKMixedUnitInstance()   // units=[METER^1]
+val width = 4.meters.toKMixedUnitInstance()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
@@ -60,8 +60,8 @@ val backToLength = area / width                 // value=10.0, units=[METER^1]
 
 ```kotlin
 // 「カスタム単位の追加」のパターンに従って「時間」単位グループが存在すると仮定:
-val distance = 100.meters().toKMixedUnitInstance()
-val time = 10.seconds().toKMixedUnitInstance()
+val distance = 100.meters.toKMixedUnitInstance()
+val time = 10.seconds.toKMixedUnitInstance()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
@@ -116,12 +116,12 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters().toKMixedUnitInstance() / 1.seconds().toKMixedUnitInstance()
+val speed = 10.meters.toKMixedUnitInstance() / 1.seconds.toKMixedUnitInstance()
 
 speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
 
-val area = 200.meters().toKMixedUnitInstance() * 50.meters().toKMixedUnitInstance()
+val area = 200.meters.toKMixedUnitInstance() * 50.meters.toKMixedUnitInstance()
 area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```
 
@@ -136,7 +136,7 @@ area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 100.meters()                 // KLengthUnitInstance
+val distance = 100.meters                 // KLengthUnitInstance
 val mixed = distance.toKMixedUnitInstance()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
@@ -150,11 +150,11 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters() / 2.seconds()          // KMixedUnitInstance(時間グループが存在すると仮定)
-val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds() // units=[METER^1]
+val speed = 10.meters / 2.seconds          // KMixedUnitInstance(時間グループが存在すると仮定)
+val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds // units=[METER^1]
 distanceAgain.toKLengthUnit().value             // 10.0
 
-val area = 200.meters() * 50.meters()           // units=[METER^2]
+val area = 200.meters * 50.meters           // units=[METER^2]
 area.toKLengthUnit().value                        // 10000.0(面積、指数2)
 ```
 

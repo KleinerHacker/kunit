@@ -36,18 +36,18 @@ private fun of(value: Number, unit: KTimeUnit): KTimeUnitInstance = timeUnitInst
  *
  * Example:
  * ```kotlin
- * 5.seconds().value   // 5.0
- * 5L.seconds().value  // 5.0
- * 5.0f.seconds().value // 5.0
+ * 5.seconds.value   // 5.0
+ * 5L.seconds.value  // 5.0
+ * 5.0f.seconds.value // 5.0
  * ```
  */
-fun Number.seconds(): KTimeUnitInstance = of(this, KTimeUnit.SECOND)
+val Number.seconds: KTimeUnitInstance get() = of(this, KTimeUnit.SECOND)
 
-/** Creates a pure time value in minutes. Example: `2.minutes().value // 120.0` (normalized to seconds). */
-fun Number.minutes(): KTimeUnitInstance = of(this, KTimeUnit.MINUTE)
+/** Creates a pure time value in minutes. Example: `2.minutes.value // 120.0` (normalized to seconds). */
+val Number.minutes: KTimeUnitInstance get() = of(this, KTimeUnit.MINUTE)
 
-/** Creates a pure time value in hours. Example: `2.hours().value // 7200.0` (normalized to seconds). */
-fun Number.hours(): KTimeUnitInstance = of(this, KTimeUnit.HOUR)
+/** Creates a pure time value in hours. Example: `2.hours.value // 7200.0` (normalized to seconds). */
+val Number.hours: KTimeUnitInstance get() = of(this, KTimeUnit.HOUR)
 
-/** Creates a pure time value in days. Example: `1.days().value // 86400.0` (normalized to seconds). */
-fun Number.days(): KTimeUnitInstance = of(this, KTimeUnit.DAY)
+/** Creates a pure time value in days. Example: `1.days.value // 86400.0` (normalized to seconds). */
+val Number.days: KTimeUnitInstance get() = of(this, KTimeUnit.DAY)

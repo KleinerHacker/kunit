@@ -26,7 +26,7 @@ Every "pure" unit exposes a `toKMixedUnitInstance()` extension to convert to thi
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val d = 5.meters()
+val d = 5.meters
 val mixed = d.toKMixedUnitInstance() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
@@ -43,8 +43,8 @@ multiplying/dividing units is always physically meaningful.
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 10.meters().toKMixedUnitInstance()   // units=[METER^1]
-val width = 4.meters().toKMixedUnitInstance()       // units=[METER^1]
+val distance = 10.meters.toKMixedUnitInstance()   // units=[METER^1]
+val width = 4.meters.toKMixedUnitInstance()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
@@ -55,8 +55,8 @@ produces a genuinely mixed unit:
 
 ```kotlin
 // Once a "time" unit group exists, following the pattern in "Adding Custom Units":
-val distance = 100.meters().toKMixedUnitInstance()
-val time = 10.seconds().toKMixedUnitInstance()
+val distance = 100.meters.toKMixedUnitInstance()
+val time = 10.seconds.toKMixedUnitInstance()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
@@ -102,7 +102,7 @@ a.hasSameUnits(b) // compares the (unit -> exponent) signature, order-independen
 ```
 
 !!! note
-    The examples above and below that reference `seconds()`/`TimeUnit` illustrate what a **second** unit
+    The examples above and below that reference `seconds`/`TimeUnit` illustrate what a **second** unit
     group would look like combined with length - kunit currently ships only the `length` group (see
     [Predefined Units](units/length.md)). Follow [Adding Custom Units](custom-units.md) to add your own.
 
@@ -117,12 +117,12 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters().toKMixedUnitInstance() / 1.seconds().toKMixedUnitInstance()
+val speed = 10.meters.toKMixedUnitInstance() / 1.seconds.toKMixedUnitInstance()
 
 speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
 
-val area = 200.meters().toKMixedUnitInstance() * 50.meters().toKMixedUnitInstance()
+val area = 200.meters.toKMixedUnitInstance() * 50.meters.toKMixedUnitInstance()
 area.valueAs(KLengthDerivedUnit.HECTARE) // 1.0
 ```
 
@@ -137,7 +137,7 @@ Every pure unit wrapper class supports `*`/`/` directly against a `KMixedUnitIns
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val distance = 100.meters()                 // KLengthUnitInstance
+val distance = 100.meters                 // KLengthUnitInstance
 val mixed = distance.toKMixedUnitInstance()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
@@ -151,11 +151,11 @@ into that group's wrapper class via the group-specific `toXxxUnit()` extension (
 ```kotlin
 import org.pcsoft.framework.kunit.length.*
 
-val speed = 10.meters() / 2.seconds()          // KMixedUnitInstance (once time exists)
-val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds() // units=[METER^1]
+val speed = 10.meters / 2.seconds          // KMixedUnitInstance (once time exists)
+val distanceAgain = speed.toKMixedUnitInstance() * 2.seconds // units=[METER^1]
 distanceAgain.toKLengthUnit().value             // 10.0
 
-val area = 200.meters() * 50.meters()           // units=[METER^2]
+val area = 200.meters * 50.meters           // units=[METER^2]
 area.toKLengthUnit().value                        // 10000.0 (an area, exponent 2)
 ```
 

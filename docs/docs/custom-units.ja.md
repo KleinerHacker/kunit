@@ -106,7 +106,7 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 ## 3. 生成用拡張関数を追加する
 
 `K...UnitExtensions.kt` のパターンに従って、単位ごとに bare な `val` エイリアスと `Number` 拡張関数を
-追加します。これにより、呼び出し元は `5.kilograms()` や `1 kilo grams` と書くことができ、`kilograms`
+追加します。これにより、呼び出し元は `5.kilograms` や `1 kilo grams` と書くことができ、`kilograms`
 を純粋な `valueAs` ターゲットとして渡すこともできます。
 
 ```kotlin
@@ -127,16 +127,16 @@ val ounces: KMassUnit = KMassUnit.OUNCE
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
 /** 任意の [Number] 型からキログラム単位の純粋な質量値を作成します。 */
-fun Number.kilograms(): KMassUnitInstance = of(this, KMassUnit.KILOGRAM)
+val Number.kilograms: KMassUnitInstance get() = of(this, KMassUnit.KILOGRAM)
 
 /** グラム単位の純粋な質量値を作成します。 */
-fun Number.grams(): KMassUnitInstance = of(this, KMassUnit.GRAM)
+val Number.grams: KMassUnitInstance get() = of(this, KMassUnit.GRAM)
 
 /** ポンド単位の純粋な質量値を作成します。 */
-fun Number.pounds(): KMassUnitInstance = of(this, KMassUnit.POUND)
+val Number.pounds: KMassUnitInstance get() = of(this, KMassUnit.POUND)
 
 /** オンス単位の純粋な質量値を作成します。 */
-fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
+val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 ```
 
 これで完了です - すべてのロジックは汎用のルートパッケージにあり、`KMassUnit : KUnit` だけで動作するため、
@@ -146,8 +146,8 @@ fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
 
-val a = 500.grams()
-val b = 2.pounds()
+val a = 500.grams
+val b = 2.pounds
 val total = a + b            // KMassUnitInstance、キログラムに正規化
 println(total.valueAs(kilograms))
 println(total.valueAs(grams))
@@ -172,8 +172,8 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // 説明のみを目的とした例
-println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 説明のみを目的とした例
+println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. 他のグループとの組み合わせ
@@ -187,7 +187,7 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 密度 = 質量 / 体積
-val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
+val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
 ```
 
 ## 6. 命名とテストのチェックリスト

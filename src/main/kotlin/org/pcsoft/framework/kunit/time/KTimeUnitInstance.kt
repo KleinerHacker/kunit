@@ -34,13 +34,13 @@ import kotlin.math.roundToLong
  * time² or 1/time). Multiplying/dividing therefore "escapes" to a raw [KMixedUnitInstance] (e.g. `s^2`,
  * `s^-1`), just like length's `*`/`/`.
  *
- * Instances are created via the extension functions in `KTimeUnitExtensions.kt` (e.g. `5.seconds()`,
- * `2.hours()`), the SI-prefix `infix` constructors in `KTimeUnitPrefix.kt` (e.g. `5 milli seconds`),
+ * Instances are created via the creator extension properties in `KTimeUnitExtensions.kt` (e.g. `5.seconds`,
+ * `2.hours`), the SI-prefix `infix` constructors in `KTimeUnitPrefix.kt` (e.g. `5 milli seconds`),
  * or from a [Duration] via [toKTimeUnit].
  *
  * Example:
  * ```kotlin
- * val t = 2.hours()
+ * val t = 2.hours
  * t.value               // 7200.0 (normalized to seconds)
  * t.valueAs(KTimeUnit.HOUR) // 2.0 (read back in hours)
  * t.toDuration()        // PT2H
@@ -57,7 +57,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
      *
      * Example:
      * ```kotlin
-     * val t = 2.hours()
+     * val t = 2.hours
      * t.valueAs(KTimeUnit.MINUTE)                        // 120.0
      * t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND) // 7 200 000.0 (ms)
      * ```
@@ -70,7 +70,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
      *
      * Example:
      * ```kotlin
-     * (1.hours() + 30.minutes()).value // 5400.0
+     * (1.hours + 30.minutes).value // 5400.0
      * ```
      */
     override operator fun plus(other: KTimeUnitInstance): KTimeUnitInstance = KTimeUnitInstance(duration + other.duration)
@@ -105,8 +105,8 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
      *
      * Example:
      * ```kotlin
-     * 2.hours().toString(KTimeUnit.HOUR)   // "2.0 h"
-     * 2.hours().toString(KTimeUnit.MINUTE) // "120.0 min"
+     * 2.hours.toString(KTimeUnit.HOUR)   // "2.0 h"
+     * 2.hours.toString(KTimeUnit.MINUTE) // "120.0 min"
      * ```
      */
     override fun toString(target: KUnitTarget): String = toKMixedUnitInstance().toString(target)
@@ -251,7 +251,7 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
  *
  * Example:
  * ```kotlin
- * val speed = 10.meters() / 2.seconds()
+ * val speed = 10.meters / 2.seconds
  * val time = speed.toKMixedUnitInstance() // NOT a single time term -> would throw
  *
  * (5 milli seconds).value // 0.005

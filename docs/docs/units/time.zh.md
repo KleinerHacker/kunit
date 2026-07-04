@@ -16,10 +16,10 @@
 
 | 单位 | 枚举值 | 符号 | 构造器 | 1 单位 (秒) |
 |---|---|---|---:|---:|
-| 秒 | `KTimeUnit.SECOND` | `s` | `Number.seconds()` | 1.0 |
-| 分 | `KTimeUnit.MINUTE` | `min` | `Number.minutes()` | 60.0 |
-| 小时 | `KTimeUnit.HOUR` | `h` | `Number.hours()` | 3600.0 |
-| 天 | `KTimeUnit.DAY` | `d` | `Number.days()` | 86 400.0 |
+| 秒 | `KTimeUnit.SECOND` | `s` | `Number.seconds` | 1.0 |
+| 分 | `KTimeUnit.MINUTE` | `min` | `Number.minutes` | 60.0 |
+| 小时 | `KTimeUnit.HOUR` | `h` | `Number.hours` | 3600.0 |
+| 天 | `KTimeUnit.DAY` | `d` | `Number.days` | 86 400.0 |
 
 仅建模物理时间刻度；基于日历的单位（周、年）被有意省略，因为它们由日历定义，而非固定的物理量。
 
@@ -32,7 +32,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.time.*
 
-val t = 2.hours()
+val t = 2.hours
 t.value                      // 7200.0 (归一化为秒)
 t.valueAs(KTimeUnit.HOUR)    // 2.0 (以小时读回)
 t.valueAs(minutes)           // 120.0
@@ -44,16 +44,16 @@ t.valueAs(minutes)           // 120.0
 import org.pcsoft.framework.kunit.time.*
 
 // + / - : 同一组，不同时间单位之间自动转换（精确的 Duration 运算）
-val a = 1.hours() + 30.minutes()   // KTimeUnitInstance，归一化为秒 (5400.0)
-val b = 2.hours() - 30.minutes()
+val a = 1.hours + 30.minutes   // KTimeUnitInstance，归一化为秒 (5400.0)
+val b = 2.hours - 30.minutes
 
 // 比较
-2.hours() > 90.minutes()            // true
-1.hours() == 60.minutes()           // true (归一化值相同)
+2.hours > 90.minutes            // true
+1.hours == 60.minutes           // true (归一化值相同)
 
 // * / / : 始终允许，生成具有新指数的 KMixedUnitInstance
-val secondsSquared = 3.seconds() * 4.seconds()   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
-val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.0, 无量纲
+val secondsSquared = 3.seconds * 4.seconds   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
+val ratio = 10.seconds / 2.seconds           // KMixedUnitInstance: value=5.0, 无量纲
 ```
 
 ## 比较与相等
@@ -70,7 +70,7 @@ val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.
 import java.time.Duration
 import org.pcsoft.framework.kunit.time.*
 
-val t = 90.minutes()
+val t = 90.minutes
 t.toDuration()                       // PT1H30M
 Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
@@ -81,7 +81,7 @@ t.negated().isNegative()               // true
 // 转发的查询方法原样透传
 t.toHours()      // 1
 t.toMinutesPart() // 30
-t.dividedBy(30.minutes()) // 3
+t.dividedBy(30.minutes) // 3
 ```
 
 ## SI 前缀
@@ -99,7 +99,7 @@ val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (秒)
 
 // 使用带前缀的目标读回值
-val t = 2.hours()
+val t = 2.hours
 t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND)  // 7 200 000.0 (ms)
 t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```
@@ -115,9 +115,9 @@ t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```kotlin
 import org.pcsoft.framework.kunit.time.*
 
-2.hours().toString()               // "7200.0 s" (基本单位表示)
-2.hours().toString(KTimeUnit.HOUR) // "2.0 h"
-2.hours().toString(minutes)        // "120.0 min"
+2.hours.toString()               // "7200.0 s" (基本单位表示)
+2.hours.toString(KTimeUnit.HOUR) // "2.0 h"
+2.hours.toString(minutes)        // "120.0 min"
 ```
 
 ## 与其他单位混合
@@ -128,10 +128,10 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters() / 1.seconds().toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
+val speed = 10.meters / 1.seconds.toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // 将速度再乘以时间可恢复为纯长度
-val distance = speed * 2.seconds().toKMixedUnitInstance()
+val distance = speed * 2.seconds.toKMixedUnitInstance()
 distance.toKLengthUnit().value // 20.0
 ```

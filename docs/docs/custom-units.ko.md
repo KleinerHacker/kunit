@@ -106,7 +106,7 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 ## 3. 생성자 확장 함수 추가
 
 `K...UnitExtensions.kt` 패턴을 따라, 단위마다 bare `val` 별칭과 `Number` 확장 함수를 추가하세요. 이렇게
-하면 호출부에서 `5.kilograms()` 또는 `1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상
+하면 호출부에서 `5.kilograms` 또는 `1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상
 으로도 전달할 수 있습니다.
 
 ```kotlin
@@ -127,16 +127,16 @@ val ounces: KMassUnit = KMassUnit.OUNCE
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
 /** 모든 [Number] 타입으로부터 킬로그램 단위의 순수 질량 값을 생성합니다. */
-fun Number.kilograms(): KMassUnitInstance = of(this, KMassUnit.KILOGRAM)
+val Number.kilograms: KMassUnitInstance get() = of(this, KMassUnit.KILOGRAM)
 
 /** 그램 단위의 순수 질량 값을 생성합니다. */
-fun Number.grams(): KMassUnitInstance = of(this, KMassUnit.GRAM)
+val Number.grams: KMassUnitInstance get() = of(this, KMassUnit.GRAM)
 
 /** 파운드 단위의 순수 질량 값을 생성합니다. */
-fun Number.pounds(): KMassUnitInstance = of(this, KMassUnit.POUND)
+val Number.pounds: KMassUnitInstance get() = of(this, KMassUnit.POUND)
 
 /** 온스 단위의 순수 질량 값을 생성합니다. */
-fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
+val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 ```
 
 이것으로 충분합니다 - 모든 로직이 범용 루트 패키지에 있고 `KMassUnit : KUnit`만 있으면 동작하기 때문에,
@@ -146,8 +146,8 @@ fun Number.ounces(): KMassUnitInstance = of(this, KMassUnit.OUNCE)
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
 
-val a = 500.grams()
-val b = 2.pounds()
+val a = 500.grams
+val b = 2.pounds
 val total = a + b            // KMassUnitInstance, 킬로그램으로 정규화됨
 println(total.valueAs(kilograms))
 println(total.valueAs(grams))
@@ -172,8 +172,8 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds().toKMixedUnitInstance().toKMassUnit() // 예시 목적으로만
-println(2500.grams().valueAs(KMassDerivedUnit.TONNE)) // 0.0025
+val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 예시 목적으로만
+println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
 ## 5. 다른 그룹과 결합
@@ -186,7 +186,7 @@ import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 밀도 = 질량 / 부피
-val density = 5.kilograms().toKMixedUnitInstance() / 2.liters().toKMixedUnitInstance()
+val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
 ```
 
 ## 6. 네이밍과 테스트 체크리스트

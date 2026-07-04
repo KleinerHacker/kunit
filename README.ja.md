@@ -67,7 +67,7 @@ mkdocs build
 * **`KUnitPrefix`** —— 完全な SI 接頭辞表（Quetta/Q ～ Quecto/q）を持つルートパッケージのジェネリック
   列挙型です。接頭辞は `KUnit` 自体の一部ではなく、値の読み書き時にのみ意味を持ち、
   グループごとの `infix` 関数（例：`5 kilo meters`）で組み合わせ、そのグループの具体単位を直接返します
-  （`5 kilo meters` は `KLengthUnitInstance`、`5000.meters()` と同等）。
+  （`5 kilo meters` は `KLengthUnitInstance`、`5000.meters` と同等）。
 * **特殊単位**（`KDerivedUnit` / `KScaledDerivedUnit`）—— 独自の名前/記号を持ち、グループと指数に
   紐付いた追加の換算先（例：面積のヘクタール、体積のリットル）で、基本メカニズムを置き換えるのではなく
   補完します。
@@ -188,8 +188,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // 任意の Number 型から純粋な長さの値を生成
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // 演算子：同じグループと指数の範囲内で自動換算
 val total = distance + trip          // KLengthUnitInstance、メートルに正規化
@@ -206,10 +206,10 @@ println(total.valueAs(yards))         // 例：23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面積（指数 2）と体積（指数 3）のための特殊単位
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -219,7 +219,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0（メートルに正規化）
 ```

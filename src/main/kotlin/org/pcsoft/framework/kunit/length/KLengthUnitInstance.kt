@@ -24,17 +24,17 @@ import org.pcsoft.framework.kunit.KUnitTerm
  * internally to [KLengthUnit.BASE], regardless of which unit or [org.pcsoft.framework.kunit.KUnitPrefix]
  * it was constructed with.
  *
- * Instances are created via the extension functions in `KLengthUnitExtensions.kt`
- * (e.g. `5.meters()`, `5.hectares()`) or the SI-prefix `infix` constructors in `KLengthUnitPrefix.kt`
+ * Instances are created via the creator extension properties in `KLengthUnitExtensions.kt`
+ * (e.g. `5.meters`, `5.hectares`) or the SI-prefix `infix` constructors in `KLengthUnitPrefix.kt`
  * (e.g. `3 kilo meters`).
  *
  * Example:
  * ```kotlin
- * val d = 5.miles()
+ * val d = 5.miles
  * d.value             // 8046.72 (normalized to meters)
  * d.valueAs(KLengthUnit.MILE) // 5.0 (read back in miles)
  *
- * val area = 5.hectares()
+ * val area = 5.hectares
  * area.value          // 50000.0 (normalized to square meters)
  * ```
  */
@@ -54,11 +54,11 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
      *
      * Example:
      * ```kotlin
-     * val d = 5.miles()
+     * val d = 5.miles
      * d.valueAs(KLengthUnit.MILE)                        // 5.0
      * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // 8.04672 (km)
      *
-     * val area = 5.hectares()
+     * val area = 5.hectares
      * area.valueAs(KLengthDerivedUnit.HECTARE) // 5.0
      * ```
      */
@@ -74,9 +74,9 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
      *
      * Example:
      * ```kotlin
-     * (1.kilometers() + 500.meters()).value // 1500.0
+     * ((1 kilo meters) + 500.meters).value // 1500.0
      *
-     * 5.hectares() + 5.meters() // throws IllegalStateException (area vs. length)
+     * 5.hectares + 5.meters // throws IllegalStateException (area vs. length)
      * ```
      */
     override operator fun plus(other: KLengthUnitInstance): KLengthUnitInstance = KLengthUnitInstance(instance + other.instance)
@@ -90,7 +90,7 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
      *
      * Example:
      * ```kotlin
-     * val area = 200.meters() * 50.meters() // KMixedUnitInstance: value=10000.0, units=[METER^2]
+     * val area = 200.meters * 50.meters // KMixedUnitInstance: value=10000.0, units=[METER^2]
      * ```
      */
     override operator fun times(other: KLengthUnitInstance): KMixedUnitInstance = instance * other.instance
@@ -137,9 +137,9 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
      *
      * Example:
      * ```kotlin
-     * 5.miles().toString(KLengthUnit.MILE)                        // "5.0 mi"
-     * 5.miles().toString(KUnitPrefix.KILO with KLengthUnit.METER) // "8.04672 km"
-     * 5.hectares().toString(KLengthDerivedUnit.HECTARE)           // "5.0 ha"
+     * 5.miles.toString(KLengthUnit.MILE)                        // "5.0 mi"
+     * 5.miles.toString(KUnitPrefix.KILO with KLengthUnit.METER) // "8.04672 km"
+     * 5.hectares.toString(KLengthDerivedUnit.HECTARE)           // "5.0 ha"
      * ```
      */
     override fun toString(target: KUnitTarget): String = instance.toString(target)
@@ -158,11 +158,11 @@ class KLengthUnitInstance internal constructor(internal val instance: KMixedUnit
  *
  * Example:
  * ```kotlin
- * val speed = 10.meters() / 2.seconds()
- * val distance = speed.toKMixedUnitInstance() * 2.seconds() // units=[METER^1]
+ * val speed = 10.meters / 2.seconds
+ * val distance = speed.toKMixedUnitInstance() * 2.seconds // units=[METER^1]
  * distance.toKLengthUnit().value // 10.0
  *
- * val area = 200.meters() * 50.meters() // units=[METER^2]
+ * val area = 200.meters * 50.meters // units=[METER^2]
  * area.toKLengthUnit().value // 10000.0
  *
  * (5 kilo miles).value // 5000 * 1609.344 (normalized to meters)

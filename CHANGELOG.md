@@ -4,9 +4,15 @@
 
 ### Added
 
+- Comprehensive **parameterized cross-matrix tests** for every unit group and the mixed unit, built on
+  JUnit Jupiter `@ParameterizedTest`/`@MethodSource` (new `junit-jupiter-params` test dependency): a full
+  prefix × unit matrix plus one standalone test per SI prefix, a unit → every-other-unit conversion
+  matrix, one method per operator (`+`/`-`/`*`/`/`) and per comparison (`==`/`!=`/`<`/`<=`/`>`/`>=`) over
+  every unit pair, per-unit `toString`/`toString(target)`, and a length × time cross-group matrix for the
+  mixed unit. The procedure is documented in `CLAUDE.md` as mandatory for future groups.
 - Per-group SI-prefix `infix` constructors (`KLengthUnitPrefix.kt`, `KTimeUnitPrefix.kt`): `5 kilo meters`
   now returns a `KLengthUnitInstance` directly (and `5 milli seconds` a `KTimeUnitInstance`), rather than an
-  intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters()` and is the preferred
+  intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters` and is the preferred
   construction form.
 - Test coverage in `KMixedUnitInstanceTest` verifying that `KMixedUnitInstance` term exponents are
   added on `*` and subtracted on `/` — including crossings of the 0-point (negative→positive and
@@ -16,7 +22,7 @@
 - New light-distance units in the **Length** group: light-second (`ls`), light-minute (`lmin`),
   light-hour (`lh`), light-day (`ld`) and light-week (`lw`), complementing the existing light-year.
   Defined via the speed of light (`c = 299 792 458 m/s`) and the Julian time base, with matching
-  `Number.lightSeconds()` … `Number.lightWeeks()` creators and bare `val` aliases.
+  `Number.lightSeconds` … `Number.lightWeeks` creators and bare `val` aliases.
 - New unit group **Time** (`org.pcsoft.framework.kunit.time`):
   - Units: second (base), minute, hour, day. Calendar-based units (week, year) are intentionally
     excluded, since they are defined by calendars rather than by a fixed physical quantity.
@@ -36,6 +42,10 @@
 
 ### Changed
 
+- **Breaking:** the number-extension creators are now extension **properties** instead of functions —
+  construct pure units with `5.meters`, `2.hours`, `5.hectares` (previously `5.meters()`, `2.hours()`,
+  `5.hectares()`). The `toXxx()` conversions (`toKMixedUnitInstance()`, `toKLengthUnit()`,
+  `toKTimeUnit()`, `toDuration()`) remain functions.
 - **Breaking:** the prefix `infix` functions are now declared **per group** (over the group's own unit
   type) and return the concrete "pure" unit directly, replacing the single set of generic root-package
   functions that returned a `KPrefixBuilder`. `(5 kilo meters).toKMixedUnitInstance().toKLengthUnit()`

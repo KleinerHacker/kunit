@@ -20,8 +20,8 @@ package org.pcsoft.framework.kunit
  * exponents combine consistently through [KMixedUnitInstance.times]/[KMixedUnitInstance.div] (addition /
  * subtraction of exponents), which is what all arithmetic in this library relies on.
  *
- * Example: a pure length value (e.g. `5.meters()`) is represented internally as a single
- * `KUnitTerm(KLengthUnit.METER, 1)`. Multiplying two lengths together (`5.meters() * 3.meters()`)
+ * Example: a pure length value (e.g. `5.meters`) is represented internally as a single
+ * `KUnitTerm(KLengthUnit.METER, 1)`. Multiplying two lengths together (`5.meters * 3.meters`)
  * yields a single term `KUnitTerm(KLengthUnit.METER, 2)` (an area, in square meters).
  */
 data class KUnitTerm(val unit: KUnit, val exponent: Int)
@@ -37,7 +37,7 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
  *
  * Example:
  * ```kotlin
- * val speed = 10.meters() / 2.seconds() // KMixedUnitInstance: value = 5.0, units = [METER^1, SECOND^-1]
+ * val speed = 10.meters / 2.seconds // KMixedUnitInstance: value = 5.0, units = [METER^1, SECOND^-1]
  * ```
  */
 class KMixedUnitInstance internal constructor(value: Number, val units: List<KUnitTerm>) : KUnitMeasurable {
@@ -66,13 +66,13 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val a = 5.meters().toKMixedUnitInstance()       // value=5.0, units=[METER^1]
-     * val b = 3.meters().toKMixedUnitInstance()       // value=3.0, units=[METER^1]
+     * val a = 5.meters.toKMixedUnitInstance()       // value=5.0, units=[METER^1]
+     * val b = 3.meters.toKMixedUnitInstance()       // value=3.0, units=[METER^1]
      * (a * b).value                              // 15.0
      * (a * b).units                              // [METER^2]
      *
-     * val speed = 10.meters() / 2.seconds()      // units=[METER^1, SECOND^-1]
-     * val time = 4.seconds().toKMixedUnitInstance()   // units=[SECOND^1]
+     * val speed = 10.meters / 2.seconds      // units=[METER^1, SECOND^-1]
+     * val time = 4.seconds.toKMixedUnitInstance()   // units=[SECOND^1]
      * (speed.toKMixedUnitInstance() * time).units     // [METER^1] (SECOND^-1 + SECOND^1 = SECOND^0, removed)
      * ```
      */
@@ -89,8 +89,8 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val distance = 10.meters().toKMixedUnitInstance() // units=[METER^1]
-     * val time = 2.seconds().toKMixedUnitInstance()     // units=[SECOND^1]
+     * val distance = 10.meters.toKMixedUnitInstance() // units=[METER^1]
+     * val time = 2.seconds.toKMixedUnitInstance()     // units=[SECOND^1]
      * val speed = distance / time                  // value=5.0, units=[METER^1, SECOND^-1]
      * ```
      */
@@ -193,10 +193,10 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val speed = 10.meters() / 1.seconds() // KMixedUnitInstance: value=10.0, units=[METER^1, SECOND^-1]
+     * val speed = 10.meters / 1.seconds // KMixedUnitInstance: value=10.0, units=[METER^1, SECOND^-1]
      * speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
      *
-     * val area = (200.meters() * 50.meters()) // units=[METER^2]
+     * val area = (200.meters * 50.meters) // units=[METER^2]
      * area.valueAs(KLengthDerivedUnit.HECTARE)  // 1.0
      * ```
      */
@@ -220,7 +220,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * (10.meters() / 2.seconds()).toString() // "5.0 m*s^-1"
+     * (10.meters / 2.seconds).toString() // "5.0 m*s^-1"
      * ```
      */
     override fun toString(): String =
@@ -236,7 +236,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val speed = 10.meters() / 1.seconds()
+     * val speed = 10.meters / 1.seconds
      * speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
      * ```
      */

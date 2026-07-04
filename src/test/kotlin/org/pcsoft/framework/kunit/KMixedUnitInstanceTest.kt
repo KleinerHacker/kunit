@@ -12,11 +12,19 @@
 
 package org.pcsoft.framework.kunit
 
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.length.KLengthDerivedUnit
 import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.length.lengthOf
+import org.pcsoft.framework.kunit.length.lengthUnitGenerators
 import org.pcsoft.framework.kunit.length.meters
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.time.timeOf
+import org.pcsoft.framework.kunit.time.timeUnitGenerators
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -24,7 +32,32 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KMixedUnitInstanceTest {
+
+    /** Every combination of a length unit with a time unit, for the cross-group mixed-unit matrices. */
+    private fun lengthTimePairs(): List<Arguments> =
+        lengthUnitGenerators.flatMap { (_, l) -> timeUnitGenerators.map { (_, t) -> Arguments.of(l, t) } }
+
+    @ParameterizedTest(name = "{0} per {1}")
+    @MethodSource("lengthTimePairs")
+    fun `dividing every length by every time yields the expected speed term`(length: KLengthUnit, time: KTimeUnit) {
+        val speed = lengthOf(length, 10) / timeOf(time, 2).toKMixedUnitInstance()
+
+        val expected = 10.0 * length.baseValue / (2.0 * time.baseValue)
+        assertEquals(expected, speed.value, (kotlin.math.abs(expected) * 1e-9).coerceAtLeast(1e-12), "$length / $time mismatch")
+        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)), speed.units.toSet())
+    }
+
+    @ParameterizedTest(name = "{0} times {1}")
+    @MethodSource("lengthTimePairs")
+    fun `multiplying every length by every time yields the expected mixed term`(length: KLengthUnit, time: KTimeUnit) {
+        val product = lengthOf(length, 10) * timeOf(time, 2).toKMixedUnitInstance()
+
+        val expected = 10.0 * length.baseValue * (2.0 * time.baseValue)
+        assertEquals(expected, product.value, (kotlin.math.abs(expected) * 1e-9).coerceAtLeast(1e-12), "$length * $time mismatch")
+        assertEquals(setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, 1)), product.units.toSet())
+    }
 
     @Test
     fun `times merges exponent of matching unit`() {
@@ -39,7 +72,7 @@ class KMixedUnitInstanceTest {
 
     @Test
     fun `pure wrappers are usable polymorphically as KUnitMeasurable`() {
-        val measurables: List<KUnitMeasurable> = listOf(5.meters(), 2.hours())
+        val measurables: List<KUnitMeasurable> = listOf(5.meters, 2.hours)
 
         // value + toKMixedUnitInstance come from the KUnitMeasurable surface (via by-delegation)
         assertEquals(listOf(5.0, 7200.0), measurables.map { it.value })
@@ -294,7 +327,7 @@ class KMixedUnitInstanceTest {
 
     @Test
     fun `valueAs supports derived units for area`() {
-        val area = 200.meters() * 50.meters()
+        val area = 200.meters * 50.meters
 
         assertEquals(1.0, area.valueAs(KLengthDerivedUnit.HECTARE), 1e-9)
     }
@@ -315,7 +348,7 @@ class KMixedUnitInstanceTest {
 
     @Test
     fun `toString with a derived unit target does not append an exponent suffix`() {
-        val area = 200.meters() * 50.meters()
+        val area = 200.meters * 50.meters
 
         assertEquals("1.0 ha", area.toString(KLengthDerivedUnit.HECTARE))
     }

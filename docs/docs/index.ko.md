@@ -11,7 +11,7 @@
 
 - **타입 안전한 연산.** 서로 다른 단위 그룹이나 지수 간의 `+`, `-` 연산은 잘못된 숫자를 조용히 반환하는 대신
   `IllegalStateException`을 던집니다.
-- **자동 변환.** `5.meters() + 3.miles()`는 그대로 동작합니다 - 두 피연산자는 내부적으로 정규화되므로 결합하기 전에
+- **자동 변환.** `5.meters + 3.miles`는 그대로 동작합니다 - 두 피연산자는 내부적으로 정규화되므로 결합하기 전에
   수동으로 단위를 변환할 필요가 없습니다.
 - **자유로운 곱셈과 나눗셈.** 단위의 곱셈/나눗셈은 *항상* 허용되며 결과적인 물리 차원(지수)을 자동으로 추적합니다.
   예: `길이 * 길이`는 면적이 됩니다.
@@ -56,8 +56,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // 모든 Number 타입으로부터 순수 길이 값을 생성
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // 연산자: 동일 그룹·동일 지수 내에서 자동 변환
 val total = distance + trip          // KLengthUnitInstance, 미터로 정규화됨
@@ -74,10 +74,10 @@ println(total.valueAs(yards))                         // 예: 23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 면적(지수 2)과 부피(지수 3)를 위한 특수 단위
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -87,7 +87,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0 (미터로 정규화됨)
 ```

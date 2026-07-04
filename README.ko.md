@@ -65,7 +65,7 @@ mkdocs build
 * **`KUnitPrefix`** - 완전한 SI 접두어 표(Quetta/Q ~ Quecto/q)를 담은 루트 패키지의 제네릭 열거형입니다.
   접두어는 `KUnit` 자체의 일부가 아니라 값의 읽기/쓰기 시에만 의미가 있으며, 그룹별 `infix` 함수
   (예: `5 kilo meters`)로 결합되어 해당 그룹의 구체 단위를 바로 반환합니다(`5 kilo meters` 는
-  `KLengthUnitInstance`, `5000.meters()` 와 동일).
+  `KLengthUnitInstance`, `5000.meters` 와 동일).
 * **특수 단위**(`KDerivedUnit` / `KScaledDerivedUnit`) - 고유한 이름/기호를 가진, 그룹 및 지수에 종속된
   추가 변환 대상(예: 넓이의 헥타르, 부피의 리터)으로, 기본 메커니즘을 대체하지 않고 보완합니다.
 
@@ -184,8 +184,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // 임의의 Number 타입에서 순수 길이 값 생성
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // 연산자: 같은 그룹과 지수 내에서 자동 변환
 val total = distance + trip          // KLengthUnitInstance, 미터로 정규화됨
@@ -202,10 +202,10 @@ println(total.valueAs(yards))         // 예: 23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 넓이(지수 2)와 부피(지수 3)를 위한 특수 단위
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -215,7 +215,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0 (미터로 정규화됨)
 ```

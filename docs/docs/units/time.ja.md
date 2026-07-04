@@ -17,10 +17,10 @@
 
 | 単位 | Enum 値 | 記号 | 生成関数 | 1 単位 (秒) |
 |---|---|---|---:|---:|
-| 秒 | `KTimeUnit.SECOND` | `s` | `Number.seconds()` | 1.0 |
-| 分 | `KTimeUnit.MINUTE` | `min` | `Number.minutes()` | 60.0 |
-| 時 | `KTimeUnit.HOUR` | `h` | `Number.hours()` | 3600.0 |
-| 日 | `KTimeUnit.DAY` | `d` | `Number.days()` | 86 400.0 |
+| 秒 | `KTimeUnit.SECOND` | `s` | `Number.seconds` | 1.0 |
+| 分 | `KTimeUnit.MINUTE` | `min` | `Number.minutes` | 60.0 |
+| 時 | `KTimeUnit.HOUR` | `h` | `Number.hours` | 3600.0 |
+| 日 | `KTimeUnit.DAY` | `d` | `Number.days` | 86 400.0 |
 
 物理的な時間スケールのみをモデル化しています。暦に基づく単位（週、年）は、固定された物理量ではなく暦によって
 定義されるため、意図的に除外しています。
@@ -34,7 +34,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.time.*
 
-val t = 2.hours()
+val t = 2.hours
 t.value                      // 7200.0 (秒に正規化)
 t.valueAs(KTimeUnit.HOUR)    // 2.0 (時として読み戻し)
 t.valueAs(minutes)           // 120.0
@@ -46,16 +46,16 @@ t.valueAs(minutes)           // 120.0
 import org.pcsoft.framework.kunit.time.*
 
 // + / - : 同じグループ、異なる時間単位間の自動変換（正確な Duration 演算）
-val a = 1.hours() + 30.minutes()   // KTimeUnitInstance、秒に正規化 (5400.0)
-val b = 2.hours() - 30.minutes()
+val a = 1.hours + 30.minutes   // KTimeUnitInstance、秒に正規化 (5400.0)
+val b = 2.hours - 30.minutes
 
 // 比較
-2.hours() > 90.minutes()            // true
-1.hours() == 60.minutes()           // true (正規化値が等しい)
+2.hours > 90.minutes            // true
+1.hours == 60.minutes           // true (正規化値が等しい)
 
 // * / / : 常に許可され、新しい指数を持つ KMixedUnitInstance を生成
-val secondsSquared = 3.seconds() * 4.seconds()   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
-val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.0, 無次元
+val secondsSquared = 3.seconds * 4.seconds   // KMixedUnitInstance: value=12.0, units=[SECOND^2]
+val ratio = 10.seconds / 2.seconds           // KMixedUnitInstance: value=5.0, 無次元
 ```
 
 ## 比較と等価性
@@ -73,7 +73,7 @@ val ratio = 10.seconds() / 2.seconds()           // KMixedUnitInstance: value=5.
 import java.time.Duration
 import org.pcsoft.framework.kunit.time.*
 
-val t = 90.minutes()
+val t = 90.minutes
 t.toDuration()                       // PT1H30M
 Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
@@ -84,7 +84,7 @@ t.negated().isNegative()               // true
 // 転送された問い合わせメソッドはそのまま透過
 t.toHours()      // 1
 t.toMinutesPart() // 30
-t.dividedBy(30.minutes()) // 3
+t.dividedBy(30.minutes) // 3
 ```
 
 ## SI 接頭辞
@@ -103,7 +103,7 @@ val fiveMillis = 5 milli seconds
 fiveMillis.value // 0.005 (秒)
 
 // 接頭辞付きターゲットを使って値を読み戻す
-val t = 2.hours()
+val t = 2.hours
 t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND)  // 7 200 000.0 (ms)
 t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```
@@ -120,9 +120,9 @@ t.toString(KUnitPrefix.MILLI with KTimeUnit.SECOND) // "7200000.0 ms"
 ```kotlin
 import org.pcsoft.framework.kunit.time.*
 
-2.hours().toString()               // "7200.0 s" (基本単位表現)
-2.hours().toString(KTimeUnit.HOUR) // "2.0 h"
-2.hours().toString(minutes)        // "120.0 min"
+2.hours.toString()               // "7200.0 s" (基本単位表現)
+2.hours.toString(KTimeUnit.HOUR) // "2.0 h"
+2.hours.toString(minutes)        // "120.0 min"
 ```
 
 ## 他の単位との混合
@@ -133,10 +133,10 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters() / 1.seconds().toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
+val speed = 10.meters / 1.seconds.toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
 speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // 速度に時間を掛け戻すと純粋な長さが復元される
-val distance = speed * 2.seconds().toKMixedUnitInstance()
+val distance = speed * 2.seconds.toKMixedUnitInstance()
 distance.toKLengthUnit().value // 20.0
 ```

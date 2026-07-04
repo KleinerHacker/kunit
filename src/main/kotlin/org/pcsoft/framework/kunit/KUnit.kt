@@ -26,7 +26,7 @@ package org.pcsoft.framework.kunit
  *
  * Example:
  * ```kotlin
- * val d = 5.miles()
+ * val d = 5.miles
  * d.valueAs(KLengthUnit.MILE)                       // plain KUnit target
  * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // KScaledUnit target
  * ```

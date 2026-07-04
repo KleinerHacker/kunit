@@ -25,10 +25,10 @@ import org.pcsoft.framework.kunit.KDerivedUnit
  *
  * Example:
  * ```kotlin
- * val area = 200.meters() * 50.meters()          // KMixedUnitInstance, 10 000 m² (METER^2)
+ * val area = 200.meters * 50.meters          // KMixedUnitInstance, 10 000 m² (METER^2)
  * area.valueAs(KLengthDerivedUnit.HECTARE)         // 1.0
  *
- * val volume = 2.meters() * 2.meters() * 2.meters() // KMixedUnitInstance, 8 m³ (METER^3)
+ * val volume = 2.meters * 2.meters * 2.meters // KMixedUnitInstance, 8 m³ (METER^3)
  * volume.valueAs(KLengthDerivedUnit.LITER)         // 8000.0
  * ```
  */

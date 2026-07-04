@@ -68,7 +68,7 @@ mkdocs build
 * **`KUnitPrefix`** - generic root-package enum with the complete SI prefix table (Quetta/Q to Quecto/q).
   Prefixes are not part of `KUnit` itself, they only matter for reading/writing values, and are applied via
   per-group `infix` functions (e.g. `5 kilo meters`) that return the group's concrete unit directly
-  (`5 kilo meters` is a `KLengthUnitInstance`, equivalent to `5000.meters()`).
+  (`5 kilo meters` is a `KLengthUnitInstance`, equivalent to `5000.meters`).
 * **Special units** (`KDerivedUnit` / `KScaledDerivedUnit`) - additional, group- and exponent-bound conversion
   targets with their own name/symbol (e.g. hectare for area, liter for volume), complementing rather than
   replacing the normal mechanism.
@@ -189,8 +189,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // Create pure length values from any Number type
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // Operators: automatic conversion within the same group and exponent
 val total = distance + trip          // KLengthUnitInstance, normalized to meters
@@ -207,10 +207,10 @@ println(total.valueAs(yards))         // e.g. 23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // Special units for area (exponent 2) and volume (exponent 3)
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -220,7 +220,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0 (normalized to meters)
 ```

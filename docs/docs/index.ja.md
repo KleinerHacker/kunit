@@ -11,7 +11,7 @@
 
 - **型安全な演算。** 異なる単位グループや指数間の `+`、`-` は、誤った数値を静かに返す代わりに
   `IllegalStateException` を投げます。
-- **自動変換。** `5.meters() + 3.miles()` はそのまま動作します - 両方のオペランドは内部的に正規化されるため、
+- **自動変換。** `5.meters + 3.miles` はそのまま動作します - 両方のオペランドは内部的に正規化されるため、
   結合前に手動で単位を変換する必要はありません。
 - **自由な乗算・除算。** 単位の乗算・除算は*常に*許可されており、結果の物理次元(指数)を自動的に追跡します。
   例: `長さ * 長さ` は面積になります。
@@ -58,8 +58,8 @@ import org.pcsoft.framework.kunit.with
 import org.pcsoft.framework.kunit.length.*
 
 // 任意の Number 型から純粋な長さの値を作成
-val distance = 5.meters()
-val trip = 10.miles()
+val distance = 5.meters
+val trip = 10.miles
 
 // 演算子: 同じグループ・同じ指数内での自動変換
 val total = distance + trip          // KLengthUnitInstance、メートルに正規化
@@ -76,10 +76,10 @@ println(total.valueAs(yards))                         // 例: 23018.4...
 val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
 
 // 面積(指数2)と体積(指数3)のための特殊単位
-val plot = 3.hectares()
+val plot = 3.hectares
 println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
 
-val tank = 200.liters()
+val tank = 200.liters
 println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 ```
 
@@ -89,7 +89,7 @@ println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
 import org.pcsoft.framework.kunit.length.kilo
 import org.pcsoft.framework.kunit.length.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters())
+// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
 println(fiveKm.value) // 5000.0(メートルに正規化)
 ```

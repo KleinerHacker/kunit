@@ -16,7 +16,7 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 
 // SI-prefix `infix` constructors for the length group. Each takes a bare [KLengthUnit] (e.g. the
 // `meters` alias) and returns a [KLengthUnitInstance] directly (exponent 1), scaled by the prefix and
-// normalized to the base unit - e.g. `5 kilo meters` == `5000.meters()`. Unlike a group-agnostic root
+// normalized to the base unit - e.g. `5 kilo meters` == `5000.meters`. Unlike a group-agnostic root
 // helper, these live in the length package, where the concrete wrapper type is known, so no
 // intermediate builder or explicit `toKLengthUnit()` step is needed.
 

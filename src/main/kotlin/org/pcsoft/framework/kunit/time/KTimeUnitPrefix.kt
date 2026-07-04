@@ -16,7 +16,7 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 
 // SI-prefix `infix` constructors for the time group. Each takes a bare [KTimeUnit] (e.g. the `seconds`
 // alias) and returns a [KTimeUnitInstance] directly, scaled by the prefix and normalized to seconds -
-// e.g. `5 milli seconds` == `0.005.seconds()`. Values outside roughly `[1 ns, Long.MAX seconds]` are
+// e.g. `5 milli seconds` == `0.005.seconds`. Values outside roughly `[1 ns, Long.MAX seconds]` are
 // not representable by the Duration backing (see KTimeUnitInstance).
 
 private fun prefixed(value: Number, prefix: KUnitPrefix, unit: KTimeUnit): KTimeUnitInstance =

@@ -32,7 +32,7 @@ package org.pcsoft.framework.kunit
  *
  * Example:
  * ```kotlin
- * val values: List<KUnitMeasurable> = listOf(5.meters(), 2.hours(), 10.meters() / 2.seconds())
+ * val values: List<KUnitMeasurable> = listOf(5.meters, 2.hours, 10.meters / 2.seconds)
  * values.map { it.value }                 // normalized base values
  * values.map { it.toKMixedUnitInstance() } // uniform generic representation
  * ```
@@ -64,8 +64,8 @@ interface KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * val speed = 10.meters() / 2.seconds()          // [METER^1, SECOND^-1]
-     * (speed * 4.seconds().toKMixedUnitInstance())   // [METER^1] (SECOND^-1 + SECOND^1 cancels)
+     * val speed = 10.meters / 2.seconds          // [METER^1, SECOND^-1]
+     * (speed * 4.seconds.toKMixedUnitInstance())   // [METER^1] (SECOND^-1 + SECOND^1 cancels)
      * ```
      */
     operator fun times(other: KMixedUnitInstance): KMixedUnitInstance
@@ -77,8 +77,8 @@ interface KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * val distance = 10.meters().toKMixedUnitInstance() // [METER^1]
-     * val time = 2.seconds().toKMixedUnitInstance()     // [SECOND^1]
+     * val distance = 10.meters.toKMixedUnitInstance() // [METER^1]
+     * val time = 2.seconds.toKMixedUnitInstance()     // [SECOND^1]
      * (distance / time)                                 // value=5.0, [METER^1, SECOND^-1]
      * ```
      */
@@ -121,8 +121,8 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * 5.miles().valueAs(KLengthUnit.MILE)                        // 5.0
-     * 2.hours().valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND) // 7_200_000.0
+     * 5.miles.valueAs(KLengthUnit.MILE)                        // 5.0
+     * 2.hours.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND) // 7_200_000.0
      * ```
      */
     fun valueAs(target: KUnitTarget): Double
@@ -145,7 +145,7 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * (1.kilometers() + 500.meters()).value // 1500.0
+     * ((1 kilo meters) + 500.meters).value // 1500.0
      * ```
      */
     operator fun plus(other: SELF): SELF
@@ -165,7 +165,7 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * val area = 200.meters() * 50.meters() // [METER^2], value=10000.0
+     * val area = 200.meters * 50.meters // [METER^2], value=10000.0
      * ```
      */
     operator fun times(other: SELF): KMixedUnitInstance
@@ -186,7 +186,7 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      *
      * Example:
      * ```kotlin
-     * 1.kilometers() > 500.meters() // true
+     * (1 kilo meters) > 500.meters // true
      * ```
      */
     operator fun compareTo(other: SELF): Int
