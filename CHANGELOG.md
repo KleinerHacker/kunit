@@ -35,6 +35,16 @@
 - The general `KDistanceUnitInstance` is intentionally **not additive** (no `plus`/`minus`/`compareTo`):
   cross-dimension addition lives only on the leaf types, which is what makes `length + area` a compile
   error. Add two `m⁴` values through the mixed engine instead.
+- **DSL file reorganization** (internal, no API change): creator/bare-value declarations are now
+  co-located per dimension. The catch-all `KDistanceUnitExtensions.kt` was split into per-dimension
+  `KLengthUnitExtensions.kt`/`KAreaUnitExtensions.kt`/`KVolumeUnitExtensions.kt` (creators) and
+  `KLengthUnitBareValues.kt`/`KAreaUnitBareValues.kt`/`KVolumeUnitBareValues.kt` (bare unit
+  references/tokens). Speed and time likewise split their bare references into
+  `KSpeedUnitBareValues.kt`/`KTimeUnitBareValues.kt`. The bare area/volume prefix tokens moved out of
+  `KDistanceUnitPrefix.kt` into the new `*BareValues.kt` files. The distance tests follow the same
+  per-dimension layout: the length instance tests moved into `KLengthUnitInstanceTest` (alongside the
+  existing `KAreaUnitInstanceTest`/`KVolumeUnitInstanceTest`), and the shared cross-dimension generator
+  matrices/helpers were extracted into `KDistanceTestFixtures.kt`.
 
 ## [0.2.0]
 

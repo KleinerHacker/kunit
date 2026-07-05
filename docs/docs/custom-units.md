@@ -103,11 +103,13 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
     KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
-## 3. Add creator extension properties
+## 3. Add bare unit references and creator extension properties
 
-Following the `K...UnitExtensions.kt` pattern, add a bare `val` alias plus a `Number` extension **property** per
-unit, so callers can write `5.kilograms` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs`
-target:
+Split the DSL vocabulary into two files, per the project convention: the bare `val` aliases go into
+`K...UnitBareValues.kt`, and the `Number` extension **properties** go into `K...UnitExtensions.kt`. Together
+they let callers write `5.kilograms` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs` target.
+
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -123,6 +125,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** Bare reference to [KMassUnit.OUNCE]. */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`:
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 

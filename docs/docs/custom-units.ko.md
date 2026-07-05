@@ -105,9 +105,11 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 
 ## 3. 생성자 확장 함수 추가
 
-`K...UnitExtensions.kt` 패턴을 따라, 단위마다 bare `val` 별칭과 `Number` 확장 함수를 추가하세요. 이렇게
-하면 호출부에서 `5.kilograms` 또는 `1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상
-으로도 전달할 수 있습니다.
+프로젝트 관례에 따라 DSL 어휘를 두 파일로 나눕니다. bare `val` 별칭은 `K...UnitBareValues.kt`에,
+`Number` 확장 함수는 `K...UnitExtensions.kt`에 배치합니다. 이렇게 하면 호출부에서 `5.kilograms` 또는
+`1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상으로도 전달할 수 있습니다.
+
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -123,6 +125,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** [KMassUnit.OUNCE]에 대한 bare 참조. */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`:
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 

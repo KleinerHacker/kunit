@@ -21,7 +21,7 @@ import org.pcsoft.framework.kunit.KUnitInstance
  * comparisons only accept another area (`area + length` does not compile), while `*`/`/` are strongly
  * typed (e.g. `area / length = length`, `area * length = volume`).
  *
- * Instances are created via the area creator extension properties in `KDistanceUnitExtensions.kt`
+ * Instances are created via the area creator extension properties in `KAreaUnitExtensions.kt`
  * (e.g. `200.squareMeters`, `5.hectares`), the SI-prefix `infix` constructors in
  * `KDistanceUnitPrefix.kt` (e.g. `5 kilo squareMeters`), or as the result of `length * length`.
  *

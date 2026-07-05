@@ -16,103 +16,11 @@ import org.pcsoft.framework.kunit.KUnitPrefix
 import kotlin.math.pow
 
 // SI-prefix `infix` constructors for the distance group. For a plain length the right operand is a bare
-// [KDistanceUnit] (e.g. the `meters` alias) and the result is a [KLengthUnitInstance] (exponent 1),
-// e.g. `5 kilo meters` == `5000.meters`. For area/volume the right operand is a bare area/volume token
-// (e.g. `squareMeters`, `cubicMeters`), and the SI prefix scales the *linear* base unit before it is
+// [KDistanceUnit] (e.g. the `meters` alias, see `KLengthUnitBareValues.kt`) and the result is a
+// [KLengthUnitInstance] (exponent 1), e.g. `5 kilo meters` == `5000.meters`. For area/volume the right
+// operand is a bare area/volume token (e.g. `squareMeters`, `cubicMeters`, see `KAreaUnitBareValues.kt`
+// / `KVolumeUnitBareValues.kt`), and the SI prefix scales the *linear* base unit before it is
 // squared/cubed: `5 kilo squareMeters` == `5 * (1000 m)^2` == 5_000_000 m² (i.e. 5 square kilometers).
-
-/** Bare area-unit token for the area prefix `infix` DSL (e.g. `5 kilo squareMeters`). */
-@JvmInline
-value class KDistanceAreaUnit internal constructor(internal val unit: KDistanceUnit)
-
-/** Bare volume-unit token for the volume prefix `infix` DSL (e.g. `5 kilo cubicMeters`). */
-@JvmInline
-value class KDistanceVolumeUnit internal constructor(internal val unit: KDistanceUnit)
-
-/** Bare area token for [KDistanceUnit.METER], for the area prefix infix functions. */
-val squareMeters: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.METER)
-/** Bare volume token for [KDistanceUnit.METER], for the volume prefix infix functions. */
-val cubicMeters: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.METER)
-
-/** Bare area token for [KDistanceUnit.MILE], for the area prefix infix functions. */
-val squareMiles: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.MILE)
-/** Bare volume token for [KDistanceUnit.MILE], for the volume prefix infix functions. */
-val cubicMiles: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.MILE)
-
-/** Bare area token for [KDistanceUnit.NAUTICAL_MILE], for the area prefix infix functions. */
-val squareNauticalMiles: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.NAUTICAL_MILE)
-/** Bare volume token for [KDistanceUnit.NAUTICAL_MILE], for the volume prefix infix functions. */
-val cubicNauticalMiles: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.NAUTICAL_MILE)
-
-/** Bare area token for [KDistanceUnit.YARD], for the area prefix infix functions. */
-val squareYards: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.YARD)
-/** Bare volume token for [KDistanceUnit.YARD], for the volume prefix infix functions. */
-val cubicYards: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.YARD)
-
-/** Bare area token for [KDistanceUnit.FOOT], for the area prefix infix functions. */
-val squareFeet: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.FOOT)
-/** Bare volume token for [KDistanceUnit.FOOT], for the volume prefix infix functions. */
-val cubicFeet: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.FOOT)
-
-/** Bare area token for [KDistanceUnit.INCH], for the area prefix infix functions. */
-val squareInches: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.INCH)
-/** Bare volume token for [KDistanceUnit.INCH], for the volume prefix infix functions. */
-val cubicInches: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.INCH)
-
-/** Bare area token for [KDistanceUnit.FATHOM], for the area prefix infix functions. */
-val squareFathoms: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.FATHOM)
-/** Bare volume token for [KDistanceUnit.FATHOM], for the volume prefix infix functions. */
-val cubicFathoms: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.FATHOM)
-
-/** Bare area token for [KDistanceUnit.CHAIN], for the area prefix infix functions. */
-val squareChains: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.CHAIN)
-/** Bare volume token for [KDistanceUnit.CHAIN], for the volume prefix infix functions. */
-val cubicChains: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.CHAIN)
-
-/** Bare area token for [KDistanceUnit.FURLONG], for the area prefix infix functions. */
-val squareFurlongs: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.FURLONG)
-/** Bare volume token for [KDistanceUnit.FURLONG], for the volume prefix infix functions. */
-val cubicFurlongs: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.FURLONG)
-
-/** Bare area token for [KDistanceUnit.ASTRONOMICAL_UNIT], for the area prefix infix functions. */
-val squareAstronomicalUnits: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.ASTRONOMICAL_UNIT)
-/** Bare volume token for [KDistanceUnit.ASTRONOMICAL_UNIT], for the volume prefix infix functions. */
-val cubicAstronomicalUnits: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.ASTRONOMICAL_UNIT)
-
-/** Bare area token for [KDistanceUnit.LIGHT_SECOND], for the area prefix infix functions. */
-val squareLightSeconds: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.LIGHT_SECOND)
-/** Bare volume token for [KDistanceUnit.LIGHT_SECOND], for the volume prefix infix functions. */
-val cubicLightSeconds: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.LIGHT_SECOND)
-
-/** Bare area token for [KDistanceUnit.LIGHT_MINUTE], for the area prefix infix functions. */
-val squareLightMinutes: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.LIGHT_MINUTE)
-/** Bare volume token for [KDistanceUnit.LIGHT_MINUTE], for the volume prefix infix functions. */
-val cubicLightMinutes: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.LIGHT_MINUTE)
-
-/** Bare area token for [KDistanceUnit.LIGHT_HOUR], for the area prefix infix functions. */
-val squareLightHours: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.LIGHT_HOUR)
-/** Bare volume token for [KDistanceUnit.LIGHT_HOUR], for the volume prefix infix functions. */
-val cubicLightHours: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.LIGHT_HOUR)
-
-/** Bare area token for [KDistanceUnit.LIGHT_DAY], for the area prefix infix functions. */
-val squareLightDays: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.LIGHT_DAY)
-/** Bare volume token for [KDistanceUnit.LIGHT_DAY], for the volume prefix infix functions. */
-val cubicLightDays: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.LIGHT_DAY)
-
-/** Bare area token for [KDistanceUnit.LIGHT_WEEK], for the area prefix infix functions. */
-val squareLightWeeks: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.LIGHT_WEEK)
-/** Bare volume token for [KDistanceUnit.LIGHT_WEEK], for the volume prefix infix functions. */
-val cubicLightWeeks: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.LIGHT_WEEK)
-
-/** Bare area token for [KDistanceUnit.LIGHT_YEAR], for the area prefix infix functions. */
-val squareLightYears: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.LIGHT_YEAR)
-/** Bare volume token for [KDistanceUnit.LIGHT_YEAR], for the volume prefix infix functions. */
-val cubicLightYears: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.LIGHT_YEAR)
-
-/** Bare area token for [KDistanceUnit.PARSEC], for the area prefix infix functions. */
-val squareParsecs: KDistanceAreaUnit = KDistanceAreaUnit(KDistanceUnit.PARSEC)
-/** Bare volume token for [KDistanceUnit.PARSEC], for the volume prefix infix functions. */
-val cubicParsecs: KDistanceVolumeUnit = KDistanceVolumeUnit(KDistanceUnit.PARSEC)
 
 private fun prefixedLength(value: Number, prefix: KUnitPrefix, unit: KDistanceUnit): KLengthUnitInstance =
     lengthOf(value.toDouble() * prefix.factor * unit.baseValue)

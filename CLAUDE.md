@@ -102,6 +102,24 @@
 * A sub-package is created for each "pure" unit
 * The base classes `KUnit` and `KMixedUnitInstance` are located in the root package
 
+### DSL file organization
+
+The construction/DSL vocabulary of a group is split into dedicated files, organized **per
+dimension**, never mixed into the wrapper class files:
+
+* **Per-dimension, not per-group.** A group with several exponent-dimensioned subtypes
+  (distance → length/area/volume) gets one set of DSL files **per dimension** (e.g.
+  `KLengthUnit*`, `KAreaUnit*`, `KVolumeUnit*`) - there is **no** shared `KDistanceUnit*`
+  catch-all DSL file spanning all three
+* **Creators** - the `Number.xxx` creator extension properties, together with their private
+  creator helpers (`lengthFrom`/`areaFrom`/`of`, ...), live in `K<Dimension>UnitExtensions.kt`
+  (e.g. `KLengthUnitExtensions.kt`, `KAreaUnitExtensions.kt`, `KSpeedUnitExtensions.kt`)
+* **Bare values** - the bare unit reference / token `val` aliases (`meters`, `squareMeters`,
+  `seconds`, ...) live in `K<Dimension>UnitBareValues.kt`, kept separate from the creators
+* **Prefix DSL** - the SI-prefix `infix` constructors keep their own `K<Group>UnitPrefix.kt`
+* The `*Instance.kt` files hold **only** the wrapper class, its factory helpers
+  (`lengthOf`/`areaOf`/...) and the `to<Group>()` conversions - no creator/bare-value DSL
+
 ## Naming Scheme
 
 * All public types (classes, interfaces, enums, objects) start with `K` project-wide - in the

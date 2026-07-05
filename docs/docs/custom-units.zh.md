@@ -103,8 +103,11 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 
 ## 3. 添加创建者扩展函数
 
-遵循 `K...UnitExtensions.kt` 的模式，为每个单位添加一个裸 `val` 别名以及一个 `Number` 扩展函数，这样
-调用方就可以写 `5.kilograms` 或 `1 kilo grams`，也可以把 `kilograms` 作为纯粹的 `valueAs` 目标传入：
+按照项目约定，将 DSL 词汇拆分到两个文件中：裸 `val` 别名放入 `K...UnitBareValues.kt`，`Number` 扩展
+函数放入 `K...UnitExtensions.kt`。这样调用方就可以写 `5.kilograms` 或 `1 kilo grams`，也可以把
+`kilograms` 作为纯粹的 `valueAs` 目标传入：
+
+`KMassUnitBareValues.kt`：
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -120,6 +123,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** [KMassUnit.OUNCE] 的裸引用。 */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`：
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 

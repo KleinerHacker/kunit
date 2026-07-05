@@ -105,9 +105,12 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 
 ## 3. 生成用拡張関数を追加する
 
-`K...UnitExtensions.kt` のパターンに従って、単位ごとに bare な `val` エイリアスと `Number` 拡張関数を
-追加します。これにより、呼び出し元は `5.kilograms` や `1 kilo grams` と書くことができ、`kilograms`
-を純粋な `valueAs` ターゲットとして渡すこともできます。
+プロジェクトの慣例に従い、DSL 語彙を 2 つのファイルに分割します。bare な `val` エイリアスは
+`K...UnitBareValues.kt` に、`Number` 拡張関数は `K...UnitExtensions.kt` に配置します。これにより、
+呼び出し元は `5.kilograms` や `1 kilo grams` と書くことができ、`kilograms` を純粋な `valueAs`
+ターゲットとして渡すこともできます。
+
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -123,6 +126,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** [KMassUnit.OUNCE] への bare 参照。 */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`:
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 

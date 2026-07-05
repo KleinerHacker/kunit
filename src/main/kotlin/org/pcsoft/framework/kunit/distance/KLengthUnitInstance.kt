@@ -26,7 +26,7 @@ import org.pcsoft.framework.kunit.KUnitInstance
  *   typed (see the [times]/[div] overloads), while a length combined with the general
  *   [KDistanceUnitInstance] or a raw [KMixedUnitInstance] falls back to a [KMixedUnitInstance].
  *
- * Instances are created via the creator extension properties in `KDistanceUnitExtensions.kt`
+ * Instances are created via the creator extension properties in `KLengthUnitExtensions.kt`
  * (e.g. `5.meters`, `5.miles`) or the SI-prefix `infix` constructors in `KDistanceUnitPrefix.kt`
  * (e.g. `3 kilo meters`).
  *
