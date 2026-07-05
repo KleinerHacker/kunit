@@ -16,6 +16,7 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -32,6 +33,7 @@ class KDistanceTypeTransitionTest {
 
     // region times matrix — statically typed results
 
+    /** Every `length/area/volume * length/area/volume` product resolves to the statically correct type (area, volume, or the general base) with the right value and summed exponent. */
     @Test
     fun `times result types`() {
         val ll: KAreaUnitInstance = l * l
@@ -66,6 +68,7 @@ class KDistanceTypeTransitionTest {
 
     // region div matrix — statically typed results
 
+    /** Every `length/area/volume / length/area/volume` quotient resolves to the statically correct type (length, area, dimensionless mixed, or the general base) with the right value and subtracted exponent. */
     @Test
     fun `div result types`() {
         val ll: KMixedUnitInstance = l / l
@@ -100,6 +103,7 @@ class KDistanceTypeTransitionTest {
 
     // region fallbacks and mixed operands
 
+    /** Multiplying a leaf by a general [KDistanceUnitInstance] operand (exponent outside {1,2,3}) falls back to a raw mixed unit with the summed exponent. */
     @Test
     fun `general distance operand falls back to mixed`() {
         val general: KDistanceUnitInstance = a * a // exponent 4, general type
@@ -107,6 +111,7 @@ class KDistanceTypeTransitionTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.BASE, 5)), result.units)
     }
 
+    /** Multiplying a leaf by a raw [KMixedUnitInstance] operand stays a mixed unit (the typed overloads only apply between two distance wrappers). */
     @Test
     fun `leaf times raw mixed unit stays mixed`() {
         val mixed = KMixedUnitInstance(2.0, listOf(KUnitTerm(KDistanceUnit.BASE, 1)))
@@ -118,11 +123,32 @@ class KDistanceTypeTransitionTest {
 
     // region equality across dimensions
 
+    /** Comparing values of different dimensions with `equals` returns `false` (never throws), while same-dimension values compare by normalized magnitude. */
     @Test
     fun `equals across dimensions is false, not an error`() {
         assertFalse(5.meters.equals(5.squareMeters))
         assertFalse(5.squareMeters.equals(5.cubicMeters))
         assertTrue(5.meters == 500.centi(meters))
+    }
+
+    // endregion
+
+    // region in-hierarchy narrowing (KDistanceUnitInstance.toLength/toArea/toVolume)
+
+    /** Narrowing each leaf to its own dimension via `toLength`/`toArea`/`toVolume` returns the same value at the same exponent. */
+    @Test
+    fun `narrowing to the matching dimension returns the value`() {
+        assertEquals(2.0, l.toLength().value, 1e-9)
+        assertEquals(3.0, a.toArea().value, 1e-9)
+        assertEquals(5.0, v.toVolume().value, 1e-9)
+    }
+
+    /** Narrowing to a dimension whose exponent does not match (e.g. `length.toArea()`) throws `IllegalStateException`. */
+    @Test
+    fun `narrowing to the wrong dimension throws`() {
+        assertFailsWith<IllegalStateException> { l.toArea() }
+        assertFailsWith<IllegalStateException> { a.toVolume() }
+        assertFailsWith<IllegalStateException> { v.toLength() }
     }
 
     // endregion

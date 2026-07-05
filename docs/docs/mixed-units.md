@@ -161,3 +161,14 @@ area.toDistance().value                        // 10000.0 (an area, exponent 2)
 
 If the `KMixedUnitInstance` does **not** consist of exactly one term of that group (e.g. it's still a mixed
 length/time value), the conversion throws `IllegalStateException`.
+
+The same narrowing is available **directly on a distance value** (not only on `KMixedUnitInstance`): a
+general `KDistanceUnitInstance` — or any leaf — can be narrowed to a specific dimension with `toLength()`,
+`toArea()` or `toVolume()`, which are exponent-checked and throw `IllegalStateException` on a mismatch:
+
+```kotlin
+val area = 200.meters * 50.meters           // KAreaUnitInstance (exponent 2)
+area.toArea().value                          // 10000.0
+area.toDistance().toArea().value             // 10000.0 (widened, then narrowed back)
+area.toLength()                              // IllegalStateException (exponent 2, not 1)
+```

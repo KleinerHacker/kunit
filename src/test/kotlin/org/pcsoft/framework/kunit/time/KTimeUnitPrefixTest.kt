@@ -62,26 +62,38 @@ private val representablePrefixFunctions: List<KUnitPrefix> = listOf(
     KUnitPrefix.DECI, KUnitPrefix.CENTI, KUnitPrefix.MILLI, KUnitPrefix.MICRO, KUnitPrefix.NANO
 )
 
+/** Looks up the prefix `infix` lambda for [prefix] and applies it to [n] [unit] (e.g. `n milli seconds`). */
 private fun applyPrefix(prefix: KUnitPrefix, n: Number, unit: KTimeUnit): KTimeUnitInstance =
     allPrefixFunctions.first { it.second == prefix }.first(n, unit)
 
+/**
+ * Prefix × unit cross-matrix for the time group. Because time values are backed by a `Duration` (whole
+ * seconds are a `Long`), extreme prefixes overflow, so two complementary tests are used: a standalone
+ * per-prefix test that always lands at exactly 1.0 s (all 24 prefixes), and a prefix × unit matrix
+ * restricted to the representable band (see [representablePrefixFunctions]). The unit side is driven off the
+ * bare-value aliases ([timeBareValues]) so `5 milli seconds` runs through the alias.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KTimeUnitPrefixTest {
 
+    /** Provider: every SI prefix, for the standalone per-prefix test. */
     private fun prefixes(): List<Arguments> = allPrefixFunctions.map { Arguments.of(it.second) }
 
+    /** Provider: the representable prefix band crossed with every time bare-value alias. */
     private fun prefixUnitPairs(): List<Arguments> =
-        representablePrefixFunctions.flatMap { prefix -> timeUnitGenerators.map { (_, unit) -> Arguments.of(prefix, unit) } }
+        representablePrefixFunctions.flatMap { prefix -> timeBareValues.map { unit -> Arguments.of(prefix, unit) } }
 
+    /** Each of the 24 prefixes applied to `1 / factor` seconds lands at exactly 1.0 s — isolates the prefix while staying in the Duration-representable range. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("prefixes")
     fun `every prefix scales by its factor`(prefix: KUnitPrefix) {
         // Applying the prefix to 1 / factor seconds must land at exactly 1.0 second, which stays within the
         // Duration-backed range for every prefix, however extreme.
-        val actual = applyPrefix(prefix, 1.0 / prefix.factor, KTimeUnit.SECOND).value
+        val actual = applyPrefix(prefix, 1.0 / prefix.factor, seconds).value
         assertEquals(1.0, actual, 1e-9, "prefix $prefix mismatch")
     }
 
+    /** Every representable prefix × every time unit (`5 kilo hours`, …) both scales the base value correctly and reads back the original count via `valueAs`. */
     @ParameterizedTest(name = "{0} {1}")
     @MethodSource("prefixUnitPairs")
     fun `every representable prefix combined with every unit round trips`(prefix: KUnitPrefix, unit: KTimeUnit) {
@@ -94,6 +106,7 @@ class KTimeUnitPrefixTest {
             "prefix $prefix with unit $unit read-back mismatch")
     }
 
+    /** The prefix `infix` form (`5 milli seconds`) returns a typed [KTimeUnitInstance] directly, with the right value, `valueAs` and single second-term signature. */
     @Test
     fun `prefix infix returns a KTimeUnitInstance directly`() {
         val ms: KTimeUnitInstance = 5 milli seconds

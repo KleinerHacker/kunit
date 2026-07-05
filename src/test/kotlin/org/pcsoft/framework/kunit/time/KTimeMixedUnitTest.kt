@@ -24,6 +24,7 @@ import kotlin.test.assertFailsWith
 
 class KTimeMixedUnitTest {
 
+    /** Dividing a length by a time through the mixed engine produces a `[m¹, s⁻¹]` speed-shaped mixed unit with the right value. */
     @Test
     fun `dividing a length by a time produces speed`() {
         val speed = 10.meters / 2.seconds.toUnit()
@@ -32,6 +33,7 @@ class KTimeMixedUnitTest {
         assertEquals(setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.SECOND, -1)), speed.units.toSet())
     }
 
+    /** A speed-shaped mixed unit reads back as km/h via `valueAs`/`toString` with a composed length-per-time target (10 m/s == 36 km/h). */
     @Test
     fun `speed converts to kilometers per hour`() {
         val speed = 10.meters / 1.seconds.toUnit() // 10 m/s
@@ -42,6 +44,7 @@ class KTimeMixedUnitTest {
         assertEquals("36.0 km*h^-1", speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR))
     }
 
+    /** Multiplying a speed-shaped mixed unit back by a time cancels the second term and recovers a pure length. */
     @Test
     fun `multiplying speed back by time recovers a pure length`() {
         val speed = 10.meters / 2.seconds.toUnit() // 5 m/s
@@ -52,6 +55,7 @@ class KTimeMixedUnitTest {
         assertEquals(10.0, distance.toDistance().value, 1e-9)
     }
 
+    /** A speed-shaped mixed unit is not a pure time value, so `toTime()` throws `IllegalStateException`. */
     @Test
     fun `dividing a length by a time and multiplying back is not a pure time`() {
         val speed = 10.meters / 2.seconds.toUnit()

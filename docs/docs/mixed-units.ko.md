@@ -157,3 +157,14 @@ area.toDistance().value                        // 10000.0 (면적, 지수 2)
 
 `KMixedUnitInstance`가 해당 그룹의 항 하나로만 구성되어 있지 **않은** 경우(예: 여전히 혼합된 길이/시간 값인 경우)
 변환은 `IllegalStateException`을 던집니다.
+
+동일한 좁히기(narrowing)는 `KMixedUnitInstance`뿐 아니라 **거리 값에서 직접** 사용할 수 있습니다. 일반
+`KDistanceUnitInstance`(또는 임의의 리프)는 `toLength()`, `toArea()`, `toVolume()`으로 특정 차원으로 좁힐 수
+있으며, 지수를 검사하여 일치하지 않으면 `IllegalStateException`을 던집니다:
+
+```kotlin
+val area = 200.meters * 50.meters           // KAreaUnitInstance (지수 2)
+area.toArea().value                          // 10000.0
+area.toDistance().toArea().value             // 10000.0 (넓혔다가 다시 좁힘)
+area.toLength()                              // IllegalStateException (지수 2, 1이 아님)
+```

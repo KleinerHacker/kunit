@@ -22,15 +22,25 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
+/**
+ * The named derived units of the distance group (hectare/are/acre for area, litre/gallon/… for volume):
+ * that each creator produces the correct leaf type and exponent, round-trips through `valueAs`, and that an
+ * area/volume built from raw lengths reads back in the matching derived unit.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KDistanceDerivedUnitTest {
 
+    /** Provider: every area derived unit. */
     private fun areaDeriveds(): List<Arguments> = areaDerivedGenerators.map { Arguments.of(it.second) }
+    /** Provider: every volume derived unit. */
     private fun volumeDeriveds(): List<Arguments> = volumeDerivedGenerators.map { Arguments.of(it.second) }
 
+    /** Builds `n` of the given area derived unit via its creator property. */
     private fun mkAreaDerived(d: KDerivedUnit<KDistanceUnit>, n: Number) = areaDerivedGenerators.first { it.second == d }.first(n)
+    /** Builds `n` of the given volume derived unit via its creator property. */
     private fun mkVolumeDerived(d: KDerivedUnit<KDistanceUnit>, n: Number) = volumeDerivedGenerators.first { it.second == d }.first(n)
 
+    /** Every area derived unit (hectare/are/acre) builds a [KAreaUnitInstance] of exponent 2 that round-trips through `valueAs`. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("areaDeriveds")
     fun `area derived units round trip and are exponent 2`(d: KDerivedUnit<KDistanceUnit>) {
@@ -41,6 +51,7 @@ class KDistanceDerivedUnitTest {
         assertEquals(5.0, instance.valueAs(d), 1e-9)
     }
 
+    /** Every volume derived unit (litre/gallon/…) builds a [KVolumeUnitInstance] of exponent 3 that round-trips through `valueAs`. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("volumeDeriveds")
     fun `volume derived units round trip and are exponent 3`(d: KDerivedUnit<KDistanceUnit>) {
@@ -51,18 +62,21 @@ class KDistanceDerivedUnitTest {
         assertEquals(5.0, instance.valueAs(d), 1e-9)
     }
 
+    /** An area built by multiplying two raw lengths (200 m × 50 m = 10 000 m²) reads back as exactly 1 hectare. */
     @Test
     fun `an area built from two lengths reads back in hectares`() {
         val area = 200.meters * 50.meters // 10 000 m²
         assertEquals(1.0, area.valueAs(KDistanceDerivedUnit.HECTARE), 1e-9)
     }
 
+    /** A volume built by multiplying three raw lengths (2 m³ = 8 m³) reads back as 8000 litres. */
     @Test
     fun `a volume built from three lengths reads back in liters`() {
         val volume = 2.meters * 2.meters * 2.meters // 8 m³
         assertEquals(8000.0, volume.valueAs(KDistanceDerivedUnit.LITER), 1e-6)
     }
 
+    /** Reading a value via a derived-unit target of the wrong exponent (hectare on a length, litre on an area) throws `IllegalStateException`. */
     @Test
     fun `a derived-unit target of the wrong exponent fails`() {
         assertFailsWith<IllegalStateException> { 5.meters.valueAs(KDistanceDerivedUnit.HECTARE) }

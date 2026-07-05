@@ -160,3 +160,14 @@ area.toDistance().value                        // 10000.0(面積、指数2)
 
 `KMixedUnitInstance` がそのグループの1つの項だけで構成されて**いない**場合(例: まだ長さ/時間が混在した値の場合)、
 変換は `IllegalStateException` を投げます。
+
+同じ絞り込み(narrowing)は `KMixedUnitInstance` だけでなく、**距離の値に対して直接**利用できます。一般的な
+`KDistanceUnitInstance`(または任意のリーフ)は `toLength()`、`toArea()`、`toVolume()` で特定の次元へ絞り込め、
+指数を検査して一致しない場合は `IllegalStateException` を投げます:
+
+```kotlin
+val area = 200.meters * 50.meters           // KAreaUnitInstance(指数2)
+area.toArea().value                          // 10000.0
+area.toDistance().toArea().value             // 10000.0(広げてから再び絞り込む)
+area.toLength()                              // IllegalStateException(指数2、1ではない)
+```

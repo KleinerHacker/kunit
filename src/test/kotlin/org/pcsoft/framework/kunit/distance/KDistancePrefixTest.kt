@@ -18,7 +18,21 @@ import kotlin.math.pow
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+/**
+ * Prefix × unit cross-matrix for the distance group. For each dimension (length/area/volume) it verifies
+ * that applying every SI prefix (`kilo`, `mega`, …) to every unit through the bare-value DSL
+ * (`5 kilo meters`, `5 kilo squareMiles`, …) yields the correct base value.
+ *
+ * The `*Ops` lists capture the 24 prefix `infix` functions as `(prefix, (count, unit) -> instance)` pairs:
+ * the lambda is the actual code under test (`{ n, u -> n kilo u }` calls `Number.kilo(unit)`), while the
+ * expected value is computed independently from `prefix.factor * unit.baseValue` (squared/cubed for
+ * area/volume, because the prefix scales the linear base before the exponent is applied). The unit side is
+ * fed from the bare-value lists (`lengthBareValues`/`areaBareValues`/`volumeBareValues` in
+ * `KDistanceTestFixtures.kt`) so the aliases themselves are exercised.
+ */
 class KDistancePrefixTest {
+    // The 24 length prefix infix functions, keyed by prefix. Each lambda applies the prefix to a count and a
+    // bare KDistanceUnit (`n kilo meters`), returning the constructed length.
     private val lengthOps: List<Pair<KUnitPrefix, (Number, KDistanceUnit) -> KLengthUnitInstance>> = listOf(
         KUnitPrefix.QUETTA to { n, u -> n quetta u },
         KUnitPrefix.RONNA to { n, u -> n ronna u },
@@ -45,108 +59,121 @@ class KDistancePrefixTest {
         KUnitPrefix.RONTO to { n, u -> n ronto u },
         KUnitPrefix.QUECTO to { n, u -> n quecto u },
     )
-    private val areaOps: List<Pair<KUnitPrefix, (Number, KDistanceUnit) -> KAreaUnitInstance>> = listOf(
-        KUnitPrefix.QUETTA to { n, u -> n quetta KDistanceAreaUnit(u) },
-        KUnitPrefix.RONNA to { n, u -> n ronna KDistanceAreaUnit(u) },
-        KUnitPrefix.YOTTA to { n, u -> n yotta KDistanceAreaUnit(u) },
-        KUnitPrefix.ZETTA to { n, u -> n zetta KDistanceAreaUnit(u) },
-        KUnitPrefix.EXA to { n, u -> n exa KDistanceAreaUnit(u) },
-        KUnitPrefix.PETA to { n, u -> n peta KDistanceAreaUnit(u) },
-        KUnitPrefix.TERA to { n, u -> n tera KDistanceAreaUnit(u) },
-        KUnitPrefix.GIGA to { n, u -> n giga KDistanceAreaUnit(u) },
-        KUnitPrefix.MEGA to { n, u -> n mega KDistanceAreaUnit(u) },
-        KUnitPrefix.KILO to { n, u -> n kilo KDistanceAreaUnit(u) },
-        KUnitPrefix.HECTO to { n, u -> n hecto KDistanceAreaUnit(u) },
-        KUnitPrefix.DECA to { n, u -> n deca KDistanceAreaUnit(u) },
-        KUnitPrefix.DECI to { n, u -> n deci KDistanceAreaUnit(u) },
-        KUnitPrefix.CENTI to { n, u -> n centi KDistanceAreaUnit(u) },
-        KUnitPrefix.MILLI to { n, u -> n milli KDistanceAreaUnit(u) },
-        KUnitPrefix.MICRO to { n, u -> n micro KDistanceAreaUnit(u) },
-        KUnitPrefix.NANO to { n, u -> n nano KDistanceAreaUnit(u) },
-        KUnitPrefix.PICO to { n, u -> n pico KDistanceAreaUnit(u) },
-        KUnitPrefix.FEMTO to { n, u -> n femto KDistanceAreaUnit(u) },
-        KUnitPrefix.ATTO to { n, u -> n atto KDistanceAreaUnit(u) },
-        KUnitPrefix.ZEPTO to { n, u -> n zepto KDistanceAreaUnit(u) },
-        KUnitPrefix.YOCTO to { n, u -> n yocto KDistanceAreaUnit(u) },
-        KUnitPrefix.RONTO to { n, u -> n ronto KDistanceAreaUnit(u) },
-        KUnitPrefix.QUECTO to { n, u -> n quecto KDistanceAreaUnit(u) },
+    // The 24 area prefix infix functions. They take an area bare-value token (`n kilo squareMeters`); the
+    // prefix scales the linear base unit, which is then squared.
+    private val areaOps: List<Pair<KUnitPrefix, (Number, KDistanceAreaUnit) -> KAreaUnitInstance>> = listOf(
+        KUnitPrefix.QUETTA to { n, u -> n quetta u },
+        KUnitPrefix.RONNA to { n, u -> n ronna u },
+        KUnitPrefix.YOTTA to { n, u -> n yotta u },
+        KUnitPrefix.ZETTA to { n, u -> n zetta u },
+        KUnitPrefix.EXA to { n, u -> n exa u },
+        KUnitPrefix.PETA to { n, u -> n peta u },
+        KUnitPrefix.TERA to { n, u -> n tera u },
+        KUnitPrefix.GIGA to { n, u -> n giga u },
+        KUnitPrefix.MEGA to { n, u -> n mega u },
+        KUnitPrefix.KILO to { n, u -> n kilo u },
+        KUnitPrefix.HECTO to { n, u -> n hecto u },
+        KUnitPrefix.DECA to { n, u -> n deca u },
+        KUnitPrefix.DECI to { n, u -> n deci u },
+        KUnitPrefix.CENTI to { n, u -> n centi u },
+        KUnitPrefix.MILLI to { n, u -> n milli u },
+        KUnitPrefix.MICRO to { n, u -> n micro u },
+        KUnitPrefix.NANO to { n, u -> n nano u },
+        KUnitPrefix.PICO to { n, u -> n pico u },
+        KUnitPrefix.FEMTO to { n, u -> n femto u },
+        KUnitPrefix.ATTO to { n, u -> n atto u },
+        KUnitPrefix.ZEPTO to { n, u -> n zepto u },
+        KUnitPrefix.YOCTO to { n, u -> n yocto u },
+        KUnitPrefix.RONTO to { n, u -> n ronto u },
+        KUnitPrefix.QUECTO to { n, u -> n quecto u },
     )
-    private val volumeOps: List<Pair<KUnitPrefix, (Number, KDistanceUnit) -> KVolumeUnitInstance>> = listOf(
-        KUnitPrefix.QUETTA to { n, u -> n quetta KDistanceVolumeUnit(u) },
-        KUnitPrefix.RONNA to { n, u -> n ronna KDistanceVolumeUnit(u) },
-        KUnitPrefix.YOTTA to { n, u -> n yotta KDistanceVolumeUnit(u) },
-        KUnitPrefix.ZETTA to { n, u -> n zetta KDistanceVolumeUnit(u) },
-        KUnitPrefix.EXA to { n, u -> n exa KDistanceVolumeUnit(u) },
-        KUnitPrefix.PETA to { n, u -> n peta KDistanceVolumeUnit(u) },
-        KUnitPrefix.TERA to { n, u -> n tera KDistanceVolumeUnit(u) },
-        KUnitPrefix.GIGA to { n, u -> n giga KDistanceVolumeUnit(u) },
-        KUnitPrefix.MEGA to { n, u -> n mega KDistanceVolumeUnit(u) },
-        KUnitPrefix.KILO to { n, u -> n kilo KDistanceVolumeUnit(u) },
-        KUnitPrefix.HECTO to { n, u -> n hecto KDistanceVolumeUnit(u) },
-        KUnitPrefix.DECA to { n, u -> n deca KDistanceVolumeUnit(u) },
-        KUnitPrefix.DECI to { n, u -> n deci KDistanceVolumeUnit(u) },
-        KUnitPrefix.CENTI to { n, u -> n centi KDistanceVolumeUnit(u) },
-        KUnitPrefix.MILLI to { n, u -> n milli KDistanceVolumeUnit(u) },
-        KUnitPrefix.MICRO to { n, u -> n micro KDistanceVolumeUnit(u) },
-        KUnitPrefix.NANO to { n, u -> n nano KDistanceVolumeUnit(u) },
-        KUnitPrefix.PICO to { n, u -> n pico KDistanceVolumeUnit(u) },
-        KUnitPrefix.FEMTO to { n, u -> n femto KDistanceVolumeUnit(u) },
-        KUnitPrefix.ATTO to { n, u -> n atto KDistanceVolumeUnit(u) },
-        KUnitPrefix.ZEPTO to { n, u -> n zepto KDistanceVolumeUnit(u) },
-        KUnitPrefix.YOCTO to { n, u -> n yocto KDistanceVolumeUnit(u) },
-        KUnitPrefix.RONTO to { n, u -> n ronto KDistanceVolumeUnit(u) },
-        KUnitPrefix.QUECTO to { n, u -> n quecto KDistanceVolumeUnit(u) },
+    // The 24 volume prefix infix functions. They take a volume bare-value token (`n kilo cubicMeters`); the
+    // prefix scales the linear base unit, which is then cubed.
+    private val volumeOps: List<Pair<KUnitPrefix, (Number, KDistanceVolumeUnit) -> KVolumeUnitInstance>> = listOf(
+        KUnitPrefix.QUETTA to { n, u -> n quetta u },
+        KUnitPrefix.RONNA to { n, u -> n ronna u },
+        KUnitPrefix.YOTTA to { n, u -> n yotta u },
+        KUnitPrefix.ZETTA to { n, u -> n zetta u },
+        KUnitPrefix.EXA to { n, u -> n exa u },
+        KUnitPrefix.PETA to { n, u -> n peta u },
+        KUnitPrefix.TERA to { n, u -> n tera u },
+        KUnitPrefix.GIGA to { n, u -> n giga u },
+        KUnitPrefix.MEGA to { n, u -> n mega u },
+        KUnitPrefix.KILO to { n, u -> n kilo u },
+        KUnitPrefix.HECTO to { n, u -> n hecto u },
+        KUnitPrefix.DECA to { n, u -> n deca u },
+        KUnitPrefix.DECI to { n, u -> n deci u },
+        KUnitPrefix.CENTI to { n, u -> n centi u },
+        KUnitPrefix.MILLI to { n, u -> n milli u },
+        KUnitPrefix.MICRO to { n, u -> n micro u },
+        KUnitPrefix.NANO to { n, u -> n nano u },
+        KUnitPrefix.PICO to { n, u -> n pico u },
+        KUnitPrefix.FEMTO to { n, u -> n femto u },
+        KUnitPrefix.ATTO to { n, u -> n atto u },
+        KUnitPrefix.ZEPTO to { n, u -> n zepto u },
+        KUnitPrefix.YOCTO to { n, u -> n yocto u },
+        KUnitPrefix.RONTO to { n, u -> n ronto u },
+        KUnitPrefix.QUECTO to { n, u -> n quecto u },
     )
 
+    // Relative tolerance: 1e-9 of the expected magnitude, floored just above zero so the prefix span
+    // (quetta 1e30 … quecto 1e-30, squared/cubed) stays comparable without a fixed absolute epsilon.
     private fun delta(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-300)
 
+    /** Every SI prefix applied to every length unit via `n <prefix> unit` yields `count * factor * baseValue` metres. */
     @Test
     fun `length prefix x unit matrix`() {
-        for ((prefix, op) in lengthOps) for ((_, unit) in lengthUnitGenerators) {
+        for ((prefix, op) in lengthOps) for (unit in lengthBareValues) {
             val expected = 3.0 * prefix.factor * unit.baseValue
             assertEquals(expected, op(3, unit).value, delta(expected), "$prefix x $unit")
         }
     }
 
+    /** Every SI prefix applied to every area token scales the linear base first, then squares it: `count * (factor * baseValue)²`. */
     @Test
     fun `area prefix x unit matrix`() {
-        for ((prefix, op) in areaOps) for ((_, unit) in areaUnitGenerators) {
+        for ((prefix, op) in areaOps) for ((token, unit) in areaBareValues) {
             val expected = 3.0 * (prefix.factor * unit.baseValue).pow(2)
-            assertEquals(expected, op(3, unit).value, delta(expected), "$prefix x $unit")
+            assertEquals(expected, op(3, token).value, delta(expected), "$prefix x $unit")
         }
     }
 
+    /** Every SI prefix applied to every volume token scales the linear base first, then cubes it: `count * (factor * baseValue)³`. */
     @Test
     fun `volume prefix x unit matrix`() {
-        for ((prefix, op) in volumeOps) for ((_, unit) in volumeUnitGenerators) {
+        for ((prefix, op) in volumeOps) for ((token, unit) in volumeBareValues) {
             val expected = 3.0 * (prefix.factor * unit.baseValue).pow(3)
-            assertEquals(expected, op(3, unit).value, delta(expected), "$prefix x $unit")
+            assertEquals(expected, op(3, token).value, delta(expected), "$prefix x $unit")
         }
     }
 
+    /** Each prefix applied to 1 metre equals exactly its numeric factor — isolates the prefix from the unit. */
     @Test
     fun `every length prefix standalone against meter`() {
         for ((prefix, op) in lengthOps) {
-            assertEquals(prefix.factor, op(1, KDistanceUnit.METER).value, delta(prefix.factor), "$prefix")
+            assertEquals(prefix.factor, op(1, meters).value, delta(prefix.factor), "$prefix")
         }
     }
 
+    /** Each prefix applied to 1 square metre equals its factor squared — isolates the prefix at exponent 2. */
     @Test
     fun `every area prefix standalone against square meter`() {
         for ((prefix, op) in areaOps) {
             val expected = prefix.factor.pow(2)
-            assertEquals(expected, op(1, KDistanceUnit.METER).value, delta(expected), "$prefix")
+            assertEquals(expected, op(1, squareMeters).value, delta(expected), "$prefix")
         }
     }
 
+    /** Each prefix applied to 1 cubic metre equals its factor cubed — isolates the prefix at exponent 3. */
     @Test
     fun `every volume prefix standalone against cubic meter`() {
         for ((prefix, op) in volumeOps) {
             val expected = prefix.factor.pow(3)
-            assertEquals(expected, op(1, KDistanceUnit.METER).value, delta(expected), "$prefix")
+            assertEquals(expected, op(1, cubicMeters).value, delta(expected), "$prefix")
         }
     }
 
+    /** Spot check that the prefix scales the linear base before squaring/cubing: `1 kilo squareMeters` == 1 km² == 1e6 m², `1 kilo cubicMeters` == 1e9 m³. */
     @Test
     fun `kilo square meters is a square kilometer`() {
         assertEquals(1_000_000.0, (1 kilo squareMeters).value, 1e-3)

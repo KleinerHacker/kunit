@@ -18,9 +18,19 @@
   existing named derived units (`ares`/`hectares`/`acres`, `liters`/… ) now return
   `KAreaUnitInstance`/`KVolumeUnitInstance`.
 - New conversions `KMixedUnitInstance.toDistance()`/`toLength()`/`toArea()`/`toVolume()`.
+- **In-hierarchy narrowing** `KDistanceUnitInstance.toLength()`/`toArea()`/`toVolume()`: a general distance
+  value (or any leaf) can now be narrowed to a specific dimension directly, mirroring the
+  `KMixedUnitInstance` extensions (exponent-checked, throws `IllegalStateException` on mismatch). Previously
+  only `toDistance()` existed on the wrapper and the narrowing conversions lived solely on
+  `KMixedUnitInstance`.
 
 ### Changed
 
+- **Tests: prefix × unit matrices now construct through the bare-value DSL.** The prefix cross-matrices
+  for every group build their instances via the bare-value aliases (`5 kilo meters`, `5 kilo squareMiles`,
+  `5 milli seconds`, `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the
+  `K*UnitBareValues.kt` aliases are now fully covered and every unit × every prefix runs through the real
+  DSL. Test-construction policy documented in `CLAUDE.md`.
 - **Breaking:** the length group was renamed to **distance** — package
   `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
   `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the

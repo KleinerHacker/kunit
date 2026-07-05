@@ -82,11 +82,40 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
     operator fun div(other: KDistanceUnitInstance): KMixedUnitInstance = instance / other.instance
 
     /**
-     * Widens this value to the general distance abstraction. For the base type this returns `this`; the
-     * leaf types inherit it, so `5.meters.toDistance()` yields the same value typed as the group's
-     * abstraction (e.g. for a heterogeneous `List<KDistanceUnitInstance>`).
+     * Narrows this distance value to a [KLengthUnitInstance], requiring [exponent] to be **1**. For a value
+     * that is already a length this returns it unchanged; it is the in-hierarchy counterpart of
+     * [KMixedUnitInstance.toLength] (e.g. to narrow an element of a `List<KDistanceUnitInstance>`).
+     *
+     * @throws IllegalStateException if [exponent] is not 1.
      */
-    fun toDistance(): KDistanceUnitInstance = this
+    fun toLength(): KLengthUnitInstance {
+        check(exponent == 1) { "KDistanceUnitInstance $this is not a length (expected exponent 1, was $exponent)" }
+        return this as? KLengthUnitInstance ?: KLengthUnitInstance(instance)
+    }
+
+    /**
+     * Narrows this distance value to a [KAreaUnitInstance], requiring [exponent] to be **2**. For a value
+     * that is already an area this returns it unchanged; the in-hierarchy counterpart of
+     * [KMixedUnitInstance.toArea].
+     *
+     * @throws IllegalStateException if [exponent] is not 2.
+     */
+    fun toArea(): KAreaUnitInstance {
+        check(exponent == 2) { "KDistanceUnitInstance $this is not an area (expected exponent 2, was $exponent)" }
+        return this as? KAreaUnitInstance ?: KAreaUnitInstance(instance)
+    }
+
+    /**
+     * Narrows this distance value to a [KVolumeUnitInstance], requiring [exponent] to be **3**. For a value
+     * that is already a volume this returns it unchanged; the in-hierarchy counterpart of
+     * [KMixedUnitInstance.toVolume].
+     *
+     * @throws IllegalStateException if [exponent] is not 3.
+     */
+    fun toVolume(): KVolumeUnitInstance {
+        check(exponent == 3) { "KDistanceUnitInstance $this is not a volume (expected exponent 3, was $exponent)" }
+        return this as? KVolumeUnitInstance ?: KVolumeUnitInstance(instance)
+    }
 
     /**
      * Structural equality by **concrete type**, [exponent] and normalized [value]: two values are equal

@@ -39,22 +39,34 @@ internal val timeUnitGenerators: List<Pair<(Number) -> KTimeUnitInstance, KTimeU
     ({ n: Number -> n.days }) to KTimeUnit.DAY
 )
 
+/** All time bare-value aliases (`seconds`, `minutes`, …), used to drive the prefix `infix` DSL in tests. */
+internal val timeBareValues: List<KTimeUnit> = listOf(seconds, minutes, hours, days)
+
 /** Builds a [KTimeUnitInstance] of [n] in [unit] via that unit's creator property (exercises the property creators). */
 internal fun timeOf(unit: KTimeUnit, n: Number): KTimeUnitInstance =
     timeUnitGenerators.first { it.second == unit }.first(n)
 
 internal fun timeDelta(expected: Double): Double = (abs(expected) * 1e-9).coerceAtLeast(1e-12)
 
+/**
+ * Full behavioural matrix for [KTimeUnitInstance]: construction/conversion, every operator (`+`, `-`, `*`,
+ * `/`) and every comparison, each parameterized over every time unit (and every unit pair). Instances are
+ * built via [timeOf] (the creator properties); expected values come from `unit.baseValue`. `PER_CLASS`
+ * lifecycle lets the `@MethodSource` providers below be non-static instance methods.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KTimeUnitInstanceTest {
 
+    /** Provider: every time unit, for the single-unit parameterized tests. */
     private fun units(): List<Arguments> = timeUnitGenerators.map { Arguments.of(it.second) }
 
+    /** Provider: the full cross-product of every unit against every other unit, for the pairwise tests. */
     private fun unitPairs(): List<Arguments> =
         timeUnitGenerators.flatMap { (_, a) -> timeUnitGenerators.map { (_, b) -> Arguments.of(a, b) } }
 
     // region construction / conversion matrix
 
+    /** Each creator property builds `5 unit`, normalizes to the base value (seconds) and reads back exactly 5 via `valueAs(unit)`. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("units")
     fun `every creator property round trips through valueAs`(unit: KTimeUnit) {
@@ -63,6 +75,7 @@ class KTimeUnitInstanceTest {
         assertEquals(5.0, instance.valueAs(unit), 5.0 * 1e-9, "valueAs round trip mismatch for $unit")
     }
 
+    /** Converting `5 from` into every other time unit yields `5 * from.baseValue / to.baseValue` — the full conversion matrix. */
     @ParameterizedTest(name = "{0} -> {1}")
     @MethodSource("unitPairs")
     fun `every unit converts into every other unit`(from: KTimeUnit, to: KTimeUnit) {
@@ -74,6 +87,7 @@ class KTimeUnitInstanceTest {
 
     // region operator matrix (every unit against every other unit)
 
+    /** `a + b` for every unit pair normalizes both operands and returns their sum as a time value. */
     @ParameterizedTest(name = "{0} + {1}")
     @MethodSource("unitPairs")
     fun `plus combines every pair of units`(a: KTimeUnit, b: KTimeUnit) {
@@ -82,6 +96,7 @@ class KTimeUnitInstanceTest {
         assertEquals(expected, result.value, timeDelta(expected), "$a + $b mismatch")
     }
 
+    /** `a - b` for every unit pair normalizes both operands and returns their difference as a time value. */
     @ParameterizedTest(name = "{0} - {1}")
     @MethodSource("unitPairs")
     fun `minus combines every pair of units`(a: KTimeUnit, b: KTimeUnit) {
@@ -90,6 +105,7 @@ class KTimeUnitInstanceTest {
         assertEquals(expected, result.value, timeDelta(expected), "$a - $b mismatch")
     }
 
+    /** `a * b` for every unit pair multiplies the normalized values and adds the exponents to `[s²]` (a "square second"). */
     @ParameterizedTest(name = "{0} * {1}")
     @MethodSource("unitPairs")
     fun `times combines every pair of units into second squared`(a: KTimeUnit, b: KTimeUnit) {
@@ -99,6 +115,7 @@ class KTimeUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 2)), result.units)
     }
 
+    /** `a / b` for every unit pair divides the normalized values and cancels the terms to a dimensionless ratio. */
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("unitPairs")
     fun `div combines every pair of units into a dimensionless ratio`(a: KTimeUnit, b: KTimeUnit) {
@@ -112,6 +129,7 @@ class KTimeUnitInstanceTest {
 
     // region comparison matrix (every unit against every other unit)
 
+    /** `==` is true exactly when the two operands' normalized base values are equal, across every unit pair. */
     @ParameterizedTest(name = "{0} == {1}")
     @MethodSource("unitPairs")
     fun `equals holds exactly when normalized values match`(a: KTimeUnit, b: KTimeUnit) {
@@ -120,6 +138,7 @@ class KTimeUnitInstanceTest {
         assertEquals(av == bv, timeOf(a, 5) == timeOf(b, 3), "$a == $b mismatch")
     }
 
+    /** `!=` is the exact negation of `==` for every unit pair. */
     @ParameterizedTest(name = "{0} != {1}")
     @MethodSource("unitPairs")
     fun `not equals is the negation of equals`(a: KTimeUnit, b: KTimeUnit) {
@@ -128,6 +147,7 @@ class KTimeUnitInstanceTest {
         assertEquals(av != bv, timeOf(a, 5) != timeOf(b, 3), "$a != $b mismatch")
     }
 
+    /** `<` follows the ordering of the normalized base values, across every unit pair. */
     @ParameterizedTest(name = "{0} < {1}")
     @MethodSource("unitPairs")
     fun `less than follows normalized values`(a: KTimeUnit, b: KTimeUnit) {
@@ -136,6 +156,7 @@ class KTimeUnitInstanceTest {
         assertEquals(av < bv, timeOf(a, 5) < timeOf(b, 3), "$a < $b mismatch")
     }
 
+    /** `<=` follows the ordering of the normalized base values, across every unit pair. */
     @ParameterizedTest(name = "{0} <= {1}")
     @MethodSource("unitPairs")
     fun `less than or equal follows normalized values`(a: KTimeUnit, b: KTimeUnit) {
@@ -144,6 +165,7 @@ class KTimeUnitInstanceTest {
         assertEquals(av <= bv, timeOf(a, 5) <= timeOf(b, 3), "$a <= $b mismatch")
     }
 
+    /** `>` follows the ordering of the normalized base values, across every unit pair. */
     @ParameterizedTest(name = "{0} > {1}")
     @MethodSource("unitPairs")
     fun `greater than follows normalized values`(a: KTimeUnit, b: KTimeUnit) {
@@ -152,6 +174,7 @@ class KTimeUnitInstanceTest {
         assertEquals(av > bv, timeOf(a, 5) > timeOf(b, 3), "$a > $b mismatch")
     }
 
+    /** `>=` follows the ordering of the normalized base values, across every unit pair. */
     @ParameterizedTest(name = "{0} >= {1}")
     @MethodSource("unitPairs")
     fun `greater than or equal follows normalized values`(a: KTimeUnit, b: KTimeUnit) {
@@ -164,6 +187,7 @@ class KTimeUnitInstanceTest {
 
     // region toString matrix (every unit)
 
+    /** `toString()` with no target renders the normalized value followed by the base-unit symbol (seconds). */
     @ParameterizedTest(name = "{0}")
     @MethodSource("units")
     fun `toString default renders the value in the base unit`(unit: KTimeUnit) {
@@ -171,6 +195,7 @@ class KTimeUnitInstanceTest {
         assertEquals("${instance.value} ${KTimeUnit.BASE.symbol}", instance.toString())
     }
 
+    /** `toString(unit)` renders the value converted into that unit followed by the unit's own symbol. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("units")
     fun `toString with the own unit renders that symbol`(unit: KTimeUnit) {
@@ -178,6 +203,7 @@ class KTimeUnitInstanceTest {
         assertEquals("${instance.valueAs(unit)} ${unit.symbol}", instance.toString(unit))
     }
 
+    /** `toString(milli·unit)` renders the value in the prefix-scaled target with the prefixed symbol (`m…`). */
     @ParameterizedTest(name = "milli {0}")
     @MethodSource("units")
     fun `toString with a scaled target renders the prefixed symbol`(unit: KTimeUnit) {
@@ -190,6 +216,7 @@ class KTimeUnitInstanceTest {
 
     // region group-specific behaviour retained from the original suite
 
+    /** The creator property accepts any `Number` (`Int`/`Long`/`Float`/`Double`) and normalizes to the same Double value. */
     @Test
     fun `construction from non-Double Number types`() {
         assertEquals(5.0, 5.seconds.value, 1e-9)
@@ -198,6 +225,7 @@ class KTimeUnitInstanceTest {
         assertEquals(5.0, 5.0.seconds.value, 1e-9)
     }
 
+    /** Multiplying a time by a raw [KMixedUnitInstance] delegates to the mixed engine (`s * s⁻¹` cancels to a dimensionless value). */
     @Test
     fun `times with KMixedUnitInstance delegates to KMixedUnitInstance times`() {
         val perSecond = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)))
@@ -208,6 +236,7 @@ class KTimeUnitInstanceTest {
         assertTrue(result.units.isEmpty())
     }
 
+    /** Dividing a time by a scalar [KMixedUnitInstance] delegates to the mixed engine and keeps the second term. */
     @Test
     fun `div with KMixedUnitInstance delegates to KMixedUnitInstance div`() {
         val dimensionless = KMixedUnitInstance(2.0, listOf())
@@ -218,6 +247,7 @@ class KTimeUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), result.units)
     }
 
+    /** A time decomposed via `toUnit()` and recomposed via `toTime()` equals the original. */
     @Test
     fun `toUnit and toTime round trip`() {
         val original = 2.hours
@@ -227,6 +257,7 @@ class KTimeUnitInstanceTest {
         assertEquals(original, roundTripped)
     }
 
+    /** `toTime()` normalizes a non-base time term (e.g. hours) to seconds before wrapping it. */
     @Test
     fun `toTime normalizes a non-base time unit to seconds`() {
         val twoHours = KMixedUnitInstance(2.0, listOf(KUnitTerm(KTimeUnit.HOUR, 1)))
@@ -234,6 +265,7 @@ class KTimeUnitInstanceTest {
         assertEquals(7200.0, twoHours.toTime().value, 1e-9)
     }
 
+    /** `toTime()` on a non-time term (e.g. a metre) throws `IllegalStateException`. */
     @Test
     fun `toTime fails for a non-time unit`() {
         val notTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(NonTimeUnit.METER, 1)))
@@ -241,6 +273,7 @@ class KTimeUnitInstanceTest {
         assertFailsWith<IllegalStateException> { notTime.toTime() }
     }
 
+    /** `toTime()` on a multi-term mixed unit (not a pure time value) throws `IllegalStateException`. */
     @Test
     fun `toTime fails for a mixed unit with more than one term`() {
         val notPure = KMixedUnitInstance(5.0, listOf(KUnitTerm(KTimeUnit.SECOND, 1), KUnitTerm(NonTimeUnit.METER, 1)))
@@ -248,6 +281,7 @@ class KTimeUnitInstanceTest {
         assertFailsWith<IllegalStateException> { notPure.toTime() }
     }
 
+    /** `toTime()` accepts any single time term regardless of exponent (a "square second" is still time-typed) and just wraps the numeric value. */
     @Test
     fun `toTime ignores the exponent since a time term stays time-typed`() {
         // The exponent is irrelevant to this conversion: a KTimeUnit term is a time-typed unit

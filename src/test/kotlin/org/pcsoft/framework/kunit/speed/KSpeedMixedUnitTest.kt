@@ -39,17 +39,22 @@ import kotlin.test.assertFailsWith
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KSpeedMixedUnitTest {
 
+    /** Provider: the full cross-product of every length unit against every time unit (core → composed matrix). */
     private fun lengthTimePairs(): List<Arguments> =
         lengthUnitGenerators.flatMap { (_, l) -> timeUnitGenerators.map { (_, t) -> Arguments.of(l, t) } }
 
+    /** Provider: every length unit, for the "read back into every length unit" decomposition. */
     private fun lengths(): List<Arguments> = lengthUnitGenerators.map { Arguments.of(it.second) }
 
+    /** Provider: every time unit, for the "read back into every time unit" decomposition. */
     private fun times(): List<Arguments> = timeUnitGenerators.map { Arguments.of(it.second) }
 
+    /** Relative tolerance across the wide magnitude span (inch/s … light-year/day). */
     private fun delta(expected: Double): Double = (abs(expected) * 1e-9).coerceAtLeast(1e-12)
 
     // region core -> composed (length / time == speed)
 
+    /** core → composed: `length / time` for every unit pair yields a typed [KSpeedUnitInstance] with the right value and `[m¹, s⁻¹]` signature. */
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("lengthTimePairs")
     fun `dividing a length by a time yields a typed speed`(length: KDistanceUnit, time: KTimeUnit) {
@@ -65,6 +70,7 @@ class KSpeedMixedUnitTest {
         )
     }
 
+    /** The typed `length / time` operator and the raw mixed-engine division + `toSpeed()` produce the same value, for every unit pair. */
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("lengthTimePairs")
     fun `the raw mixed division agrees with toSpeed`(length: KDistanceUnit, time: KTimeUnit) {
@@ -78,6 +84,7 @@ class KSpeedMixedUnitTest {
 
     // region composed -> core (speed * time == length, read back into every length unit)
 
+    /** composed → core: `speed * time` recovers a typed length and reads back correctly into every length unit, for every time unit. */
     @ParameterizedTest(name = "speed * time read back in {0}")
     @MethodSource("lengths")
     fun `speed times time decomposes back into every length unit`(readBack: KDistanceUnit) {
@@ -99,6 +106,7 @@ class KSpeedMixedUnitTest {
 
     // region composed -> core (length / speed == time, read back into every time unit)
 
+    /** composed → core: `length / speed` recovers a typed time and reads back correctly into every time unit, for every length unit. */
     @ParameterizedTest(name = "length / speed read back in {0}")
     @MethodSource("times")
     fun `length divided by speed decomposes back into every time unit`(readBack: KTimeUnit) {
@@ -119,6 +127,7 @@ class KSpeedMixedUnitTest {
 
     // region commutativity and error cases
 
+    /** `speed * time` and `time * speed` yield the same length value — cross-group multiplication is commutative. */
     @Test
     fun `time times speed equals speed times time`() {
         val speed = speedOf(KSpeedUnit.METERS_PER_SECOND, 10)
@@ -126,6 +135,7 @@ class KSpeedMixedUnitTest {
         assertEquals((speed * timeOf(KTimeUnit.SECOND, 60)).value, (timeOf(KTimeUnit.SECOND, 60) * speed).value, 1e-9)
     }
 
+    /** An `area / time` (`m²/s`) shape is not a speed and `toSpeed()` throws `IllegalStateException` rather than mislead. */
     @Test
     fun `dividing an area by a time is not a speed`() {
         // an area (m^2) divided by a time is m^2/s, not a speed - must fail rather than mislead
@@ -134,6 +144,7 @@ class KSpeedMixedUnitTest {
         assertFailsWith<IllegalStateException> { areaPerTime.toSpeed() }
     }
 
+    /** A plain length (single `m¹` term) is not a speed shape, so `toSpeed()` throws `IllegalStateException`. */
     @Test
     fun `a plain length is not a speed`() {
         assertFailsWith<IllegalStateException> { mkLength(KDistanceUnit.METER, 5).toUnit().toSpeed() }

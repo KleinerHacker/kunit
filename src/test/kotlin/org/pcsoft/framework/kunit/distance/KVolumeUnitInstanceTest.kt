@@ -21,15 +21,24 @@ import kotlin.math.pow
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+/**
+ * Full behavioural matrix for [KVolumeUnitInstance] (the exponent-3 distance leaf): construction/conversion,
+ * every operator and every comparison, parameterized over every volume unit (and every unit pair). Instances
+ * come from [volumeUnitGenerators] (creator properties); expected values from `unit.baseValue` cubed.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KVolumeUnitInstanceTest {
 
+    /** Provider: every volume unit, for the single-unit parameterized tests. */
     private fun units(): List<Arguments> = volumeUnitGenerators.map { Arguments.of(it.second) }
+    /** Provider: the full cross-product of every unit against every other unit, for the pairwise tests. */
     private fun unitPairs(): List<Arguments> =
         volumeUnitGenerators.flatMap { (_, a) -> volumeUnitGenerators.map { (_, b) -> Arguments.of(a, b) } }
 
+    /** The expected base value of `1 unit³`: the unit's linear base value cubed. */
     private fun cu(u: KDistanceUnit) = u.baseValue.pow(3)
 
+    /** Each `cubic…` creator builds `5 unit³`, normalizes to m³, reads back exactly 5 via `valueAs`, and is exponent 3. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("units")
     fun `every volume creator round trips through valueAs`(unit: KDistanceUnit) {
@@ -39,6 +48,7 @@ class KVolumeUnitInstanceTest {
         assertEquals(3, instance.exponent)
     }
 
+    /** Converting `5 from³` into every other volume unit yields `5 * cu(from) / cu(to)` — the full volume conversion matrix. */
     @ParameterizedTest(name = "{0} -> {1}")
     @MethodSource("unitPairs")
     fun `every volume converts into every other volume`(from: KDistanceUnit, to: KDistanceUnit) {
@@ -46,6 +56,7 @@ class KVolumeUnitInstanceTest {
         assertEquals(expected, mkVolume(from, 5).valueAs(to), distanceDelta(expected))
     }
 
+    /** `volume + volume` for every unit pair normalizes both and returns their sum as a volume (exponent 3). */
     @ParameterizedTest(name = "{0} + {1}")
     @MethodSource("unitPairs")
     fun `plus combines every pair of volumes`(a: KDistanceUnit, b: KDistanceUnit) {
@@ -55,6 +66,7 @@ class KVolumeUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.BASE, 3)), result.toUnit().units)
     }
 
+    /** `volume - volume` for every unit pair normalizes both and returns their difference as a volume (exponent 3). */
     @ParameterizedTest(name = "{0} - {1}")
     @MethodSource("unitPairs")
     fun `minus combines every pair of volumes`(a: KDistanceUnit, b: KDistanceUnit) {
@@ -63,6 +75,7 @@ class KVolumeUnitInstanceTest {
         assertEquals(expected, result.value, distanceDelta(expected))
     }
 
+    /** `volume * volume` yields exponent 6, which has no leaf type, so it falls back to the general [KDistanceUnitInstance]. */
     @ParameterizedTest(name = "{0} * {1}")
     @MethodSource("unitPairs")
     fun `volume times volume is m6 (general distance)`(a: KDistanceUnit, b: KDistanceUnit) {
@@ -72,6 +85,7 @@ class KVolumeUnitInstanceTest {
         assertEquals(6, result.exponent)
     }
 
+    /** `volume / volume` for every unit pair cancels the terms to a dimensionless [KMixedUnitInstance] holding the ratio. */
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("unitPairs")
     fun `volume div volume is a dimensionless mixed unit`(a: KDistanceUnit, b: KDistanceUnit) {
@@ -81,6 +95,7 @@ class KVolumeUnitInstanceTest {
         assertTrue(result.units.isEmpty())
     }
 
+    /** All six comparison operators follow the normalized base values, across every volume unit pair. */
     @ParameterizedTest(name = "{0} cmp {1}")
     @MethodSource("unitPairs")
     fun `comparison operators follow normalized values`(a: KDistanceUnit, b: KDistanceUnit) {
@@ -94,6 +109,7 @@ class KVolumeUnitInstanceTest {
         assertEquals(x.value >= y.value, x >= y)
     }
 
+    /** `toString()` with no target renders the value followed by the cubed base-unit symbol (`m^3`). */
     @ParameterizedTest(name = "{0}")
     @MethodSource("units")
     fun `toString default renders cubic meters`(unit: KDistanceUnit) {
@@ -101,6 +117,7 @@ class KVolumeUnitInstanceTest {
         assertEquals("${instance.value} ${KDistanceUnit.BASE.symbol}^3", instance.toString())
     }
 
+    /** `toString(unit)` renders the value in that unit followed by its cubed symbol (`unit^3`). */
     @ParameterizedTest(name = "{0}")
     @MethodSource("units")
     fun `toString with own unit renders cubed symbol`(unit: KDistanceUnit) {

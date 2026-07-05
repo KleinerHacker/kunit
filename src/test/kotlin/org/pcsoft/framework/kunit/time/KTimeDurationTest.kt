@@ -20,6 +20,7 @@ import kotlin.test.assertTrue
 
 class KTimeDurationTest {
 
+    /** A `java.time.Duration` converted via `Duration.toTime()` and back via `toDuration()` round-trips exactly. */
     @Test
     fun `toDuration and Duration_toTime round trip`() {
         val duration = Duration.ofMinutes(90)
@@ -30,12 +31,14 @@ class KTimeDurationTest {
         assertEquals(duration, instance.toDuration())
     }
 
+    /** The time creators map onto the expected `java.time.Duration` (2 hours, 1 day). */
     @Test
     fun `creators produce the expected Duration`() {
         assertEquals(Duration.ofHours(2), 2.hours.toDuration())
         assertEquals(Duration.ofDays(1), 1.days.toDuration())
     }
 
+    /** `+`/`-` on time instances match the underlying `Duration` arithmetic. */
     @Test
     fun `plus and minus match underlying Duration arithmetic`() {
         val a = 1.hours
@@ -45,6 +48,7 @@ class KTimeDurationTest {
         assertEquals(a.toDuration() - b.toDuration(), (a - b).toDuration())
     }
 
+    /** Comparison and equality on time instances match the underlying `Duration` ordering (30 min < 1 h, 1 h == 60 min). */
     @Test
     fun `compareTo and equals match underlying Duration`() {
         assertTrue(30.minutes < 1.hours)
@@ -52,6 +56,7 @@ class KTimeDurationTest {
         assertEquals(Duration.ofHours(1), 60.minutes.toDuration())
     }
 
+    /** The forwarded `Duration` mutators (`plusDays`, `minusMinutes`, `multipliedBy`, `negated`, `abs`) return a time instance matching the underlying `Duration` result. */
     @Test
     fun `forwarded Duration mutators return a KTimeUnitInstance`() {
         assertEquals(Duration.ofHours(1).plusDays(1), 1.hours.plusDays(1).toDuration())
@@ -61,6 +66,7 @@ class KTimeDurationTest {
         assertEquals(Duration.ofHours(-1).abs(), (-1).hours.abs().toDuration())
     }
 
+    /** The forwarded `Duration` query methods (`toHours`, `toMinutesPart`, `isNegative`, `isZero`, …) pass through to the backing `Duration`. */
     @Test
     fun `forwarded Duration query methods pass through`() {
         val t = 90.minutes // 1 h 30 min
@@ -75,11 +81,13 @@ class KTimeDurationTest {
         assertTrue(0.seconds.isZero())
     }
 
+    /** `dividedBy(other)` counts how many times one duration fits into another (90 min / 30 min == 3). */
     @Test
     fun `dividedBy another duration counts how many fit`() {
         assertEquals(3, 90.minutes.dividedBy(30.minutes))
     }
 
+    /** A sub-second value (0.25 s) is stored correctly in the `Duration`'s nanosecond part and reads back exactly. */
     @Test
     fun `sub-second construction round trips through nanoseconds`() {
         val t = 0.25.seconds

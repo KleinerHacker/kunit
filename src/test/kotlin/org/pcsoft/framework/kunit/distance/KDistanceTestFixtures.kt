@@ -15,10 +15,27 @@ package org.pcsoft.framework.kunit.distance
 import org.pcsoft.framework.kunit.KDerivedUnit
 import kotlin.math.abs
 
-// Shared, cross-dimension test fixtures for the distance group: the creator-property generator
-// matrices and the small builder/tolerance helpers used by the per-dimension test classes
-// (KLengthUnitInstanceTest, KAreaUnitInstanceTest, KVolumeUnitInstanceTest, the prefix/mixed/derived
-// tests). Kept here so no single dimension's test file owns the material the others depend on.
+// Shared, cross-dimension test fixtures for the distance group: the construction matrices and the small
+// builder/tolerance helpers used by the per-dimension test classes (KLengthUnitInstanceTest,
+// KAreaUnitInstanceTest, KVolumeUnitInstanceTest, the prefix/mixed/derived tests). Kept here so no single
+// dimension's test file owns the material the others depend on.
+//
+// There are TWO parallel families of construction fixtures, each covering a different public entry point:
+//
+//   * `*UnitGenerators` — lists of (creator-property lambda, unit) pairs. The lambda `{ n -> n.meters }`
+//     exercises the number-extension **creator properties** (`5.meters`, `3.squareMiles`, …). The paired
+//     `KDistanceUnit` is the reference used to compute the expected value (`unit.baseValue`).
+//   * `*BareValues` — the public **bare-value alias tokens** (`meters`, `squareMiles`, `cubicYards`, …).
+//     These are the argument the prefix `infix` functions take, so driving the prefix matrices off this
+//     list makes `5 kilo meters` genuinely run through the alias (and thus covers K*UnitBareValues.kt).
+//     Area/volume tokens are wrappers, so they are paired with the underlying linear unit for the expected
+//     `baseValue`.
+//
+// Enum/wrapper values (KDistanceUnit.METER, …) are used ONLY to compute expected values, never to build the
+// instance under test — see the test-construction policy in CLAUDE.md.
+//
+// The `mkLength`/`mkArea`/`mkVolume` helpers look an instance up by unit and build it (via the creator
+// property); `distanceDelta` is a magnitude-relative tolerance (see its own doc).
 
 /** All length (exponent 1) creator properties paired with the [KDistanceUnit] they construct. */
 internal val lengthUnitGenerators: List<Pair<(Number) -> KLengthUnitInstance, KDistanceUnit>> = listOf(
@@ -97,6 +114,35 @@ internal val volumeDerivedGenerators: List<Pair<(Number) -> KVolumeUnitInstance,
     ({ n: Number -> n.imperialGallons }) to KDistanceDerivedUnit.IMPERIAL_GALLON,
     ({ n: Number -> n.usFluidOunces }) to KDistanceDerivedUnit.US_FLUID_OUNCE,
     ({ n: Number -> n.oilBarrels }) to KDistanceDerivedUnit.OIL_BARREL
+)
+
+// Bare-value alias lists — the public DSL tokens (`meters`, `squareMiles`, `cubicYards`, …) used to
+// construct instances through the prefix `infix` functions (e.g. `5 kilo meters`). Referencing the
+// aliases here executes their `val` initializers, so the K*UnitBareValues.kt surface is covered. The
+// paired KDistanceUnit is only the reference for expected-value computation (`unit.baseValue`).
+
+/** All length bare-value aliases, in the same order as [lengthUnitGenerators]. */
+internal val lengthBareValues: List<KDistanceUnit> = listOf(
+    meters, miles, nauticalMiles, yards, feet, inches, fathoms, chains, furlongs, astronomicalUnits,
+    lightSeconds, lightMinutes, lightHours, lightDays, lightWeeks, lightYears, parsecs
+)
+
+/** All area bare-value tokens paired with the underlying [KDistanceUnit] (for the expected `baseValue`). */
+internal val areaBareValues: List<Pair<KDistanceAreaUnit, KDistanceUnit>> = listOf(
+    squareMeters to meters, squareMiles to miles, squareNauticalMiles to nauticalMiles, squareYards to yards,
+    squareFeet to feet, squareInches to inches, squareFathoms to fathoms, squareChains to chains,
+    squareFurlongs to furlongs, squareAstronomicalUnits to astronomicalUnits, squareLightSeconds to lightSeconds,
+    squareLightMinutes to lightMinutes, squareLightHours to lightHours, squareLightDays to lightDays,
+    squareLightWeeks to lightWeeks, squareLightYears to lightYears, squareParsecs to parsecs
+)
+
+/** All volume bare-value tokens paired with the underlying [KDistanceUnit] (for the expected `baseValue`). */
+internal val volumeBareValues: List<Pair<KDistanceVolumeUnit, KDistanceUnit>> = listOf(
+    cubicMeters to meters, cubicMiles to miles, cubicNauticalMiles to nauticalMiles, cubicYards to yards,
+    cubicFeet to feet, cubicInches to inches, cubicFathoms to fathoms, cubicChains to chains,
+    cubicFurlongs to furlongs, cubicAstronomicalUnits to astronomicalUnits, cubicLightSeconds to lightSeconds,
+    cubicLightMinutes to lightMinutes, cubicLightHours to lightHours, cubicLightDays to lightDays,
+    cubicLightWeeks to lightWeeks, cubicLightYears to lightYears, cubicParsecs to parsecs
 )
 
 /** Builds a length of [n] in [unit] via that unit's creator property. */

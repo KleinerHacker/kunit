@@ -39,6 +39,7 @@ class KMixedUnitInstanceTest {
     private fun lengthTimePairs(): List<Arguments> =
         lengthUnitGenerators.flatMap { (_, l) -> timeUnitGenerators.map { (_, t) -> Arguments.of(l, t) } }
 
+    /** Cross-group matrix: dividing every length unit by every time unit yields the expected value and a `[m¹, s⁻¹]` speed-shaped term. */
     @ParameterizedTest(name = "{0} per {1}")
     @MethodSource("lengthTimePairs")
     fun `dividing every length by every time yields the expected speed term`(length: KDistanceUnit, time: KTimeUnit) {
@@ -49,6 +50,7 @@ class KMixedUnitInstanceTest {
         assertEquals(setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)), speed.units.toSet())
     }
 
+    /** Cross-group matrix: multiplying every length unit by every time unit yields the expected value and a `[m¹, s¹]` two-term signature. */
     @ParameterizedTest(name = "{0} times {1}")
     @MethodSource("lengthTimePairs")
     fun `multiplying every length by every time yields the expected mixed term`(length: KDistanceUnit, time: KTimeUnit) {
@@ -59,6 +61,7 @@ class KMixedUnitInstanceTest {
         assertEquals(setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, 1)), product.units.toSet())
     }
 
+    /** `times` on two instances of the same unit adds their exponents (`m¹ * m¹ = m²`) and multiplies the values. */
     @Test
     fun `times merges exponent of matching unit`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -70,6 +73,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 2)), result.units)
     }
 
+    /** The pure wrappers (length, time) are usable polymorphically through the [KUnitMeasurable] surface (`value`/`toUnit` via delegation). */
     @Test
     fun `pure wrappers are usable polymorphically as KUnitMeasurable`() {
         val measurables: List<KUnitMeasurable> = listOf(5.meters, 2.hours)
@@ -80,6 +84,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), measurables[1].toUnit().units)
     }
 
+    /** `times` with a non-matching unit adds that unit as a new term carrying its own exponent (`m¹ * s⁻² = [m¹, s⁻²]`). */
     @Test
     fun `times introduces new unit with its own exponent`() {
         val distance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -91,6 +96,7 @@ class KMixedUnitInstanceTest {
         assertTrue(result.hasSameUnits(KMixedUnitInstance(0.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -2)))))
     }
 
+    /** `times` that drives a matching unit's exponent to zero removes that term entirely (`s¹ * s⁻¹` drops the second). */
     @Test
     fun `times cancels out matching unit to zero exponent`() {
         val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, 1)))
@@ -101,6 +107,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 1)), result.units)
     }
 
+    /** `times` adds the exponents of a matching higher-power unit (`m² * m³ = m⁵`). */
     @Test
     fun `times adds exponents of matching unit`() {
         val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
@@ -112,6 +119,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 5)), result.units)
     }
 
+    /** `times` correctly crosses the zero point upwards (`m⁻² * m³ = m¹`). */
     @Test
     fun `times drives exponent through zero from negative to positive`() {
         // METER^-2 * METER^3 => METER^1 (crossing the 0-point upwards)
@@ -124,6 +132,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 1)), result.units)
     }
 
+    /** `times` removes the term when exponents cancel to exactly zero (`m⁻² * m² =` dimensionless). */
     @Test
     fun `times removes term when exponents cancel to exactly zero`() {
         // METER^-2 * METER^2 => METER^0 => term removed entirely
@@ -136,6 +145,7 @@ class KMixedUnitInstanceTest {
         assertTrue(result.units.isEmpty())
     }
 
+    /** `times` between two multi-term mixed units adds exponents per unit, removing those that reach zero (`m` cancels, `s` accumulates to `s⁻²`). */
     @Test
     fun `times against a mixed unit adds exponents across the zero point`() {
         // (METER^1 * SECOND^-1) * (METER^-1 * SECOND^-1)
@@ -150,6 +160,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KTimeUnit.SECOND, -2)), result.units)
     }
 
+    /** `div` correctly crosses the zero point downwards (`m¹ / m³ = m⁻²`). */
     @Test
     fun `div drives exponent through zero from positive to negative`() {
         // METER^1 / METER^3 => METER^-2 (crossing the 0-point downwards)
@@ -162,6 +173,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, -2)), result.units)
     }
 
+    /** `div` removes the term when exponents cancel to exactly zero (`m² / m² =` dimensionless). */
     @Test
     fun `div removes term when exponents cancel to exactly zero`() {
         // METER^2 / METER^2 => METER^0 => term removed entirely
@@ -174,6 +186,7 @@ class KMixedUnitInstanceTest {
         assertTrue(result.units.isEmpty())
     }
 
+    /** `div` between two multi-term mixed units subtracts exponents per unit, removing those that reach zero (`m` cancels, `s` becomes `s²`). */
     @Test
     fun `div against a mixed unit subtracts exponents across the zero point`() {
         // (METER^1 * SECOND^1) / (METER^1 * SECOND^-1)
@@ -188,6 +201,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KTimeUnit.SECOND, 2)), result.units)
     }
 
+    /** `div` of a length by a time produces a speed-shaped `[m¹, s⁻¹]` mixed unit with the divided value. */
     @Test
     fun `div subtracts exponent of matching unit`() {
         val distance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -199,6 +213,7 @@ class KMixedUnitInstanceTest {
         assertEquals(setOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)), speed.units.toSet())
     }
 
+    /** `div` with a non-present unit introduces it as a new term with a negated exponent (the divisor's second becomes `s⁻¹`). */
     @Test
     fun `div introduces new unit with negated exponent`() {
         val distance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -210,6 +225,7 @@ class KMixedUnitInstanceTest {
         assertEquals(-1, secondTerm.exponent)
     }
 
+    /** `plus` of two mixed units with identical term signatures sums their values. */
     @Test
     fun `plus succeeds when units are identical`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -218,6 +234,7 @@ class KMixedUnitInstanceTest {
         assertEquals(8.0, (a + b).value)
     }
 
+    /** `plus` of matching terms in different units of the same group auto-converts via normalization (metre + mile). */
     @Test
     fun `plus converts different units of the same group automatically`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -229,6 +246,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 1)), result.units)
     }
 
+    /** `plus` fails with `IllegalStateException` when a term has no matching unit group on the other side (length + time). */
     @Test
     fun `plus fails when unit groups differ`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -237,6 +255,7 @@ class KMixedUnitInstanceTest {
         assertFailsWith<IllegalStateException> { a + b }
     }
 
+    /** `plus` fails with `IllegalStateException` when matching unit groups have different exponents (area + length). */
     @Test
     fun `plus fails when exponents differ`() {
         val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
@@ -245,6 +264,7 @@ class KMixedUnitInstanceTest {
         assertFailsWith<IllegalStateException> { area + length }
     }
 
+    /** `minus` of two mixed units with identical term signatures subtracts their values. */
     @Test
     fun `minus succeeds when units are identical`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -253,6 +273,7 @@ class KMixedUnitInstanceTest {
         assertEquals(2.0, (a - b).value)
     }
 
+    /** `minus` of matching terms in different units of the same group auto-converts via normalization (metre − mile). */
     @Test
     fun `minus converts different units of the same group automatically`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -264,6 +285,7 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 1)), result.units)
     }
 
+    /** `minus` fails with `IllegalStateException` when a term has no matching unit group on the other side (length − time). */
     @Test
     fun `minus fails when unit groups differ`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -272,6 +294,7 @@ class KMixedUnitInstanceTest {
         assertFailsWith<IllegalStateException> { a - b }
     }
 
+    /** `equals`/`hashCode` are structural and order-independent over terms; a different value makes them unequal. */
     @Test
     fun `equals and hashCode are structural and order independent`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
@@ -283,6 +306,7 @@ class KMixedUnitInstanceTest {
         assertNotEquals(a, c)
     }
 
+    /** `hasSameUnits` compares only the term signature (not the value) and is order-independent. */
     @Test
     fun `hasSameUnits is order independent`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
@@ -291,6 +315,7 @@ class KMixedUnitInstanceTest {
         assertTrue(a.hasSameUnits(b))
     }
 
+    /** `hasSameUnits` returns false when the same unit appears at a different exponent (`m¹` vs `m²`). */
     @Test
     fun `hasSameUnits is false for different exponents`() {
         val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
@@ -299,6 +324,7 @@ class KMixedUnitInstanceTest {
         assertFalse(a.hasSameUnits(b))
     }
 
+    /** `valueAs` with two composed targets (km, hour) converts a speed-shaped mixed unit to km/h in either argument order. */
     @Test
     fun `valueAs converts speed to km per hour using mixed targets in any order`() {
         // 10 m / 1 s
@@ -311,6 +337,7 @@ class KMixedUnitInstanceTest {
         assertEquals(36.0, kmh2, 1e-9)
     }
 
+    /** `valueAs` throws `IllegalStateException` when the number of targets does not match the number of terms (one target for a two-term unit). */
     @Test
     fun `valueAs throws on target count mismatch`() {
         val speedInstance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
@@ -318,6 +345,7 @@ class KMixedUnitInstanceTest {
         assertFailsWith<IllegalStateException> { speedInstance.valueAs(KDistanceUnit.METER) }
     }
 
+    /** `valueAs` throws `IllegalStateException` when a target's unit group does not match any term (two distance targets for a length/time unit). */
     @Test
     fun `valueAs throws on group mismatch`() {
         val speedInstance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
@@ -325,6 +353,7 @@ class KMixedUnitInstanceTest {
         assertFailsWith<IllegalStateException> { speedInstance.valueAs(KDistanceUnit.METER, KDistanceUnit.MILE) }
     }
 
+    /** `valueAs` accepts a matching-exponent derived unit target: a 10 000 m² area reads back as 1 hectare. */
     @Test
     fun `valueAs supports derived units for area`() {
         val area = 200.meters * 50.meters
@@ -332,6 +361,7 @@ class KMixedUnitInstanceTest {
         assertEquals(1.0, area.valueAs(KDistanceDerivedUnit.HECTARE), 1e-9)
     }
 
+    /** `toString()` with no targets renders the raw term signature (`5.0 m*s^-1`). */
     @Test
     fun `toString without targets uses raw units`() {
         val instance = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
@@ -339,6 +369,7 @@ class KMixedUnitInstanceTest {
         assertEquals("5.0 m*s^-1", instance.toString())
     }
 
+    /** `toString(km, hour)` renders the value converted into the composed target with the `km*h^-1` symbol. */
     @Test
     fun `toString with targets uses converted units`() {
         val speedInstance = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
@@ -346,6 +377,7 @@ class KMixedUnitInstanceTest {
         assertEquals("36.0 km*h^-1", speedInstance.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR))
     }
 
+    /** `toString(hectare)` renders a derived-unit target with its own symbol and no `^n` suffix (`1.0 ha`, not `ha^2`). */
     @Test
     fun `toString with a derived unit target does not append an exponent suffix`() {
         val area = 200.meters * 50.meters

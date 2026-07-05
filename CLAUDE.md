@@ -224,6 +224,20 @@ dimension**, never mixed into the wrapper class files:
 
 ## Tests
 
+* **Construction runs through the public DSL, not the raw enums.** Test instances are built **primarily
+  via the public DSL surface** - the prefix `infix` functions (`5 kilo meters`), the bare-value aliases
+  (`meters`, `squareMiles`, `metersPerHour`, `seconds`, ...) and the creator properties (`5.meters`). The
+  raw enum/wrapper values (`KDistanceUnit.METER`, `KDistanceAreaUnit(u)`, `KSpeedUnit.METERS_PER_SECOND`)
+  are used **only for expected-value computation** (e.g. `unit.baseValue`), never to construct the
+  instance under test. This ensures the suite covers exactly the surface users actually call: every
+  bare-value × prefix combination runs through the DSL rather than bypassing the alias. Applies to
+  **every** group and is the yardstick for the prefix and construction matrices
+* **Every test method carries a KDoc.** Each test function (annotated `@Test` or `@ParameterizedTest`)
+  **must** have a KDoc comment stating the **use case it verifies** - what is exercised and what the
+  expected outcome is (e.g. "Adding two lengths of different units normalizes both and returns their sum as
+  a length."). This is a base rule and applies to **every** test in the suite, success and error cases
+  alike. Shared fixtures (generator/bare-value lists, `@MethodSource` providers, builder/tolerance helpers)
+  are likewise documented so their purpose is self-evident
 * Every "pure" unit is tested separately
   * Full tests for the most complete possible test coverage
   * Complete tests for all operations
