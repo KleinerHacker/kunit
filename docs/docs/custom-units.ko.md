@@ -1,6 +1,6 @@
 # 사용자 정의 단위 추가
 
-kunit은 현재 하나의 단위 그룹([길이](units/length.md))만 제공하지만, 전체 엔진(`KUnit`, `KMixedUnitInstance`,
+kunit은 현재 하나의 단위 그룹([거리](units/distance.md))만 제공하지만, 전체 엔진(`KUnit`, `KMixedUnitInstance`,
 접두어, 파생 단위)은 범용적이며 그룹에 독립적입니다. 새로운 물리량을 추가한다는 것은 `length` 패키지가
 이미 확립한 패턴을 따르는 것을 의미합니다. 이 페이지에서는 처음부터 예시로 **질량**(Mass) 그룹
 (`org.pcsoft.framework.kunit.mass`)을 추가하는 과정을 안내합니다.

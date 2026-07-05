@@ -1,11 +1,19 @@
-# 长度
+# 距离
 
 包：`org.pcsoft.framework.kunit.distance`
 基础单位：**米**（`KDistanceUnit.BASE == KDistanceUnit.METER`）
 
-`KLengthUnitInstance` 将 `KMixedUnitInstance` 限定为 `KDistanceUnit.BASE` 的单个项进行包装，指数可以是任意值——
-指数 1 表示普通长度，2 表示面积，3 表示体积。无论创建时使用的是哪个单位，数值始终以米（或平方米/立方米）
-归一化存储。
+距离组在开放基础包装类型 `KDistanceUnitInstance`（`KDistanceUnit.BASE` 的单个项，指数可为**任意**值）之下，
+将各个指数建模为各自独立、编译期安全的类型：
+
+* **`KLengthUnitInstance`** —— 指数 1（长度）
+* **`KAreaUnitInstance`** —— 指数 2（面积）
+* **`KVolumeUnitInstance`** —— 指数 3（体积）
+
+数值始终以米（或平方米/立方米）归一化存储。由于长度、面积和体积是不同的类型，在 `+`/`-`/比较中混用它们会导致
+**编译错误**（不存在这样的运算符），而 `*`/`/` 会尽可能保持在同一类型族内（`length * length = area`，
+`area / length = length`），对于 `{1,2,3}` 之外的指数（或指数为 0 的无量纲结果）则回退到
+`KDistanceUnitInstance`/`KMixedUnitInstance`。
 
 ## 指数 1 - 长度
 
@@ -56,23 +64,25 @@ val b = 2.miles - 800.meters
 // 比较
 2.miles > 1.miles               // true
 1.miles == 1609.344.meters      // true（归一化后的数值相同）
-5.hectares > 5.meters           // 抛出 IllegalStateException（面积 vs 长度，指数不同）
+// 5.hectares > 5.meters        // 无法编译：面积与长度是不同的类型
 
-// * / / : 始终允许，生成一个具有新指数的 KMixedUnitInstance
-val area = 200.meters * 50.meters   // KMixedUnitInstance: value=10000.0, units=[METER^2]
-val lengthAgain = area / 50.meters.toUnit() // KMixedUnitInstance: value=200.0, units=[METER^1]
+// * / / : 当两个操作数都是静态定维时，保持在长度类型族内
+val area = 200.meters * 50.meters   // KAreaUnitInstance: value=10000.0（m²）
+val lengthAgain = area / 50.meters  // KLengthUnitInstance: value=200.0（m）
+val ratio = 10.meters / 2.meters    // KMixedUnitInstance（无量纲），value=5.0
 ```
 
 ### 比较与相等性
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个具有**相同指数**的 `KLengthUnitInstance` 的归一化 `value`。
-在不同指数之间进行比较（例如长度与面积）会抛出 `IllegalStateException`，与 `+`/`-` 的规则一致。
+`==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个**相同类型**（相同维度）值的归一化 `value`。
+混用不同维度（例如长度与面积）会被编译器拒绝——不存在这样的运算符——与 `+`/`-` 的规则一致。
+跨维度的 `equals` 直接返回 `false`。
 
 ## 指数 2 - 面积
 
-指数为 2 的 `KLengthUnitInstance` 表示面积，例如两个长度相乘的结果。除了原始的
-`KDistanceUnit.BASE^2`（平方米）表示外，还可以使用以下命名的特殊单位（`KDistanceDerivedUnit`）作为
-转换/格式化目标：
+`KAreaUnitInstance` 表示面积，例如 `length * length` 的结果。除了针对每个单位的 `square…` 创建函数
+（`200.squareMeters`、`5.squareMiles`……以及前缀 infix 形式 `5 kilo squareMeters` == 5 平方千米
+== 5 000 000 m²）之外，还可以使用以下命名的特殊单位（`KDistanceDerivedUnit`）作为转换/格式化目标：
 
 | 特殊单位 | 枚举值 | 符号 | 创建函数 | 1 单位对应的 m² |
 |---|---:|---:|---:|---:|
@@ -88,17 +98,18 @@ plot.value                                   // 30000.0（平方米）
 plot.valueAs(KDistanceDerivedUnit.ARE)          // 300.0
 plot.valueAs(KDistanceDerivedUnit.ACRE)         // ≈ 7.4132
 
-val computed = 200.meters * 50.meters     // KMixedUnitInstance, units=[METER^2]
-computed.toDistance().valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val computed = 200.meters * 50.meters     // KAreaUnitInstance（10 000 m²）
+computed.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
 
-plot + computed.toDistance()                // 允许：两者都是指数 2（面积）
-plot + 5.meters                              // 抛出 IllegalStateException（面积 vs 长度）
+plot + computed                              // 允许：两者都是面积 -> KAreaUnitInstance
+// plot + 5.meters                           // 无法编译：面积与长度
 ```
 
 ## 指数 3 - 体积
 
-指数为 3 的 `KLengthUnitInstance` 表示体积。除了原始的 `KDistanceUnit.BASE^3`（立方米）表示外，还可以
-使用以下命名的特殊单位：
+`KVolumeUnitInstance` 表示体积，例如 `length * length * length` 或 `area * length`。除了针对每个单位的
+`cubic…` 创建函数（`2.cubicMeters`、`3.cubicMiles`……以及前缀 infix 形式 `5 kilo cubicMeters`）之外，
+还可以使用以下命名的特殊单位：
 
 | 特殊单位 | 枚举值 | 符号 | 创建函数 | 1 单位对应的 m³ |
 |---|---:|---:|---:|---:|
@@ -115,10 +126,10 @@ val tank = 200.liters
 tank.value                                        // 0.2（立方米）
 tank.valueAs(KDistanceDerivedUnit.US_GALLON)        // ≈ 52.834
 
-val cube = 2.meters * 2.meters * 2.meters   // KMixedUnitInstance, units=[METER^3]
-cube.toDistance().valueAs(KDistanceDerivedUnit.LITER) // 8000.0
+val cube = 2.meters * 2.meters * 2.meters   // KVolumeUnitInstance（8 m³）
+cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
-tank + cube.toDistance()                        // 允许：两者都是指数 3（体积）
+tank + cube                                  // 允许：两者都是体积 -> KVolumeUnitInstance
 ```
 
 ## SI 前缀
@@ -152,5 +163,5 @@ import org.pcsoft.framework.kunit.distance.*
 
 5.meters.toString()                        // "5.0 m"（基础单位表示）
 5.miles.toString(KDistanceUnit.MILE)          // "5.0 mi"
-(200.meters * 50.meters).toDistance().toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
+(200.meters * 50.meters).toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
 ```

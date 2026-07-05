@@ -3,7 +3,7 @@
 **混合单位**（德语：*Mischeinheit*）是由多个 `KUnit` 组成的值，每个都带有自己的指数，例如速度的
 `m^1 * s^-1`，或力的 `m^1 * kg^1 * s^-2`。在 kunit 中，这由通用的 `KMixedUnitInstance` 类表示。
 
-虽然特定于分组的包装类（如 `KLengthUnitInstance`，参见[预定义单位](units/length.md)）在处理单一物理量纲时
+虽然特定于分组的包装类（如 `KLengthUnitInstance`，参见[预定义单位](units/distance.md)）在处理单一物理量纲时
 很方便，但一旦需要组合**不同**组的单位，或者不希望使用包装类提供的同组自动换算，就需要直接使用
 `KMixedUnitInstance`。
 
@@ -30,7 +30,7 @@ val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 
 !!! note
     下面示例中引用 `seconds`/`TimeUnit` 的部分仅用于说明"时间"单位组与长度组合时的样子——kunit 目前
-    只提供 `length` 组（参见[预定义单位](units/length.md)）。要自行添加，请参阅
+    只提供 `length` 组（参见[预定义单位](units/distance.md)）。要自行添加，请参阅
     [添加自定义单位](custom-units.md)。
 
 ## 乘法与除法

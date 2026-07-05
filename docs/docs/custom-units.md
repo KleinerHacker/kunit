@@ -1,6 +1,6 @@
 # Adding Custom Units
 
-kunit ships one unit group today ([Length](units/length.md)), but the whole engine (`KUnit`, `KMixedUnitInstance`,
+kunit ships one unit group today ([Distance](units/distance.md)), but the whole engine (`KUnit`, `KMixedUnitInstance`,
 prefixes, derived units) is generic and group-independent. Adding a new physical quantity means following
 the same pattern the `length` package already establishes. This page walks through adding a demonstrative
 **Mass** group (`org.pcsoft.framework.kunit.mass`) from scratch.

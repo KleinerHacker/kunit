@@ -35,7 +35,7 @@ kunit is built around two central types:
 
 Every unit group additionally provides a **wrapper class** (e.g. `KLengthUnitInstance`) that encapsulates a
 `KMixedUnitInstance` restricted to a single unit group, always normalized to that group's base unit. This is the
-type you will use most of the time - see [Predefined Units](units/length.md) for the units shipped today,
+type you will use most of the time - see [Predefined Units](units/distance.md) for the units shipped today,
 and [Mixed Units](mixed-units.md) for when and how to drop down to the generic `KMixedUnitInstance` engine
 directly.
 

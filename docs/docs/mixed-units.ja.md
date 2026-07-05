@@ -4,7 +4,7 @@
 例: 速度の `m^1 * s^-1`、力の `m^1 * kg^1 * s^-2`。kunit ではこれは汎用の `KMixedUnitInstance` クラスで
 表現されます。
 
-グループごとのラッパークラス(`KLengthUnitInstance` など、[定義済み単位](units/length.md) を参照)は
+グループごとのラッパークラス(`KLengthUnitInstance` など、[定義済み単位](units/distance.md) を参照)は
 単一の物理次元を扱う際に便利ですが、**異なる**グループの単位を組み合わせる必要がある場合や、ラッパークラスが
 提供する同一グループ内の自動変換を望まない場合には、`KMixedUnitInstance` を直接使用することになります。
 
@@ -32,7 +32,7 @@ val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 !!! note
     以下の例で `seconds`/`TimeUnit` を参照している部分は、「時間」単位グループが長さと組み合わされた
     場合の姿を示すためのものです - kunit は現在 `length` グループのみを提供しています
-    ([定義済み単位](units/length.md) を参照)。自分で追加するには
+    ([定義済み単位](units/distance.md) を参照)。自分で追加するには
     [カスタム単位の追加](custom-units.md) に従ってください。
 
 ## 乗算と除算

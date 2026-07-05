@@ -1,11 +1,20 @@
-# 長さ
+# 距離
 
 パッケージ: `org.pcsoft.framework.kunit.distance`
 基本単位: **メートル**(`KDistanceUnit.BASE == KDistanceUnit.METER`)
 
-`KLengthUnitInstance` は `KDistanceUnit.BASE` の単一の項に限定された `KMixedUnitInstance` を、任意の指数で
-ラップします - 純粋な長さは指数1、面積は2、体積は3です。値は作成に使用された単位に関係なく、常にメートル
-(または平方/立方メートル)に正規化されて保存されます。
+距離グループは、開いた基底ラッパー `KDistanceUnitInstance`(`KDistanceUnit.BASE` の単一の項、**任意の**指数)
+の下で、各指数をそれぞれ独立したコンパイル時安全な型としてモデル化します:
+
+* **`KLengthUnitInstance`** — 指数1(長さ)
+* **`KAreaUnitInstance`** — 指数2(面積)
+* **`KVolumeUnitInstance`** — 指数3(体積)
+
+値は作成に使用された単位に関係なく、常にメートル(または平方/立方メートル)に正規化されて保存されます。長さ、
+面積、体積は異なる型であるため、`+`/`-`/比較でそれらを混在させると**コンパイルエラー**になります(そのような
+演算子は存在しません)。一方 `*`/`/` は可能な限り同じ型ファミリー内に留まり(`length * length = area`、
+`area / length = length`)、`{1,2,3}` 以外の指数(または指数0の無次元の結果)については
+`KDistanceUnitInstance`/`KMixedUnitInstance` にフォールバックします。
 
 ## 指数1 - 長さ
 
@@ -56,23 +65,25 @@ val b = 2.miles - 800.meters
 // 比較
 2.miles > 1.miles               // true
 1.miles == 1609.344.meters      // true(正規化された値が同じ)
-5.hectares > 5.meters           // IllegalStateException が発生(面積 vs 長さ、指数が異なる)
+// 5.hectares > 5.meters        // コンパイルされない: 面積と長さは異なる型
 
-// * / / : 常に許可され、新しい指数を持つ KMixedUnitInstance を生成
-val area = 200.meters * 50.meters   // KMixedUnitInstance: value=10000.0, units=[METER^2]
-val lengthAgain = area / 50.meters.toUnit() // KMixedUnitInstance: value=200.0, units=[METER^1]
+// * / / : 両方のオペランドが静的に次元付けされている場合、長さファミリー内に留まる
+val area = 200.meters * 50.meters   // KAreaUnitInstance: value=10000.0(m²)
+val lengthAgain = area / 50.meters  // KLengthUnitInstance: value=200.0(m)
+val ratio = 10.meters / 2.meters    // KMixedUnitInstance(無次元)、value=5.0
 ```
 
 ### 比較と等価性
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` は**同じ指数**を持つ2つの `KLengthUnitInstance` の正規化された `value`
-を比較します。異なる指数間(例: 長さと面積)の比較は、`+`/`-` のルールと同様に `IllegalStateException`
-を投げます。
+`==`、`!=`、`<`、`<=`、`>`、`>=` は**同じ型**(同じ次元)を持つ2つの値の正規化された `value`
+を比較します。異なる次元(例: 長さと面積)を混在させることは、`+`/`-` のルールと同様にコンパイラによって
+拒否されます — そのような演算子は存在しません。次元をまたぐ `equals` は単に `false` を返します。
 
 ## 指数2 - 面積
 
-指数が2の `KLengthUnitInstance` は面積を表します(例: 2つの長さを掛けた結果)。生の
-`KDistanceUnit.BASE^2`(平方メートル)表現に加えて、次の名前付き特殊単位(`KDistanceDerivedUnit`)を
+`KAreaUnitInstance` は面積を表します(例: `length * length` の結果)。各単位に対する `square…`
+コンストラクタ(`200.squareMeters`、`5.squareMiles`、… および接頭辞 infix 形式 `5 kilo squareMeters`
+== 5平方キロメートル == 5 000 000 m²)に加えて、次の名前付き特殊単位(`KDistanceDerivedUnit`)を
 変換・フォーマットのターゲットとして使用できます。
 
 | 特殊単位 | Enum 値 | 記号 | コンストラクタ | m²換算(1単位) |
@@ -89,17 +100,18 @@ plot.value                                   // 30000.0(m²)
 plot.valueAs(KDistanceDerivedUnit.ARE)          // 300.0
 plot.valueAs(KDistanceDerivedUnit.ACRE)         // ≈ 7.4132
 
-val computed = 200.meters * 50.meters     // KMixedUnitInstance, units=[METER^2]
-computed.toDistance().valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val computed = 200.meters * 50.meters     // KAreaUnitInstance(10 000 m²)
+computed.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
 
-plot + computed.toDistance()                // 許可される: 両方とも指数2(面積)
-plot + 5.meters                              // IllegalStateException が発生(面積 vs 長さ)
+plot + computed                              // 許可される: 両方とも面積 -> KAreaUnitInstance
+// plot + 5.meters                           // コンパイルされない: 面積と長さ
 ```
 
 ## 指数3 - 体積
 
-指数が3の `KLengthUnitInstance` は体積を表します。生の `KDistanceUnit.BASE^3`(立方メートル)表現に
-加えて、次の名前付き特殊単位が利用できます。
+`KVolumeUnitInstance` は体積を表します(例: `length * length * length` または `area * length`)。各単位に
+対する `cubic…` コンストラクタ(`2.cubicMeters`、`3.cubicMiles`、… および接頭辞 infix 形式
+`5 kilo cubicMeters`)に加えて、次の名前付き特殊単位が利用できます。
 
 | 特殊単位 | Enum 値 | 記号 | コンストラクタ | m³換算(1単位) |
 |---|---:|---:|---:|---:|
@@ -116,10 +128,10 @@ val tank = 200.liters
 tank.value                                        // 0.2(m³)
 tank.valueAs(KDistanceDerivedUnit.US_GALLON)        // ≈ 52.834
 
-val cube = 2.meters * 2.meters * 2.meters   // KMixedUnitInstance, units=[METER^3]
-cube.toDistance().valueAs(KDistanceDerivedUnit.LITER) // 8000.0
+val cube = 2.meters * 2.meters * 2.meters   // KVolumeUnitInstance(8 m³)
+cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
-tank + cube.toDistance()                        // 許可される: 両方とも指数3(体積)
+tank + cube                                  // 許可される: 両方とも体積 -> KVolumeUnitInstance
 ```
 
 ## SI 接頭辞
@@ -154,5 +166,5 @@ import org.pcsoft.framework.kunit.distance.*
 
 5.meters.toString()                        // "5.0 m"(基本単位表現)
 5.miles.toString(KDistanceUnit.MILE)          // "5.0 mi"
-(200.meters * 50.meters).toDistance().toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
+(200.meters * 50.meters).toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
 ```

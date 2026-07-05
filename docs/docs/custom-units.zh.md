@@ -1,6 +1,6 @@
 # 添加自定义单位
 
-kunit 目前只提供一个单位组([长度](units/length.md))，但整个引擎（`KUnit`、`KMixedUnitInstance`、前缀、
+kunit 目前只提供一个单位组([距离](units/distance.md))，但整个引擎（`KUnit`、`KMixedUnitInstance`、前缀、
 派生单位）都是通用的、与组无关的。添加一个新的物理量意味着遵循 `length` 包已经建立的模式。本页从零开始
 演示如何添加一个示范性的**质量**（Mass）组（`org.pcsoft.framework.kunit.mass`）。
 

@@ -32,7 +32,7 @@ kunit 围绕两个核心类型构建：
 
 每个单位组还额外提供一个 **包装类**（例如 `KLengthUnitInstance`），它封装了一个限定于单个单位组的
 `KMixedUnitInstance`，并始终归一化到该组的基础单位。这是你在大多数情况下会使用的类型——目前提供的单位请参见
-[预定义单位](units/length.md)，何时以及如何直接使用通用的 `KMixedUnitInstance` 引擎请参见
+[预定义单位](units/distance.md)，何时以及如何直接使用通用的 `KMixedUnitInstance` 引擎请参见
 [混合单位](mixed-units.md)。
 
 如果你想为新的物理量（例如质量或时间）添加支持，请参阅

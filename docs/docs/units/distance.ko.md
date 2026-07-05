@@ -1,11 +1,20 @@
-# 길이
+# 거리
 
 패키지: `org.pcsoft.framework.kunit.distance`
 기본 단위: **미터** (`KDistanceUnit.BASE == KDistanceUnit.METER`)
 
-`KLengthUnitInstance`는 `KDistanceUnit.BASE`의 단일 항으로 제한된 `KMixedUnitInstance`를 임의의 지수로
-래핑합니다 - 순수한 길이는 지수 1, 면적은 2, 부피는 3입니다. 값은 생성에 사용된 단위와 관계없이 항상
-미터(또는 제곱/세제곱미터)로 정규화되어 저장됩니다.
+거리 그룹은 열린 기반 래퍼 `KDistanceUnitInstance`(`KDistanceUnit.BASE`의 단일 항, **임의의** 지수)
+아래에서 각 지수를 컴파일 타임에 안전한 고유 타입으로 모델링합니다:
+
+* **`KLengthUnitInstance`** — 지수 1 (길이)
+* **`KAreaUnitInstance`** — 지수 2 (면적)
+* **`KVolumeUnitInstance`** — 지수 3 (부피)
+
+값은 생성에 사용된 단위와 관계없이 항상 미터(또는 제곱/세제곱미터)로 정규화되어 저장됩니다. 길이, 면적,
+부피는 서로 다른 타입이므로 `+`/`-`/비교에서 이들을 섞으면 **컴파일 오류**가 됩니다(그런 연산자가 존재하지
+않음). 반면 `*`/`/`는 가능한 한 같은 타입 패밀리 안에 머물며(`length * length = area`,
+`area / length = length`), `{1,2,3}` 밖의 지수(또는 지수 0의 무차원 결과)에 대해서는
+`KDistanceUnitInstance`/`KMixedUnitInstance`로 폴백합니다.
 
 ## 지수 1 - 길이
 
@@ -56,23 +65,25 @@ val b = 2.miles - 800.meters
 // 비교
 2.miles > 1.miles               // true
 1.miles == 1609.344.meters      // true (정규화된 값이 같음)
-5.hectares > 5.meters           // IllegalStateException 발생 (면적 vs 길이, 지수가 다름)
+// 5.hectares > 5.meters        // 컴파일되지 않음: 면적과 길이는 서로 다른 타입
 
-// * / / : 항상 허용되며, 새로운 지수를 가진 KMixedUnitInstance를 생성
-val area = 200.meters * 50.meters   // KMixedUnitInstance: value=10000.0, units=[METER^2]
-val lengthAgain = area / 50.meters.toUnit() // KMixedUnitInstance: value=200.0, units=[METER^1]
+// * / / : 두 피연산자가 모두 정적으로 차원이 정해지면 길이 패밀리 안에 머무름
+val area = 200.meters * 50.meters   // KAreaUnitInstance: value=10000.0 (m²)
+val lengthAgain = area / 50.meters  // KLengthUnitInstance: value=200.0 (m)
+val ratio = 10.meters / 2.meters    // KMixedUnitInstance (무차원), value=5.0
 ```
 
 ### 비교와 동등성
 
-`==`, `!=`, `<`, `<=`, `>`, `>=`는 **동일한 지수**를 가진 두 `KLengthUnitInstance`의 정규화된 `value`를
-비교합니다. 서로 다른 지수 간(예: 길이와 면적)의 비교는 `+`/`-` 규칙과 마찬가지로
-`IllegalStateException`을 던집니다.
+`==`, `!=`, `<`, `<=`, `>`, `>=`는 **동일한 타입**(동일한 차원)을 가진 두 값의 정규화된 `value`를
+비교합니다. 서로 다른 차원(예: 길이와 면적)을 섞는 것은 `+`/`-` 규칙과 마찬가지로 컴파일러가 거부합니다 —
+그런 연산자가 존재하지 않습니다. 차원이 다른 `equals`는 단순히 `false`를 반환합니다.
 
 ## 지수 2 - 면적
 
-지수가 2인 `KLengthUnitInstance`는 면적을 나타냅니다(예: 두 길이를 곱한 결과). 원시 `KDistanceUnit.BASE^2`
-(제곱미터) 표현 외에도, 다음과 같은 명명된 특수 단위(`KDistanceDerivedUnit`)를 변환/포맷 대상으로 사용할
+`KAreaUnitInstance`는 면적을 나타냅니다(예: `length * length`의 결과). 각 단위별 `square…` 생성자
+(`200.squareMeters`, `5.squareMiles`, … 및 접두어 infix 형식 `5 kilo squareMeters` == 5 제곱킬로미터
+== 5 000 000 m²) 외에도, 다음과 같은 명명된 특수 단위(`KDistanceDerivedUnit`)를 변환/포맷 대상으로 사용할
 수 있습니다.
 
 | 특수 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (m²) |
@@ -89,16 +100,17 @@ plot.value                                   // 30000.0 (m²)
 plot.valueAs(KDistanceDerivedUnit.ARE)          // 300.0
 plot.valueAs(KDistanceDerivedUnit.ACRE)         // ≈ 7.4132
 
-val computed = 200.meters * 50.meters     // KMixedUnitInstance, units=[METER^2]
-computed.toDistance().valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val computed = 200.meters * 50.meters     // KAreaUnitInstance (10 000 m²)
+computed.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
 
-plot + computed.toDistance()                // 허용됨: 둘 다 지수 2 (면적)
-plot + 5.meters                              // IllegalStateException 발생 (면적 vs 길이)
+plot + computed                              // 허용됨: 둘 다 면적 -> KAreaUnitInstance
+// plot + 5.meters                           // 컴파일되지 않음: 면적과 길이
 ```
 
 ## 지수 3 - 부피
 
-지수가 3인 `KLengthUnitInstance`는 부피를 나타냅니다. 원시 `KDistanceUnit.BASE^3`(세제곱미터) 표현 외에도
+`KVolumeUnitInstance`는 부피를 나타냅니다(예: `length * length * length` 또는 `area * length`). 각 단위별
+`cubic…` 생성자(`2.cubicMeters`, `3.cubicMiles`, … 및 접두어 infix 형식 `5 kilo cubicMeters`) 외에도
 다음과 같은 명명된 특수 단위를 사용할 수 있습니다.
 
 | 특수 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (m³) |
@@ -116,10 +128,10 @@ val tank = 200.liters
 tank.value                                        // 0.2 (m³)
 tank.valueAs(KDistanceDerivedUnit.US_GALLON)        // ≈ 52.834
 
-val cube = 2.meters * 2.meters * 2.meters   // KMixedUnitInstance, units=[METER^3]
-cube.toDistance().valueAs(KDistanceDerivedUnit.LITER) // 8000.0
+val cube = 2.meters * 2.meters * 2.meters   // KVolumeUnitInstance (8 m³)
+cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
-tank + cube.toDistance()                        // 허용됨: 둘 다 지수 3 (부피)
+tank + cube                                  // 허용됨: 둘 다 부피 -> KVolumeUnitInstance
 ```
 
 ## SI 접두어
@@ -153,5 +165,5 @@ import org.pcsoft.framework.kunit.distance.*
 
 5.meters.toString()                        // "5.0 m" (기본 단위 표현)
 5.miles.toString(KDistanceUnit.MILE)          // "5.0 mi"
-(200.meters * 50.meters).toDistance().toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
+(200.meters * 50.meters).toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
 ```

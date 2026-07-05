@@ -32,7 +32,7 @@ kunit은 두 가지 핵심 타입을 중심으로 구성됩니다.
 
 모든 단위 그룹은 추가로 **래퍼 클래스**(예: `KLengthUnitInstance`)를 제공하며, 이는 단일 단위 그룹으로 제한된
 `KMixedUnitInstance`를 캡슐화하고 항상 해당 그룹의 기본 단위로 정규화됩니다. 대부분의 경우 이 타입을 사용하게 됩니다 - 현재
-제공되는 단위는 [미리 정의된 단위](units/length.md)를, 범용 `KMixedUnitInstance` 엔진을 직접 사용해야 하는 경우는
+제공되는 단위는 [미리 정의된 단위](units/distance.md)를, 범용 `KMixedUnitInstance` 엔진을 직접 사용해야 하는 경우는
 [혼합 단위](mixed-units.md)를 참고하세요.
 
 새로운 물리량(예: 질량이나 시간)에 대한 지원을 추가하고 싶다면, 단계별 안내인

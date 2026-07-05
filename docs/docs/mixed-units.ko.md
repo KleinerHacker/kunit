@@ -3,7 +3,7 @@
 **혼합 단위**(독일어: *Mischeinheit*)는 여러 개의 `KUnit`이 각각 자신의 지수와 함께 결합된 값입니다. 예:
 속도의 `m^1 * s^-1`, 힘의 `m^1 * kg^1 * s^-2`. kunit에서는 범용 `KMixedUnitInstance` 클래스가 이를 표현합니다.
 
-그룹별 래퍼 클래스(`KLengthUnitInstance` 등, [미리 정의된 단위](units/length.md) 참고)는 단일 물리 차원을
+그룹별 래퍼 클래스(`KLengthUnitInstance` 등, [미리 정의된 단위](units/distance.md) 참고)는 단일 물리 차원을
 다룰 때 편리하지만, **서로 다른** 그룹의 단위를 결합해야 하거나 래퍼 클래스가 제공하는 동일 그룹 내 자동 변환을
 원하지 않을 때는 `KMixedUnitInstance`를 직접 사용해야 합니다.
 
@@ -30,7 +30,7 @@ val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 
 !!! note
     아래 예시 중 `seconds`/`TimeUnit`을 참조하는 부분은 "시간" 단위 그룹이 길이와 결합될 때의 모습을
-    보여주기 위한 것입니다 - kunit은 현재 `length` 그룹만 제공합니다([미리 정의된 단위](units/length.md)
+    보여주기 위한 것입니다 - kunit은 현재 `length` 그룹만 제공합니다([미리 정의된 단위](units/distance.md)
     참고). 직접 추가하려면 [사용자 정의 단위 추가](custom-units.md)를 따르세요.
 
 ## 곱셈과 나눗셈

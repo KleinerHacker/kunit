@@ -4,7 +4,7 @@ A **mixed unit** (German: *Mischeinheit*) is a value composed of several `KUnit`
 exponent, e.g. `m^1 * s^-1` for a speed, or `m^1 * kg^1 * s^-2` for a force. In kunit this is represented by
 the generic `KMixedUnitInstance` class.
 
-While the group-specific wrapper classes (like `KLengthUnitInstance`, see [Predefined Units](units/length.md))
+While the group-specific wrapper classes (like `KLengthUnitInstance`, see [Predefined Units](units/distance.md))
 are convenient for working with a single physical dimension, `KMixedUnitInstance` is what you reach for once you
 need to combine units from **different** groups, or when you don't want the automatic same-group conversion
 that the wrapper classes provide.
@@ -104,7 +104,7 @@ a.hasSameUnits(b) // compares the (unit -> exponent) signature, order-independen
 !!! note
     The examples above and below that reference `seconds`/`TimeUnit` illustrate what a **second** unit
     group would look like combined with length - kunit currently ships only the `length` group (see
-    [Predefined Units](units/length.md)). Follow [Adding Custom Units](custom-units.md) to add your own.
+    [Predefined Units](units/distance.md)). Follow [Adding Custom Units](custom-units.md) to add your own.
 
 ## Reading and formatting values
 
