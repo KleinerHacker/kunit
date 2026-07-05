@@ -27,9 +27,9 @@ import kotlin.test.assertTrue
  */
 class KDistanceTypeTransitionTest {
 
-    private val l = 2.meters          // KLengthUnitInstance
-    private val a = 3.squareMeters    // KAreaUnitInstance
-    private val v = 5.cubicMeters     // KVolumeUnitInstance
+    private val l = 2.meters                     // KLengthUnitInstance
+    private val a = 3.meters * 1.meters          // KAreaUnitInstance (3 m²)
+    private val v = 5.meters * 1.meters * 1.meters // KVolumeUnitInstance (5 m³)
 
     // region times matrix — statically typed results
 
@@ -126,8 +126,8 @@ class KDistanceTypeTransitionTest {
     /** Comparing values of different dimensions with `equals` returns `false` (never throws), while same-dimension values compare by normalized magnitude. */
     @Test
     fun `equals across dimensions is false, not an error`() {
-        assertFalse(5.meters.equals(5.squareMeters))
-        assertFalse(5.squareMeters.equals(5.cubicMeters))
+        assertFalse(5.meters.equals(5.meters * 1.meters))
+        assertFalse((5.meters * 1.meters).equals(5.meters * 1.meters * 1.meters))
         assertTrue(5.meters == 500.centi(meters))
     }
 

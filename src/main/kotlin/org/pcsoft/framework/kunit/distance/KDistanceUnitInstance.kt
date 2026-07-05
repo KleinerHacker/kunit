@@ -140,6 +140,34 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
     open fun toString(target: KUnitTarget): String = instance.toString(target)
 }
 
+/**
+ * Raises this distance value to the integer power [n], staying **inside** the distance hierarchy: the
+ * normalized [KDistanceUnitInstance.value] is raised to [n] and the [KDistanceUnitInstance.exponent] is
+ * multiplied by [n], so the concrete result type follows the resulting exponent
+ * ([KLengthUnitInstance]/[KAreaUnitInstance]/[KVolumeUnitInstance] for 1/2/3, otherwise the general
+ * [KDistanceUnitInstance]).
+ *
+ * This is the distance-typed counterpart of the group-agnostic [KMixedUnitInstance.pow]; unlike that
+ * one it keeps the value dimensioned. `2.meters pow 2` is therefore a [KAreaUnitInstance] of `4.0 m²`
+ * (i.e. `(2 m)²`), `2.meters pow 3` a [KVolumeUnitInstance].
+ *
+ * Precedence note: `pow` is a named infix function and binds **weaker** than `* / + -`; parenthesize in
+ * mixed expressions.
+ *
+ * @param n the integer exponent. `n == 0` yields the dimensionless case within the distance group
+ * (`m⁰`, value `1.0`); for a truly unit-less [KMixedUnitInstance] use `x.toUnit() pow 0`. Negative `n`
+ * inverts the dimension (e.g. `m` → `m⁻ⁿ`).
+ *
+ * Example:
+ * ```kotlin
+ * (2.meters pow 2)          // KAreaUnitInstance: 4.0 m²
+ * (2 kilo meters pow 2)     // KAreaUnitInstance: 4_000_000.0 m²  ((2000 m)²)
+ * (2.meters pow 2 pow 2)    // KVolumeUnitInstance? no - exponent 4 -> KDistanceUnitInstance: 16.0 m⁴
+ * ```
+ */
+infix fun KDistanceUnitInstance.pow(n: Int): KDistanceUnitInstance =
+    distanceOf(Math.pow(value, n.toDouble()), exponent * n)
+
 // --- Factory helpers (single creation source; constructors stay internal) -----------------------
 
 /**

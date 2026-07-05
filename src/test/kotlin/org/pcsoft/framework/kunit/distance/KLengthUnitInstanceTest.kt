@@ -240,7 +240,7 @@ class KLengthUnitInstanceTest {
     /** The general (exponent-4) distance type has no `+`, but `*` still works and falls back to a raw mixed unit (exponent 8). */
     @Test
     fun `general distance type is not additive but multiplies`() {
-        val m4: KDistanceUnitInstance = 2.squareMeters * 3.squareMeters // exponent 4, general type
+        val m4: KDistanceUnitInstance = (2.meters * 1.meters) * (3.meters * 1.meters) // 2 m² * 3 m² = exponent 4, general type
         val product = m4 * m4 // broad times -> mixed
         assertEquals(36.0, product.value, 1e-9)
         assertEquals(listOf(KUnitTerm(KDistanceUnit.BASE, 8)), product.units)
@@ -250,7 +250,7 @@ class KLengthUnitInstanceTest {
     @Test
     fun `area valueAs raises base value to the power of the exponent`() {
         // 1 square kilometer == 1_000_000 m²
-        assertEquals(1.0, (1_000_000).squareMeters.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER), 1e-6)
+        assertEquals(1.0, (1_000_000.meters * 1.meters).valueAs(KUnitPrefix.KILO with KDistanceUnit.METER), 1e-6)
     }
 
     /** Sanity check on the `kotlin.math.pow` helper used by the expected-value computations (1000² == 1e6). */

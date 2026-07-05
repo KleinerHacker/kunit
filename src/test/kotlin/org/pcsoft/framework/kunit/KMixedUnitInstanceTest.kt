@@ -160,6 +160,76 @@ class KMixedUnitInstanceTest {
         assertEquals(listOf(KUnitTerm(KTimeUnit.SECOND, -2)), result.units)
     }
 
+    // region pow
+
+    /** `pow 2` squares the value and doubles every term's exponent (`(m¹·s⁻¹)² = 25 · m²·s⁻²`). */
+    @Test
+    fun `pow squares value and multiplies every exponent`() {
+        val speed = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
+
+        val result = speed pow 2
+
+        assertEquals(25.0, result.value)
+        assertEquals(setOf(KUnitTerm(KDistanceUnit.METER, 2), KUnitTerm(KTimeUnit.SECOND, -2)), result.units.toSet())
+    }
+
+    /** `pow 1` is the identity (value and terms unchanged). */
+    @Test
+    fun `pow 1 is identity`() {
+        val a = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
+
+        val result = a pow 1
+
+        assertEquals(3.0, result.value)
+        assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 2)), result.units)
+    }
+
+    /** `pow 3` cubes the value and triples the exponent (`(m²)³ = 8 · m⁶`). */
+    @Test
+    fun `pow 3 cubes value and triples exponent`() {
+        val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
+
+        val result = a pow 3
+
+        assertEquals(8.0, result.value)
+        assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 6)), result.units)
+    }
+
+    /** `pow 0` collapses to a dimensionless unit of value `1.0` (all terms dropped). */
+    @Test
+    fun `pow 0 is dimensionless one`() {
+        val a = KMixedUnitInstance(7.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KTimeUnit.SECOND, -1)))
+
+        val result = a pow 0
+
+        assertEquals(1.0, result.value)
+        assertTrue(result.units.isEmpty())
+    }
+
+    /** A negative power inverts both the value and every exponent (`(m²)⁻¹ = 0.5 · m⁻²`). */
+    @Test
+    fun `pow negative inverts value and exponents`() {
+        val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
+
+        val result = a pow -1
+
+        assertEquals(0.5, result.value)
+        assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, -2)), result.units)
+    }
+
+    /** Chaining `pow` composes multiplicatively on the exponent (`((m¹)² )² = m⁴`, value `2⁴`). */
+    @Test
+    fun `pow chains multiplicatively`() {
+        val a = KMixedUnitInstance(2.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
+
+        val result = a pow 2 pow 2
+
+        assertEquals(16.0, result.value)
+        assertEquals(listOf(KUnitTerm(KDistanceUnit.METER, 4)), result.units)
+    }
+
+    // endregion
+
     /** `div` correctly crosses the zero point downwards (`m¹ / m³ = m⁻²`). */
     @Test
     fun `div drives exponent through zero from positive to negative`() {

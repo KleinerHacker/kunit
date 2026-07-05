@@ -81,10 +81,10 @@ val ratio = 10.meters / 2.meters    // KMixedUnitInstance (무차원), value=5.0
 
 ## 지수 2 - 면적
 
-`KAreaUnitInstance`는 면적을 나타냅니다(예: `length * length`의 결과). 각 단위별 `square…` 생성자
-(`200.squareMeters`, `5.squareMiles`, … 및 접두어 infix 형식 `5 kilo squareMeters` == 5 제곱킬로미터
-== 5 000 000 m²) 외에도, 다음과 같은 명명된 특수 단위(`KDistanceDerivedUnit`)를 변환/포맷 대상으로 사용할
-수 있습니다.
+`KAreaUnitInstance`는 면적을 나타냅니다(예: `length * length`의 결과, 또는 길이를 infix `pow` 연산자로
+제곱한 결과: `2.meters pow 2` == `(2 m)²` == 4 m², `2 kilo meters pow 2` == 4 000 000 m²). `squareXxx`
+생성자는 없습니다 — `pow`가 유일한 거듭제곱 문법입니다(아래 "`pow`로 거듭제곱" 절 참고). 다음과 같은 명명된
+특수 단위(`KDistanceDerivedUnit`)를 변환/포맷 대상으로 사용할 수 있습니다.
 
 | 특수 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (m²) |
 |---|---:|---:|---:|---:|
@@ -109,9 +109,9 @@ plot + computed                              // 허용됨: 둘 다 면적 -> KAr
 
 ## 지수 3 - 부피
 
-`KVolumeUnitInstance`는 부피를 나타냅니다(예: `length * length * length` 또는 `area * length`). 각 단위별
-`cubic…` 생성자(`2.cubicMeters`, `3.cubicMiles`, … 및 접두어 infix 형식 `5 kilo cubicMeters`) 외에도
-다음과 같은 명명된 특수 단위를 사용할 수 있습니다.
+`KVolumeUnitInstance`는 부피를 나타냅니다(예: `length * length * length`, `area * length`, 또는 길이를
+세제곱한 결과: `2.meters pow 3` == 8 m³, `2 kilo meters pow 3`). 면적과 마찬가지로 `cubicXxx` 생성자는
+없으며 `pow`를 사용합니다(아래 "`pow`로 거듭제곱" 절 참고). 다음과 같은 명명된 특수 단위를 사용할 수 있습니다.
 
 | 특수 단위 | Enum 값 | 기호 | 생성자 | 1 단위 (m³) |
 |---|---:|---:|---:|---:|
@@ -133,6 +133,29 @@ cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
 tank + cube                                  // 허용됨: 둘 다 부피 -> KVolumeUnitInstance
 ```
+
+## `pow`로 거듭제곱
+
+infix `pow` 연산자로 값을 정수 거듭제곱합니다. Kotlin에는 오버로드 가능한 `^` 연산자(그리고 `^=`)가
+없으므로, `pow`가 모든 그룹에서 유일한 거듭제곱 문법입니다 — `squareXxx`/`cubicXxx` 생성자는 없습니다.
+
+`pow`는 값을 거듭제곱하고 **모든** 지수에 `n`을 곱합니다. 따라서 `2.meters pow 2`는 `(2 m)² = 4 m²`
+입니다(지수만이 아니라 값도 거듭제곱됨). 거리 그룹에서는 결과가 차원을 가집니다: `pow 2`는
+`KAreaUnitInstance`, `pow 3`은 `KVolumeUnitInstance`, 그 외 지수는 일반 `KDistanceUnitInstance`입니다.
+
+```kotlin
+import org.pcsoft.framework.kunit.distance.*
+
+val area = 2.meters pow 2         // KAreaUnitInstance: 4.0 m²
+val big = 2 kilo meters pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
+val volume = 2.meters pow 3       // KVolumeUnitInstance: 8.0 m³
+val m4 = 2.meters pow 2 pow 2     // KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)
+val inverse = 2.meters pow -1     // KDistanceUnitInstance: 0.5 m⁻¹
+```
+
+`pow`는 명명된 infix 함수이므로 `* / + -`보다 **더 약하게** 결합합니다. 혼합 식에서는 괄호를 사용하세요
+(`(a * b) pow 2`). 모든 단위 그룹에서 사용할 수 있습니다 — 예: `2.hours pow 2`(시간에는 차원 거듭제곱
+타입이 없으므로 일반 `KMixedUnitInstance`).
 
 ## SI 접두어
 

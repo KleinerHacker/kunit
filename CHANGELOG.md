@@ -12,10 +12,14 @@
     `volume / area = length`, etc., instead of always returning a raw `KMixedUnitInstance`.
   - Cross-dimension `+`/`-`/comparison (`length + area`, `length < volume`, …) are now a **compile
     error** — no such operator exists — rather than a runtime `IllegalStateException`.
-- **Area and volume creators** for every distance unit: `200.squareMeters`, `3.cubicMiles`, … plus the
-  SI-prefix `infix` forms `5 kilo squareMeters` / `3 kilo cubicMeters` (the prefix scales the linear base
-  unit, then it is squared/cubed, so `5 kilo squareMeters` == 5 square kilometers == 5 000 000 m²). The
-  existing named derived units (`ares`/`hectares`/`acres`, `liters`/… ) now return
+- **Exponentiation via `pow`.** A group-agnostic infix power operation raises any unit to an integer
+  power: `2.meters pow 2` (= `(2 m)² = 4 m²`, a `KAreaUnitInstance`), `2 kilo meters pow 2`
+  (= 4 000 000 m²), `2.meters pow 3` (a volume), `2.hours pow 2` (a generic `KMixedUnitInstance`), and it
+  chains (`x pow 2 pow 2`). The value is powered and every term's exponent multiplied by `n`; `pow 0` is
+  dimensionless. This is the single power syntax across all groups (Kotlin has no overloadable `^`). For
+  distance the result is dimensioned (`KDistanceUnitInstance.pow`); for other groups it is a
+  `KMixedUnitInstance`.
+- The named derived units (`ares`/`hectares`/`acres`, `liters`/… ) return
   `KAreaUnitInstance`/`KVolumeUnitInstance`.
 - New conversions `KMixedUnitInstance.toDistance()`/`toLength()`/`toArea()`/`toVolume()`.
 - **In-hierarchy narrowing** `KDistanceUnitInstance.toLength()`/`toArea()`/`toVolume()`: a general distance
@@ -27,10 +31,11 @@
 ### Changed
 
 - **Tests: prefix × unit matrices now construct through the bare-value DSL.** The prefix cross-matrices
-  for every group build their instances via the bare-value aliases (`5 kilo meters`, `5 kilo squareMiles`,
-  `5 milli seconds`, `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the
-  `K*UnitBareValues.kt` aliases are now fully covered and every unit × every prefix runs through the real
-  DSL. Test-construction policy documented in `CLAUDE.md`.
+  for every group build their instances via the bare-value aliases (`5 kilo meters`, `5 milli seconds`,
+  `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the `K*UnitBareValues.kt` aliases
+  are now fully covered and every unit × every prefix runs through the real DSL. The distance area/volume
+  matrices now raise a prefixed length via `pow` (`(5 kilo meters) pow 2`). Test-construction policy
+  documented in `CLAUDE.md`.
 - **Breaking:** the length group was renamed to **distance** — package
   `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
   `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the
@@ -55,6 +60,16 @@
   per-dimension layout: the length instance tests moved into `KLengthUnitInstanceTest` (alongside the
   existing `KAreaUnitInstanceTest`/`KVolumeUnitInstanceTest`), and the shared cross-dimension generator
   matrices/helpers were extracted into `KDistanceTestFixtures.kt`.
+
+### Removed
+
+- **Named `squareXxx`/`cubicXxx` area and volume constructors** and the prefixed area/volume DSL —
+  superseded by `pow`. Removed: the `Number.squareMeters`/`squareMiles`/… and
+  `Number.cubicMeters`/`cubicMiles`/… creator properties, the `n kilo squareMeters` / `n kilo cubicMeters`
+  prefix `infix` overloads, and the supporting token types/aliases (`KDistanceAreaUnit`,
+  `KDistanceVolumeUnit`, `KAreaUnitBareValues.kt`, `KVolumeUnitBareValues.kt`). Write `2.meters pow 2`
+  instead of `2.squareMeters`, and `(2 kilo meters) pow 2` instead of `2 kilo squareMeters`. The named
+  derived special units (`hectares`, `ares`, `acres`, `liters`, `usGallons`, …) are unaffected.
 
 ## [0.2.0]
 

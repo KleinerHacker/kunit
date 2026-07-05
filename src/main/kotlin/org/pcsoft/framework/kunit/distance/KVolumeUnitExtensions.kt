@@ -13,67 +13,15 @@
 package org.pcsoft.framework.kunit.distance
 
 import org.pcsoft.framework.kunit.KDerivedUnit
-import kotlin.math.pow
 
-// Volume (exponent 3) creator extension properties, including the derived-unit (liter/gallon/…) creators.
-
-private fun volumeFrom(value: Number, unit: KDistanceUnit): KVolumeUnitInstance = volumeOf(value.toDouble() * unit.baseValue.pow(3))
+// Volume (exponent 3) creator extension properties for the derived special units (liter/gallon/…).
+//
+// There are intentionally NO cubicXxx creators (e.g. cubicMeters, cubicMiles): a plain volume is
+// built via the group-agnostic power operation, e.g. `2.meters pow 3` or `1.miles pow 3`
+// (see KDistanceUnitInstance.pow / KMixedUnitInstance.pow). The derived units below carry their own
+// name/symbol/conversion factor and therefore remain dedicated creators.
 
 private fun volumeFrom(value: Number, derived: KDerivedUnit<KDistanceUnit>): KVolumeUnitInstance = volumeOf(value.toDouble() * derived.baseValue)
-
-/**
- * Creates a pure volume value (exponent 3) in cubic meters. Example: `2.cubicMeters.value // 2.0`
- * (already in m³). Equivalent to `x.meters * y.meters * z.meters` when `x*y*z = 2`.
- */
-val Number.cubicMeters: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.METER)
-
-/** Creates a pure volume value in cubic miles. */
-val Number.cubicMiles: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.MILE)
-
-/** Creates a pure volume value in cubic nautical miles. */
-val Number.cubicNauticalMiles: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.NAUTICAL_MILE)
-
-/** Creates a pure volume value in cubic yards. Example: `1.cubicYards.value // 0.764554857984` (m³). */
-val Number.cubicYards: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.YARD)
-
-/** Creates a pure volume value in cubic feet. Example: `1.cubicFeet.value // 0.028316846592` (m³). */
-val Number.cubicFeet: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.FOOT)
-
-/** Creates a pure volume value in cubic inches. Example: `1.cubicInches.value // 1.6387064e-5` (m³). */
-val Number.cubicInches: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.INCH)
-
-/** Creates a pure volume value in cubic fathoms. */
-val Number.cubicFathoms: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.FATHOM)
-
-/** Creates a pure volume value in cubic chains. */
-val Number.cubicChains: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.CHAIN)
-
-/** Creates a pure volume value in cubic furlongs. */
-val Number.cubicFurlongs: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.FURLONG)
-
-/** Creates a pure volume value in cubic astronomical units. */
-val Number.cubicAstronomicalUnits: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.ASTRONOMICAL_UNIT)
-
-/** Creates a pure volume value in cubic light-seconds. */
-val Number.cubicLightSeconds: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.LIGHT_SECOND)
-
-/** Creates a pure volume value in cubic light-minutes. */
-val Number.cubicLightMinutes: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.LIGHT_MINUTE)
-
-/** Creates a pure volume value in cubic light-hours. */
-val Number.cubicLightHours: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.LIGHT_HOUR)
-
-/** Creates a pure volume value in cubic light-days. */
-val Number.cubicLightDays: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.LIGHT_DAY)
-
-/** Creates a pure volume value in cubic light-weeks. */
-val Number.cubicLightWeeks: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.LIGHT_WEEK)
-
-/** Creates a pure volume value in cubic light-years. */
-val Number.cubicLightYears: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.LIGHT_YEAR)
-
-/** Creates a pure volume value in cubic parsecs. */
-val Number.cubicParsecs: KVolumeUnitInstance get() = volumeFrom(this, KDistanceUnit.PARSEC)
 
 /**
  * Creates a pure volume value (exponent 3) in liters. Example:

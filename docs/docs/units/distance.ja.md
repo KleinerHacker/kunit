@@ -81,10 +81,10 @@ val ratio = 10.meters / 2.meters    // KMixedUnitInstance(無次元)、value=5.0
 
 ## 指数2 - 面積
 
-`KAreaUnitInstance` は面積を表します(例: `length * length` の結果)。各単位に対する `square…`
-コンストラクタ(`200.squareMeters`、`5.squareMiles`、… および接頭辞 infix 形式 `5 kilo squareMeters`
-== 5平方キロメートル == 5 000 000 m²)に加えて、次の名前付き特殊単位(`KDistanceDerivedUnit`)を
-変換・フォーマットのターゲットとして使用できます。
+`KAreaUnitInstance` は面積を表します(例: `length * length` の結果、または長さを infix `pow` 演算子で
+2乗した結果: `2.meters pow 2` == `(2 m)²` == 4 m²、`2 kilo meters pow 2` == 4 000 000 m²)。`squareXxx`
+コンストラクタはありません — `pow` が唯一のべき乗構文です(下記「`pow` によるべき乗」の節を参照)。次の
+名前付き特殊単位(`KDistanceDerivedUnit`)を変換・フォーマットのターゲットとして使用できます。
 
 | 特殊単位 | Enum 値 | 記号 | コンストラクタ | m²換算(1単位) |
 |---|---:|---:|---:|---:|
@@ -109,9 +109,9 @@ plot + computed                              // 許可される: 両方とも面
 
 ## 指数3 - 体積
 
-`KVolumeUnitInstance` は体積を表します(例: `length * length * length` または `area * length`)。各単位に
-対する `cubic…` コンストラクタ(`2.cubicMeters`、`3.cubicMiles`、… および接頭辞 infix 形式
-`5 kilo cubicMeters`)に加えて、次の名前付き特殊単位が利用できます。
+`KVolumeUnitInstance` は体積を表します(例: `length * length * length`、`area * length`、または長さを
+3乗した結果: `2.meters pow 3` == 8 m³、`2 kilo meters pow 3`)。面積と同様に `cubicXxx` コンストラクタは
+なく、`pow` を使用します(下記「`pow` によるべき乗」の節を参照)。次の名前付き特殊単位が利用できます。
 
 | 特殊単位 | Enum 値 | 記号 | コンストラクタ | m³換算(1単位) |
 |---|---:|---:|---:|---:|
@@ -133,6 +133,30 @@ cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
 tank + cube                                  // 許可される: 両方とも体積 -> KVolumeUnitInstance
 ```
+
+## `pow` によるべき乗
+
+infix `pow` 演算子で値を整数乗します。Kotlin にはオーバーロード可能な `^` 演算子(および `^=`)がないため、
+`pow` がすべてのグループで唯一のべき乗構文です — `squareXxx`/`cubicXxx` コンストラクタは存在しません。
+
+`pow` は値をべき乗し、**さらに**すべての指数に `n` を掛けます。したがって `2.meters pow 2` は
+`(2 m)² = 4 m²` です(指数だけでなく値もべき乗されます)。距離グループでは結果が次元を持ちます: `pow 2`
+は `KAreaUnitInstance`、`pow 3` は `KVolumeUnitInstance`、その他の指数は一般の `KDistanceUnitInstance`
+になります。
+
+```kotlin
+import org.pcsoft.framework.kunit.distance.*
+
+val area = 2.meters pow 2         // KAreaUnitInstance: 4.0 m²
+val big = 2 kilo meters pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
+val volume = 2.meters pow 3       // KVolumeUnitInstance: 8.0 m³
+val m4 = 2.meters pow 2 pow 2     // KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)
+val inverse = 2.meters pow -1     // KDistanceUnitInstance: 0.5 m⁻¹
+```
+
+`pow` は名前付き infix 関数なので、`* / + -` よりも**弱く**結合します。混合式では括弧を付けてください
+(`(a * b) pow 2`)。すべての単位グループで使用できます — 例: `2.hours pow 2`(時間には次元を持つべき乗型が
+ないため、一般の `KMixedUnitInstance` になります)。
 
 ## SI 接頭辞
 

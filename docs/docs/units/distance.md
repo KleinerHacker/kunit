@@ -81,10 +81,11 @@ operator - consistent with the `+`/`-` rules. `equals` across dimensions simply 
 
 ## Exponent 2 - Area
 
-`KAreaUnitInstance` represents an area, e.g. the result of `length * length`. Besides the `square…`
-creators for every unit (`200.squareMeters`, `5.squareMiles`, … and the prefix `infix` form
-`5 kilo squareMeters` == 5 square kilometers == 5 000 000 m²), the following named special units
-(`KDistanceDerivedUnit`) are available as conversion/formatting targets:
+`KAreaUnitInstance` represents an area, e.g. the result of `length * length` or of raising a length to the
+second power with the infix `pow` operator (`2.meters pow 2` == `(2 m)²` == 4 m², `2 kilo meters pow 2`
+== 4 000 000 m²). There are no `squareXxx` creators — `pow` is the only power syntax (see
+[Powers with `pow`](#powers-with-pow)). The following named special units (`KDistanceDerivedUnit`) are
+available as conversion/formatting targets:
 
 | Special unit | Enum value | Symbol | Creator | 1 unit in m² |
 |---|---|---:|---:|---:|
@@ -109,9 +110,10 @@ plot + computed                              // allowed: both are areas -> KArea
 
 ## Exponent 3 - Volume
 
-`KVolumeUnitInstance` represents a volume, e.g. `length * length * length` or `area * length`. Besides the
-`cubic…` creators for every unit (`2.cubicMeters`, `3.cubicMiles`, … and the prefix `infix` form
-`5 kilo cubicMeters`), the following named special units are available:
+`KVolumeUnitInstance` represents a volume, e.g. `length * length * length`, `area * length`, or a length
+raised to the third power (`2.meters pow 3` == 8 m³, `2 kilo meters pow 3`). As with area, there are no
+`cubicXxx` creators — use `pow` (see [Powers with `pow`](#powers-with-pow)). The following named special
+units are available:
 
 | Special unit | Enum value | Symbol | Creator | 1 unit in m³ |
 |---|---|---:|---:|---:|
@@ -133,6 +135,31 @@ cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
 tank + cube                                  // allowed: both are volumes -> KVolumeUnitInstance
 ```
+
+## Powers with `pow`
+
+Raise a value to an integer power with the infix `pow` operator. Kotlin has no overloadable `^` operator
+(and no `^=`), so `pow` is the single, group-wide power syntax — there are no `squareXxx`/`cubicXxx`
+constructors.
+
+`pow` raises the value **and** multiplies every exponent by `n`, so `2.meters pow 2` is `(2 m)² = 4 m²`
+(the value is powered, not merely the exponent). For the distance group the result is dimensioned: `pow 2`
+yields a `KAreaUnitInstance`, `pow 3` a `KVolumeUnitInstance`, other exponents the general
+`KDistanceUnitInstance`.
+
+```kotlin
+import org.pcsoft.framework.kunit.distance.*
+
+val area = 2.meters pow 2         // KAreaUnitInstance: 4.0 m²
+val big = 2 kilo meters pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
+val volume = 2.meters pow 3       // KVolumeUnitInstance: 8.0 m³
+val m4 = 2.meters pow 2 pow 2     // KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)
+val inverse = 2.meters pow -1     // KDistanceUnitInstance: 0.5 m⁻¹
+```
+
+`pow` is a named infix function, so it binds **weaker** than `* / + -`; parenthesize in mixed expressions
+(`(a * b) pow 2`). It is available on every unit group — e.g. `2.hours pow 2` (a generic
+`KMixedUnitInstance`, since time has no dimensioned power type).
 
 ## SI prefixes
 

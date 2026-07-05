@@ -80,6 +80,6 @@ class KDistanceDerivedUnitTest {
     @Test
     fun `a derived-unit target of the wrong exponent fails`() {
         assertFailsWith<IllegalStateException> { 5.meters.valueAs(KDistanceDerivedUnit.HECTARE) }
-        assertFailsWith<IllegalStateException> { 5.squareMeters.valueAs(KDistanceDerivedUnit.LITER) }
+        assertFailsWith<IllegalStateException> { (5.meters * 1.meters).valueAs(KDistanceDerivedUnit.LITER) }
     }
 }

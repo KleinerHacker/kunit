@@ -21,9 +21,9 @@ import org.pcsoft.framework.kunit.KUnitInstance
  * comparisons only accept another volume, while `*`/`/` are strongly typed (e.g. `volume / area =
  * length`, `volume / length = area`).
  *
- * Instances are created via the volume creator extension properties in `KVolumeUnitExtensions.kt`
- * (e.g. `2.cubicMeters`, `5.liters`), the SI-prefix `infix` constructors in `KDistanceUnitPrefix.kt`
- * (e.g. `5 kilo cubicMeters`), or as the result of `length * length * length` / `area * length`.
+ * Instances are created via the power operation on a length (e.g. `2.meters pow 3`,
+ * `5 kilo meters pow 3`), the derived-unit creator extension properties in `KVolumeUnitExtensions.kt`
+ * (e.g. `5.liters`, `1.usGallons`), or as the result of `length * length * length` / `area * length`.
  *
  * Example:
  * ```kotlin

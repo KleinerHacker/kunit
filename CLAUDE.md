@@ -114,7 +114,7 @@ dimension**, never mixed into the wrapper class files:
 * **Creators** - the `Number.xxx` creator extension properties, together with their private
   creator helpers (`lengthFrom`/`areaFrom`/`of`, ...), live in `K<Dimension>UnitExtensions.kt`
   (e.g. `KLengthUnitExtensions.kt`, `KAreaUnitExtensions.kt`, `KSpeedUnitExtensions.kt`)
-* **Bare values** - the bare unit reference / token `val` aliases (`meters`, `squareMeters`,
+* **Bare values** - the bare unit reference / token `val` aliases (`meters`, `miles`,
   `seconds`, ...) live in `K<Dimension>UnitBareValues.kt`, kept separate from the creators
 * **Prefix DSL** - the SI-prefix `infix` constructors keep their own `K<Group>UnitPrefix.kt`
 * The `*Instance.kt` files hold **only** the wrapper class, its factory helpers
@@ -174,6 +174,24 @@ dimension**, never mixed into the wrapper class files:
   * "pure" units
   * In addition to the classic equals, there must be a method to check the unit (`KUnit` + exponent)
     for mixed units
+* **Exponentiation (`pow`).** Raising a unit to an integer power is expressed **only** via the infix
+  `pow` function (`2.meters pow 2`, `2 kilo meters pow 2`, `x = x pow 2`), never via named
+  `squareXxx`/`cubicXxx` constructors (those do not exist). Rationale: Kotlin has no overloadable `^`
+  operator (and no `^=`), and a 4-word chain like `2 square kilo meters` is not parseable as infix, so a
+  single, group-agnostic `pow` is the one and only power syntax.
+  * **Semantics:** the value is raised (`value.pow(n)`) and **every** `(KUnit, exponent)` term's exponent
+    is multiplied by `n`; a term reaching exponent 0 is dropped. `pow 0` is dimensionless (value 1),
+    `pow 1` the identity, negative `n` inverts the dimension. `2.meters pow 2` is `(2 m)² = 4 m²`
+    (the value is powered, **not** merely the exponent), and `pow` chains multiplicatively
+    (`2.meters pow 2 pow 2 = 16 m⁴`).
+  * **Return type / availability:** `pow` must be available on **every** group. It is declared as the
+    group-agnostic extension `KUnitMeasurable.pow(Int): KMixedUnitInstance` (so it reaches every "pure"
+    wrapper) and, for groups that model exponents as dimensioned subtypes (e.g. distance), a **more
+    specific** typed extension (`KDistanceUnitInstance.pow(Int): KDistanceUnitInstance`, so
+    `2.meters pow 2` is a `KAreaUnitInstance`). It is deliberately **not** a member of
+    `KUnitMeasurable`/`KUnitInstance` (that would shadow the typed variants, as with `times`/`div`).
+  * **Precedence:** `pow` is a named infix function and binds **weaker** than `* / + -`; parenthesize
+    in mixed expressions (`(a * b) pow 2`).
 * Both `KMixedUnitInstance` and the "pure" wrapper classes offer, in addition to the normalized raw value, a
   way to read a converted value for a desired target unit, as well as a `toString` overload that
   takes this target unit(s) into account in the text output. Target units can be a pure unit or
@@ -226,8 +244,9 @@ dimension**, never mixed into the wrapper class files:
 
 * **Construction runs through the public DSL, not the raw enums.** Test instances are built **primarily
   via the public DSL surface** - the prefix `infix` functions (`5 kilo meters`), the bare-value aliases
-  (`meters`, `squareMiles`, `metersPerHour`, `seconds`, ...) and the creator properties (`5.meters`). The
-  raw enum/wrapper values (`KDistanceUnit.METER`, `KDistanceAreaUnit(u)`, `KSpeedUnit.METERS_PER_SECOND`)
+  (`meters`, `miles`, `metersPerHour`, `seconds`, ...), the creator properties (`5.meters`) and the power
+  operation (`2.meters pow 2` for areas/volumes). The
+  raw enum/wrapper values (`KDistanceUnit.METER`, `KSpeedUnit.METERS_PER_SECOND`)
   are used **only for expected-value computation** (e.g. `unit.baseValue`), never to construct the
   instance under test. This ensures the suite covers exactly the surface users actually call: every
   bare-value × prefix combination runs through the DSL rather than bypassing the alias. Applies to

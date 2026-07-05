@@ -170,14 +170,18 @@ The distance group models exponents as their own compile-time-safe types under a
 `KDistanceUnitInstance` (any exponent):
 
 * **`KLengthUnitInstance`** - exponent 1 (a length): `5.meters`, `3 kilo meters`
-* **`KAreaUnitInstance`** - exponent 2 (an area): `200.squareMeters`, `5 kilo squareMeters`, plus the
+* **`KAreaUnitInstance`** - exponent 2 (an area): `2.meters pow 2`, `2 kilo meters pow 2`, plus the
   special units (`KDistanceDerivedUnit`) are, hectare, acre
-* **`KVolumeUnitInstance`** - exponent 3 (a volume): `2.cubicMeters`, `3 kilo cubicMeters`, plus liter,
+* **`KVolumeUnitInstance`** - exponent 3 (a volume): `2.meters pow 3`, `2 kilo meters pow 3`, plus liter,
   US gallon, imperial gallon, US fluid ounce, oil barrel
 
 `*`/`/` stay in this family where possible (`length * length = area`, `area / length = length`); a
 resulting exponent outside `{1,2,3}` falls back to `KDistanceUnitInstance`. Cross-dimension `+`/`-`/
 comparison (`length + area`) are a **compile error**, not a runtime failure.
+
+Raise a unit to a power with the infix `pow` (Kotlin has no overloadable `^`): `2.meters pow 2` is
+`(2 m)² = 4 m²`, `2.meters pow 3` a volume, and `pow` works on every group (`2.hours pow 2`). It is the
+only power syntax — there are no `squareXxx`/`cubicXxx` constructors.
 
 ### Still Open
 
@@ -204,7 +208,7 @@ val trip = 10.miles
 val total = distance + trip          // KLengthUnitInstance, normalized to meters
 val diff = trip - distance
 
-// distance + 3.squareMeters          // does NOT compile: length + area is a compile error
+// distance + (3.meters pow 2)        // does NOT compile: length + area is a compile error
 
 // Comparisons
 val isFarther = trip > distance      // true
@@ -217,12 +221,13 @@ println(total.valueAs(yards))         // e.g. 23018.4...
 val area = 200.meters * 50.meters    // KAreaUnitInstance (10 000 m²)
 val side = area / 100.meters         // KLengthUnitInstance (100 m)
 
-// Area / volume creators (per unit) and their special named units
+// Powers via `pow`, plus the special named area/volume units
+val hall = 3.meters pow 2            // KAreaUnitInstance (9 m²)
+val bigPlot = 2 kilo meters pow 2    // KAreaUnitInstance (4 000 000 m²)
+val box = 2.meters pow 3             // KVolumeUnitInstance (8 m³)
 val plot = 3.hectares                // KAreaUnitInstance
 println(plot.valueAs(KDistanceDerivedUnit.ARE))   // 300.0
-val hall = 12.squareMeters           // KAreaUnitInstance
 val tank = 200.liters                // KVolumeUnitInstance
-val box = 2.cubicMeters              // KVolumeUnitInstance
 println(tank.valueAs(KDistanceDerivedUnit.US_GALLON))
 ```
 

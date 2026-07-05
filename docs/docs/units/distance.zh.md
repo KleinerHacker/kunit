@@ -80,9 +80,10 @@ val ratio = 10.meters / 2.meters    // KMixedUnitInstance（无量纲），value
 
 ## 指数 2 - 面积
 
-`KAreaUnitInstance` 表示面积，例如 `length * length` 的结果。除了针对每个单位的 `square…` 创建函数
-（`200.squareMeters`、`5.squareMiles`……以及前缀 infix 形式 `5 kilo squareMeters` == 5 平方千米
-== 5 000 000 m²）之外，还可以使用以下命名的特殊单位（`KDistanceDerivedUnit`）作为转换/格式化目标：
+`KAreaUnitInstance` 表示面积，例如 `length * length` 的结果，或用 infix `pow` 运算符对长度求平方
+（`2.meters pow 2` == `(2 m)²` == 4 m²，`2 kilo meters pow 2` == 4 000 000 m²）。没有 `squareXxx`
+创建函数——`pow` 是唯一的幂运算语法（参见下文"用 `pow` 求幂"一节）。还可以使用以下命名的特殊单位
+（`KDistanceDerivedUnit`）作为转换/格式化目标：
 
 | 特殊单位 | 枚举值 | 符号 | 创建函数 | 1 单位对应的 m² |
 |---|---:|---:|---:|---:|
@@ -107,9 +108,9 @@ plot + computed                              // 允许：两者都是面积 -> K
 
 ## 指数 3 - 体积
 
-`KVolumeUnitInstance` 表示体积，例如 `length * length * length` 或 `area * length`。除了针对每个单位的
-`cubic…` 创建函数（`2.cubicMeters`、`3.cubicMiles`……以及前缀 infix 形式 `5 kilo cubicMeters`）之外，
-还可以使用以下命名的特殊单位：
+`KVolumeUnitInstance` 表示体积，例如 `length * length * length`、`area * length`，或对长度求三次方
+（`2.meters pow 3` == 8 m³，`2 kilo meters pow 3`）。与面积一样，没有 `cubicXxx` 创建函数，请使用 `pow`
+（参见下文"用 `pow` 求幂"一节）。还可以使用以下命名的特殊单位：
 
 | 特殊单位 | 枚举值 | 符号 | 创建函数 | 1 单位对应的 m³ |
 |---|---:|---:|---:|---:|
@@ -131,6 +132,29 @@ cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
 
 tank + cube                                  // 允许：两者都是体积 -> KVolumeUnitInstance
 ```
+
+## 用 `pow` 求幂
+
+用 infix `pow` 运算符对值进行整数次幂运算。Kotlin 没有可重载的 `^` 运算符（也没有 `^=`），因此 `pow`
+是所有分组中唯一的幂运算语法——不存在 `squareXxx`/`cubicXxx` 创建函数。
+
+`pow` 会对值求幂，**并**将每个指数乘以 `n`，因此 `2.meters pow 2` 是 `(2 m)² = 4 m²`（是对值求幂，而不
+仅仅是指数）。对于距离分组，结果带有量纲：`pow 2` 得到 `KAreaUnitInstance`，`pow 3` 得到
+`KVolumeUnitInstance`，其他指数得到通用的 `KDistanceUnitInstance`。
+
+```kotlin
+import org.pcsoft.framework.kunit.distance.*
+
+val area = 2.meters pow 2         // KAreaUnitInstance: 4.0 m²
+val big = 2 kilo meters pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
+val volume = 2.meters pow 3       // KVolumeUnitInstance: 8.0 m³
+val m4 = 2.meters pow 2 pow 2     // KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)
+val inverse = 2.meters pow -1     // KDistanceUnitInstance: 0.5 m⁻¹
+```
+
+`pow` 是命名的 infix 函数，因此其结合优先级**弱于** `* / + -`；在混合表达式中请加括号
+（`(a * b) pow 2`）。它可用于每个单位分组——例如 `2.hours pow 2`（由于时间没有带量纲的幂类型，得到通用的
+`KMixedUnitInstance`）。
 
 ## SI 前缀
 

@@ -98,6 +98,38 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
         KMixedUnitInstance(value / other.value, combineUnits(units, other.units, -1))
 
     /**
+     * Raises this mixed unit to the integer power [n]. Always allowed.
+     *
+     * The resulting [value] is `value.pow(n)` and **every** [KUnitTerm]'s exponent is multiplied by
+     * [n]; any term whose resulting exponent becomes `0` is dropped. This is the single, group-agnostic
+     * exponentiation form of the library - there are no named `squareXxx`/`cubicXxx` constructors.
+     * (`^`/`^=` cannot be overloaded in Kotlin, hence the infix `pow`.)
+     *
+     * Precedence note: `pow` is a named infix function and therefore binds **weaker** than the
+     * arithmetic operators `* / + -`. In mixed expressions, parenthesize accordingly
+     * (e.g. `(a * b) pow 2`).
+     *
+     * @param n the integer exponent. `n == 0` yields a dimensionless result (value `1.0`, no units);
+     * negative `n` inverts the dimension (e.g. `m` becomes `m^-n`).
+     *
+     * Example:
+     * ```kotlin
+     * val length = 2.meters.toUnit()  // value=2.0, units=[METER^1]
+     * (length pow 2).value                       // 4.0
+     * (length pow 2).units                       // [METER^2]  ((2 m)² = 4 m²)
+     * (length pow 2 pow 2).units                 // [METER^4]  ((2 m²)² = 4 m⁴)
+     * (length pow 0).units                       // [] (dimensionless, value 1.0)
+     * ```
+     */
+    infix fun pow(n: Int): KMixedUnitInstance {
+        if (n == 0) return KMixedUnitInstance(1.0, emptyList())
+        val poweredUnits = units
+            .map { it.copy(exponent = it.exponent * n) }
+            .filter { it.exponent != 0 }
+        return KMixedUnitInstance(Math.pow(value, n.toDouble()), poweredUnits)
+    }
+
+    /**
      * Adds two mixed units.
      *
      * Allowed as long as `this` and [other] describe the same physical dimension: for every term in
@@ -298,6 +330,23 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
         return result
     }
 }
+
+/**
+ * Raises **any** measurable value to the integer power [n], producing a generic [KMixedUnitInstance].
+ *
+ * This is the group-agnostic entry point that makes `pow` available on every "pure" wrapper of every unit
+ * group (time, speed, and any future group): it simply normalizes the receiver via [KUnitMeasurable.toUnit]
+ * and applies [KMixedUnitInstance.pow]. Groups that offer a dimensioned result declare a **more specific**
+ * `pow` extension on their own type (e.g. `KDistanceUnitInstance.pow`, which returns a
+ * `KDistanceUnitInstance`); Kotlin's overload resolution then prefers that narrower extension, so this one
+ * only applies where no typed variant exists.
+ *
+ * Example:
+ * ```kotlin
+ * val t2 = 2.hours pow 2   // KMixedUnitInstance: value 7200² (base seconds squared), units [s²]
+ * ```
+ */
+infix fun KUnitMeasurable.pow(n: Int): KMixedUnitInstance = toUnit() pow n
 
 private fun combineUnits(a: List<KUnitTerm>, b: List<KUnitTerm>, sign: Int): List<KUnitTerm> {
     val exponents = LinkedHashMap<KUnit, Int>()

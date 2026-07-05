@@ -13,67 +13,15 @@
 package org.pcsoft.framework.kunit.distance
 
 import org.pcsoft.framework.kunit.KDerivedUnit
-import kotlin.math.pow
 
-// Area (exponent 2) creator extension properties, including the derived-unit (are/hectare/acre) creators.
-
-private fun areaFrom(value: Number, unit: KDistanceUnit): KAreaUnitInstance = areaOf(value.toDouble() * unit.baseValue.pow(2))
+// Area (exponent 2) creator extension properties for the derived special units (are/hectare/acre).
+//
+// There are intentionally NO squareXxx creators (e.g. squareMeters, squareMiles): a plain area is
+// built via the group-agnostic power operation, e.g. `200.meters pow 2` or `1.miles pow 2`
+// (see KDistanceUnitInstance.pow / KMixedUnitInstance.pow). The derived units below carry their own
+// name/symbol/conversion factor and therefore remain dedicated creators.
 
 private fun areaFrom(value: Number, derived: KDerivedUnit<KDistanceUnit>): KAreaUnitInstance = areaOf(value.toDouble() * derived.baseValue)
-
-/**
- * Creates a pure area value (exponent 2) in square meters. Example: `200.squareMeters.value // 200.0`
- * (already in m²). Equivalent to `x.meters * y.meters` when `x*y = 200`.
- */
-val Number.squareMeters: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.METER)
-
-/** Creates a pure area value in square miles. Example: `1.squareMiles.value // 2589988.110336` (m²). */
-val Number.squareMiles: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.MILE)
-
-/** Creates a pure area value in square nautical miles. */
-val Number.squareNauticalMiles: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.NAUTICAL_MILE)
-
-/** Creates a pure area value in square yards. Example: `1.squareYards.value // 0.83612736` (m²). */
-val Number.squareYards: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.YARD)
-
-/** Creates a pure area value in square feet. Example: `1.squareFeet.value // 0.09290304` (m²). */
-val Number.squareFeet: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.FOOT)
-
-/** Creates a pure area value in square inches. Example: `1.squareInches.value // 0.00064516` (m²). */
-val Number.squareInches: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.INCH)
-
-/** Creates a pure area value in square fathoms. */
-val Number.squareFathoms: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.FATHOM)
-
-/** Creates a pure area value in square chains. */
-val Number.squareChains: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.CHAIN)
-
-/** Creates a pure area value in square furlongs. */
-val Number.squareFurlongs: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.FURLONG)
-
-/** Creates a pure area value in square astronomical units. */
-val Number.squareAstronomicalUnits: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.ASTRONOMICAL_UNIT)
-
-/** Creates a pure area value in square light-seconds. */
-val Number.squareLightSeconds: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.LIGHT_SECOND)
-
-/** Creates a pure area value in square light-minutes. */
-val Number.squareLightMinutes: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.LIGHT_MINUTE)
-
-/** Creates a pure area value in square light-hours. */
-val Number.squareLightHours: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.LIGHT_HOUR)
-
-/** Creates a pure area value in square light-days. */
-val Number.squareLightDays: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.LIGHT_DAY)
-
-/** Creates a pure area value in square light-weeks. */
-val Number.squareLightWeeks: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.LIGHT_WEEK)
-
-/** Creates a pure area value in square light-years. */
-val Number.squareLightYears: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.LIGHT_YEAR)
-
-/** Creates a pure area value in square parsecs. */
-val Number.squareParsecs: KAreaUnitInstance get() = areaFrom(this, KDistanceUnit.PARSEC)
 
 /**
  * Creates a pure area value (exponent 2) in ares. Example:

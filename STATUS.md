@@ -49,6 +49,12 @@
   * Complete parameterized test suite incl. the mandatory **bidirectional** decomposition (core → speed
     and speed → every core unit) and a dedicated MkDocs page (`docs/docs/units/speed.md` + ko/zh/ja)
 
+* **Exponentiation via `pow`** (group-agnostic): infix `pow(Int)` on `KMixedUnitInstance` and the
+  `KUnitMeasurable.pow` extension raise any unit to an integer power (`2.meters pow 2`, `2 kilo meters pow 2`,
+  `2.hours pow 2`); the distance group adds a dimensioned `KDistanceUnitInstance.pow` so `2.meters pow 2`
+  is a `KAreaUnitInstance`. This replaces the removed named `squareXxx`/`cubicXxx` constructors and the
+  prefixed area/volume DSL. Full cross-matrix tests (per unit, per prefix, per exponent) added.
+
 ## Open
 
 * Further unit groups (e.g. mass, temperature, ...) following the pattern established here for `length`/`time`
