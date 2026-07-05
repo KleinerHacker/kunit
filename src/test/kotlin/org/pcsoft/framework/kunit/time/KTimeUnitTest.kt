@@ -17,6 +17,7 @@ import kotlin.test.assertEquals
 
 class KTimeUnitTest {
 
+    /** The second is the group's base unit (factor 1.0, symbol "s") and equals [KTimeUnit.BASE]. */
     @Test
     fun `second is the base unit`() {
         assertEquals(KTimeUnit.SECOND, KTimeUnit.BASE)
@@ -24,24 +25,28 @@ class KTimeUnitTest {
         assertEquals("s", KTimeUnit.SECOND.symbol)
     }
 
+    /** The minute carries the symbol "min" and a conversion factor of 60 seconds. */
     @Test
     fun `minute symbol and baseValue`() {
         assertEquals("min", KTimeUnit.MINUTE.symbol)
         assertEquals(60.0, KTimeUnit.MINUTE.baseValue)
     }
 
+    /** The hour carries the symbol "h" and a conversion factor of 3600 seconds. */
     @Test
     fun `hour symbol and baseValue`() {
         assertEquals("h", KTimeUnit.HOUR.symbol)
         assertEquals(3600.0, KTimeUnit.HOUR.baseValue)
     }
 
+    /** The day carries the symbol "d" and a conversion factor of 86 400 seconds. */
     @Test
     fun `day symbol and baseValue`() {
         assertEquals("d", KTimeUnit.DAY.symbol)
         assertEquals(86_400.0, KTimeUnit.DAY.baseValue)
     }
 
+    /** The group defines exactly four units (second, minute, hour, day) — guards against an accidental addition/removal. */
     @Test
     fun `all enum values are covered`() {
         assertEquals(4, KTimeUnit.entries.size)

@@ -28,11 +28,11 @@ kunit은 두 가지 핵심 타입을 중심으로 구성됩니다.
 - **`KMixedUnitInstance`** - *혼합 단위*(Mischeinheit): `Double` 기본값과 하나 이상의 `KUnit` 조합, 각각 정수
   지수와 짝을 이룹니다 (예: 속도의 `m^1 * s^-1`). 이는 다른 모든 것을 구동하는 범용 엔진입니다.
 - **`KUnit`** - 단위 그룹에 속하는 단일 "순수" 단위입니다(예: 미터는 길이 그룹에 속함). 구체적인 단위 그룹은
-  `enum class ... : KUnit` (예: `KLengthUnit`)로 모델링됩니다.
+  `enum class ... : KUnit` (예: `KDistanceUnit`)로 모델링됩니다.
 
 모든 단위 그룹은 추가로 **래퍼 클래스**(예: `KLengthUnitInstance`)를 제공하며, 이는 단일 단위 그룹으로 제한된
 `KMixedUnitInstance`를 캡슐화하고 항상 해당 그룹의 기본 단위로 정규화됩니다. 대부분의 경우 이 타입을 사용하게 됩니다 - 현재
-제공되는 단위는 [미리 정의된 단위](units/length.md)를, 범용 `KMixedUnitInstance` 엔진을 직접 사용해야 하는 경우는
+제공되는 단위는 [미리 정의된 단위](units/distance.md)를, 범용 `KMixedUnitInstance` 엔진을 직접 사용해야 하는 경우는
 [혼합 단위](mixed-units.md)를 참고하세요.
 
 새로운 물리량(예: 질량이나 시간)에 대한 지원을 추가하고 싶다면, 단계별 안내인
@@ -53,7 +53,7 @@ kunit은 두 가지 핵심 타입을 중심으로 구성됩니다.
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 
 // 모든 Number 타입으로부터 순수 길이 값을 생성
 val distance = 5.meters
@@ -71,21 +71,21 @@ println(total.valueAs(KUnitPrefix.KILO with meters)) // 예: 21.0467...
 println(total.valueAs(yards))                         // 예: 23018.4...
 
 // 순수 단위의 곱셈/나눗셈은 혼합 단위(KMixedUnitInstance)를 생성
-val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
+val area = distance.toUnit() * trip.toUnit()
 
 // 면적(지수 2)과 부피(지수 3)를 위한 특수 단위
 val plot = 3.hectares
-println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KDistanceDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters
-println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KDistanceDerivedUnit.US_GALLON))
 ```
 
 ### SI 접두어
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.kilo
-import org.pcsoft.framework.kunit.length.meters
+import org.pcsoft.framework.kunit.distance.kilo
+import org.pcsoft.framework.kunit.distance.meters
 
 // "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
@@ -97,10 +97,10 @@ println(fiveKm.value) // 5000.0 (미터로 정규화됨)
 ```kotlin
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 
 // 혼합 단위를 수동으로 구성, 예: 제곱미터 (길이^1 * 길이^1)
-val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
 val doubled = speed * speed // 지수가 더해짐 -> 길이^2
 ```
 

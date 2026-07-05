@@ -1,6 +1,6 @@
 # カスタム単位の追加
 
-kunit は現在1つの単位グループ([長さ](units/length.md))のみを提供していますが、エンジン全体
+kunit は現在1つの単位グループ([距離](units/distance.md))のみを提供していますが、エンジン全体
 (`KUnit`、`KMixedUnitInstance`、接頭辞、派生単位)は汎用的でグループに依存しません。新しい物理量を追加する
 とは、`length` パッケージがすでに確立しているパターンに従うことを意味します。このページでは、例として
 **質量**(Mass)グループ(`org.pcsoft.framework.kunit.mass`)をゼロから追加する手順を説明します。
@@ -85,7 +85,7 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
+    fun toUnit(): KMixedUnitInstance = instance
 }
 
 /** 純粋な質量の [KMixedUnitInstance] を [KMassUnit.BASE] に正規化して [KMassUnitInstance] に変換します。 */
@@ -105,9 +105,12 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 
 ## 3. 生成用拡張関数を追加する
 
-`K...UnitExtensions.kt` のパターンに従って、単位ごとに bare な `val` エイリアスと `Number` 拡張関数を
-追加します。これにより、呼び出し元は `5.kilograms` や `1 kilo grams` と書くことができ、`kilograms`
-を純粋な `valueAs` ターゲットとして渡すこともできます。
+プロジェクトの慣例に従い、DSL 語彙を 2 つのファイルに分割します。bare な `val` エイリアスは
+`K...UnitBareValues.kt` に、`Number` 拡張関数は `K...UnitExtensions.kt` に配置します。これにより、
+呼び出し元は `5.kilograms` や `1 kilo grams` と書くことができ、`kilograms` を純粋な `valueAs`
+ターゲットとして渡すこともできます。
+
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -123,6 +126,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** [KMassUnit.OUNCE] への bare 参照。 */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`:
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
@@ -141,7 +150,7 @@ val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 
 これで完了です - すべてのロジックは汎用のルートパッケージにあり、`KMassUnit : KUnit` だけで動作するため、
 すでに完全な `+`、`-`、`*`、`/`、比較演算、SI 接頭辞(`5 kilo grams`)、そして
-`toKMixedUnitInstance()`/`toKMassUnit()` の相互変換を無料で手に入れています。
+`toUnit()`/`toKMassUnit()` の相互変換を無料で手に入れています。
 
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
@@ -158,7 +167,7 @@ val heavier = b > a          // true
 ## 4.(任意)特殊・派生単位の追加
 
 グループに特定の指数に紐づく、よく使われる名前付き単位(面積のヘクタールのような)がある場合は、
-`KLengthDerivedUnit` に類似した `KDerivedUnit` オブジェクトを追加してください。
+`KDistanceDerivedUnit` に類似した `KDerivedUnit` オブジェクトを追加してください。
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -172,7 +181,7 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 説明のみを目的とした例
+val truckLoad = 3.pounds.toUnit().toKMassUnit() // 説明のみを目的とした例
 println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
@@ -183,11 +192,11 @@ println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 [混合単位](mixed-units.md) を参照してください。
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 密度 = 質量 / 体積
-val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
+val density = 5.kilograms.toUnit() / 2.liters.toUnit()
 ```
 
 ## 6. 命名とテストのチェックリスト

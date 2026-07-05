@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.with
 import kotlin.test.Test
@@ -55,25 +55,35 @@ private val prefixFunctions: List<Pair<(Number, KSpeedUnit) -> KSpeedUnitInstanc
     ({ n: Number, u: KSpeedUnit -> n quecto u }) to KUnitPrefix.QUECTO
 )
 
+/** Looks up the prefix `infix` lambda for [prefix] and applies it to [n] [unit] (e.g. `n kilo metersPerSecond`). */
 private fun applyPrefix(prefix: KUnitPrefix, n: Number, unit: KSpeedUnit): KSpeedUnitInstance =
     prefixFunctions.first { it.second == prefix }.first(n, unit)
 
+/**
+ * Prefix × unit cross-matrix for the speed group. All 24 SI prefixes are representable, so both a
+ * standalone per-prefix test and a full prefix × unit matrix are run. The unit side is driven off the
+ * bare-value aliases ([speedBareValues]) so `5 kilo metersPerSecond` runs through the alias.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KSpeedUnitPrefixTest {
 
+    /** Provider: every SI prefix, for the standalone per-prefix test. */
     private fun prefixes(): List<Arguments> = prefixFunctions.map { Arguments.of(it.second) }
 
+    /** Provider: every prefix crossed with every speed bare-value alias. */
     private fun prefixUnitPairs(): List<Arguments> =
-        prefixFunctions.flatMap { (_, prefix) -> speedUnitGenerators.map { (_, unit) -> Arguments.of(prefix, unit) } }
+        prefixFunctions.flatMap { (_, prefix) -> speedBareValues.map { unit -> Arguments.of(prefix, unit) } }
 
+    /** Each prefix applied to 5 m/s equals the same 5·factor m/s built without a prefix — isolates the prefix from the unit. */
     @ParameterizedTest(name = "{0}")
     @MethodSource("prefixes")
     fun `every prefix scales against the equivalent unprefixed calculation`(prefix: KUnitPrefix) {
         val expected = (5.0 * prefix.factor).metersPerSecond.value
-        val actual = applyPrefix(prefix, 5, KSpeedUnit.METERS_PER_SECOND).value
+        val actual = applyPrefix(prefix, 5, metersPerSecond).value
         assertEquals(expected, actual, expected.coerceAtLeast(1.0) * 1e-9, "prefix $prefix mismatch")
     }
 
+    /** Every prefix × every speed unit (`5 kilo metersPerHour`, …) both scales the base value correctly and reads back the original count via `valueAs`. */
     @ParameterizedTest(name = "{0} {1}")
     @MethodSource("prefixUnitPairs")
     fun `every prefix combined with every unit round trips`(prefix: KUnitPrefix, unit: KSpeedUnit) {
@@ -86,6 +96,7 @@ class KSpeedUnitPrefixTest {
             "prefix $prefix with unit $unit valueAs mismatch")
     }
 
+    /** The prefix `infix` form (`5 kilo metersPerSecond`) returns a typed [KSpeedUnitInstance] directly, with the right value, `valueAs` and `[m¹, s⁻¹]` term signature. */
     @Test
     fun `prefix infix returns a KSpeedUnitInstance directly`() {
         val kmps: KSpeedUnitInstance = 5 kilo metersPerSecond
@@ -93,8 +104,8 @@ class KSpeedUnitPrefixTest {
         assertEquals(5000.0, kmps.value, 1e-9)
         assertEquals(5.0, kmps.valueAs(KUnitPrefix.KILO with KSpeedUnit.METERS_PER_SECOND), 1e-9)
         assertEquals(
-            setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
-            kmps.toKMixedUnitInstance().units.toSet()
+            setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
+            kmps.toUnit().units.toSet()
         )
     }
 }

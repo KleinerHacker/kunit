@@ -23,18 +23,34 @@
 * A `KMixedUnitInstance` is wrapped for each group of units for "pure units"
   * The wrapper classes (e.g. `KLengthUnitInstance`) encapsulate a `KMixedUnitInstance` via delegation
     (no inheritance relationship) and always store their value **normalized to the base unit of the group**
-  * A wrapper class is not necessarily limited to exponent 1 - it can also encapsulate derived quantities
-    of the same group with a different exponent (e.g. area = exponent 2, volume = exponent 3 for length).
-    The rules for `+`/`-`/comparison operators (only allowed for the same group **and** the same exponent,
-    otherwise `IllegalStateException`) apply for each exponent, not only for exponent 1
+  * **Exponent-dimensioned subtypes (the distance model, the generic pattern for future groups).** A
+    group may model its exponents as their own compile-time-safe types under an **open base wrapper**
+    (any exponent), e.g. for `distance`:
+    * `KDistanceUnitInstance` - the open base / catch-all (any exponent, e.g. `m⁴`, `m⁻¹`)
+    * `KLengthUnitInstance` (exponent 1), `KAreaUnitInstance` (2), `KVolumeUnitInstance` (3) - each
+      `: KDistanceUnitInstance(instance), KUnitInstance<ItsOwnType>`
+    * Results whose exponent leaves `{1,2,3}` fall back to the base type; a dimensionless result
+      (exponent 0) is a `KMixedUnitInstance`.
+    * **Mechanism:** the base type has **no** `plus`/`minus`/`compareTo`; those live only on the leaf
+      types, typed to their own dimension. This makes cross-dimension `+`/`-`/comparison
+      (`length + area`, `length < volume`) a **compile error**, not a runtime failure. The tradeoff:
+      the base type is not additive (add two `m⁴` values through the mixed engine). `*`/`/` are always
+      allowed and, when both operands are statically dimensioned, produce the correctly typed result
+      (`length * length = area`, `area / length = length`); a general/mixed operand falls back to
+      `KMixedUnitInstance`.
+    * Time/Speed deliberately stay **outside** the distance hierarchy (otherwise the base `*`/`/`
+      members would shadow the speed cross-group extension operators).
 * **Common interface hierarchy** (root package) for every unit-value type:
   * `KUnitMeasurable` - the group-agnostic surface shared by **all** values (`value`,
-    `toKMixedUnitInstance()`, `*`/`/` against a `KMixedUnitInstance`). `KMixedUnitInstance` implements it
+    `toUnit()`, `*`/`/` against a `KMixedUnitInstance`). `KMixedUnitInstance` implements it
     directly; the "pure" wrappers implement it via Kotlin `by` delegation to their internal
-    `KMixedUnitInstance` (so `value`/`times`/`div`/`toKMixedUnitInstance` are never hand-written there)
+    `KMixedUnitInstance` (so `value`/`times`/`div`/`toUnit` are never hand-written there)
   * `KUnitInstance<SELF : KUnitInstance<SELF>>` - the self-typed (F-bounded) interface of the "pure"
-    wrappers, extending `KUnitMeasurable` with same-type `+`/`-`/comparison, same-group `*`/`/`, and
-    single-target `valueAs`/`toString`. Each wrapper implements `KUnitInstance<ItsOwnType>`
+    wrappers, extending `KUnitMeasurable` with same-type `+`/`-`/comparison and single-target
+    `valueAs`/`toString`. Each wrapper implements `KUnitInstance<ItsOwnType>`. It does **not** declare
+    `times`/`div`: same-group multiplication/division comes from `KUnitMeasurable` (against a
+    `KMixedUnitInstance`) plus group-specific typed overloads, so dimensioned subtypes can narrow their
+    `*`/`/` return types without a signature clash
 * **Immutability invariant**: every instance type (`KMixedUnitInstance`, the "pure" wrappers, and any
   future wrapper) is strictly immutable - only `val` state, no mutable fields; every operator/conversion
   returns a **new** instance
@@ -42,15 +58,18 @@
   created via number-extension creator **properties** (e.g. `5.meters`, `2.hours` - `val Number.meters`,
   not a function), the group prefix `infix`
   constructors (e.g. `5 kilo meters`), operator results, or the conversion extensions
-  (`KMixedUnitInstance.toXxxUnit()`, `Duration.toKTimeUnit()`). A wrapper must
-  **never** be constructed directly from a `KMixedUnitInstance` by callers - the only `KMixedUnitInstance`→
-  wrapper path is the `toXxxUnit()` extension
+  (`KMixedUnitInstance.toDistance()`/`toLength()`/`toTime()`/`toSpeed()`, `Duration.toTime()`). A wrapper
+  must **never** be constructed directly from a `KMixedUnitInstance` by callers - the only
+  `KMixedUnitInstance`→ wrapper path is the `to<Group>()` extension
+* **Conversion-method naming**: conversion methods/properties never carry the hard class name - they read
+  as `toUnit()` (the generic `KMixedUnitInstance`) and `to<Group/Size>()` (e.g. `toDistance()`,
+  `toLength()`, `toArea()`, `toVolume()`, `toTime()`, `toSpeed()`). Apply this to every group
 * SI prefixes (the complete SI prefix table, from Quetta/Q to Quecto/q) are not part of
   `KUnit`/the (KUnit, exponent) pair, since they are only relevant when reading/writing values. They are
   represented via a generic `KUnitPrefix` enum (root package)
   * The prefix `infix` functions for construction (e.g. `5 kilo meters`) are **defined per group**, in
-    each unit sub-package, over that group's own unit type (e.g. `Number.kilo(KLengthUnit): KLengthUnitInstance`
-    in `KLengthUnitPrefix.kt`, `Number.kilo(KTimeUnit): KTimeUnitInstance` in `KTimeUnitPrefix.kt`). Each
+    each unit sub-package, over that group's own unit type (e.g. `Number.kilo(KDistanceUnit): KLengthUnitInstance`
+    in `KDistanceUnitPrefix.kt`, `Number.kilo(KTimeUnit): KTimeUnitInstance` in `KTimeUnitPrefix.kt`). Each
     returns that group's concrete "pure" unit **directly** (`5 kilo meters` is a `KLengthUnitInstance`, not
     an intermediate) - this is the **preferred** construction form. `5 kilo meters` is exactly equivalent to
     `5000.meters`.
@@ -83,12 +102,31 @@
 * A sub-package is created for each "pure" unit
 * The base classes `KUnit` and `KMixedUnitInstance` are located in the root package
 
+### DSL file organization
+
+The construction/DSL vocabulary of a group is split into dedicated files, organized **per
+dimension**, never mixed into the wrapper class files:
+
+* **Per-dimension, not per-group.** A group with several exponent-dimensioned subtypes
+  (distance → length/area/volume) gets one set of DSL files **per dimension** (e.g.
+  `KLengthUnit*`, `KAreaUnit*`, `KVolumeUnit*`) - there is **no** shared `KDistanceUnit*`
+  catch-all DSL file spanning all three
+* **Creators** - the `Number.xxx` creator extension properties, together with their private
+  creator helpers (`lengthFrom`/`areaFrom`/`of`, ...), live in `K<Dimension>UnitExtensions.kt`
+  (e.g. `KLengthUnitExtensions.kt`, `KAreaUnitExtensions.kt`, `KSpeedUnitExtensions.kt`)
+* **Bare values** - the bare unit reference / token `val` aliases (`meters`, `miles`,
+  `seconds`, ...) live in `K<Dimension>UnitBareValues.kt`, kept separate from the creators
+* **Prefix DSL** - the SI-prefix `infix` constructors keep their own `K<Group>UnitPrefix.kt`
+* The `*Instance.kt` files hold **only** the wrapper class, its factory helpers
+  (`lengthOf`/`areaOf`/...) and the `to<Group>()` conversions - no creator/bare-value DSL
+
 ## Naming Scheme
 
 * All public types (classes, interfaces, enums, objects) start with `K` project-wide - in the
   root package (`KUnit`, `KMixedUnitInstance`, `KUnitMeasurable`, `KUnitInstance`, `KUnitPrefix`,
   `KDerivedUnit`, ...) just as
-  in every sub-package (e.g. `KLengthUnit`, `KLengthUnitInstance`, `KLengthDerivedUnit` in `length`)
+  in every sub-package (e.g. `KDistanceUnit`, `KDistanceUnitInstance`, `KLengthUnitInstance`,
+  `KAreaUnitInstance`, `KVolumeUnitInstance`, `KDistanceDerivedUnit` in `distance`)
 * Extension properties/functions and bare `val` aliases (DSL vocabulary such as the `meters` creator property, `kilo`, and the `meters` unit alias) are
   exempt from this rule - they remain named in a language-natural way
 
@@ -112,11 +150,11 @@
 ### MkDocs site
 
 * Every new unit group must ship a dedicated MkDocs page at `docs/docs/units/<group>.md`, following the
-  existing `docs/docs/units/length.md` as the template (units table, operators, comparisons, SI prefixes,
+  existing `docs/docs/units/distance.md` as the template (units table, operators, comparisons, SI prefixes,
   `toString` formatting, mixing with other units, plus any group-specific sections)
 * The page must be provided in **every** language the site supports (the `mkdocs-static-i18n` suffix
   structure: the default `<group>.md` plus `<group>.ko.md`, `<group>.zh.md`, `<group>.ja.md`), mirroring
-  the translation coverage of the `length` page
+  the translation coverage of the `distance` page
 * `docs/mkdocs.yml` must be updated accordingly: add a `nav` entry under `Predefined Units` and a matching
   label in every locale's `nav_translations`
 
@@ -136,6 +174,24 @@
   * "pure" units
   * In addition to the classic equals, there must be a method to check the unit (`KUnit` + exponent)
     for mixed units
+* **Exponentiation (`pow`).** Raising a unit to an integer power is expressed **only** via the infix
+  `pow` function (`2.meters pow 2`, `2 kilo meters pow 2`, `x = x pow 2`), never via named
+  `squareXxx`/`cubicXxx` constructors (those do not exist). Rationale: Kotlin has no overloadable `^`
+  operator (and no `^=`), and a 4-word chain like `2 square kilo meters` is not parseable as infix, so a
+  single, group-agnostic `pow` is the one and only power syntax.
+  * **Semantics:** the value is raised (`value.pow(n)`) and **every** `(KUnit, exponent)` term's exponent
+    is multiplied by `n`; a term reaching exponent 0 is dropped. `pow 0` is dimensionless (value 1),
+    `pow 1` the identity, negative `n` inverts the dimension. `2.meters pow 2` is `(2 m)² = 4 m²`
+    (the value is powered, **not** merely the exponent), and `pow` chains multiplicatively
+    (`2.meters pow 2 pow 2 = 16 m⁴`).
+  * **Return type / availability:** `pow` must be available on **every** group. It is declared as the
+    group-agnostic extension `KUnitMeasurable.pow(Int): KMixedUnitInstance` (so it reaches every "pure"
+    wrapper) and, for groups that model exponents as dimensioned subtypes (e.g. distance), a **more
+    specific** typed extension (`KDistanceUnitInstance.pow(Int): KDistanceUnitInstance`, so
+    `2.meters pow 2` is a `KAreaUnitInstance`). It is deliberately **not** a member of
+    `KUnitMeasurable`/`KUnitInstance` (that would shadow the typed variants, as with `times`/`div`).
+  * **Precedence:** `pow` is a named infix function and binds **weaker** than `* / + -`; parenthesize
+    in mixed expressions (`(a * b) pow 2`).
 * Both `KMixedUnitInstance` and the "pure" wrapper classes offer, in addition to the normalized raw value, a
   way to read a converted value for a desired target unit, as well as a `toString` overload that
   takes this target unit(s) into account in the text output. Target units can be a pure unit or
@@ -149,8 +205,13 @@
 ## Conversion
 
 * Every "pure" unit offers, via an extension method, a way to convert it into a `KMixedUnitInstance`
-* When calculating with the same "pure" unit, that same unit is returned again
-* When calculating with different "pure" units, a new `KMixedUnitInstance` is returned
+* For `+`/`-` between two "pure" units of the same type, that same type is returned again
+* For `*`/`/` between two "pure" units of the same group **that model exponents as dimensioned subtypes**
+  (e.g. distance), the result stays in that type family when both operands are statically dimensioned and
+  the resulting exponent has a dedicated type (`length * length = area`); otherwise (resulting exponent
+  outside the modelled set, or a general/mixed operand, or a dimensionless exponent-0 result) a
+  `KMixedUnitInstance` / the group's base type is returned. For a group without dimensioned subtypes,
+  `*`/`/` between different "pure" units yield a `KMixedUnitInstance`
 * When calculating a "pure" unit with a mixed unit, or mixed units with each other, new `KMixedUnitInstance`s are returned
 
 ### Error Handling
@@ -181,6 +242,21 @@
 
 ## Tests
 
+* **Construction runs through the public DSL, not the raw enums.** Test instances are built **primarily
+  via the public DSL surface** - the prefix `infix` functions (`5 kilo meters`), the bare-value aliases
+  (`meters`, `miles`, `metersPerHour`, `seconds`, ...), the creator properties (`5.meters`) and the power
+  operation (`2.meters pow 2` for areas/volumes). The
+  raw enum/wrapper values (`KDistanceUnit.METER`, `KSpeedUnit.METERS_PER_SECOND`)
+  are used **only for expected-value computation** (e.g. `unit.baseValue`), never to construct the
+  instance under test. This ensures the suite covers exactly the surface users actually call: every
+  bare-value × prefix combination runs through the DSL rather than bypassing the alias. Applies to
+  **every** group and is the yardstick for the prefix and construction matrices
+* **Every test method carries a KDoc.** Each test function (annotated `@Test` or `@ParameterizedTest`)
+  **must** have a KDoc comment stating the **use case it verifies** - what is exercised and what the
+  expected outcome is (e.g. "Adding two lengths of different units normalizes both and returns their sum as
+  a length."). This is a base rule and applies to **every** test in the suite, success and error cases
+  alike. Shared fixtures (generator/bare-value lists, `@MethodSource` providers, builder/tolerance helpers)
+  are likewise documented so their purpose is self-evident
 * Every "pure" unit is tested separately
   * Full tests for the most complete possible test coverage
   * Complete tests for all operations

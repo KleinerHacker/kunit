@@ -21,8 +21,8 @@ package org.pcsoft.framework.kunit
  * subtraction of exponents), which is what all arithmetic in this library relies on.
  *
  * Example: a pure length value (e.g. `5.meters`) is represented internally as a single
- * `KUnitTerm(KLengthUnit.METER, 1)`. Multiplying two lengths together (`5.meters * 3.meters`)
- * yields a single term `KUnitTerm(KLengthUnit.METER, 2)` (an area, in square meters).
+ * `KUnitTerm(KDistanceUnit.METER, 1)`. Multiplying two lengths together (`5.meters * 3.meters`)
+ * yields a single term `KUnitTerm(KDistanceUnit.METER, 2)` (an area, in square meters).
  */
 data class KUnitTerm(val unit: KUnit, val exponent: Int)
 
@@ -54,7 +54,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      * [KUnitMeasurable] conversion is the identity here (it is the "pure" unit wrappers that produce a
      * genuinely new [KMixedUnitInstance] from their internal state).
      */
-    override fun toKMixedUnitInstance(): KMixedUnitInstance = this
+    override fun toUnit(): KMixedUnitInstance = this
 
     /**
      * Multiplies two mixed units. Always allowed.
@@ -66,14 +66,14 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val a = 5.meters.toKMixedUnitInstance()       // value=5.0, units=[METER^1]
-     * val b = 3.meters.toKMixedUnitInstance()       // value=3.0, units=[METER^1]
+     * val a = 5.meters.toUnit()       // value=5.0, units=[METER^1]
+     * val b = 3.meters.toUnit()       // value=3.0, units=[METER^1]
      * (a * b).value                              // 15.0
      * (a * b).units                              // [METER^2]
      *
      * val speed = 10.meters / 2.seconds      // units=[METER^1, SECOND^-1]
-     * val time = 4.seconds.toKMixedUnitInstance()   // units=[SECOND^1]
-     * (speed.toKMixedUnitInstance() * time).units     // [METER^1] (SECOND^-1 + SECOND^1 = SECOND^0, removed)
+     * val time = 4.seconds.toUnit()   // units=[SECOND^1]
+     * (speed.toUnit() * time).units     // [METER^1] (SECOND^-1 + SECOND^1 = SECOND^0, removed)
      * ```
      */
     override operator fun times(other: KMixedUnitInstance): KMixedUnitInstance =
@@ -89,8 +89,8 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val distance = 10.meters.toKMixedUnitInstance() // units=[METER^1]
-     * val time = 2.seconds.toKMixedUnitInstance()     // units=[SECOND^1]
+     * val distance = 10.meters.toUnit() // units=[METER^1]
+     * val time = 2.seconds.toUnit()     // units=[SECOND^1]
      * val speed = distance / time                  // value=5.0, units=[METER^1, SECOND^-1]
      * ```
      */
@@ -98,11 +98,43 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
         KMixedUnitInstance(value / other.value, combineUnits(units, other.units, -1))
 
     /**
+     * Raises this mixed unit to the integer power [n]. Always allowed.
+     *
+     * The resulting [value] is `value.pow(n)` and **every** [KUnitTerm]'s exponent is multiplied by
+     * [n]; any term whose resulting exponent becomes `0` is dropped. This is the single, group-agnostic
+     * exponentiation form of the library - there are no named `squareXxx`/`cubicXxx` constructors.
+     * (`^`/`^=` cannot be overloaded in Kotlin, hence the infix `pow`.)
+     *
+     * Precedence note: `pow` is a named infix function and therefore binds **weaker** than the
+     * arithmetic operators `* / + -`. In mixed expressions, parenthesize accordingly
+     * (e.g. `(a * b) pow 2`).
+     *
+     * @param n the integer exponent. `n == 0` yields a dimensionless result (value `1.0`, no units);
+     * negative `n` inverts the dimension (e.g. `m` becomes `m^-n`).
+     *
+     * Example:
+     * ```kotlin
+     * val length = 2.meters.toUnit()  // value=2.0, units=[METER^1]
+     * (length pow 2).value                       // 4.0
+     * (length pow 2).units                       // [METER^2]  ((2 m)² = 4 m²)
+     * (length pow 2 pow 2).units                 // [METER^4]  ((2 m²)² = 4 m⁴)
+     * (length pow 0).units                       // [] (dimensionless, value 1.0)
+     * ```
+     */
+    infix fun pow(n: Int): KMixedUnitInstance {
+        if (n == 0) return KMixedUnitInstance(1.0, emptyList())
+        val poweredUnits = units
+            .map { it.copy(exponent = it.exponent * n) }
+            .filter { it.exponent != 0 }
+        return KMixedUnitInstance(Math.pow(value, n.toDouble()), poweredUnits)
+    }
+
+    /**
      * Adds two mixed units.
      *
      * Allowed as long as `this` and [other] describe the same physical dimension: for every term in
      * [units] there must be exactly one term in `other.units` belonging to the same unit group (i.e.
-     * the same runtime [KUnit] type, e.g. all `KLengthUnit` values) with the same exponent, and vice
+     * the same runtime [KUnit] type, e.g. all `KDistanceUnit` values) with the same exponent, and vice
      * versa. Matching terms do **not** need to be the exact same [KUnit] - [other]'s value is
      * automatically converted into `this`'s units first, using each matched pair's [KUnit.baseValue]
      * ratio (analogous to the automatic conversion performed by "pure" unit wrapper classes like
@@ -113,15 +145,15 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
-     * val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
+     * val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
      * (a + b).value // 8.0
      *
-     * val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.MILE, 1)))
+     * val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.MILE, 1)))
      * (a + c).value // 4832.032 (3 miles converted to meters, then added), units=[METER^1]
      *
-     * val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 2)))
-     * val length = KMixedUnitInstance(3.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+     * val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
+     * val length = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
      * area + length // throws IllegalStateException: different exponents (2 vs 1)
      * ```
      */
@@ -170,8 +202,8 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      *
      * Example:
      * ```kotlin
-     * val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.METER, 1), KUnitTerm(TimeUnit.SECOND, -1)))
-     * val b = KMixedUnitInstance(9.0, listOf(KUnitTerm(TimeUnit.SECOND, -1), KUnitTerm(KLengthUnit.METER, 1)))
+     * val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(TimeUnit.SECOND, -1)))
+     * val b = KMixedUnitInstance(9.0, listOf(KUnitTerm(TimeUnit.SECOND, -1), KUnitTerm(KDistanceUnit.METER, 1)))
      * a.hasSameUnits(b) // true, even though value and term order differ
      * ```
      */
@@ -184,7 +216,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      * own [KUnit].
      *
      * Each target must match exactly one term in [units] by unit group (i.e. the runtime type of
-     * the term's [KUnit], e.g. all `KLengthUnit` values belong to the same group) and, for
+     * the term's [KUnit], e.g. all `KDistanceUnit` values belong to the same group) and, for
      * [KDerivedUnit]/[KScaledDerivedUnit] targets, by exponent as well; every term must have exactly
      * one matching target and vice versa (the number of [targets] must equal `units.size`).
      *
@@ -194,10 +226,10 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      * Example:
      * ```kotlin
      * val speed = 10.meters / 1.seconds // KMixedUnitInstance: value=10.0, units=[METER^1, SECOND^-1]
-     * speed.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
+     * speed.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
      *
      * val area = (200.meters * 50.meters) // units=[METER^2]
-     * area.valueAs(KLengthDerivedUnit.HECTARE)  // 1.0
+     * area.valueAs(KDistanceDerivedUnit.HECTARE)  // 1.0
      * ```
      */
     fun valueAs(vararg targets: KUnitTarget): Double {
@@ -237,7 +269,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      * Example:
      * ```kotlin
      * val speed = 10.meters / 1.seconds
-     * speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
+     * speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
      * ```
      */
     fun toString(vararg targets: KUnitTarget): String {
@@ -298,6 +330,23 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
         return result
     }
 }
+
+/**
+ * Raises **any** measurable value to the integer power [n], producing a generic [KMixedUnitInstance].
+ *
+ * This is the group-agnostic entry point that makes `pow` available on every "pure" wrapper of every unit
+ * group (time, speed, and any future group): it simply normalizes the receiver via [KUnitMeasurable.toUnit]
+ * and applies [KMixedUnitInstance.pow]. Groups that offer a dimensioned result declare a **more specific**
+ * `pow` extension on their own type (e.g. `KDistanceUnitInstance.pow`, which returns a
+ * `KDistanceUnitInstance`); Kotlin's overload resolution then prefers that narrower extension, so this one
+ * only applies where no typed variant exists.
+ *
+ * Example:
+ * ```kotlin
+ * val t2 = 2.hours pow 2   // KMixedUnitInstance: value 7200² (base seconds squared), units [s²]
+ * ```
+ */
+infix fun KUnitMeasurable.pow(n: Int): KMixedUnitInstance = toUnit() pow n
 
 private fun combineUnits(a: List<KUnitTerm>, b: List<KUnitTerm>, sign: Int): List<KUnitTerm> {
     val exponents = LinkedHashMap<KUnit, Int>()

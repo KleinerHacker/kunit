@@ -1,6 +1,6 @@
 # Adding Custom Units
 
-kunit ships one unit group today ([Length](units/length.md)), but the whole engine (`KUnit`, `KMixedUnitInstance`,
+kunit ships one unit group today ([Distance](units/distance.md)), but the whole engine (`KUnit`, `KMixedUnitInstance`,
 prefixes, derived units) is generic and group-independent. Adding a new physical quantity means following
 the same pattern the `length` package already establishes. This page walks through adding a demonstrative
 **Mass** group (`org.pcsoft.framework.kunit.mass`) from scratch.
@@ -85,7 +85,7 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
+    fun toUnit(): KMixedUnitInstance = instance
 }
 
 /** Converts a pure-mass [KMixedUnitInstance] back into a [KMassUnitInstance], normalizing to [KMassUnit.BASE]. */
@@ -103,11 +103,13 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
     KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
-## 3. Add creator extension properties
+## 3. Add bare unit references and creator extension properties
 
-Following the `K...UnitExtensions.kt` pattern, add a bare `val` alias plus a `Number` extension **property** per
-unit, so callers can write `5.kilograms` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs`
-target:
+Split the DSL vocabulary into two files, per the project convention: the bare `val` aliases go into
+`K...UnitBareValues.kt`, and the `Number` extension **properties** go into `K...UnitExtensions.kt`. Together
+they let callers write `5.kilograms` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs` target.
+
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -123,6 +125,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** Bare reference to [KMassUnit.OUNCE]. */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`:
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
@@ -140,7 +148,7 @@ val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 ```
 
 That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, SI prefixes (`5 kilo grams`), and
-`toKMixedUnitInstance()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
+`toUnit()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
 package and only needs `KMassUnit : KUnit` to work.
 
 ```kotlin
@@ -158,7 +166,7 @@ val heavier = b > a          // true
 ## 4. (Optional) Add special/derived units
 
 If your group has commonly used named units bound to a specific exponent (like hectare for area), add a
-`KDerivedUnit` object analogous to `KLengthDerivedUnit`:
+`KDerivedUnit` object analogous to `KDistanceDerivedUnit`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -172,7 +180,7 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // just for illustration
+val truckLoad = 3.pounds.toUnit().toKMassUnit() // just for illustration
 println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
@@ -183,11 +191,11 @@ composes with any other group (e.g. length) via `*`/`/` - see [Mixed Units](mixe
 rules:
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
 // density = mass / volume
-val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
+val density = 5.kilograms.toUnit() / 2.liters.toUnit()
 ```
 
 ## 6. Naming and testing checklist

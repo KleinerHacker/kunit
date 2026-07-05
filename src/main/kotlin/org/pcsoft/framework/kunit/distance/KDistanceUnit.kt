@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations.
  */
 
-package org.pcsoft.framework.kunit.length
+package org.pcsoft.framework.kunit.distance
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -20,10 +20,10 @@ import org.pcsoft.framework.kunit.KUnit
  *
  * Example:
  * ```kotlin
- * KLengthUnit.MILE.baseValue // 1609.344 (1 mile = 1609.344 meters)
+ * KDistanceUnit.MILE.baseValue // 1609.344 (1 mile = 1609.344 meters)
  * ```
  */
-enum class KLengthUnit(override val symbol: String, override val baseValue: Double) : KUnit {
+enum class KDistanceUnit(override val symbol: String, override val baseValue: Double) : KUnit {
     /** Meter, the SI base unit of length; [baseValue] = 1.0 by definition. */
     METER("m", 1.0),
 
@@ -80,6 +80,6 @@ enum class KLengthUnit(override val symbol: String, override val baseValue: Doub
          * The base unit of the length group; all internal values of [KLengthUnitInstance] are
          * normalized to this unit.
          */
-        val BASE: KLengthUnit = METER
+        val BASE: KDistanceUnit = METER
     }
 }

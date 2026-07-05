@@ -6,12 +6,12 @@
 `KTimeUnitInstance`는 [`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)을
 100% 래핑합니다. `Duration`이 유일한 원천(나노초 정밀도)이며, 전체 `Duration` API가 그대로 전달됩니다.
 그 위에 다른 모든 "순수" 단위 래퍼와 동일한 표면(`value`/`valueAs`/`+`/`-`/`*`/`/`/`toString`/
-`toKMixedUnitInstance`)을 제공하므로, 시간 값은 범용 혼합 단위 엔진에 그대로 연결됩니다(예: `length / time` =
+`toUnit`)을 제공하므로, 시간 값은 범용 혼합 단위 엔진에 그대로 연결됩니다(예: `length / time` =
 속도). 값은 항상 초로 정규화되어 저장됩니다.
 
 `Duration`은 항상 단순한 지속 시간만 나타내므로, 시간 값은 항상 지수 1입니다 - time² 또는 1/time 래퍼는
 없습니다(곱하기/나누기는 길이와 마찬가지로 원시 `KMixedUnitInstance`로 "빠져나갑니다"). 따라서
-`KMixedUnitInstance.toKTimeUnit()`은 **지수 1의** 단일 `KTimeUnit` 항만 허용합니다.
+`KMixedUnitInstance.toTime()`은 **지수 1의** 단일 `KTimeUnit` 항만 허용합니다.
 
 ## 단위
 
@@ -75,7 +75,7 @@ import org.pcsoft.framework.kunit.time.*
 
 val t = 90.minutes
 t.toDuration()                       // PT1H30M
-Duration.ofMinutes(90).toKTimeUnit() // KTimeUnitInstance, valueAs(HOUR) == 1.5
+Duration.ofMinutes(90).toTime() // KTimeUnitInstance, valueAs(HOUR) == 1.5
 
 // 전달된 변경자는 KTimeUnitInstance를 반환
 t.plusHours(1).valueAs(KTimeUnit.HOUR) // 2.5
@@ -130,13 +130,13 @@ import org.pcsoft.framework.kunit.time.*
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
-val speed = 10.meters / 1.seconds.toKMixedUnitInstance()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
-speed.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
+val speed = 10.meters / 1.seconds.toUnit()          // KMixedUnitInstance, units=[METER^1, SECOND^-1]
+speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
 
 // 속도에 시간을 다시 곱하면 순수한 길이를 복원
-val distance = speed * 2.seconds.toKMixedUnitInstance()
-distance.toKLengthUnit().value // 20.0
+val distance = speed * 2.seconds.toUnit()
+distance.toDistance().value // 20.0
 ```

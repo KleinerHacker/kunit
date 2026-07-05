@@ -5,7 +5,7 @@ Base unit: **meter per second** (`KSpeedUnit.BASE == KSpeedUnit.METERS_PER_SECON
 
 Speed is the first **constructed** unit: unlike length or time it is not a single "real" quantity but a
 composition, `length · time⁻¹` (`m/s`). `KSpeedUnitInstance` therefore wraps a `KMixedUnitInstance` of
-exactly two terms - one `KLengthUnit.BASE` (meter) at exponent `+1` and one `KTimeUnit.BASE` (second) at
+exactly two terms - one `KDistanceUnit.BASE` (meter) at exponent `+1` and one `KTimeUnit.BASE` (second) at
 exponent `-1`. The value is always stored normalized to meters per second, regardless of which unit,
 prefix, or length/time combination it was created from.
 
@@ -59,12 +59,12 @@ The four legal combinations and their result type:
 | `length / speed` | `KTimeUnitInstance` | duration = distance / speed |
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.speed.*
 
 // --- core units -> speed ------------------------------------------------
-val v = 100.meters / 10.seconds          // KSpeedUnitInstance (NO .toKSpeedUnit() needed!)
+val v = 100.meters / 10.seconds          // KSpeedUnitInstance (NO .toSpeed() needed!)
 v.value                                     // 10.0 (m/s)
 v.valueAs(KSpeedUnit.KILOMETERS_PER_HOUR)   // 36.0
 v.valueAs(KSpeedUnit.MILES_PER_HOUR)        // ≈ 22.37
@@ -79,7 +79,7 @@ val explicit: KSpeedUnitInstance = 100.meters / 10.seconds
 // --- speed -> length (multiply by a time) -------------------------------
 val distance = v * 60.seconds             // KLengthUnitInstance
 distance.value                              // 600.0 (m)
-distance.valueAs(KLengthUnit.METER)         // 600.0
+distance.valueAs(KDistanceUnit.METER)         // 600.0
 distance.valueAs(feet)                      // ≈ 1968.5 (read back in any length unit)
 distance.valueAs(miles)                     // ≈ 0.373
 60.seconds * v                            // same result (commutative)
@@ -102,12 +102,12 @@ time.valueAs(KTimeUnit.HOUR)                // ≈ 0.0167
 
 Because a Kotlin operator has a single, compile-time return type, `KLengthUnitInstance / KTimeUnitInstance`
 is *reserved* for building a typed speed and cannot instead yield an `m²/s`. That intermediate is **not
-lost**, though - drop one operand to the mixed level with `toKMixedUnitInstance()`, which selects the
+lost**, though - drop one operand to the mixed level with `toUnit()`, which selects the
 generic `KMixedUnitInstance` `/` operator (arbitrary exponents, no speed check). This explicit
-`toKMixedUnitInstance()` is the intended signal that you are leaving the strongly-typed paths.
+`toUnit()` is the intended signal that you are leaving the strongly-typed paths.
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
 val area = 2.hectares                 // KLengthUnitInstance, exponent 2 (20 000 m²)
@@ -115,12 +115,12 @@ val area = 2.hectares                 // KLengthUnitInstance, exponent 2 (20 000
 // area / 2.seconds                   // ❌ throws IllegalStateException (would be m²/s, not a speed)
 
 // ✅ deliberate m²/s intermediate: one operand at the mixed level
-val areaPerTime = area.toKMixedUnitInstance() / 2.seconds.toKMixedUnitInstance()
+val areaPerTime = area.toUnit() / 2.seconds.toUnit()
 areaPerTime.value                       // 10000.0
 areaPerTime.units                       // [METER^2, SECOND^-1]
 
 // ...and it chains onward like any KMixedUnitInstance
-val backToArea = areaPerTime * 4.seconds.toKMixedUnitInstance() // units=[METER^2], value=40000.0
+val backToArea = areaPerTime * 4.seconds.toUnit() // units=[METER^2], value=40000.0
 ```
 
 ## Operators
@@ -172,13 +172,13 @@ You can also read a speed back as an explicit **length-per-time pair** (two targ
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.speed.*
 
 val v = 10.metersPerSecond
-v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
-v.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
+v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
+v.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
 ```
 
 ## toString formatting

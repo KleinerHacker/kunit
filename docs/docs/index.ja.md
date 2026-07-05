@@ -28,11 +28,11 @@ kunit は2つの中心的な型を中心に構築されています。
 - **`KMixedUnitInstance`** - *混合単位*(Mischeinheit): `Double` の基本値と、それぞれ整数の指数と対になった
   1つ以上の `KUnit`(例: 速度の `m^1 * s^-1`)。これは他のすべてを支える汎用エンジンです。
 - **`KUnit`** - 単位グループに属する単一の「純粋な」単位(例: メートルは長さグループに属する)。具体的な
-  単位グループは `enum class ... : KUnit`(例: `KLengthUnit`)としてモデル化されます。
+  単位グループは `enum class ... : KUnit`(例: `KDistanceUnit`)としてモデル化されます。
 
 すべての単位グループは、さらに**ラッパークラス**(例: `KLengthUnitInstance`)を提供します。これは単一の
 単位グループに限定された `KMixedUnitInstance` をカプセル化し、常にそのグループの基本単位に正規化されます。
-これはほとんどの場合に使用する型です - 現在提供されている単位については[定義済み単位](units/length.md)を、
+これはほとんどの場合に使用する型です - 現在提供されている単位については[定義済み単位](units/distance.md)を、
 汎用の `KMixedUnitInstance` エンジンを直接使用すべき場合については[混合単位](mixed-units.md)を参照してください。
 
 新しい物理量(質量や時間など)のサポートを追加したい場合は、[カスタム単位の追加](custom-units.md)の
@@ -55,7 +55,7 @@ kunit は2つの中心的な型を中心に構築されています。
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 
 // 任意の Number 型から純粋な長さの値を作成
 val distance = 5.meters
@@ -73,21 +73,21 @@ println(total.valueAs(KUnitPrefix.KILO with meters)) // 例: 21.0467...
 println(total.valueAs(yards))                         // 例: 23018.4...
 
 // 純粋な単位の乗算・除算は混合単位(KMixedUnitInstance)を生成する
-val area = distance.toKMixedUnitInstance() * trip.toKMixedUnitInstance()
+val area = distance.toUnit() * trip.toUnit()
 
 // 面積(指数2)と体積(指数3)のための特殊単位
 val plot = 3.hectares
-println(plot.valueAs(KLengthDerivedUnit.ARE))   // 300.0
+println(plot.valueAs(KDistanceDerivedUnit.ARE))   // 300.0
 
 val tank = 200.liters
-println(tank.valueAs(KLengthDerivedUnit.US_GALLON))
+println(tank.valueAs(KDistanceDerivedUnit.US_GALLON))
 ```
 
 ### SI 接頭辞
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.kilo
-import org.pcsoft.framework.kunit.length.meters
+import org.pcsoft.framework.kunit.distance.kilo
+import org.pcsoft.framework.kunit.distance.meters
 
 // "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
 val fiveKm = 5 kilo meters
@@ -99,10 +99,10 @@ println(fiveKm.value) // 5000.0(メートルに正規化)
 ```kotlin
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 
 // 混合単位を手動で構成する例、平方メートル(長さ^1 * 長さ^1)
-val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KLengthUnit.METER, 1)))
+val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
 val doubled = speed * speed // 指数が加算される -> 長さ^2
 ```
 

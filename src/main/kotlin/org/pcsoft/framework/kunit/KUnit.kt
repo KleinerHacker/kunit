@@ -16,10 +16,10 @@ package org.pcsoft.framework.kunit
  * Marker interface for anything that can be used as a display/conversion target for a unit value.
  *
  * A target is either:
- * - a plain [KUnit] (no scaling, e.g. `KLengthUnit.METER`),
- * - a [KScaledUnit] (a [KUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.KILO with KLengthUnit.METER`),
- * - a [KDerivedUnit] (a named unit bound to a specific unit group and exponent, e.g. `KLengthDerivedUnit.HECTARE`), or
- * - a [KScaledDerivedUnit] (a [KDerivedUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.MILLI with KLengthDerivedUnit.LITER`).
+ * - a plain [KUnit] (no scaling, e.g. `KDistanceUnit.METER`),
+ * - a [KScaledUnit] (a [KUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.KILO with KDistanceUnit.METER`),
+ * - a [KDerivedUnit] (a named unit bound to a specific unit group and exponent, e.g. `KDistanceDerivedUnit.HECTARE`), or
+ * - a [KScaledDerivedUnit] (a [KDerivedUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.MILLI with KDistanceDerivedUnit.LITER`).
  *
  * This lets conversion/formatting functions such as `KMixedUnitInstance.valueAs`, `KMixedUnitInstance.toString`,
  * or `KLengthUnitInstance.valueAs` accept any of these interchangeably at the same call site.
@@ -27,8 +27,8 @@ package org.pcsoft.framework.kunit
  * Example:
  * ```kotlin
  * val d = 5.miles
- * d.valueAs(KLengthUnit.MILE)                       // plain KUnit target
- * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // KScaledUnit target
+ * d.valueAs(KDistanceUnit.MILE)                       // plain KUnit target
+ * d.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER) // KScaledUnit target
  * ```
  */
 interface KUnitTarget

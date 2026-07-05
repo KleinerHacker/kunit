@@ -5,7 +5,7 @@
 
 速度是第一个**构造(constructed)**单位: 与长度或时间不同, 它不是单一的"真实"物理量, 而是一个组合,
 `长度 · 时间⁻¹` (`m/s`)。因此 `KSpeedUnitInstance` 包装了一个恰好包含两个项的 `KMixedUnitInstance` -
-一个指数为 `+1` 的 `KLengthUnit.BASE`(米)和一个指数为 `-1` 的 `KTimeUnit.BASE`(秒)。无论用哪个单位、
+一个指数为 `+1` 的 `KDistanceUnit.BASE`(米)和一个指数为 `-1` 的 `KTimeUnit.BASE`(秒)。无论用哪个单位、
 前缀或长度/时间组合创建, 其值始终以米每秒归一化存储。
 
 ## 单位
@@ -55,12 +55,12 @@ v.valueAs(mach)                             // ≈ 0.0408 (声速的比例)
 | `length / speed` | `KTimeUnitInstance` | 时间 = 距离 / 速度 |
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.speed.*
 
 // --- 核心单位 -> 速度 ---------------------------------------------------
-val v = 100.meters / 10.seconds          // KSpeedUnitInstance (无需 .toKSpeedUnit()!)
+val v = 100.meters / 10.seconds          // KSpeedUnitInstance (无需 .toSpeed()!)
 v.value                                     // 10.0 (m/s)
 v.valueAs(KSpeedUnit.KILOMETERS_PER_HOUR)   // 36.0
 v.valueAs(KSpeedUnit.MILES_PER_HOUR)        // ≈ 22.37
@@ -75,7 +75,7 @@ val explicit: KSpeedUnitInstance = 100.meters / 10.seconds
 // --- 速度 -> 长度 (乘以时间) --------------------------------------------
 val distance = v * 60.seconds             // KLengthUnitInstance
 distance.value                              // 600.0 (m)
-distance.valueAs(KLengthUnit.METER)         // 600.0
+distance.valueAs(KDistanceUnit.METER)         // 600.0
 distance.valueAs(feet)                      // ≈ 1968.5 (读回为任意长度单位)
 distance.valueAs(miles)                     // ≈ 0.373
 60.seconds * v                            // 相同结果(可交换)
@@ -97,11 +97,11 @@ time.valueAs(KTimeUnit.HOUR)                // ≈ 0.0167
 
 由于 Kotlin 运算符在编译期只有单一的返回类型, `KLengthUnitInstance / KTimeUnitInstance` 被**保留**用于
 构建有类型的速度, 无法改为产生 `m²/s`。但那个中间结果**并未丢失** - 将一个操作数用
-`toKMixedUnitInstance()` 降到混合层, 这样就会选择通用的 `KMixedUnitInstance` 的 `/` 运算符(任意指数,
-无速度检查)。这个显式的 `toKMixedUnitInstance()` 正是你离开强类型路径的有意信号。
+`toUnit()` 降到混合层, 这样就会选择通用的 `KMixedUnitInstance` 的 `/` 运算符(任意指数,
+无速度检查)。这个显式的 `toUnit()` 正是你离开强类型路径的有意信号。
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.time.*
 
 val area = 2.hectares                 // KLengthUnitInstance, 指数 2 (20 000 m²)
@@ -109,12 +109,12 @@ val area = 2.hectares                 // KLengthUnitInstance, 指数 2 (20 000 m
 // area / 2.seconds                   // ❌ 抛出 IllegalStateException (只是 m²/s, 非速度)
 
 // ✅ 有意的 m²/s 中间结果: 将一个操作数降到混合层
-val areaPerTime = area.toKMixedUnitInstance() / 2.seconds.toKMixedUnitInstance()
+val areaPerTime = area.toUnit() / 2.seconds.toUnit()
 areaPerTime.value                       // 10000.0
 areaPerTime.units                       // [METER^2, SECOND^-1]
 
 // ...并且它像任何 KMixedUnitInstance 一样继续链式计算
-val backToArea = areaPerTime * 4.seconds.toKMixedUnitInstance() // units=[METER^2], value=40000.0
+val backToArea = areaPerTime * 4.seconds.toUnit() // units=[METER^2], value=40000.0
 ```
 
 ## 运算符
@@ -163,13 +163,13 @@ v.valueAs(KUnitPrefix.KILO with KSpeedUnit.METERS_PER_SECOND)  // 0.005
 ```kotlin
 import org.pcsoft.framework.kunit.KUnitPrefix
 import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.length.KLengthUnit
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.speed.*
 
 val v = 10.metersPerSecond
-v.valueAs(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
-v.toString(KUnitPrefix.KILO with KLengthUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
+v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)   // 36.0 (km per h)
+v.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR)  // "36.0 km*h^-1"
 ```
 
 ## toString 格式化

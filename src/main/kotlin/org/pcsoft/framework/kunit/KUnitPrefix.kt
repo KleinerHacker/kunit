@@ -24,9 +24,9 @@ package org.pcsoft.framework.kunit
  *
  * Example:
  * ```kotlin
- * val d = 5 kilo meters // KLengthUnitInstance, "meters" is the KLengthUnit.METER alias
+ * val d = 5 kilo meters // KLengthUnitInstance, "meters" is the KDistanceUnit.METER alias
  * d.value                 // 5000.0 (normalized to meters)
- * d.valueAs(KUnitPrefix.KILO with KLengthUnit.METER) // 5.0 (read back in kilometers)
+ * d.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER) // 5.0 (read back in kilometers)
  * ```
  */
 enum class KUnitPrefix(val symbol: String, val factor: Double) {
@@ -112,7 +112,7 @@ enum class KUnitPrefix(val symbol: String, val factor: Double) {
  *
  * Example:
  * ```kotlin
- * val km = KUnitPrefix.KILO with KLengthUnit.METER
+ * val km = KUnitPrefix.KILO with KDistanceUnit.METER
  * km.baseValue // 1000.0 (1 km = 1000 m)
  * km.symbol    // "km"
  * ```
@@ -121,7 +121,7 @@ data class KScaledUnit(val prefix: KUnitPrefix, val unit: KUnit) : KUnitTarget {
     /**
      * Combined conversion factor to the group's base unit: [prefix].factor * [unit].baseValue.
      *
-     * Example: `(KUnitPrefix.MILLI with KLengthUnit.METER).baseValue == 0.001`.
+     * Example: `(KUnitPrefix.MILLI with KDistanceUnit.METER).baseValue == 0.001`.
      */
     val baseValue: Double get() = prefix.factor * unit.baseValue
 
@@ -132,11 +132,11 @@ data class KScaledUnit(val prefix: KUnitPrefix, val unit: KUnit) : KUnitTarget {
 }
 
 /**
- * Combines a prefix and a unit into a [KScaledUnit], e.g. `KUnitPrefix.KILO with KLengthUnit.METER`.
+ * Combines a prefix and a unit into a [KScaledUnit], e.g. `KUnitPrefix.KILO with KDistanceUnit.METER`.
  *
  * Example:
  * ```kotlin
- * val km = KUnitPrefix.KILO with KLengthUnit.METER
+ * val km = KUnitPrefix.KILO with KDistanceUnit.METER
  * 5.miles.valueAs(km) // ≈ 8.046722 (miles expressed in kilometers)
  * ```
  */
@@ -148,12 +148,12 @@ infix fun KUnitPrefix.with(unit: KUnit): KScaledUnit = KScaledUnit(this, unit)
  * relative to meter). Unlike [KScaledUnit], the factor here is not a simple SI-prefix multiplier but
  * an arbitrary, named conversion tied to one specific [exponent] of [referenceUnit]'s group.
  *
- * [KDerivedUnit] does **not** replace the normal per-unit exponent mechanism (e.g. `KLengthUnit.METER`
+ * [KDerivedUnit] does **not** replace the normal per-unit exponent mechanism (e.g. `KDistanceUnit.METER`
  * at exponent 2 is still a perfectly valid, "raw" area representation) - it only adds an additional,
  * friendlier [KUnitTarget] for `valueAs`/`valueAs`/`toString` conversions.
  *
  * Generic over the referenced unit type `U`, so a group-specific constant (e.g.
- * `KLengthDerivedUnit.HECTARE: KDerivedUnit<KLengthUnit>`) cannot accidentally be constructed with the
+ * `KDistanceDerivedUnit.HECTARE: KDerivedUnit<KDistanceUnit>`) cannot accidentally be constructed with the
  * `referenceUnit` of a different group (e.g. a mass unit) - that mismatch is caught at compile time.
  * The exponent itself remains a runtime value (Kotlin has no types for numeric exponents), so using
  * e.g. `HECTARE` (exponent 2) against a pure length (exponent 1) still fails at runtime with
@@ -161,7 +161,7 @@ infix fun KUnitPrefix.with(unit: KUnit): KScaledUnit = KScaledUnit(this, unit)
  *
  * Example:
  * ```kotlin
- * val hectare = KDerivedUnit(symbol = "ha", exponent = 2, baseValue = 10_000.0, referenceUnit = KLengthUnit.BASE)
+ * val hectare = KDerivedUnit(symbol = "ha", exponent = 2, baseValue = 10_000.0, referenceUnit = KDistanceUnit.BASE)
  * val area = 200.meters * 50.meters // KMixedUnitInstance, 10 000 m²
  * area.valueAs(hectare) // 1.0
  * ```
@@ -180,7 +180,7 @@ data class KDerivedUnit<U : KUnit>(
  *
  * Example:
  * ```kotlin
- * val milliliter = KUnitPrefix.MILLI with KLengthDerivedUnit.LITER
+ * val milliliter = KUnitPrefix.MILLI with KDistanceDerivedUnit.LITER
  * milliliter.baseValue // 1e-6 (1 mL = 1e-6 m³)
  * milliliter.symbol    // "mL"
  * ```
@@ -209,12 +209,12 @@ data class KScaledDerivedUnit<U : KUnit>(val prefix: KUnitPrefix, val derivedUni
 
 /**
  * Combines a prefix and a derived unit into a [KScaledDerivedUnit], e.g.
- * `KUnitPrefix.MILLI with KLengthDerivedUnit.LITER` (= "mL", 1e-6 m³).
+ * `KUnitPrefix.MILLI with KDistanceDerivedUnit.LITER` (= "mL", 1e-6 m³).
  *
  * Example:
  * ```kotlin
  * val volume = 2.meters * 2.meters * 2.meters // 8 m³
- * volume.valueAs(KUnitPrefix.MILLI with KLengthDerivedUnit.LITER) // 8 000 000.0 (mL)
+ * volume.valueAs(KUnitPrefix.MILLI with KDistanceDerivedUnit.LITER) // 8 000 000.0 (mL)
  * ```
  */
 infix fun <U : KUnit> KUnitPrefix.with(derivedUnit: KDerivedUnit<U>): KScaledDerivedUnit<U> = KScaledDerivedUnit(this, derivedUnit)

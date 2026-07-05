@@ -18,10 +18,10 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.length.KLengthUnit
-import org.pcsoft.framework.kunit.length.KLengthUnitInstance
-import org.pcsoft.framework.kunit.length.lengthOf
-import org.pcsoft.framework.kunit.length.lengthUnitGenerators
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.distance.mkLength
+import org.pcsoft.framework.kunit.distance.lengthUnitGenerators
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.time.timeOf
@@ -39,37 +39,43 @@ import kotlin.test.assertFailsWith
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KSpeedMixedUnitTest {
 
+    /** Provider: the full cross-product of every length unit against every time unit (core → composed matrix). */
     private fun lengthTimePairs(): List<Arguments> =
         lengthUnitGenerators.flatMap { (_, l) -> timeUnitGenerators.map { (_, t) -> Arguments.of(l, t) } }
 
+    /** Provider: every length unit, for the "read back into every length unit" decomposition. */
     private fun lengths(): List<Arguments> = lengthUnitGenerators.map { Arguments.of(it.second) }
 
+    /** Provider: every time unit, for the "read back into every time unit" decomposition. */
     private fun times(): List<Arguments> = timeUnitGenerators.map { Arguments.of(it.second) }
 
+    /** Relative tolerance across the wide magnitude span (inch/s … light-year/day). */
     private fun delta(expected: Double): Double = (abs(expected) * 1e-9).coerceAtLeast(1e-12)
 
     // region core -> composed (length / time == speed)
 
+    /** core → composed: `length / time` for every unit pair yields a typed [KSpeedUnitInstance] with the right value and `[m¹, s⁻¹]` signature. */
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("lengthTimePairs")
-    fun `dividing a length by a time yields a typed speed`(length: KLengthUnit, time: KTimeUnit) {
-        val speed: KSpeedUnitInstance = lengthOf(length, 10) / timeOf(time, 2)
+    fun `dividing a length by a time yields a typed speed`(length: KDistanceUnit, time: KTimeUnit) {
+        val speed: KSpeedUnitInstance = mkLength(length, 10) / timeOf(time, 2)
 
         val expected = 10.0 * length.baseValue / (2.0 * time.baseValue)
         assertEquals(expected, speed.value, delta(expected), "$length / $time value mismatch")
         assertEquals(expected, speedOf(KSpeedUnit.METERS_PER_SECOND, expected).value, delta(expected))
         assertEquals(
-            setOf(KUnitTerm(KLengthUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
-            speed.toKMixedUnitInstance().units.toSet(),
+            setOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
+            speed.toUnit().units.toSet(),
             "$length / $time term signature mismatch"
         )
     }
 
+    /** The typed `length / time` operator and the raw mixed-engine division + `toSpeed()` produce the same value, for every unit pair. */
     @ParameterizedTest(name = "{0} / {1}")
     @MethodSource("lengthTimePairs")
-    fun `the raw mixed division agrees with toKSpeedUnit`(length: KLengthUnit, time: KTimeUnit) {
-        val viaOperator = lengthOf(length, 10) / timeOf(time, 2)
-        val viaConversion = (lengthOf(length, 10).toKMixedUnitInstance() / timeOf(time, 2).toKMixedUnitInstance()).toKSpeedUnit()
+    fun `the raw mixed division agrees with toSpeed`(length: KDistanceUnit, time: KTimeUnit) {
+        val viaOperator = mkLength(length, 10) / timeOf(time, 2)
+        val viaConversion = (mkLength(length, 10).toUnit() / timeOf(time, 2).toUnit()).toSpeed()
 
         assertEquals(viaConversion.value, viaOperator.value, delta(viaConversion.value), "$length / $time mismatch")
     }
@@ -78,9 +84,10 @@ class KSpeedMixedUnitTest {
 
     // region composed -> core (speed * time == length, read back into every length unit)
 
+    /** composed → core: `speed * time` recovers a typed length and reads back correctly into every length unit, for every time unit. */
     @ParameterizedTest(name = "speed * time read back in {0}")
     @MethodSource("lengths")
-    fun `speed times time decomposes back into every length unit`(readBack: KLengthUnit) {
+    fun `speed times time decomposes back into every length unit`(readBack: KDistanceUnit) {
         val speed = speedOf(KSpeedUnit.KILOMETERS_PER_HOUR, 36) // 10 m/s
 
         timeUnitGenerators.forEach { (_, timeUnit) ->
@@ -91,7 +98,7 @@ class KSpeedMixedUnitTest {
             val expectedReadBack = expectedMeters / readBack.baseValue
             assertEquals(expectedReadBack, distance.valueAs(readBack), delta(expectedReadBack),
                 "read-back mismatch into $readBack for $timeUnit")
-            assertEquals(listOf(KUnitTerm(KLengthUnit.BASE, 1)), distance.toKMixedUnitInstance().units)
+            assertEquals(listOf(KUnitTerm(KDistanceUnit.BASE, 1)), distance.toUnit().units)
         }
     }
 
@@ -99,19 +106,20 @@ class KSpeedMixedUnitTest {
 
     // region composed -> core (length / speed == time, read back into every time unit)
 
+    /** composed → core: `length / speed` recovers a typed time and reads back correctly into every time unit, for every length unit. */
     @ParameterizedTest(name = "length / speed read back in {0}")
     @MethodSource("times")
     fun `length divided by speed decomposes back into every time unit`(readBack: KTimeUnit) {
         val speed = speedOf(KSpeedUnit.METERS_PER_SECOND, 10)
 
         lengthUnitGenerators.forEach { (_, lengthUnit) ->
-            val time: KTimeUnitInstance = lengthOf(lengthUnit, 100) / speed
+            val time: KTimeUnitInstance = mkLength(lengthUnit, 100) / speed
             val expectedSeconds = 100.0 * lengthUnit.baseValue / 10.0
             assertEquals(expectedSeconds, time.value, delta(expectedSeconds), "value mismatch for $lengthUnit")
             val expectedReadBack = expectedSeconds / readBack.baseValue
             assertEquals(expectedReadBack, time.valueAs(readBack), delta(expectedReadBack),
                 "read-back mismatch into $readBack for $lengthUnit")
-            assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), time.toKMixedUnitInstance().units)
+            assertEquals(listOf(KUnitTerm(KTimeUnit.BASE, 1)), time.toUnit().units)
         }
     }
 
@@ -119,6 +127,7 @@ class KSpeedMixedUnitTest {
 
     // region commutativity and error cases
 
+    /** `speed * time` and `time * speed` yield the same length value — cross-group multiplication is commutative. */
     @Test
     fun `time times speed equals speed times time`() {
         val speed = speedOf(KSpeedUnit.METERS_PER_SECOND, 10)
@@ -126,17 +135,19 @@ class KSpeedMixedUnitTest {
         assertEquals((speed * timeOf(KTimeUnit.SECOND, 60)).value, (timeOf(KTimeUnit.SECOND, 60) * speed).value, 1e-9)
     }
 
+    /** An `area / time` (`m²/s`) shape is not a speed and `toSpeed()` throws `IllegalStateException` rather than mislead. */
     @Test
     fun `dividing an area by a time is not a speed`() {
         // an area (m^2) divided by a time is m^2/s, not a speed - must fail rather than mislead
-        val areaPerTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KLengthUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -1)))
+        val areaPerTime = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.BASE, 2), KUnitTerm(KTimeUnit.BASE, -1)))
 
-        assertFailsWith<IllegalStateException> { areaPerTime.toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { areaPerTime.toSpeed() }
     }
 
+    /** A plain length (single `m¹` term) is not a speed shape, so `toSpeed()` throws `IllegalStateException`. */
     @Test
     fun `a plain length is not a speed`() {
-        assertFailsWith<IllegalStateException> { lengthOf(KLengthUnit.METER, 5).toKMixedUnitInstance().toKSpeedUnit() }
+        assertFailsWith<IllegalStateException> { mkLength(KDistanceUnit.METER, 5).toUnit().toSpeed() }
     }
 
     // endregion

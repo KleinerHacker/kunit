@@ -1,6 +1,6 @@
 # 사용자 정의 단위 추가
 
-kunit은 현재 하나의 단위 그룹([길이](units/length.md))만 제공하지만, 전체 엔진(`KUnit`, `KMixedUnitInstance`,
+kunit은 현재 하나의 단위 그룹([거리](units/distance.md))만 제공하지만, 전체 엔진(`KUnit`, `KMixedUnitInstance`,
 접두어, 파생 단위)은 범용적이며 그룹에 독립적입니다. 새로운 물리량을 추가한다는 것은 `length` 패키지가
 이미 확립한 패턴을 따르는 것을 의미합니다. 이 페이지에서는 처음부터 예시로 **질량**(Mass) 그룹
 (`org.pcsoft.framework.kunit.mass`)을 추가하는 과정을 안내합니다.
@@ -85,7 +85,7 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
     override fun toString(): String = instance.toString()
     fun toString(target: KUnitTarget): String = instance.toString(target)
 
-    fun toKMixedUnitInstance(): KMixedUnitInstance = instance
+    fun toUnit(): KMixedUnitInstance = instance
 }
 
 /** 순수 질량 [KMixedUnitInstance]를 [KMassUnit.BASE]로 정규화하여 [KMassUnitInstance]로 다시 변환합니다. */
@@ -105,9 +105,11 @@ internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
 
 ## 3. 생성자 확장 함수 추가
 
-`K...UnitExtensions.kt` 패턴을 따라, 단위마다 bare `val` 별칭과 `Number` 확장 함수를 추가하세요. 이렇게
-하면 호출부에서 `5.kilograms` 또는 `1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상
-으로도 전달할 수 있습니다.
+프로젝트 관례에 따라 DSL 어휘를 두 파일로 나눕니다. bare `val` 별칭은 `K...UnitBareValues.kt`에,
+`Number` 확장 함수는 `K...UnitExtensions.kt`에 배치합니다. 이렇게 하면 호출부에서 `5.kilograms` 또는
+`1 kilo grams`를 사용할 수 있고, `kilograms`를 순수 `valueAs` 대상으로도 전달할 수 있습니다.
+
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -123,6 +125,12 @@ val pounds: KMassUnit = KMassUnit.POUND
 
 /** [KMassUnit.OUNCE]에 대한 bare 참조. */
 val ounces: KMassUnit = KMassUnit.OUNCE
+```
+
+`KMassUnitExtensions.kt`:
+
+```kotlin
+package org.pcsoft.framework.kunit.mass
 
 private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
 
@@ -141,7 +149,7 @@ val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
 
 이것으로 충분합니다 - 모든 로직이 범용 루트 패키지에 있고 `KMassUnit : KUnit`만 있으면 동작하기 때문에,
 이미 완전한 `+`, `-`, `*`, `/`, 비교 연산, SI 접두어(`5 kilo grams`), 그리고
-`toKMixedUnitInstance()`/`toKMassUnit()` 왕복 변환을 무료로 얻게 됩니다.
+`toUnit()`/`toKMassUnit()` 왕복 변환을 무료로 얻게 됩니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.mass.*
@@ -158,7 +166,7 @@ val heavier = b > a          // true
 ## 4. (선택 사항) 특수/파생 단위 추가
 
 그룹에 특정 지수에 고정된, 흔히 사용되는 명명된 단위(면적의 헥타르와 같은)가 있다면,
-`KLengthDerivedUnit`과 유사한 `KDerivedUnit` 객체를 추가하세요.
+`KDistanceDerivedUnit`과 유사한 `KDerivedUnit` 객체를 추가하세요.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
@@ -172,7 +180,7 @@ object KMassDerivedUnit {
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toKMixedUnitInstance().toKMassUnit() // 예시 목적으로만
+val truckLoad = 3.pounds.toUnit().toKMassUnit() // 예시 목적으로만
 println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 ```
 
@@ -182,11 +190,11 @@ println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
 그룹(예: 길이)과 결합됩니다 - 전체 규칙은 [혼합 단위](mixed-units.md)를 참고하세요.
 
 ```kotlin
-import org.pcsoft.framework.kunit.length.*
+import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
 // 밀도 = 질량 / 부피
-val density = 5.kilograms.toKMixedUnitInstance() / 2.liters.toKMixedUnitInstance()
+val density = 5.kilograms.toUnit() / 2.liters.toUnit()
 ```
 
 ## 6. 네이밍과 테스트 체크리스트

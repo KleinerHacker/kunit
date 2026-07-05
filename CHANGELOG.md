@@ -2,6 +2,75 @@
 
 ## [Unreleased]
 
+### Added
+
+- **Dimensioned distance subtypes.** The distance group now models exponents as their own types under an
+  open base `KDistanceUnitInstance` (any exponent): `KLengthUnitInstance` (exponent 1),
+  `KAreaUnitInstance` (2) and `KVolumeUnitInstance` (3). Results whose exponent leaves `{1,2,3}` fall back
+  to `KDistanceUnitInstance`; a dimensionless result (exponent 0) is a `KMixedUnitInstance`.
+  - Same-group `*`/`/` are now **strongly typed**: `length * length = area`, `area / length = length`,
+    `volume / area = length`, etc., instead of always returning a raw `KMixedUnitInstance`.
+  - Cross-dimension `+`/`-`/comparison (`length + area`, `length < volume`, …) are now a **compile
+    error** — no such operator exists — rather than a runtime `IllegalStateException`.
+- **Exponentiation via `pow`.** A group-agnostic infix power operation raises any unit to an integer
+  power: `2.meters pow 2` (= `(2 m)² = 4 m²`, a `KAreaUnitInstance`), `2 kilo meters pow 2`
+  (= 4 000 000 m²), `2.meters pow 3` (a volume), `2.hours pow 2` (a generic `KMixedUnitInstance`), and it
+  chains (`x pow 2 pow 2`). The value is powered and every term's exponent multiplied by `n`; `pow 0` is
+  dimensionless. This is the single power syntax across all groups (Kotlin has no overloadable `^`). For
+  distance the result is dimensioned (`KDistanceUnitInstance.pow`); for other groups it is a
+  `KMixedUnitInstance`.
+- The named derived units (`ares`/`hectares`/`acres`, `liters`/… ) return
+  `KAreaUnitInstance`/`KVolumeUnitInstance`.
+- New conversions `KMixedUnitInstance.toDistance()`/`toLength()`/`toArea()`/`toVolume()`.
+- **In-hierarchy narrowing** `KDistanceUnitInstance.toLength()`/`toArea()`/`toVolume()`: a general distance
+  value (or any leaf) can now be narrowed to a specific dimension directly, mirroring the
+  `KMixedUnitInstance` extensions (exponent-checked, throws `IllegalStateException` on mismatch). Previously
+  only `toDistance()` existed on the wrapper and the narrowing conversions lived solely on
+  `KMixedUnitInstance`.
+
+### Changed
+
+- **Tests: prefix × unit matrices now construct through the bare-value DSL.** The prefix cross-matrices
+  for every group build their instances via the bare-value aliases (`5 kilo meters`, `5 milli seconds`,
+  `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the `K*UnitBareValues.kt` aliases
+  are now fully covered and every unit × every prefix runs through the real DSL. The distance area/volume
+  matrices now raise a prefixed length via `pow` (`(5 kilo meters) pow 2`). Test-construction policy
+  documented in `CLAUDE.md`.
+- **Breaking:** the length group was renamed to **distance** — package
+  `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
+  `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the
+  exponent-1 leaf (a length); the general "any exponent" wrapper is the new `KDistanceUnitInstance`.
+- **Breaking:** conversion accessors dropped their hard class names for a natural DSL:
+  `toKMixedUnitInstance()` → `toUnit()`, `toKTimeUnit()` → `toTime()`, `toKSpeedUnit()` → `toSpeed()`,
+  `toKLengthUnit()` → `toDistance()` (plus the new exponent-checked `toLength()`/`toArea()`/`toVolume()`).
+- **Breaking:** `KUnitInstance<SELF>` no longer declares `times(SELF)`/`div(SELF)`. Same-group
+  multiplication/division comes from `KUnitMeasurable` (against a `KMixedUnitInstance`) plus the
+  group-specific typed overloads; this split is what lets the distance leaves narrow their `*`/`/` return
+  types without a signature clash.
+- The general `KDistanceUnitInstance` is intentionally **not additive** (no `plus`/`minus`/`compareTo`):
+  cross-dimension addition lives only on the leaf types, which is what makes `length + area` a compile
+  error. Add two `m⁴` values through the mixed engine instead.
+- **DSL file reorganization** (internal, no API change): creator/bare-value declarations are now
+  co-located per dimension. The catch-all `KDistanceUnitExtensions.kt` was split into per-dimension
+  `KLengthUnitExtensions.kt`/`KAreaUnitExtensions.kt`/`KVolumeUnitExtensions.kt` (creators) and
+  `KLengthUnitBareValues.kt`/`KAreaUnitBareValues.kt`/`KVolumeUnitBareValues.kt` (bare unit
+  references/tokens). Speed and time likewise split their bare references into
+  `KSpeedUnitBareValues.kt`/`KTimeUnitBareValues.kt`. The bare area/volume prefix tokens moved out of
+  `KDistanceUnitPrefix.kt` into the new `*BareValues.kt` files. The distance tests follow the same
+  per-dimension layout: the length instance tests moved into `KLengthUnitInstanceTest` (alongside the
+  existing `KAreaUnitInstanceTest`/`KVolumeUnitInstanceTest`), and the shared cross-dimension generator
+  matrices/helpers were extracted into `KDistanceTestFixtures.kt`.
+
+### Removed
+
+- **Named `squareXxx`/`cubicXxx` area and volume constructors** and the prefixed area/volume DSL —
+  superseded by `pow`. Removed: the `Number.squareMeters`/`squareMiles`/… and
+  `Number.cubicMeters`/`cubicMiles`/… creator properties, the `n kilo squareMeters` / `n kilo cubicMeters`
+  prefix `infix` overloads, and the supporting token types/aliases (`KDistanceAreaUnit`,
+  `KDistanceVolumeUnit`, `KAreaUnitBareValues.kt`, `KVolumeUnitBareValues.kt`). Write `2.meters pow 2`
+  instead of `2.squareMeters`, and `(2 kilo meters) pow 2` instead of `2 kilo squareMeters`. The named
+  derived special units (`hectares`, `ares`, `acres`, `liters`, `usGallons`, …) are unaffected.
+
 ## [0.2.0]
 
 ### Added
