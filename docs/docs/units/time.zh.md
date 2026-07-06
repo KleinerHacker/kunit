@@ -135,3 +135,7 @@ speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36
 val distance = speed * 2.seconds.toUnit()
 distance.toDistance().value // 20.0
 ```
+
+这里 `1.seconds.toUnit()` 有意将结果保持在混合层级——`10.meters / 1.seconds` 则会返回带类型的
+`KSpeedUnitInstance`。没有专用跨组运算符的两个纯单位（例如 `2.hours * 5.bytes`）会直接结合为
+`KMixedUnitInstance`，无需 `.toUnit()`。

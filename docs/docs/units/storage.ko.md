@@ -49,9 +49,14 @@ val b = 4.bytes - 16.bits       // KStorageUnitInstance: 2.0 B
 1.bytes == 8.bits               // true (same normalized amount)
 2.bytes > 1.bytes               // true
 
-// * / / 는 혼합 엔진에 위임 (KMixedUnitInstance 대상)
-val rate = 1000.bytes.toUnit() / 2.seconds.toUnit() // KMixedUnitInstance: 500 B·s⁻¹
+// * / / 그룹 간: 서로 다른 그룹의 두 순수 단위를 직접 KMixedUnitInstance 로 결합
+val rate = 1000.bytes / 2.seconds                   // KMixedUnitInstance: 500 B·s⁻¹
+// 동등한 명시적 형태 (혼합 엔진 경유):
+val rate2 = 1000.bytes.toUnit() / 2.seconds.toUnit()
 ```
+
+서로 **다른** 그룹의 두 순수 단위 간 직접 `*`/`/`(`1000.bytes / 2.seconds`)는 `KUnitInstance` 에 정의된
+그룹 비종속 연산자 쌍으로 제공되며, 더 이상 `.toUnit()` 호출이 필요하지 않습니다.
 
 ### 비교와 동등성
 
@@ -134,7 +139,7 @@ file.toString(KStorageBinaryPrefix.MEBI with bytes)   // "4.0 MiB"
 import org.pcsoft.framework.kunit.storage.*
 import org.pcsoft.framework.kunit.time.seconds
 
-val rate = 1000.bytes.toUnit() / 1.seconds.toUnit()   // 1000 B/s
+val rate = 1000.bytes / 1.seconds                     // 1000 B/s (직접, toUnit() 불필요)
 val amount = (rate * 60.seconds.toUnit()).toStorage() // 60000 B
 amount.valueAs(KStorageBinaryPrefix.KIBI with bytes)  // ≈ 58.59 (KiB)
 ```

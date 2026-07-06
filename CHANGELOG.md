@@ -19,6 +19,11 @@
     prefix × unit matrices, `toString`, and the cross-group storage × time decomposition) and a dedicated
     MkDocs page (`docs/docs/units/storage.md` + ko/zh/ja).
 - `KMixedUnitInstance.resolve()` now also resolves the storage group's `KBinaryScaledUnit` target.
+- **General cross-group `*`/`/` operators.** Any two "pure" units can now be multiplied/divided directly
+  across group boundaries (e.g. `20.bytes / 20.seconds`) without first calling `toUnit()`, yielding a
+  `KMixedUnitInstance`. Provided by one group-agnostic pair of extension operators
+  `KUnitInstance<*>.times/div(KUnitInstance<*>)` in `KUnitMeasurable.kt`; statically-typed cross-group
+  results (e.g. `length / time = speed`, `length * length = area`) are preserved via overload resolution.
 
 ### Changed
 

@@ -12,12 +12,16 @@
 
 package org.pcsoft.framework.kunit.storage
 
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.div
+import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertIs
 
 /**
  * Cross-group behaviour of the storage group: storage x time through the mixed engine (a data rate,
@@ -38,7 +42,7 @@ class KStorageMixedUnitTest {
     fun `every storage over every time forms the right rate`() {
         for ((_, storageUnit) in storageUnitGenerators) for (timeUnit in KTimeUnit.entries) {
             val storage = mkStorage(storageUnit, 5)
-            val time = org.pcsoft.framework.kunit.KMixedUnitInstance(2.0, listOf(KUnitTerm(timeUnit, 1)))
+            val time = KMixedUnitInstance(2.0, listOf(KUnitTerm(timeUnit, 1)))
             val rate = storage.toUnit() / time
             // The mixed engine divides raw values; storage.toUnit() is normalized to bytes, time keeps its raw 2.0.
             val expected = (5.0 * storageUnit.baseValue) / 2.0
@@ -67,6 +71,25 @@ class KStorageMixedUnitTest {
             val expected = 60.0 / unit.baseValue
             assertEquals(expected, time.valueAs(unit), 1e-6, "read back in $unit")
         }
+    }
+
+    /**
+     * The general cross-group operators let two pure units of different groups be multiplied/divided
+     * **directly** (no `toUnit()`), yielding a `KMixedUnitInstance` identical to the normalized form.
+     */
+    @Test
+    fun `storage times and over time works directly without toUnit`() {
+        val product = 1000.bytes * 2.seconds
+        assertIs<KMixedUnitInstance>(product)
+        assertEquals(2000.0, product.value, 1e-9)
+        assertEquals(listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KTimeUnit.SECOND, 1)), product.units)
+
+        val rate = 1000.bytes / 2.seconds
+        assertIs<KMixedUnitInstance>(rate)
+        assertEquals(500.0, rate.value, 1e-9)
+        assertEquals(listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KTimeUnit.SECOND, -1)), rate.units)
+        // Direct form equals the explicit toUnit() form.
+        assertEquals((1000.bytes.toUnit() / 2.seconds.toUnit()).units, rate.units)
     }
 
     /** A data rate divided again by a time (`B·s⁻²`) is not a pure storage value and `toStorage()` fails with `IllegalStateException`. */

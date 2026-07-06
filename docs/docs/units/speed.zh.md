@@ -117,6 +117,10 @@ areaPerTime.units                       // [METER^2, SECOND^-1]
 val backToArea = areaPerTime * 4.seconds.toUnit() // units=[METER^2], value=40000.0
 ```
 
+这里需要 `.toUnit()`，只是因为 `length`/`time` 已经带有优先级更高的专用跨组运算符。对于**没有**此类运算符的
+两个纯单位（例如 `10.metersPerSecond * 5.bytes`），通用的 `KUnitInstance` `*`/`/` 运算符会直接返回
+`KMixedUnitInstance`，无需 `.toUnit()`。
+
 ## 运算符
 
 ```kotlin

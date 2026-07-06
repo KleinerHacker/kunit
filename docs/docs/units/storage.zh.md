@@ -48,9 +48,14 @@ val b = 4.bytes - 16.bits       // KStorageUnitInstance: 2.0 B
 1.bytes == 8.bits               // true (same normalized amount)
 2.bytes > 1.bytes               // true
 
-// * / / 委托给混合引擎（针对 KMixedUnitInstance）
-val rate = 1000.bytes.toUnit() / 2.seconds.toUnit() // KMixedUnitInstance: 500 B·s⁻¹
+// * / / 跨组：直接将不同组的两个纯单位组合为 KMixedUnitInstance
+val rate = 1000.bytes / 2.seconds                   // KMixedUnitInstance: 500 B·s⁻¹
+// 等价的显式写法（经由混合引擎）：
+val rate2 = 1000.bytes.toUnit() / 2.seconds.toUnit()
 ```
+
+**不同**组的两个纯单位之间的直接 `*`/`/`（`1000.bytes / 2.seconds`）由 `KUnitInstance` 上的一对与组无关的
+运算符提供；不再需要 `.toUnit()` 调用。
 
 ### 比较与相等
 
@@ -130,7 +135,7 @@ file.toString(KStorageBinaryPrefix.MEBI with bytes)   // "4.0 MiB"
 import org.pcsoft.framework.kunit.storage.*
 import org.pcsoft.framework.kunit.time.seconds
 
-val rate = 1000.bytes.toUnit() / 1.seconds.toUnit()   // 1000 B/s
+val rate = 1000.bytes / 1.seconds                     // 1000 B/s（直接写法，无需 toUnit()）
 val amount = (rate * 60.seconds.toUnit()).toStorage() // 60000 B
 amount.valueAs(KStorageBinaryPrefix.KIBI with bytes)  // ≈ 58.59 (KiB)
 ```

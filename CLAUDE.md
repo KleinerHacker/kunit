@@ -1,3 +1,14 @@
+# Working with this document
+
+* **`CLAUDE.md` is the single source of truth for planning and changes.** For any plan or code change,
+  use **only** this file and the files it **explicitly references** as your source of information.
+* **Do not scan the code without explicit approval.** Searching or reading source code outside the
+  explicitly referenced files requires the user's express permission first.
+* **When something important is missing, ask - don't reach for the code.** If a piece of information
+  required for the task is not in `CLAUDE.md`, ask the user rather than inferring it from the source.
+* **Fold clarifications back in.** From such a question, decide whether `CLAUDE.md` needs to be
+  extended, and extend it as part of the change.
+
 # Overview
 
 * Calculation with units
@@ -261,6 +272,20 @@ dimension**, never mixed into the wrapper class files:
   `KMixedUnitInstance` / the group's base type is returned. For a group without dimensioned subtypes,
   `*`/`/` between different "pure" units yield a `KMixedUnitInstance`
 * When calculating a "pure" unit with a mixed unit, or mixed units with each other, new `KMixedUnitInstance`s are returned
+* **General cross-group `*`/`/`.** Any two "pure" units can be multiplied/divided **directly**, across
+  group boundaries, without first calling `toUnit()` (e.g. `20.bytes / 20.seconds`); the result is a
+  `KMixedUnitInstance`. This is provided by **one** group-agnostic pair of extension operators
+  `operator fun KUnitInstance<*>.times/div(other: KUnitInstance<*>): KMixedUnitInstance` in the root
+  (`KUnitMeasurable.kt`, below the `KUnitInstance` interface). It covers every group (incl. the distance
+  base type) and every future group automatically.
+  * It is deliberately an **extension, not a member** of `KUnitInstance`/`KUnitMeasurable`. A member
+    would, by Kotlin's *"member always wins"* rule (kotlinlang.org/docs/extensions.html), shadow the
+    statically-typed cross-group **extension** operators (e.g. speed's `KLengthUnitInstance.div(KTimeUnitInstance)`),
+    degrading `length / time` from `KSpeedUnitInstance` to `KMixedUnitInstance`. As an extension it only
+    applies when no more specific member or extension matches, so all typed results are preserved
+    (`3.meters * 4.meters = KAreaUnitInstance`, `100.meters / 5.seconds = KSpeedUnitInstance`).
+  * Only `*`/`/` exist across groups; `+`/`-` across groups remain a deliberate **compile error** (adding
+    unequal dimensions is invalid).
 
 ### Error Handling
 

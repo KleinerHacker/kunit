@@ -144,3 +144,8 @@ speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36
 val distance = speed * 2.seconds.toUnit()
 distance.toDistance().value // 20.0
 ```
+
+Here `1.seconds.toUnit()` deliberately keeps the result at the mixed level - `10.meters / 1.seconds`
+would instead return a typed `KSpeedUnitInstance`. Two pure units of groups **without** a dedicated
+cross-group operator (e.g. `2.hours * 5.bytes`) combine directly into a `KMixedUnitInstance`, with no
+`.toUnit()` needed.

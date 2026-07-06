@@ -50,9 +50,14 @@ val b = 4.bytes - 16.bits       // KStorageUnitInstance: 2.0 B
 1.bytes == 8.bits               // true (same normalized amount)
 2.bytes > 1.bytes               // true
 
-// * / / delegate to the mixed engine (against a KMixedUnitInstance)
-val rate = 1000.bytes.toUnit() / 2.seconds.toUnit() // KMixedUnitInstance: 500 B·s⁻¹
+// * / / across groups: combine any two pure units directly into a KMixedUnitInstance
+val rate = 1000.bytes / 2.seconds                   // KMixedUnitInstance: 500 B·s⁻¹
+// equivalent explicit form (via the mixed engine):
+val rate2 = 1000.bytes.toUnit() / 2.seconds.toUnit()
 ```
+
+The direct `*`/`/` between two pure units of **different** groups (`1000.bytes / 2.seconds`) is provided
+by a group-agnostic pair of operators on `KUnitInstance`; the `.toUnit()` calls are no longer required.
 
 ### Comparisons and equality
 
@@ -134,7 +139,7 @@ can be decomposed back:
 import org.pcsoft.framework.kunit.storage.*
 import org.pcsoft.framework.kunit.time.seconds
 
-val rate = 1000.bytes.toUnit() / 1.seconds.toUnit()   // 1000 B/s
+val rate = 1000.bytes / 1.seconds                     // 1000 B/s (direct, no toUnit())
 val amount = (rate * 60.seconds.toUnit()).toStorage() // 60000 B
 amount.valueAs(KStorageBinaryPrefix.KIBI with bytes)  // ≈ 58.59 (KiB)
 ```

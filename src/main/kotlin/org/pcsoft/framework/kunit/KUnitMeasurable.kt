@@ -172,3 +172,43 @@ interface KUnitInstance<SELF : KUnitInstance<SELF>> : KUnitMeasurable {
      */
     operator fun compareTo(other: SELF): Int
 }
+
+/**
+ * Multiplies this "pure" unit value with **any** other "pure" unit value - across group boundaries -
+ * producing a new [KMixedUnitInstance] whose unit terms are the union of both sides' terms with their
+ * exponents added (a resulting exponent of `0` drops that unit). Always allowed.
+ *
+ * This is the group-agnostic catch-all that lets any two wrappers be combined directly, without first
+ * normalizing them via [toUnit]:
+ * ```kotlin
+ * 20.bytes * 20.seconds   // KMixedUnitInstance [BYTE^1, SECOND^1]
+ * ```
+ *
+ * It is deliberately an **extension**, not a member of [KUnitInstance]/[KUnitMeasurable]: a member
+ * would (by Kotlin's "member always wins" rule) shadow the more specific, statically-typed cross-group
+ * operators such as `KLengthUnitInstance.times(...)`, degrading their result to [KMixedUnitInstance].
+ * As an extension it only applies when no more specific member or extension matches, so typed results
+ * are preserved:
+ * ```kotlin
+ * 3.meters * 4.meters     // KAreaUnitInstance   (member wins)
+ * ```
+ */
+operator fun KUnitInstance<*>.times(other: KUnitInstance<*>): KMixedUnitInstance =
+    toUnit() * other.toUnit()
+
+/**
+ * Divides this "pure" unit value by **any** other "pure" unit value - across group boundaries -
+ * producing a new [KMixedUnitInstance] whose unit terms are this side's terms combined with `other`'s
+ * terms with their exponents negated (a resulting exponent of `0` drops that unit). Always allowed.
+ *
+ * The group-agnostic counterpart to [times], letting any two wrappers be combined directly:
+ * ```kotlin
+ * 20.bytes / 20.seconds   // KMixedUnitInstance [BYTE^1, SECOND^-1]
+ * ```
+ *
+ * Like [times] it is deliberately an **extension** rather than a member, so it does not shadow the
+ * statically-typed cross-group operators (e.g. `100.meters / 5.seconds` stays a `KSpeedUnitInstance`,
+ * because that more specific extension wins over this generic one).
+ */
+operator fun KUnitInstance<*>.div(other: KUnitInstance<*>): KMixedUnitInstance =
+    toUnit() / other.toUnit()

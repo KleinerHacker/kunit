@@ -104,7 +104,11 @@ Because a Kotlin operator has a single, compile-time return type, `KLengthUnitIn
 is *reserved* for building a typed speed and cannot instead yield an `m²/s`. That intermediate is **not
 lost**, though - drop one operand to the mixed level with `toUnit()`, which selects the
 generic `KMixedUnitInstance` `/` operator (arbitrary exponents, no speed check). This explicit
-`toUnit()` is the intended signal that you are leaving the strongly-typed paths.
+`toUnit()` is the intended signal that you are leaving the strongly-typed paths. (This applies only
+because `length`/`time` already carry dedicated, more specific cross-group operators that take
+precedence. For two pure units of groups **without** such an operator - e.g. `10.metersPerSecond * 5.bytes` -
+the general `KUnitInstance` `*`/`/` operators apply directly and return a `KMixedUnitInstance`, no
+`toUnit()` required.)
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
