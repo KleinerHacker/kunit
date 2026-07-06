@@ -51,6 +51,34 @@
     `times`/`div`: same-group multiplication/division comes from `KUnitMeasurable` (against a
     `KMixedUnitInstance`) plus group-specific typed overloads, so dimensioned subtypes can narrow their
     `*`/`/` return types without a signature clash
+* **Wrapper shapes.** There are three concrete shapes a "pure" wrapper can take; pick by the group's
+  nature:
+  * **dimensioned hierarchy** (distance) - an open base type plus exponent-specialized leaves, see the
+    distance bullet above
+  * **`Duration`-backed** (time) - the wrapper stores a `java.time.Duration` and delegates
+    `KUnitMeasurable` to a `KMixedUnitInstance` built from it; subject to `Duration`'s representable range
+  * **plain one-dimensional** (storage) - a single-term, `Double`-backed wrapper with **no** exponent
+    subtypes and **no** `Duration` backing. It is the simplest shape:
+    `class KStorageUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
+    KUnitMeasurable by instance, KUnitInstance<KStorageUnitInstance>` - it delegates
+    `value`/`toUnit`/`times`/`div`/`pow` to `instance` and hand-writes only the `KUnitInstance`-only
+    members (`valueAs`, `toString(target)`, `plus`/`minus`/`compareTo`) plus `equals`/`hashCode`/`toString()`.
+    Its factory (`storageOf(value: Double)`) builds `KMixedUnitInstance(value, listOf(KUnitTerm(BASE, 1)))`
+* **Target system (`KUnitTarget`)** - the common supertype of everything accepted by `valueAs(...)` /
+  `toString(...)` (both `vararg KUnitTarget` on `KMixedUnitInstance`, single-target on the wrappers). Its
+  implementors, all resolved centrally by `KMixedUnitInstance.resolve()`:
+  * `KUnit` itself (a bare unit)
+  * `KScaledUnit(prefix: KUnitPrefix, unit: KUnit)` - a prefix-scaled unit, built via
+    `KUnitPrefix.with(KUnit)` (e.g. `KUnitPrefix.KILO with meters`). Exposes `baseValue`/`symbol`;
+    resolved `isLinearPerDimension = true` (its `baseValue` is raised to the term's exponent)
+  * `KDerivedUnit<U : KUnit>(symbol, exponent, baseValue, referenceUnit)` - the **special units**;
+    bound to one specific exponent, declared per group as `object K<Group>DerivedUnit { val HECTARE = ... }`;
+    resolved `isLinearPerDimension = false` (its `baseValue` is the full, already-exponentiated factor,
+    and matching additionally requires the exponent to equal the term's)
+  * `KScaledDerivedUnit<U>` - a `KDerivedUnit` scaled by a `KUnitPrefix` (`KUnitPrefix.with(KDerivedUnit)`)
+  * A group may add its **own** `KUnitTarget` (e.g. `KBinaryScaledUnit` for storage's binary prefixes);
+    doing so requires one new `is ...` branch in `KMixedUnitInstance.resolve()` (the only root-code edit a
+    new group can need)
 * **Immutability invariant**: every instance type (`KMixedUnitInstance`, the "pure" wrappers, and any
   future wrapper) is strictly immutable - only `val` state, no mutable fields; every operator/conversion
   returns a **new** instance
@@ -64,9 +92,17 @@
 * **Conversion-method naming**: conversion methods/properties never carry the hard class name - they read
   as `toUnit()` (the generic `KMixedUnitInstance`) and `to<Group/Size>()` (e.g. `toDistance()`,
   `toLength()`, `toArea()`, `toVolume()`, `toTime()`, `toSpeed()`). Apply this to every group
+* The `(KUnit, exponent)` pair is the type `KUnitTerm(val unit: KUnit, val exponent: Int)` (declared in
+  `KMixedUnitInstance.kt`); a `KMixedUnitInstance` stores `val units: List<KUnitTerm>`
 * SI prefixes (the complete SI prefix table, from Quetta/Q to Quecto/q) are not part of
   `KUnit`/the (KUnit, exponent) pair, since they are only relevant when reading/writing values. They are
-  represented via a generic `KUnitPrefix` enum (root package)
+  represented via a generic `KUnitPrefix` enum (root package; fields `symbol`, `factor` - no `baseValue`)
+  * A group is **not** obliged to expose the full prefix table: it may declare only a **subset** of the
+    prefix `infix` functions (e.g. storage omits every diminishing prefix - factor < 1, i.e. `deci`
+    downward - so `5 milli bytes` is a **compile error**, not a runtime check), and it may add an
+    **alternative prefix system** of its own (e.g. storage's binary IEC prefixes `KStorageBinaryPrefix`
+    Ki/Mi/Gi…, powers of 1024) as a separate enum plus a matching `KUnitTarget` (`KBinaryScaledUnit`) and
+    `with` infix - the pattern mirrors `KUnitPrefix`/`KScaledUnit` exactly
   * The prefix `infix` functions for construction (e.g. `5 kilo meters`) are **defined per group**, in
     each unit sub-package, over that group's own unit type (e.g. `Number.kilo(KDistanceUnit): KLengthUnitInstance`
     in `KDistanceUnitPrefix.kt`, `Number.kilo(KTimeUnit): KTimeUnitInstance` in `KTimeUnitPrefix.kt`). Each
@@ -100,7 +136,14 @@
 
 * The root package is called `org.pcsoft.framework.kunit`
 * A sub-package is created for each "pure" unit
-* The base classes `KUnit` and `KMixedUnitInstance` are located in the root package
+* The base classes `KUnit` and `KMixedUnitInstance` are located in the root package. The root package
+  holds only four `.kt` files and several root types share a file (there is **no** file-per-type rule
+  in root):
+  * `KUnit.kt` - `KUnitTarget` (marker root of all targets) and `KUnit`
+  * `KUnitMeasurable.kt` - `KUnitMeasurable` **and** `KUnitInstance` (no separate `KUnitInstance.kt`)
+  * `KMixedUnitInstance.kt` - `KUnitTerm` and `KMixedUnitInstance` (+ the `KUnitMeasurable.pow` extension)
+  * `KUnitPrefix.kt` - `KUnitPrefix`, `KScaledUnit`, `KDerivedUnit`, `KScaledDerivedUnit` and their
+    `with` infixes (no separate `KDerivedUnit.kt`)
 
 ### DSL file organization
 
@@ -127,6 +170,11 @@ dimension**, never mixed into the wrapper class files:
   `KDerivedUnit`, ...) just as
   in every sub-package (e.g. `KDistanceUnit`, `KDistanceUnitInstance`, `KLengthUnitInstance`,
   `KAreaUnitInstance`, `KVolumeUnitInstance`, `KDistanceDerivedUnit` in `distance`)
+* **Unit-enum = group name; wrapper/DSL = dimension name.** The `KUnit` enum is named after the
+  **group** (`KDistanceUnit`), while the "pure" wrapper and its DSL files are named after the
+  **dimension** (`KLengthUnitInstance`, `KLength*` DSL, over `KDistanceUnit`) - there is deliberately no
+  `KLengthUnit` type. For a **one-dimensional** group, group and dimension coincide, so both share the
+  one name (`KStorageUnit` + `KStorageUnitInstance`, DSL `KStorage*`)
 * Extension properties/functions and bare `val` aliases (DSL vocabulary such as the `meters` creator property, `kilo`, and the `meters` unit alias) are
   exempt from this rule - they remain named in a language-natural way
 

@@ -1,5 +1,33 @@
 # kunit Changelog
 
+## [UNRELEASED]
+
+### Added
+
+- **Storage unit group** (`org.pcsoft.framework.kunit.storage`): a new predefined group for digital data
+  amounts, base unit **byte** (`KStorageUnit.BYTE`), with **bit** (`KStorageUnit.BIT`, 0.125 B). Creator
+  properties `Number.bytes`/`Number.bits`, bare aliases `bytes`/`bits`, and the
+  `KMixedUnitInstance.toStorage()` conversion. It is the first *plain, one-dimensional*, `Double`-backed
+  wrapper shape (`KStorageUnitInstance`).
+  - **No diminishing prefixes.** Only the non-diminishing SI prefixes (`deca` upward) are offered;
+    `deci`/`centi`/`milli`/… do not exist for storage, so e.g. `5 milli bytes` is a **compile error**.
+  - **Binary (IEC) prefixes.** A second prefix system `KStorageBinaryPrefix` (`kibi`, `mebi`, `gibi`, …,
+    powers of 1024) with matching `infix` constructors and a `KBinaryScaledUnit` `valueAs`/`toString`
+    target (`KStorageBinaryPrefix.KIBI with bytes`), so a value can distinguish 1000 (`kilo`) from 1024
+    (`kibi`).
+  - Full parameterized test suite (conversion, operator and comparison matrices, decimal + binary
+    prefix × unit matrices, `toString`, and the cross-group storage × time decomposition) and a dedicated
+    MkDocs page (`docs/docs/units/storage.md` + ko/zh/ja).
+- `KMixedUnitInstance.resolve()` now also resolves the storage group's `KBinaryScaledUnit` target.
+
+### Changed
+
+- **`CLAUDE.md` reconciled with the actual code**: documented `KUnitTarget`, `KUnitTerm`, `KScaledUnit`/
+  `KScaledDerivedUnit` + `with`, the `KDerivedUnit` fields and per-group `object`, the real root-package
+  file layout (no `KUnitInstance.kt`/`KDerivedUnit.kt`), the "unit-enum = group name / wrapper = dimension
+  name" rule, the three wrapper shapes (dimensioned / `Duration`-backed / plain one-dimensional), and that
+  a group may offer a prefix subset and/or an alternative prefix system.
+
 ## [0.3.0]
 
 ### Added

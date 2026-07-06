@@ -55,6 +55,21 @@
   is a `KAreaUnitInstance`. This replaces the removed named `squareXxx`/`cubicXxx` constructors and the
   prefixed area/volume DSL. Full cross-matrix tests (per unit, per prefix, per exponent) added.
 
+* Sub-package `org.pcsoft.framework.kunit.storage` (digital data amount; first **plain one-dimensional**,
+  `Double`-backed wrapper shape):
+  * `KStorageUnit` (byte (base), bit = 0.125 B)
+  * `KStorageUnitInstance` — wraps a single-term `[B¹]` `KMixedUnitInstance` normalized to bytes
+    (`KUnitMeasurable by instance` + `KUnitInstance<KStorageUnitInstance>` directly), plus
+    `KMixedUnitInstance.toStorage()`
+  * `KStorageUnitExtensions` (creator properties `bytes`/`bits`), `KStorageUnitBareValues` (`bytes`/`bits`)
+  * `KStorageUnitPrefix` — only the **non-diminishing** SI prefixes (`deca`..`quetta`; the diminishing ones
+    are intentionally absent → compile error) **plus** the binary IEC prefixes (`kibi`..`yobi`)
+  * `KStorageBinaryPrefix` (Ki..Yi, powers of 1024) + `KBinaryScaledUnit` target + `with` infix; wired into
+    `KMixedUnitInstance.resolve()`
+  * Complete parameterized test suite (incl. decimal vs. binary 1000/1024, cross-group storage × time) and a
+    dedicated MkDocs page (`docs/docs/units/storage.md` + ko/zh/ja)
+  * `CLAUDE.md` reconciled with the actual code (target system, wrapper shapes, root file layout, naming rule)
+
 ## Open
 
 * Further unit groups (e.g. mass, temperature, ...) following the pattern established here for `length`/`time`

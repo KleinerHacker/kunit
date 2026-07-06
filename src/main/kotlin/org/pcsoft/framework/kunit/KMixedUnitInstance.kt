@@ -310,6 +310,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
         is KScaledDerivedUnit<*> -> ResolvedTarget(target.referenceUnit.javaClass, target.exponent, target.baseValue, target.symbol, isLinearPerDimension = false)
         is KDerivedUnit<*> -> ResolvedTarget(target.referenceUnit.javaClass, target.exponent, target.baseValue, target.symbol, isLinearPerDimension = false)
         is KScaledUnit -> ResolvedTarget(target.unit.javaClass, null, target.baseValue, target.symbol, isLinearPerDimension = true)
+        is org.pcsoft.framework.kunit.storage.KBinaryScaledUnit -> ResolvedTarget(target.unit.javaClass, null, target.baseValue, target.symbol, isLinearPerDimension = true)
         is KUnit -> ResolvedTarget(target.javaClass, null, target.baseValue, target.symbol, isLinearPerDimension = true)
         else -> error("Unsupported KUnitTarget implementation: $target")
     }
