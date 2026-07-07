@@ -4,6 +4,25 @@
 
 ### Added
 
+- **Data-rate unit group** (`org.pcsoft.framework.kunit.datarate`): a new *constructed* group for data
+  transfer rates, `storage · time⁻¹`, base unit **byte per second** (`KDataRateUnit.BYTES_PER_SECOND`),
+  with **bit per second** (`KDataRateUnit.BITS_PER_SECOND`, 0.125 B/s). Creator properties
+  `Number.bytesPerSecond`/`Number.bitsPerSecond`, bare aliases `bytesPerSecond`/`bitsPerSecond`, and the
+  `KMixedUnitInstance.toDataRate()` conversion. `KDataRateUnitInstance` wraps a two-term
+  `[KStorageUnit.BASE¹, KTimeUnit.BASE⁻¹]` instance, always normalized to B/s.
+  - **Cross-group operators**: `storage / time = data rate`, `data rate * time = storage`,
+    `time * data rate = storage`, `storage / data rate = time`, each strongly typed (e.g.
+    `100.bytes / 10.seconds` is a `KDataRateUnitInstance`, no `toUnit()` needed).
+  - **Prefix policy mirrors storage** (the numerator): only the non-diminishing SI prefixes (`deca`
+    upward) are offered - `5 milli bytesPerSecond` is a **compile error** - plus the binary IEC prefixes
+    (`kibi`, `mebi`, …, reused from `KStorageBinaryPrefix`), so a rate can distinguish 1000 (`kilo`) from
+    1024 (`kibi`). Whole-rate `valueAs`/`toString` targets accept a bare `KDataRateUnit`, an SI-scaled
+    (`KUnitPrefix.KILO with bytesPerSecond` → `kB/s`) or a binary-scaled one
+    (`KStorageBinaryPrefix.KIBI with bytesPerSecond` → `KiB/s`); no root `resolve()` change was needed
+    (the storage `KBinaryScaledUnit` branch already covers it).
+  - Full parameterized test suite (conversion, operator and comparison matrices, decimal + binary
+    prefix × unit matrices, `toString`, and the bidirectional cross-group storage × time decomposition)
+    and a dedicated MkDocs page (`docs/docs/units/datarate.md` + ko/zh/ja).
 - **Storage unit group** (`org.pcsoft.framework.kunit.storage`): a new predefined group for digital data
   amounts, base unit **byte** (`KStorageUnit.BYTE`), with **bit** (`KStorageUnit.BIT`, 0.125 B). Creator
   properties `Number.bytes`/`Number.bits`, bare aliases `bytes`/`bits`, and the

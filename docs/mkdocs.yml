@@ -76,6 +76,7 @@ plugins:
             Time: 시간
             Storage: 저장 용량
             Speed: 속도
+            Data Rate: 데이터 전송률
             API Docs: API 문서
             Licences: 라이선스
         - locale: zh
@@ -91,6 +92,7 @@ plugins:
             Time: 时间
             Storage: 存储
             Speed: 速度
+            Data Rate: 数据速率
             API Docs: API 文档
             Licences: 许可证
         - locale: ja
@@ -106,6 +108,7 @@ plugins:
             Time: 時間
             Storage: ストレージ
             Speed: 速度
+            Data Rate: データレート
             API Docs: API ドキュメント
             Licences: ライセンス
 
@@ -119,5 +122,6 @@ nav:
       - Storage: units/storage.md
   - Constructed Units:
       - Speed: units/speed.md
+      - Data Rate: units/datarate.md
   - API Docs: dokka/html/index.html
   - Licences: licences/index.html

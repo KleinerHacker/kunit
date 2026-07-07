@@ -70,6 +70,21 @@
     dedicated MkDocs page (`docs/docs/units/storage.md` + ko/zh/ja)
   * `CLAUDE.md` reconciled with the actual code (target system, wrapper shapes, root file layout, naming rule)
 
+* Sub-package `org.pcsoft.framework.kunit.datarate` (second **constructed** quantity: data rate =
+  storage·time⁻¹):
+  * `KDataRateUnit` (byte per second (base), bit per second = 0.125 B/s) — each carrying a single factor to
+    B/s so it doubles as a plain `KUnit`/target
+  * `KDataRateUnitInstance` — wraps a two-term `[B¹, s⁻¹]` `KMixedUnitInstance` normalized to B/s; reads back
+    either as a whole data-rate unit (bare, SI-scaled or binary-scaled) or as a storage-per-time pair, plus
+    `KMixedUnitInstance.toDataRate()` (validates the two-term rate signature)
+  * `KDataRateUnitExtensions` (creator properties + bare `val` aliases), `KDataRateUnitPrefix` — the same
+    prefix policy as storage: non-diminishing SI prefixes **plus** the binary IEC prefixes (reused from
+    `KStorageBinaryPrefix`); no root `resolve()` change needed
+  * `KDataRateUnitOperators` — direct cross-group operators `storage / time → data rate`,
+    `data rate * time → storage`, `time * data rate → storage`, `storage / data rate → time`
+  * Complete parameterized test suite incl. the mandatory **bidirectional** decomposition and a dedicated
+    MkDocs page (`docs/docs/units/datarate.md` + ko/zh/ja)
+
 ## Open
 
 * Further unit groups (e.g. mass, temperature, ...) following the pattern established here for `length`/`time`
