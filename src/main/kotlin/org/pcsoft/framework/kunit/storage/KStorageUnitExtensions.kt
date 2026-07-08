@@ -12,26 +12,21 @@
 
 package org.pcsoft.framework.kunit.storage
 
-// Storage creator extension properties.
+import org.pcsoft.framework.kunit.KAugmentingPrefixBuilder
 
-private fun storageFrom(value: Number, unit: KStorageUnit): KStorageUnitInstance = storageOf(value.toDouble() * unit.baseValue)
+// Prefixed, value-1 storage templates. A fraction of a bit is not a meaningful data amount, so the
+// `bytes`/`bits` properties hang **only** on the augmenting (supra-unity) SI builder and on the binary
+// IEC builder - never on the diminishing builder. That makes `kilo.bytes`/`kibi.bytes` valid while
+// `milli.bytes` is a **compile error** (there is no `bytes` property reachable from `milli`).
 
-/**
- * Creates a pure storage value in bytes from any [Number] type. The value is normalized to bytes
- * ([KStorageUnit.BASE]).
- *
- * Example:
- * ```kotlin
- * 5.bytes.value   // 5.0
- * 5L.bytes.value  // 5.0
- * ```
- */
-val Number.bytes: KStorageUnitInstance get() = storageFrom(this, KStorageUnit.BYTE)
+/** Decimal SI-prefixed bytes, e.g. `kilo.bytes` = 1000 B, `mega.bytes` = 1e6 B. */
+val KAugmentingPrefixBuilder.bytes: KStorageUnitInstance get() = storageOf(prefix.factor * KStorageUnit.BYTE.baseValue)
 
-/**
- * Creates a pure storage value in bits from any [Number] type. The value is normalized to bytes
- * (1 bit = 0.125 bytes).
- *
- * Example: `8.bits.value // 1.0`.
- */
-val Number.bits: KStorageUnitInstance get() = storageFrom(this, KStorageUnit.BIT)
+/** Decimal SI-prefixed bits, e.g. `kilo.bits`. */
+val KAugmentingPrefixBuilder.bits: KStorageUnitInstance get() = storageOf(prefix.factor * KStorageUnit.BIT.baseValue)
+
+/** Binary IEC-prefixed bytes, e.g. `kibi.bytes` = 1024 B, `mebi.bytes` = 1 048 576 B. */
+val KStorageBinaryPrefixBuilder.bytes: KStorageUnitInstance get() = storageOf(factor * KStorageUnit.BYTE.baseValue)
+
+/** Binary IEC-prefixed bits, e.g. `kibi.bits`. */
+val KStorageBinaryPrefixBuilder.bits: KStorageUnitInstance get() = storageOf(factor * KStorageUnit.BIT.baseValue)

@@ -13,35 +13,18 @@
 package org.pcsoft.framework.kunit
 
 /**
- * Marker interface for anything that can be used as a display/conversion target for a unit value.
- *
- * A target is either:
- * - a plain [KUnit] (no scaling, e.g. `KDistanceUnit.METER`),
- * - a [KScaledUnit] (a [KUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.KILO with KDistanceUnit.METER`),
- * - a [KDerivedUnit] (a named unit bound to a specific unit group and exponent, e.g. `KDistanceDerivedUnit.HECTARE`), or
- * - a [KScaledDerivedUnit] (a [KDerivedUnit] combined with a [KUnitPrefix], e.g. `KUnitPrefix.MILLI with KDistanceDerivedUnit.LITER`).
- *
- * This lets conversion/formatting functions such as `KMixedUnitInstance.valueAs`, `KMixedUnitInstance.toString`,
- * or `KLengthUnitInstance.valueAs` accept any of these interchangeably at the same call site.
- *
- * Example:
- * ```kotlin
- * val d = 5.miles
- * d.valueAs(KDistanceUnit.MILE)                       // plain KUnit target
- * d.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER) // KScaledUnit target
- * ```
- */
-interface KUnitTarget
-
-/**
  * Represents a single physical unit belonging to a unit group (e.g. meter within the length group).
  *
- * Concrete unit groups are modeled as `enum class` implementations of this interface.
+ * Concrete unit groups are modeled as `enum class` implementations of this interface. A [KUnit] only
+ * carries the group's raw scale metadata ([symbol], [baseValue]); it is **not** a construction or
+ * reading target itself. Both building (`10 of meters`) and reading (`v into kilo.meters`) work purely
+ * with **value-1 unit instances** (see [KUnitMeasurable.of]/[KUnitMeasurable.into] and the prefix
+ * builders), so there is no separate "unit target" abstraction any more.
  *
  * Two [KUnit] instances are considered to belong to the same group when they share the same runtime
  * type.
  */
-interface KUnit : KUnitTarget {
+interface KUnit {
     /**
      * The symbol used to display this unit, e.g. `"m"` for meter or `"mi"` for mile.
      */

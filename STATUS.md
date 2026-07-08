@@ -2,6 +2,24 @@
 
 ## Done
 
+* **Construction/reading DSL: `of` + `into` + prefix builders** (the current, breaking model):
+  * Build with `number of <value-1 unit template>` (`10.5 of kilo.meters / milli.seconds`), read with
+    `value into <unit>` (`v into kilo.meters`). `Number.of`/`KUnitMeasurable.into`/`KUnitMeasurable.scaledBy`
+    live in `KUnitMeasurable.kt`.
+  * Prefix builders in `KPrefixBuilder.kt`: `KPrefixBuilder` (base) → `KDiminishingPrefixBuilder` /
+    `KAugmentingPrefixBuilder`, plus the 24 builder values (`kilo`, `milli`, …). Storage's binary IEC
+    prefixes are `KStorageBinaryPrefixBuilder` values (`kibi`, …). Units are extension properties on the
+    appropriate builder type (`val KPrefixBuilder.meters`, `val KAugmentingPrefixBuilder.bytes`), so
+    `milli.bytes` is a **compile error** while `kilo.bytes`/`kibi.bytes` compile.
+  * Bare tokens (`meters`, `seconds`, `bytes`, `knots`, `hectares`, `liters`, …) are value-1
+    `K…UnitInstance` values used as templates for `of`/`into`. Constructed groups have no composite
+    `*PerY` tokens - a speed/rate is an expression (`meters / seconds`), only single-named specials
+    (`knots`, `mach`, `speedOfLight`) remain.
+  * Removed entirely: `valueAs`, custom-unit `toString(target)`, the `Number.xxx` creators, the prefix
+    `infix` functions, and the whole `KUnitTarget`/`KScaledUnit`/`KDerivedUnit`/`with` system.
+  * Full parameterized test suite migrated to `of`/`into` (one consolidated `K<Group>Test.kt` per group +
+    `KMixedUnitTest`); the `milli.bytes` compile-failure is verified.
+
 * Root package `org.pcsoft.framework.kunit`:
   * `KUnit`, `KUnitTarget` (base interfaces)
   * `KMixedUnitInstance`, `KUnitTerm` (mixed-unit engine incl. `+`, `-`, `*`, `/`, `hasSameUnits`, `valueAs`, `toString` overload)

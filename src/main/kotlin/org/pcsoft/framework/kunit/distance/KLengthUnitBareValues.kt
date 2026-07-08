@@ -12,58 +12,58 @@
 
 package org.pcsoft.framework.kunit.distance
 
-// Bare unit references, usable both as a KUnitTarget (e.g. `d.valueAs(meters)`) and as the `unit`
-// argument of the distance-group prefix `infix` functions (e.g. `5 kilo meters`, see
-// `KDistanceUnitPrefix.kt`). Only METER is an SI unit and therefore sensibly combinable with a prefix,
-// but the others are still accepted since KUnitPrefix is a purely mathematical scale factor.
+// Bare, value-1 length tokens (each = 1 unit, normalized to meters). They are the vocabulary for both
+// building (`10 of meters`) and reading (`v into miles`), and combine with the prefix builders
+// (`kilo.meters`) and operators (`meters / seconds`). See KLengthUnitExtensions.kt for the prefixed
+// forms.
 
-/** Bare reference to [KDistanceUnit.METER], for use with `valueAs` or the prefix `infix` functions. */
-val meters: KDistanceUnit = KDistanceUnit.METER
+/** 1 meter ([KDistanceUnit.METER]). Build with `n of meters`, read with `v into meters`. */
+val meters: KLengthUnitInstance = lengthOf(KDistanceUnit.METER.baseValue)
 
-/** Bare reference to [KDistanceUnit.MILE]. */
-val miles: KDistanceUnit = KDistanceUnit.MILE
+/** 1 mile ([KDistanceUnit.MILE]). */
+val miles: KLengthUnitInstance = lengthOf(KDistanceUnit.MILE.baseValue)
 
-/** Bare reference to [KDistanceUnit.NAUTICAL_MILE]. */
-val nauticalMiles: KDistanceUnit = KDistanceUnit.NAUTICAL_MILE
+/** 1 nautical mile ([KDistanceUnit.NAUTICAL_MILE]). */
+val nauticalMiles: KLengthUnitInstance = lengthOf(KDistanceUnit.NAUTICAL_MILE.baseValue)
 
-/** Bare reference to [KDistanceUnit.YARD]. */
-val yards: KDistanceUnit = KDistanceUnit.YARD
+/** 1 yard ([KDistanceUnit.YARD]). */
+val yards: KLengthUnitInstance = lengthOf(KDistanceUnit.YARD.baseValue)
 
-/** Bare reference to [KDistanceUnit.FOOT]. */
-val feet: KDistanceUnit = KDistanceUnit.FOOT
+/** 1 foot ([KDistanceUnit.FOOT]). */
+val feet: KLengthUnitInstance = lengthOf(KDistanceUnit.FOOT.baseValue)
 
-/** Bare reference to [KDistanceUnit.INCH]. */
-val inches: KDistanceUnit = KDistanceUnit.INCH
+/** 1 inch ([KDistanceUnit.INCH]). */
+val inches: KLengthUnitInstance = lengthOf(KDistanceUnit.INCH.baseValue)
 
-/** Bare reference to [KDistanceUnit.FATHOM]. */
-val fathoms: KDistanceUnit = KDistanceUnit.FATHOM
+/** 1 fathom ([KDistanceUnit.FATHOM]). */
+val fathoms: KLengthUnitInstance = lengthOf(KDistanceUnit.FATHOM.baseValue)
 
-/** Bare reference to [KDistanceUnit.CHAIN]. */
-val chains: KDistanceUnit = KDistanceUnit.CHAIN
+/** 1 chain ([KDistanceUnit.CHAIN]). */
+val chains: KLengthUnitInstance = lengthOf(KDistanceUnit.CHAIN.baseValue)
 
-/** Bare reference to [KDistanceUnit.FURLONG]. */
-val furlongs: KDistanceUnit = KDistanceUnit.FURLONG
+/** 1 furlong ([KDistanceUnit.FURLONG]). */
+val furlongs: KLengthUnitInstance = lengthOf(KDistanceUnit.FURLONG.baseValue)
 
-/** Bare reference to [KDistanceUnit.ASTRONOMICAL_UNIT]. */
-val astronomicalUnits: KDistanceUnit = KDistanceUnit.ASTRONOMICAL_UNIT
+/** 1 astronomical unit ([KDistanceUnit.ASTRONOMICAL_UNIT]). */
+val astronomicalUnits: KLengthUnitInstance = lengthOf(KDistanceUnit.ASTRONOMICAL_UNIT.baseValue)
 
-/** Bare reference to [KDistanceUnit.LIGHT_SECOND]. */
-val lightSeconds: KDistanceUnit = KDistanceUnit.LIGHT_SECOND
+/** 1 light-second ([KDistanceUnit.LIGHT_SECOND]). */
+val lightSeconds: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_SECOND.baseValue)
 
-/** Bare reference to [KDistanceUnit.LIGHT_MINUTE]. */
-val lightMinutes: KDistanceUnit = KDistanceUnit.LIGHT_MINUTE
+/** 1 light-minute ([KDistanceUnit.LIGHT_MINUTE]). */
+val lightMinutes: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_MINUTE.baseValue)
 
-/** Bare reference to [KDistanceUnit.LIGHT_HOUR]. */
-val lightHours: KDistanceUnit = KDistanceUnit.LIGHT_HOUR
+/** 1 light-hour ([KDistanceUnit.LIGHT_HOUR]). */
+val lightHours: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_HOUR.baseValue)
 
-/** Bare reference to [KDistanceUnit.LIGHT_DAY]. */
-val lightDays: KDistanceUnit = KDistanceUnit.LIGHT_DAY
+/** 1 light-day ([KDistanceUnit.LIGHT_DAY]). */
+val lightDays: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_DAY.baseValue)
 
-/** Bare reference to [KDistanceUnit.LIGHT_WEEK]. */
-val lightWeeks: KDistanceUnit = KDistanceUnit.LIGHT_WEEK
+/** 1 light-week ([KDistanceUnit.LIGHT_WEEK]). */
+val lightWeeks: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_WEEK.baseValue)
 
-/** Bare reference to [KDistanceUnit.LIGHT_YEAR]. */
-val lightYears: KDistanceUnit = KDistanceUnit.LIGHT_YEAR
+/** 1 light-year ([KDistanceUnit.LIGHT_YEAR]). */
+val lightYears: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_YEAR.baseValue)
 
-/** Bare reference to [KDistanceUnit.PARSEC]. */
-val parsecs: KDistanceUnit = KDistanceUnit.PARSEC
+/** 1 parsec ([KDistanceUnit.PARSEC]). */
+val parsecs: KLengthUnitInstance = lengthOf(KDistanceUnit.PARSEC.baseValue)

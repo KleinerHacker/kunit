@@ -14,7 +14,6 @@ package org.pcsoft.framework.kunit.distance
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 
 /**
@@ -54,14 +53,10 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
     val exponent: Int get() = instance.units.single().exponent
 
     /**
-     * Converts [value] into the given unit, prefixed unit, or (for the matching exponent) derived
-     * unit - see [KMixedUnitInstance.valueAs] for the exact matching rules.
-     *
-     * @throws IllegalStateException if [target] does not belong to the distance group, or (for a
-     * [org.pcsoft.framework.kunit.KDerivedUnit]/[org.pcsoft.framework.kunit.KScaledDerivedUnit]
-     * target) if its exponent does not match [exponent].
+     * Returns a new distance value of the same exponent with [value] scaled by [factor] (the concrete
+     * leaf type follows the exponent). Backs number-times-unit construction (`10 of kilo.meters`).
      */
-    fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
+    override fun scaledBy(factor: Double): KDistanceUnitInstance = distanceOf(value * factor, exponent)
 
     /**
      * Multiplies this distance value by another distance value of **any** dimension, producing a raw
@@ -130,14 +125,6 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
 
     /** Base-unit representation, e.g. `"5.0 m"` for a length, `"10000.0 m^2"` for an area. */
     override fun toString(): String = instance.toString()
-
-    /**
-     * Representation in the given unit, prefixed unit, or (for the matching exponent) derived unit -
-     * see [valueAs] for the exact matching rules.
-     *
-     * @throws IllegalStateException under the same conditions as [valueAs].
-     */
-    open fun toString(target: KUnitTarget): String = instance.toString(target)
 }
 
 /**

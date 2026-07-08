@@ -12,23 +12,19 @@
 
 package org.pcsoft.framework.kunit.storage
 
-import org.pcsoft.framework.kunit.KUnit
-import org.pcsoft.framework.kunit.KUnitTarget
-
 /**
- * A binary (IEC 80000-13) magnitude prefix for the storage group, based on powers of **1024**
- * (`2^10`) rather than the decimal powers of 1000 used by
- * [org.pcsoft.framework.kunit.KUnitPrefix]. This is what lets a data amount distinguish e.g. a
- * kilobyte (`kilo`, 1000 B) from a kibibyte (`kibi`, 1024 B).
+ * A binary (IEC 80000-13) magnitude prefix for the storage group, based on powers of **1024** (`2^10`)
+ * rather than the decimal powers of 1000 used by [org.pcsoft.framework.kunit.KUnitPrefix]. This is what
+ * lets a data amount distinguish a kilobyte (`kilo`, 1000 B) from a kibibyte (`kibi`, 1024 B).
  *
- * Like the SI prefixes, a binary prefix is **not** stored as part of a value - it only scales a raw
- * value at the input/output boundary (via the `infix` constructors in `KStorageUnitPrefix.kt`, and as
- * a [KBinaryScaledUnit] target for `valueAs`/`toString`).
+ * Like the SI prefixes, a binary prefix is exposed as a **builder** ([KStorageBinaryPrefixBuilder]) that
+ * turns the `bytes`/`bits` tokens into a prefixed, value-1 template for use with `of`/`into`
+ * (e.g. `4 of kibi.bytes`, `v into mebi.bytes`).
  *
  * Example:
  * ```kotlin
- * (1 kibi bytes).value // 1024.0
- * (1 mebi bytes).value // 1048576.0
+ * (1 of kibi.bytes).value // 1024.0
+ * (1 of mebi.bytes).value // 1048576.0
  * ```
  */
 enum class KStorageBinaryPrefix(val symbol: String, val factor: Double) {
@@ -58,34 +54,34 @@ enum class KStorageBinaryPrefix(val symbol: String, val factor: Double) {
 }
 
 /**
- * A [KUnit] combined with a [KStorageBinaryPrefix], e.g. "KiB" = `KIBI with bytes`.
- *
- * Used as a [KUnitTarget] wherever a plain [KUnit]/[org.pcsoft.framework.kunit.KScaledUnit] would be
- * accepted (e.g. `KStorageUnitInstance.valueAs`, `KMixedUnitInstance.valueAs`/`toString`), so a storage
- * value can be read/formatted in a binary-scaled unit. It is the binary counterpart of
- * [org.pcsoft.framework.kunit.KScaledUnit] and is resolved identically (linear per dimension).
- *
- * Example:
- * ```kotlin
- * val kib = KStorageBinaryPrefix.KIBI with bytes
- * kib.baseValue // 1024.0
- * kib.symbol    // "KiB"
- * ```
+ * A binary prefix **builder** (the IEC counterpart of
+ * [org.pcsoft.framework.kunit.KAugmentingPrefixBuilder]): it turns the storage `bytes`/`bits` tokens
+ * into a value-1 template scaled by a power of 1024, e.g. `kibi.bytes` (1024 B). Since binary prefixes
+ * are inherently *supra-unity*, only the `bytes`/`bits` properties (declared in
+ * `KStorageUnitExtensions.kt`) hang on it - it mirrors the augmenting SI builder exactly.
  */
-data class KBinaryScaledUnit(val prefix: KStorageBinaryPrefix, val unit: KUnit) : KUnitTarget {
-    /** Combined conversion factor to the group's base unit: [prefix].factor * [unit].baseValue. */
-    val baseValue: Double get() = prefix.factor * unit.baseValue
+class KStorageBinaryPrefixBuilder internal constructor(internal val factor: Double)
 
-    /** The combined display symbol, e.g. `"KiB"` for `KIBI with BYTE`. */
-    val symbol: String get() = prefix.symbol + unit.symbol
-}
+/** Kibi builder (1024^1). Use as `kibi.bytes`, `kibi.bits`. */
+val kibi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.KIBI.factor)
 
-/**
- * Combines a binary prefix and a unit into a [KBinaryScaledUnit], e.g. `KStorageBinaryPrefix.KIBI with bytes`.
- *
- * Example:
- * ```kotlin
- * (1 mebi bytes).valueAs(KStorageBinaryPrefix.KIBI with bytes) // 1024.0 (1 MiB = 1024 KiB)
- * ```
- */
-infix fun KStorageBinaryPrefix.with(unit: KUnit): KBinaryScaledUnit = KBinaryScaledUnit(this, unit)
+/** Mebi builder (1024^2). */
+val mebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.MEBI.factor)
+
+/** Gibi builder (1024^3). */
+val gibi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.GIBI.factor)
+
+/** Tebi builder (1024^4). */
+val tebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.TEBI.factor)
+
+/** Pebi builder (1024^5). */
+val pebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.PEBI.factor)
+
+/** Exbi builder (1024^6). */
+val exbi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.EXBI.factor)
+
+/** Zebi builder (1024^7). */
+val zebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.ZEBI.factor)
+
+/** Yobi builder (1024^8). */
+val yobi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.YOBI.factor)

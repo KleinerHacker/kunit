@@ -12,12 +12,12 @@
 
 package org.pcsoft.framework.kunit.storage
 
-// Bare unit references, usable both as a KUnitTarget (e.g. `s.valueAs(bits)`) and as the `unit`
-// argument of the storage-group prefix `infix` functions (e.g. `5 kilo bytes`, `5 kibi bytes`, see
-// `KStorageUnitPrefix.kt`).
+// Bare, value-1 storage tokens (each = 1 unit, normalized to bytes). Vocabulary for building
+// (`10 of bytes`) and reading (`v into bits`); combine with the prefix builders (`kilo.bytes`,
+// `kibi.bytes`). Prefixed forms live in KStorageUnitExtensions.kt.
 
-/** Bare reference to [KStorageUnit.BYTE], for use with `valueAs` or the prefix `infix` functions. */
-val bytes: KStorageUnit = KStorageUnit.BYTE
+/** 1 byte ([KStorageUnit.BYTE]). */
+val bytes: KStorageUnitInstance = storageOf(KStorageUnit.BYTE.baseValue)
 
-/** Bare reference to [KStorageUnit.BIT]. */
-val bits: KStorageUnit = KStorageUnit.BIT
+/** 1 bit ([KStorageUnit.BIT] = 0.125 B). */
+val bits: KStorageUnitInstance = storageOf(KStorageUnit.BIT.baseValue)

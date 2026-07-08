@@ -13,12 +13,9 @@
 package org.pcsoft.framework.kunit.datarate
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KScaledUnit
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.storage.KBinaryScaledUnit
 import org.pcsoft.framework.kunit.storage.KStorageUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
 
@@ -50,38 +47,10 @@ class KDataRateUnitInstance internal constructor(internal val instance: KMixedUn
     KUnitInstance<KDataRateUnitInstance>, KUnitMeasurable by instance {
 
     /**
-     * Converts [value] into the given whole data-rate unit (a bare [KDataRateUnit], an SI-scaled or a
-     * binary-scaled one) - `value / target.baseValue`.
-     *
-     * For a storage-per-time pair target (e.g. MB + s) use the [valueAs] `vararg` overload instead; a
-     * single storage or time [KUnitTarget] is delegated to the internal two-term instance and therefore
-     * fails (a data rate needs two targets), which is intentional.
-     *
-     * Example:
-     * ```kotlin
-     * val r = 100.bytes / 10.seconds
-     * r.valueAs(KDataRateUnit.BITS_PER_SECOND) // 80.0
-     * ```
+     * Returns a new data-rate value with [value] (B/s) scaled by [factor]. Backs number-times-unit
+     * construction (`5 of mega.bytes / seconds`, `10 of bytesPerSecond`).
      */
-    override fun valueAs(target: KUnitTarget): Double {
-        val whole = wholeRateTarget(target)
-        return if (whole != null) value / whole.first else instance.valueAs(target)
-    }
-
-    /**
-     * Converts [value] as a storage-per-time pair, i.e. exactly two targets: one storage-group and one
-     * time-group [KUnitTarget] (order independent), delegating to [KMixedUnitInstance.valueAs].
-     *
-     * @throws IllegalStateException if [targets] does not consist of one matching storage and one
-     * matching time target (see [KMixedUnitInstance.valueAs]).
-     *
-     * Example:
-     * ```kotlin
-     * val r = 100.bytes / 10.seconds
-     * r.valueAs(KUnitPrefix.KILO with KStorageUnit.BYTE, KTimeUnit.SECOND) // 0.01 (kB per s)
-     * ```
-     */
-    fun valueAs(vararg targets: KUnitTarget): Double = instance.valueAs(*targets)
+    override fun scaledBy(factor: Double): KDataRateUnitInstance = dataRateUnitInstanceOf(value * factor)
 
     /**
      * Adds two data rates, automatically converting between different [KDataRateUnit]s since both
@@ -117,45 +86,6 @@ class KDataRateUnitInstance internal constructor(internal val instance: KMixedUn
 
     /** Base-unit representation, e.g. `"10.0 B/s"`. */
     override fun toString(): String = "$value ${KDataRateUnit.BASE.symbol}"
-
-    /**
-     * Representation in the given whole data-rate unit (a bare [KDataRateUnit], an SI-scaled or a
-     * binary-scaled one); for a storage-per-time pair use the [toString] `vararg` overload. See
-     * [valueAs] for the matching rules.
-     *
-     * Example:
-     * ```kotlin
-     * (100.bytes / 10.seconds).toString(KDataRateUnit.BITS_PER_SECOND) // "80.0 bit/s"
-     * ```
-     */
-    override fun toString(target: KUnitTarget): String {
-        val whole = wholeRateTarget(target)
-        return if (whole != null) "${value / whole.first} ${whole.second}" else instance.toString(target)
-    }
-
-    /**
-     * Resolves a "whole data rate" target - a bare [KDataRateUnit], a [KScaledUnit] wrapping one, or a
-     * [KBinaryScaledUnit] wrapping one - to its `(baseValue, symbol)` pair, or `null` if [target] is not
-     * a whole data-rate unit (then it is treated as a storage-per-time pair target and delegated to
-     * [instance]).
-     */
-    private fun wholeRateTarget(target: KUnitTarget): Pair<Double, String>? = when {
-        target is KDataRateUnit -> target.baseValue to target.symbol
-        target is KScaledUnit && target.unit is KDataRateUnit -> target.baseValue to target.symbol
-        target is KBinaryScaledUnit && target.unit is KDataRateUnit -> target.baseValue to target.symbol
-        else -> null
-    }
-
-    /**
-     * Representation as a storage-per-time pair (e.g. `MB` + `s`), delegating to
-     * [KMixedUnitInstance.toString].
-     *
-     * Example:
-     * ```kotlin
-     * (100.bytes / 10.seconds).toString(KUnitPrefix.KILO with KStorageUnit.BYTE, KTimeUnit.SECOND) // "0.01 kB*s^-1"
-     * ```
-     */
-    fun toString(vararg targets: KUnitTarget): String = instance.toString(*targets)
 }
 
 /**

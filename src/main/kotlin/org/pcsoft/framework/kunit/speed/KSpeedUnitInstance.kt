@@ -13,10 +13,8 @@
 package org.pcsoft.framework.kunit.speed
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KScaledUnit
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.time.KTimeUnit
@@ -50,38 +48,10 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
     KUnitInstance<KSpeedUnitInstance>, KUnitMeasurable by instance {
 
     /**
-     * Converts [value] into the given whole speed unit (a [KSpeedUnit]) - `value / target.baseValue`.
-     *
-     * For a length-per-time pair target (e.g. km + h) use the [valueAs] `vararg` overload instead; a
-     * single length or time [KUnitTarget] is delegated to the internal two-term instance and therefore
-     * fails (a speed needs two targets), which is intentional.
-     *
-     * Example:
-     * ```kotlin
-     * val v = 100.meters / 10.seconds
-     * v.valueAs(KSpeedUnit.KILOMETERS_PER_HOUR) // 36.0
-     * v.valueAs(KSpeedUnit.MACH)                // 0.0293... (fraction of the speed of sound)
-     * ```
+     * Returns a new speed value with [value] (m/s) scaled by [factor]. Backs number-times-unit
+     * construction (`36 of kilometersPerHour`, `10 of kilo.meters / hours`).
      */
-    override fun valueAs(target: KUnitTarget): Double {
-        val whole = wholeSpeedTarget(target)
-        return if (whole != null) value / whole.first else instance.valueAs(target)
-    }
-
-    /**
-     * Converts [value] as a length-per-time pair, i.e. exactly two targets: one length-group and one
-     * time-group [KUnitTarget] (order independent), delegating to [KMixedUnitInstance.valueAs].
-     *
-     * @throws IllegalStateException if [targets] does not consist of one matching length and one
-     * matching time target (see [KMixedUnitInstance.valueAs]).
-     *
-     * Example:
-     * ```kotlin
-     * val v = 100.meters / 10.seconds
-     * v.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // 36.0 (km per h)
-     * ```
-     */
-    fun valueAs(vararg targets: KUnitTarget): Double = instance.valueAs(*targets)
+    override fun scaledBy(factor: Double): KSpeedUnitInstance = speedUnitInstanceOf(value * factor)
 
     /**
      * Adds two speeds, automatically converting between different [KSpeedUnit]s since both operands are
@@ -116,42 +86,6 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
 
     /** Base-unit representation, e.g. `"10.0 m/s"`. */
     override fun toString(): String = "$value ${KSpeedUnit.BASE.symbol}"
-
-    /**
-     * Representation in the given whole speed unit (a [KSpeedUnit]); for a length-per-time pair use the
-     * [toString] `vararg` overload. See [valueAs] for the matching rules.
-     *
-     * Example:
-     * ```kotlin
-     * (100.meters / 10.seconds).toString(KSpeedUnit.KILOMETERS_PER_HOUR) // "36.0 km/h"
-     * ```
-     */
-    override fun toString(target: KUnitTarget): String {
-        val whole = wholeSpeedTarget(target)
-        return if (whole != null) "${value / whole.first} ${whole.second}" else instance.toString(target)
-    }
-
-    /**
-     * Resolves a "whole speed" target - a bare [KSpeedUnit] or a [KScaledUnit] wrapping one - to its
-     * `(baseValue, symbol)` pair, or `null` if [target] is not a whole speed unit (then it is treated
-     * as a length-per-time pair target and delegated to [instance]).
-     */
-    private fun wholeSpeedTarget(target: KUnitTarget): Pair<Double, String>? = when {
-        target is KSpeedUnit -> target.baseValue to target.symbol
-        target is KScaledUnit && target.unit is KSpeedUnit -> target.baseValue to target.symbol
-        else -> null
-    }
-
-    /**
-     * Representation as a length-per-time pair (e.g. `km` + `h`), delegating to
-     * [KMixedUnitInstance.toString].
-     *
-     * Example:
-     * ```kotlin
-     * (100.meters / 10.seconds).toString(KUnitPrefix.KILO with KDistanceUnit.METER, KTimeUnit.HOUR) // "36.0 km*h^-1"
-     * ```
-     */
-    fun toString(vararg targets: KUnitTarget): String = instance.toString(*targets)
 }
 
 /**

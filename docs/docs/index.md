@@ -11,17 +11,19 @@ Working with raw numbers for physical quantities is error-prone: it is easy to a
 miles without converting, or to add an area to a length. kunit solves this by making the unit part of the
 type:
 
+- **Two verbs, `of` and `into`.** Build with `number of <unit>` (`5 of meters`), read with
+  `value into <unit>` (`v into kilo.meters`). Number and unit are strictly separated.
 - **Type-safe arithmetic.** `+` and `-` between incompatible unit groups or exponents throw
   `IllegalStateException` instead of silently producing a wrong number.
-- **Automatic conversion.** Adding `5.meters + 3.miles` just works - both operands are normalized
+- **Automatic conversion.** `(5 of meters) + (3 of miles)` just works - both operands are normalized
   internally, so you never have to manually convert units before combining them.
 - **Free-form multiplication and division.** Multiplying or dividing units is *always* allowed and
   automatically tracks the resulting physical dimension (exponent), e.g. `length * length` becomes an area.
 - **Full `Number` support.** Construct values from `Int`, `Long`, `Float`, `Double`, and any other `Number`
   type; everything is normalized to `Double` internally.
-- **The complete SI prefix table**, from Quetta (Q) to Quecto (q), usable generically with any unit.
-- **Named special units** (like hectare, liter, acre) as convenient, group- and exponent-bound
-  input/output targets, without replacing the underlying raw-exponent representation.
+- **The complete SI prefix table**, from Quetta (Q) to Quecto (q), as prefix builders (`kilo.meters`,
+  `milli.seconds`) with compile-time-enforced per-unit prefix policy.
+- **Named special units** (like hectare, liter, acre) as ordinary value-1 tokens used with `of`/`into`.
 
 ## Core concepts
 
@@ -57,13 +59,14 @@ group you need.
 ### Length
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
 
-// Create pure length values from any Number type
-val distance = 5.meters
-val trip = 10.miles
+// Build pure length values with `of` from any Number type
+val distance = 5 of meters
+val trip = 10 of miles
 
 // Operators: automatic conversion within the same group and exponent
 val total = distance + trip          // KLengthUnitInstance, normalized to meters
@@ -72,42 +75,43 @@ val diff = trip - distance
 // Comparisons
 val isFarther = trip > distance      // true
 
-// Read the value in a specific unit
-println(total.valueAs(KUnitPrefix.KILO with meters)) // e.g. 21.0467...
-println(total.valueAs(yards))                         // e.g. 23018.4...
+// Read the value in a specific unit with `into`
+println(total into kilo.meters)      // e.g. 21.0467...
+println(total into yards)            // e.g. 23018.4...
 
-// Multiplying/dividing pure units builds a mixed unit (KMixedUnitInstance)
-val area = distance.toUnit() * trip.toUnit()
+// Multiplying pure lengths builds a strongly typed area
+val area = distance * trip           // KAreaUnitInstance
 
-// Special units for area (exponent 2) and volume (exponent 3)
-val plot = 3.hectares
-println(plot.valueAs(KDistanceDerivedUnit.ARE))   // 300.0
+// Named special units for area (exponent 2) and volume (exponent 3)
+val plot = 3 of hectares
+println(plot into ares)              // 300.0
 
-val tank = 200.liters
-println(tank.valueAs(KDistanceDerivedUnit.US_GALLON))
+val tank = 200 of liters
+println(tank into usGallons)
 ```
 
 ### SI prefixes
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.kilo
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.meters
 
-// "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
-val fiveKm = 5 kilo meters
+// `5 of kilo.meters` -> KLengthUnitInstance (== 5000 m)
+val fiveKm = 5 of kilo.meters
 println(fiveKm.value) // 5000.0 (normalized to meters)
 ```
 
-### Mixed units
+### Mixed / composite units
 
 ```kotlin
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.pow
+import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.time.seconds
 
-// Manually composing a mixed unit, e.g. meters squared (length^1 * length^1)
-val speed = KMixedUnitInstance(10.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val doubled = speed * speed // exponents are added -> length^2
+// Compose a unit expression from value-1 templates and scale it with `of`
+val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²
 ```
 
 ## Checkout & Build

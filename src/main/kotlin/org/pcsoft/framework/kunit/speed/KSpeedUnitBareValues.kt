@@ -12,28 +12,19 @@
 
 package org.pcsoft.framework.kunit.speed
 
-// Bare unit references, usable both as a KUnitTarget (e.g. `v.valueAs(kilometersPerHour)`) and as the
-// `unit` argument of the speed-group prefix `infix` functions (e.g. `5 kilo metersPerSecond`, see
-// `KSpeedUnitPrefix.kt`). Only m/s is an SI unit and therefore sensibly combinable with a prefix, but
-// the others are still accepted since KUnitPrefix is a purely mathematical scale factor.
+// A speed is built as a length-per-time expression, e.g. `10 of kilo.meters / hours` or
+// `100 of meters / (10 of seconds)`. There are therefore deliberately **no** spelled-out composite tokens
+// (`metersPerSecond`, `kilometersPerHour`, `milesPerHour`, `feetPerSecond` = plain `meters / seconds`,
+// `kilo.meters / hours`, … and thus redundant).
+//
+// Only speeds with a genuinely single, conventional name and their own factor survive as value-1 tokens,
+// used with `of`/`into` (`50 of knots`, `v into mach`).
 
-/** Bare reference to [KSpeedUnit.METERS_PER_SECOND], for use with [valueAs][KSpeedUnitInstance.valueAs] or the prefix `infix` functions. */
-val metersPerSecond: KSpeedUnit = KSpeedUnit.METERS_PER_SECOND
+/** 1 knot ([KSpeedUnit.KNOT], 1 nautical mile per hour). */
+val knots: KSpeedUnitInstance = speedUnitInstanceOf(KSpeedUnit.KNOT.baseValue)
 
-/** Bare reference to [KSpeedUnit.KILOMETERS_PER_HOUR]. */
-val kilometersPerHour: KSpeedUnit = KSpeedUnit.KILOMETERS_PER_HOUR
+/** 1 Mach ([KSpeedUnit.MACH], ISA sea-level speed of sound, 340.29 m/s). */
+val mach: KSpeedUnitInstance = speedUnitInstanceOf(KSpeedUnit.MACH.baseValue)
 
-/** Bare reference to [KSpeedUnit.MILES_PER_HOUR]. */
-val milesPerHour: KSpeedUnit = KSpeedUnit.MILES_PER_HOUR
-
-/** Bare reference to [KSpeedUnit.KNOT]. */
-val knots: KSpeedUnit = KSpeedUnit.KNOT
-
-/** Bare reference to [KSpeedUnit.FEET_PER_SECOND]. */
-val feetPerSecond: KSpeedUnit = KSpeedUnit.FEET_PER_SECOND
-
-/** Bare reference to [KSpeedUnit.MACH]. */
-val mach: KSpeedUnit = KSpeedUnit.MACH
-
-/** Bare reference to [KSpeedUnit.LIGHT_SPEED]. */
-val speedOfLight: KSpeedUnit = KSpeedUnit.LIGHT_SPEED
+/** 1 c, the speed of light ([KSpeedUnit.LIGHT_SPEED], 299 792 458 m/s). */
+val speedOfLight: KSpeedUnitInstance = speedUnitInstanceOf(KSpeedUnit.LIGHT_SPEED.baseValue)

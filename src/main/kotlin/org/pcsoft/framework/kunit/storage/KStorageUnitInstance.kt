@@ -15,7 +15,6 @@ package org.pcsoft.framework.kunit.storage
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 
 /**
@@ -45,12 +44,10 @@ class KStorageUnitInstance internal constructor(internal val instance: KMixedUni
     KUnitMeasurable by instance, KUnitInstance<KStorageUnitInstance> {
 
     /**
-     * Converts [value] into the given unit, SI-prefixed unit, or binary-prefixed unit - see
-     * [KMixedUnitInstance.valueAs] for the exact matching rules.
-     *
-     * @throws IllegalStateException if [target] does not belong to the storage group.
+     * Returns a new storage value with [value] (bytes) scaled by [factor]. Backs number-times-unit
+     * construction (`10 of kilo.bytes`).
      */
-    override fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
+    override fun scaledBy(factor: Double): KStorageUnitInstance = storageOf(value * factor)
 
     /**
      * Adds two storage values, automatically converting between bit and byte since both operands are
@@ -79,14 +76,6 @@ class KStorageUnitInstance internal constructor(internal val instance: KMixedUni
 
     /** Base-unit representation, e.g. `"1024.0 B"`. */
     override fun toString(): String = instance.toString()
-
-    /**
-     * Representation in the given unit, SI-prefixed unit, or binary-prefixed unit - see [valueAs] for
-     * the exact matching rules.
-     *
-     * @throws IllegalStateException under the same conditions as [valueAs].
-     */
-    override fun toString(target: KUnitTarget): String = instance.toString(target)
 }
 
 // --- Factory helper (single creation source; constructor stays internal) -------------------------

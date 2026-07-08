@@ -16,6 +16,46 @@
   * This is a unit composed of several units
 * Enables calculations in physical contexts with real units in Double
 
+# Construction and Reading DSL (authoritative)
+
+Number and unit are **strictly separated**. There are exactly **two** free-standing verbs for units:
+
+* **Build:** `number of <unit-expression>` — `Number.of(template)` scales a **value-1 unit template**
+  by the leading number and returns the template's own (strong) type. Examples:
+  `10.5 of meters`, `10.5 of kilo.meters`, `10.5 of kilo.meters / milli.seconds` (a `KSpeedUnitInstance`),
+  `2 of hectares`, `10 of meters * (milli.seconds pow 2)`.
+* **Read:** `value into <unit-expression>` — `KUnitMeasurable.into(target): Double` returns the numeric
+  value in that unit (checked by unit signature). Examples: `v into kilo.meters`, `area into hectares`.
+  There is **no** `valueAs` and **no** custom-unit `toString(target)`; format via
+  `"${v into kilo.meters} km"`. Only the base-unit `toString()` remains.
+
+The **unit-expression** is built from value-1 instances and the existing operators `*` `/` `pow`:
+
+* **Bare tokens** (`meters`, `seconds`, `bytes`, `knots`, `hectares`, `liters`, …) are value-1
+  `K…UnitInstance` values in `K<Dimension>UnitBareValues.kt`. Constructed groups (speed, data rate) have
+  **no** spelled-out composite tokens (`metersPerSecond`, `bytesPerSecond`, …) - a speed/rate is an
+  expression (`meters / seconds`, `bytes / seconds`); only genuinely single-named specials (`knots`,
+  `mach`, `speedOfLight`) remain as tokens.
+* **Prefix builders** turn a token into a prefixed value-1 template by property access
+  (`kilo.meters`, `milli.seconds`, `kibi.bytes`). The builder hierarchy (root `KPrefixBuilder.kt`) is
+  `sealed KPrefixBuilder` → `KDiminishingPrefixBuilder` (factor < 1: `deci`…`quecto`) /
+  `KAugmentingPrefixBuilder` (factor > 1: `deca`…`quetta`); the 24 builder values live there. A group hangs
+  its unit as an extension property on the **appropriate** builder type: units valid with any magnitude on
+  the base `KPrefixBuilder`, magnitude-restricted units on a subtype. Storage's `bytes`/`bits` hang only on
+  `KAugmentingPrefixBuilder` (and the binary `KStorageBinaryPrefixBuilder`), so **`milli.bytes` is a
+  compile error** while `kilo.bytes`/`kibi.bytes` compile — the storage prefix policy is enforced by types,
+  not at runtime.
+* **`scaledBy`** (`KUnitMeasurable.scaledBy(Double)`, overridden per wrapper to return its own type) is the
+  scaling primitive behind `of`; it is the only reason `of` can preserve the strong type.
+* **Special/derived units** (`hectares`, `ares`, `acres`, `liters`, gallons, …) are named value-1
+  instances, **not** a separate target type. There is **no** `KUnitTarget`/`KScaledUnit`/`KDerivedUnit`
+  system any more.
+
+**Kotlin precedence facts that shaped this:** `as`/`in` are hard keywords (hence `of`/`into`); `* /` bind
+tighter than the named infixes `of`/`into`/`pow`, so `10.5 of kilo.meters / milli.seconds` reads as
+`10.5 of (kilo.meters / milli.seconds)`; `pow` is weaker than `* /`, so parenthesize a powered term
+(`meters * (milli.seconds pow 2)`).
+
 # Architecture
 
 * `KMixedUnitInstance` - Represents a mixed unit.
@@ -75,31 +115,24 @@
     `value`/`toUnit`/`times`/`div`/`pow` to `instance` and hand-writes only the `KUnitInstance`-only
     members (`valueAs`, `toString(target)`, `plus`/`minus`/`compareTo`) plus `equals`/`hashCode`/`toString()`.
     Its factory (`storageOf(value: Double)`) builds `KMixedUnitInstance(value, listOf(KUnitTerm(BASE, 1)))`
-* **Target system (`KUnitTarget`)** - the common supertype of everything accepted by `valueAs(...)` /
-  `toString(...)` (both `vararg KUnitTarget` on `KMixedUnitInstance`, single-target on the wrappers). Its
-  implementors, all resolved centrally by `KMixedUnitInstance.resolve()`:
-  * `KUnit` itself (a bare unit)
-  * `KScaledUnit(prefix: KUnitPrefix, unit: KUnit)` - a prefix-scaled unit, built via
-    `KUnitPrefix.with(KUnit)` (e.g. `KUnitPrefix.KILO with meters`). Exposes `baseValue`/`symbol`;
-    resolved `isLinearPerDimension = true` (its `baseValue` is raised to the term's exponent)
-  * `KDerivedUnit<U : KUnit>(symbol, exponent, baseValue, referenceUnit)` - the **special units**;
-    bound to one specific exponent, declared per group as `object K<Group>DerivedUnit { val HECTARE = ... }`;
-    resolved `isLinearPerDimension = false` (its `baseValue` is the full, already-exponentiated factor,
-    and matching additionally requires the exponent to equal the term's)
-  * `KScaledDerivedUnit<U>` - a `KDerivedUnit` scaled by a `KUnitPrefix` (`KUnitPrefix.with(KDerivedUnit)`)
-  * A group may add its **own** `KUnitTarget` (e.g. `KBinaryScaledUnit` for storage's binary prefixes);
-    doing so requires one new `is ...` branch in `KMixedUnitInstance.resolve()` (the only root-code edit a
-    new group can need)
+* **Reading targets are value-1 unit templates** (there is **no** `KUnitTarget` system). `into(target)`
+  accepts any `KUnitMeasurable` describing the desired unit - a bare token (`meters`), a prefixed builder
+  template (`kilo.meters`), a named special unit (`hectares`), or an expression (`kilo.meters / hours`) -
+  and returns `this.value / target.value` after checking that both have the same unit signature. The
+  removed types were `KUnitTarget`, `KScaledUnit`, `KDerivedUnit`, `KScaledDerivedUnit`,
+  `KBinaryScaledUnit` and every `with` infix; there is no central `resolve()`. A new group adds **no**
+  root-code edit for reading - it only contributes its value-1 tokens and builder-property extensions.
 * **Immutability invariant**: every instance type (`KMixedUnitInstance`, the "pure" wrappers, and any
   future wrapper) is strictly immutable - only `val` state, no mutable fields; every operator/conversion
   returns a **new** instance
 * **Creation invariant**: the "pure" wrapper constructors are `internal`. Concrete units may **only** be
-  created via number-extension creator **properties** (e.g. `5.meters`, `2.hours` - `val Number.meters`,
-  not a function), the group prefix `infix`
-  constructors (e.g. `5 kilo meters`), operator results, or the conversion extensions
+  created via the `of` verb on a value-1 template (e.g. `5 of meters`, `2 of hours`, `5 of kilo.meters`;
+  see the *Construction and Reading DSL* section), operator results, or the conversion extensions
   (`KMixedUnitInstance.toDistance()`/`toLength()`/`toTime()`/`toSpeed()`, `Duration.toTime()`). A wrapper
   must **never** be constructed directly from a `KMixedUnitInstance` by callers - the only
-  `KMixedUnitInstance`→ wrapper path is the `to<Group>()` extension
+  `KMixedUnitInstance`→ wrapper path is the `to<Group>()` extension. The value-1 bare tokens and prefix
+  builder templates are themselves built internally via the group factories (`lengthOf`, `timeUnitInstanceOf`,
+  `storageOf`, `speedUnitInstanceOf`, `dataRateUnitInstanceOf`)
 * **Conversion-method naming**: conversion methods/properties never carry the hard class name - they read
   as `toUnit()` (the generic `KMixedUnitInstance`) and `to<Group/Size>()` (e.g. `toDistance()`,
   `toLength()`, `toArea()`, `toVolume()`, `toTime()`, `toSpeed()`). Apply this to every group
@@ -114,12 +147,13 @@
     **alternative prefix system** of its own (e.g. storage's binary IEC prefixes `KStorageBinaryPrefix`
     Ki/Mi/Gi…, powers of 1024) as a separate enum plus a matching `KUnitTarget` (`KBinaryScaledUnit`) and
     `with` infix - the pattern mirrors `KUnitPrefix`/`KScaledUnit` exactly
-  * The prefix `infix` functions for construction (e.g. `5 kilo meters`) are **defined per group**, in
-    each unit sub-package, over that group's own unit type (e.g. `Number.kilo(KDistanceUnit): KLengthUnitInstance`
-    in `KDistanceUnitPrefix.kt`, `Number.kilo(KTimeUnit): KTimeUnitInstance` in `KTimeUnitPrefix.kt`). Each
-    returns that group's concrete "pure" unit **directly** (`5 kilo meters` is a `KLengthUnitInstance`, not
-    an intermediate) - this is the **preferred** construction form. `5 kilo meters` is exactly equivalent to
-    `5000.meters`.
+  * Prefixes are applied via the **prefix builders** (`kilo`, `milli`, …; root `KPrefixBuilder.kt`), which
+    expose a group's units as value-1 templates through extension **properties** per group
+    (`val KPrefixBuilder.meters` in `KLengthUnitExtensions.kt`, `val KPrefixBuilder.seconds` in
+    `KTimeUnitExtensions.kt`, `val KAugmentingPrefixBuilder.bytes` in `KStorageUnitExtensions.kt`). Combined
+    with `of` this is the construction form: `5 of kilo.meters` is a `KLengthUnitInstance`, exactly
+    equivalent to `5 of meters` scaled, i.e. `5000` m. The old per-group prefix `infix` functions
+    (`5 kilo meters`) and their `K*UnitPrefix.kt` files were removed.
     * Rationale: the wrapper classes live in the sub-packages, so only the group package can build its
       concrete wrapper. Returning the concrete type (rather than a group-agnostic intermediate that the
       caller must convert with `toXxxUnit()`) keeps the call site free of boilerplate. The cost is that the
@@ -251,10 +285,10 @@ dimension**, never mixed into the wrapper class files:
     `KUnitMeasurable`/`KUnitInstance` (that would shadow the typed variants, as with `times`/`div`).
   * **Precedence:** `pow` is a named infix function and binds **weaker** than `* / + -`; parenthesize
     in mixed expressions (`(a * b) pow 2`).
-* Both `KMixedUnitInstance` and the "pure" wrapper classes offer, in addition to the normalized raw value, a
-  way to read a converted value for a desired target unit, as well as a `toString` overload that
-  takes this target unit(s) into account in the text output. Target units can be a pure unit or
-  a unit scaled by a prefix/special unit
+* Both `KMixedUnitInstance` and the "pure" wrapper classes offer, in addition to the normalized raw value,
+  the `into` verb to read a converted value for a desired unit template (a bare token, a prefixed builder
+  template, or a special/derived value-1 instance). Text output is the base-unit `toString()` only; format
+  a specific unit as `"${v into kilo.meters} km"`
 
 ### Error Handling
 
@@ -316,12 +350,10 @@ dimension**, never mixed into the wrapper class files:
 ## Tests
 
 * **Construction runs through the public DSL, not the raw enums.** Test instances are built **primarily
-  via the public DSL surface** - the prefix `infix` functions (`5 kilo meters`), the bare-value aliases
-  (`meters`, `miles`, `metersPerHour`, `seconds`, ...), the creator properties (`5.meters`) and the power
-  operation (`2.meters pow 2` for areas/volumes). The
-  raw enum/wrapper values (`KDistanceUnit.METER`, `KSpeedUnit.METERS_PER_SECOND`)
-  are used **only for expected-value computation** (e.g. `unit.baseValue`), never to construct the
-  instance under test. This ensures the suite covers exactly the surface users actually call: every
+  via the public DSL surface** - the `of` verb on value-1 tokens and builder templates (`5 of meters`,
+  `5 of kilo.meters`, `2 of hectares`), the power operation (`(2 of meters) pow 2`), and read back with
+  `into`. The raw enum values (`KDistanceUnit.METER`, `KSpeedUnit.METERS_PER_SECOND`) are used **only for
+  expected-value computation** (e.g. `unit.baseValue`), never to construct the instance under test. This ensures the suite covers exactly the surface users actually call: every
   bare-value × prefix combination runs through the DSL rather than bypassing the alias. Applies to
   **every** group and is the yardstick for the prefix and construction matrices
 * **Every test method carries a KDoc.** Each test function (annotated `@Test` or `@ParameterizedTest`)
@@ -382,8 +414,9 @@ and a `xxxOf(unit, n)` helper. For each new group provide, each as its **own** p
 * **Comparison matrix** — one parameterized method **per comparison operator** (`==`, `!=`, `<`, `<=`,
   `>`, `>=`), each covering every unit against every other unit, expectations derived from the
   normalized base values. Plus representative `IllegalStateException` cases (e.g. mixing exponents).
-* **`toString`** — `toString()` (default/base unit) and `toString(target)` for every unit, including a
-  scaled (prefixed) target and, where applicable, a derived-unit target.
+* **Reading (`into`)** — read every unit back in every other unit of the group and in a prefixed template
+  (`v into kilo.meters`) and, where applicable, a special-unit template (`area into hectares`); plus
+  `toString()` (base unit only). There is no custom-unit `toString(target)`.
 * The same matrices apply to the group's **derived units**, and the mixed unit is exercised with a
   **cross-group** matrix (every unit of one group against every unit of another, e.g. length × time).
 

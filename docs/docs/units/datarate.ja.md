@@ -1,159 +1,136 @@
-# データレート
+# データ転送率
 
 パッケージ: `org.pcsoft.framework.kunit.datarate`
-基本単位: **バイト毎秒** (`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
+基本単位: **バイト毎秒**(`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
 
-データレートは（[速度](speed.md)に続く）2 番目の**構成された(constructed)**単位です。単一の「実在する」
-物理量ではなく、`ストレージ · 時間⁻¹` (`B/s`) の組み合わせです。そのため `KDataRateUnitInstance` は、
-ちょうど 2 つの項 - 指数 `+1` の `KStorageUnit.BASE`（バイト）と指数 `-1` の `KTimeUnit.BASE`（秒）-
-からなる `KMixedUnitInstance` をラップします。値は、どの単位・接頭辞・ストレージ/時間の組み合わせで
-生成されても、常にバイト毎秒に正規化されて保存されます。
+データ転送率は**構成された**単位です([速度](speed.md) に続く2つ目): 単一の「実在する」量ではなく、
+`storage · time⁻¹`(`B/s`)という合成です。したがって `KDataRateUnitInstance` は、ちょうど2つの項 — 指数 `+1`
+の `KStorageUnit.BASE`(バイト)と指数 `-1` の `KTimeUnit.BASE`(秒) — からなる `KMixedUnitInstance` をラップ
+します。値は、どの単位やストレージ/時間の組み合わせから作成されたかに関係なく、常にバイト毎秒に正規化されて
+保存されます。
 
-## 単位
+## データ転送率の作成
 
-| 単位 | Enum 値 | 記号 | 生成関数 | 1 単位 (B/s) |
-|---|---|---|---:|---:|
-| バイト毎秒 | `KDataRateUnit.BYTES_PER_SECOND` | `B/s` | `Number.bytesPerSecond` | 1.0 |
-| ビット毎秒 | `KDataRateUnit.BITS_PER_SECOND` | `bit/s` | `Number.bitsPerSecond` | 0.125 |
+データ転送率は**ストレージ毎時間の式**として作成します。例: `100 of bytes / seconds`、
+`5 of mega.bytes / seconds`、`10 of kibi.bytes / seconds` — いずれも `KDataRateUnitInstance` を生成します。
+任意のストレージ毎時間テンプレートで読み戻します(`r into (bits / seconds)`)。`bytesPerSecond` のような綴られた
+複合トークンは意図的に**ありません**(それらはまさに `bytes / seconds` です)。
 
-どちらの単位にも、`valueAs`/`toString` のターゲットや接頭辞 infix 関数の `unit` 引数として使える bare な
-`val` エイリアスがあります: `bytesPerSecond`, `bitsPerSecond`。
-
-> **バイトベースの基本単位。** 基本単位はバイト毎秒であり、ストレージ群（基本単位がバイト）と一貫して
-> います。ネットワークで一般的なビット毎秒 (`bps`) は `0.125 B/s` です。より大きな単位（kB/s, MB/s,
-> Mbit/s, KiB/s, …）は専用の enum 値ではなく、後述の接頭辞 DSL から得られます。
+基本単位: ストレージグループと一貫して、*バイト*毎秒です。ネットワークで一般的な bit/s(`bps`)は `0.125 B/s`
+です。「メガビット毎秒」は `1 of mega.bits / seconds` です。
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.time.seconds
 import org.pcsoft.framework.kunit.datarate.*
 
-val r = 100.bytesPerSecond
-r.value                                     // 100.0 (B/s に正規化)
-r.valueAs(KDataRateUnit.BITS_PER_SECOND)    // 800.0 (bit/s で読み戻し)
-r.valueAs(bitsPerSecond)                     // 800.0 (bare エイリアス経由)
+val r = 100 of bytes / seconds
+r.value                  // 100.0(B/s に正規化)
+r into (bits / seconds)  // 800.0(bit/s に戻して読み取り)
 ```
 
-## 核心単位（ストレージ & 時間）で計算する
+## 中核単位(ストレージと時間)での計算
 
-これこそが構成された単位の要点です。データレート*は*ストレージ量を時間で割ったものです。KUnit では、
-ストレージ・時間・データレートの 3 つの量の間を、単純な `*` と `/` で行き来でき、各結果は**強く型付け**
-されます。生の `KMixedUnitInstance` を自分で組み立てたり展開したりする必要はありません。
-
-有効な 4 つの組み合わせと結果の型:
+データ転送率*とは*、ストレージ量を時間で割ったものです。3つの量 — ストレージ、時間、データ転送率 — の間を
+単純な `*` と `/` で行き来でき、各結果は**強く型付け**されます。
 
 | 式 | 結果の型 | 意味 |
 |---|---|---|
-| `storage / time` | `KDataRateUnitInstance` | レート = 量 / 時間 |
-| `data rate * time` | `KStorageUnitInstance` | 量 = レート × 時間 |
-| `time * data rate` | `KStorageUnitInstance` | 量（可換） |
-| `storage / data rate` | `KTimeUnitInstance` | 時間 = 量 / レート |
+| `storage / time` | `KDataRateUnitInstance` | 転送率 = 量 / 時間 |
+| `data rate * time` | `KStorageUnitInstance` | 量 = 転送率 × 時間 |
+| `time * data rate` | `KStorageUnitInstance` | 量(可換) |
+| `storage / data rate` | `KTimeUnitInstance` | 時間 = 量 / 転送率 |
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.mega
 import org.pcsoft.framework.kunit.storage.*
 import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.datarate.*
 
-// --- 核心単位 -> データレート -------------------------------------------
-val r = 100.bytes / 10.seconds            // KDataRateUnitInstance（.toDataRate() 不要！）
-r.value                                     // 10.0 (B/s)
-r.valueAs(KDataRateUnit.BITS_PER_SECOND)    // 80.0
+// --- 中核単位 -> データ転送率 --------------------------------------------
+val r = (100 of bytes) / (10 of seconds)   // KDataRateUnitInstance(.toDataRate() は不要!)
+r.value                  // 10.0(B/s)
+r into (bits / seconds)  // 80.0
 
-// 代入先の型は何も変換しません - 演算子がすでに KDataRateUnitInstance を返します。
-val explicit: KDataRateUnitInstance = 100.bytes / 10.seconds
+// 接頭辞付きの分子、括弧不要:
+val download = 5 of mega.bytes / seconds   // KDataRateUnitInstance(5 MB/s)
 
-// --- データレート -> ストレージ（時間を掛ける） ------------------------
-val amount = r * 60.seconds               // KStorageUnitInstance
-amount.value                                // 600.0 (B)
-amount.valueAs(bytes)                        // 600.0
-amount.valueAs(bits)                         // 4800.0（任意のストレージ単位で読み戻し）
-60.seconds * r                            // 同じ結果（可換）
+// --- データ転送率 -> ストレージ(時間を掛ける) --------------------------
+val amount = r * (60 of seconds)   // KStorageUnitInstance
+amount into bytes     // 600.0
+amount into bits      // 4800.0
+(60 of seconds) * r   // 同じ結果(可換)
 
-// --- データレート -> 時間（ストレージ量を割る） ------------------------
-val time = 600.bytes / r                  // KTimeUnitInstance
-time.value                                  // 60.0 (s)
-time.valueAs(KTimeUnit.MINUTE)              // 1.0
+// --- データ転送率 -> 時間(ストレージ量をそれで割る) ------------------
+val time = (600 of bytes) / r      // KTimeUnitInstance
+time into minutes     // 1.0
 ```
 
-!!! warning "*純粋な* ストレージ / 時間 の形だけがデータレート"
-    `KMixedUnitInstance.toDataRate()` は、指数 `+1` のストレージ項 1 つと指数 `-1` の時間項 1 つを厳密に
-    要求します。`B²`（ストレージの二乗）、`B·s⁻²`、`B·s` の形はデータレートではなく、変換は誤った値を
-    黙って返す代わりに `IllegalStateException` をスローします。同様に `storage + data rate`（次元が異なる）
-    はコンパイルエラーです。
+!!! warning "データ転送率になるのは*純粋な*ストレージ/時間の形のみ"
+    `KMixedUnitInstance.toDataRate()` は、ちょうど1つの指数 `+1` のストレージ項と1つの指数 `-1` の時間項を
+    要求します。`B²`(ストレージの2乗)、`B·s⁻²`、`B·s` の形はデータ転送率ではありません — 変換は
+    `IllegalStateException` をスローします。同様に、`storage + data rate`(異なる次元)はコンパイルエラーです。
 
 ## 演算子
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.time.seconds
 import org.pcsoft.framework.kunit.datarate.*
 
-// + / - : 同一群、異なるデータレート単位間で自動変換
-val a = 1.bytesPerSecond + 8.bitsPerSecond   // KDataRateUnitInstance, 2 B/s
-val b = 2.bytesPerSecond - 8.bitsPerSecond   // 1 B/s
+// + / - : 同じグループ内、バイトベースとビットベースの転送率の間の自動変換
+val a = (1 of bytes / seconds) + (8 of bits / seconds)   // KDataRateUnitInstance、2 B/s
+val b = (2 of bytes / seconds) - (8 of bits / seconds)   // 1 B/s
 
-// 比較（正規化された B/s 値による）
-1.bytesPerSecond > 4.bitsPerSecond           // true  (1 B/s > 0.5 B/s)
-1.bytesPerSecond == 8.bitsPerSecond          // true  (同じ正規化値)
+// 比較(正規化された B/s 値による)
+(1 of bytes / seconds) > (4 of bits / seconds)           // true
+(1 of bytes / seconds) == (8 of bits / seconds)          // true
 
-// 2 つのデータレート間の * / / は KMixedUnitInstance に脱出します（もはや純粋なレートではない）
-val squared = 10.bytesPerSecond * 2.bytesPerSecond // KMixedUnitInstance, units=[B^2, s^-2]
+// 2つのデータ転送率の間の * / / は KMixedUnitInstance に脱出する(もはや純粋な転送率ではない)
+val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInstance, [B^2, s^-2]
 ```
 
-## 比較と等価性
+## SI および2進(IEC)接頭辞
 
-`==`, `!=`, `<`, `<=`, `>`, `>=` は 2 つの `KDataRateUnitInstance` の正規化された `value`（バイト毎秒）を
-比較します。データレートは常に同じ次元を持つため、指数チェックは不要です。
-
-## SI 接頭辞とバイナリ (IEC) 接頭辞
-
-データレート群は[ストレージ](storage.md)群の接頭辞ポリシーを踏襲します（分子がストレージ量のため）:
-
-* **縮小しない**十進 SI 接頭辞（`deca` 以上、係数 >= 1）のみを提供します。縮小する接頭辞（`deci`,
-  `centi`, `milli`, …）は**存在しません** - `5 milli bytesPerSecond` は実行時失敗ではなく**コンパイル
-  エラー**です。
-* 十進 SI 接頭辞に加えて、**バイナリ IEC 接頭辞**（`kibi`, `mebi`, `gibi`, …、1024 の累乗、
-  `KStorageBinaryPrefix` から再利用）が利用可能で、レートは 1000 (`kilo`) と 1024 (`kibi`) を区別できます。
+データ転送率グループは [ストレージ](storage.md) グループの接頭辞ポリシーを反映します(その分子はストレージ量
+です): 分子は**増大** SI ビルダー(`kilo`、`mega` など)または**2進**ビルダー(`kibi`、`mebi` など)を使用
+します。縮小ビルダーには `bytes`/`bits` プロパティがないため、`milli.bytes / seconds` はコンパイルされません。
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.storage.KStorageBinaryPrefix
-import org.pcsoft.framework.kunit.storage.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.time.seconds
 import org.pcsoft.framework.kunit.datarate.*
 
-// 構築: "5 mega bytesPerSecond" -> KDataRateUnitInstance（直接、== 5_000_000.bytesPerSecond）
-val download = 5 mega bytesPerSecond
-download.value // 5000000.0
+// 10進 vs 2進: 1000(kilo)!= 1024(kibi)
+(1 of kilo.bytes / seconds).value // 1000.0
+(1 of kibi.bytes / seconds).value // 1024.0
 
-// 十進 vs バイナリ: 1000 (kilo) != 1024 (kibi)
-(1 kilo bytesPerSecond).value // 1000.0
-(1 kibi bytesPerSecond).value // 1024.0
-
-// スケール済みの全体レートターゲットで値を読み戻す
-val r = 4096.bytesPerSecond
-r.valueAs(KUnitPrefix.KILO with bytesPerSecond)              // 4.096  (kB/s)
-r.valueAs(KStorageBinaryPrefix.KIBI with bytesPerSecond)     // 4.0    (KiB/s)
-```
-
-データレートを明示的な**ストレージ毎時間ペア**（2 つのターゲット）として読み戻すこともできます:
-
-```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.storage.KStorageUnit
-import org.pcsoft.framework.kunit.time.KTimeUnit
-import org.pcsoft.framework.kunit.datarate.*
-
-val r = 5000.bytesPerSecond
-r.valueAs(KUnitPrefix.KILO with KStorageUnit.BYTE, KTimeUnit.SECOND)   // 5.0 (kB / s)
-r.toString(KUnitPrefix.KILO with KStorageUnit.BYTE, KTimeUnit.SECOND)  // "5.0 kB*s^-1"
+// ストレージ毎時間テンプレートで値を読み戻す
+val r = 4096 of bytes / seconds
+r into (kilo.bytes / seconds)  // 4.096(kB/s)
+r into (kibi.bytes / seconds)  // 4.0  (KiB/s)
 ```
 
 ## toString フォーマット
 
+基本単位の `toString()` のみが存在します。特定の単位は `into` を使ってフォーマットします:
+
 ```kotlin
-import org.pcsoft.framework.kunit.storage.KStorageBinaryPrefix
-import org.pcsoft.framework.kunit.storage.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.storage.bytes
+import org.pcsoft.framework.kunit.storage.kibi
+import org.pcsoft.framework.kunit.time.seconds
 import org.pcsoft.framework.kunit.datarate.*
 
-10.bytesPerSecond.toString()                                    // "10.0 B/s"（基本単位）
-(100.bytes / 10.seconds).toString(KDataRateUnit.BITS_PER_SECOND) // "80.0 bit/s"
-4096.bytesPerSecond.toString(KStorageBinaryPrefix.KIBI with bytesPerSecond) // "4.0 KiB/s"
+(10 of bytes / seconds).toString()  // "10.0 B/s"(基本単位)
+"${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"
 ```

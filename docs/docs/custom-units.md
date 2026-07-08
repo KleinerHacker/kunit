@@ -1,9 +1,11 @@
 # Adding Custom Units
 
-kunit ships one unit group today ([Distance](units/distance.md)), but the whole engine (`KUnit`, `KMixedUnitInstance`,
-prefixes, derived units) is generic and group-independent. Adding a new physical quantity means following
-the same pattern the `length` package already establishes. This page walks through adding a demonstrative
-**Mass** group (`org.pcsoft.framework.kunit.mass`) from scratch.
+kunit ships several unit groups today ([Distance](units/distance.md), [Time](units/time.md),
+[Storage](units/storage.md), [Speed](units/speed.md), [Data Rate](units/datarate.md)), but the whole engine
+(`KUnit`, `KMixedUnitInstance`, the `of`/`into` verbs, prefix builders) is generic and group-independent.
+Adding a new physical quantity means following the same pattern. This page walks through adding a
+demonstrative **Mass** group (`org.pcsoft.framework.kunit.mass`) — a plain, one-dimensional group modeled on
+the storage group.
 
 ## 1. Create the sub-package and the `KUnit` enum
 
@@ -16,10 +18,6 @@ package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
-/**
- * Enumerates concrete units of mass. [baseValue] is the factor to convert into the group's base
- * unit ([BASE], kilogram): `1 unit = baseValue * kilogram`.
- */
 enum class KMassUnit(override val symbol: String, override val baseValue: Double) : KUnit {
     /** Kilogram, the SI base unit of mass; [baseValue] = 1.0 by definition. */
     KILOGRAM("kg", 1.0),
@@ -42,176 +40,161 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. Create the wrapper class
 
-The wrapper class (`KMassUnitInstance`) encapsulates a `KMixedUnitInstance` by **delegation** (not inheritance)
-and always normalizes its value to the group's base unit. Copy the shape of `KLengthUnitInstance` - it is
-generic in the exponent, so the same wrapper also serves derived quantities of mass if you ever need them.
+The wrapper (`KMassUnitInstance`) encapsulates a `KMixedUnitInstance` by **delegation** (`KUnitMeasurable by
+instance`) and implements `KUnitInstance<KMassUnitInstance>`. It hand-writes only the `KUnitInstance`-only
+members (`plus`/`minus`/`compareTo`) plus the `scaledBy` override (which backs `of`) and
+`equals`/`hashCode`/`toString`. There is **no** `valueAs`/`toString(target)` - reading is the group-agnostic
+`into` verb. Copy the shape of `KStorageUnitInstance`.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTarget
+import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
 
-class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) {
+class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
+    KUnitMeasurable by instance, KUnitInstance<KMassUnitInstance> {
 
-    private val exponent: Int get() = instance.units.single().exponent
+    /** Backs `of`: scales the value (kilograms), returning the same type. */
+    override fun scaledBy(factor: Double): KMassUnitInstance = massUnitInstanceOf(value * factor)
 
-    val value: Double get() = instance.value
+    override operator fun plus(other: KMassUnitInstance): KMassUnitInstance = massUnitInstanceOf(value + other.value)
+    override operator fun minus(other: KMassUnitInstance): KMassUnitInstance = massUnitInstanceOf(value - other.value)
+    override operator fun compareTo(other: KMassUnitInstance): Int = value.compareTo(other.value)
 
-    fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
-
-    operator fun plus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance + other.instance)
-    operator fun minus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance - other.instance)
-
-    operator fun times(other: KMassUnitInstance): KMixedUnitInstance = instance * other.instance
-    operator fun div(other: KMassUnitInstance): KMixedUnitInstance = instance / other.instance
-    operator fun times(other: KMixedUnitInstance): KMixedUnitInstance = instance * other
-    operator fun div(other: KMixedUnitInstance): KMixedUnitInstance = instance / other
-
-    operator fun compareTo(other: KMassUnitInstance): Int {
-        check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
-        return value.compareTo(other.value)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is KMassUnitInstance) return false
-        check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
-        return value == other.value
-    }
-
+    override fun equals(other: Any?): Boolean = other is KMassUnitInstance && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = instance.toString()
-    fun toString(target: KUnitTarget): String = instance.toString(target)
-
-    fun toUnit(): KMixedUnitInstance = instance
 }
 
+/** Builds a [KMassUnitInstance] from a value already expressed in kilograms ([KMassUnit.BASE]). */
+internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
+    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
+
 /** Converts a pure-mass [KMixedUnitInstance] back into a [KMassUnitInstance], normalizing to [KMassUnit.BASE]. */
-fun KMixedUnitInstance.toKMassUnit(): KMassUnitInstance {
+fun KMixedUnitInstance.toMass(): KMassUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KMassUnit) {
-        "KMixedUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
+        "KMixedUnitInstance $this does not represent a pure mass value (expected exactly one term of a KMassUnit)"
     }
-    val normalizedValue = value * Math.pow(unit.baseValue, term.exponent.toDouble())
-    return KMassUnitInstance(KMixedUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
+    return massUnitInstanceOf(value * unit.baseValue)
 }
-
-internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
-    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
-## 3. Add bare unit references and creator extension properties
+## 3. Add value-1 bare tokens and prefix-builder properties
 
-Split the DSL vocabulary into two files, per the project convention: the bare `val` aliases go into
-`K...UnitBareValues.kt`, and the `Number` extension **properties** go into `K...UnitExtensions.kt`. Together
-they let callers write `5.kilograms` or `1 kilo grams` and also pass `kilograms` as a plain `valueAs` target.
+Split the DSL vocabulary into two files, per the project convention: the value-1 bare tokens go into
+`K...UnitBareValues.kt`, and the prefix-builder property extensions go into `K...UnitExtensions.kt`. Together
+they let callers write `5 of kilograms` or `5 of kilo.grams` and read back with `into`.
 
 `KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-/** Bare reference to [KMassUnit.KILOGRAM], for use with [valueAs][KMassUnitInstance.valueAs] or the prefix `infix` functions. */
-val kilograms: KMassUnit = KMassUnit.KILOGRAM
+/** 1 kilogram ([KMassUnit.KILOGRAM]). */
+val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
 
-/** Bare reference to [KMassUnit.GRAM]. */
-val grams: KMassUnit = KMassUnit.GRAM
+/** 1 gram ([KMassUnit.GRAM]). */
+val grams: KMassUnitInstance = massUnitInstanceOf(KMassUnit.GRAM.baseValue)
 
-/** Bare reference to [KMassUnit.POUND]. */
-val pounds: KMassUnit = KMassUnit.POUND
+/** 1 pound ([KMassUnit.POUND]). */
+val pounds: KMassUnitInstance = massUnitInstanceOf(KMassUnit.POUND.baseValue)
 
-/** Bare reference to [KMassUnit.OUNCE]. */
-val ounces: KMassUnit = KMassUnit.OUNCE
+/** 1 ounce ([KMassUnit.OUNCE]). */
+val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 ```
 
-`KMassUnitExtensions.kt`:
+`KMassUnitExtensions.kt` (mass accepts any magnitude, so the properties hang on the common base
+`KPrefixBuilder`):
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
+import org.pcsoft.framework.kunit.KPrefixBuilder
 
-/** Creates a pure mass value in kilograms from any [Number] type. */
-val Number.kilograms: KMassUnitInstance get() = of(this, KMassUnit.KILOGRAM)
+private fun prefixedMass(builder: KPrefixBuilder, unit: KMassUnit): KMassUnitInstance =
+    massUnitInstanceOf(builder.prefix.factor * unit.baseValue)
 
-/** Creates a pure mass value in grams. */
-val Number.grams: KMassUnitInstance get() = of(this, KMassUnit.GRAM)
+/** Prefixed kilograms, e.g. `kilo.kilograms`. */
+val KPrefixBuilder.kilograms: KMassUnitInstance get() = prefixedMass(this, KMassUnit.KILOGRAM)
 
-/** Creates a pure mass value in pounds. */
-val Number.pounds: KMassUnitInstance get() = of(this, KMassUnit.POUND)
+/** Prefixed grams, e.g. `milli.grams` = 1 mg. */
+val KPrefixBuilder.grams: KMassUnitInstance get() = prefixedMass(this, KMassUnit.GRAM)
 
-/** Creates a pure mass value in ounces. */
-val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
+/** Prefixed pounds. */
+val KPrefixBuilder.pounds: KMassUnitInstance get() = prefixedMass(this, KMassUnit.POUND)
+
+/** Prefixed ounces. */
+val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUnit.OUNCE)
 ```
 
-That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, SI prefixes (`5 kilo grams`), and
-`toUnit()`/`toKMassUnit()` round-tripping for free, since all of that lives in the generic root
-package and only needs `KMassUnit : KUnit` to work.
+That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, the SI prefix builders
+(`5 of milli.grams`), and `toUnit()`/`toMass()` round-tripping for free.
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mass.*
 
-val a = 500.grams
-val b = 2.pounds
+val a = 500 of grams
+val b = 2 of pounds
 val total = a + b            // KMassUnitInstance, normalized to kilograms
-println(total.valueAs(kilograms))
-println(total.valueAs(grams))
+println(total into kilograms)
+println(total into grams)
 
 val heavier = b > a          // true
 ```
 
 ## 4. (Optional) Add special/derived units
 
-If your group has commonly used named units bound to a specific exponent (like hectare for area), add a
-`KDerivedUnit` object analogous to `KDistanceDerivedUnit`:
+If your group has commonly used named units bound to a specific scaling (like hectare for area), add them as
+named value-1 instances — no separate target type is needed:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-import org.pcsoft.framework.kunit.KDerivedUnit
-
-object KMassDerivedUnit {
-    /** Metric ton, 1 t = 1000 kg (exponent 1, an alternative "named" scaling of the base unit). */
-    val TONNE: KDerivedUnit<KMassUnit> = KDerivedUnit(symbol = "t", exponent = 1, baseValue = 1000.0, referenceUnit = KMassUnit.BASE)
-}
+/** 1 metric ton (1000 kg). */
+val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toUnit().toKMassUnit() // just for illustration
-println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.mass.*
+
+println((2500 of grams) into tonnes) // 0.0025
 ```
 
 ## 5. Combine with other groups
 
-Because everything ultimately funnels through the generic `KMixedUnitInstance` engine, your new group immediately
-composes with any other group (e.g. length) via `*`/`/` - see [Mixed Units](mixed-units.md) for the full
-rules:
+Because everything ultimately funnels through the generic `KMixedUnitInstance` engine, your new group
+immediately composes with any other group via `*`/`/` - see [Mixed Units](mixed-units.md) for the rules. For
+a strongly-typed cross-group result (like `mass / volume = density`), add typed operator extensions in a
+`K...UnitOperators.kt`, mirroring `KSpeedUnitOperators.kt`.
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
-// density = mass / volume
-val density = 5.kilograms.toUnit() / 2.liters.toUnit()
+// density = mass / volume (generic KMixedUnitInstance: [KILOGRAM^1, METER^-3])
+val density = (5 of kilograms) / (2 of liters)
 ```
 
 ## 6. Naming and testing checklist
 
-- All public types start with `K` (`KMassUnit`, `KMassUnitInstance`, `KMassDerivedUnit`, ...); creator
-  extension properties and bare `val` aliases (`kilograms`, `grams`, ...) are exempt and stay
-  language-natural.
-- Cover the group with the parameterized cross-matrix test procedure (prefix × unit, unit → unit
-  conversion, one method per operator and per comparison over every unit pair, `toString`) — see the
-  "Parameterized cross-matrix test procedure" section in `CLAUDE.md`.
+- All public types start with `K` (`KMassUnit`, `KMassUnitInstance`, ...); the value-1 bare tokens and the
+  prefix-builder property extensions (`kilograms`, `grams`, ...) are exempt and stay language-natural.
+- Cover the group with the parameterized cross-matrix test procedure, built through `of`/`into` (never the
+  raw enum): unit → unit conversion, one method per operator and per comparison over every unit pair, the
+  prefix-builder matrix, `of` type-preservation, and `into` error cases — see the "Parameterized
+  cross-matrix test procedure" section in `CLAUDE.md`.
 - Document every public member in English, in Markdown, with examples where useful - especially operators.
-- Write a full test suite per group, mirroring the structure under `length`:
-    - a dedicated test class for the `KUnit` enum values themselves,
-    - a dedicated test class for the wrapper class covering every operator (`+`, `-`, `*`, `/`) and every
-      comparison operator (`==`, `!=`, `<`, `<=`, `>`, `>=`) with both a success and (where applicable) an
-      `IllegalStateException` failure case,
-    - a full prefix × unit test matrix (every unit/derived unit combined with every SI prefix), plus one
-      standalone test per prefix,
-    - mixed-unit tests combining the new group with at least one other group.
+- If the group is magnitude-restricted (like storage, which rejects diminishing prefixes), hang its unit
+  properties on `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` instead of the base `KPrefixBuilder`,
+  so the disallowed prefixes are a **compile error**.
+```

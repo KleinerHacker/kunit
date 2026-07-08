@@ -1,209 +1,189 @@
 # 添加自定义单位
 
-kunit 目前只提供一个单位组([距离](units/distance.md))，但整个引擎（`KUnit`、`KMixedUnitInstance`、前缀、
-派生单位）都是通用的、与组无关的。添加一个新的物理量意味着遵循 `length` 包已经建立的模式。本页从零开始
-演示如何添加一个示范性的**质量**（Mass）组（`org.pcsoft.framework.kunit.mass`）。
+kunit 今天提供了多个单位组([距离](units/distance.md)、[时间](units/time.md)、[存储](units/storage.md)、
+[速度](units/speed.md)、[数据传输率](units/datarate.md)),但整个引擎(`KUnit`、`KMixedUnitInstance`、`of`/`into`
+动词、前缀构建器)是通用且与组无关的。添加一个新的物理量意味着遵循相同的模式。本页逐步介绍如何添加一个演示性的
+**质量**组(`org.pcsoft.framework.kunit.mass`)—— 一个仿照存储组的简单一维组。
 
 ## 1. 创建子包和 `KUnit` 枚举
 
-每个单位组都在 `org.pcsoft.framework.kunit` 下拥有自己的子包，其单位声明为实现 `KUnit` 的
-`enum class`。`baseValue` 是转换为该组基础单位的系数——基础单位本身的 `baseValue == 1.0`。
+每个单位组在 `org.pcsoft.framework.kunit` 下拥有自己的子包,其单位声明为实现 `KUnit` 的 `enum class`。
+`baseValue` 是到该组基本单位的转换系数 —— 基本单位本身的 `baseValue == 1.0`。
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
-/**
- * 枚举具体的质量单位。[baseValue] 是转换为组基础单位([BASE]，千克)的系数：
- * `1 单位 = baseValue * 千克`。
- */
 enum class KMassUnit(override val symbol: String, override val baseValue: Double) : KUnit {
-    /** 千克，质量的 SI 基础单位；根据定义 [baseValue] = 1.0。 */
+    /** 千克,质量的 SI 基本单位;根据定义 [baseValue] = 1.0。 */
     KILOGRAM("kg", 1.0),
 
-    /** 克，1 g = 0.001 kg。 */
+    /** 克,1 g = 0.001 kg。 */
     GRAM("g", 0.001),
 
-    /** 国际常衡磅，1 lb = 0.45359237 kg。 */
+    /** 国际常衡磅,1 lb = 0.45359237 kg。 */
     POUND("lb", 0.45359237),
 
-    /** 国际常衡盎司，1 oz = 0.028349523125 kg。 */
+    /** 国际常衡盎司,1 oz = 0.028349523125 kg。 */
     OUNCE("oz", 0.028349523125);
 
     companion object {
-        /** 质量组的基础单位；[KMassUnitInstance] 的所有内部值都会归一化到该单位。 */
+        /** 质量组的基本单位;[KMassUnitInstance] 的所有内部值都归一化为此单位。 */
         val BASE: KMassUnit = KILOGRAM
     }
 }
 ```
 
-## 2. 创建包装类
+## 2. 创建包装器类
 
-包装类（`KMassUnitInstance`）通过**委托**（而非继承）封装一个 `KMixedUnitInstance`，并始终将其值归一化到该组
-的基础单位。直接复制 `KLengthUnitInstance` 的结构即可——它在指数上是通用的，因此同一个包装类以后如果需要
-也可以服务于质量的派生量。
+包装器(`KMassUnitInstance`)通过**委托**(`KUnitMeasurable by instance`)封装一个 `KMixedUnitInstance`,并实现
+`KUnitInstance<KMassUnitInstance>`。它只手写 `KUnitInstance` 专属的成员(`plus`/`minus`/`compareTo`)、支撑 `of`
+的 `scaledBy` 重写,以及 `equals`/`hashCode`/`toString`。**没有** `valueAs`/`toString(target)` —— 读取是与组无关的
+`into` 动词。复制 `KStorageUnitInstance` 的形态。
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTarget
+import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
 
-class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) {
+class KMassUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
+    KUnitMeasurable by instance, KUnitInstance<KMassUnitInstance> {
 
-    private val exponent: Int get() = instance.units.single().exponent
+    /** 支撑 `of`: 缩放值(千克),返回相同类型。 */
+    override fun scaledBy(factor: Double): KMassUnitInstance = massUnitInstanceOf(value * factor)
 
-    val value: Double get() = instance.value
+    override operator fun plus(other: KMassUnitInstance): KMassUnitInstance = massUnitInstanceOf(value + other.value)
+    override operator fun minus(other: KMassUnitInstance): KMassUnitInstance = massUnitInstanceOf(value - other.value)
+    override operator fun compareTo(other: KMassUnitInstance): Int = value.compareTo(other.value)
 
-    fun valueAs(target: KUnitTarget): Double = instance.valueAs(target)
-
-    operator fun plus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance + other.instance)
-    operator fun minus(other: KMassUnitInstance): KMassUnitInstance = KMassUnitInstance(instance - other.instance)
-
-    operator fun times(other: KMassUnitInstance): KMixedUnitInstance = instance * other.instance
-    operator fun div(other: KMassUnitInstance): KMixedUnitInstance = instance / other.instance
-    operator fun times(other: KMixedUnitInstance): KMixedUnitInstance = instance * other
-    operator fun div(other: KMixedUnitInstance): KMixedUnitInstance = instance / other
-
-    operator fun compareTo(other: KMassUnitInstance): Int {
-        check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
-        return value.compareTo(other.value)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is KMassUnitInstance) return false
-        check(exponent == other.exponent) { "Cannot compare KMassUnitInstance with different exponents: $exponent vs ${other.exponent}" }
-        return value == other.value
-    }
-
+    override fun equals(other: Any?): Boolean = other is KMassUnitInstance && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = instance.toString()
-    fun toString(target: KUnitTarget): String = instance.toString(target)
-
-    fun toUnit(): KMixedUnitInstance = instance
 }
 
-/** 将纯质量的 [KMixedUnitInstance] 转换回 [KMassUnitInstance]，并归一化到 [KMassUnit.BASE]。 */
-fun KMixedUnitInstance.toKMassUnit(): KMassUnitInstance {
+/** 从已经以千克([KMassUnit.BASE])表示的值构建一个 [KMassUnitInstance]。 */
+internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
+    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
+
+/** 将纯质量 [KMixedUnitInstance] 转换回 [KMassUnitInstance],归一化为 [KMassUnit.BASE]。 */
+fun KMixedUnitInstance.toMass(): KMassUnitInstance {
     val term = units.singleOrNull()
     val unit = term?.unit
     check(term != null && unit is KMassUnit) {
-        "KMixedUnitInstance $this does not represent a pure mass-based value (expected exactly one term of a KMassUnit)"
+        "KMixedUnitInstance $this does not represent a pure mass value (expected exactly one term of a KMassUnit)"
     }
-    val normalizedValue = value * Math.pow(unit.baseValue, term.exponent.toDouble())
-    return KMassUnitInstance(KMixedUnitInstance(normalizedValue, listOf(KUnitTerm(KMassUnit.BASE, term.exponent))))
+    return massUnitInstanceOf(value * unit.baseValue)
 }
-
-internal fun massUnitInstanceOf(value: Double): KMassUnitInstance =
-    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
 ```
 
-## 3. 添加创建者扩展函数
+## 3. 添加值为 1 的裸令牌和前缀构建器属性
 
-按照项目约定，将 DSL 词汇拆分到两个文件中：裸 `val` 别名放入 `K...UnitBareValues.kt`，`Number` 扩展
-函数放入 `K...UnitExtensions.kt`。这样调用方就可以写 `5.kilograms` 或 `1 kilo grams`，也可以把
-`kilograms` 作为纯粹的 `valueAs` 目标传入：
+按照项目约定,将 DSL 词汇拆分到两个文件: 值为 1 的裸令牌放入 `K...UnitBareValues.kt`,前缀构建器属性扩展放入
+`K...UnitExtensions.kt`。二者结合让调用者可以写 `5 of kilograms` 或 `5 of kilo.grams`,并用 `into` 读回。
 
-`KMassUnitBareValues.kt`：
+`KMassUnitBareValues.kt`:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-/** [KMassUnit.KILOGRAM] 的裸引用，用于 [valueAs][KMassUnitInstance.valueAs] 或前缀 infix 函数。 */
-val kilograms: KMassUnit = KMassUnit.KILOGRAM
+/** 1 千克([KMassUnit.KILOGRAM])。 */
+val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
 
-/** [KMassUnit.GRAM] 的裸引用。 */
-val grams: KMassUnit = KMassUnit.GRAM
+/** 1 克([KMassUnit.GRAM])。 */
+val grams: KMassUnitInstance = massUnitInstanceOf(KMassUnit.GRAM.baseValue)
 
-/** [KMassUnit.POUND] 的裸引用。 */
-val pounds: KMassUnit = KMassUnit.POUND
+/** 1 磅([KMassUnit.POUND])。 */
+val pounds: KMassUnitInstance = massUnitInstanceOf(KMassUnit.POUND.baseValue)
 
-/** [KMassUnit.OUNCE] 的裸引用。 */
-val ounces: KMassUnit = KMassUnit.OUNCE
+/** 1 盎司([KMassUnit.OUNCE])。 */
+val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 ```
 
-`KMassUnitExtensions.kt`：
+`KMassUnitExtensions.kt`(质量接受任何量级,因此属性挂在公共基类 `KPrefixBuilder` 上):
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-private fun of(value: Number, unit: KMassUnit): KMassUnitInstance = massUnitInstanceOf(value.toDouble() * unit.baseValue)
+import org.pcsoft.framework.kunit.KPrefixBuilder
 
-/** 从任意 [Number] 类型创建以千克为单位的纯质量值。 */
-val Number.kilograms: KMassUnitInstance get() = of(this, KMassUnit.KILOGRAM)
+private fun prefixedMass(builder: KPrefixBuilder, unit: KMassUnit): KMassUnitInstance =
+    massUnitInstanceOf(builder.prefix.factor * unit.baseValue)
 
-/** 创建以克为单位的纯质量值。 */
-val Number.grams: KMassUnitInstance get() = of(this, KMassUnit.GRAM)
+/** 带前缀的千克,例如 `kilo.kilograms`。 */
+val KPrefixBuilder.kilograms: KMassUnitInstance get() = prefixedMass(this, KMassUnit.KILOGRAM)
 
-/** 创建以磅为单位的纯质量值。 */
-val Number.pounds: KMassUnitInstance get() = of(this, KMassUnit.POUND)
+/** 带前缀的克,例如 `milli.grams` = 1 mg。 */
+val KPrefixBuilder.grams: KMassUnitInstance get() = prefixedMass(this, KMassUnit.GRAM)
 
-/** 创建以盎司为单位的纯质量值。 */
-val Number.ounces: KMassUnitInstance get() = of(this, KMassUnit.OUNCE)
+/** 带前缀的磅。 */
+val KPrefixBuilder.pounds: KMassUnitInstance get() = prefixedMass(this, KMassUnit.POUND)
+
+/** 带前缀的盎司。 */
+val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUnit.OUNCE)
 ```
 
-到这里就完成了——由于所有逻辑都位于通用的根包中，只需要 `KMassUnit : KUnit` 即可工作，你已经免费获得了
-完整的 `+`、`-`、`*`、`/`、比较运算、SI 前缀（`5 kilo grams`），以及
-`toUnit()`/`toKMassUnit()` 之间的往返转换。
+就是这样 —— 这已经免费给了你完整的 `+`、`-`、`*`、`/`、比较、SI 前缀构建器(`5 of milli.grams`),以及
+`toUnit()`/`toMass()` 往返转换。
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mass.*
 
-val a = 500.grams
-val b = 2.pounds
-val total = a + b            // KMassUnitInstance，归一化为千克
-println(total.valueAs(kilograms))
-println(total.valueAs(grams))
+val a = 500 of grams
+val b = 2 of pounds
+val total = a + b            // KMassUnitInstance, 归一化为千克
+println(total into kilograms)
+println(total into grams)
 
 val heavier = b > a          // true
 ```
 
-## 4.（可选）添加特殊/派生单位
+## 4.(可选)添加特殊/派生单位
 
-如果你的组有常用的、绑定到特定指数的命名单位（如面积中的公顷），可以添加一个类似
-`KDistanceDerivedUnit` 的 `KDerivedUnit` 对象：
+如果你的组有绑定到特定缩放的常用命名单位(如面积的公顷),将它们作为命名的值 1 实例添加 —— 不需要单独的目标类型:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mass
 
-import org.pcsoft.framework.kunit.KDerivedUnit
-
-object KMassDerivedUnit {
-    /** 公吨，1 t = 1000 kg（指数 1，是基础单位的另一种"命名"缩放）。 */
-    val TONNE: KDerivedUnit<KMassUnit> = KDerivedUnit(symbol = "t", exponent = 1, baseValue = 1000.0, referenceUnit = KMassUnit.BASE)
-}
+/** 1 公吨(1000 kg)。 */
+val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```
 
 ```kotlin
-val truckLoad = 3.pounds.toUnit().toKMassUnit() // 仅作说明用
-println(2500.grams.valueAs(KMassDerivedUnit.TONNE)) // 0.0025
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.mass.*
+
+println((2500 of grams) into tonnes) // 0.0025
 ```
 
-## 5. 与其他组结合
+## 5. 与其他组组合
 
-由于所有内容最终都会流经通用的 `KMixedUnitInstance` 引擎，你的新组可以立即通过 `*`/`/` 与任何其他组
-（例如长度）组合——完整规则请参见[混合单位](mixed-units.md)：
+由于一切最终都汇入通用的 `KMixedUnitInstance` 引擎,你的新组立即可以通过 `*`/`/` 与任何其他组组合 —— 规则见
+[混合单位](mixed-units.md)。对于强类型的跨组结果(如 `mass / volume = density`),在 `K...UnitOperators.kt` 中
+添加带类型的运算符扩展,仿照 `KSpeedUnitOperators.kt`。
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
 import org.pcsoft.framework.kunit.mass.*
 
-// 密度 = 质量 / 体积
-val density = 5.kilograms.toUnit() / 2.liters.toUnit()
+// 密度 = 质量 / 体积(通用 KMixedUnitInstance: [KILOGRAM^1, METER^-3])
+val density = (5 of kilograms) / (2 of liters)
 ```
 
-## 6. 命名与测试检查清单
+## 6. 命名与测试清单
 
-- 所有公开类型都以 `K` 开头（`KMassUnit`、`KMassUnitInstance`、`KMassDerivedUnit` 等）；创建者扩展函数
-  和裸 `val` 别名（`kilograms()`、`grams` 等）不受此规则约束，保持语言自然的命名。
-- 用英语、Markdown 格式记录每个公开成员，并在有用的地方（尤其是运算符）附上示例。
-- 按照 `length` 下的结构，为每个组编写完整的测试套件：
-    - 针对 `KUnit` 枚举值本身的专用测试类，
-    - 针对包装类的专用测试类，覆盖每个运算符（`+`、`-`、`*`、`/`）和每个比较运算符
-      （`==`、`!=`、`<`、`<=`、`>`、`>=`），既包含成功用例，也（在适用的情况下）包含
-      `IllegalStateException` 失败用例，
-    - 完整的前缀 × 单位测试矩阵（每个单位/派生单位与每个 SI 前缀组合），外加每个前缀一个独立测试，
-    - 将新组与至少一个其他组组合的混合单位测试。
+- 所有 public 类型以 `K` 开头(`KMassUnit`、`KMassUnitInstance` 等);值为 1 的裸令牌和前缀构建器属性扩展
+  (`kilograms`、`grams` 等)是例外,保持语言自然。
+- 用参数化的交叉矩阵测试流程覆盖该组,通过 `of`/`into` 构建(绝不使用原始枚举): 单位 → 单位转换,每个运算符
+  和每个比较对每个单位对各一个方法,前缀构建器矩阵,`of` 类型保持,以及 `into` 错误用例 —— 参见 `CLAUDE.md`
+  中的"参数化交叉矩阵测试流程"一节。
+- 用英文、以 Markdown 记录每个 public 成员,在有用处附上示例 —— 尤其是运算符。
+- 如果该组是量级受限的(如拒绝缩小前缀的存储),将其单位属性挂在 `KAugmentingPrefixBuilder`/
+  `KDiminishingPrefixBuilder` 而非基类 `KPrefixBuilder` 上,使不允许的前缀成为**编译错误**。

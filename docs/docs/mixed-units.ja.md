@@ -1,12 +1,12 @@
 # 混合単位
 
-**混合単位**(ドイツ語: *Mischeinheit*)は、複数の `KUnit` がそれぞれ独自の指数とともに組み合わされた値です。
-例: 速度の `m^1 * s^-1`、力の `m^1 * kg^1 * s^-2`。kunit ではこれは汎用の `KMixedUnitInstance` クラスで
+**混合単位**(ドイツ語: *Mischeinheit*)は、それぞれが独自の指数を持つ複数の `KUnit` から構成される値です。
+例: 速度なら `m^1 * s^-1`、力なら `m^1 * kg^1 * s^-2`。kunit ではこれは汎用の `KMixedUnitInstance` クラスで
 表現されます。
 
-グループごとのラッパークラス(`KLengthUnitInstance` など、[定義済み単位](units/distance.md) を参照)は
-単一の物理次元を扱う際に便利ですが、**異なる**グループの単位を組み合わせる必要がある場合や、ラッパークラスが
-提供する同一グループ内の自動変換を望まない場合には、`KMixedUnitInstance` を直接使用することになります。
+グループ固有のラッパークラス(`KLengthUnitInstance` など、[事前定義された単位](units/distance.md) を参照)は
+単一の物理次元を扱うのに便利ですが、**異なる**グループの単位を組み合わせる必要がある場合や、ラッパークラスが
+提供する同一グループの自動変換を望まない場合には `KMixedUnitInstance` を使います。
 
 ## 構造
 
@@ -16,158 +16,156 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
 class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 ```
 
-- `value` は正規化された `Double` の大きさで、常に `units` に列挙された単位と指数に対して相対的です -
+- `value` は正規化された `Double` の大きさで、常に `units` に列挙されたまさにその単位と指数に対する相対値です —
   グループラッパーとは異なり、`KMixedUnitInstance` はグループの基本単位への正規化を**行いません**。
-- `units` は物理次元を記述する `(KUnit, 指数)` のペアのリストです。
+- `units` は物理次元を記述する `(KUnit, exponent)` のペアのリストです。
 
-すべての「純粋な」単位は、この汎用表現に変換するための `toUnit()` 拡張関数を提供します。
+すべての「純粋な」単位は、この汎用表現に変換するための `toUnit()` 拡張を公開します:
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val d = 5.meters
+val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
-!!! note
-    以下の例で `seconds`/`TimeUnit` を参照している部分は、「時間」単位グループが長さと組み合わされた
-    場合の姿を示すためのものです - kunit は現在 `length` グループのみを提供しています
-    ([定義済み単位](units/distance.md) を参照)。自分で追加するには
-    [カスタム単位の追加](custom-units.md) に従ってください。
-
 ## 乗算と除算
 
-2つの `KMixedUnitInstance` 間の `*` と `/` は**常に**許可されています - 単位の乗算・除算は常に物理的に意味が
-あるため、次元の制約はありません。
+`*` と `/` は2つの `KMixedUnitInstance` の間で**常に**許可されます — 単位の乗算/除算は常に物理的に意味を持つため、
+次元の制限はありません。
 
-- `*` は一致する単位の指数を加算し、一方にしか存在しない単位はそのまま結果に含まれます。
-- `/` は一致する単位について右側オペランドの指数を減算します(右側にのみ存在する単位は指数の符号が
-  反転されます)。
-- 結果の指数が `0` になった場合、その単位は結果から完全に削除されます。
+- `*` は一致する単位の指数を足し合わせ、片側にのみ存在する単位はそのまま引き継ぎます。
+- `/` は一致する単位から右辺の指数を引きます(右辺にのみ存在する単位については指数を反転します)。
+- 結果の指数が `0` になると、その単位は結果から完全に取り除かれます。
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 10.meters.toUnit()   // units=[METER^1]
-val width = 4.meters.toUnit()       // units=[METER^1]
+val distance = (10 of meters).toUnit()   // units=[METER^1]
+val width = (4 of meters).toUnit()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
 ```
 
-2つの異なる単位グループ(例: 長さと、将来追加されるかもしれない時間)を混合する場合も全く同様に動作し、
-真の混合単位が生成されます。
+2つの異なる単位グループ(例: 長さと時間)を混ぜても、まったく同じように動作し、真の混合単位を生成します:
 
 ```kotlin
-// 「カスタム単位の追加」のパターンに従って「時間」単位グループが存在すると仮定:
-val distance = 100.meters.toUnit()
-val time = 10.seconds.toUnit()
+import org.pcsoft.framework.kunit.time.seconds
+
+val distance = (100 of meters).toUnit()
+val time = (10 of seconds).toUnit()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
 ## 加算と減算
 
-`*`/`/` とは異なり、`+` と `-` は2つの `KMixedUnitInstance` が**同じ物理次元**を表す場合にのみ許可されます -
-片方の各項に対し、もう片方に同じ単位グループ(例えば `KDistanceUnit` の値すべて)かつ同じ指数を持つ項が
-ちょうど1つ存在する必要があります(順序は問いません)。`KUnit` 自体が完全に一致している必要は**ありません** -
-一致した項は自動的に正規化変換されます。これはグループごとのラッパークラス(`KLengthUnitInstance` など)が
-「pure」単位に対して行っているのと同じ仕組みです。結果は左辺オペランドの `units` で表現されます。
+`*`/`/` とは異なり、`+` と `-` は**同じ物理次元**を記述する2つの `KMixedUnitInstance` の間でのみ許可されます:
+片側のすべての項について、同じ単位グループに属し(例: すべて `KDistanceUnit` の値)同じ指数を持つ項が、もう
+片側にちょうど1つ存在しなければなりません(順序は問いません)。`KUnit` 自体が同一である必要は**ありません** —
+一致する項は、グループ固有のラッパークラス(`KLengthUnitInstance` など)が「純粋な」単位に対して行うのと同じ
+ように、正規化によって自動的に変換されます。結果は左辺のオペランドの `units` で表現されます。
 
 ```kotlin
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.distance.miles
 
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
+val a = (5 of meters).toUnit()
+val b = (3 of meters).toUnit()
 (a + b).value // 8.0
 
-val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.MILE, 1)))
-(a + c).value // 4832.032 (3マイルをメートルに変換してから加算), units=[METER^1]
+val c = (3 of miles).toUnit()
+(a + c).value // 4832.032(3マイルをメートルに変換してから加算)、units=[METER^1]
 ```
 
-単位グループや指数が一致しない場合は失敗します:
+一致しない単位グループや一致しない指数は依然として失敗します:
 
 ```kotlin
-val time = KMixedUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
-a + time // IllegalStateException が発生: TimeUnit.SECOND に対応する単位グループがない
+import org.pcsoft.framework.kunit.time.seconds
 
-val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
-a + area // IllegalStateException が発生: 指数の不一致 (1 vs 2)
+a + (3 of seconds).toUnit()       // IllegalStateException をスロー: 時間の項に一致する単位グループがない
+a + ((2 of meters) pow 2).toUnit() // IllegalStateException をスロー: 指数の不一致(1 対 2)
 ```
 
-`hasSameUnits` を使用すると、(グループではなく)**完全一致**であることを事前に確認できます。
+事前に**厳密な**一致(同じグループだけでなく同じ `KUnit`)を確認するには `hasSameUnits` を使います:
 
 ```kotlin
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KDistanceUnit.METER, 0)))
-a.hasSameUnits(b) // (単位 -> 指数) シグネチャを順序に関係なく比較
+val x = (5 of meters).toUnit()
+val y = (3 of meters).toUnit()
+x.hasSameUnits(y) // (unit -> exponent) シグネチャを順序に依存せず比較する
 ```
 
-## 値の読み取りとフォーマット
+## 値の読み取り
 
-`valueAs` は値を任意のターゲット単位の集合に変換します - 各ターゲットは単位グループごとに(派生単位の場合は
-指数も含めて)ちょうど1つの項と一致する必要があります。`toString` オーバーロードは同様に動作しますが、
-記号もレンダリングします。
+`into` はターゲットの単位テンプレート(bare トークン、接頭辞付きビルダーテンプレート、または特殊な値1
+インスタンス)で値を読み取り、素の `Double` を返します。両辺は同じ物理次元を記述していなければなりません。
+`valueAs` もカスタム単位の `toString` もありません。特定の単位は `"${v into kilo.meters} km"` のように
+フォーマットします。
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters.toUnit() / 1.seconds.toUnit()
+val speed = (10 of meters) / (1 of seconds)
 
-speed.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
-speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
+speed into (kilo.meters / hours)   // 36.0(km/h)
 
-val area = 200.meters.toUnit() * 50.meters.toUnit()
-area.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val area = (200 of meters) * (50 of meters)
+area into hectares                 // 1.0
 ```
 
-引数なしのデフォルトの `toString()` は常に各項自身の `KUnit.symbol` を使用し、`*` で連結します。例:
+デフォルト(引数なし)の `toString()` は常に各項自身の `KUnit.symbol` を `*` で連結して使用します。例:
 `"5.0 m*s^-1"`。
 
 ## 純粋な単位と混合単位の混在
 
-すべての純粋な単位ラッパークラスは `KMixedUnitInstance` に対して直接 `*`/`/` をサポートしているため、これらの
-演算子のために `toUnit()` を明示的に呼び出す必要はほとんどありません。
+すべての純粋な単位ラッパークラスは `KMixedUnitInstance` に対して直接 `*`/`/` をサポートするため、これらの演算子の
+ために `toUnit()` を明示的に呼ぶ必要はほとんどありません:
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 100.meters                 // KLengthUnitInstance
+val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
 ```
 
-## 純粋な単位への変換
+## 純粋な単位への変換し戻し
 
-`KMixedUnitInstance` が再び単一の単位グループの1つの項だけで構成されるようになった場合、グループ固有の
-`toXxxUnit()` 拡張関数(例: `toDistance()`)を介して、そのグループのラッパークラスに戻すことができます。
+`KMixedUnitInstance` が再び単一の単位グループのちょうど1つの項を表すようになったら、グループ固有の `toXxxUnit()`
+拡張(例: `toDistance()`)を介してそのグループのラッパークラスに変換し戻すことができます:
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters / 2.seconds          // KMixedUnitInstance(時間グループが存在すると仮定)
-val distanceAgain = speed.toUnit() * 2.seconds // units=[METER^1]
-distanceAgain.toDistance().value             // 10.0
+val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
+val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]
+distanceAgain.toDistance().value               // 10.0
 
-val area = 200.meters * 50.meters           // units=[METER^2]
-area.toDistance().value                        // 10000.0(面積、指数2)
+val area = (200 of meters) * (50 of meters)    // KAreaUnitInstance
+area.toUnit().toDistance().value               // 10000.0(面積、指数2)
 ```
 
-`KMixedUnitInstance` がそのグループの1つの項だけで構成されて**いない**場合(例: まだ長さ/時間が混在した値の場合)、
-変換は `IllegalStateException` を投げます。
+`KMixedUnitInstance` がそのグループのちょうど1つの項で構成されて**いない**場合(例: まだ混合された長さ/時間の値
+である場合)、変換は `IllegalStateException` をスローします。
 
-同じ絞り込み(narrowing)は `KMixedUnitInstance` だけでなく、**距離の値に対して直接**利用できます。一般的な
-`KDistanceUnitInstance`(または任意のリーフ)は `toLength()`、`toArea()`、`toVolume()` で特定の次元へ絞り込め、
-指数を検査して一致しない場合は `IllegalStateException` を投げます:
+同じ絞り込みは**距離の値に対して直接**(`KMixedUnitInstance` だけでなく)利用できます: 一般の
+`KDistanceUnitInstance` — または任意のリーフ — は `toLength()`、`toArea()`、`toVolume()` で特定の次元に
+絞り込めます。これらは指数がチェックされ、不一致の場合は `IllegalStateException` をスローします:
 
 ```kotlin
-val area = 200.meters * 50.meters           // KAreaUnitInstance(指数2)
+val area = (200 of meters) * (50 of meters)  // KAreaUnitInstance(指数2)
 area.toArea().value                          // 10000.0
-area.toDistance().toArea().value             // 10000.0(広げてから再び絞り込む)
-area.toLength()                              // IllegalStateException(指数2、1ではない)
+area.toDistance().toArea().value             // 10000.0(広げてから絞り込み戻す)
+area.toLength()                              // IllegalStateException(指数2であり1ではない)
 ```

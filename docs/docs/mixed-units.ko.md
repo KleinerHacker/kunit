@@ -1,11 +1,12 @@
 # 혼합 단위
 
-**혼합 단위**(독일어: *Mischeinheit*)는 여러 개의 `KUnit`이 각각 자신의 지수와 함께 결합된 값입니다. 예:
-속도의 `m^1 * s^-1`, 힘의 `m^1 * kg^1 * s^-2`. kunit에서는 범용 `KMixedUnitInstance` 클래스가 이를 표현합니다.
+**혼합 단위**(독일어: *Mischeinheit*)는 각각 고유한 지수로 거듭제곱된 여러 `KUnit`로 구성된 값입니다. 예:
+속도의 경우 `m^1 * s^-1`, 힘의 경우 `m^1 * kg^1 * s^-2`. kunit에서 이것은 범용 `KMixedUnitInstance` 클래스로
+표현됩니다.
 
-그룹별 래퍼 클래스(`KLengthUnitInstance` 등, [미리 정의된 단위](units/distance.md) 참고)는 단일 물리 차원을
-다룰 때 편리하지만, **서로 다른** 그룹의 단위를 결합해야 하거나 래퍼 클래스가 제공하는 동일 그룹 내 자동 변환을
-원하지 않을 때는 `KMixedUnitInstance`를 직접 사용해야 합니다.
+그룹별 래퍼 클래스(`KLengthUnitInstance` 등, [사전 정의된 단위](units/distance.md) 참조)는 단일 물리 차원을
+다루는 데 편리하지만, **서로 다른** 그룹의 단위를 결합해야 하거나 래퍼 클래스가 제공하는 같은 그룹 자동 변환을
+원하지 않을 때는 `KMixedUnitInstance`를 사용합니다.
 
 ## 구조
 
@@ -15,156 +16,156 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
 class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 ```
 
-- `value`는 정규화된 `Double` 크기이며, 항상 `units`에 나열된 단위와 지수에 상대적입니다 - 그룹 래퍼와 달리
-  `KMixedUnitInstance`는 그룹의 기본 단위로의 정규화를 **수행하지 않습니다**.
-- `units`는 물리 차원을 설명하는 `(KUnit, 지수)` 쌍의 목록입니다.
+- `value`는 정규화된 `Double` 크기이며, 항상 `units`에 나열된 바로 그 단위와 지수에 대한 상대값입니다 — 그룹
+  래퍼와 달리 `KMixedUnitInstance`는 그룹의 기본 단위로의 정규화를 **하지 않습니다**.
+- `units`는 물리 차원을 기술하는 `(KUnit, exponent)` 쌍의 리스트입니다.
 
-모든 "순수" 단위는 이 범용 표현으로 변환하기 위한 `toUnit()` 확장 함수를 제공합니다.
+모든 "순수" 단위는 이 범용 표현으로 변환하는 `toUnit()` 확장을 노출합니다:
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val d = 5.meters
+val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
-!!! note
-    아래 예시 중 `seconds`/`TimeUnit`을 참조하는 부분은 "시간" 단위 그룹이 길이와 결합될 때의 모습을
-    보여주기 위한 것입니다 - kunit은 현재 `length` 그룹만 제공합니다([미리 정의된 단위](units/distance.md)
-    참고). 직접 추가하려면 [사용자 정의 단위 추가](custom-units.md)를 따르세요.
-
 ## 곱셈과 나눗셈
 
-두 `KMixedUnitInstance` 사이의 `*`와 `/`는 **항상** 허용됩니다 - 단위의 곱셈/나눗셈은 항상 물리적으로 의미가
-있으므로 차원 제약이 없습니다.
+`*`와 `/`는 두 `KMixedUnitInstance` 사이에서 **항상** 허용됩니다 — 단위의 곱셈/나눗셈은 항상 물리적으로 의미가
+있으므로 차원 제한이 없습니다.
 
-- `*`는 일치하는 단위의 지수를 더하고, 한쪽에만 존재하는 단위는 그대로 결과에 포함시킵니다.
-- `/`는 일치하는 단위에 대해 오른쪽 피연산자의 지수를 뺍니다(오른쪽에만 존재하는 단위는 지수의 부호가
-  반전됩니다).
-- 결과 지수가 `0`이 되면 해당 단위는 결과에서 완전히 제거됩니다.
+- `*`는 일치하는 단위의 지수를 더하고, 한쪽에만 존재하는 단위는 그대로 이어받습니다.
+- `/`는 일치하는 단위에서 우변의 지수를 뺍니다(우변에만 존재하는 단위는 지수를 부호 반전합니다).
+- 결과 지수가 `0`이 되면 그 단위는 결과에서 완전히 제거됩니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 10.meters.toUnit()   // units=[METER^1]
-val width = 4.meters.toUnit()       // units=[METER^1]
+val distance = (10 of meters).toUnit()   // units=[METER^1]
+val width = (4 of meters).toUnit()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
 ```
 
-서로 다른 두 단위 그룹(예: 길이와, 추가된다면 시간)을 혼합하는 것도 동일하게 동작하며, 진정한 혼합 단위를
-생성합니다.
+두 개의 서로 다른 단위 그룹(예: 길이와 시간)을 섞어도 정확히 같은 방식으로 동작하며 진정한 혼합 단위를
+생성합니다:
 
 ```kotlin
-// "시간" 단위 그룹이 존재한다고 가정 (사용자 정의 단위 추가 문서의 패턴을 따름):
-val distance = 100.meters.toUnit()
-val time = 10.seconds.toUnit()
+import org.pcsoft.framework.kunit.time.seconds
+
+val distance = (100 of meters).toUnit()
+val time = (10 of seconds).toUnit()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
 ## 덧셈과 뺄셈
 
-`*`/`/`와 달리, `+`와 `-`는 두 `KMixedUnitInstance`가 **동일한 물리적 차원**을 나타낼 때만 허용됩니다 - 한쪽의
-각 항에 대해, 다른 쪽에 동일한 단위 그룹(예: 모든 `KDistanceUnit` 값)이면서 동일한 지수를 가진 항이 정확히
-하나 존재해야 합니다(순서는 무관). `KUnit` 자체가 완전히 동일할 필요는 **없습니다** - 일치하는 항은
-자동으로 정규화되어 변환됩니다. 이는 그룹별 래퍼 클래스(`KLengthUnitInstance` 등)가 "pure" 단위에 대해
-수행하는 것과 동일한 방식입니다. 결과는 왼쪽 피연산자의 `units`로 표현됩니다.
+`*`/`/`와 달리 `+`와 `-`는 **같은 물리 차원**을 기술하는 두 `KMixedUnitInstance` 사이에서만 허용됩니다: 한쪽의
+모든 항에 대해, 같은 단위 그룹에 속하고(예: 모두 `KDistanceUnit` 값) 같은 지수를 가진 항이 다른 쪽에 정확히
+하나 있어야 합니다(순서 무관). `KUnit` 자체가 동일할 필요는 **없습니다** — 일치하는 항은 그룹별 래퍼 클래스
+(`KLengthUnitInstance` 등)가 "순수" 단위에 대해 하는 것과 같은 방식으로 정규화를 통해 자동 변환됩니다. 결과는
+좌변 피연산자의 `units`로 표현됩니다.
 
 ```kotlin
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.distance.miles
 
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
+val a = (5 of meters).toUnit()
+val b = (3 of meters).toUnit()
 (a + b).value // 8.0
 
-val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.MILE, 1)))
-(a + c).value // 4832.032 (3마일을 미터로 변환한 뒤 더함), units=[METER^1]
+val c = (3 of miles).toUnit()
+(a + c).value // 4832.032(3마일을 미터로 변환한 후 더함), units=[METER^1]
 ```
 
-단위 그룹이나 지수가 일치하지 않으면 여전히 실패합니다.
+일치하지 않는 단위 그룹이나 일치하지 않는 지수는 여전히 실패합니다:
 
 ```kotlin
-val time = KMixedUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
-a + time // IllegalStateException 발생: TimeUnit.SECOND에 대응하는 단위 그룹이 없음
+import org.pcsoft.framework.kunit.time.seconds
 
-val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
-a + area // IllegalStateException 발생: 지수 불일치 (1 vs 2)
+a + (3 of seconds).toUnit()       // IllegalStateException 던짐: 시간 항에 일치하는 단위 그룹 없음
+a + ((2 of meters) pow 2).toUnit() // IllegalStateException 던짐: 지수 불일치(1 대 2)
 ```
 
-`hasSameUnits`를 사용하면 (그룹이 아닌) **완전히 동일한지** 사전에 확인할 수 있습니다.
+미리 **정확한** 일치(같은 그룹뿐 아니라 같은 `KUnit`)를 확인하려면 `hasSameUnits`를 사용합니다:
 
 ```kotlin
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KDistanceUnit.METER, 0)))
-a.hasSameUnits(b) // (단위 -> 지수) 시그니처를 순서와 무관하게 비교
+val x = (5 of meters).toUnit()
+val y = (3 of meters).toUnit()
+x.hasSameUnits(y) // (unit -> exponent) 시그니처를 순서 무관하게 비교
 ```
 
-## 값 읽기와 포맷팅
+## 값 읽기
 
-`valueAs`는 값을 임의의 목표 단위 집합으로 변환합니다 - 각 목표는 단위 그룹별로(파생 단위의 경우 지수까지)
-정확히 하나의 항과 일치해야 합니다. `toString` 오버로드는 동일하게 동작하지만 기호까지 함께 렌더링합니다.
+`into`는 대상 단위 템플릿(맨 토큰, 접두사가 붙은 빌더 템플릿, 또는 특수 값 1 인스턴스)에서 값을 읽어 순수한
+`Double`을 반환합니다. 양쪽 모두 같은 물리 차원을 기술해야 합니다. `valueAs`도 사용자 정의 단위 `toString`도
+없습니다. 특정 단위는 `"${v into kilo.meters} km"`처럼 형식화합니다.
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters.toUnit() / 1.seconds.toUnit()
+val speed = (10 of meters) / (1 of seconds)
 
-speed.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
-speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
+speed into (kilo.meters / hours)   // 36.0(km/h)
 
-val area = 200.meters.toUnit() * 50.meters.toUnit()
-area.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val area = (200 of meters) * (50 of meters)
+area into hectares                 // 1.0
 ```
 
-인자가 없는 기본 `toString()`은 항상 각 항의 고유 `KUnit.symbol`을 사용하며 `*`로 연결합니다. 예:
+기본(인자 없는) `toString()`은 항상 각 항 고유의 `KUnit.symbol`을 `*`로 이어붙여 사용합니다. 예:
 `"5.0 m*s^-1"`.
 
-## 순수 단위와 혼합 단위의 혼용
+## 순수 단위와 혼합 단위 섞기
 
-모든 순수 단위 래퍼 클래스는 `KMixedUnitInstance`에 대해 `*`/`/`를 직접 지원하므로, 이 연산자들을 위해
-`toUnit()`를 명시적으로 호출할 필요는 거의 없습니다.
+모든 순수 단위 래퍼 클래스는 `KMixedUnitInstance`에 대해 직접 `*`/`/`를 지원하므로, 이 연산자들을 위해
+`toUnit()`을 명시적으로 호출할 필요가 거의 없습니다:
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 100.meters                 // KLengthUnitInstance
+val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
 ```
 
-## 다시 순수 단위로 변환
+## 순수 단위로 다시 변환하기
 
-`KMixedUnitInstance`가 다시 단일 단위 그룹의 항 하나만으로 구성되면, 그룹별 `toXxxUnit()` 확장 함수(예:
-`toDistance()`)를 통해 해당 그룹의 래퍼 클래스로 다시 변환할 수 있습니다.
+`KMixedUnitInstance`가 다시 단일 단위 그룹의 정확히 하나의 항을 나타내게 되면, 그룹별 `toXxxUnit()` 확장(예:
+`toDistance()`)을 통해 그 그룹의 래퍼 클래스로 다시 변환할 수 있습니다:
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters / 2.seconds          // KMixedUnitInstance (시간 그룹이 존재한다고 가정)
-val distanceAgain = speed.toUnit() * 2.seconds // units=[METER^1]
-distanceAgain.toDistance().value             // 10.0
+val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
+val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]
+distanceAgain.toDistance().value               // 10.0
 
-val area = 200.meters * 50.meters           // units=[METER^2]
-area.toDistance().value                        // 10000.0 (면적, 지수 2)
+val area = (200 of meters) * (50 of meters)    // KAreaUnitInstance
+area.toUnit().toDistance().value               // 10000.0(면적, 지수 2)
 ```
 
-`KMixedUnitInstance`가 해당 그룹의 항 하나로만 구성되어 있지 **않은** 경우(예: 여전히 혼합된 길이/시간 값인 경우)
-변환은 `IllegalStateException`을 던집니다.
+`KMixedUnitInstance`가 그 그룹의 정확히 하나의 항으로 구성되어 있지 **않으면**(예: 여전히 혼합된 길이/시간
+값이면) 변환은 `IllegalStateException`을 던집니다.
 
-동일한 좁히기(narrowing)는 `KMixedUnitInstance`뿐 아니라 **거리 값에서 직접** 사용할 수 있습니다. 일반
-`KDistanceUnitInstance`(또는 임의의 리프)는 `toLength()`, `toArea()`, `toVolume()`으로 특정 차원으로 좁힐 수
-있으며, 지수를 검사하여 일치하지 않으면 `IllegalStateException`을 던집니다:
+같은 좁히기는 **거리 값에 직접**(`KMixedUnitInstance`뿐 아니라) 사용할 수 있습니다: 일반 `KDistanceUnitInstance`
+— 또는 임의의 리프 — 는 `toLength()`, `toArea()`, `toVolume()`으로 특정 차원으로 좁힐 수 있으며, 이들은 지수가
+검사되고 불일치 시 `IllegalStateException`을 던집니다:
 
 ```kotlin
-val area = 200.meters * 50.meters           // KAreaUnitInstance (지수 2)
+val area = (200 of meters) * (50 of meters)  // KAreaUnitInstance(지수 2)
 area.toArea().value                          // 10000.0
-area.toDistance().toArea().value             // 10000.0 (넓혔다가 다시 좁힘)
-area.toLength()                              // IllegalStateException (지수 2, 1이 아님)
+area.toDistance().toArea().value             // 10000.0(넓혔다가 다시 좁힘)
+area.toLength()                              // IllegalStateException(지수 2, 1 아님)
 ```

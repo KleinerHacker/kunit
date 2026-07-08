@@ -12,43 +12,25 @@
 
 package org.pcsoft.framework.kunit.distance
 
-import org.pcsoft.framework.kunit.KDerivedUnit
+import org.pcsoft.framework.kunit.KPrefixBuilder
 
-// Volume (exponent 3) creator extension properties for the derived special units (liter/gallon/…).
-//
-// There are intentionally NO cubicXxx creators (e.g. cubicMeters, cubicMiles): a plain volume is
-// built via the group-agnostic power operation, e.g. `2.meters pow 3` or `1.miles pow 3`
-// (see KDistanceUnitInstance.pow / KMixedUnitInstance.pow). The derived units below carry their own
-// name/symbol/conversion factor and therefore remain dedicated creators.
+// Prefixed, value-1 templates for the named volume special units (e.g. `milli.liters` = 1 mL). The plain
+// per-length volume has no prefixed token (build it via `pow`, e.g. `2 of kilo.meters pow 3`).
 
-private fun volumeFrom(value: Number, derived: KDerivedUnit<KDistanceUnit>): KVolumeUnitInstance = volumeOf(value.toDouble() * derived.baseValue)
+private fun prefixedVolume(builder: KPrefixBuilder, cubicMeters: Double): KVolumeUnitInstance =
+    volumeOf(builder.prefix.factor * cubicMeters)
 
-/**
- * Creates a pure volume value (exponent 3) in liters. Example:
- * `1.liters.value // 0.001` (normalized to cubic meters).
- */
-val Number.liters: KVolumeUnitInstance get() = volumeFrom(this, KDistanceDerivedUnit.LITER)
+/** Prefixed liters, e.g. `milli.liters` = 1 mL, `hecto.liters` = 1 hL. */
+val KPrefixBuilder.liters: KVolumeUnitInstance get() = prefixedVolume(this, 0.001)
 
-/**
- * Creates a pure volume value (exponent 3) in US liquid gallons. Example:
- * `1.usGallons.value // 0.003785411784` (normalized to cubic meters).
- */
-val Number.usGallons: KVolumeUnitInstance get() = volumeFrom(this, KDistanceDerivedUnit.US_GALLON)
+/** Prefixed US liquid gallons. */
+val KPrefixBuilder.usGallons: KVolumeUnitInstance get() = prefixedVolume(this, 0.003785411784)
 
-/**
- * Creates a pure volume value (exponent 3) in imperial gallons. Example:
- * `1.imperialGallons.value // 0.00454609` (normalized to cubic meters).
- */
-val Number.imperialGallons: KVolumeUnitInstance get() = volumeFrom(this, KDistanceDerivedUnit.IMPERIAL_GALLON)
+/** Prefixed imperial gallons. */
+val KPrefixBuilder.imperialGallons: KVolumeUnitInstance get() = prefixedVolume(this, 0.00454609)
 
-/**
- * Creates a pure volume value (exponent 3) in US fluid ounces. Example:
- * `1.usFluidOunces.value // 2.95735295625e-5` (normalized to cubic meters).
- */
-val Number.usFluidOunces: KVolumeUnitInstance get() = volumeFrom(this, KDistanceDerivedUnit.US_FLUID_OUNCE)
+/** Prefixed US fluid ounces. */
+val KPrefixBuilder.usFluidOunces: KVolumeUnitInstance get() = prefixedVolume(this, 2.95735295625e-5)
 
-/**
- * Creates a pure volume value (exponent 3) in oil barrels. Example:
- * `1.oilBarrels.value // 0.158987294928` (normalized to cubic meters).
- */
-val Number.oilBarrels: KVolumeUnitInstance get() = volumeFrom(this, KDistanceDerivedUnit.OIL_BARREL)
+/** Prefixed oil barrels. */
+val KPrefixBuilder.oilBarrels: KVolumeUnitInstance get() = prefixedVolume(this, 0.158987294928)

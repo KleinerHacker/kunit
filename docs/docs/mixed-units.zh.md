@@ -1,11 +1,10 @@
 # 混合单位
 
-**混合单位**（德语：*Mischeinheit*）是由多个 `KUnit` 组成的值，每个都带有自己的指数，例如速度的
-`m^1 * s^-1`，或力的 `m^1 * kg^1 * s^-2`。在 kunit 中，这由通用的 `KMixedUnitInstance` 类表示。
+**混合单位**(德语: *Mischeinheit*)是由多个 `KUnit` 组成的值,每个单位提升到各自的指数,例如速度为
+`m^1 * s^-1`,力为 `m^1 * kg^1 * s^-2`。在 kunit 中,这由通用的 `KMixedUnitInstance` 类表示。
 
-虽然特定于分组的包装类（如 `KLengthUnitInstance`，参见[预定义单位](units/distance.md)）在处理单一物理量纲时
-很方便，但一旦需要组合**不同**组的单位，或者不希望使用包装类提供的同组自动换算，就需要直接使用
-`KMixedUnitInstance`。
+虽然组特定的包装器类(如 `KLengthUnitInstance`,见[预定义单位](units/distance.md))便于处理单个物理维度,但当
+你需要组合**不同**组的单位,或者不想要包装器类提供的同组自动转换时,就要用到 `KMixedUnitInstance`。
 
 ## 结构
 
@@ -15,120 +14,118 @@ data class KUnitTerm(val unit: KUnit, val exponent: Int)
 class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 ```
 
-- `value` 是归一化后的 `Double` 数值，始终相对于 `units` 中列出的确切单位和指数——与分组包装类不同，
-  `KMixedUnitInstance` **不会**归一化到某个组的基础单位。
-- `units` 是描述物理量纲的 `(KUnit, 指数)` 对列表。
+- `value` 是归一化的 `Double` 量级,始终相对于 `units` 中所列的确切单位和指数 —— 与组包装器不同,
+  `KMixedUnitInstance` **不**执行到某个组基本单位的归一化。
+- `units` 是描述物理维度的 `(KUnit, exponent)` 对的列表。
 
-每个"纯"单位都提供 `toUnit()` 扩展函数，用于转换为这种通用表示形式：
+每个"纯"单位都暴露一个 `toUnit()` 扩展以转换为这种通用表示:
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val d = 5.meters
+val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
-!!! note
-    下面示例中引用 `seconds`/`TimeUnit` 的部分仅用于说明"时间"单位组与长度组合时的样子——kunit 目前
-    只提供 `length` 组（参见[预定义单位](units/distance.md)）。要自行添加，请参阅
-    [添加自定义单位](custom-units.md)。
+## 乘法和除法
 
-## 乘法与除法
+`*` 和 `/` 在两个 `KMixedUnitInstance` 之间**始终**被允许 —— 由于单位的乘法/除法在物理上总是有意义的,因此没有
+维度限制。
 
-两个 `KMixedUnitInstance` 之间的 `*` 和 `/` **始终**被允许——单位的乘除在物理上总是有意义的，因此没有量纲限制。
-
-- `*` 会累加匹配单位的指数，并将只存在于一侧的单位原样带入结果。
-- `/` 会从匹配单位中减去右侧操作数的指数（对于只存在于右侧的单位，则取反其指数）。
-- 结果指数为 `0` 时，该单位会从结果中被完全移除。
+- `*` 将匹配单位的指数相加,并简单地保留仅存在于一侧的任何单位。
+- `/` 从匹配单位中减去右侧的指数(对仅存在于右侧的单位则对指数取反)。
+- 结果指数为 `0` 会将该单位从结果中完全移除。
 
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 10.meters.toUnit()   // units=[METER^1]
-val width = 4.meters.toUnit()       // units=[METER^1]
+val distance = (10 of meters).toUnit()   // units=[METER^1]
+val width = (4 of meters).toUnit()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
 ```
 
-混合两个不同的单位组（例如长度，以及未来可能加入的时间）的方式完全相同，并会产生一个真正的混合单位：
+混合两个不同的单位组(例如长度和时间)以完全相同的方式工作,并产生一个真正的混合单位:
 
 ```kotlin
-// 假设已按照《添加自定义单位》中的模式存在一个"时间"单位组：
-val distance = 100.meters.toUnit()
-val time = 10.seconds.toUnit()
+import org.pcsoft.framework.kunit.time.seconds
+
+val distance = (100 of meters).toUnit()
+val time = (10 of seconds).toUnit()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
-## 加法与减法
+## 加法和减法
 
-与 `*`/`/` 不同，`+` 和 `-` 只有在两个 `KMixedUnitInstance` 表示**相同的物理维度**时才被允许——一侧的每个项，
-必须在另一侧恰好有一个属于同一单位组（例如所有 `KDistanceUnit` 值）且指数相同的项（顺序无关）。`KUnit`
-本身**不需要**完全一致——匹配的项会自动进行归一化换算，这与特定于分组的包装类（`KLengthUnitInstance` 等）
-对"pure"单位所做的完全一样。结果以左侧操作数的 `units` 表示。
+与 `*`/`/` 不同,`+` 和 `-` 只允许在描述**相同物理维度**的两个 `KMixedUnitInstance` 之间进行: 对于一侧的每个项,
+另一侧必须恰好有一个属于相同单位组(例如全都是 `KDistanceUnit` 值)且具有相同指数的项(与顺序无关)。`KUnit`
+本身**不**需要完全相同 —— 匹配的项会通过归一化自动转换,方式与组特定包装器类(`KLengthUnitInstance` 等)对
+"纯"单位所做的相同。结果以左操作数的 `units` 表示。
 
 ```kotlin
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.distance.miles
 
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
+val a = (5 of meters).toUnit()
+val b = (3 of meters).toUnit()
 (a + b).value // 8.0
 
-val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.MILE, 1)))
-(a + c).value // 4832.032（3英里换算为米后相加），units=[METER^1]
+val c = (3 of miles).toUnit()
+(a + c).value // 4832.032(将 3 英里转换为米后相加), units=[METER^1]
 ```
 
-单位组或指数不匹配时仍会失败：
+不匹配的单位组或不匹配的指数仍然会失败:
 
 ```kotlin
-val time = KMixedUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
-a + time // 抛出 IllegalStateException：找不到 TimeUnit.SECOND 对应的单位组
+import org.pcsoft.framework.kunit.time.seconds
 
-val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
-a + area // 抛出 IllegalStateException：指数不匹配（1 与 2）
+a + (3 of seconds).toUnit()       // 抛出 IllegalStateException: 时间项没有匹配的单位组
+a + ((2 of meters) pow 2).toUnit() // 抛出 IllegalStateException: 指数不匹配(1 对 2)
 ```
 
-使用 `hasSameUnits` 可以预先检查是否**完全一致**（而不仅仅是同一分组）：
+使用 `hasSameUnits` 预先检查**精确**匹配(相同的 `KUnit`,而不只是相同的组):
 
 ```kotlin
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KDistanceUnit.METER, 0)))
-a.hasSameUnits(b) // 比较 (单位 -> 指数) 签名，与顺序无关
+val x = (5 of meters).toUnit()
+val y = (3 of meters).toUnit()
+x.hasSameUnits(y) // 与顺序无关地比较 (unit -> exponent) 签名
 ```
 
-## 读取与格式化数值
+## 读取值
 
-`valueAs` 将数值转换为一组任意的目标单位——每个目标必须按单位组（对于派生单位还需按指数）恰好匹配一个项。
-`toString` 重载执行相同的操作，但同时会渲染符号。
+`into` 以目标单位模板(裸令牌、带前缀的构建器模板或特殊的值 1 实例)读取值,返回一个纯 `Double`。两侧都必须
+描述相同的物理维度。没有 `valueAs`,也没有自定义单位的 `toString`;特定单位格式化为 `"${v into kilo.meters} km"`。
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.time.seconds
+
+val speed = (10 of meters) / (1 of seconds)
+
+speed into (kilo.meters / hours)   // 36.0(km/h)
+
+val area = (200 of meters) * (50 of meters)
+area into hectares                 // 1.0
+```
+
+默认(无参)`toString()` 始终使用每个项自身的 `KUnit.symbol`,用 `*` 连接,例如 `"5.0 m*s^-1"`。
+
+## 混合纯单位和混合单位
+
+每个纯单位包装器类都直接支持对 `KMixedUnitInstance` 的 `*`/`/`,因此你很少需要为这些运算符显式调用 `toUnit()`:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
 
-val speed = 10.meters.toUnit() / 1.seconds.toUnit()
-
-speed.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
-speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
-
-val area = 200.meters.toUnit() * 50.meters.toUnit()
-area.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
-```
-
-默认（无参数）的 `toString()` 始终使用每个项自身的 `KUnit.symbol`，并用 `*` 连接，例如 `"5.0 m*s^-1"`。
-
-## 混合使用纯单位与混合单位
-
-每个纯单位包装类都直接支持对 `KMixedUnitInstance` 使用 `*`/`/`，因此在这些运算符中你几乎不需要显式调用
-`toUnit()`：
-
-```kotlin
-import org.pcsoft.framework.kunit.distance.*
-
-val distance = 100.meters                 // KLengthUnitInstance
+val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
@@ -136,30 +133,32 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 
 ## 转换回纯单位
 
-一旦 `KMixedUnitInstance` 再次恰好只包含单个单位组的一个项，就可以通过该组特定的 `toXxxUnit()` 扩展函数
-（例如 `toDistance()`）将其转换回该组的包装类：
+一旦 `KMixedUnitInstance` 再次表示单个单位组的恰好一个项,就可以通过组特定的 `toXxxUnit()` 扩展(例如
+`toDistance()`)转换回该组的包装器类:
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters / 2.seconds          // KMixedUnitInstance（假设时间组存在）
-val distanceAgain = speed.toUnit() * 2.seconds // units=[METER^1]
-distanceAgain.toDistance().value             // 10.0
+val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
+val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]
+distanceAgain.toDistance().value               // 10.0
 
-val area = 200.meters * 50.meters           // units=[METER^2]
-area.toDistance().value                        // 10000.0（面积，指数为2）
+val area = (200 of meters) * (50 of meters)    // KAreaUnitInstance
+area.toUnit().toDistance().value               // 10000.0(面积, 指数 2)
 ```
 
-如果 `KMixedUnitInstance` **不是**恰好由该组的一个项组成（例如仍然是混合的长度/时间值），转换会抛出
+如果 `KMixedUnitInstance` **不**恰好由该组的一个项组成(例如它仍是混合的长度/时间值),转换会抛出
 `IllegalStateException`。
 
-同样的收窄操作也可以**直接在距离值上**使用（不仅限于 `KMixedUnitInstance`）：通用的
-`KDistanceUnitInstance`（或任意叶子类型）可以用 `toLength()`、`toArea()` 或 `toVolume()` 收窄到具体维度，
-这些方法会检查指数，不匹配时抛出 `IllegalStateException`：
+同样的收窄也可以**直接在距离值上**使用(不仅限于 `KMixedUnitInstance`): 一般的 `KDistanceUnitInstance` ——
+或任意叶子 —— 可以用 `toLength()`、`toArea()` 或 `toVolume()` 收窄到特定维度,它们会检查指数,并在不匹配时
+抛出 `IllegalStateException`:
 
 ```kotlin
-val area = 200.meters * 50.meters           // KAreaUnitInstance（指数为2）
+val area = (200 of meters) * (50 of meters)  // KAreaUnitInstance(指数 2)
 area.toArea().value                          // 10000.0
-area.toDistance().toArea().value             // 10000.0（先放宽，再收窄回来）
-area.toLength()                              // IllegalStateException（指数为2，而非1）
+area.toDistance().toArea().value             // 10000.0(先扩宽,再收窄回来)
+area.toLength()                              // IllegalStateException(指数 2,而非 1)
 ```

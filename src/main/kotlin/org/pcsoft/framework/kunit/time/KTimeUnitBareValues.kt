@@ -12,19 +12,18 @@
 
 package org.pcsoft.framework.kunit.time
 
-// Bare unit references, usable both as a KUnitTarget (e.g. `t.valueAs(hours)`) and as the `unit`
-// argument of the time-group prefix `infix` functions (e.g. `5 milli seconds`, see
-// `KTimeUnitPrefix.kt`). Only SECOND is an SI unit and therefore sensibly combinable with a prefix, but
-// the others are still accepted since KUnitPrefix is a purely mathematical scale factor.
+// Bare, value-1 time tokens (each = 1 unit, normalized to seconds). Vocabulary for building
+// (`10 of seconds`) and reading (`v into hours`); combine with the prefix builders (`milli.seconds`)
+// and operators (`meters / seconds`). Prefixed forms live in KTimeUnitExtensions.kt.
 
-/** Bare reference to [KTimeUnit.SECOND], for use with [valueAs][KTimeUnitInstance.valueAs] or the prefix `infix` functions. */
-val seconds: KTimeUnit = KTimeUnit.SECOND
+/** 1 second ([KTimeUnit.SECOND]). */
+val seconds: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.SECOND.baseValue)
 
-/** Bare reference to [KTimeUnit.MINUTE]. */
-val minutes: KTimeUnit = KTimeUnit.MINUTE
+/** 1 minute ([KTimeUnit.MINUTE]). */
+val minutes: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.MINUTE.baseValue)
 
-/** Bare reference to [KTimeUnit.HOUR]. */
-val hours: KTimeUnit = KTimeUnit.HOUR
+/** 1 hour ([KTimeUnit.HOUR]). */
+val hours: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.HOUR.baseValue)
 
-/** Bare reference to [KTimeUnit.DAY]. */
-val days: KTimeUnit = KTimeUnit.DAY
+/** 1 day ([KTimeUnit.DAY]). */
+val days: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.DAY.baseValue)

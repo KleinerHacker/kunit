@@ -2,6 +2,50 @@
 
 ## [UNRELEASED]
 
+### Changed
+
+- **Breaking — construction/reading DSL fully replaced by `of` / `into`.** Number and unit are now
+  strictly separated: build with `number of <unit-expression>` and read with `value into <unit>`.
+  - **Construction:** `10.5 of kilo.meters`, `10.5 of kilo.meters / milli.seconds`, `2 of hectares`,
+    `10 of meters * (milli.seconds pow 2)`. `Number.of` is a single group-agnostic infix that scales a
+    **value-1 unit template** (backed by a new `KUnitMeasurable.scaledBy`), preserving the strong result
+    type (`KLengthUnitInstance`, `KSpeedUnitInstance`, …).
+  - **Reading:** `v into kilo.meters`, `area into hectares` (returns `Double`). `into` replaces **all**
+    `valueAs(...)` overloads, which were removed everywhere.
+  - **Prefix builders.** Prefixes are now builder values (`kilo`, `milli`, …) exposing value-1 unit
+    templates via property access (`kilo.meters`, `milli.seconds`). A compile-time hierarchy
+    (`KPrefixBuilder` → `KDiminishingPrefixBuilder` / `KAugmentingPrefixBuilder`) enforces which units
+    accept which prefixes: `bytes`/`bits` hang only on the augmenting (and binary IEC) builder, so
+    `milli.bytes` is a **compile error** while `kilo.bytes`/`kibi.bytes` are valid. Binary IEC prefixes
+    are the builder values `kibi`, `mebi`, … (`KStorageBinaryPrefixBuilder`).
+  - **Bare tokens are now value-1 instances.** `meters`, `seconds`, `bytes`, `hectares`, `liters`, … are
+    `K…UnitInstance` values (1 unit), used as the template for both `of` and `into`. Special/derived units
+    (`hectares`, `ares`, `acres`, `liters`, gallons, …) are now named value-1 instances instead of
+    `KDerivedUnit` targets. Constructed groups (speed, data rate) drop their spelled-out composite tokens
+    entirely - a speed/rate is written as an expression (`meters / seconds`, `bytes / seconds`); only
+    genuinely single-named speeds (`knots`, `mach`, `speedOfLight`) remain as tokens.
+
+### Removed
+
+- **Breaking.** All previous construction/reading surface: the `Number.xxx` creator properties
+  (`5.meters`, `2.hours`, …); every `valueAs(...)` and the custom-unit `toString(target)` overloads (on
+  the wrappers **and** `KMixedUnitInstance`); the per-group prefix `infix` functions (`5 kilo meters`,
+  `5 milli seconds`, `5 kibi bytes`, …) and their files (`K*UnitPrefix.kt`); the composite bare-value
+  tokens `metersPerSecond`/`kilometersPerHour`/`bytesPerSecond`/… — removed entirely (build a speed/rate
+  as an expression, `meters / seconds`); the entire `KUnitTarget` system — `KUnitTarget`, `KScaledUnit`,
+  `KDerivedUnit`, `KScaledDerivedUnit`, `KBinaryScaledUnit` and every `with` infix — plus
+  `KDistanceDerivedUnit`. Reading in a specific unit is now `into` with a value-1 template; there is no
+  custom-unit `toString` (format via `"${v into kilo.meters} km"`).
+
+### Added
+
+- `Number.of` / `KUnitMeasurable.into` (root, `KUnitMeasurable.kt`), `KUnitMeasurable.scaledBy`, and the
+  `KPrefixBuilder` hierarchy with all 24 SI builder values plus the binary `KStorageBinaryPrefixBuilder`
+  values. Per-group value-1 bare tokens and prefix builder properties
+  (`val KPrefixBuilder.meters`, `val KAugmentingPrefixBuilder.bytes`, …).
+
+<details><summary>Earlier [UNRELEASED] entries (storage / data-rate groups, pre-DSL-overhaul)</summary>
+
 ### Added
 
 - **Data-rate unit group** (`org.pcsoft.framework.kunit.datarate`): a new *constructed* group for data
@@ -51,6 +95,8 @@
   file layout (no `KUnitInstance.kt`/`KDerivedUnit.kt`), the "unit-enum = group name / wrapper = dimension
   name" rule, the three wrapper shapes (dimensioned / `Duration`-backed / plain one-dimensional), and that
   a group may offer a prefix subset and/or an alternative prefix system.
+
+</details>
 
 ## [0.3.0]
 

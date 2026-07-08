@@ -1,154 +1,157 @@
 # ストレージ
 
 パッケージ: `org.pcsoft.framework.kunit.storage`
-基準単位: **バイト** (`KStorageUnit.BASE == KStorageUnit.BYTE`)
+基本単位: **バイト**(`KStorageUnit.BASE == KStorageUnit.BYTE`)
 
-ストレージグループはデジタルデータ量をモデル化します。これは**単純な 1 次元**のグループです（距離グループの
-ように指数ごとのサブタイプを持たず、時間グループのように `Duration` を基盤にもしていません）。
-`KStorageUnitInstance` は単一の `KStorageUnit.BASE`（バイト）項をラップし、常にバイトに正規化して保持します。
+ストレージグループはデジタルデータ量をモデル化します。これは**素朴な1次元の**グループです(距離グループのような
+指数特化のサブタイプも、時間グループのような `Duration` 裏付けもありません): `KStorageUnitInstance` は単一の
+`KStorageUnit.BASE`(バイト)項をラップし、常にバイトに正規化されて保存されます。
 
-このグループには 2 つの特別な点があります:
+このグループを特別にしているのは2点です:
 
-* **値を小さくする接頭辞は無し。** ビットの端数は意味のあるデータ量ではないため、値を小さくする SI 接頭辞
-  （`deci`、`centi`、`milli` など — 係数 `< 1`）は**提供されません**。`5 milli bytes` と書くと実行時
-  エラーではなく**コンパイルエラー**になります。値を小さくしない SI 接頭辞（`deca` 以上）のみ存在します。
-* **バイナリ（IEC）接頭辞。** 十進 SI 接頭辞（`kilo` = 1000）に加えて、2 番目のバイナリ接頭辞体系
-  （`KStorageBinaryPrefix`: `kibi` = 1024、`mebi` = 1024²、…）があり、値が十進のステップ 1000 と
-  バイナリのステップ 1024 を区別できます。
+* **縮小接頭辞なし。** ビットの端数は意味のあるデータ量ではないため、縮小 SI 接頭辞(`deci`、`centi`、`milli`
+  など — 係数 `< 1`)は `bytes`/`bits` では**使用できません**。`milli.bytes` と書くことは実行時失敗ではなく
+  **コンパイルエラー**です: `bytes`/`bits` プロパティは増大 SI ビルダー(`KAugmentingPrefixBuilder`)と2進
+  ビルダーにのみ付き、縮小ビルダーには決して付きません。
+* **2進(IEC)接頭辞。** 10進 SI ビルダー(`kilo` = 1000)に加えて、2つ目の2進ビルダー体系(`kibi` = 1024、
+  `mebi` = 1024² など)があり、値が10進の刻み 1000 と2進の刻み 1024 を区別できます。
 
 ## 単位
 
-| 単位 | 列挙値 | 記号 | 生成子 | バイト換算 |
+| 単位 | Enum 値 | 記号 | トークン | バイト換算(1単位) |
 |---|---|---|---:|---:|
-| バイト | `KStorageUnit.BYTE` | `B` | `Number.bytes` | 1.0 |
-| ビット | `KStorageUnit.BIT` | `bit` | `Number.bits` | 0.125 |
+| バイト | `KStorageUnit.BYTE` | `B` | `bytes` | 1.0 |
+| ビット | `KStorageUnit.BIT` | `bit` | `bits` | 0.125 |
 
-1 バイトは 8 ビットです。両単位とも `valueAs`/`toString` のターゲット、または接頭辞 `infix` 関数の `unit`
-引数として使える bare `val` エイリアス（`bytes`、`bits`）を持ちます。
+1バイトは8ビットです。各 `トークン` は値1の `KStorageUnitInstance` であり、`of`(作成)と `into`(読み取り)で
+使用します。
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.storage.*
 
-val size = 5.bytes
-size.value                     // 5.0 (normalized to bytes)
-size.valueAs(bits)             // 40.0 (read back in bits)
-1.bytes.valueAs(bits)          // 8.0
-8.bits.valueAs(bytes)          // 1.0
+val size = 5 of bytes
+size.value          // 5.0(バイトに正規化)
+size into bits      // 40.0(ビットに戻して読み取り)
+(1 of bytes) into bits   // 8.0
+(8 of bits) into bytes   // 1.0
 ```
 
 ## 演算子
 
 ```kotlin
-import org.pcsoft.framework.kunit.storage.*
-
-// + / - : 同一グループ、ビットとバイトの間で自動変換
-val a = 1.bytes + 8.bits        // KStorageUnitInstance: 2.0 B
-val b = 4.bytes - 16.bits       // KStorageUnitInstance: 2.0 B
-
-// 比較
-1.bytes == 8.bits               // true (same normalized amount)
-2.bytes > 1.bytes               // true
-
-// * / / グループ間: 異なるグループの 2 つの純粋単位を直接 KMixedUnitInstance に結合
-val rate = 1000.bytes / 2.seconds                   // KMixedUnitInstance: 500 B·s⁻¹
-// 同等の明示的な書き方（混合エンジン経由）:
-val rate2 = 1000.bytes.toUnit() / 2.seconds.toUnit()
-```
-
-**異なる**グループの 2 つの純粋単位間の直接の `*`/`/`（`1000.bytes / 2.seconds`）は、`KUnitInstance` 上の
-グループ非依存の演算子ペアによって提供され、`.toUnit()` の呼び出しは不要になりました。
-
-### 比較と等価性
-
-`==`、`!=`、`<`、`<=`、`>`、`>=` は 2 つの `KStorageUnitInstance` 値の正規化された `value`（バイト）を
-比較します。`equals` は正規化された量に基づくため `1.bytes == 8.bits` です。
-
-## `pow` によるべき乗
-
-中置 `pow` 演算子で値を整数べき乗します（Kotlin にはオーバーロード可能な `^` がありません）。ストレージ
-グループでは `pow` は汎用の `KMixedUnitInstance` を返します（ストレージには次元付きのべき乗型がありません）:
-
-```kotlin
-import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.storage.*
-
-val squared = 2.bytes pow 2     // KMixedUnitInstance: 4.0 B²
-```
-
-`pow` は名前付き中置関数なので、`* / + -` よりも**弱く**結合します。混合式では括弧を付けてください
-（`(a * b) pow 2`）。
-
-## 十進 SI 接頭辞
-
-任意の `KStorageUnit` は**値を小さくしない** SI 接頭辞（`deca`、`hecto`、`kilo`、`mega`、`giga`、
-`tera`、`peta`、`exa`、`zetta`、`yotta`、`ronna`、`quetta`）と組み合わせられます。ストレージグループの
-`infix` 構築関数（直接 `KStorageUnitInstance` を返す）と `with`（`valueAs`/`toString` ターゲット用）を
-使います。値を小さくする接頭辞（`deci` 以下）はストレージには**存在しません**。
-
-```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
-import org.pcsoft.framework.kunit.storage.*
-
-val fiveKb = 5 kilo bytes                 // KStorageUnitInstance (== 5000.bytes)
-fiveKb.value                              // 5000.0
-
-val big = 3.bytes
-big.valueAs(KUnitPrefix.KILO with bytes)  // 0.003 (kB)
-
-// 5 milli bytes                          // コンパイル不可: 値を小さくする接頭辞は提供されない
-```
-
-## バイナリ（IEC）接頭辞
-
-バイナリ接頭辞は 1024 のべき乗であり、値が 1000（`kilo`）と 1024（`kibi`）を区別できるようにします。
-`infix` 構築関数（`kibi`、`mebi`、`gibi`、`tebi`、`pebi`、`exbi`、`zebi`、`yobi`）として、また
-`KStorageBinaryPrefix` + `with` を介した `valueAs`/`toString` ターゲットとして提供されます。
-
-```kotlin
-import org.pcsoft.framework.kunit.storage.*
-
-(1 kilo bytes).value                                  // 1000.0  (decimal)
-(1 kibi bytes).value                                  // 1024.0  (binary)
-(1 mega bytes).value                                  // 1_000_000.0
-(1 mebi bytes).value                                  // 1_048_576.0
-
-val file = 4 mebi bytes
-file.valueAs(KStorageBinaryPrefix.KIBI with bytes)    // 4096.0 (KiB)
-file.toString(KStorageBinaryPrefix.MEBI with bytes)   // "4.0 MiB"
-```
-
-| バイナリ接頭辞 | 列挙値 | 記号 | `infix` | 係数 |
-|---|---|---|---:|---:|
-| Kibi | `KStorageBinaryPrefix.KIBI` | `Ki` | `kibi` | 1024 |
-| Mebi | `KStorageBinaryPrefix.MEBI` | `Mi` | `mebi` | 1024² |
-| Gibi | `KStorageBinaryPrefix.GIBI` | `Gi` | `gibi` | 1024³ |
-| Tebi | `KStorageBinaryPrefix.TEBI` | `Ti` | `tebi` | 1024⁴ |
-| Pebi | `KStorageBinaryPrefix.PEBI` | `Pi` | `pebi` | 1024⁵ |
-| Exbi | `KStorageBinaryPrefix.EXBI` | `Ei` | `exbi` | 1024⁶ |
-| Zebi | `KStorageBinaryPrefix.ZEBI` | `Zi` | `zebi` | 1024⁷ |
-| Yobi | `KStorageBinaryPrefix.YOBI` | `Yi` | `yobi` | 1024⁸ |
-
-## 他の単位との混合
-
-ストレージ値を時間と組み合わせると、混合エンジンを通じてデータレート（`byte·second⁻¹`）になり、再び分解
-できます:
-
-```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.storage.*
 import org.pcsoft.framework.kunit.time.seconds
 
-val rate = 1000.bytes / 1.seconds                     // 1000 B/s（直接、toUnit() 不要）
-val amount = (rate * 60.seconds.toUnit()).toStorage() // 60000 B
-amount.valueAs(KStorageBinaryPrefix.KIBI with bytes)  // ≈ 58.59 (KiB)
+// + / - : 同じグループ内、ビットとバイトの間の自動変換
+val a = (1 of bytes) + (8 of bits)   // KStorageUnitInstance: 2.0 B
+val b = (4 of bytes) - (16 of bits)  // KStorageUnitInstance: 2.0 B
+
+// 比較
+(1 of bytes) == (8 of bits)          // true(正規化された量が同じ)
+(2 of bytes) > (1 of bytes)          // true
+
+// storage / time は型付きのデータ転送率(データ転送率のページを参照)
+val rate = (1000 of bytes) / (2 of seconds)  // KDataRateUnitInstance: 500 B/s
+```
+
+### 比較と等価性
+
+`==`、`!=`、`<`、`<=`、`>`、`>=` は2つの `KStorageUnitInstance` 値の正規化された `value`(バイト)を比較します。
+`equals` は正規化された量によるため、`(1 of bytes) == (8 of bits)` です。
+
+## `pow` によるべき乗
+
+infix `pow` 演算子で値を整数乗します(Kotlin にはオーバーロード可能な `^` がありません)。ストレージグループでは
+`pow` は一般の `KMixedUnitInstance` を返します(ストレージには次元を持つべき乗型がありません):
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.pow
+import org.pcsoft.framework.kunit.storage.*
+
+val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
+```
+
+## 10進 SI 接頭辞
+
+任意のストレージ単位は、**増大**(1超)SI 接頭辞ビルダー(`deca`、`hecto`、`kilo`、`mega`、`giga`、`tera`、
+`peta`、`exa`、`zetta`、`yotta`、`ronna`、`quetta`)とプロパティアクセスで組み合わせられます。縮小ビルダー
+(`deci` 以下)には `bytes`/`bits` プロパティが**ない**ため、`milli.bytes` はコンパイルされません。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.storage.*
+
+val fiveKb = 5 of kilo.bytes         // KStorageUnitInstance(== 5000 B)
+fiveKb.value                         // 5000.0
+
+(3 of bytes) into kilo.bytes         // 0.003(kB)
+
+// 5 of milli.bytes                  // コンパイルされない: 縮小ビルダーに `bytes` はない
+```
+
+## 2進(IEC)接頭辞
+
+2進接頭辞ビルダーは 1024 のべき乗で、値が 1000(`kilo`)と 1024(`kibi`)を区別できるようにします: `kibi`、
+`mebi`、`gibi`、`tebi`、`pebi`、`exbi`、`zebi`、`yobi`。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.mega
+import org.pcsoft.framework.kunit.storage.*
+
+(1 of kilo.bytes).value   // 1000.0     (10進)
+(1 of kibi.bytes).value   // 1024.0     (2進)
+(1 of mega.bytes).value   // 1_000_000.0
+(1 of mebi.bytes).value   // 1_048_576.0
+
+val file = 4 of mebi.bytes
+file into kibi.bytes      // 4096.0(KiB)
+```
+
+| 2進ビルダー | 記号 | バイト換算(1単位) |
+|---|---|---:|
+| `kibi` | `Ki` | 1024 |
+| `mebi` | `Mi` | 1024² |
+| `gibi` | `Gi` | 1024³ |
+| `tebi` | `Ti` | 1024⁴ |
+| `pebi` | `Pi` | 1024⁵ |
+| `exbi` | `Ei` | 1024⁶ |
+| `zebi` | `Zi` | 1024⁷ |
+| `yobi` | `Yi` | 1024⁸ |
+
+## 他の単位との組み合わせ
+
+ストレージの値を時間と組み合わせるとデータ転送率(`byte·second⁻¹`)になり、元に分解し戻すこともできます:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.time.seconds
+
+val rate = (1000 of bytes) / (1 of seconds)  // 1000 B/s(型付き KDataRateUnitInstance)
+val amount = rate * (60 of seconds)          // 60000 B(型付き KStorageUnitInstance)
+amount into kibi.bytes                        // ≈ 58.59(KiB)
 ```
 
 ## toString フォーマット
 
+基本単位の `toString()` のみが存在します。特定の単位は `into` を使ってフォーマットします:
+
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.storage.*
 
-1024.bytes.toString()                                   // "1024.0 B" (base unit representation)
-5.bits.toString(bits)                                   // "5.0 bit"
-2048.bytes.toString(KStorageBinaryPrefix.KIBI with bytes) // "2.0 KiB"
+(1024 of bytes).toString()               // "1024.0 B"(基本単位表現)
+"${(5 of bits) into bits} bit"           // "5.0 bit"
+"${(2048 of bytes) into kibi.bytes} KiB" // "2.0 KiB"
 ```

@@ -10,185 +10,199 @@
 * **`KAreaUnitInstance`** — 指数2(面積)
 * **`KVolumeUnitInstance`** — 指数3(体積)
 
-値は作成に使用された単位に関係なく、常にメートル(または平方/立方メートル)に正規化されて保存されます。長さ、
-面積、体積は異なる型であるため、`+`/`-`/比較でそれらを混在させると**コンパイルエラー**になります(そのような
-演算子は存在しません)。一方 `*`/`/` は可能な限り同じ型ファミリー内に留まり(`length * length = area`、
-`area / length = length`)、`{1,2,3}` 以外の指数(または指数0の無次元の結果)については
-`KDistanceUnitInstance`/`KMixedUnitInstance` にフォールバックします。
+値は常にメートル(または平方/立方メートル)に正規化されて保存されます。長さ、面積、体積は異なる型であるため、
+`+`/`-`/比較でそれらを混在させると**コンパイルエラー**になります(そのような演算子は存在しません)。一方
+`*`/`/` は可能な限り同じ型ファミリー内に留まり(`length * length = area`、`area / length = length`)、
+`{1,2,3}` 以外の指数(または指数0の無次元の結果)については `KDistanceUnitInstance`/`KMixedUnitInstance`
+にフォールバックします。
+
+すべての値は `number of <トークン>` で作成し、`value into <トークン>` で読み戻します。
 
 ## 指数1 - 長さ
 
-| 単位 | Enum 値 | 記号 | コンストラクタ | メートル換算(1単位) |
+| 単位 | Enum 値 | 記号 | トークン | メートル換算(1単位) |
 |---|---|---|---:|---:|
-| メートル | `KDistanceUnit.METER` | `m` | `Number.meters` | 1.0 |
-| マイル | `KDistanceUnit.MILE` | `mi` | `Number.miles` | 1609.344 |
-| 海里 | `KDistanceUnit.NAUTICAL_MILE` | `nmi` | `Number.nauticalMiles` | 1852.0 |
-| ヤード | `KDistanceUnit.YARD` | `yd` | `Number.yards` | 0.9144 |
-| フィート | `KDistanceUnit.FOOT` | `ft` | `Number.feet` | 0.3048 |
-| インチ | `KDistanceUnit.INCH` | `in` | `Number.inches` | 0.0254 |
-| ファゾム | `KDistanceUnit.FATHOM` | `ftm` | `Number.fathoms` | 1.8288 |
-| チェーン | `KDistanceUnit.CHAIN` | `ch` | `Number.chains` | 20.1168 |
-| ファーロング | `KDistanceUnit.FURLONG` | `fur` | `Number.furlongs` | 201.168 |
-| 天文単位 | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `Number.astronomicalUnits` | 1.495978707e11 |
-| 光秒 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `Number.lightSeconds` | 299792458.0 |
-| 光分 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `Number.lightMinutes` | 1.798754748e10 |
-| 光時 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `Number.lightHours` | 1.0792528488e12 |
-| 光日 | `KDistanceUnit.LIGHT_DAY` | `ld` | `Number.lightDays` | 2.59020683712e13 |
-| 光週 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `Number.lightWeeks` | 1.813144785984e14 |
-| 光年 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `Number.lightYears` | 9.4607304725808e15 |
-| パーセク | `KDistanceUnit.PARSEC` | `pc` | `Number.parsecs` | 3.0856775814913673e16 |
+| メートル | `KDistanceUnit.METER` | `m` | `meters` | 1.0 |
+| マイル | `KDistanceUnit.MILE` | `mi` | `miles` | 1609.344 |
+| 海里 | `KDistanceUnit.NAUTICAL_MILE` | `nmi` | `nauticalMiles` | 1852.0 |
+| ヤード | `KDistanceUnit.YARD` | `yd` | `yards` | 0.9144 |
+| フィート | `KDistanceUnit.FOOT` | `ft` | `feet` | 0.3048 |
+| インチ | `KDistanceUnit.INCH` | `in` | `inches` | 0.0254 |
+| ファゾム | `KDistanceUnit.FATHOM` | `ftm` | `fathoms` | 1.8288 |
+| チェーン | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
+| ファーロング | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
+| 天文単位 | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
+| 光秒 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
+| 光分 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
+| 光時 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
+| 光日 | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
+| 光週 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
+| 光年 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
+| パーセク | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
 
-上記のすべての単位には、`valueAs`/`toString` のターゲットや接頭辞 infix 関数の `unit` 引数として
-使用できる bare な `val` エイリアスがあります: `meters`、`miles`、`nauticalMiles`、`yards`、
-`feet`、`inches`、`fathoms`、`chains`、`furlongs`、`astronomicalUnits`、`lightSeconds`、
-`lightMinutes`、`lightHours`、`lightDays`、`lightWeeks`、`lightYears`、`parsecs`。
+各 `トークン` は値1の `KLengthUnitInstance` であり、`of`(作成)と `into`(読み取り)の両方で使用します。
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.distance.*
 
-val d = 5.miles
-d.value                        // 8046.72(メートルに正規化)
-d.valueAs(KDistanceUnit.MILE)    // 5.0(マイルに戻して読み取り)
-d.valueAs(feet)                 // 26400.0
-d.valueAs(nauticalMiles)        // ≈ 4.3452(海里として読み取り)
+val d = 5 of miles
+d.value               // 8046.72(メートルに正規化)
+d into miles          // 5.0(マイルに戻して読み取り)
+d into feet           // 26400.0
+d into nauticalMiles  // ≈ 4.3452
 ```
 
 ### 演算子
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
 
 // + / - : 同じグループ内、異なる長さの単位間の自動変換
-val a = 1.miles + 500.meters   // KLengthUnitInstance、メートルに正規化
-val b = 2.miles - 800.meters
+val a = (1 of miles) + (500 of meters)   // KLengthUnitInstance、メートルに正規化
+val b = (2 of miles) - (800 of meters)
 
 // 比較
-2.miles > 1.miles               // true
-1.miles == 1609.344.meters      // true(正規化された値が同じ)
-// 5.hectares > 5.meters        // コンパイルされない: 面積と長さは異なる型
+(2 of miles) > (1 of miles)              // true
+(1 of miles) == (1609.344 of meters)     // true(正規化された値が同じ)
+// (5 of hectares) > (5 of meters)       // コンパイルされない: 面積と長さは異なる型
 
 // * / / : 両方のオペランドが静的に次元付けされている場合、長さファミリー内に留まる
-val area = 200.meters * 50.meters   // KAreaUnitInstance: value=10000.0(m²)
-val lengthAgain = area / 50.meters  // KLengthUnitInstance: value=200.0(m)
-val ratio = 10.meters / 2.meters    // KMixedUnitInstance(無次元)、value=5.0
+val area = (200 of meters) * (50 of meters)   // KAreaUnitInstance: value=10000.0(m²)
+val lengthAgain = area / (50 of meters)       // KLengthUnitInstance: value=200.0(m)
+val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance(無次元)、value=5.0
 ```
 
 ### 比較と等価性
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` は**同じ型**(同じ次元)を持つ2つの値の正規化された `value`
-を比較します。異なる次元(例: 長さと面積)を混在させることは、`+`/`-` のルールと同様にコンパイラによって
-拒否されます — そのような演算子は存在しません。次元をまたぐ `equals` は単に `false` を返します。
+`==`、`!=`、`<`、`<=`、`>`、`>=` は**同じ型**(同じ次元)を持つ2つの値の正規化された `value` を比較します。
+異なる次元(例: 長さと面積)を混在させることは、`+`/`-` のルールと同様にコンパイラによって拒否されます —
+そのような演算子は存在しません。次元をまたぐ `equals` は単に `false` を返します。
 
 ## 指数2 - 面積
 
 `KAreaUnitInstance` は面積を表します(例: `length * length` の結果、または長さを infix `pow` 演算子で
-2乗した結果: `2.meters pow 2` == `(2 m)²` == 4 m²、`2 kilo meters pow 2` == 4 000 000 m²)。`squareXxx`
-コンストラクタはありません — `pow` が唯一のべき乗構文です(下記「`pow` によるべき乗」の節を参照)。次の
-名前付き特殊単位(`KDistanceDerivedUnit`)を変換・フォーマットのターゲットとして使用できます。
+2乗した結果: `(2 of meters) pow 2` == `(2 m)²` == 4 m²、`(2 of kilo.meters) pow 2` == 4 000 000 m²)。
+`squareXxx` トークンはありません — `pow` が唯一のべき乗構文です(下記「[`pow` によるべき乗](#pow)」の節を
+参照)。次の名前付き特殊単位トークンが利用できます。
 
-| 特殊単位 | Enum 値 | 記号 | コンストラクタ | m²換算(1単位) |
-|---|---:|---:|---:|---:|
-| アール | `KDistanceDerivedUnit.ARE` | `a` | `Number.ares` | 100.0 |
-| ヘクタール | `KDistanceDerivedUnit.HECTARE` | `ha` | `Number.hectares` | 10 000.0 |
-| エーカー | `KDistanceDerivedUnit.ACRE` | `ac` | `Number.acres` | 4046.8564224 |
+| 特殊単位 | 記号 | トークン | m²換算(1単位) |
+|---|---:|---:|---:|
+| アール | `a` | `ares` | 100.0 |
+| ヘクタール | `ha` | `hectares` | 10 000.0 |
+| エーカー | `ac` | `acres` | 4046.8564224 |
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.distance.*
 
-val plot = 3.hectares
-plot.value                                   // 30000.0(m²)
-plot.valueAs(KDistanceDerivedUnit.ARE)          // 300.0
-plot.valueAs(KDistanceDerivedUnit.ACRE)         // ≈ 7.4132
+val plot = 3 of hectares
+plot.value        // 30000.0(m²)
+plot into ares    // 300.0
+plot into acres   // ≈ 7.4132
 
-val computed = 200.meters * 50.meters     // KAreaUnitInstance(10 000 m²)
-computed.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val computed = (200 of meters) * (50 of meters)  // KAreaUnitInstance(10 000 m²)
+computed into hectares                           // 1.0
 
-plot + computed                              // 許可される: 両方とも面積 -> KAreaUnitInstance
-// plot + 5.meters                           // コンパイルされない: 面積と長さ
+plot + computed   // 許可される: 両方とも面積 -> KAreaUnitInstance
+// plot + (5 of meters)  // コンパイルされない: 面積と長さ
 ```
 
 ## 指数3 - 体積
 
 `KVolumeUnitInstance` は体積を表します(例: `length * length * length`、`area * length`、または長さを
-3乗した結果: `2.meters pow 3` == 8 m³、`2 kilo meters pow 3`)。面積と同様に `cubicXxx` コンストラクタは
-なく、`pow` を使用します(下記「`pow` によるべき乗」の節を参照)。次の名前付き特殊単位が利用できます。
+3乗した結果: `(2 of meters) pow 3` == 8 m³)。面積と同様に `cubicXxx` トークンはなく、`pow` を使用します
+(下記「[`pow` によるべき乗](#pow)」の節を参照)。次の名前付き特殊単位トークンが利用できます。
 
-| 特殊単位 | Enum 値 | 記号 | コンストラクタ | m³換算(1単位) |
-|---|---:|---:|---:|---:|
-| リットル | `KDistanceDerivedUnit.LITER` | `L` | `Number.liters` | 0.001 |
-| 米国液量ガロン | `KDistanceDerivedUnit.US_GALLON` | `gal (US)` | `Number.usGallons` | 0.003785411784 |
-| 英国ガロン | `KDistanceDerivedUnit.IMPERIAL_GALLON` | `gal (UK)` | `Number.imperialGallons` | 0.00454609 |
-| 米国液量オンス | `KDistanceDerivedUnit.US_FLUID_OUNCE` | `fl oz` | `Number.usFluidOunces` | 2.95735295625e-5 |
-| オイルバレル | `KDistanceDerivedUnit.OIL_BARREL` | `bbl` | `Number.oilBarrels` | 0.158987294928 |
+| 特殊単位 | 記号 | トークン | m³換算(1単位) |
+|---|---:|---:|---:|
+| リットル | `L` | `liters` | 0.001 |
+| 米国液量ガロン | `gal (US)` | `usGallons` | 0.003785411784 |
+| 英国ガロン | `gal (UK)` | `imperialGallons` | 0.00454609 |
+| 米国液量オンス | `fl oz` | `usFluidOunces` | 2.95735295625e-5 |
+| オイルバレル | `bbl` | `oilBarrels` | 0.158987294928 |
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.distance.*
 
-val tank = 200.liters
-tank.value                                        // 0.2(m³)
-tank.valueAs(KDistanceDerivedUnit.US_GALLON)        // ≈ 52.834
+val tank = 200 of liters
+tank.value          // 0.2(m³)
+tank into usGallons // ≈ 52.834
 
-val cube = 2.meters * 2.meters * 2.meters   // KVolumeUnitInstance(8 m³)
-cube.valueAs(KDistanceDerivedUnit.LITER)    // 8000.0
+val cube = (2 of meters) * (2 of meters) * (2 of meters)  // KVolumeUnitInstance(8 m³)
+cube into liters                                          // 8000.0
 
-tank + cube                                  // 許可される: 両方とも体積 -> KVolumeUnitInstance
+tank + cube         // 許可される: 両方とも体積 -> KVolumeUnitInstance
 ```
 
-## `pow` によるべき乗
+## <a name="pow"></a>`pow` によるべき乗
 
 infix `pow` 演算子で値を整数乗します。Kotlin にはオーバーロード可能な `^` 演算子(および `^=`)がないため、
-`pow` がすべてのグループで唯一のべき乗構文です — `squareXxx`/`cubicXxx` コンストラクタは存在しません。
+`pow` がグループ全体で唯一のべき乗構文です — `squareXxx`/`cubicXxx` トークンは存在しません。
 
-`pow` は値をべき乗し、**さらに**すべての指数に `n` を掛けます。したがって `2.meters pow 2` は
+`pow` は値をべき乗し、**さらに**すべての指数に `n` を掛けます。したがって `(2 of meters) pow 2` は
 `(2 m)² = 4 m²` です(指数だけでなく値もべき乗されます)。距離グループでは結果が次元を持ちます: `pow 2`
 は `KAreaUnitInstance`、`pow 3` は `KVolumeUnitInstance`、その他の指数は一般の `KDistanceUnitInstance`
 になります。
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
 
-val area = 2.meters pow 2         // KAreaUnitInstance: 4.0 m²
-val big = 2 kilo meters pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
-val volume = 2.meters pow 3       // KVolumeUnitInstance: 8.0 m³
-val m4 = 2.meters pow 2 pow 2     // KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)
-val inverse = 2.meters pow -1     // KDistanceUnitInstance: 0.5 m⁻¹
+val area = (2 of meters) pow 2         // KAreaUnitInstance: 4.0 m²
+val big = (2 of kilo.meters) pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
+val volume = (2 of meters) pow 3       // KVolumeUnitInstance: 8.0 m³
+val m4 = (2 of meters) pow 2 pow 2     // KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)
+val inverse = (2 of meters) pow -1     // KDistanceUnitInstance: 0.5 m⁻¹
 ```
 
-`pow` は名前付き infix 関数なので、`* / + -` よりも**弱く**結合します。混合式では括弧を付けてください
-(`(a * b) pow 2`)。すべての単位グループで使用できます — 例: `2.hours pow 2`(時間には次元を持つべき乗型が
-ないため、一般の `KMixedUnitInstance` になります)。
+`pow` は `* / + -` よりも**弱く**結合します。混合式では括弧を付けてください(`(a * b) pow 2`)。すべての単位
+グループで使用できます — 例: `(2 of hours) pow 2`(時間には次元を持つべき乗型がないため、一般の
+`KMixedUnitInstance` になります)。
 
 ## SI 接頭辞
 
-任意の `KDistanceUnit` は、24種類の SI 接頭辞(`KUnitPrefix`、ルートパッケージ、Quetta/Q から
-Quecto/q まで)のいずれとも、グループごとの infix 構築関数（具体単位を直接返す）と `with`(valueAs/toString ターゲット用)を使って
-組み合わせることができます。
+任意の長さ単位は、24種類の SI 接頭辞**ビルダー**(`kilo`、`milli` など、ルートパッケージ)のいずれとも
+プロパティアクセスで組み合わせることができ、`of`/`into` 用の値1テンプレートを生成します:
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.distance.*
 
-// 構築: "5 kilo meters" -> KLengthUnitInstance (direct, == 5000.meters)
-val fiveKm = 5 kilo meters
+// 構築: "5 of kilo.meters" -> KLengthUnitInstance(== 5000 m)
+val fiveKm = 5 of kilo.meters
 fiveKm.value // 5000.0
 
-// 接頭辞付きのターゲットを使って値を読み戻す
-val d = 5.miles
-d.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER)  // 8.04672(km)
-d.toString(KUnitPrefix.KILO with KDistanceUnit.METER) // "8.04672 km"
+// 接頭辞付きの単位で値を読み戻す
+val d = 5 of miles
+d into kilo.meters  // 8.04672(km)
 
-// 接頭辞は派生単位(面積/体積)とも組み合わせ可能
-val tank = 200.liters
-tank.valueAs(KUnitPrefix.MILLI with KDistanceDerivedUnit.LITER) // 200000.0(mL)
+// 接頭辞は名前付きの面積/体積トークンとも組み合わせ可能
+val tank = 200 of liters
+tank into milli.liters  // 200000.0(mL)
 ```
 
 ## toString フォーマット
 
+基本単位の `toString()` のみが存在します。特定の単位は `into` を使ってフォーマットします:
+
 ```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
 
-5.meters.toString()                        // "5.0 m"(基本単位表現)
-5.miles.toString(KDistanceUnit.MILE)          // "5.0 mi"
-(200.meters * 50.meters).toString(KDistanceDerivedUnit.HECTARE) // "1.0 ha"
+(5 of meters).toString()               // "5.0 m"(基本単位表現)
+"${(5 of miles) into miles} mi"        // "5.0 mi"
+"${((200 of meters) * (50 of meters)) into hectares} ha" // "1.0 ha"
 ```

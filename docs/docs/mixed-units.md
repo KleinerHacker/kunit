@@ -26,7 +26,7 @@ Every "pure" unit exposes a `toUnit()` extension to convert to this generic repr
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val d = 5.meters
+val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 ```
 
@@ -43,8 +43,8 @@ multiplying/dividing units is always physically meaningful.
 ```kotlin
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 10.meters.toUnit()   // units=[METER^1]
-val width = 4.meters.toUnit()       // units=[METER^1]
+val distance = (10 of meters).toUnit()   // units=[METER^1]
+val width = (4 of meters).toUnit()       // units=[METER^1]
 
 val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
@@ -54,9 +54,10 @@ Mixing two different unit groups (e.g. length and, once available, time) works e
 produces a genuinely mixed unit:
 
 ```kotlin
-// Once a "time" unit group exists, following the pattern in "Adding Custom Units":
-val distance = 100.meters.toUnit()
-val time = 10.seconds.toUnit()
+import org.pcsoft.framework.kunit.time.seconds
+
+val distance = (100 of meters).toUnit()
+val time = (10 of seconds).toUnit()
 
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
@@ -71,59 +72,55 @@ the same way the group-specific wrapper classes (`KLengthUnitInstance`, etc.) do
 result is expressed in the left-hand operand's `units`.
 
 ```kotlin
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.distance.miles
 
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
+val a = (5 of meters).toUnit()
+val b = (3 of meters).toUnit()
 (a + b).value // 8.0
 
-val c = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.MILE, 1)))
+val c = (3 of miles).toUnit()
 (a + c).value // 4832.032 (3 miles converted to meters, then added), units=[METER^1]
 ```
 
 Mismatched unit groups or mismatched exponents still fail:
 
 ```kotlin
-val time = KMixedUnitInstance(3.0, listOf(KUnitTerm(TimeUnit.SECOND, 1)))
-a + time // throws IllegalStateException: no matching unit group for TimeUnit.SECOND
+import org.pcsoft.framework.kunit.time.seconds
 
-val area = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 2)))
-a + area // throws IllegalStateException: mismatched exponents (1 vs 2)
+a + (3 of seconds).toUnit()       // throws IllegalStateException: no matching unit group for a time term
+a + ((2 of meters) pow 2).toUnit() // throws IllegalStateException: mismatched exponents (1 vs 2)
 ```
 
 Use `hasSameUnits` to check for an **exact** match (same `KUnit`s, not just the same group) up front:
 
 ```kotlin
-val a = KMixedUnitInstance(5.0, listOf(KUnitTerm(KDistanceUnit.METER, 1)))
-val b = KMixedUnitInstance(3.0, listOf(KUnitTerm(KDistanceUnit.METER, 1), KUnitTerm(KDistanceUnit.METER, 0)))
-a.hasSameUnits(b) // compares the (unit -> exponent) signature, order-independent
+val x = (5 of meters).toUnit()
+val y = (3 of meters).toUnit()
+x.hasSameUnits(y) // compares the (unit -> exponent) signature, order-independent
 ```
 
-!!! note
-    The examples above and below that reference `seconds`/`TimeUnit` illustrate what a **second** unit
-    group would look like combined with length - kunit currently ships only the `length` group (see
-    [Predefined Units](units/distance.md)). Follow [Adding Custom Units](custom-units.md) to add your own.
+## Reading values
 
-## Reading and formatting values
-
-`valueAs` converts the value into an arbitrary set of target units - each target must match exactly one term
-by unit group (and, for derived units, by exponent). `toString` overloads do the same but also render the
-symbols.
+`into` reads the value in a target unit template (a bare token, a prefixed builder template, or a special
+value-1 instance), returning a plain `Double`. Both sides must describe the same physical dimension. There is
+no `valueAs` and no custom-unit `toString`; format a specific unit as `"${v into kilo.meters} km"`.
 
 ```kotlin
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.with
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters.toUnit() / 1.seconds.toUnit()
+val speed = (10 of meters) / (1 of seconds)
 
-speed.valueAs(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // 36.0 (km/h)
-speed.toString(KUnitPrefix.KILO with KDistanceUnit.METER, TimeUnit.HOUR) // "36.0 km*h^-1"
+speed into (kilo.meters / hours)   // 36.0 (km/h)
 
-val area = 200.meters.toUnit() * 50.meters.toUnit()
-area.valueAs(KDistanceDerivedUnit.HECTARE) // 1.0
+val area = (200 of meters) * (50 of meters)
+area into hectares                 // 1.0
 ```
 
 The default (no-argument) `toString()` always uses each term's own `KUnit.symbol`, joined with `*`, e.g.
@@ -135,9 +132,10 @@ Every pure unit wrapper class supports `*`/`/` directly against a `KMixedUnitIns
 `toUnit()` explicitly for these operators:
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
 
-val distance = 100.meters                 // KLengthUnitInstance
+val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
 
 val combined = distance * mixed              // KMixedUnitInstance: METER^2
@@ -149,14 +147,16 @@ Once a `KMixedUnitInstance` again represents exactly one term of a single unit g
 into that group's wrapper class via the group-specific `toXxxUnit()` extension (e.g. `toDistance()`):
 
 ```kotlin
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.time.seconds
 
-val speed = 10.meters / 2.seconds          // KMixedUnitInstance (once time exists)
-val distanceAgain = speed.toUnit() * 2.seconds // units=[METER^1]
-distanceAgain.toDistance().value             // 10.0
+val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
+val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]
+distanceAgain.toDistance().value               // 10.0
 
-val area = 200.meters * 50.meters           // units=[METER^2]
-area.toDistance().value                        // 10000.0 (an area, exponent 2)
+val area = (200 of meters) * (50 of meters)    // KAreaUnitInstance
+area.toUnit().toDistance().value               // 10000.0 (an area, exponent 2)
 ```
 
 If the `KMixedUnitInstance` does **not** consist of exactly one term of that group (e.g. it's still a mixed
@@ -167,7 +167,7 @@ general `KDistanceUnitInstance` — or any leaf — can be narrowed to a specifi
 `toArea()` or `toVolume()`, which are exponent-checked and throw `IllegalStateException` on a mismatch:
 
 ```kotlin
-val area = 200.meters * 50.meters           // KAreaUnitInstance (exponent 2)
+val area = (200 of meters) * (50 of meters)  // KAreaUnitInstance (exponent 2)
 area.toArea().value                          // 10000.0
 area.toDistance().toArea().value             // 10000.0 (widened, then narrowed back)
 area.toLength()                              // IllegalStateException (exponent 2, not 1)

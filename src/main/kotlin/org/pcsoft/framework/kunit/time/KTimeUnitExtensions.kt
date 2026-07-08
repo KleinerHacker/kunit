@@ -12,27 +12,24 @@
 
 package org.pcsoft.framework.kunit.time
 
-// Time creator extension properties (bare unit references live in `KTimeUnitBareValues.kt`).
+import org.pcsoft.framework.kunit.KPrefixBuilder
 
-private fun of(value: Number, unit: KTimeUnit): KTimeUnitInstance = timeUnitInstanceOf(value.toDouble() * unit.baseValue)
+// Prefixed, value-1 time templates: one property per time unit on the prefix builder (e.g.
+// `milli.seconds` = 0.001 s, `micro.seconds` = 1e-6 s). Time accepts *any* magnitude, so the properties
+// hang on the common base [KPrefixBuilder]. Use with `of`/`into`, e.g. `10 of milli.seconds`,
+// `v into micro.seconds`, or as a rate denominator `meters / milli.seconds`.
 
-/**
- * Creates a pure time value in seconds from any [Number] type.
- *
- * Example:
- * ```kotlin
- * 5.seconds.value   // 5.0
- * 5L.seconds.value  // 5.0
- * 5.0f.seconds.value // 5.0
- * ```
- */
-val Number.seconds: KTimeUnitInstance get() = of(this, KTimeUnit.SECOND)
+private fun prefixedTime(builder: KPrefixBuilder, unit: KTimeUnit): KTimeUnitInstance =
+    timeUnitInstanceOf(builder.prefix.factor * unit.baseValue)
 
-/** Creates a pure time value in minutes. Example: `2.minutes.value // 120.0` (normalized to seconds). */
-val Number.minutes: KTimeUnitInstance get() = of(this, KTimeUnit.MINUTE)
+/** Prefixed seconds, e.g. `milli.seconds` = 0.001 s, `kilo.seconds` = 1000 s. */
+val KPrefixBuilder.seconds: KTimeUnitInstance get() = prefixedTime(this, KTimeUnit.SECOND)
 
-/** Creates a pure time value in hours. Example: `2.hours.value // 7200.0` (normalized to seconds). */
-val Number.hours: KTimeUnitInstance get() = of(this, KTimeUnit.HOUR)
+/** Prefixed minutes, e.g. `kilo.minutes`. */
+val KPrefixBuilder.minutes: KTimeUnitInstance get() = prefixedTime(this, KTimeUnit.MINUTE)
 
-/** Creates a pure time value in days. Example: `1.days.value // 86400.0` (normalized to seconds). */
-val Number.days: KTimeUnitInstance get() = of(this, KTimeUnit.DAY)
+/** Prefixed hours, e.g. `kilo.hours`. */
+val KPrefixBuilder.hours: KTimeUnitInstance get() = prefixedTime(this, KTimeUnit.HOUR)
+
+/** Prefixed days, e.g. `kilo.days`. */
+val KPrefixBuilder.days: KTimeUnitInstance get() = prefixedTime(this, KTimeUnit.DAY)

@@ -15,7 +15,6 @@ package org.pcsoft.framework.kunit.time
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTarget
 import org.pcsoft.framework.kunit.KUnitTerm
 import java.time.Duration
 import java.time.temporal.TemporalUnit
@@ -50,19 +49,10 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
     KUnitInstance<KTimeUnitInstance>, KUnitMeasurable by baseInstanceOf(duration) {
 
     /**
-     * Converts [value] into the given unit or prefixed unit - see [KMixedUnitInstance.valueAs] for the exact
-     * matching rules.
-     *
-     * @throws IllegalStateException if [target] does not belong to the time group.
-     *
-     * Example:
-     * ```kotlin
-     * val t = 2.hours
-     * t.valueAs(KTimeUnit.MINUTE)                        // 120.0
-     * t.valueAs(KUnitPrefix.MILLI with KTimeUnit.SECOND) // 7 200 000.0 (ms)
-     * ```
+     * Returns a new time value with [value] (seconds) scaled by [factor]. Backs number-times-unit
+     * construction (`10 of milli.seconds`).
      */
-    override fun valueAs(target: KUnitTarget): Double = toUnit().valueAs(target)
+    override fun scaledBy(factor: Double): KTimeUnitInstance = timeUnitInstanceOf(value * factor)
 
     /**
      * Adds two durations, automatically converting between different [KTimeUnit]s since both operands
@@ -97,19 +87,6 @@ class KTimeUnitInstance internal constructor(internal val duration: Duration) :
 
     /** Base-unit representation, e.g. `"7200.0 s"` for two hours. */
     override fun toString(): String = toUnit().toString()
-
-    /**
-     * Representation in the given unit or prefixed unit - see [valueAs] for the matching rules.
-     *
-     * @throws IllegalStateException under the same conditions as [valueAs].
-     *
-     * Example:
-     * ```kotlin
-     * 2.hours.toString(KTimeUnit.HOUR)   // "2.0 h"
-     * 2.hours.toString(KTimeUnit.MINUTE) // "120.0 min"
-     * ```
-     */
-    override fun toString(target: KUnitTarget): String = toUnit().toString(target)
 
     // --- java.time.Duration facade -------------------------------------------------------------
 

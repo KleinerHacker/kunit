@@ -12,31 +12,19 @@
 
 package org.pcsoft.framework.kunit.distance
 
-import org.pcsoft.framework.kunit.KDerivedUnit
+import org.pcsoft.framework.kunit.KPrefixBuilder
 
-// Area (exponent 2) creator extension properties for the derived special units (are/hectare/acre).
-//
-// There are intentionally NO squareXxx creators (e.g. squareMeters, squareMiles): a plain area is
-// built via the group-agnostic power operation, e.g. `200.meters pow 2` or `1.miles pow 2`
-// (see KDistanceUnitInstance.pow / KMixedUnitInstance.pow). The derived units below carry their own
-// name/symbol/conversion factor and therefore remain dedicated creators.
+// Prefixed, value-1 templates for the named area special units (e.g. `milli.hectares`). The plain
+// per-length area has no prefixed token (build it via `pow`, e.g. `10 of kilo.meters pow 2`).
 
-private fun areaFrom(value: Number, derived: KDerivedUnit<KDistanceUnit>): KAreaUnitInstance = areaOf(value.toDouble() * derived.baseValue)
+private fun prefixedArea(builder: KPrefixBuilder, squareMeters: Double): KAreaUnitInstance =
+    areaOf(builder.prefix.factor * squareMeters)
 
-/**
- * Creates a pure area value (exponent 2) in ares. Example:
- * `5.ares.valueAs(KDistanceDerivedUnit.ARE) // 5.0`.
- */
-val Number.ares: KAreaUnitInstance get() = areaFrom(this, KDistanceDerivedUnit.ARE)
+/** Prefixed ares, e.g. `deca.ares`. */
+val KPrefixBuilder.ares: KAreaUnitInstance get() = prefixedArea(this, 100.0)
 
-/**
- * Creates a pure area value (exponent 2) in hectares. Example:
- * `5.hectares.value // 50000.0` (normalized to square meters).
- */
-val Number.hectares: KAreaUnitInstance get() = areaFrom(this, KDistanceDerivedUnit.HECTARE)
+/** Prefixed hectares, e.g. `kilo.hectares`. */
+val KPrefixBuilder.hectares: KAreaUnitInstance get() = prefixedArea(this, 10_000.0)
 
-/**
- * Creates a pure area value (exponent 2) in acres. Example:
- * `1.acres.value // 4046.8564224` (normalized to square meters).
- */
-val Number.acres: KAreaUnitInstance get() = areaFrom(this, KDistanceDerivedUnit.ACRE)
+/** Prefixed acres. */
+val KPrefixBuilder.acres: KAreaUnitInstance get() = prefixedArea(this, 4046.8564224)
