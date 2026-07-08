@@ -1,0 +1,102 @@
+/*
+ * Copyright (c) KleinerHacker alias Pfeiffer C Soft 2026.
+ * This work is licensed under the Apache License, Version 2.0.
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, this software is distributed on an “AS IS” BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations.
+ */
+
+/* ==========================================================================
+   KUnit brand theme — colors derived from the logo
+   Blue      #0070f0   (primary blue of the "K")
+   Deep blue #0048c0
+   Purple    #9333ea   (accent, lower stroke of the "K")
+   Navy      #0a1a30   (dark base color)
+   ========================================================================== */
+
+:root {
+  --kunit-blue:       #0070f0;
+  --kunit-blue-deep:  #0048c0;
+  --kunit-blue-light: #4d9bff;
+  --kunit-purple:     #9333ea;
+  --kunit-purple-lt:  #b975f5;
+  --kunit-navy:       #0a1a30;
+  --kunit-navy-2:     #10233f;
+}
+
+/* --------------------------------------------------------------------------
+   Light mode
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        var(--kunit-blue);
+  --md-primary-fg-color--light: var(--kunit-blue-light);
+  --md-primary-fg-color--dark:  var(--kunit-blue-deep);
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.7);
+
+  --md-accent-fg-color:         var(--kunit-purple);
+  --md-accent-fg-color--transparent: rgba(147, 51, 234, 0.1);
+
+  --md-typeset-a-color:         var(--kunit-blue-deep);
+}
+
+/* --------------------------------------------------------------------------
+   Dark mode (slate) — navy header, brighter blue/purple for contrast
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        var(--kunit-navy);
+  --md-primary-fg-color--light: var(--kunit-navy-2);
+  --md-primary-fg-color--dark:  #050d19;
+  --md-primary-bg-color:        #ffffff;
+
+  --md-accent-fg-color:         var(--kunit-purple-lt);
+  --md-accent-fg-color--transparent: rgba(185, 117, 245, 0.12);
+
+  --md-typeset-a-color:         var(--kunit-blue-light);
+
+  /* tint the page background slightly toward navy */
+  --md-default-bg-color:        #0c1626;
+  --md-default-bg-color--light: #0c1626;
+}
+
+/* Gradient accent on the top tab-bar / section links to widen the spectrum */
+[data-md-color-scheme="default"] .md-tabs {
+  background: linear-gradient(90deg, var(--kunit-blue) 0%, var(--kunit-blue-deep) 55%, var(--kunit-purple) 100%);
+}
+[data-md-color-scheme="slate"] .md-tabs {
+  background: linear-gradient(90deg, var(--kunit-navy) 0%, var(--kunit-blue-deep) 60%, var(--kunit-purple) 100%);
+}
+
+/* Active nav / accent details */
+.md-nav__link--active,
+.md-nav__link:focus,
+.md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* --------------------------------------------------------------------------
+   Replace the header site title text with the banner wordmark
+   (light variant, since the header background is always dark/colored)
+   -------------------------------------------------------------------------- */
+.md-header__title .md-header__topic > .md-ellipsis {
+  position: relative;
+  color: transparent;               /* hide the "KUnit" text */
+  white-space: nowrap;
+}
+.md-header__title .md-header__topic:first-child > .md-ellipsis::after {
+  content: "";
+  display: inline-block;
+  height: 2.2rem;
+  aspect-ratio: 773 / 338;          /* banner.png native ratio */
+  vertical-align: middle;
+  background: url("../assets/images/banner-light.png") left center / contain no-repeat;
+}
+
+/* keep the wordmark from being clipped on small screens */
+.md-header__title {
+  overflow: visible;
+}
