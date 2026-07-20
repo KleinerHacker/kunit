@@ -92,16 +92,14 @@ classDiagram
         <<enum>>
         Quetta ... Quecto
     }
-    class KDerivedUnit {
-        <<interface>>
-        +referenceUnit: KUnit
-        +exponent: Int
-        +baseValue: Double
+    class KPrefixBuilder {
+        <<abstract>>
+        +prefix: KUnitPrefix
     }
 
     KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
-    KDerivedUnit --> KUnit : referenceUnit
+    KPrefixBuilder --> KUnitPrefix : prefix
 
     class KDistanceUnit {
         <<enum>>
@@ -112,15 +110,9 @@ classDiagram
         +scaledBy(factor)
         +plus() minus() times() div()
     }
-    class KDistanceDerivedUnit {
-        <<enum>>
-        HECTARE, ARE, ACRE, LITER, ...
-    }
 
     KUnit <|.. KDistanceUnit
-    KDerivedUnit <|.. KDistanceDerivedUnit
     KLengthUnitInstance *-- KMixedUnitInstance : delegates to
-    KDistanceDerivedUnit --> KDistanceUnit : referenceUnit
 ```
 
 ### 包结构

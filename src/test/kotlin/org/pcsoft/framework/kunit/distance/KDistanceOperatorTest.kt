@@ -12,18 +12,7 @@
 
 package org.pcsoft.framework.kunit.distance
 
-import org.pcsoft.framework.kunit.KPrefixBuilder
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.deca
-import org.pcsoft.framework.kunit.deci
-import org.pcsoft.framework.kunit.giga
-import org.pcsoft.framework.kunit.hecto
-import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.nano
 import org.pcsoft.framework.kunit.of
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -36,12 +25,11 @@ import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
 /**
- * Full behaviour matrix for the distance group under the `of`/`into`/builder DSL: length construction and
- * reading, the `+`/`-`/`*`/`/` operators (typed dimension transitions), comparisons, `pow`, the prefix
- * builders (incl. the diminishing/augmenting split) and the named area/volume special units.
+ * All distance operators: `+`/`-` (length arithmetic), `*`/`/` (typed dimension transitions), comparison,
+ * `pow`, and the compile-time-safe cross-dimension failure via the engine.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class KDistanceTest {
+class KDistanceOperatorTest {
 
     /** All length bare tokens paired with their base value (meters per 1 unit), for expected-value maths. */
     private val lengthTokens: List<Pair<KLengthUnitInstance, Double>> = listOf(
@@ -58,37 +46,12 @@ class KDistanceTest {
         parsecs to KDistanceUnit.PARSEC.baseValue
     )
 
-    /** All 24 SI prefix builders paired with their scale factor. */
-    private val allPrefixes: List<Pair<KPrefixBuilder, Double>> = listOf(
-        deca to 10.0, hecto to 100.0, kilo to 1_000.0, mega to 1e6, giga to 1e9,
-        deci to 0.1, centi to 0.01, milli to 1e-3, micro to 1e-6, nano to 1e-9
-    )
-
     private fun rel(expected: Double): Double = (abs(expected) * 1e-9).coerceAtLeast(1e-12)
 
     private fun lengthPairs(): List<Array<Any>> =
         lengthTokens.flatMap { a -> lengthTokens.map { b -> arrayOf<Any>(a.first, a.second, b.first, b.second) } }
 
     private fun tokens(): List<Array<Any>> = lengthTokens.map { arrayOf<Any>(it.first, it.second) }
-
-    private fun prefixes(): List<Array<Any>> = allPrefixes.map { arrayOf<Any>(it.first, it.second) }
-
-    /** `n of <unit>` normalizes to meters as `n * baseValue`, and reads back as `n` in its own unit. */
-    @ParameterizedTest
-    @MethodSource("tokens")
-    fun `construction and round-trip read`(token: KLengthUnitInstance, base: Double) {
-        val v = 7 of token
-        assertEquals(7.0 * base, v.value, rel(7.0 * base))
-        assertEquals(7.0, v into token, rel(7.0))
-    }
-
-    /** Converting one length unit into every other equals `n * from.base / to.base`. */
-    @ParameterizedTest
-    @MethodSource("lengthPairs")
-    fun `conversion matrix`(from: KLengthUnitInstance, fromBase: Double, to: KLengthUnitInstance, toBase: Double) {
-        val expected = 3.0 * fromBase / toBase
-        assertEquals(expected, (3 of from) into to, rel(expected))
-    }
 
     /** Adding two lengths of any units normalizes both and returns a length equal to the summed meters. */
     @ParameterizedTest
@@ -157,59 +120,59 @@ class KDistanceTest {
         assertEquals(2.0, back.value, 1e-9)
     }
 
-    /** Every SI prefix builder scales a meter template by its factor (`1 of kilo.meters == 1000 m`). */
-    @ParameterizedTest
-    @MethodSource("prefixes")
-    fun `prefix standalone on meters`(builder: KPrefixBuilder, factor: Double) {
-        assertEquals(factor, (1 of builder.meters).value, rel(factor))
-    }
-
-    /** Prefix x length-unit matrix (kilo/milli): `n of kilo.<unit>` = `n * 1000 * base`, read back as `n`. */
-    @ParameterizedTest
-    @MethodSource("tokens")
-    fun `prefix times unit`(@Suppress("UNUSED_PARAMETER") token: KLengthUnitInstance, base: Double) {
-        // Reconstruct the prefixed template from the same unit via the meter-relative base value.
-        val kiloTemplate = kilo.meters.scaledBy(base) // 1000 * base meters, i.e. kilo.<unit>
-        assertEquals(1000.0 * base * 4.0, (4 of kiloTemplate).value, rel(1000.0 * base * 4.0))
-    }
-
-    /** The named area special units build and read via `of`/`into` (2 ha = 20 000 m²). */
-    @Test
-    fun `area special units`() {
-        assertEquals(20_000.0, (2 of hectares).value, 1e-6)
-        assertEquals(2.0, (2 of hectares) into hectares, 1e-9)
-        assertEquals(2.0, (20_000 of meters * (1 of meters)).let { it into hectares }, 1e-9)
-        assertEquals(100.0, (1 of hectares) into ares, 1e-9)
-    }
-
-    /** The named volume special units build and read via `of`/`into` (1 L = 0.001 m³). */
-    @Test
-    fun `volume special units and milli prefix`() {
-        assertEquals(0.001, (1 of liters).value, 1e-12)
-        assertEquals(1000.0, (1 of meters pow 3) into liters, 1e-6)
-        assertEquals(1.0, (1 of milli.liters).value / 1e-6, 1e-9) // 1 mL = 1e-6 m³
-    }
-
-    /** `of` preserves the strong static type of the template. */
-    @Test
-    fun `of preserves type`() {
-        assertIs<KLengthUnitInstance>(5 of meters)
-        assertIs<KAreaUnitInstance>(5 of hectares)
-        assertIs<KVolumeUnitInstance>(5 of liters)
-        assertIs<KLengthUnitInstance>(5 of kilo.meters)
-    }
-
-    /** `into` across incompatible dimensions (length read as area) fails with IllegalStateException. */
-    @Test
-    fun `into incompatible dimension fails`() {
-        assertFailsWith<IllegalStateException> { (1 of meters) into hectares }
-        assertFailsWith<IllegalStateException> { (1 of hectares) into meters }
-    }
-
     /** Adding an area and a length (same group, different exponent) is a compile error, checked here via the
      *  runtime mixed-engine equivalent failing. */
     @Test
     fun `area plus length is invalid via engine`() {
         assertFailsWith<IllegalStateException> { (1 of hectares).toUnit() + (1 of meters).toUnit() }
+    }
+
+    /** The typed length leaf operators: `length * area = volume`, `length * volume`/`length / area`/
+     *  `length / volume` escape to the general distance type at the matching exponent. */
+    @Test
+    fun `length leaf operators`() {
+        val len = 3 of meters
+        val area = (2 of meters) * (2 of meters)                    // 4 m²
+        val vol = (2 of meters) * (2 of meters) * (2 of meters)     // 8 m³
+        assertIs<KVolumeUnitInstance>(len * area)                   // length * area = volume
+        assertEquals(12.0, (len * area).value, 1e-9)
+        assertEquals(4, (len * vol).exponent)                      // length * volume = m⁴
+        assertEquals(-1, (len / area).exponent)                    // length / area = m⁻¹
+        assertEquals(-2, (len / vol).exponent)                     // length / volume = m⁻²
+    }
+
+    /** The typed area leaf operators: `+`/`-`/comparison and the `*`/`/` transitions. */
+    @Test
+    fun `area leaf operators`() {
+        val a1 = (2 of meters) * (2 of meters) // 4 m²
+        val a2 = (3 of meters) * (3 of meters) // 9 m²
+        val len = 2 of meters
+        val vol = (2 of meters) * (2 of meters) * (2 of meters) // 8 m³
+        assertEquals(13.0, (a1 + a2).value, 1e-9)
+        assertEquals(-5.0, (a1 - a2).value, 1e-9)
+        assertTrue(a2 > a1)
+        assertEquals(4, (a1 * a2).exponent)                    // area * area = m⁴
+        assertEquals(5, (a1 * vol).exponent)                   // area * volume = m⁵
+        assertIs<KLengthUnitInstance>(a1 / len)                // area / length = length
+        assertEquals(2.0, (a1 / len).value, 1e-9)
+        assertTrue((a1 / a2).units.isEmpty())                  // area / area = dimensionless
+        assertEquals(-1, (a1 / vol).exponent)                  // area / volume = m⁻¹
+    }
+
+    /** The typed volume leaf operators: `+`/`-`/comparison and the `*`/`/` transitions. */
+    @Test
+    fun `volume leaf operators`() {
+        val v1 = (2 of meters) * (2 of meters) * (2 of meters) // 8 m³
+        val v2 = (1 of meters) * (1 of meters) * (1 of meters) // 1 m³
+        val len = 2 of meters
+        val area = (2 of meters) * (2 of meters) // 4 m²
+        assertEquals(9.0, (v1 + v2).value, 1e-9)
+        assertEquals(7.0, (v1 - v2).value, 1e-9)
+        assertTrue(v1 > v2)
+        assertEquals(4, (v1 * len).exponent)                   // volume * length = m⁴
+        assertEquals(5, (v1 * area).exponent)                  // volume * area = m⁵
+        assertEquals(6, (v1 * v2).exponent)                    // volume * volume = m⁶
+        assertIs<KAreaUnitInstance>(v1 / len)                  // volume / length = area
+        assertTrue((v1 / v2).units.isEmpty())                  // volume / volume = dimensionless
     }
 }

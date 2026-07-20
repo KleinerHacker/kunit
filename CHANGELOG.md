@@ -4,6 +4,9 @@
 
 ### Changed
 
+- **README architecture diagram reconciled with the current code.** The class diagram in all four READMEs
+  (`README.md` + ko/zh/ja) no longer references the removed `KDerivedUnit`/`KDistanceDerivedUnit` types;
+  it now shows the real `KPrefixBuilder` → `KUnitPrefix` relationship instead.
 - **Breaking — construction/reading DSL fully replaced by `of` / `into`.** Number and unit are now
   strictly separated: build with `number of <unit-expression>` and read with `value into <unit>`.
   - **Construction:** `10.5 of kilo.meters`, `10.5 of kilo.meters / milli.seconds`, `2 of hectares`,
@@ -24,6 +27,17 @@
     `KDerivedUnit` targets. Constructed groups (speed, data rate) drop their spelled-out composite tokens
     entirely - a speed/rate is written as an expression (`meters / seconds`, `bytes / seconds`); only
     genuinely single-named speeds (`knots`, `mach`, `speedOfLight`) remain as tokens.
+- **Tests reorganized per aspect.** Each group's single aggregate test class was split into the
+  group-named per-aspect classes mandated by the test rules — `K<Group>UnitSystemTest` (the
+  `K<Group>UnitInstance` surface), `K<Group>OperatorTest` (all operators), `K<Group>UnitTest` (the
+  concrete units / bare values), `K<Group>PrefixTest` (the prefixes) — with a class omitted where the
+  group has no such logic (e.g. no `PrefixTest` for the composed speed/data-rate groups, and only
+  `System`/`Operator` for the root mixed unit). No behavioural change; coverage is unchanged.
+- **Internal simplification (no behavioural change).** Removed unreachable defensive fallbacks so the
+  code carries no dead branches: the in-hierarchy `KDistanceUnitInstance.toLength`/`toArea`/`toVolume`
+  now use a direct cast (the exponent check already guarantees the concrete leaf type), and
+  `combineUnits` inserts the first operand's terms directly (a single mixed unit never repeats a unit).
+  Test coverage is now 100 % across line, branch, method and class.
 
 ### Removed
 

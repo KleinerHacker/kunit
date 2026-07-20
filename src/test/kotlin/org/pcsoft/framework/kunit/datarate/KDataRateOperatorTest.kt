@@ -12,14 +12,13 @@
 
 package org.pcsoft.framework.kunit.datarate
 
+import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.storage.KStorageUnit
 import org.pcsoft.framework.kunit.storage.KStorageUnitInstance
 import org.pcsoft.framework.kunit.storage.bits
 import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.kibi
 import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.time.hours
@@ -33,14 +32,15 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertIs
+import kotlin.test.assertTrue
 
 /**
- * Behaviour matrix for the constructed data-rate group (storage·time⁻¹): core→composed
- * (`storage / time = data rate`) across a storage×time matrix, composed→core decomposition, the prefixed
- * numerator (`mega.bytes / seconds`, `kibi.bytes / seconds`), whole-unit tokens, and `of`/`into`.
+ * The typed cross-group data-rate operators: core→composed (`storage / time = data rate`) across a
+ * storage×time matrix, composed→core decomposition (`rate * time`, `storage / rate`), and the
+ * invalid-shape guard.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class KDataRateTest {
+class KDataRateOperatorTest {
 
     private val storages = listOf(
         bytes to KStorageUnit.BYTE.baseValue,
@@ -54,7 +54,7 @@ class KDataRateTest {
 
     private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-12)
     private fun matrix(): List<Array<Any>> =
-        storages.flatMap { s -> times.map { t -> arrayOf<Any>(s.first, s.second, t.first, t.second) } }
+        storages.flatMap { s -> times.map { t -> arrayOf(s.first, s.second, t.first, t.second) } }
 
     /** core→composed: `storage / time` is a typed data rate whose B/s value is `s.base / t.base`. */
     @ParameterizedTest
@@ -85,27 +85,35 @@ class KDataRateTest {
         assertEquals(60.0, time into seconds, 1e-9)
     }
 
-    /** Prefixed numerator, klammerfrei: `5 of mega.bytes / seconds` and `10 of kibi.bytes / seconds`. */
-    @Test
-    fun `prefixed numerator rate`() {
-        val a = 5 of mega.bytes / seconds
-        assertIs<KDataRateUnitInstance>(a)
-        assertEquals(5e6, a.value, 1e-3)
-        val b = 10 of kibi.bytes / seconds
-        assertEquals(10.0 * 1024, b.value, 1e-9)
-    }
-
-    /** Data rates are built as expressions; byte/bit rate reads back via `bits / seconds`. */
-    @Test
-    fun `expression rates and conversion`() {
-        assertEquals(10.0, (10 of bytes / seconds).value, 1e-9)
-        assertEquals(80.0, ((100 of bytes) / (10 of seconds)) into (bits / seconds), 1e-9)
-    }
-
-    /** A non-rate shape (storage² / time) fails to become a data rate. */
+    /** A non-rate shape (storage² / time, or a single storage term) fails to become a data rate. */
     @Test
     fun `invalid rate decomposition fails`() {
         val sq = (2 of bytes).toUnit() * (2 of bytes).toUnit()
         assertFailsWith<IllegalStateException> { (sq / (1 of seconds).toUnit()).toDataRate() }
+        // a single storage term (size != 2, no time term) also fails
+        assertFailsWith<IllegalStateException> { (100 of bytes).toUnit().toDataRate() }
+        // two terms, storage present, but the time term has the wrong exponent (+1, not -1)
+        assertFailsWith<IllegalStateException> { ((1 of bytes).toUnit() * (1 of seconds).toUnit()).toDataRate() }
+    }
+
+    /** Same-type data-rate operators: `+`/`-`, comparison, and `rate*rate`/`rate/rate` escaping to a mixed unit. */
+    @Test
+    fun `rate same-type operators`() {
+        val r1 = (100 of bytes) / (10 of seconds) // 10 B/s
+        val r2 = (20 of bytes) / (10 of seconds)  // 2 B/s
+        assertEquals(12.0, (r1 + r2).value, 1e-9)
+        assertEquals(8.0, (r1 - r2).value, 1e-9)
+        assertTrue(r1 > r2)
+        assertIs<KMixedUnitInstance>(r1 * r2)
+        assertIs<KMixedUnitInstance>(r1 / r2)
+    }
+
+    /** The commutative `time * data rate = storage`. */
+    @Test
+    fun `time times rate is storage`() {
+        val r = (100 of bytes) / (10 of seconds) // 10 B/s
+        val amount = (60 of seconds) * r
+        assertIs<KStorageUnitInstance>(amount)
+        assertEquals(600.0, amount into bytes, 1e-9)
     }
 }

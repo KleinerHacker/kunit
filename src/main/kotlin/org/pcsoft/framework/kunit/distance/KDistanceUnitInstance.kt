@@ -85,7 +85,8 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
      */
     fun toLength(): KLengthUnitInstance {
         check(exponent == 1) { "KDistanceUnitInstance $this is not a length (expected exponent 1, was $exponent)" }
-        return this as? KLengthUnitInstance ?: KLengthUnitInstance(instance)
+        // Exponent 1 is only ever produced as a KLengthUnitInstance (see distanceOf), so the cast holds.
+        return this as KLengthUnitInstance
     }
 
     /**
@@ -97,7 +98,8 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
      */
     fun toArea(): KAreaUnitInstance {
         check(exponent == 2) { "KDistanceUnitInstance $this is not an area (expected exponent 2, was $exponent)" }
-        return this as? KAreaUnitInstance ?: KAreaUnitInstance(instance)
+        // Exponent 2 is only ever produced as a KAreaUnitInstance (see distanceOf), so the cast holds.
+        return this as KAreaUnitInstance
     }
 
     /**
@@ -109,7 +111,8 @@ open class KDistanceUnitInstance internal constructor(internal val instance: KMi
      */
     fun toVolume(): KVolumeUnitInstance {
         check(exponent == 3) { "KDistanceUnitInstance $this is not a volume (expected exponent 3, was $exponent)" }
-        return this as? KVolumeUnitInstance ?: KVolumeUnitInstance(instance)
+        // Exponent 3 is only ever produced as a KVolumeUnitInstance (see distanceOf), so the cast holds.
+        return this as KVolumeUnitInstance
     }
 
     /**

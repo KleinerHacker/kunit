@@ -259,7 +259,8 @@ infix fun KUnitMeasurable.pow(n: Int): KMixedUnitInstance = toUnit() pow n
 private fun combineUnits(a: List<KUnitTerm>, b: List<KUnitTerm>, sign: Int): List<KUnitTerm> {
     val exponents = LinkedHashMap<KUnit, Int>()
 
-    for (term in a) exponents[term.unit] = (exponents[term.unit] ?: 0) + term.exponent
+    // A single mixed unit never carries the same KUnit twice, so `a`'s terms are inserted directly.
+    for (term in a) exponents[term.unit] = term.exponent
     for (term in b) exponents[term.unit] = (exponents[term.unit] ?: 0) + sign * term.exponent
 
     return exponents.filterValues { it != 0 }.map { (unit, exponent) -> KUnitTerm(unit, exponent) }
