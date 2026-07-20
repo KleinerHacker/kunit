@@ -36,7 +36,7 @@
   * `KLengthDerivedUnit` (area: are, hectare, acre; volume: liter, US/imperial gallon, US fluid ounce, oil barrel)
 * All length types consistently carry the `K` prefix naming scheme (`KLengthUnit`, `KLengthUnitInstance`, `KLengthDerivedUnit`)
 * Complete test suite for all classes mentioned above (root package + `length` package)
-* `CLAUDE.md` extended with the architectural decisions made as part of this prototype
+* `.claude/CLAUDE.md` extended with the architectural decisions made as part of this prototype
 * Sub-package `org.pcsoft.framework.kunit.time` (physical quantity time):
   * `KTimeUnit` (second, minute, hour, day), base unit second
   * `KTimeUnitInstance` - a 100 % wrapper around `java.time.Duration` (the `Duration` is the source of
@@ -48,7 +48,7 @@
   * Note: values outside roughly `[1 ns, Long.MAX seconds]` are not representable by the Duration backing
   * Complete test suite (`time` package) and a dedicated MkDocs page (`docs/docs/units/time.md` + ko/zh/ja);
     the pre-existing throwaway private `TimeUnit` test enums were migrated to the official `KTimeUnit`
-  * `CLAUDE.md` extended with the per-unit MkDocs page convention
+  * `.claude/CLAUDE.md` extended with the per-unit MkDocs page convention
 
 * Number-extension creators are extension **properties** (`5.meters`, `2.hours`); the `toXxx()`
   conversions remain functions
@@ -86,7 +86,7 @@
     `KMixedUnitInstance.resolve()`
   * Complete parameterized test suite (incl. decimal vs. binary 1000/1024, cross-group storage × time) and a
     dedicated MkDocs page (`docs/docs/units/storage.md` + ko/zh/ja)
-  * `CLAUDE.md` reconciled with the actual code (target system, wrapper shapes, root file layout, naming rule)
+  * `.claude/CLAUDE.md` reconciled with the actual code (target system, wrapper shapes, root file layout, naming rule)
 
 * Sub-package `org.pcsoft.framework.kunit.datarate` (second **constructed** quantity: data rate =
   storage·time⁻¹):

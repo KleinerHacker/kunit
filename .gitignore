@@ -41,9 +41,6 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-### Claude Code ###
-.claude
-
 ### MkDocs ###
 docs/docs/dokka
 docs/docs/licences

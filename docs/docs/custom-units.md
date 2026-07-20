@@ -192,7 +192,7 @@ val density = (5 of kilograms) / (2 of liters)
 - Cover the group with the parameterized cross-matrix test procedure, built through `of`/`into` (never the
   raw enum): unit → unit conversion, one method per operator and per comparison over every unit pair, the
   prefix-builder matrix, `of` type-preservation, and `into` error cases — see the "Parameterized
-  cross-matrix test procedure" section in `CLAUDE.md`.
+  cross-matrix test procedure" section in `../../.claude/CLAUDE.md`.
 - Document every public member in English, in Markdown, with examples where useful - especially operators.
 - If the group is magnitude-restricted (like storage, which rejects diminishing prefixes), hang its unit
   properties on `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` instead of the base `KPrefixBuilder`,

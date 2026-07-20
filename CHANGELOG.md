@@ -90,7 +90,7 @@
 
 ### Changed
 
-- **`CLAUDE.md` reconciled with the actual code**: documented `KUnitTarget`, `KUnitTerm`, `KScaledUnit`/
+- **`.claude/CLAUDE.md` reconciled with the actual code**: documented `KUnitTarget`, `KUnitTerm`, `KScaledUnit`/
   `KScaledDerivedUnit` + `with`, the `KDerivedUnit` fields and per-group `object`, the real root-package
   file layout (no `KUnitInstance.kt`/`KDerivedUnit.kt`), the "unit-enum = group name / wrapper = dimension
   name" rule, the three wrapper shapes (dimensioned / `Duration`-backed / plain one-dimensional), and that
@@ -133,7 +133,7 @@
   `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the `K*UnitBareValues.kt` aliases
   are now fully covered and every unit × every prefix runs through the real DSL. The distance area/volume
   matrices now raise a prefixed length via `pow` (`(5 kilo meters) pow 2`). Test-construction policy
-  documented in `CLAUDE.md`.
+  documented in `.claude/CLAUDE.md`.
 - **Breaking:** the length group was renamed to **distance** — package
   `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
   `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the
@@ -195,7 +195,7 @@
   prefix × unit matrix plus one standalone test per SI prefix, a unit → every-other-unit conversion
   matrix, one method per operator (`+`/`-`/`*`/`/`) and per comparison (`==`/`!=`/`<`/`<=`/`>`/`>=`) over
   every unit pair, per-unit `toString`/`toString(target)`, and a length × time cross-group matrix for the
-  mixed unit. The procedure is documented in `CLAUDE.md` as mandatory for future groups.
+  mixed unit. The procedure is documented in `.claude/CLAUDE.md` as mandatory for future groups.
 - Per-group SI-prefix `infix` constructors (`KLengthUnitPrefix.kt`, `KTimeUnitPrefix.kt`): `5 kilo meters`
   now returns a `KLengthUnitInstance` directly (and `5 milli seconds` a `KTimeUnitInstance`), rather than an
   intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters` and is the preferred
