@@ -16,7 +16,7 @@
 # Communication Notes
 
 * Every output the AI writes to the console must be in German
-* **Never** implement code directly; always create a plan first
+* NEVER implement code directly; always create a plan first
   * Switch to plan mode on your own if necessary
 
 # Documentation
