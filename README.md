@@ -153,6 +153,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 |---|---|---|
 | Distance | `org.pcsoft.framework.kunit.distance` | Meter (`KDistanceUnit.BASE`) |
 | Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
+| Mass | `org.pcsoft.framework.kunit.mass` | Gram (`KMassUnit.BASE`) |
 | Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
 | Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
 | Temperature Difference | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
@@ -185,6 +186,20 @@ comparison (`length + area`) are a **compile error**, not a runtime failure.
 Raise a unit to a power with the infix `pow` (Kotlin has no overloadable `^`): `(2 of meters) pow 2` is
 `(2 m)² = 4 m²`, `(2 of meters) pow 3` a volume, and `pow` works on every group (`(2 of hours) pow 2`).
 It is the only power syntax — there are no `squareXxx`/`cubicXxx` constructors.
+
+#### Mass (`KMassUnit`)
+
+Gram (base), tonne, metric carat, and the avoirdupois (grain, dram, ounce, pound, stone, US/UK
+hundredweight, short/long ton, slug), troy (pennyweight, troy ounce, troy pound), historical/regional
+(German pound, Zentner, Lot, jin/catty, liang/tael, momme, kan) and scientific (dalton/u) units. The base
+unit is the **gram**, not the kilogram — the kilogram is simply `kilo.grams`. Every unit takes the full
+SI prefix set; `+`/`-`/comparison and `equals` work on the normalized gram value.
+
+```kotlin
+val m = 2 of kilo.grams          // 2000 g (the kilogram is `kilo.grams`)
+m into pounds                    // ≈ 4.409
+(1 of kilo.grams) == (1000 of grams) // true
+```
 
 #### Temperature (`KTemperatureUnit`)
 

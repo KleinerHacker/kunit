@@ -18,15 +18,24 @@ import org.pcsoft.framework.kunit.KAugmentingPrefixBuilder
 // `bytes`/`bits` properties hang **only** on the augmenting (supra-unity) SI builder and on the binary
 // IEC builder - never on the diminishing builder. That makes `kilo.bytes`/`kibi.bytes` valid while
 // `milli.bytes` is a **compile error** (there is no `bytes` property reachable from `milli`).
+//
+// Storage hangs its templates on two different builder types (SI augmenting + IEC binary), so it uses
+// one helper per builder instead of the single `prefixed<Name>` helper of the single-builder groups.
+
+private fun augmentedStorage(builder: KAugmentingPrefixBuilder, unit: KStorageUnit): KStorageUnitInstance =
+    storageOf(builder.prefix.factor * unit.baseValue)
+
+private fun binaryStorage(builder: KStorageBinaryPrefixBuilder, unit: KStorageUnit): KStorageUnitInstance =
+    storageOf(builder.factor * unit.baseValue)
 
 /** Decimal SI-prefixed bytes, e.g. `kilo.bytes` = 1000 B, `mega.bytes` = 1e6 B. */
-val KAugmentingPrefixBuilder.bytes: KStorageUnitInstance get() = storageOf(prefix.factor * KStorageUnit.BYTE.baseValue)
+val KAugmentingPrefixBuilder.bytes: KStorageUnitInstance get() = augmentedStorage(this, KStorageUnit.BYTE)
 
 /** Decimal SI-prefixed bits, e.g. `kilo.bits`. */
-val KAugmentingPrefixBuilder.bits: KStorageUnitInstance get() = storageOf(prefix.factor * KStorageUnit.BIT.baseValue)
+val KAugmentingPrefixBuilder.bits: KStorageUnitInstance get() = augmentedStorage(this, KStorageUnit.BIT)
 
 /** Binary IEC-prefixed bytes, e.g. `kibi.bytes` = 1024 B, `mebi.bytes` = 1 048 576 B. */
-val KStorageBinaryPrefixBuilder.bytes: KStorageUnitInstance get() = storageOf(factor * KStorageUnit.BYTE.baseValue)
+val KStorageBinaryPrefixBuilder.bytes: KStorageUnitInstance get() = binaryStorage(this, KStorageUnit.BYTE)
 
 /** Binary IEC-prefixed bits, e.g. `kibi.bits`. */
-val KStorageBinaryPrefixBuilder.bits: KStorageUnitInstance get() = storageOf(factor * KStorageUnit.BIT.baseValue)
+val KStorageBinaryPrefixBuilder.bits: KStorageUnitInstance get() = binaryStorage(this, KStorageUnit.BIT)

@@ -4,6 +4,18 @@
 
 ### Added
 
+- **New `Mass` unit group** (`org.pcsoft.framework.kunit.mass`): a plain, one-dimensional native group
+  with base unit **gram** (`KMassUnit.BASE == KMassUnit.GRAM`). The **kilogram is deliberately not a
+  dedicated unit** — it is simply `kilo.grams` (the SI prefix `kilo` on the gram), like every other
+  decimal magnitude. Units span metric (gram, tonne, metric carat), avoirdupois (grain, dram, ounce,
+  pound, stone, US/UK hundredweight, short/long ton, slug), troy/apothecary (pennyweight, troy ounce,
+  troy pound), historical/regional (German pound, Zentner, Lot, jin/catty, liang/tael, momme, kan) and
+  scientific (dalton/u). Build and read with `of`/`into` through the bare tokens (`grams`, `pounds`,
+  `troyOunces`, `jin`, `daltons`, …); full SI prefix support on every unit; `+`/`-`/comparison operate
+  on the normalized gram value, and `equals`/`hashCode` are by mass quantity
+  (`(1 of kilo.grams) == (1000 of grams)`); `KMixedUnitInstance.toMass()` converts a single mass term
+  back to the pure wrapper. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
 - **New `Temperature Difference` group** (`org.pcsoft.framework.kunit.temperature`): a **linear**
   (offset-free) counterpart to the affine temperature group, modelling a temperature *interval* rather
   than an absolute point. Kelvin only, no prefixes. Built explicitly via `KTemperatureDifference.ofKelvin(…)`

@@ -29,6 +29,8 @@
 * README.md must be up to date for existing units and architecture
   * Supported languages: English, Japanese, Chinese, Korean
 * All user-relevant changes must be documented in CHANGELOG.md
+  * CHANGELOG.md contains ONLY changes the user notices externally (new units, changed public API or behavior)
+  * Purely internal changes (refactoring, private helpers) and documentation/KDoc fixes MUST NOT be listed
 
 # Planning
 

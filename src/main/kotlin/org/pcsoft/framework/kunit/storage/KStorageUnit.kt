@@ -28,9 +28,9 @@ import org.pcsoft.framework.kunit.KUnit
  *
  * Example:
  * ```kotlin
- * 1.bytes.valueAs(bits)                // 8.0
- * (1 kilo bytes).value                 // 1000.0 (decimal)
- * (1 kibi bytes).value                 // 1024.0 (binary)
+ * (1 of bytes) into bits               // 8.0
+ * (1 of kilo.bytes).value              // 1000.0 (decimal)
+ * (1 of kibi.bytes).value              // 1024.0 (binary)
  * ```
  */
 enum class KStorageUnit(override val symbol: String, override val baseValue: Double) : KUnit {

@@ -27,17 +27,16 @@ import org.pcsoft.framework.kunit.KUnitTerm
  * single-target `valueAs`/`toString`). There is no exponent-specialized subtype hierarchy (unlike the
  * distance group) and no `Duration` backing (unlike the time group).
  *
- * Instances are created via the creator extension properties in `KStorageUnitExtensions.kt`
- * (e.g. `5.bytes`, `2.bits`), the SI-prefix `infix` constructors (e.g. `3 kilo bytes`) or the binary
- * `infix` constructors (e.g. `3 kibi bytes`) in `KStorageUnitPrefix.kt`, operator results, or
+ * Instances are created via the bare tokens in `KStorageUnitBareValues.kt` (e.g. `5 of bytes`,
+ * `2 of bits`), the SI-prefixed templates (e.g. `3 of kilo.bytes`) or the binary IEC-prefixed templates
+ * (e.g. `3 of kibi.bytes`) in `KStorageUnitExtensions.kt`, operator results, or
  * [KMixedUnitInstance.toStorage]. The constructor is `internal`; callers must never build one directly.
  *
  * Example:
  * ```kotlin
- * val size = 4 kibi bytes            // 4096 bytes
+ * val size = 4 of kibi.bytes         // 4096 bytes
  * size.value                         // 4096.0 (normalized to bytes)
- * size.valueAs(bits)                 // 32768.0
- * size.valueAs(KStorageBinaryPrefix.KIBI with bytes) // 4.0 (read back in KiB)
+ * size into bits                     // 32768.0
  * ```
  */
 class KStorageUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :

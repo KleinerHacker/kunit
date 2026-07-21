@@ -74,6 +74,7 @@ plugins:
             Constructed Units: 구성된 단위
             Distance: 거리
             Time: 시간
+            Mass: 질량
             Storage: 저장 용량
             Temperature: 온도
             Overview: 개요
@@ -94,6 +95,7 @@ plugins:
             Constructed Units: 构造单位
             Distance: 距离
             Time: 时间
+            Mass: 质量
             Storage: 存储
             Temperature: 温度
             Overview: 概述
@@ -114,6 +116,7 @@ plugins:
             Constructed Units: 構成単位
             Distance: 距離
             Time: 時間
+            Mass: 質量
             Storage: ストレージ
             Temperature: 温度
             Overview: 概要
@@ -131,6 +134,7 @@ nav:
   - Predefined Units:
       - Distance: units/distance.md
       - Time: units/time.md
+      - Mass: units/mass.md
       - Storage: units/storage.md
       - Temperature:
           - Overview: units/temperature-overview.md

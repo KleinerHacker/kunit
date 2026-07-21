@@ -59,7 +59,12 @@ A file `K<UnitName>UnitExtensions.kt` is created. It contains the **prefixed, va
 see the prefix skill), never on `Number`:
 * One property per concrete unit, e.g. `val KPrefixBuilder.meters: K<UnitName>UnitInstance`, so that
   `kilo.meters` / `milli.meters` yield value-1 templates for use with `of`/`into`.
-* Optionally, helper functions related to unit calculation.
+* Each property MUST delegate to a single **private helper** `prefixed<Name>(builder, unit)` that does the
+  `<name>Of(builder.prefix.factor * unit.baseValue)` scaling, instead of inlining the scaling per property
+  (the reference pattern of length/time/mass). A group that hangs templates on **several** builder types
+  (e.g. storage: SI augmenting + IEC binary) uses one such helper per builder type.
+* All construction/reading examples in KDoc MUST use the token verbs `N of unit` / `v into unit`
+  (e.g. `5 of grams`), never `N.unit` number-receiver extensions and never an infix prefix form.
 
 ## Bare Values (Templates)
 
