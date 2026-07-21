@@ -32,12 +32,6 @@
 | 체인 | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
 | 펄롱 | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
 | 천문단위 | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
-| 광초 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
-| 광분 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
-| 광시 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
-| 광일 | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
-| 광주 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
-| 광년 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | 파섹 | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
 | 큐빗 | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
 | 로마 피트 (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
@@ -49,6 +43,21 @@
 | 케이블 길이 | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
 | 베르스타 | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
 | 프로이센 마일 | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
+
+### 빛 이동 거리 (접두사 없는 `light` 그룹)
+
+빛 이동 거리는 접두사가 없는 `light` 빌더로 묶여 있어 `5 of light.seconds`, `3 of light.years`
+처럼 거의 자연어처럼 작성할 수 있습니다. 이들은 어떤 SI 접두사도 받지 않습니다
+(`kilo.lightYears`는 물리적으로 의미가 없기 때문입니다).
+
+| 단위 | 열거값 | 기호 | 토큰 | 1 단위의 미터 값 |
+|---|---|---|---:|---:|
+| 광초 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `light.seconds` | 299792458.0 |
+| 광분 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `light.minutes` | 1.798754748e10 |
+| 광시 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `light.hours` | 1.0792528488e12 |
+| 광일 | `KDistanceUnit.LIGHT_DAY` | `ld` | `light.days` | 2.59020683712e13 |
+| 광주 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `light.weeks` | 1.813144785984e14 |
+| 광년 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `light.years` | 9.4607304725808e15 |
 
 각 `토큰`은 값-1 `KLengthUnitInstance`로, `of`(생성)와 `into`(읽기)에 모두 사용됩니다.
 

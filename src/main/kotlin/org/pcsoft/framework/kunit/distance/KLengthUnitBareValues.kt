@@ -47,23 +47,8 @@ val furlongs: KLengthUnitInstance = lengthOf(KDistanceUnit.FURLONG.baseValue)
 /** 1 astronomical unit ([KDistanceUnit.ASTRONOMICAL_UNIT]). */
 val astronomicalUnits: KLengthUnitInstance = lengthOf(KDistanceUnit.ASTRONOMICAL_UNIT.baseValue)
 
-/** 1 light-second ([KDistanceUnit.LIGHT_SECOND]). */
-val lightSeconds: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_SECOND.baseValue)
-
-/** 1 light-minute ([KDistanceUnit.LIGHT_MINUTE]). */
-val lightMinutes: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_MINUTE.baseValue)
-
-/** 1 light-hour ([KDistanceUnit.LIGHT_HOUR]). */
-val lightHours: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_HOUR.baseValue)
-
-/** 1 light-day ([KDistanceUnit.LIGHT_DAY]). */
-val lightDays: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_DAY.baseValue)
-
-/** 1 light-week ([KDistanceUnit.LIGHT_WEEK]). */
-val lightWeeks: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_WEEK.baseValue)
-
-/** 1 light-year ([KDistanceUnit.LIGHT_YEAR]). */
-val lightYears: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_YEAR.baseValue)
+// Light-travel distances (light-second … light-year) are grouped behind the prefix-free `light`
+// builder instead (`5 of light.seconds`, `3 of light.years`); see KLengthLightUnitBuilder.kt.
 
 /** 1 parsec ([KDistanceUnit.PARSEC]). */
 val parsecs: KLengthUnitInstance = lengthOf(KDistanceUnit.PARSEC.baseValue)

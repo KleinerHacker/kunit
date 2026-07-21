@@ -32,12 +32,6 @@
 | チェーン | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
 | ファーロング | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
 | 天文単位 | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
-| 光秒 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
-| 光分 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
-| 光時 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
-| 光日 | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
-| 光週 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
-| 光年 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | パーセク | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
 | キュビット | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
 | ローマフィート (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
@@ -49,6 +43,21 @@
 | ケーブル長 | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
 | ヴェルスタ | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
 | プロイセンマイル | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
+
+### 光の到達距離（プレフィックス不可の `light` グループ）
+
+光の到達距離はプレフィックス不可の `light` ビルダーにまとめられ、`5 of light.seconds`、
+`3 of light.years` のようにほぼ自然な文として記述できます。これらは SI プレフィックスを一切
+受け付けません（`kilo.lightYears` は物理的に無意味なため）。
+
+| 単位 | 列挙値 | 記号 | トークン | 1 単位のメートル値 |
+|---|---|---|---:|---:|
+| 光秒 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `light.seconds` | 299792458.0 |
+| 光分 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `light.minutes` | 1.798754748e10 |
+| 光時 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `light.hours` | 1.0792528488e12 |
+| 光日 | `KDistanceUnit.LIGHT_DAY` | `ld` | `light.days` | 2.59020683712e13 |
+| 光週 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `light.weeks` | 1.813144785984e14 |
+| 光年 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `light.years` | 9.4607304725808e15 |
 
 各 `トークン` は値1の `KLengthUnitInstance` であり、`of`(作成)と `into`(読み取り)の両方で使用します。
 

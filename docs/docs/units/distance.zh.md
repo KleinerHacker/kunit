@@ -31,12 +31,6 @@
 | 链 | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
 | 弗隆 | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
 | 天文单位 | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
-| 光秒 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
-| 光分 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
-| 光时 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
-| 光日 | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
-| 光周 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
-| 光年 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | 秒差距 | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
 | 腕尺 | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
 | 罗马尺 (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
@@ -48,6 +42,20 @@
 | 链长 | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
 | 俄里 | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
 | 普鲁士里 | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
+
+### 光行进距离（无前缀 `light` 组）
+
+光行进距离归入无前缀的 `light` 构建器，可几乎像自然语言一样书写，例如 `5 of light.seconds`、
+`3 of light.years`。它们刻意不接受任何 SI 前缀（`kilo.lightYears` 在物理上没有意义）。
+
+| 单位 | 枚举值 | 符号 | 令牌 | 1 单位对应米 |
+|---|---|---|---:|---:|
+| 光秒 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `light.seconds` | 299792458.0 |
+| 光分 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `light.minutes` | 1.798754748e10 |
+| 光时 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `light.hours` | 1.0792528488e12 |
+| 光日 | `KDistanceUnit.LIGHT_DAY` | `ld` | `light.days` | 2.59020683712e13 |
+| 光周 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `light.weeks` | 1.813144785984e14 |
+| 光年 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `light.years` | 9.4607304725808e15 |
 
 每个`令牌`都是值为 1 的 `KLengthUnitInstance`，同时用于 `of`（构建）和 `into`（读取）。
 

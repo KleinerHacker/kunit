@@ -4,6 +4,15 @@
 
 ### Added
 
+- **New prefix-free `light` group for light-travel distances** (`org.pcsoft.framework.kunit.distance`):
+  the light-second … light-year units are now grouped behind the `light` builder object and read almost
+  like prose — `5 of light.seconds`, `3 of light.years` — via the properties `light.seconds`,
+  `light.minutes`, `light.hours`, `light.days`, `light.weeks`, `light.years`. They deliberately accept
+  **no** SI prefixes (a `kilo.lightYears` is physically meaningless). Full docs (EN/JA/ZH/KO) and 100 %
+  test coverage included. **Breaking:** the previous bare tokens `lightSeconds` … `lightYears` and their
+  prefixed forms (`kilo.lightYears`, …) were **removed**; migrate `n of lightYears` → `n of light.years`
+  (analogously for second/minute/hour/day/week).
+
 - **Historical volume units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
   **imperial bushel** (`imperialBushels`, 0.03636872 m³), **imperial hogshead** (`hogsheads`,
   0.32731785 m³), **imperial pint** (`imperialPints`, 0.00056826125 m³) and **imperial quart**

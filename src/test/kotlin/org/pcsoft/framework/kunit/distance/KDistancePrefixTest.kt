@@ -49,7 +49,6 @@ class KDistancePrefixTest {
         fathoms to KDistanceUnit.FATHOM.baseValue,
         chains to KDistanceUnit.CHAIN.baseValue,
         furlongs to KDistanceUnit.FURLONG.baseValue,
-        lightYears to KDistanceUnit.LIGHT_YEAR.baseValue,
         parsecs to KDistanceUnit.PARSEC.baseValue,
         cubits to KDistanceUnit.CUBIT.baseValue,
         romanFeet to KDistanceUnit.ROMAN_FOOT.baseValue,
@@ -105,12 +104,6 @@ class KDistancePrefixTest {
         check(kilo.chains, KDistanceUnit.CHAIN)
         check(kilo.furlongs, KDistanceUnit.FURLONG)
         check(kilo.astronomicalUnits, KDistanceUnit.ASTRONOMICAL_UNIT)
-        check(kilo.lightSeconds, KDistanceUnit.LIGHT_SECOND)
-        check(kilo.lightMinutes, KDistanceUnit.LIGHT_MINUTE)
-        check(kilo.lightHours, KDistanceUnit.LIGHT_HOUR)
-        check(kilo.lightDays, KDistanceUnit.LIGHT_DAY)
-        check(kilo.lightWeeks, KDistanceUnit.LIGHT_WEEK)
-        check(kilo.lightYears, KDistanceUnit.LIGHT_YEAR)
         check(kilo.parsecs, KDistanceUnit.PARSEC)
         check(kilo.cubits, KDistanceUnit.CUBIT)
         check(kilo.romanFeet, KDistanceUnit.ROMAN_FOOT)

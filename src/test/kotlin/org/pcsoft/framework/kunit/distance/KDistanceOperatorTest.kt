@@ -42,7 +42,7 @@ class KDistanceOperatorTest {
         fathoms to KDistanceUnit.FATHOM.baseValue,
         chains to KDistanceUnit.CHAIN.baseValue,
         furlongs to KDistanceUnit.FURLONG.baseValue,
-        lightYears to KDistanceUnit.LIGHT_YEAR.baseValue,
+        light.years to KDistanceUnit.LIGHT_YEAR.baseValue,
         parsecs to KDistanceUnit.PARSEC.baseValue
     )
 

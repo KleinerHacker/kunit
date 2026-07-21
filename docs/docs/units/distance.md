@@ -32,12 +32,6 @@ Build every value with `number of <token>` and read it back with `value into <to
 | Chain | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
 | Furlong | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
 | Astronomical unit | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
-| Light-second | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
-| Light-minute | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
-| Light-hour | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
-| Light-day | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
-| Light-week | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
-| Light-year | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | Parsec | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
 | Cubit | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
 | Roman foot (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
@@ -49,6 +43,21 @@ Build every value with `number of <token>` and read it back with `value into <to
 | Cable length | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
 | Verst | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
 | Prussian mile | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
+
+### Light-travel distances (prefix-free `light` group)
+
+Light-travel distances are grouped behind the prefix-free `light` builder and read almost like prose,
+e.g. `5 of light.seconds`, `3 of light.years`. They deliberately accept **no** SI prefixes (a
+`kilo.lightYears` is physically meaningless).
+
+| Unit | Enum value | Symbol | Token | 1 unit in meters |
+|---|---|---|---:|---:|
+| Light-second | `KDistanceUnit.LIGHT_SECOND` | `ls` | `light.seconds` | 299792458.0 |
+| Light-minute | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `light.minutes` | 1.798754748e10 |
+| Light-hour | `KDistanceUnit.LIGHT_HOUR` | `lh` | `light.hours` | 1.0792528488e12 |
+| Light-day | `KDistanceUnit.LIGHT_DAY` | `ld` | `light.days` | 2.59020683712e13 |
+| Light-week | `KDistanceUnit.LIGHT_WEEK` | `lw` | `light.weeks` | 1.813144785984e14 |
+| Light-year | `KDistanceUnit.LIGHT_YEAR` | `ly` | `light.years` | 9.4607304725808e15 |
 
 Each `Token` is a value-1 `KLengthUnitInstance` used with both `of` (build) and `into` (read).
 
