@@ -147,3 +147,15 @@ distance into meters // 20.0
 
 **没有**专用跨组运算符的组的两个纯单位(例如 `(2 of hours) * (5 of bytes)`)直接结合为
 `KMixedUnitInstance`,无需 `.toUnit()`。
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `s` | `seconds` | 时间，基本单位（秒） |
+| `min` | `minutes` | 分 |
+| `h` | `hours` | 时 |
+| `ms` | `milli.seconds` | 带前缀的时间（毫秒） |
+| `s⁻¹` | `seconds pow -1` | 时间的倒数（展开为混合单位） |

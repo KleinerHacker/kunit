@@ -81,3 +81,14 @@ import org.pcsoft.framework.kunit.force.*
 (10 of newtons).toString()   // "10.0 N"(기본 단위)
 "${(1 of kilo.ponds) into newtons} N" // "9.80665 N"
 ```
+
+## 표기법
+
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+
+| 수학 | Kotlin | 의미 |
+|---|---|---|
+| `N` | `newtons` | 힘, 기본 단위(명명 토큰, 뉴턴) |
+| `kg·m/s²` | `kilo.grams * meters / (seconds pow 2)` | 질량·길이 / 시간² 로서의 힘(분수 형식) |
+| `kg·m·s⁻²` | `kilo.grams * meters * (seconds pow -2)` | 같은 힘을 순수 곱으로 표현 |
+| `kN` | `kilo.newtons` | 접두사가 붙은 힘(킬로뉴턴) |

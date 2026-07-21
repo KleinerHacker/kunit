@@ -154,3 +154,15 @@ distance into meters // 20.0
 
 Two pure units of groups **without** a dedicated cross-group operator (e.g. `(2 of hours) * (5 of bytes)`)
 combine directly into a `KMixedUnitInstance`, with no `.toUnit()` needed.
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `s` | `seconds` | time, base unit (second) |
+| `min` | `minutes` | minute |
+| `h` | `hours` | hour |
+| `ms` | `milli.seconds` | prefixed time (millisecond) |
+| `s⁻¹` | `seconds pow -1` | inverse time (escapes to a mixed unit) |

@@ -81,3 +81,14 @@ import org.pcsoft.framework.kunit.acceleration.*
 (1 of gals).toString()               // "0.01 m/s²"(기본 단위)
 "${(1 of standardGravities) into gals} Gal" // "980.665 Gal"
 ```
+
+## 표기법
+
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+
+| 수학 | Kotlin | 의미 |
+|---|---|---|
+| `m/s²` | `meters / (seconds pow 2)` | 가속도, 기본 단위(초당 초당 미터) — 분수 형식 |
+| `m·s⁻²` | `meters * (seconds pow -2)` | 같은 가속도를 음의 지수 곱으로 표현 |
+| `Gal` | `gals` | 명명된 단위(1 cm/s²) |
+| `Δv / t` | `speed / time` | 속도 ÷ 시간으로 생성 |

@@ -138,3 +138,15 @@ import org.pcsoft.framework.kunit.speed.*
 (10 of meters / seconds).toString()   // "10.0 m/s"(基本単位)
 "${(10 of meters / seconds) into (kilo.meters / hours)} km/h" // "36.0 km/h"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `m/s` | `meters / seconds` | 速度、基本単位（毎秒メートル）— 分数形式 |
+| `m·s⁻¹` | `meters * (seconds pow -1)` | 同じ速度を負の指数の積で表現 |
+| `km/h` | `kilo.meters / hours` | 毎時キロメートル |
+| `mi/h` | `miles / hours` | 毎時マイル |
+| `100 m / 10 s` | `(100 of meters) / (10 of seconds)` | 長さ ÷ 時間 で構築 |

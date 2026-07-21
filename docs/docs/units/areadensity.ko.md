@@ -83,3 +83,14 @@ import org.pcsoft.framework.kunit.areadensity.*
 
 ((5 of kilo.grams) / ((5 of meters) * (1 of meters))).toString() // "1.0 kg/m²"(기본 단위)
 ```
+
+## 표기법
+
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+
+| 수학 | Kotlin | 의미 |
+|---|---|---|
+| `kg/m²` | `kilo.grams / (meters pow 2)` | 면밀도, 기본 단위(제곱미터당 킬로그램) — 분수 형식 |
+| `kg·m⁻²` | `kilo.grams * (meters pow -2)` | 같은 면밀도를 음의 지수 곱으로 표현 |
+| `g/mm²` | `grams / (milli.meters pow 2)` | 제곱밀리미터당 그램 |
+| `25 kg / (5 m · 1 m)` | `(25 of kilo.grams) / ((5 of meters) * (1 of meters))` | 질량 ÷ 넓이로 생성 |

@@ -81,3 +81,14 @@ import org.pcsoft.framework.kunit.density.*
 
 ((1 of kilo.grams) / (1 of liters)).toString() // "1000.0 kg/m³"(基本单位)
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `kg/m³` | `kilo.grams / (meters pow 3)` | 密度，基本单位（千克每立方米）— 分数形式 |
+| `kg·m⁻³` | `kilo.grams * (meters pow -3)` | 同一密度写成带负指数的乘积 |
+| `g/cm³` | `grams / (centi.meters pow 3)` | 克每立方厘米 |
+| `6 kg / 2 L` | `(6 of kilo.grams) / (2 of liters)` | 由 质量 ÷ 体积 构造 |

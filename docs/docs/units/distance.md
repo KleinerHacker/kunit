@@ -234,3 +234,16 @@ import org.pcsoft.framework.kunit.distance.*
 "${(5 of miles) into miles} mi"        // "5.0 mi"
 "${((200 of meters) * (50 of meters)) into hectares} ha" // "1.0 ha"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `m` | `meters` | length, base unit (metre) |
+| `km` | `kilo.meters` | prefixed length (kilometre) |
+| `m²` | `meters pow 2` | area (metre squared) |
+| `m³` | `meters pow 3` | volume (metre cubed) |
+| `m⁻¹` | `meters pow -1` | inverse length |
+| `2 m · 2 m` | `(2 of meters) * (2 of meters)` | area built from length × length |

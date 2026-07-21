@@ -81,3 +81,14 @@ import org.pcsoft.framework.kunit.acceleration.*
 (1 of gals).toString()               // "0.01 m/s²" (base unit)
 "${(1 of standardGravities) into gals} Gal" // "980.665 Gal"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `m/s²` | `meters / (seconds pow 2)` | acceleration, base unit (metre per second squared) — fraction form |
+| `m·s⁻²` | `meters * (seconds pow -2)` | same acceleration as a product with a negative exponent |
+| `Gal` | `gals` | named unit (1 cm/s²) |
+| `v / t` | `speed / time` | build from speed ÷ time |

@@ -133,3 +133,15 @@ import org.pcsoft.framework.kunit.datarate.*
 (10 of bytes / seconds).toString()  // "10.0 B/s"(기본 단위)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"
 ```
+
+## 표기법
+
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+
+| 수학 | Kotlin | 의미 |
+|---|---|---|
+| `B/s` | `bytes / seconds` | 데이터 전송률, 기본 단위(초당 바이트) — 분수 형식 |
+| `B·s⁻¹` | `bytes * (seconds pow -1)` | 같은 전송률을 음의 지수 곱으로 표현 |
+| `bit/s` | `bits / seconds` | 초당 비트 |
+| `MB/s` | `mega.bytes / seconds` | 초당 메가바이트 |
+| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | 저장 용량 ÷ 시간으로 생성 |

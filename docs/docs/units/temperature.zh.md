@@ -115,3 +115,14 @@ import org.pcsoft.framework.kunit.temperature.*
 (25 of celsius).toString()               // "298.15 K"(基本单位表示)
 "${(25 of celsius) into fahrenheit} °F"  // "77.0 °F"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。 温度是仿射量，因此没有 `·`/指数的乘积形式，只有命名单位和偏移变换。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `K` | `kelvin` | 绝对温度，基本单位（开尔文） |
+| `°C` | `celsius` | 摄氏度（`K = °C + 273.15`） |
+| `°F` | `fahrenheit` | 华氏度 |
+| `25 °C` | `25 of celsius` | 构造一个绝对温度 |

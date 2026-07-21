@@ -85,3 +85,13 @@ import org.pcsoft.framework.kunit.temperature.*
 
 KTemperatureDifference.ofKelvin(20).toString() // "20.0 ΔK"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed. A difference carries only the kelvin scale (no offset) and is built explicitly, never with the generic `of`.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `ΔK` | `KTemperatureDifference.ofKelvin(20)` | temperature interval, base unit (kelvin) |
+| `30 °C − 10 °C` | `(30 of celsius) - (10 of celsius)` | difference from two absolute temperatures |
+| `20 ΔK + 10 ΔK` | `KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)` | sum of two differences |

@@ -155,3 +155,14 @@ import org.pcsoft.framework.kunit.storage.*
 "${(5 of bits) into bits} bit"           // "5.0 bit"
 "${(2048 of bytes) into kibi.bytes} KiB" // "2.0 KiB"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `B` | `bytes` | データ量、基本単位（バイト） |
+| `bit` | `bits` | ビット（`1 B = 8 bit`） |
+| `kB` | `kilo.bytes` | 十進接頭辞付きバイト（1000 B） |
+| `KiB` | `kibi.bytes` | 二進接頭辞付きバイト（1024 B） |

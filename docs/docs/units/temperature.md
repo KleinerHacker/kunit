@@ -122,3 +122,14 @@ import org.pcsoft.framework.kunit.temperature.*
 (25 of celsius).toString()               // "298.15 K" (base unit representation)
 "${(25 of celsius) into fahrenheit} °F"  // "77.0 °F"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed. Temperature is affine, so there is no `·`/exponent product form — only named units and the offset transform.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `K` | `kelvin` | absolute temperature, base unit (kelvin) |
+| `°C` | `celsius` | degree Celsius (`K = °C + 273.15`) |
+| `°F` | `fahrenheit` | degree Fahrenheit |
+| `25 °C` | `25 of celsius` | build an absolute temperature |

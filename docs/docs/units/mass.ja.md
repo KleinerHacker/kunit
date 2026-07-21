@@ -119,3 +119,14 @@ import org.pcsoft.framework.kunit.mass.*
 (1 of kilo.grams).toString()             // "1000.0 g"（基準単位表現）
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `g` | `grams` | 質量、基本単位（グラム） |
+| `kg` | `kilo.grams` | キログラム（グラムに接頭辞を適用） |
+| `mg` | `milli.grams` | ミリグラム |
+| `g²` | `grams pow 2` | グラムの2乗（汎用混合単位） |

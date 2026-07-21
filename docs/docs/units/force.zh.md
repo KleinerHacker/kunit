@@ -79,3 +79,14 @@ import org.pcsoft.framework.kunit.force.*
 (10 of newtons).toString()   // "10.0 N"(基本单位)
 "${(1 of kilo.ponds) into newtons} N" // "9.80665 N"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `N` | `newtons` | 力，基本单位（命名标记，牛顿） |
+| `kg·m/s²` | `kilo.grams * meters / (seconds pow 2)` | 作为 质量·长度 / 时间² 的力（分数形式） |
+| `kg·m·s⁻²` | `kilo.grams * meters * (seconds pow -2)` | 同一力写成纯乘积 |
+| `kN` | `kilo.newtons` | 带前缀的力（千牛顿） |

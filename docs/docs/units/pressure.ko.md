@@ -79,3 +79,14 @@ import org.pcsoft.framework.kunit.pressure.*
 (50 of pascals).toString()   // "50.0 Pa"(기본 단위)
 "${(1 of bars) into pascals} Pa" // "100000.0 Pa"
 ```
+
+## 표기법
+
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+
+| 수학 | Kotlin | 의미 |
+|---|---|---|
+| `Pa` | `pascals` | 압력, 기본 단위(명명 토큰, 파스칼) |
+| `N/m²` | `newtons / (meters pow 2)` | 힘 / 넓이로서의 압력(분수 형식) |
+| `kg·m⁻¹·s⁻²` | `kilo.grams * (meters pow -1) * (seconds pow -2)` | 같은 압력을 순수 곱으로 표현 |
+| `kPa` | `kilo.pascals` | 접두사가 붙은 압력(킬로파스칼) |

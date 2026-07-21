@@ -134,3 +134,15 @@ import org.pcsoft.framework.kunit.datarate.*
 (10 of bytes / seconds).toString()  // "10.0 B/s"(基本単位)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `B/s` | `bytes / seconds` | データ転送率、基本単位（毎秒バイト）— 分数形式 |
+| `B·s⁻¹` | `bytes * (seconds pow -1)` | 同じ転送率を負の指数の積で表現 |
+| `bit/s` | `bits / seconds` | 毎秒ビット |
+| `MB/s` | `mega.bytes / seconds` | 毎秒メガバイト |
+| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | ストレージ ÷ 時間 で構築 |

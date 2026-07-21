@@ -158,3 +158,14 @@ import org.pcsoft.framework.kunit.storage.*
 "${(5 of bits) into bits} bit"           // "5.0 bit"
 "${(2048 of bytes) into kibi.bytes} KiB" // "2.0 KiB"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `B` | `bytes` | data amount, base unit (byte) |
+| `bit` | `bits` | bit (`1 B = 8 bit`) |
+| `kB` | `kilo.bytes` | decimal-prefixed byte (1000 B) |
+| `KiB` | `kibi.bytes` | binary-prefixed byte (1024 B) |

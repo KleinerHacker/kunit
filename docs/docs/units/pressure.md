@@ -79,3 +79,14 @@ import org.pcsoft.framework.kunit.pressure.*
 (50 of pascals).toString()   // "50.0 Pa" (base unit)
 "${(1 of bars) into pascals} Pa" // "100000.0 Pa"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `Pa` | `pascals` | pressure, base unit (named token, pascal) |
+| `N/m²` | `newtons / (meters pow 2)` | pressure as force / area (fraction form) |
+| `kg·m⁻¹·s⁻²` | `kilo.grams * (meters pow -1) * (seconds pow -2)` | same pressure as a pure product |
+| `kPa` | `kilo.pascals` | prefixed pressure (kilopascal) |

@@ -136,3 +136,15 @@ import org.pcsoft.framework.kunit.datarate.*
 (10 of bytes / seconds).toString()  // "10.0 B/s" (base unit)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `B/s` | `bytes / seconds` | data rate, base unit (byte per second) — fraction form |
+| `B·s⁻¹` | `bytes * (seconds pow -1)` | same rate as a product with a negative exponent |
+| `bit/s` | `bits / seconds` | bit per second |
+| `MB/s` | `mega.bytes / seconds` | megabyte per second |
+| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | build from storage ÷ time |

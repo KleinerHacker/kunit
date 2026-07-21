@@ -83,3 +83,14 @@ import org.pcsoft.framework.kunit.areadensity.*
 
 ((5 of kilo.grams) / ((5 of meters) * (1 of meters))).toString() // "1.0 kg/m²" (base unit)
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `kg/m²` | `kilo.grams / (meters pow 2)` | area density, base unit (kilogram per square metre) — fraction form |
+| `kg·m⁻²` | `kilo.grams * (meters pow -2)` | same area density as a product with a negative exponent |
+| `g/mm²` | `grams / (milli.meters pow 2)` | gram per square millimetre |
+| `25 kg / (5 m · 1 m)` | `(25 of kilo.grams) / ((5 of meters) * (1 of meters))` | build from mass ÷ area |

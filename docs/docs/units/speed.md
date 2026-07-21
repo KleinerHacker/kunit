@@ -140,3 +140,15 @@ import org.pcsoft.framework.kunit.speed.*
 (10 of meters / seconds).toString()   // "10.0 m/s" (base unit)
 "${(10 of meters / seconds) into (kilo.meters / hours)} km/h" // "36.0 km/h"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `m/s` | `meters / seconds` | speed, base unit (metre per second) — fraction form |
+| `m·s⁻¹` | `meters * (seconds pow -1)` | same speed as a product with a negative exponent |
+| `km/h` | `kilo.meters / hours` | kilometre per hour |
+| `mi/h` | `miles / hours` | mile per hour |
+| `100 m / 10 s` | `(100 of meters) / (10 of seconds)` | build from length ÷ time |

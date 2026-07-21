@@ -78,3 +78,13 @@ import org.pcsoft.framework.kunit.temperature.*
 
 KTemperatureDifference.ofKelvin(20).toString() // "20.0 ΔK"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。 温差只带开尔文标度（无偏移），且需显式构造，而非通用的 `of`。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `ΔK` | `KTemperatureDifference.ofKelvin(20)` | 温度间隔，基本单位（开尔文） |
+| `30 °C − 10 °C` | `(30 of celsius) - (10 of celsius)` | 两个绝对温度之差 |
+| `20 ΔK + 10 ΔK` | `KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)` | 两个温差之和 |

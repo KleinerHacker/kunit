@@ -82,3 +82,14 @@ import org.pcsoft.framework.kunit.density.*
 
 ((1 of kilo.grams) / (1 of liters)).toString() // "1000.0 kg/m³" (base unit)
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `kg/m³` | `kilo.grams / (meters pow 3)` | density, base unit (kilogram per cubic metre) — fraction form |
+| `kg·m⁻³` | `kilo.grams * (meters pow -3)` | same density as a product with a negative exponent |
+| `g/cm³` | `grams / (centi.meters pow 3)` | gram per cubic centimetre |
+| `6 kg / 2 L` | `(6 of kilo.grams) / (2 of liters)` | build from mass ÷ volume |

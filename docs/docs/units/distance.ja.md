@@ -234,3 +234,16 @@ import org.pcsoft.framework.kunit.distance.*
 "${(5 of miles) into miles} mi"        // "5.0 mi"
 "${((200 of meters) * (50 of meters)) into hectares} ha" // "1.0 ha"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `m` | `meters` | 長さ、基本単位（メートル） |
+| `km` | `kilo.meters` | 接頭辞付きの長さ（キロメートル） |
+| `m²` | `meters pow 2` | 面積（メートルの2乗） |
+| `m³` | `meters pow 3` | 体積（メートルの3乗） |
+| `m⁻¹` | `meters pow -1` | 長さの逆数 |
+| `2 m · 2 m` | `(2 of meters) * (2 of meters)` | 長さ×長さで作る面積 |

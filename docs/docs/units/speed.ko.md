@@ -138,3 +138,15 @@ import org.pcsoft.framework.kunit.speed.*
 (10 of meters / seconds).toString()   // "10.0 m/s"(기본 단위)
 "${(10 of meters / seconds) into (kilo.meters / hours)} km/h" // "36.0 km/h"
 ```
+
+## 표기법
+
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+
+| 수학 | Kotlin | 의미 |
+|---|---|---|
+| `m/s` | `meters / seconds` | 속도, 기본 단위(초당 미터) — 분수 형식 |
+| `m·s⁻¹` | `meters * (seconds pow -1)` | 같은 속도를 음의 지수 곱으로 표현 |
+| `km/h` | `kilo.meters / hours` | 시속 킬로미터 |
+| `mi/h` | `miles / hours` | 시속 마일 |
+| `100 m / 10 s` | `(100 of meters) / (10 of seconds)` | 길이 ÷ 시간으로 생성 |

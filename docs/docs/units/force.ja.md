@@ -82,3 +82,14 @@ import org.pcsoft.framework.kunit.force.*
 (10 of newtons).toString()   // "10.0 N"(基本単位)
 "${(1 of kilo.ponds) into newtons} N" // "9.80665 N"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `N` | `newtons` | 力、基本単位（名前付きトークン、ニュートン） |
+| `kg·m/s²` | `kilo.grams * meters / (seconds pow 2)` | 質量·長さ / 時間² としての力（分数形式） |
+| `kg·m·s⁻²` | `kilo.grams * meters * (seconds pow -2)` | 同じ力を純粋な積で表現 |
+| `kN` | `kilo.newtons` | 接頭辞付きの力（キロニュートン） |

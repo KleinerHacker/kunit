@@ -79,3 +79,14 @@ import org.pcsoft.framework.kunit.acceleration.*
 (1 of gals).toString()               // "0.01 m/s²"(基本单位)
 "${(1 of standardGravities) into gals} Gal" // "980.665 Gal"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `m/s²` | `meters / (seconds pow 2)` | 加速度，基本单位（米每二次方秒）— 分数形式 |
+| `m·s⁻²` | `meters * (seconds pow -2)` | 同一加速度写成带负指数的乘积 |
+| `Gal` | `gals` | 命名单位（1 cm/s²） |
+| `Δv / t` | `speed / time` | 由 速度 ÷ 时间 构造 |

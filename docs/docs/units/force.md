@@ -82,3 +82,14 @@ import org.pcsoft.framework.kunit.force.*
 (10 of newtons).toString()   // "10.0 N" (base unit)
 "${(1 of kilo.ponds) into newtons} N" // "9.80665 N"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `N` | `newtons` | force, base unit (named token, newton) |
+| `kg·m/s²` | `kilo.grams * meters / (seconds pow 2)` | force as mass·length / time² (fraction form) |
+| `kg·m·s⁻²` | `kilo.grams * meters * (seconds pow -2)` | same force as a pure product |
+| `kN` | `kilo.newtons` | prefixed force (kilonewton) |

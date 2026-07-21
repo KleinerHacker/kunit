@@ -77,3 +77,14 @@ import org.pcsoft.framework.kunit.pressure.*
 (50 of pascals).toString()   // "50.0 Pa"(基本单位)
 "${(1 of bars) into pascals} Pa" // "100000.0 Pa"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `Pa` | `pascals` | 压强，基本单位（命名标记，帕斯卡） |
+| `N/m²` | `newtons / (meters pow 2)` | 作为 力 / 面积 的压强（分数形式） |
+| `kg·m⁻¹·s⁻²` | `kilo.grams * (meters pow -1) * (seconds pow -2)` | 同一压强写成纯乘积 |
+| `kPa` | `kilo.pascals` | 带前缀的压强（千帕） |

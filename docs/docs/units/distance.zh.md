@@ -228,3 +228,16 @@ import org.pcsoft.framework.kunit.distance.*
 "${(5 of miles) into miles} mi"        // "5.0 mi"
 "${((200 of meters) * (50 of meters)) into hectares} ha" // "1.0 ha"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `m` | `meters` | 长度，基本单位（米） |
+| `km` | `kilo.meters` | 带前缀的长度（千米） |
+| `m²` | `meters pow 2` | 面积（米的平方） |
+| `m³` | `meters pow 3` | 体积（米的立方） |
+| `m⁻¹` | `meters pow -1` | 长度的倒数 |
+| `2 m · 2 m` | `(2 of meters) * (2 of meters)` | 由 长度×长度 构成的面积 |

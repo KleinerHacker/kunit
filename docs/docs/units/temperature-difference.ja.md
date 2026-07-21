@@ -81,3 +81,13 @@ import org.pcsoft.framework.kunit.temperature.*
 
 KTemperatureDifference.ofKelvin(20).toString() // "20.0 ΔK"
 ```
+
+## 記法
+
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。 温度差はケルビンのスケールのみ（オフセットなし）を持ち、汎用の `of` ではなく明示的に構築します。
+
+| 数学 | Kotlin | 意味 |
+|---|---|---|
+| `ΔK` | `KTemperatureDifference.ofKelvin(20)` | 温度間隔、基本単位（ケルビン） |
+| `30 °C − 10 °C` | `(30 of celsius) - (10 of celsius)` | 2つの絶対温度の差 |
+| `20 ΔK + 10 ΔK` | `KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)` | 2つの温度差の和 |

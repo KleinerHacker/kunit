@@ -82,3 +82,14 @@ import org.pcsoft.framework.kunit.areadensity.*
 
 ((5 of kilo.grams) / ((5 of meters) * (1 of meters))).toString() // "1.0 kg/m²"(基本单位)
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `kg/m²` | `kilo.grams / (meters pow 2)` | 面密度，基本单位（千克每平方米）— 分数形式 |
+| `kg·m⁻²` | `kilo.grams * (meters pow -2)` | 同一面密度写成带负指数的乘积 |
+| `g/mm²` | `grams / (milli.meters pow 2)` | 克每平方毫米 |
+| `25 kg / (5 m · 1 m)` | `(25 of kilo.grams) / ((5 of meters) * (1 of meters))` | 由 质量 ÷ 面积 构造 |

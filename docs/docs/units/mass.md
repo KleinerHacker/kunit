@@ -119,3 +119,14 @@ import org.pcsoft.framework.kunit.mass.*
 (1 of kilo.grams).toString()             // "1000.0 g" (base unit representation)
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"
 ```
+
+## Notation
+
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+
+| Mathematics | Kotlin | Meaning |
+|---|---|---|
+| `g` | `grams` | mass, base unit (gram) |
+| `kg` | `kilo.grams` | kilogram (prefix applied to the gram) |
+| `mg` | `milli.grams` | milligram |
+| `g²` | `grams pow 2` | gram squared (generic mixed unit) |

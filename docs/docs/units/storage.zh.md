@@ -152,3 +152,14 @@ import org.pcsoft.framework.kunit.storage.*
 "${(5 of bits) into bits} bit"           // "5.0 bit"
 "${(2048 of bytes) into kibi.bytes} KiB" // "2.0 KiB"
 ```
+
+## 记法
+
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+
+| 数学 | Kotlin | 含义 |
+|---|---|---|
+| `B` | `bytes` | 数据量，基本单位（字节） |
+| `bit` | `bits` | 位（`1 B = 8 bit`） |
+| `kB` | `kilo.bytes` | 十进制前缀字节（1000 B） |
+| `KiB` | `kibi.bytes` | 二进制前缀字节（1024 B） |
