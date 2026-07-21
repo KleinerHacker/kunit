@@ -1,4 +1,7 @@
-# 温度
+# 絶対温度
+
+> **温度**トピックの一部です — [概要](temperature-overview.md)および線形の対応物
+> [温度差](temperature-difference.md)を参照してください。
 
 パッケージ: `org.pcsoft.framework.kunit.temperature`
 基本単位: **ケルビン**(`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
@@ -24,6 +27,7 @@
 | ケルビン | `KTemperatureUnit.KELVIN` | `K` | `kelvin` | 恒等 |
 | セルシウス度 | `KTemperatureUnit.CELSIUS` | `°C` | `celsius` | `K = °C + 273.15` |
 | ファーレンハイト度 | `KTemperatureUnit.FAHRENHEIT` | `°F` | `fahrenheit` | `K = (°F − 32)·5/9 + 273.15` |
+| ランキン度 | `KTemperatureUnit.RANKINE` | `°R` | `rankine` | `K = °R·5/9` |
 
 各 `トークン` は値1の `KTemperatureUnitInstance` であり、`of`(作成)と `into`(読み取り)で使用します。
 
@@ -45,15 +49,27 @@ t into kelvin       // 298.15
 
 ## 演算子
 
-`+`/`-`/比較は内部の**絶対ケルビン**値に対して行われます:
+絶対温度はアフィンな**点**であり、ベクトルではありません。そのため演算は意図的に非対称です — これが物理的に正しい
+挙動です([温度差](temperature-difference.md)も参照):
+
+* `AbsTemp − AbsTemp` → **`KTemperatureDifferenceUnitInstance`**(両者間のケルビン*区間*。例:`30 °C − 10 °C = 20 ΔK`、
+  `20 °C` では**ない**)。
+* `AbsTemp ± 差` → 再び絶対温度。
+* `AbsTemp + AbsTemp` → **コンパイルエラー**(2つの絶対温度の加算は物理的に無意味)。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.temperature.*
 
-// + / - : 両オペランドを絶対ケルビンに正規化
-val a = (25 of celsius) + (5 of kelvin)   // KTemperatureUnitInstance: 303.15 K
-val b = (25 of celsius) - (5 of kelvin)   // KTemperatureUnitInstance: 293.15 K
+// 絶対 − 絶対 = 温度差(ケルビン)
+val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
+d.value                                             // 20.0
+
+// 絶対 ± 差 = 絶対温度
+val a = (25 of celsius) + KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 303.15 K
+val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 293.15 K
+
+// (30 of celsius) + (10 of celsius)               // コンパイルされません
 
 // 比較(絶対ケルビンによる)
 (0 of celsius) == (273.15 of kelvin)      // true(同じ絶対温度)

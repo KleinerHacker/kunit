@@ -1,4 +1,7 @@
-# 温度
+# 绝对温度
+
+> **温度**主题的一部分 —— 参见[概述](temperature-overview.md)以及线性对应物
+> [温度差](temperature-difference.md)。
 
 包: `org.pcsoft.framework.kunit.temperature`
 基本单位: **开尔文**(`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
@@ -21,6 +24,7 @@
 | 开尔文 | `KTemperatureUnit.KELVIN` | `K` | `kelvin` | 恒等 |
 | 摄氏度 | `KTemperatureUnit.CELSIUS` | `°C` | `celsius` | `K = °C + 273.15` |
 | 华氏度 | `KTemperatureUnit.FAHRENHEIT` | `°F` | `fahrenheit` | `K = (°F − 32)·5/9 + 273.15` |
+| 兰氏度 | `KTemperatureUnit.RANKINE` | `°R` | `rankine` | `K = °R·5/9` |
 
 每个 `令牌` 都是值为 1 的 `KTemperatureUnitInstance`,与 `of`(构建)和 `into`(读取)配合使用。
 
@@ -42,15 +46,27 @@ t into kelvin       // 298.15
 
 ## 运算符
 
-`+`/`-`/比较都在内部的**绝对开尔文**值上进行:
+绝对温度是仿射**点**,而非向量。因此其运算刻意是非对称的 —— 这是物理上正确的行为(另见
+[温度差](temperature-difference.md)):
+
+* `AbsTemp − AbsTemp` → **`KTemperatureDifferenceUnitInstance`**(两者之间的开尔文*区间*,例如
+  `30 °C − 10 °C = 20 ΔK`,而**不是** `20 °C`)。
+* `AbsTemp ± 差值` → 再次得到绝对温度。
+* `AbsTemp + AbsTemp` → **编译错误**(两个绝对温度相加在物理上无意义)。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.temperature.*
 
-// + / - : 两个操作数都归一化为绝对开尔文
-val a = (25 of celsius) + (5 of kelvin)   // KTemperatureUnitInstance: 303.15 K
-val b = (25 of celsius) - (5 of kelvin)   // KTemperatureUnitInstance: 293.15 K
+// 绝对 − 绝对 = 温度差(开尔文)
+val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
+d.value                                             // 20.0
+
+// 绝对 ± 差值 = 绝对温度
+val a = (25 of celsius) + KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 303.15 K
+val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 293.15 K
+
+// (30 of celsius) + (10 of celsius)               // 无法编译
 
 // 比较(按绝对开尔文)
 (0 of celsius) == (273.15 of kelvin)      // true(相同的绝对温度)

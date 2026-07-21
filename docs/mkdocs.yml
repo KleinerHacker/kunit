@@ -76,6 +76,9 @@ plugins:
             Time: 시간
             Storage: 저장 용량
             Temperature: 온도
+            Overview: 개요
+            Absolute Temperature: 절대 온도
+            Temperature Difference: 온도 차
             Speed: 속도
             Data Rate: 데이터 전송률
             API Docs: API 문서
@@ -93,6 +96,9 @@ plugins:
             Time: 时间
             Storage: 存储
             Temperature: 温度
+            Overview: 概述
+            Absolute Temperature: 绝对温度
+            Temperature Difference: 温度差
             Speed: 速度
             Data Rate: 数据速率
             API Docs: API 文档
@@ -110,6 +116,9 @@ plugins:
             Time: 時間
             Storage: ストレージ
             Temperature: 温度
+            Overview: 概要
+            Absolute Temperature: 絶対温度
+            Temperature Difference: 温度差
             Speed: 速度
             Data Rate: データレート
             API Docs: API ドキュメント
@@ -123,7 +132,10 @@ nav:
       - Distance: units/distance.md
       - Time: units/time.md
       - Storage: units/storage.md
-      - Temperature: units/temperature.md
+      - Temperature:
+          - Overview: units/temperature-overview.md
+          - Absolute Temperature: units/temperature.md
+          - Temperature Difference: units/temperature-difference.md
   - Constructed Units:
       - Speed: units/speed.md
       - Data Rate: units/datarate.md

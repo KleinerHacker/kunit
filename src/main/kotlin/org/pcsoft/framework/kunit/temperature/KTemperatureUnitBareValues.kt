@@ -25,3 +25,7 @@ val celsius: KTemperatureUnitInstance = temperatureOf(KTemperatureUnit.CELSIUS.b
 /** Degree Fahrenheit token ([KTemperatureUnit.FAHRENHEIT]); `K = (°F − 32) · 5/9 + 273.15`. */
 val fahrenheit: KTemperatureUnitInstance =
     temperatureOf(KTemperatureUnit.FAHRENHEIT.baseValue, KTemperatureUnit.FAHRENHEIT)
+
+/** Degree Rankine token ([KTemperatureUnit.RANKINE]); `K = °R · 5/9`. */
+val rankine: KTemperatureUnitInstance =
+    temperatureOf(KTemperatureUnit.RANKINE.baseValue, KTemperatureUnit.RANKINE)

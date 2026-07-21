@@ -22,8 +22,19 @@ import org.pcsoft.framework.kunit.KUnitTerm
  * (kelvin) term at exponent 1, always normalized internally to **absolute kelvin**.
  *
  * Like the storage wrapper it encapsulates a [KMixedUnitInstance] via `by` delegation (so
- * `value`/`toUnit`/`times`/`div` and the group-agnostic `pow` come from the delegate) and implements
- * [KUnitInstance] directly (adding same-type `+`/`-`/comparison operating on absolute kelvin).
+ * `value`/`toUnit`/`div` and the group-agnostic `pow` come from the delegate). Unlike the linear
+ * wrappers it does **not** implement [org.pcsoft.framework.kunit.KUnitInstance]: an absolute temperature
+ * is an affine *point*, not a *vector*. Its arithmetic is therefore deliberately asymmetric (see the
+ * operators below):
+ * * `AbsTemp − AbsTemp` yields a [KTemperatureDifferenceUnitInstance] (the physically correct kelvin
+ *   interval, e.g. `(30 of celsius) - (10 of celsius) = 20 K`, not `20 °C`).
+ * * `AbsTemp ± TempDiff` yields an absolute temperature again.
+ * * `AbsTemp + AbsTemp` is **intentionally absent** (adding two absolute temperatures is physically
+ *   meaningless) and thus a compile error.
+ *
+ * Because it is not a [org.pcsoft.framework.kunit.KUnitInstance], the group-agnostic cross-group
+ * `times`/`div` extensions do not apply; they are re-declared as members below so that `temp * bytes`
+ * still falls back to a generic mixed unit.
  *
  * **Affine exception:** temperature conversions are offset-and-scale, not a single factor. Both the
  * group-agnostic verbs stay robust by overriding their measurable hooks affinely: [scaledBy] backs
@@ -46,7 +57,7 @@ import org.pcsoft.framework.kunit.KUnitTerm
 class KTemperatureUnitInstance internal constructor(
     internal val instance: KMixedUnitInstance,
     internal val unit: KTemperatureUnit = KTemperatureUnit.BASE,
-) : KUnitMeasurable by instance, KUnitInstance<KTemperatureUnitInstance> {
+) : KUnitMeasurable by instance {
 
     /**
      * **Affine construction hook** (the temperature exception): interprets [factor] as a *reading* in
@@ -68,18 +79,39 @@ class KTemperatureUnitInstance internal constructor(
     override fun readBaseValue(baseValue: Double): Double = unit.fromBase(baseValue)
 
     /**
-     * Adds two temperatures on their absolute kelvin [value]. Only another [KTemperatureUnitInstance] is
-     * accepted; the result is again absolute kelvin.
+     * Subtracts two absolute temperatures, yielding their [KTemperatureDifferenceUnitInstance]: the
+     * physically correct kelvin **interval** between them (e.g. `(30 of celsius) - (10 of celsius) = 20 K`).
+     * There is intentionally no `AbsTemp + AbsTemp` counterpart (adding two absolute temperatures is
+     * meaningless).
      */
-    override operator fun plus(other: KTemperatureUnitInstance): KTemperatureUnitInstance =
-        temperatureOf(value + other.value)
+    operator fun minus(other: KTemperatureUnitInstance): KTemperatureDifferenceUnitInstance =
+        temperatureDifferenceOf(value - other.value)
 
-    /** Subtracts two temperatures on their absolute kelvin [value]. See [plus]. */
-    override operator fun minus(other: KTemperatureUnitInstance): KTemperatureUnitInstance =
-        temperatureOf(value - other.value)
+    /**
+     * Adds a temperature difference to this absolute temperature, yielding an absolute temperature again
+     * (result expressed in this instance's construction [unit]).
+     */
+    operator fun plus(other: KTemperatureDifferenceUnitInstance): KTemperatureUnitInstance =
+        temperatureOf(value + other.value, unit)
+
+    /** Subtracts a temperature difference from this absolute temperature. See [plus]. */
+    operator fun minus(other: KTemperatureDifferenceUnitInstance): KTemperatureUnitInstance =
+        temperatureOf(value - other.value, unit)
 
     /** Compares two temperatures by their normalized absolute kelvin [value]. */
-    override operator fun compareTo(other: KTemperatureUnitInstance): Int = value.compareTo(other.value)
+    operator fun compareTo(other: KTemperatureUnitInstance): Int = value.compareTo(other.value)
+
+    /**
+     * Cross-group multiplication fallback: since an absolute temperature is not a
+     * [org.pcsoft.framework.kunit.KUnitInstance], the group-agnostic `times` extension does not apply, so
+     * this member re-supplies it, producing a generic [KMixedUnitInstance] on the absolute kelvin value.
+     * Note this carries the affine offset baked into the kelvin value and is only physically meaningful
+     * when that reading is genuinely absolute; there is no standardized "temperature²" result type.
+     */
+    operator fun times(other: KUnitMeasurable): KMixedUnitInstance = toUnit() * other.toUnit()
+
+    /** Cross-group division fallback, the counterpart to [times]. Same physical caveat applies. */
+    operator fun div(other: KUnitMeasurable): KMixedUnitInstance = toUnit() / other.toUnit()
 
     /**
      * Structural equality by normalized absolute kelvin [value]: two temperatures are equal iff they
@@ -93,6 +125,19 @@ class KTemperatureUnitInstance internal constructor(
     /** Base-unit (kelvin) representation, e.g. `"298.15 K"`. */
     override fun toString(): String = instance.toString()
 }
+
+// --- Reverse cross-group operators ---------------------------------------------------------------
+
+/**
+ * Cross-group multiplication with an absolute temperature on the **right** (e.g. `bytes * kelvin`).
+ * Because [KTemperatureUnitInstance] is not a [KUnitInstance], the generic
+ * `KUnitInstance<*>.times(KUnitInstance<*>)` extension does not match a temperature argument; this
+ * restores the symmetric direction, producing a generic [KMixedUnitInstance].
+ */
+operator fun KUnitInstance<*>.times(other: KTemperatureUnitInstance): KMixedUnitInstance = toUnit() * other.toUnit()
+
+/** Cross-group division by an absolute temperature on the right (e.g. `bytes / kelvin`). See [times]. */
+operator fun KUnitInstance<*>.div(other: KTemperatureUnitInstance): KMixedUnitInstance = toUnit() / other.toUnit()
 
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 

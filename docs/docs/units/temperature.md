@@ -1,4 +1,7 @@
-# Temperature
+# Absolute Temperature
+
+> Part of the **Temperature** topic — see the [Overview](temperature-overview.md) and the linear
+> counterpart [Temperature Difference](temperature-difference.md).
 
 Package: `org.pcsoft.framework.kunit.temperature`
 Base unit: **kelvin** (`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
@@ -26,6 +29,7 @@ Two things make this group special:
 | Kelvin | `KTemperatureUnit.KELVIN` | `K` | `kelvin` | identity |
 | Degree Celsius | `KTemperatureUnit.CELSIUS` | `°C` | `celsius` | `K = °C + 273.15` |
 | Degree Fahrenheit | `KTemperatureUnit.FAHRENHEIT` | `°F` | `fahrenheit` | `K = (°F − 32)·5/9 + 273.15` |
+| Degree Rankine | `KTemperatureUnit.RANKINE` | `°R` | `rankine` | `K = °R·5/9` |
 
 Each `Token` is a value-1 `KTemperatureUnitInstance` used with `of` (build) and `into` (read).
 
@@ -47,15 +51,27 @@ t into kelvin       // 298.15
 
 ## Operators
 
-`+`/`-`/comparison operate on the internal **absolute kelvin** value:
+An absolute temperature is an affine **point**, not a vector. Its arithmetic is therefore deliberately
+asymmetric — the physically correct behaviour (see also [Temperature Difference](temperature-difference.md)):
+
+* `AbsTemp − AbsTemp` → a **`KTemperatureDifferenceUnitInstance`** (the kelvin *interval* between them,
+  e.g. `30 °C − 10 °C = 20 ΔK`, **not** `20 °C`).
+* `AbsTemp ± difference` → an absolute temperature again.
+* `AbsTemp + AbsTemp` → **compile error** (adding two absolute temperatures is physically meaningless).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.temperature.*
 
-// + / - : both operands normalized to absolute kelvin
-val a = (25 of celsius) + (5 of kelvin)   // KTemperatureUnitInstance: 303.15 K
-val b = (25 of celsius) - (5 of kelvin)   // KTemperatureUnitInstance: 293.15 K
+// absolute − absolute = temperature difference (in kelvin)
+val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
+d.value                                             // 20.0
+
+// absolute ± difference = absolute temperature
+val a = (25 of celsius) + KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 303.15 K
+val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 293.15 K
+
+// (30 of celsius) + (10 of celsius)               // does NOT compile
 
 // comparisons (by absolute kelvin)
 (0 of celsius) == (273.15 of kelvin)      // true (same absolute temperature)

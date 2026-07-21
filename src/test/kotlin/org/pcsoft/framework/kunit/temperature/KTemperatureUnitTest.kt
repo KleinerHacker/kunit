@@ -47,4 +47,14 @@ class KTemperatureUnitTest {
         assertEquals(500.0, ((500 of kelvin) into celsius).let { (it of celsius) into kelvin }, 1e-9)
         assertEquals(-40.0, (-40 of celsius) into fahrenheit, 1e-9) // −40 is the C/F crossover
     }
+
+    /** Rankine: absolute scale, zero at absolute zero, Fahrenheit-sized degrees. */
+    @Test
+    fun `rankine conversions`() {
+        assertEquals(0.0, (0 of kelvin) into rankine, 1e-9)          // absolute zero
+        assertEquals(491.67, (0 of celsius) into rankine, 1e-9)      // 273.15 K · 9/5
+        assertEquals(273.15, (491.67 of rankine) into kelvin, 1e-9)  // round-trip to kelvin
+        assertEquals(536.67, (25 of celsius) into rankine, 1e-9)     // 298.15 K · 9/5
+        assertEquals(671.67, (100 of celsius) into rankine, 1e-9)    // boiling point
+    }
 }

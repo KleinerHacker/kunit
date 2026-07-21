@@ -2,6 +2,28 @@
 
 ## [UNRELEASED]
 
+### Added
+
+- **New `Temperature Difference` group** (`org.pcsoft.framework.kunit.temperature`): a **linear**
+  (offset-free) counterpart to the affine temperature group, modelling a temperature *interval* rather
+  than an absolute point. Kelvin only, no prefixes. Built explicitly via `KTemperatureDifference.ofKelvin(…)`
+  or as the result of subtracting two absolute temperatures. Its symbol is rendered as **`ΔK`** (not `K`)
+  so a difference is visually distinguishable from an absolute kelvin in mixed units and `toString`.
+  Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
+- **Rankine (`°R`) added to the `Temperature` group**: absolute scale with Fahrenheit-sized degrees
+  (`K = °R·5/9`), built/read via `of`/`into` through the `rankine` token.
+
+### Changed
+
+- **Breaking: absolute-temperature arithmetic corrected to be physically consistent.** Subtracting two
+  absolute temperatures now yields a `KTemperatureDifferenceUnitInstance` in **kelvin** (e.g.
+  `30 °C − 10 °C = 20 ΔK`), instead of the previous incorrect result that reinterpreted the kelvin
+  difference as an absolute temperature (`≈ −253 °C`). An absolute temperature is now modelled as an
+  affine point: `AbsTemp ± TemperatureDifference` yields an absolute temperature, while `AbsTemp + AbsTemp`
+  is now a **compile error** (adding two absolute temperatures is physically meaningless). `*`/`/` and
+  comparison are unchanged.
+
 ## [0.5.0]
 
 ### Added

@@ -30,9 +30,16 @@ import org.pcsoft.framework.kunit.KUnit
  *
  * The group deliberately offers **no prefixes** (explicit exclusion, permitted by `architecture-prefix.md`).
  *
+ * **Related group:** this is the *absolute* (affine) temperature. Its *linear* counterpart - the interval
+ * between two temperatures - is the separate [KTemperatureDifferenceUnit] group. Subtracting two absolute
+ * temperatures (`KTemperatureUnitInstance.minus`) yields a [KTemperatureDifferenceUnitInstance] (kelvin),
+ * and a difference can be added to / subtracted from an absolute temperature to yield an absolute
+ * temperature again. `AbsTemp + AbsTemp` is deliberately unavailable (physically meaningless).
+ *
  * Conversions:
  * - `°C = K − 273.15`
  * - `°F = (K − 273.15) · 9/5 + 32`
+ * - `°R = K · 9/5` (Rankine: absolute scale, zero at absolute zero, Fahrenheit-sized degrees)
  *
  * Example:
  * ```kotlin
@@ -61,7 +68,10 @@ enum class KTemperatureUnit(
     CELSIUS("°C", { it + 273.15 }, { it - 273.15 }),
 
     /** Degree Fahrenheit ("°F"): `K = (°F − 32) · 5/9 + 273.15`, `°F = (K − 273.15) · 9/5 + 32`. */
-    FAHRENHEIT("°F", { (it - 32.0) * 5.0 / 9.0 + 273.15 }, { (it - 273.15) * 9.0 / 5.0 + 32.0 });
+    FAHRENHEIT("°F", { (it - 32.0) * 5.0 / 9.0 + 273.15 }, { (it - 273.15) * 9.0 / 5.0 + 32.0 }),
+
+    /** Degree Rankine ("°R"): absolute scale with Fahrenheit-sized degrees, `K = °R · 5/9`, `°R = K · 9/5`. */
+    RANKINE("°R", { it * 5.0 / 9.0 }, { it * 9.0 / 5.0 });
 
     /**
      * All temperature units share the linear base scale of kelvin ([baseValue] `1.0`); the affine

@@ -1,4 +1,7 @@
-# 온도
+# 절대 온도
+
+> **온도** 주제의 일부입니다 — [개요](temperature-overview.md) 및 선형 대응물
+> [온도 차](temperature-difference.md)를 참조하세요.
 
 패키지: `org.pcsoft.framework.kunit.temperature`
 기본 단위: **켈빈**(`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
@@ -24,6 +27,7 @@
 | 켈빈 | `KTemperatureUnit.KELVIN` | `K` | `kelvin` | 항등 |
 | 섭씨 | `KTemperatureUnit.CELSIUS` | `°C` | `celsius` | `K = °C + 273.15` |
 | 화씨 | `KTemperatureUnit.FAHRENHEIT` | `°F` | `fahrenheit` | `K = (°F − 32)·5/9 + 273.15` |
+| 랭킨 | `KTemperatureUnit.RANKINE` | `°R` | `rankine` | `K = °R·5/9` |
 
 각 `토큰`은 값 1의 `KTemperatureUnitInstance`이며 `of`(생성)와 `into`(읽기)에 사용됩니다.
 
@@ -45,15 +49,27 @@ t into kelvin       // 298.15
 
 ## 연산자
 
-`+`/`-`/비교는 내부의 **절대 켈빈** 값에 대해 수행됩니다:
+절대 온도는 아핀 **점**이며 벡터가 아닙니다. 따라서 연산은 의도적으로 비대칭이며, 이것이 물리적으로 올바른
+동작입니다([온도 차](temperature-difference.md) 참조):
+
+* `AbsTemp − AbsTemp` → **`KTemperatureDifferenceUnitInstance`**(둘 사이의 켈빈 *구간*. 예: `30 °C − 10 °C = 20 ΔK`,
+  `20 °C`가 **아님**).
+* `AbsTemp ± 차이` → 다시 절대 온도.
+* `AbsTemp + AbsTemp` → **컴파일 오류**(두 절대 온도의 덧셈은 물리적으로 무의미).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.temperature.*
 
-// + / - : 두 피연산자를 절대 켈빈으로 정규화
-val a = (25 of celsius) + (5 of kelvin)   // KTemperatureUnitInstance: 303.15 K
-val b = (25 of celsius) - (5 of kelvin)   // KTemperatureUnitInstance: 293.15 K
+// 절대 − 절대 = 온도 차(켈빈)
+val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
+d.value                                             // 20.0
+
+// 절대 ± 차이 = 절대 온도
+val a = (25 of celsius) + KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 303.15 K
+val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUnitInstance: 293.15 K
+
+// (30 of celsius) + (10 of celsius)               // 컴파일되지 않음
 
 // 비교(절대 켈빈 기준)
 (0 of celsius) == (273.15 of kelvin)      // true(동일한 절대 온도)

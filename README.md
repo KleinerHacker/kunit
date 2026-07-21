@@ -155,6 +155,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
 | Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
 | Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
+| Temperature Difference | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
 | Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.speed` | Meter per second (`KSpeedUnit.BASE`) |
 | Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.datarate` | Byte per second (`KDataRateUnit.BASE`) |
 
@@ -187,7 +188,7 @@ It is the only power syntax — there are no `squareXxx`/`cubicXxx` constructors
 
 #### Temperature (`KTemperatureUnit`)
 
-Kelvin (base), Celsius, Fahrenheit. Temperature is the framework's **first (permanent) affine
+Kelvin (base), Celsius, Fahrenheit, Rankine. Temperature is the framework's **first (permanent) affine
 exception**: conversions are offset-and-scale (`°C = K − 273.15`), not a single factor. The shared engine
 stays multiplicative — the affine transform is injected through the `scaledBy` (behind `of`) and
 `readBaseValue` (behind `into`) hooks, so `25 of celsius` and `t into fahrenheit` use the normal verbs
@@ -198,6 +199,27 @@ and the group has **no prefixes**.
 (0 of celsius) into kelvin       // 273.15
 (100 of celsius) into fahrenheit // 212.0
 (32 of fahrenheit) into celsius  // 0.0
+(0 of celsius) into rankine      // 491.67
+```
+
+An absolute temperature is an affine **point**, not a vector, so its arithmetic is deliberately
+asymmetric: subtracting two absolute temperatures yields a **`KTemperatureDifferenceUnitInstance`** (the
+kelvin interval), while `AbsTemp + AbsTemp` is a **compile error**.
+
+#### Temperature Difference (`KTemperatureDifferenceUnit`)
+
+The **linear** counterpart to the affine temperature group (kelvin only, no prefixes): a temperature
+*interval*, not an absolute point. It is produced by `AbsTemp − AbsTemp` or explicitly via
+`KTemperatureDifference.ofKelvin(…)`, and can be added to / subtracted from an absolute temperature to
+yield an absolute temperature again. Its symbol is rendered as **`ΔK`** (not `K`) so that a difference is
+visually distinguishable from an absolute kelvin — in a mixed unit `m·K` (absolute) and `m·ΔK`
+(difference) are the same dimension but **not** the same unit (neither equal nor addable).
+
+```kotlin
+val d = (30 of celsius) - (10 of celsius)             // KTemperatureDifferenceUnitInstance: 20 ΔK
+d.value                                                // 20.0  (not -253.15 °C!)
+d.toString()                                           // "20.0 ΔK"  (ΔK, distinct from absolute K)
+(25 of celsius) + KTemperatureDifference.ofKelvin(5)   // 303.15 K (absolute)
 ```
 
 #### Constructed groups (composed of two core groups)

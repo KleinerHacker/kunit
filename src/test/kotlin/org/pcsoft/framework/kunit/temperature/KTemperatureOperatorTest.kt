@@ -21,16 +21,30 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
- * All temperature operators: same-type `+`/`-`/`compareTo` on absolute kelvin, and the generic
+ * All absolute-temperature operators: `AbsTemp − AbsTemp` yields a temperature *difference*,
+ * `AbsTemp ± difference` yields an absolute temperature again, `compareTo` on absolute kelvin, and the
  * cross-group `*`/`/` fallback to a generic mixed unit (no standardized temperature combination exists).
  */
 class KTemperatureOperatorTest {
 
-    /** Add/subtract operate on absolute kelvin; comparison uses the kelvin value. */
+    /** Subtracting two absolute temperatures yields the kelvin interval between them, not a temperature. */
     @Test
-    fun `arithmetic and comparison`() {
-        assertEquals(303.15, ((25 of celsius) + (5 of kelvin)).value, 1e-9)
-        assertEquals(293.15, ((25 of celsius) - (5 of kelvin)).value, 1e-9)
+    fun `absolute minus absolute yields difference`() {
+        val diff = (30 of celsius) - (10 of celsius)
+        assertEquals(KTemperatureDifference.ofKelvin(20), diff)
+        assertEquals(20.0, diff.value, 1e-9)
+    }
+
+    /** Adding/subtracting a difference to/from an absolute temperature stays absolute (in kelvin). */
+    @Test
+    fun `absolute plus and minus difference stays absolute`() {
+        assertEquals(303.15, ((25 of celsius) + KTemperatureDifference.ofKelvin(5)).value, 1e-9)
+        assertEquals(293.15, ((25 of celsius) - KTemperatureDifference.ofKelvin(5)).value, 1e-9)
+    }
+
+    /** Comparison uses the normalized absolute kelvin value. */
+    @Test
+    fun `comparison`() {
         assertTrue((100 of celsius) > (100 of fahrenheit))
         assertEquals(0, (0 of celsius).compareTo(273.15 of kelvin))
     }
@@ -44,6 +58,18 @@ class KTemperatureOperatorTest {
 
         val quotient = (6 of kelvin) / (3 of bytes)
         assertEquals(2.0, quotient.value, 1e-9)
+        assertEquals(2, quotient.units.size)
+    }
+
+    /** The symmetric direction (temperature on the right) also falls back to a generic mixed unit. */
+    @Test
+    fun `cross-group with temperature on the right`() {
+        val product = (3 of bytes) * (2 of kelvin)
+        assertEquals(6.0, product.value, 1e-9)
+        assertEquals(2, product.units.size)
+
+        val quotient = (6 of bytes) / (2 of kelvin)
+        assertEquals(3.0, quotient.value, 1e-9)
         assertEquals(2, quotient.units.size)
     }
 }
