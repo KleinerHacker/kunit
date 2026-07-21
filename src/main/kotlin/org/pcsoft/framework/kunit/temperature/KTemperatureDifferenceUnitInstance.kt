@@ -23,8 +23,9 @@ import org.pcsoft.framework.kunit.KUnitTerm
  *
  * In contrast to the affine [KTemperatureUnitInstance] this is an ordinary **linear** wrapper (a
  * *vector*, not a *point*): it fully implements [KUnitInstance] with same-type `+`/`-`/comparison and
- * inherits the plain multiplicative `scaledBy`/`readBaseValue`/`times`/`div`/`pow` from its delegate.
- * Two differences are equal iff they describe the same kelvin interval.
+ * inherits the plain multiplicative `readBaseValue`/`times`/`div`/`pow` from its delegate. It overrides
+ * [scaledBy] only to keep the concrete type on scalar scaling (`diff * 2`); the scaling itself stays the
+ * plain linear one. Two differences are equal iff they describe the same kelvin interval.
  *
  * A difference is produced by subtracting two absolute temperatures
  * (`(30 of celsius) - (10 of celsius)`) or explicitly via [KTemperatureDifference.ofKelvin]; it can be
@@ -39,6 +40,13 @@ import org.pcsoft.framework.kunit.KUnitTerm
 class KTemperatureDifferenceUnitInstance internal constructor(
     internal val instance: KMixedUnitInstance,
 ) : KUnitMeasurable by instance, KUnitInstance<KTemperatureDifferenceUnitInstance> {
+
+    /**
+     * Returns a new temperature difference with [value] scaled by [factor], preserving the concrete type
+     * (so `diff * 2` stays a [KTemperatureDifferenceUnitInstance]). The scaling is plain linear - a
+     * difference is a *vector*, unlike the affine absolute [KTemperatureUnitInstance].
+     */
+    override fun scaledBy(factor: Double): KTemperatureDifferenceUnitInstance = temperatureDifferenceOf(value * factor)
 
     /** Adds two temperature differences on their kelvin [value]. The result is again a difference. */
     override operator fun plus(other: KTemperatureDifferenceUnitInstance): KTemperatureDifferenceUnitInstance =

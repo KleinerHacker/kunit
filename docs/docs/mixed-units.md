@@ -62,6 +62,52 @@ val time = (10 of seconds).toUnit()
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
+## Scaling by a plain number
+
+Any unit value can be scaled by a plain `Number`. This is a **magnitude-only** operation: it changes the
+value but leaves the unit terms and exponents untouched, so the result keeps its type and dimension.
+
+- `unit * n`, `n * unit` and `unit / n` all return the **same typed unit** (a length stays a length, an
+  area stays an area).
+- `n / unit` **inverts** the dimension (every exponent is negated) and therefore yields a generic
+  `KMixedUnitInstance` — the idiomatic way to build a reciprocal such as a frequency from a period.
+- There is deliberately **no** scalar `+`/`-`: adding a dimensionless number to a dimensioned value is
+  meaningless.
+
+A real-world example — the area of a circle, `A = π · r²`, computed entirely through the unit system:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+area into (meters * meters)      // ≈ 0.04524 (square meters)
+```
+
+Scaling a plain length or splitting a route into equal legs works the same way:
+
+```kotlin
+val tripled = (12 of meters) * 3 // KLengthUnitInstance, 36 m
+val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance, 2.5 km (one quarter of the route)
+```
+
+Dividing a number **by** a unit inverts the dimension, e.g. a frequency from a period:
+
+```kotlin
+import org.pcsoft.framework.kunit.div
+import org.pcsoft.framework.kunit.time.seconds
+
+val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1]  (0.5 Hz)
+```
+
+The affine **absolute temperature** group is the one exception: scaling an absolute temperature by a number
+is physically meaningless (its kelvin value carries the −273.15 offset), so `(20 of celsius) * 2` is a
+**compile error**. Scale a linear **temperature difference** instead (see
+[Temperature Difference](units/temperature-difference.md)).
+
 ## Addition and subtraction
 
 Unlike `*`/`/`, `+` and `-` are only allowed between two `KMixedUnitInstance`s that describe the **same physical

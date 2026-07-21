@@ -57,6 +57,45 @@ val time = (10 of seconds).toUnit()
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
+## 用纯数字缩放
+
+任何单位值都可以用纯 `Number` 缩放。这是一个**仅改变大小**的运算：它改变数值，但保持单位项和指数不变，因此结果保留其类型和量纲。
+
+- `unit * n`、`n * unit` 和 `unit / n` 都返回**相同类型的单位**（长度仍是长度，面积仍是面积）。
+- `n / unit` 会**反转**量纲（所有指数取负），因此得到一个通用的 `KMixedUnitInstance` —— 这是从周期构造频率之类倒数量的惯用方式。
+- 有意**不提供**标量的 `+`/`-`：把无量纲的数加到有量纲的值上没有意义。
+
+一个实际例子 —— 圆的面积 `A = π · r²`，完全通过单位系统计算：
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance，0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+area into (meters * meters)      // ≈ 0.04524（平方米）
+```
+
+缩放一个长度，或把一段路程等分，做法相同：
+
+```kotlin
+val tripled = (12 of meters) * 3 // KLengthUnitInstance，36 m
+val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance，2.5 km（路程的四分之一）
+```
+
+用一个数**除以**单位会反转量纲，例如从周期得到频率：
+
+```kotlin
+import org.pcsoft.framework.kunit.div
+import org.pcsoft.framework.kunit.time.seconds
+
+val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5，units=[SECOND^-1]（0.5 Hz）
+```
+
+仿射的**绝对温度**组是唯一的例外：用数字缩放绝对温度在物理上没有意义（其开尔文值带有 −273.15 的偏移），所以 `(20 of celsius) * 2` 是**编译错误**。请改为缩放线性的**温差**（参见[温差](units/temperature-difference.md)）。
+
 ## 加法和减法
 
 与 `*`/`/` 不同,`+` 和 `-` 只允许在描述**相同物理维度**的两个 `KMixedUnitInstance` 之间进行: 对于一侧的每个项,

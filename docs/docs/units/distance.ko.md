@@ -95,6 +95,23 @@ val lengthAgain = area / (50 of meters)       // KLengthUnitInstance: value=200.
 val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance (무차원), value=5.0
 ```
 
+### 숫자로 스케일링
+
+거리 값은 타입을 유지한 채 순수한 `Number`로 스케일링할 수 있습니다(길이는 길이로, 면적은 면적으로 유지). 덕분에 공식 형태의 계산을 자연스럽게 쓸 수 있습니다. 예를 들어 원의 넓이 `A = π · r²`를 전적으로 단위 시스템으로 계산합니다.
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+
+val tripled = (12 of meters) * 3 // KLengthUnitInstance, 36 m
+val half = area / 2              // KAreaUnitInstance, 원 넓이의 절반
+```
+
 ### 비교와 동등성
 
 `==`, `!=`, `<`, `<=`, `>`, `>=`는 **동일한 타입**(동일한 차원)을 가진 두 값의 정규화된 `value`를
@@ -245,3 +262,5 @@ import org.pcsoft.framework.kunit.distance.*
 | `m³` | `meters pow 3` | 부피(미터 세제곱) |
 | `m⁻¹` | `meters pow -1` | 길이의 역수 |
 | `2 m · 2 m` | `(2 of meters) * (2 of meters)` | 길이×길이로 만든 넓이 |
+| `π · A` | `Math.PI * area` | 스칼라×넓이(크기 스케일링, 넓이 유지) |
+| `A / 2` | `area / 2` | 넓이를 순수한 숫자로 나눔(넓이 유지) |

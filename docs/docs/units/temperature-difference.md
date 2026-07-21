@@ -53,6 +53,15 @@ val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin
 KTemperatureDifference.ofKelvin(20) > KTemperatureDifference.ofKelvin(10) // true
 ```
 
+Being linear, a difference can also be **scaled by a plain number** (unlike an absolute temperature),
+keeping its type:
+
+```kotlin
+import org.pcsoft.framework.kunit.times
+
+val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUnitInstance: 10 ΔK
+```
+
 A difference can be added to / subtracted from an absolute temperature to yield an absolute temperature
 again (see [Temperature](temperature.md)):
 

@@ -26,6 +26,7 @@
 * For each unit there MUST exist a MkDocs documentation file
   * /docs contains all MkDocs documentation files
   * Supported languages: English, Japanese, Chinese, Korean
+  * Every MkDocs unit page MUST include at least one real-world example (e.g. area calculation, speed from distance/time) in every supported language
 * README.md must be up to date for existing units and architecture
   * Supported languages: English, Japanese, Chinese, Korean
 * All user-relevant changes must be documented in CHANGELOG.md

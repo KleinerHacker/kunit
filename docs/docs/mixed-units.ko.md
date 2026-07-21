@@ -60,6 +60,45 @@ val time = (10 of seconds).toUnit()
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
+## 순수한 숫자로 스케일링
+
+모든 단위 값은 순수한 `Number`로 스케일링할 수 있습니다. 이는 **크기만** 바꾸는 연산입니다. 값은 바뀌지만 단위 항과 지수는 그대로 유지되므로 결과는 타입과 차원을 유지합니다.
+
+- `unit * n`, `n * unit`, `unit / n`은 모두 **같은 타입의 단위**를 반환합니다(길이는 길이로, 면적은 면적으로 유지).
+- `n / unit`은 차원을 **반전**하여(모든 지수의 부호를 반전) 일반 `KMixedUnitInstance`를 반환합니다. 주기로부터 주파수 같은 역수 값을 만드는 관용적인 방법입니다.
+- 스칼라 `+`/`-`는 의도적으로 **제공하지 않습니다**. 무차원 숫자를 차원이 있는 값에 더하는 것은 무의미하기 때문입니다.
+
+실제 예시 — 원의 넓이 `A = π · r²`를 전적으로 단위 시스템으로 계산합니다.
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+area into (meters * meters)      // ≈ 0.04524 (제곱미터)
+```
+
+길이를 스케일링하거나 경로를 균등하게 나누는 것도 같은 방식입니다.
+
+```kotlin
+val tripled = (12 of meters) * 3 // KLengthUnitInstance, 36 m
+val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance, 2.5 km (경로의 4분의 1)
+```
+
+숫자를 단위로 **나누면** 차원이 반전됩니다(예: 주기로부터 주파수).
+
+```kotlin
+import org.pcsoft.framework.kunit.div
+import org.pcsoft.framework.kunit.time.seconds
+
+val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1] (0.5 Hz)
+```
+
+아핀(affine) **절대 온도** 그룹만은 예외입니다. 절대 온도를 숫자로 스케일링하는 것은 물리적으로 무의미하므로(켈빈 값이 −273.15 오프셋을 포함), `(20 of celsius) * 2`는 **컴파일 오류**입니다. 대신 선형 **온도 차이**를 스케일링하세요([온도 차이](units/temperature-difference.md) 참조).
+
 ## 덧셈과 뺄셈
 
 `*`/`/`와 달리 `+`와 `-`는 **같은 물리 차원**을 기술하는 두 `KMixedUnitInstance` 사이에서만 허용됩니다: 한쪽의

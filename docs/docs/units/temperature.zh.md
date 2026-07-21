@@ -53,6 +53,7 @@ t into kelvin       // 298.15
   `30 °C − 10 °C = 20 ΔK`,而**不是** `20 °C`)。
 * `AbsTemp ± 差值` → 再次得到绝对温度。
 * `AbsTemp + AbsTemp` → **编译错误**(两个绝对温度相加在物理上无意义)。
+* `AbsTemp * number` / `AbsTemp / number` → **编译错误**:用纯数字缩放一个仿射点没有意义(其开尔文值带有 −273.15 偏移)。请改为缩放线性的[温差](temperature-difference.md)。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

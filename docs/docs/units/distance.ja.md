@@ -95,6 +95,23 @@ val lengthAgain = area / (50 of meters)       // KLengthUnitInstance: value=200.
 val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance(無次元)、value=5.0
 ```
 
+### 数値によるスケーリング
+
+距離の値は、型を保ったまま単なる `Number` でスケーリングできます（長さは長さのまま、面積は面積のまま）。これにより、円の面積 `A = π · r²` のような計算を単位システムだけで自然に書けます。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance、0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+
+val tripled = (12 of meters) * 3 // KLengthUnitInstance、36 m
+val half = area / 2              // KAreaUnitInstance、円の面積の半分
+```
+
 ### 比較と等価性
 
 `==`、`!=`、`<`、`<=`、`>`、`>=` は**同じ型**(同じ次元)を持つ2つの値の正規化された `value` を比較します。
@@ -247,3 +264,5 @@ import org.pcsoft.framework.kunit.distance.*
 | `m³` | `meters pow 3` | 体積（メートルの3乗） |
 | `m⁻¹` | `meters pow -1` | 長さの逆数 |
 | `2 m · 2 m` | `(2 of meters) * (2 of meters)` | 長さ×長さで作る面積 |
+| `π · A` | `Math.PI * area` | スカラー×面積（大きさのスケーリング、面積のまま） |
+| `A / 2` | `area / 2` | 面積を数値で割る（面積のまま） |

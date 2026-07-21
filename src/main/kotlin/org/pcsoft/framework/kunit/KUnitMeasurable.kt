@@ -271,3 +271,79 @@ operator fun KUnitInstance<*>.times(other: KUnitInstance<*>): KMixedUnitInstance
  */
 operator fun KUnitInstance<*>.div(other: KUnitInstance<*>): KMixedUnitInstance =
     toUnit() / other.toUnit()
+
+/**
+ * Multiplies this measure by a plain [Number] scalar, scaling its magnitude while keeping the exact
+ * same physical dimension - the result is again of **this measure's own type** (e.g. a
+ * `KLengthUnitInstance` stays a `KLengthUnitInstance`, an area stays an area). It delegates to the
+ * [KUnitMeasurable.scaledBy] primitive (the same one behind [of]); the receiver is never modified.
+ *
+ * Unlike `*` between two measures, this changes **no** unit terms and no exponents - it is a pure
+ * magnitude scaling. There is deliberately no scalar `+`/`-` (adding a dimensionless number to a
+ * dimensioned value is meaningless).
+ *
+ * The affine absolute temperature group (`KTemperatureUnitInstance`) opts out of this operator (its
+ * `scaledBy` is an affine reading transform, not a linear scaling); scaling a temperature *difference*
+ * (`KTemperatureDifferenceUnitInstance`, linear) is allowed.
+ *
+ * Example:
+ * ```kotlin
+ * import org.pcsoft.framework.kunit.distance.*
+ *
+ * val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
+ * val area = (r * r) * Math.PI     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+ * val tripled = (12 of meters) * 3 // KLengthUnitInstance, 36 m
+ * ```
+ */
+@Suppress("UNCHECKED_CAST")
+operator fun <T : KUnitMeasurable> T.times(factor: Number): T = scaledBy(factor.toDouble()) as T
+
+/**
+ * Divides this measure by a plain [Number] scalar, scaling its magnitude down while keeping the exact
+ * same physical dimension - the result is again of **this measure's own type**. It is the reciprocal
+ * counterpart of the scalar [times] and delegates to [KUnitMeasurable.scaledBy] with `1 / factor`.
+ *
+ * Note this is scaling by a number, not dividing by a *measure*: `route / 4` yields a quarter of the
+ * same length, whereas `route / (4 of seconds)` (a measure) would produce a speed. For inverting the
+ * dimension of a value use the [Number.div] form (`1 / value`).
+ *
+ * Example:
+ * ```kotlin
+ * import org.pcsoft.framework.kunit.distance.*
+ *
+ * val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance, 2.5 km (one quarter of the route)
+ * ```
+ */
+@Suppress("UNCHECKED_CAST")
+operator fun <T : KUnitMeasurable> T.div(factor: Number): T = scaledBy(1.0 / factor.toDouble()) as T
+
+/**
+ * Multiplies a plain [Number] scalar by a measure - the commuted form of the scalar [times] - so that
+ * a leading factor such as `Math.PI * area` reads naturally. The result keeps the measure's dimension
+ * and **its own type**.
+ *
+ * Example:
+ * ```kotlin
+ * import org.pcsoft.framework.kunit.distance.*
+ *
+ * val r = 12 of centi.meters
+ * val area = Math.PI * (r * r)  // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+ * ```
+ */
+@Suppress("UNCHECKED_CAST")
+operator fun <T : KUnitMeasurable> Number.times(unit: T): T = unit.scaledBy(this.toDouble()) as T
+
+/**
+ * Divides a plain [Number] scalar by a measure, **inverting** the measure's dimension: every unit term's
+ * exponent is negated and the value becomes `number / measure.value`. Because the dimension changes, the
+ * result is a generic [KMixedUnitInstance] (there is no dimension-preserving type to keep).
+ *
+ * This is the idiomatic way to build a reciprocal quantity, e.g. a frequency from a period:
+ * ```kotlin
+ * import org.pcsoft.framework.kunit.time.*
+ *
+ * val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1]  (0.5 Hz)
+ * ```
+ */
+operator fun Number.div(unit: KUnitMeasurable): KMixedUnitInstance =
+    KMixedUnitInstance(this.toDouble(), emptyList()) / unit.toUnit()

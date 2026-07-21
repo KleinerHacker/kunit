@@ -56,6 +56,7 @@ t into kelvin       // 298.15
   `20 °C`가 **아님**).
 * `AbsTemp ± 차이` → 다시 절대 온도.
 * `AbsTemp + AbsTemp` → **컴파일 오류**(두 절대 온도의 덧셈은 물리적으로 무의미).
+* `AbsTemp * number` / `AbsTemp / number` → **컴파일 오류**: 아핀 점을 순수한 숫자로 스케일링하는 것은 무의미합니다(켈빈 값이 −273.15 오프셋을 포함). 대신 선형 [온도 차이](temperature-difference.md)를 스케일링하세요.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

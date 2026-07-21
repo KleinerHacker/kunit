@@ -133,6 +133,16 @@ classDiagram
   pure unit/exponent checking (`hasSameUnits`).
 * `+`/`-` are only allowed within the same unit group and with the same exponent (pure units), or with exactly
   the same `KUnit`s including exponents (mixed units) - otherwise an `IllegalStateException` is thrown.
+* Units can also be scaled by a plain `Number`: `unit * n`, `n * unit` and `unit / n` keep the same typed
+  unit, while `n / unit` inverts the dimension to a mixed unit (e.g. `1 / (2 of seconds)` = s⁻¹). This makes
+  formula-style code read naturally, e.g. a circle area `Math.PI * (r * r)` stays a typed area. Scalar `+`/`-`
+  is not supported, and the affine absolute temperature rejects scalar `*`/`/` at compile time (scale a
+  temperature *difference* instead).
+
+```kotlin
+val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+```
 
 ## What does the framework currently support?
 

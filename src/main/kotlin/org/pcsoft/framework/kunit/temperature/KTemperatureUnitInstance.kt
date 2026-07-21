@@ -114,6 +114,28 @@ class KTemperatureUnitInstance internal constructor(
     operator fun div(other: KUnitMeasurable): KMixedUnitInstance = toUnit() / other.toUnit()
 
     /**
+     * **Blocked:** scalar multiplication is not defined for an absolute temperature. An absolute
+     * temperature is an affine *point* (its kelvin value carries the −273.15 offset), so multiplying it
+     * by a plain number is physically meaningless - `(20 of celsius) * 2` must not silently produce a
+     * bogus value. This member exists solely to shadow the group-agnostic scalar
+     * [org.pcsoft.framework.kunit.times] extension and turn such a call into a **compile error**. To
+     * scale a temperature *interval*, use [KTemperatureDifferenceUnitInstance] (linear).
+     */
+    @Suppress("UNUSED_PARAMETER")
+    @Deprecated("Scalar multiplication is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+    operator fun times(factor: Number): Nothing =
+        throw UnsupportedOperationException("Scalar multiplication is undefined for an affine absolute temperature")
+
+    /**
+     * **Blocked:** scalar division is not defined for an absolute temperature. See [times] for the
+     * reasoning; use [KTemperatureDifferenceUnitInstance] to scale a temperature interval.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    @Deprecated("Scalar division is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+    operator fun div(factor: Number): Nothing =
+        throw UnsupportedOperationException("Scalar division is undefined for an affine absolute temperature")
+
+    /**
      * Structural equality by normalized absolute kelvin [value]: two temperatures are equal iff they
      * represent the same absolute temperature (e.g. `(0 of celsius) == (273.15 of kelvin)`), independent
      * of their construction [unit].
@@ -138,6 +160,27 @@ operator fun KUnitInstance<*>.times(other: KTemperatureUnitInstance): KMixedUnit
 
 /** Cross-group division by an absolute temperature on the right (e.g. `bytes / kelvin`). See [times]. */
 operator fun KUnitInstance<*>.div(other: KTemperatureUnitInstance): KMixedUnitInstance = toUnit() / other.toUnit()
+
+/**
+ * **Blocked:** scalar-times-temperature (`2 * (20 of celsius)`) is undefined for the same affine reason as
+ * [KTemperatureUnitInstance.times]. This more specific overload shadows the group-agnostic
+ * `Number.times(T)` extension for a temperature argument, turning the call into a **compile error**.
+ */
+@Suppress("UNUSED_PARAMETER")
+@Deprecated("Scalar multiplication is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+operator fun Number.times(unit: KTemperatureUnitInstance): Nothing =
+    throw UnsupportedOperationException("Scalar multiplication is undefined for an affine absolute temperature")
+
+/**
+ * **Blocked:** number-divided-by-temperature (`1 / (20 of celsius)`) is undefined for the same affine
+ * reason as [KTemperatureUnitInstance.times]. This more specific overload shadows the group-agnostic
+ * `Number.div(KUnitMeasurable)` extension for a temperature argument, turning the call into a **compile
+ * error**.
+ */
+@Suppress("UNUSED_PARAMETER")
+@Deprecated("Scalar division is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+operator fun Number.div(unit: KTemperatureUnitInstance): Nothing =
+    throw UnsupportedOperationException("Scalar division is undefined for an affine absolute temperature")
 
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 

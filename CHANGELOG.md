@@ -4,6 +4,15 @@
 
 ### Added
 
+- **Scalar multiplication and division of units with plain numbers**: every unit can now be scaled by a
+  `Number` while keeping its type and dimension — `unit * n`, `n * unit` and `unit / n` all return the
+  same typed unit (e.g. `(12 of meters) * 3` stays a length, `Math.PI * (r * r)` stays an area, enabling
+  circle-area style formulas directly through the unit system). `n / unit` inverts the dimension and
+  yields a generic mixed unit (e.g. `1 / (2 of seconds)` = s⁻¹, a frequency). Scalar `+`/`-` remains
+  unsupported. The affine **absolute temperature** (`KTemperatureUnitInstance`) deliberately rejects
+  scalar `*`/`/` at compile time (scaling an affine point is meaningless); a linear **temperature
+  difference** (`KTemperatureDifferenceUnitInstance`) scales normally.
+
 - **New `Acceleration` unit group** (`org.pcsoft.framework.kunit.acceleration`): a *constructed*
   quantity (length · time⁻²) with base unit **m/s²** (`KAccelerationUnit.BASE`). Named tokens `gals`
   (Gal = cm/s²) and `standardGravities` (g₀ = 9.806 65 m/s²), both fully SI-prefixable (e.g. `milli.gals`

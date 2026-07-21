@@ -16,8 +16,11 @@ import org.pcsoft.framework.kunit.div
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.storage.bytes
 import org.pcsoft.framework.kunit.times
+import java.lang.reflect.InvocationTargetException
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
 /**
@@ -71,5 +74,35 @@ class KTemperatureOperatorTest {
         val quotient = (6 of bytes) / (2 of kelvin)
         assertEquals(3.0, quotient.value, 1e-9)
         assertEquals(2, quotient.units.size)
+    }
+
+    /**
+     * All four scalar operators are blocked (compile error via `@Deprecated(ERROR)`) for an affine
+     * absolute temperature. Invoked here through reflection to prove they throw at runtime too.
+     */
+    @Test
+    fun `scalar operators on absolute temperature are blocked`() {
+        val t = 20 of celsius
+        val cls = KTemperatureUnitInstance::class.java
+        val facade = Class.forName("org.pcsoft.framework.kunit.temperature.KTemperatureUnitInstanceKt")
+
+        val cases = listOf(
+            { cls.getMethod("times", Number::class.java).invoke(t, 2) },
+            { cls.getMethod("div", Number::class.java).invoke(t, 2) },
+            { facade.getMethod("times", Number::class.java, KTemperatureUnitInstance::class.java).invoke(null, 2, t) },
+            { facade.getMethod("div", Number::class.java, KTemperatureUnitInstance::class.java).invoke(null, 2, t) },
+        )
+        cases.forEach { call ->
+            val ex = assertFailsWith<InvocationTargetException> { call() }
+            assertIs<UnsupportedOperationException>(ex.cause)
+        }
+    }
+
+    /** A temperature *difference* is linear, so scalar scaling is allowed and stays a difference. */
+    @Test
+    fun `scalar scaling of a temperature difference is allowed`() {
+        val doubled = KTemperatureDifference.ofKelvin(5) * 2
+        assertIs<KTemperatureDifferenceUnitInstance>(doubled)
+        assertEquals(10.0, doubled.value, 1e-9)
     }
 }

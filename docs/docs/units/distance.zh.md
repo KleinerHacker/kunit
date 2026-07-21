@@ -93,6 +93,23 @@ val lengthAgain = area / (50 of meters)       // KLengthUnitInstance: value=200.
 val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance（无量纲），value=5.0
 ```
 
+### 用数字缩放
+
+距离值可以用纯 `Number` 缩放，同时保持类型（长度仍是长度，面积仍是面积）。这让公式化的计算读起来很自然 —— 例如完全通过单位系统计算圆的面积 `A = π · r²`：
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance，0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+
+val tripled = (12 of meters) * 3 // KLengthUnitInstance，36 m
+val half = area / 2              // KAreaUnitInstance，圆面积的一半
+```
+
 ### 比较与相等性
 
 `==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个**相同类型**（相同维度）值的归一化 `value`。
@@ -241,3 +258,5 @@ import org.pcsoft.framework.kunit.distance.*
 | `m³` | `meters pow 3` | 体积（米的立方） |
 | `m⁻¹` | `meters pow -1` | 长度的倒数 |
 | `2 m · 2 m` | `(2 of meters) * (2 of meters)` | 由 长度×长度 构成的面积 |
+| `π · A` | `Math.PI * area` | 标量×面积（大小缩放，仍是面积） |
+| `A / 2` | `area / 2` | 面积除以纯数字（仍是面积） |

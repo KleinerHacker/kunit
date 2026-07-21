@@ -56,6 +56,7 @@ t into kelvin       // 298.15
   `20 °C` では**ない**)。
 * `AbsTemp ± 差` → 再び絶対温度。
 * `AbsTemp + AbsTemp` → **コンパイルエラー**(2つの絶対温度の加算は物理的に無意味)。
+* `AbsTemp * number` / `AbsTemp / number` → **コンパイルエラー**: アフィンな点を数値でスケーリングするのは無意味です(ケルビン値が −273.15 のオフセットを含むため)。代わりに線形の[温度差](temperature-difference.md)をスケーリングしてください。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

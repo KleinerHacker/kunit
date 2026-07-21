@@ -47,6 +47,14 @@ val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin
 KTemperatureDifference.ofKelvin(20) > KTemperatureDifference.ofKelvin(10) // true
 ```
 
+由于温差是线性的,它还可以(不同于绝对温度)用纯数字**缩放**,并保持其类型:
+
+```kotlin
+import org.pcsoft.framework.kunit.times
+
+val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUnitInstance: 10 ΔK
+```
+
 差值可以加到绝对温度上或从中减去,再次得到绝对温度(参见[温度](temperature.md)):
 
 ```kotlin

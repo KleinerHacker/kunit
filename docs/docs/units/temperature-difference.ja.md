@@ -50,6 +50,14 @@ val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin
 KTemperatureDifference.ofKelvin(20) > KTemperatureDifference.ofKelvin(10) // true
 ```
 
+温度差は線形なので、(絶対温度とは異なり)型を保ったまま**数値でスケーリング**することもできます。
+
+```kotlin
+import org.pcsoft.framework.kunit.times
+
+val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUnitInstance: 10 ΔK
+```
+
 差は絶対温度に加減算して再び絶対温度を得ることができます([温度](temperature.md)参照):
 
 ```kotlin

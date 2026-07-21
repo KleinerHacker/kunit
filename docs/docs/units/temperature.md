@@ -58,6 +58,9 @@ asymmetric — the physically correct behaviour (see also [Temperature Differenc
   e.g. `30 °C − 10 °C = 20 ΔK`, **not** `20 °C`).
 * `AbsTemp ± difference` → an absolute temperature again.
 * `AbsTemp + AbsTemp` → **compile error** (adding two absolute temperatures is physically meaningless).
+* `AbsTemp * number` / `AbsTemp / number` → **compile error**: scaling an affine point by a plain number is
+  meaningless (its kelvin value carries the −273.15 offset). Scale a
+  [temperature difference](temperature-difference.md) instead, which is linear.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

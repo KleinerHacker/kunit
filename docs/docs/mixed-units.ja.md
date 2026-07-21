@@ -59,6 +59,45 @@ val time = (10 of seconds).toUnit()
 val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 ```
 
+## 数値によるスケーリング
+
+任意の単位値は、単なる `Number` でスケーリングできます。これは**大きさのみ**の演算です。値は変わりますが、単位の項と指数はそのまま保たれるため、結果は型と次元を維持します。
+
+- `unit * n`、`n * unit`、`unit / n` はすべて**同じ型の単位**を返します（長さは長さのまま、面積は面積のまま）。
+- `n / unit` は次元を**反転**し（すべての指数を符号反転）、汎用の `KMixedUnitInstance` を返します。周期から周波数を作るような逆数を構築する慣用的な方法です。
+- スカラーの `+`/`-` は意図的に**ありません**。無次元の数を次元付きの値に加えることは無意味だからです。
+
+実世界の例 — 円の面積 `A = π · r²` を単位システムだけで計算します。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance、0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+area into (meters * meters)      // ≈ 0.04524（平方メートル）
+```
+
+長さのスケーリングや、経路を等分する場合も同様です。
+
+```kotlin
+val tripled = (12 of meters) * 3 // KLengthUnitInstance、36 m
+val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance、2.5 km（経路の4分の1）
+```
+
+数を単位で**割る**と次元が反転します（例: 周期からの周波数）。
+
+```kotlin
+import org.pcsoft.framework.kunit.div
+import org.pcsoft.framework.kunit.time.seconds
+
+val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5、units=[SECOND^-1]（0.5 Hz）
+```
+
+アフィンな**絶対温度**グループだけは例外です。絶対温度を数値でスケーリングすることは物理的に無意味なため（ケルビン値が −273.15 のオフセットを含むため）、`(20 of celsius) * 2` は**コンパイルエラー**になります。代わりに線形の**温度差**をスケーリングしてください（[温度差](units/temperature-difference.md)を参照）。
+
 ## 加算と減算
 
 `*`/`/` とは異なり、`+` と `-` は**同じ物理次元**を記述する2つの `KMixedUnitInstance` の間でのみ許可されます:

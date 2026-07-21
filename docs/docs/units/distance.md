@@ -95,6 +95,25 @@ val lengthAgain = area / (50 of meters)       // KLengthUnitInstance: value=200.
 val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance (dimensionless), value=5.0
 ```
 
+### Scaling by a number
+
+A distance value can be scaled by a plain `Number` while keeping its type (a length stays a length, an
+area stays an area). This makes formula-style computations read naturally — for instance the area of a
+circle `A = π · r²` entirely through the unit system:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.times
+import org.pcsoft.framework.kunit.centi
+import org.pcsoft.framework.kunit.distance.*
+
+val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
+val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
+
+val tripled = (12 of meters) * 3 // KLengthUnitInstance, 36 m
+val half = area / 2              // KAreaUnitInstance, half the circle area
+```
+
 ### Comparisons and equality
 
 `==`, `!=`, `<`, `<=`, `>`, `>=` compare the normalized `value` of two values of the **same type** (same
@@ -247,3 +266,5 @@ The table below shows how this unit and its components are written mathematicall
 | `m³` | `meters pow 3` | volume (metre cubed) |
 | `m⁻¹` | `meters pow -1` | inverse length |
 | `2 m · 2 m` | `(2 of meters) * (2 of meters)` | area built from length × length |
+| `π · A` | `Math.PI * area` | scalar × area (magnitude scaling, stays an area) |
+| `A / 2` | `area / 2` | area divided by a plain number (stays an area) |

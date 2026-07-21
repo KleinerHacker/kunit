@@ -17,6 +17,7 @@ import org.pcsoft.framework.kunit.areadensity.KAreaDensityUnitInstance
 import org.pcsoft.framework.kunit.areadensity.div
 import org.pcsoft.framework.kunit.distance.KAreaUnitInstance
 import org.pcsoft.framework.kunit.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.force.KForceUnitInstance
 import org.pcsoft.framework.kunit.force.newtons
@@ -26,6 +27,7 @@ import org.pcsoft.framework.kunit.speed.KSpeedUnitInstance
 import org.pcsoft.framework.kunit.speed.div
 import org.pcsoft.framework.kunit.storage.KStorageUnit
 import org.pcsoft.framework.kunit.storage.bytes
+import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -113,6 +115,59 @@ class KMixedUnitOperatorTest {
         val speed = ((10 of meters) / (2 of seconds)).toUnit() // 2 terms
         val length = (3 of meters).toUnit()                    // 1 term
         assertFailsWith<IllegalStateException> { speed + length }
+    }
+
+    /** Scalar `unit * n` / `n * unit` keeps the dimension and the typed leaf (length stays length). */
+    @Test
+    fun `scalar times keeps typed dimension`() {
+        val tripled = (12 of meters) * 3
+        assertIs<KLengthUnitInstance>(tripled)
+        assertEquals(36.0, tripled.value, 1e-9)
+
+        val commuted = 3 * (12 of meters)
+        assertIs<KLengthUnitInstance>(commuted)
+        assertEquals(36.0, commuted.value, 1e-9)
+    }
+
+    /** Scalar `unit / n` scales the magnitude down while keeping the typed leaf. */
+    @Test
+    fun `scalar div keeps typed dimension`() {
+        val leg = (10 of kilo.meters) / 4
+        assertIs<KLengthUnitInstance>(leg)
+        assertEquals(2500.0, leg.value, 1e-9) // 2.5 km in meters
+    }
+
+    /** Real-world case: circle area π·r² built purely through the unit system stays a typed area. */
+    @Test
+    fun `circle area via scalar operators`() {
+        val r = 12 of centi.meters                // 0.12 m
+        val area = Math.PI * (r * r)              // KAreaUnitInstance
+        assertIs<KAreaUnitInstance>(area)
+        assertEquals(Math.PI * 0.0144, area.value, 1e-12)
+        assertEquals(Math.PI * 0.0144, area into (meters * meters), 1e-12)
+    }
+
+    /** `n / unit` inverts the dimension and degrades to a generic mixed unit (e.g. a frequency). */
+    @Test
+    fun `scalar over unit inverts dimension`() {
+        val frequency = 1 / (2 of seconds)
+        assertIs<KMixedUnitInstance>(frequency)
+        assertEquals(0.5, frequency.value, 1e-9)
+        assertTrue(frequency.hasSameUnits(KMixedUnitInstance(1.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)))))
+    }
+
+    /** Scalar scaling of an open mixed unit leaves its terms untouched, scaling only the value. */
+    @Test
+    fun `scalar scaling of open mixed unit`() {
+        val mixed = (20 of bytes) * (20 of meters) // open KMixedUnitInstance, value=400
+        val scaled = mixed * 3
+        assertIs<KMixedUnitInstance>(scaled)
+        assertEquals(1200.0, scaled.value, 1e-9)
+        assertTrue(scaled.hasSameUnits(mixed))
+
+        val halved = mixed / 2
+        assertEquals(200.0, halved.value, 1e-9)
+        assertTrue(halved.hasSameUnits(mixed))
     }
 
     /** Structural equality and hashCode of the generic mixed unit. */

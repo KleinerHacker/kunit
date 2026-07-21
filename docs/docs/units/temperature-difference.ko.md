@@ -50,6 +50,14 @@ val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin
 KTemperatureDifference.ofKelvin(20) > KTemperatureDifference.ofKelvin(10) // true
 ```
 
+온도 차이는 선형이므로 (절대 온도와 달리) 순수한 숫자로 **스케일링**할 수 있으며 타입이 유지됩니다.
+
+```kotlin
+import org.pcsoft.framework.kunit.times
+
+val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUnitInstance: 10 ΔK
+```
+
 차이는 절대 온도에 더하거나 빼서 다시 절대 온도를 얻을 수 있습니다([온도](temperature.md) 참조):
 
 ```kotlin
