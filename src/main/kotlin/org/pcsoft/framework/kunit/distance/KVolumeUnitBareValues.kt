@@ -30,3 +30,15 @@ val usFluidOunces: KVolumeUnitInstance = volumeOf(2.95735295625e-5)
 
 /** 1 oil barrel (0.158987294928 m³). */
 val oilBarrels: KVolumeUnitInstance = volumeOf(0.158987294928)
+
+/** 1 imperial bushel (0.03636872 m³; historical British dry/liquid capacity unit). */
+val imperialBushels: KVolumeUnitInstance = volumeOf(0.03636872)
+
+/** 1 imperial hogshead (0.32731785 m³; historical British cask capacity unit). */
+val hogsheads: KVolumeUnitInstance = volumeOf(0.32731785)
+
+/** 1 imperial pint (0.00056826125 m³; historical British capacity unit). */
+val imperialPints: KVolumeUnitInstance = volumeOf(0.00056826125)
+
+/** 1 imperial quart (0.0011365225 m³; historical British capacity unit; = 2 imperial pints). */
+val imperialQuarts: KVolumeUnitInstance = volumeOf(0.0011365225)

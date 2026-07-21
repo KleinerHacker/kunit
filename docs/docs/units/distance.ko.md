@@ -32,13 +32,32 @@
 | 체인 | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
 | 펄롱 | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
 | 천문단위 | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
-| 광초 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
-| 광분 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
-| 광시 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
-| 광일 | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
-| 광주 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
-| 광년 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | 파섹 | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
+| 큐빗 | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
+| 로마 피트 (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
+| 로마 걸음 (passus) | `KDistanceUnit.ROMAN_PACE` | `passus` | `romanPaces` | 1.4787 |
+| 스타디온 | `KDistanceUnit.STADIUM` | `stadium` | `stadia` | 185.0 |
+| 로마 마일 (mille passus) | `KDistanceUnit.ROMAN_MILE` | `mp` | `romanMiles` | 1481.5 |
+| 로드 (perch) | `KDistanceUnit.ROD` | `rod` | `rods` | 5.0292 |
+| 리그 | `KDistanceUnit.LEAGUE` | `lea` | `leagues` | 4828.032 |
+| 케이블 길이 | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
+| 베르스타 | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
+| 프로이센 마일 | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
+
+### 빛 이동 거리 (접두사 없는 `light` 그룹)
+
+빛 이동 거리는 접두사가 없는 `light` 빌더로 묶여 있어 `5 of light.seconds`, `3 of light.years`
+처럼 거의 자연어처럼 작성할 수 있습니다. 이들은 어떤 SI 접두사도 받지 않습니다
+(`kilo.lightYears`는 물리적으로 의미가 없기 때문입니다).
+
+| 단위 | 열거값 | 기호 | 토큰 | 1 단위의 미터 값 |
+|---|---|---|---:|---:|
+| 광초 | `KDistanceUnit.LIGHT_SECOND` | `ls` | `light.seconds` | 299792458.0 |
+| 광분 | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `light.minutes` | 1.798754748e10 |
+| 광시 | `KDistanceUnit.LIGHT_HOUR` | `lh` | `light.hours` | 1.0792528488e12 |
+| 광일 | `KDistanceUnit.LIGHT_DAY` | `ld` | `light.days` | 2.59020683712e13 |
+| 광주 | `KDistanceUnit.LIGHT_WEEK` | `lw` | `light.weeks` | 1.813144785984e14 |
+| 광년 | `KDistanceUnit.LIGHT_YEAR` | `ly` | `light.years` | 9.4607304725808e15 |
 
 각 `토큰`은 값-1 `KLengthUnitInstance`로, `of`(생성)와 `into`(읽기)에 모두 사용됩니다.
 
@@ -94,6 +113,11 @@ val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance (무차원),
 | 아르 | `a` | `ares` | 100.0 |
 | 헥타르 | `ha` | `hectares` | 10 000.0 |
 | 에이커 | `ac` | `acres` | 4046.8564224 |
+| 루드 | `ro` | `roods` | 1011.7141056 |
+| 제곱퍼치(제곱로드) | `perch²` | `squarePerches` | 25.29285264 |
+| 모르겐(프로이센) | `Mg` | `morgens` | 2553.22 |
+| 요흐(오스트리아) | `Joch` | `jochs` | 5754.642 |
+| 타크베르크(바이에른) | `Tw` | `tagwerks` | 3407.27 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -125,6 +149,10 @@ plot + computed   // 허용됨: 둘 다 면적 -> KAreaUnitInstance
 | 영국 갤런 | `gal (UK)` | `imperialGallons` | 0.00454609 |
 | 미국 액량 온스 | `fl oz` | `usFluidOunces` | 2.95735295625e-5 |
 | 오일 배럴 | `bbl` | `oilBarrels` | 0.158987294928 |
+| 임페리얼 부셸 | `bu (UK)` | `imperialBushels` | 0.03636872 |
+| 임페리얼 호그스헤드 | `hhd` | `hogsheads` | 0.32731785 |
+| 임페리얼 파인트 | `pt (UK)` | `imperialPints` | 0.00056826125 |
+| 임페리얼 쿼트 | `qt (UK)` | `imperialQuarts` | 0.0011365225 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

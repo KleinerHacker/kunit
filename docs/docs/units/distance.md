@@ -32,13 +32,32 @@ Build every value with `number of <token>` and read it back with `value into <to
 | Chain | `KDistanceUnit.CHAIN` | `ch` | `chains` | 20.1168 |
 | Furlong | `KDistanceUnit.FURLONG` | `fur` | `furlongs` | 201.168 |
 | Astronomical unit | `KDistanceUnit.ASTRONOMICAL_UNIT` | `AU` | `astronomicalUnits` | 1.495978707e11 |
-| Light-second | `KDistanceUnit.LIGHT_SECOND` | `ls` | `lightSeconds` | 299792458.0 |
-| Light-minute | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `lightMinutes` | 1.798754748e10 |
-| Light-hour | `KDistanceUnit.LIGHT_HOUR` | `lh` | `lightHours` | 1.0792528488e12 |
-| Light-day | `KDistanceUnit.LIGHT_DAY` | `ld` | `lightDays` | 2.59020683712e13 |
-| Light-week | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
-| Light-year | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | Parsec | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
+| Cubit | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
+| Roman foot (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
+| Roman pace (passus) | `KDistanceUnit.ROMAN_PACE` | `passus` | `romanPaces` | 1.4787 |
+| Stadium | `KDistanceUnit.STADIUM` | `stadium` | `stadia` | 185.0 |
+| Roman mile (mille passus) | `KDistanceUnit.ROMAN_MILE` | `mp` | `romanMiles` | 1481.5 |
+| Rod (perch) | `KDistanceUnit.ROD` | `rod` | `rods` | 5.0292 |
+| League | `KDistanceUnit.LEAGUE` | `lea` | `leagues` | 4828.032 |
+| Cable length | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
+| Verst | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
+| Prussian mile | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
+
+### Light-travel distances (prefix-free `light` group)
+
+Light-travel distances are grouped behind the prefix-free `light` builder and read almost like prose,
+e.g. `5 of light.seconds`, `3 of light.years`. They deliberately accept **no** SI prefixes (a
+`kilo.lightYears` is physically meaningless).
+
+| Unit | Enum value | Symbol | Token | 1 unit in meters |
+|---|---|---|---:|---:|
+| Light-second | `KDistanceUnit.LIGHT_SECOND` | `ls` | `light.seconds` | 299792458.0 |
+| Light-minute | `KDistanceUnit.LIGHT_MINUTE` | `lmin` | `light.minutes` | 1.798754748e10 |
+| Light-hour | `KDistanceUnit.LIGHT_HOUR` | `lh` | `light.hours` | 1.0792528488e12 |
+| Light-day | `KDistanceUnit.LIGHT_DAY` | `ld` | `light.days` | 2.59020683712e13 |
+| Light-week | `KDistanceUnit.LIGHT_WEEK` | `lw` | `light.weeks` | 1.813144785984e14 |
+| Light-year | `KDistanceUnit.LIGHT_YEAR` | `ly` | `light.years` | 9.4607304725808e15 |
 
 Each `Token` is a value-1 `KLengthUnitInstance` used with both `of` (build) and `into` (read).
 
@@ -94,6 +113,11 @@ syntax (see [Powers with `pow`](#powers-with-pow)). The following named special-
 | Are | `a` | `ares` | 100.0 |
 | Hectare | `ha` | `hectares` | 10 000.0 |
 | Acre | `ac` | `acres` | 4046.8564224 |
+| Rood | `ro` | `roods` | 1011.7141056 |
+| Square perch (square rod) | `perch²` | `squarePerches` | 25.29285264 |
+| Morgen (Prussian) | `Mg` | `morgens` | 2553.22 |
+| Joch (Austrian) | `Joch` | `jochs` | 5754.642 |
+| Tagwerk (Bavarian) | `Tw` | `tagwerks` | 3407.27 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -125,6 +149,10 @@ use `pow` (see [Powers with `pow`](#powers-with-pow)). The following named speci
 | Imperial gallon | `gal (UK)` | `imperialGallons` | 0.00454609 |
 | US fluid ounce | `fl oz` | `usFluidOunces` | 2.95735295625e-5 |
 | Oil barrel | `bbl` | `oilBarrels` | 0.158987294928 |
+| Imperial bushel | `bu (UK)` | `imperialBushels` | 0.03636872 |
+| Imperial hogshead | `hhd` | `hogsheads` | 0.32731785 |
+| Imperial pint | `pt (UK)` | `imperialPints` | 0.00056826125 |
+| Imperial quart | `qt (UK)` | `imperialQuarts` | 0.0011365225 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

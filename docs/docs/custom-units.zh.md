@@ -182,7 +182,7 @@ val density = (5 of kilograms) / (2 of liters)
 - 所有 public 类型以 `K` 开头(`KMassUnit`、`KMassUnitInstance` 等);值为 1 的裸令牌和前缀构建器属性扩展
   (`kilograms`、`grams` 等)是例外,保持语言自然。
 - 用参数化的交叉矩阵测试流程覆盖该组,通过 `of`/`into` 构建(绝不使用原始枚举): 单位 → 单位转换,每个运算符
-  和每个比较对每个单位对各一个方法,前缀构建器矩阵,`of` 类型保持,以及 `into` 错误用例 —— 参见 `CLAUDE.md`
+  和每个比较对每个单位对各一个方法,前缀构建器矩阵,`of` 类型保持,以及 `into` 错误用例 —— 参见 `../../.claude/CLAUDE.md`
   中的"参数化交叉矩阵测试流程"一节。
 - 用英文、以 Markdown 记录每个 public 成员,在有用处附上示例 —— 尤其是运算符。
 - 如果该组是量级受限的(如拒绝缩小前缀的存储),将其单位属性挂在 `KAugmentingPrefixBuilder`/

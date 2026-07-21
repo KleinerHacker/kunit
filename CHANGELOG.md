@@ -2,8 +2,61 @@
 
 ## [UNRELEASED]
 
+### Added
+
+- **New prefix-free `light` group for light-travel distances** (`org.pcsoft.framework.kunit.distance`):
+  the light-second … light-year units are now grouped behind the `light` builder object and read almost
+  like prose — `5 of light.seconds`, `3 of light.years` — via the properties `light.seconds`,
+  `light.minutes`, `light.hours`, `light.days`, `light.weeks`, `light.years`. They deliberately accept
+  **no** SI prefixes (a `kilo.lightYears` is physically meaningless). Full docs (EN/JA/ZH/KO) and 100 %
+  test coverage included. **Breaking:** the previous bare tokens `lightSeconds` … `lightYears` and their
+  prefixed forms (`kilo.lightYears`, …) were **removed**; migrate `n of lightYears` → `n of light.years`
+  (analogously for second/minute/hour/day/week).
+
+- **Historical volume units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
+  **imperial bushel** (`imperialBushels`, 0.03636872 m³), **imperial hogshead** (`hogsheads`,
+  0.32731785 m³), **imperial pint** (`imperialPints`, 0.00056826125 m³) and **imperial quart**
+  (`imperialQuarts`, 0.0011365225 m³). All build/read via `of`/`into`, come with full SI prefix support
+  and are covered by tests; docs (EN/JA/ZH/KO) and READMEs updated. (Imperial gallon, US liquid gallon
+  and oil barrel already existed and are unchanged.)
+
+- **Historical area units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
+  **rood** (`roods`, 1011.7141056 m²), **square perch / square rod** (`squarePerches`, 25.29285264 m²),
+  **Morgen (Prussian)** (`morgens`, 2553.22 m²), **Joch (Austrian)** (`jochs`, 5754.642 m²) and
+  **Tagwerk (Bavarian)** (`tagwerks`, 3407.27 m²). All build/read via `of`/`into`, come with full SI
+  prefix support and are covered by tests; docs (EN/JA/ZH/KO) and READMEs updated. (The international
+  **acre** already existed and is unchanged.)
+
+- **Historical length units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
+  **cubit** (`cubits`, 0.4572 m), **Roman foot / pes** (`romanFeet`, 0.2957 m), **Roman pace / passus**
+  (`romanPaces`, 1.4787 m), **stadium** (`stadia`, 185.0 m), **Roman mile / mille passus** (`romanMiles`,
+  1481.5 m), **rod / perch** (`rods`, 5.0292 m), **league** (`leagues`, 4828.032 m), **cable length**
+  (`cableLengths`, 185.2 m), **verst** (`versts`, 1066.8 m) and **Prussian mile** (`prussianMiles`,
+  7532.5 m). All build/read via `of`/`into`, come with full SI prefix support and are covered by tests;
+  docs (EN/JA/ZH/KO) and READMEs updated. (Nautical mile, statute mile, fathom, furlong and inch already
+  existed and are unchanged.)
+
+- **New `Temperature` unit group** (`org.pcsoft.framework.kunit.temperature`) with **Kelvin** (base),
+  **Celsius** and **Fahrenheit**. It is the framework's first **affine** group: conversions are
+  offset-and-scale (`°C = K − 273.15`, `°F = (K − 273.15)·9/5 + 32`), not a single factor. Build and read
+  with the usual verbs — `25 of celsius`, `t into fahrenheit` — through the bare tokens `kelvin`,
+  `celsius`, `fahrenheit`. Values are stored as absolute kelvin, so `*`/`/`/`pow` run through the generic
+  engine unchanged; the group has **no prefixes**. `+`/`-`/comparison operate on absolute kelvin, and
+  `equals`/`hashCode` are by absolute temperature (`(0 of celsius) == (273.15 of kelvin)`). Full docs
+  (EN/JA/ZH/KO) and 100 % test coverage included.
+
 ### Changed
 
+- **`KUnitMeasurable` gains a `readBaseValue(baseValue)` hook** behind `into` (mirroring `scaledBy`
+  behind `of`). The default linear behaviour (`baseValue / value`) is implemented on
+  `KMixedUnitInstance` and inherited by every "pure" wrapper via delegation, so `into` is unchanged for
+  all existing groups; only non-linear groups (the new affine temperature group) override it. This keeps
+  reading correct for every group without shadow-prone `into` overloads. Not a breaking change for
+  existing units.
+
+- **README architecture diagram reconciled with the current code.** The class diagram in all four READMEs
+  (`README.md` + ko/zh/ja) no longer references the removed `KDerivedUnit`/`KDistanceDerivedUnit` types;
+  it now shows the real `KPrefixBuilder` → `KUnitPrefix` relationship instead.
 - **Breaking — construction/reading DSL fully replaced by `of` / `into`.** Number and unit are now
   strictly separated: build with `number of <unit-expression>` and read with `value into <unit>`.
   - **Construction:** `10.5 of kilo.meters`, `10.5 of kilo.meters / milli.seconds`, `2 of hectares`,
@@ -24,6 +77,17 @@
     `KDerivedUnit` targets. Constructed groups (speed, data rate) drop their spelled-out composite tokens
     entirely - a speed/rate is written as an expression (`meters / seconds`, `bytes / seconds`); only
     genuinely single-named speeds (`knots`, `mach`, `speedOfLight`) remain as tokens.
+- **Tests reorganized per aspect.** Each group's single aggregate test class was split into the
+  group-named per-aspect classes mandated by the test rules — `K<Group>UnitSystemTest` (the
+  `K<Group>UnitInstance` surface), `K<Group>OperatorTest` (all operators), `K<Group>UnitTest` (the
+  concrete units / bare values), `K<Group>PrefixTest` (the prefixes) — with a class omitted where the
+  group has no such logic (e.g. no `PrefixTest` for the composed speed/data-rate groups, and only
+  `System`/`Operator` for the root mixed unit). No behavioural change; coverage is unchanged.
+- **Internal simplification (no behavioural change).** Removed unreachable defensive fallbacks so the
+  code carries no dead branches: the in-hierarchy `KDistanceUnitInstance.toLength`/`toArea`/`toVolume`
+  now use a direct cast (the exponent check already guarantees the concrete leaf type), and
+  `combineUnits` inserts the first operand's terms directly (a single mixed unit never repeats a unit).
+  Test coverage is now 100 % across line, branch, method and class.
 
 ### Removed
 
@@ -90,7 +154,7 @@
 
 ### Changed
 
-- **`CLAUDE.md` reconciled with the actual code**: documented `KUnitTarget`, `KUnitTerm`, `KScaledUnit`/
+- **`.claude/CLAUDE.md` reconciled with the actual code**: documented `KUnitTarget`, `KUnitTerm`, `KScaledUnit`/
   `KScaledDerivedUnit` + `with`, the `KDerivedUnit` fields and per-group `object`, the real root-package
   file layout (no `KUnitInstance.kt`/`KDerivedUnit.kt`), the "unit-enum = group name / wrapper = dimension
   name" rule, the three wrapper shapes (dimensioned / `Duration`-backed / plain one-dimensional), and that
@@ -133,7 +197,7 @@
   `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the `K*UnitBareValues.kt` aliases
   are now fully covered and every unit × every prefix runs through the real DSL. The distance area/volume
   matrices now raise a prefixed length via `pow` (`(5 kilo meters) pow 2`). Test-construction policy
-  documented in `CLAUDE.md`.
+  documented in `.claude/CLAUDE.md`.
 - **Breaking:** the length group was renamed to **distance** — package
   `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
   `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the
@@ -195,7 +259,7 @@
   prefix × unit matrix plus one standalone test per SI prefix, a unit → every-other-unit conversion
   matrix, one method per operator (`+`/`-`/`*`/`/`) and per comparison (`==`/`!=`/`<`/`<=`/`>`/`>=`) over
   every unit pair, per-unit `toString`/`toString(target)`, and a length × time cross-group matrix for the
-  mixed unit. The procedure is documented in `CLAUDE.md` as mandatory for future groups.
+  mixed unit. The procedure is documented in `.claude/CLAUDE.md` as mandatory for future groups.
 - Per-group SI-prefix `infix` constructors (`KLengthUnitPrefix.kt`, `KTimeUnitPrefix.kt`): `5 kilo meters`
   now returns a `KLengthUnitInstance` directly (and `5 milli seconds` a `KTimeUnitInstance`), rather than an
   intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters` and is the preferred

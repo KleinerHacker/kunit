@@ -52,23 +52,38 @@ val KPrefixBuilder.furlongs: KLengthUnitInstance get() = prefixedLength(this, KD
 /** Prefixed astronomical units. */
 val KPrefixBuilder.astronomicalUnits: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ASTRONOMICAL_UNIT)
 
-/** Prefixed light-seconds. */
-val KPrefixBuilder.lightSeconds: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LIGHT_SECOND)
-
-/** Prefixed light-minutes. */
-val KPrefixBuilder.lightMinutes: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LIGHT_MINUTE)
-
-/** Prefixed light-hours. */
-val KPrefixBuilder.lightHours: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LIGHT_HOUR)
-
-/** Prefixed light-days. */
-val KPrefixBuilder.lightDays: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LIGHT_DAY)
-
-/** Prefixed light-weeks. */
-val KPrefixBuilder.lightWeeks: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LIGHT_WEEK)
-
-/** Prefixed light-years. */
-val KPrefixBuilder.lightYears: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LIGHT_YEAR)
+// Light-travel distances (light-second … light-year) intentionally have no prefixed forms; they are
+// grouped behind the prefix-free `light` builder (`5 of light.seconds`); see KLengthLightUnitBuilder.kt.
 
 /** Prefixed parsecs. */
 val KPrefixBuilder.parsecs: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.PARSEC)
+
+/** Prefixed cubits (Elle). */
+val KPrefixBuilder.cubits: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.CUBIT)
+
+/** Prefixed Roman feet (pes). */
+val KPrefixBuilder.romanFeet: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROMAN_FOOT)
+
+/** Prefixed Roman paces (passus). */
+val KPrefixBuilder.romanPaces: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROMAN_PACE)
+
+/** Prefixed stadia. */
+val KPrefixBuilder.stadia: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.STADIUM)
+
+/** Prefixed Roman miles (mille passus). */
+val KPrefixBuilder.romanMiles: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROMAN_MILE)
+
+/** Prefixed rods (perch). */
+val KPrefixBuilder.rods: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROD)
+
+/** Prefixed leagues. */
+val KPrefixBuilder.leagues: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LEAGUE)
+
+/** Prefixed cable lengths. */
+val KPrefixBuilder.cableLengths: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.CABLE_LENGTH)
+
+/** Prefixed versts (Werst). */
+val KPrefixBuilder.versts: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.VERST)
+
+/** Prefixed Prussian miles. */
+val KPrefixBuilder.prussianMiles: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.PRUSSIAN_MILE)

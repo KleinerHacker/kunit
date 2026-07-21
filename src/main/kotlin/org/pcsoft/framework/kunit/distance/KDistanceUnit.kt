@@ -73,7 +73,37 @@ enum class KDistanceUnit(override val symbol: String, override val baseValue: Do
     LIGHT_YEAR("ly", 9.4607304725808e15),
 
     /** Parsec, 1 pc ≈ 3.0856775814913673e16 m (commonly used in astronomy). */
-    PARSEC("pc", 3.0856775814913673e16);
+    PARSEC("pc", 3.0856775814913673e16),
+
+    /** Cubit (Elle), 1 cubit = 0.4572 m (historical unit based on the forearm length). */
+    CUBIT("cubit", 0.4572),
+
+    /** Roman foot (pes), 1 pes = 0.2957 m (historical Roman length unit). */
+    ROMAN_FOOT("pes", 0.2957),
+
+    /** Roman pace (passus), 1 passus = 1.4787 m (= 5 Roman feet; historical Roman length unit). */
+    ROMAN_PACE("passus", 1.4787),
+
+    /** Stadium, 1 stadium = 185.0 m (historical Greek/Roman length unit). */
+    STADIUM("stadium", 185.0),
+
+    /** Roman mile (mille passus), 1 mille passus = 1481.5 m (= 1000 Roman paces). */
+    ROMAN_MILE("mp", 1481.5),
+
+    /** Rod (perch), 1 rod = 5.0292 m (historical surveyor's unit; = 16.5 ft). */
+    ROD("rod", 5.0292),
+
+    /** League, 1 lea = 4828.032 m (historical unit; = 3 statute miles). */
+    LEAGUE("lea", 4828.032),
+
+    /** Cable length, 1 cable = 185.2 m (maritime unit; = 1/10 nautical mile). */
+    CABLE_LENGTH("cable", 185.2),
+
+    /** Verst (Werst), 1 verst = 1066.8 m (historical Russian length unit). */
+    VERST("verst", 1066.8),
+
+    /** Prussian mile, 1 prussian mile = 7532.5 m (historical German length unit). */
+    PRUSSIAN_MILE("prussian mi", 7532.5);
 
     companion object {
         /**
