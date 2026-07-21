@@ -41,6 +41,30 @@ These must contain all supported units per unit system. This includes in particu
 * Relative value compared to the unit's standard value
 * The standard unit must be marked (see skill)
 
+### Value Semantics (equals / hashCode / toString)
+
+Every `K<UnitName>UnitInstance` MUST provide `equals`, `hashCode` and `toString` **value-based**,
+following the existing units as the reference:
+* `equals`/`hashCode` compare the **normalized base value** (two values that represent the same
+  physical quantity are equal, independent of the unit they were constructed with, e.g.
+  `1.bytes == 8.bits`, `(0 of celsius) == (273.15 of kelvin)`).
+* `toString` renders the value in the group's base unit(s) (delegating to the underlying
+  `KMixedUnitInstance`).
+
+### Non-linear (affine) Conversions
+
+By default a unit's conversion to its base is a single multiplicative factor (`baseValue`). A unit
+group whose conversion is **not** a single factor (offset-and-scale, i.e. *affine* - e.g. temperature:
+`°C = K − 273.15`) MUST NOT change the shared engine and MUST NOT add `of`/`into` overloads (those get
+shadowed by an explicitly imported generic verb). Instead it stores the **absolute base value** and
+injects its transform through the two measurable hooks:
+* `scaledBy(factor)` - the construction hook behind `of` (interpret `factor` as a reading in the unit
+  and convert it to the base).
+* `readBaseValue(baseValue)` - the reading hook behind `into` (convert the normalized base value back
+  into the unit's reading).
+
+This keeps `of`/`into` correct for every group and is a deliberate, contained exception.
+
 ## Exponents
 
 Every individual unit within a mixed unit carries an exponent. This is normally 1, but it can be increased or

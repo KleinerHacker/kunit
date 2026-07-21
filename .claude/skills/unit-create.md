@@ -19,8 +19,8 @@ These already exist in the root package `org.pcsoft.framework.kunit` and every n
 * `KMixedUnitInstance` + `KUnitTerm` - the generic engine: a numeric value together with a list of
   `(KUnit, exponent)` terms. It performs all arithmetic (`times`/`div`/`plus`/`minus`/`pow`).
 * `KUnitMeasurable` - the common surface of every value: `value` (normalized `Double`), `toUnit()`
-  (conversion into the generic engine), `scaledBy(factor)` (the primitive behind `of`), and the
-  mixed `times`/`div`.
+  (conversion into the generic engine), `scaledBy(factor)` (the primitive behind `of`),
+  `readBaseValue(baseValue)` (the primitive behind `into`), and the mixed `times`/`div`.
 * `KUnitInstance<SELF>` - the self-typed surface of a "pure" wrapper: same-type `plus`/`minus`/
   `compareTo`.
 * `Number.of(template)` / `KUnitMeasurable.into(target)` - the single construction / reading verbs.
@@ -31,6 +31,19 @@ A class following the naming scheme `K<UnitName>UnitInstance` is created for the
 `KMixedUnitInstance` (via `KUnitMeasurable by instance` delegation) and adds the self-typed surface
 (`KUnitInstance<K<UnitName>UnitInstance>`: `plus`/`minus`/`compareTo`) as well as `scaledBy` returning
 its own type (so `of` preserves the strong result type).
+
+It MUST also implement **value-based** `equals`/`hashCode`/`toString` following the existing units:
+`equals`/`hashCode` on the normalized base value (equal quantity ⇒ equal, regardless of construction
+unit), `toString` delegating to the underlying `KMixedUnitInstance` (base-unit rendering).
+
+### Non-linear (affine) groups
+
+If the group's conversion is not a single multiplicative factor (offset-and-scale, e.g. temperature),
+do **not** touch the shared engine and do **not** add `of`/`into` overloads (a generic verb imported
+explicitly would shadow them and silently misconvert). Store the **absolute base value** and inject the
+transform through the two hooks instead: override `scaledBy` (construction, behind `of`) and
+`readBaseValue` (reading, behind `into`). Carry the construction unit on the instance so the value-1
+templates know which transform to apply. This is a deliberate, contained exception.
 
 ## Unit Enumeration
 

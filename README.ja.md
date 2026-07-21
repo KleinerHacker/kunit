@@ -154,6 +154,7 @@ classDiagram
 | 距離 | `org.pcsoft.framework.kunit.distance` | メートル (`KDistanceUnit.BASE`) |
 | 時間 | `org.pcsoft.framework.kunit.time` | 秒 (`KTimeUnit.BASE`) |
 | ストレージ | `org.pcsoft.framework.kunit.storage` | バイト (`KStorageUnit.BASE`) |
+| 温度 | `org.pcsoft.framework.kunit.temperature` | ケルビン (`KTemperatureUnit.BASE`) |
 | 速度 (構成: 長さ·時間⁻¹) | `org.pcsoft.framework.kunit.speed` | メートル毎秒 (`KSpeedUnit.BASE`) |
 | データ転送率 (構成: ストレージ·時間⁻¹) | `org.pcsoft.framework.kunit.datarate` | バイト毎秒 (`KDataRateUnit.BASE`) |
 
@@ -181,6 +182,20 @@ infix `pow` で単位をべき乗します(Kotlin にはオーバーロード可
 `(2 m)² = 4 m²`、`(2 of meters) pow 3` は体積で、`pow` はすべてのグループで動作します(`(2 of hours) pow 2`)。
 これが唯一のべき乗構文です — `squareXxx`/`cubicXxx` コンストラクタは存在しません。
 
+#### 温度 (`KTemperatureUnit`)
+
+ケルビン(基本)、セルシウス、ファーレンハイト。温度はフレームワーク**最初の(恒久的な)アフィン例外**です:
+変換は単一係数ではなくオフセットとスケール(`°C = K − 273.15`)です。共有エンジンは乗算のままで、アフィン変換は
+`scaledBy`(`of` の裏側)と `readBaseValue`(`into` の裏側)フックを通じて注入されます。そのため `25 of celsius`
+や `t into fahrenheit` は通常の動詞を使い、隠されやすいオーバーロードは不要です。値は絶対ケルビンで保存され
+(`*`/`/`/`pow` はそのまま動作)、このグループには**接頭辞がありません**。
+
+```kotlin
+(0 of celsius) into kelvin       // 273.15
+(100 of celsius) into fahrenheit // 212.0
+(32 of fahrenheit) into celsius  // 0.0
+```
+
 #### 構成されたグループ(2つの中核グループから合成)
 
 * **速度** (`KSpeedUnit`) — `length · time⁻¹`;`(100 of meters) / (10 of seconds)` や
@@ -192,7 +207,7 @@ infix `pow` で単位をべき乗します(Kotlin にはオーバーロード可
 
 ### 未対応
 
-* `length` パターンに従う追加の単位グループ(例: 質量、温度)
+* `length` パターンに従う追加の単位グループ(例: 質量)
 * それ自体が混合単位で構成される複合「純粋な」単位(例: ニュートン)
 
 ## クイックスタート

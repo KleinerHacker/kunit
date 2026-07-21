@@ -6,9 +6,11 @@
 * The skillset and ruleset must be observed for every change
 * Test coverage must reach 100% at all times
   * If it does not, the tests must be extended appropriately to cover what is missing
-* Do not add new dependencies without asking
+* Do NOT scan ANY code of ANY project
+  * Create code only based on the skillset and ruleset
+* Do NOT add new dependencies without asking
   * Always ask first and provide suitable suggestions for what could be used to solve the problem
-* Do not introduce breaking changes without asking; when you ask, present the following options:
+* Do NOT introduce breaking changes without asking; when you ask, present the following options:
   * Keep the old code and mark it as deprecated with a reference to the new code (recommended)
   * Keep the old code and mark it for removal with a reference to the new code
   * Apply the change without regard for the breaking change (remove the old code, add the new one)
@@ -32,4 +34,6 @@
 
 * A plan describes multiple tasks to do
   * Describe each part in short bullet points (max. 20 words each)
+  * Do NOT create a plan summary
+    * All bullet points MUST describe each task to implement it
 * Do not execute the whole plan at once; work through it task by task

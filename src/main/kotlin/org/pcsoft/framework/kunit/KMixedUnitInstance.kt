@@ -63,6 +63,13 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
     override fun scaledBy(factor: Double): KMixedUnitInstance = KMixedUnitInstance(value * factor, units)
 
     /**
+     * Linear reading hook behind [into]: reads a base-normalized [baseValue] into this template's scale
+     * as `baseValue / value`. Every "pure" wrapper inherits this via `by` delegation; only groups with a
+     * non-linear (e.g. affine temperature) conversion override it.
+     */
+    override fun readBaseValue(baseValue: Double): Double = baseValue / value
+
+    /**
      * Multiplies two mixed units. Always allowed.
      *
      * The resulting [value] is `this.value * other.value`. The resulting [units] are computed by

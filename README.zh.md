@@ -149,6 +149,7 @@ classDiagram
 | 距离 | `org.pcsoft.framework.kunit.distance` | 米 (`KDistanceUnit.BASE`) |
 | 时间 | `org.pcsoft.framework.kunit.time` | 秒 (`KTimeUnit.BASE`) |
 | 存储 | `org.pcsoft.framework.kunit.storage` | 字节 (`KStorageUnit.BASE`) |
+| 温度 | `org.pcsoft.framework.kunit.temperature` | 开尔文 (`KTemperatureUnit.BASE`) |
 | 速度 (构造: 长度·时间⁻¹) | `org.pcsoft.framework.kunit.speed` | 米每秒 (`KSpeedUnit.BASE`) |
 | 数据传输率 (构造: 存储·时间⁻¹) | `org.pcsoft.framework.kunit.datarate` | 字节每秒 (`KDataRateUnit.BASE`) |
 
@@ -173,6 +174,19 @@ classDiagram
 `(2 of meters) pow 3` 是体积,`pow` 在每个组上都有效(`(2 of hours) pow 2`)。这是唯一的求幂语法 —— 没有
 `squareXxx`/`cubicXxx` 构造函数。
 
+#### 温度 (`KTemperatureUnit`)
+
+开尔文(基本)、摄氏、华氏。温度是框架的**第一个(永久的)仿射例外**:转换是偏移加缩放(`°C = K − 273.15`),
+而非单一系数。共享引擎保持乘法,仿射变换通过 `scaledBy`(位于 `of` 背后)和 `readBaseValue`(位于 `into` 背后)
+钩子注入。因此 `25 of celsius` 和 `t into fahrenheit` 使用普通动词,无需易被遮蔽的重载。值以绝对开尔文存储
+(`*`/`/`/`pow` 照常运行),该组**无前缀**。
+
+```kotlin
+(0 of celsius) into kelvin       // 273.15
+(100 of celsius) into fahrenheit // 212.0
+(32 of fahrenheit) into celsius  // 0.0
+```
+
 #### 构造组(由两个核心组合成)
 
 * **速度** (`KSpeedUnit`) —— `length · time⁻¹`;用 `(100 of meters) / (10 of seconds)` 或
@@ -184,7 +198,7 @@ classDiagram
 
 ### 仍待完成
 
-* 遵循 `length` 模式的更多单位组(例如质量、温度)
+* 遵循 `length` 模式的更多单位组(例如质量)
 * 本身由混合单位组成的复合"纯"单位(例如牛顿)
 
 ## 快速开始

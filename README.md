@@ -156,6 +156,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Distance | `org.pcsoft.framework.kunit.distance` | Meter (`KDistanceUnit.BASE`) |
 | Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
 | Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
+| Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
 | Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.speed` | Meter per second (`KSpeedUnit.BASE`) |
 | Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.datarate` | Byte per second (`KDataRateUnit.BASE`) |
 
@@ -183,6 +184,21 @@ Raise a unit to a power with the infix `pow` (Kotlin has no overloadable `^`): `
 `(2 m)² = 4 m²`, `(2 of meters) pow 3` a volume, and `pow` works on every group (`(2 of hours) pow 2`).
 It is the only power syntax — there are no `squareXxx`/`cubicXxx` constructors.
 
+#### Temperature (`KTemperatureUnit`)
+
+Kelvin (base), Celsius, Fahrenheit. Temperature is the framework's **first (permanent) affine
+exception**: conversions are offset-and-scale (`°C = K − 273.15`), not a single factor. The shared engine
+stays multiplicative — the affine transform is injected through the `scaledBy` (behind `of`) and
+`readBaseValue` (behind `into`) hooks, so `25 of celsius` and `t into fahrenheit` use the normal verbs
+with no shadow-prone overloads. Values are stored as absolute kelvin (so `*`/`/`/`pow` run unchanged),
+and the group has **no prefixes**.
+
+```kotlin
+(0 of celsius) into kelvin       // 273.15
+(100 of celsius) into fahrenheit // 212.0
+(32 of fahrenheit) into celsius  // 0.0
+```
+
 #### Constructed groups (composed of two core groups)
 
 * **Speed** (`KSpeedUnit`) - `length · time⁻¹`; build it directly with `(100 of meters) / (10 of seconds)`
@@ -195,7 +211,7 @@ It is the only power syntax — there are no `squareXxx`/`cubicXxx` constructors
 
 ### Still Open
 
-* Further unit groups following the `length` pattern (e.g. mass, temperature)
+* Further unit groups following the `length` pattern (e.g. mass)
 * Composite "pure" units that are themselves composed of a mixed unit (e.g. Newton)
 
 ## Quick Start

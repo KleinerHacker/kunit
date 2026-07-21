@@ -2,7 +2,25 @@
 
 ## [UNRELEASED]
 
+### Added
+
+- **New `Temperature` unit group** (`org.pcsoft.framework.kunit.temperature`) with **Kelvin** (base),
+  **Celsius** and **Fahrenheit**. It is the framework's first **affine** group: conversions are
+  offset-and-scale (`°C = K − 273.15`, `°F = (K − 273.15)·9/5 + 32`), not a single factor. Build and read
+  with the usual verbs — `25 of celsius`, `t into fahrenheit` — through the bare tokens `kelvin`,
+  `celsius`, `fahrenheit`. Values are stored as absolute kelvin, so `*`/`/`/`pow` run through the generic
+  engine unchanged; the group has **no prefixes**. `+`/`-`/comparison operate on absolute kelvin, and
+  `equals`/`hashCode` are by absolute temperature (`(0 of celsius) == (273.15 of kelvin)`). Full docs
+  (EN/JA/ZH/KO) and 100 % test coverage included.
+
 ### Changed
+
+- **`KUnitMeasurable` gains a `readBaseValue(baseValue)` hook** behind `into` (mirroring `scaledBy`
+  behind `of`). The default linear behaviour (`baseValue / value`) is implemented on
+  `KMixedUnitInstance` and inherited by every "pure" wrapper via delegation, so `into` is unchanged for
+  all existing groups; only non-linear groups (the new affine temperature group) override it. This keeps
+  reading correct for every group without shadow-prone `into` overloads. Not a breaking change for
+  existing units.
 
 - **README architecture diagram reconciled with the current code.** The class diagram in all four READMEs
   (`README.md` + ko/zh/ja) no longer references the removed `KDerivedUnit`/`KDistanceDerivedUnit` types;
