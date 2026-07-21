@@ -9,8 +9,28 @@ permissions:
   contents: write
 
 jobs:
+  # Fail fast: make sure the tag has a matching changelog entry before anything
+  # else runs, so a missing entry does not surface late in the release flow.
+  verify-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Verify changelog entry exists
+        run: |
+          TAG="${{ github.ref_name }}"
+          NOTES=$(awk "/^## \[$TAG\]/{found=1; next} found && /^## \[/{exit} found{print}" CHANGELOG.md)
+          NOTES=$(echo "$NOTES" | sed '/./,$!d' | sed -e :a -e '/^\n*$/{$d;N;ba}')
+          if [ -z "$NOTES" ]; then
+            echo "ERROR: No changelog entry found for tag $TAG"
+            exit 1
+          fi
+          echo "Changelog entry for tag $TAG found."
+
   licences:
     runs-on: ubuntu-latest
+    needs: verify-changelog
 
     steps:
       - uses: actions/checkout@v7
@@ -29,6 +49,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs: verify-changelog
 
     steps:
       - uses: actions/checkout@v7
@@ -48,6 +69,7 @@ jobs:
   # Build the docs as a generation test (mkdocs --strict) before they get deployed.
   validate-docs:
     runs-on: ubuntu-latest
+    needs: verify-changelog
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
