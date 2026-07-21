@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1236976717%2FClasslikes%2F-251573632" anchor-label="KAugmentingPrefixBuilder" id="1236976717%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-augmenting-prefix-builder/index.html"><span>KAugmenting</span><wbr></wbr><span>Prefix</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1236976717%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a> : <a href="-k-prefix-builder/index.html">KPrefixBuilder</a></div><div class="brief "><p class="paragraph">The builder for a <strong>supra-unity</strong> SI prefix (factor > 1, i.e. <code class="lang-kotlin">deca</code> up to <code class="lang-kotlin">quetta</code>). Groups add unit properties here that are only meaningful when scaled <strong>up</strong> (in addition to everything on <a href="-k-prefix-builder/index.html">KPrefixBuilder</a>) - e.g. storage's <code class="lang-kotlin">bytes</code>/<code class="lang-kotlin">bits</code>, which makes <code class="lang-kotlin">milli.bytes</code> a compile error.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="426982533%2FClasslikes%2F-251573632" anchor-label="KDiminishingPrefixBuilder" id="426982533%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-diminishing-prefix-builder/index.html"><span>KDiminishing</span><wbr></wbr><span>Prefix</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="426982533%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a> : <a href="-k-prefix-builder/index.html">KPrefixBuilder</a></div><div class="brief "><p class="paragraph">The builder for a <strong>sub-unity</strong> SI prefix (factor < 1, i.e. <code class="lang-kotlin">deci</code> down to <code class="lang-kotlin">quecto</code>). Groups add unit properties here that are only meaningful when scaled <strong>down</strong> (in addition to everything on <a href="-k-prefix-builder/index.html">KPrefixBuilder</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2043767439%2FClasslikes%2F-251573632" anchor-label="KMixedUnitInstance" id="-2043767439%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-mixed-unit-instance/index.html"><span>KMixed</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2043767439%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> : <a href="-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Represents a &quot;mixed unit&quot; (Mischeinheit): a numeric <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(0)/">value</span> together with one or more <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(1)/">units</span> (<a href="-k-unit-term/index.html">KUnitTerm</a>s) describing its physical dimension, e.g. &quot;10.0 m/s&quot; (a length term and a time term).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1480750532%2FClasslikes%2F-251573632" anchor-label="KPrefixBuilder" id="-1480750532%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-prefix-builder/index.html"><span>KPrefix</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1480750532%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-k-prefix-builder/index.html">KPrefixBuilder</a></div><div class="brief "><p class="paragraph">A prefix <strong>builder</strong>: the receiver that turns a bare unit token into a <strong>prefixed, value-1 unit template</strong> through a plain property access, e.g. <code class="lang-kotlin">kilo.meters</code> (1000 m) or <code class="lang-kotlin">milli.seconds</code> (0.001 s). The resulting template is then used with the <a href="of.html">of</a>/<a href="into.html">into</a> verbs (<code class="lang-kotlin">10 of kilo.meters</code>, <code class="lang-kotlin">v into milli.seconds</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-582696423%2FClasslikes%2F-251573632" anchor-label="KUnit" id="-582696423%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit/index.html"><span><span>KUnit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-582696423%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-k-unit/index.html">KUnit</a></div><div class="brief "><p class="paragraph">Represents a single physical unit belonging to a unit group (e.g. meter within the length group).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-68409596%2FClasslikes%2F-251573632" anchor-label="KUnitInstance" id="-68409596%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit-instance/index.html"><span>KUnit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-68409596%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-unit-instance/index.html">SELF</a><span class="token operator"> : </span><a href="-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-unit-instance/index.html">SELF</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span> : <a href="-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">The common abstraction of every &quot;pure&quot; unit wrapper (e.g. <code class="lang-kotlin">KLengthUnitInstance</code>, <code class="lang-kotlin">KTimeUnitInstance</code>): a value that belongs to exactly one unit group and therefore supports same-group, same-exponent arithmetic and comparison against <strong>its own type</strong>. Construction and reading are the group-agnostic <a href="of.html">of</a>/<a href="into.html">into</a> verbs, so no group-specific conversion members live here.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-10145448%2FClasslikes%2F-251573632" anchor-label="KUnitMeasurable" id="-10145448%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit-measurable/index.html"><span>KUnit</span><wbr></wbr><span><span>Measurable</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-10145448%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">The common abstraction shared by <strong>every</strong> unit value in this library: the generic mixed unit (<a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a>) as well as every &quot;pure&quot; unit wrapper (e.g. <code class="lang-kotlin">KLengthUnitInstance</code>, <code class="lang-kotlin">KTimeUnitInstance</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="314450343%2FClasslikes%2F-251573632" anchor-label="KUnitPrefix" id="314450343%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit-prefix/index.html"><span>KUnit</span><wbr></wbr><span><span>Prefix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="314450343%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-unit-prefix/index.html">KUnitPrefix</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-unit-prefix/index.html">KUnitPrefix</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A SI-style magnitude prefix (e.g. kilo, milli). It is the scale factor behind the prefix <strong>builders</strong> (<a href="-k-prefix-builder/index.html">KPrefixBuilder</a> and its <code class="lang-kotlin">KDiminishing</code>/<code class="lang-kotlin">KAugmenting</code> subtypes): a builder such as <code class="lang-kotlin">kilo</code> or <code class="lang-kotlin">milli</code> wraps one <a href="-k-unit-prefix/index.html">KUnitPrefix</a> and exposes value-1 unit templates (<code class="lang-kotlin">kilo.meters</code>, <code class="lang-kotlin">milli.seconds</code>) for use with the <a href="of.html">of</a>/<a href="into.html">into</a> verbs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1898793741%2FClasslikes%2F-251573632" anchor-label="KUnitTerm" id="1898793741%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit-term/index.html"><span>KUnit</span><wbr></wbr><span><span>Term</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1898793741%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-unit-term/index.html">KUnitTerm</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>unit<span class="token operator">: </span><a href="-k-unit/index.html">KUnit</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>exponent<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">One (unit, exponent) pair inside a <a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-63879881%2FProperties%2F-251573632" anchor-label="atto" id="-63879881%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="atto.html"><span><span>atto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-63879881%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="atto.html">atto</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Atto builder (10^-18), e.g. <code class="lang-kotlin">atto.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-466656140%2FProperties%2F-251573632" anchor-label="centi" id="-466656140%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="centi.html"><span><span>centi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-466656140%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="centi.html">centi</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Centi builder (10^-2), e.g. <code class="lang-kotlin">centi.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1939659686%2FProperties%2F-251573632" anchor-label="deca" id="1939659686%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deca.html"><span><span>deca</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1939659686%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="deca.html">deca</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Deca builder (10^1), e.g. <code class="lang-kotlin">deca.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2107149154%2FProperties%2F-251573632" anchor-label="deci" id="-2107149154%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deci.html"><span><span>deci</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2107149154%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="deci.html">deci</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Deci builder (10^-1), e.g. <code class="lang-kotlin">deci.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-304300857%2FProperties%2F-251573632" anchor-label="exa" id="-304300857%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exa.html"><span><span>exa</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-304300857%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="exa.html">exa</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Exa builder (10^18), e.g. <code class="lang-kotlin">exa.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="8147628%2FProperties%2F-251573632" anchor-label="femto" id="8147628%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="femto.html"><span><span>femto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="8147628%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="femto.html">femto</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Femto builder (10^-15), e.g. <code class="lang-kotlin">femto.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1743459927%2FProperties%2F-251573632" anchor-label="giga" id="-1743459927%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="giga.html"><span><span>giga</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1743459927%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="giga.html">giga</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Giga builder (10^9), e.g. <code class="lang-kotlin">giga.bytes</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1716821964%2FProperties%2F-251573632" anchor-label="hecto" id="-1716821964%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hecto.html"><span><span>hecto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1716821964%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hecto.html">hecto</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Hecto builder (10^2), e.g. <code class="lang-kotlin">hecto.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1976326948%2FProperties%2F-251573632" anchor-label="kilo" id="1976326948%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilo.html"><span><span>kilo</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1976326948%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="kilo.html">kilo</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Kilo builder (10^3), e.g. <code class="lang-kotlin">kilo.meters</code>, <code class="lang-kotlin">kilo.bytes</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-860870861%2FProperties%2F-251573632" anchor-label="mega" id="-860870861%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mega.html"><span><span>mega</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-860870861%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="mega.html">mega</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Mega builder (10^6), e.g. <code class="lang-kotlin">mega.bytes</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-811062575%2FProperties%2F-251573632" anchor-label="micro" id="-811062575%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="micro.html"><span><span>micro</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-811062575%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="micro.html">micro</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Micro builder (10^-6), e.g. <code class="lang-kotlin">micro.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-469559832%2FProperties%2F-251573632" anchor-label="milli" id="-469559832%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="milli.html"><span><span>milli</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-469559832%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="milli.html">milli</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Milli builder (10^-3), e.g. <code class="lang-kotlin">milli.meters</code>, <code class="lang-kotlin">milli.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-573182159%2FProperties%2F-251573632" anchor-label="nano" id="-573182159%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nano.html"><span><span>nano</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-573182159%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="nano.html">nano</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Nano builder (10^-9), e.g. <code class="lang-kotlin">nano.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="834514563%2FProperties%2F-251573632" anchor-label="peta" id="834514563%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="peta.html"><span><span>peta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="834514563%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="peta.html">peta</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Peta builder (10^15), e.g. <code class="lang-kotlin">peta.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1082276576%2FProperties%2F-251573632" anchor-label="pico" id="1082276576%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pico.html"><span><span>pico</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1082276576%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="pico.html">pico</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Pico builder (10^-12), e.g. <code class="lang-kotlin">pico.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="738452552%2FProperties%2F-251573632" anchor-label="quecto" id="738452552%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="quecto.html"><span><span>quecto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="738452552%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="quecto.html">quecto</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Quecto builder (10^-30), e.g. <code class="lang-kotlin">quecto.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="268621285%2FProperties%2F-251573632" anchor-label="quetta" id="268621285%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="quetta.html"><span><span>quetta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="268621285%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="quetta.html">quetta</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Quetta builder (10^30). Use as <code class="lang-kotlin">quetta.&lt;unit&gt;</code>, e.g. <code class="lang-kotlin">quetta.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="616260177%2FProperties%2F-251573632" anchor-label="ronna" id="616260177%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ronna.html"><span><span>ronna</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="616260177%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="ronna.html">ronna</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Ronna builder (10^27), e.g. <code class="lang-kotlin">ronna.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1769713015%2FProperties%2F-251573632" anchor-label="ronto" id="-1769713015%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ronto.html"><span><span>ronto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1769713015%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="ronto.html">ronto</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Ronto builder (10^-27), e.g. <code class="lang-kotlin">ronto.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1683693317%2FProperties%2F-251573632" anchor-label="tera" id="1683693317%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tera.html"><span><span>tera</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1683693317%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="tera.html">tera</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Tera builder (10^12), e.g. <code class="lang-kotlin">tera.bytes</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1111601869%2FProperties%2F-251573632" anchor-label="yocto" id="1111601869%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yocto.html"><span><span>yocto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1111601869%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="yocto.html">yocto</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Yocto builder (10^-24), e.g. <code class="lang-kotlin">yocto.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="641770602%2FProperties%2F-251573632" anchor-label="yotta" id="641770602%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yotta.html"><span><span>yotta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="641770602%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="yotta.html">yotta</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Yotta builder (10^24), e.g. <code class="lang-kotlin">yotta.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-529739467%2FProperties%2F-251573632" anchor-label="zepto" id="-529739467%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zepto.html"><span><span>zepto</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-529739467%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="zepto.html">zepto</a><span class="token operator">: </span><a href="-k-diminishing-prefix-builder/index.html">KDiminishingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Zepto builder (10^-21), e.g. <code class="lang-kotlin">zepto.seconds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1982962945%2FProperties%2F-251573632" anchor-label="zetta" id="-1982962945%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zetta.html"><span><span>zetta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1982962945%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="zetta.html">zetta</a><span class="token operator">: </span><a href="-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a></div><div class="brief "><p class="paragraph">Zetta builder (10^21), e.g. <code class="lang-kotlin">zetta.meters</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1600239050%2FFunctions%2F-251573632" anchor-label="div" id="1600239050%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1600239050%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Divides this &quot;pure&quot; unit value by <strong>any</strong> other &quot;pure&quot; unit value - across group boundaries - producing a new <a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> whose unit terms are this side's terms combined with <code class="lang-kotlin">other</code>'s terms with their exponents negated (a resulting exponent of <code class="lang-kotlin">0</code> drops that unit). Always allowed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-548803707%2FFunctions%2F-251573632" anchor-label="into" id="-548803707%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="into.html"><span><span>into</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-548803707%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="into.html"><span class="token function">into</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="-k-unit-measurable/index.html">KUnitMeasurable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Reads this value in the unit described by <a href="into.html">target</a> (a value-1 unit template), returning the plain <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a> count - the one and only reading verb of the library (there is no <code class="lang-kotlin">valueAs</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-182161866%2FFunctions%2F-251573632" anchor-label="of" id="-182161866%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="of.html"><span><span>of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-182161866%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="of.html">T</a><span class="token operator"> : </span><a href="-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="of.html"><span class="token function">of</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">template<span class="token operator">: </span><a href="of.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="of.html">T</a></div><div class="brief "><p class="paragraph">Builds a concrete unit value by scaling a <strong>value-1 unit template</strong> by this number: the one and only construction verb of the library. The template is any <a href="-k-unit-measurable/index.html">KUnitMeasurable</a> describing the desired unit - a bare token (<code class="lang-kotlin">meters</code>, <code class="lang-kotlin">seconds</code>, <code class="lang-kotlin">bytes</code>), a prefixed token from a builder (<code class="lang-kotlin">kilo.meters</code>, <code class="lang-kotlin">milli.seconds</code>), a named special unit (<code class="lang-kotlin">hectare</code>, <code class="lang-kotlin">liter</code>), or an expression combining them with <code class="lang-kotlin">*</code>/<code class="lang-kotlin">/</code>/<code class="lang-kotlin">pow</code> (<code class="lang-kotlin">kilo.meters / milli.seconds</code>, <code class="lang-kotlin">meters * (milli.seconds pow 2)</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1448996085%2FFunctions%2F-251573632" anchor-label="pow" id="1448996085%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pow.html"><span><span>pow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1448996085%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">n<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Raises <strong>any</strong> measurable value to the integer power <a href="pow.html">n</a>, producing a generic <a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1285593205%2FFunctions%2F-251573632" anchor-label="times" id="1285593205%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1285593205%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies this &quot;pure&quot; unit value with <strong>any</strong> other &quot;pure&quot; unit value - across group boundaries - producing a new <a href="-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> whose unit terms are the union of both sides' terms with their exponents added (a resulting exponent of <code class="lang-kotlin">0</code> drops that unit). Always allowed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
