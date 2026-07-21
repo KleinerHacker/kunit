@@ -2,6 +2,8 @@
 
 ## [UNRELEASED]
 
+## [0.5.0]
+
 ### Added
 
 - **New prefix-free `light` group for light-travel distances** (`org.pcsoft.framework.kunit.distance`):
