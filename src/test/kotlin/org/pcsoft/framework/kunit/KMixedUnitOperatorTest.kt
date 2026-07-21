@@ -13,30 +13,23 @@
 package org.pcsoft.framework.kunit
 
 import org.pcsoft.framework.kunit.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.speed.KSpeedUnitInstance
 import org.pcsoft.framework.kunit.speed.div
 import org.pcsoft.framework.kunit.storage.KStorageUnit
 import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.time.KTimeUnit
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertIs
+import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
-/** Core `of`/`into` verbs, `scaledBy`, and the cross-group `*`/`/` operators (generic vs typed). */
-class KMixedUnitTest {
-
-    /** `of` scales a value-1 template; `into` reads it back; both preserve dimensions. */
-    @Test
-    fun `of and into round-trip`() {
-        val v = 10.5 of meters
-        assertEquals(10.5, v.value, 1e-9)
-        assertEquals(10.5, v into meters, 1e-9)
-    }
+/** The cross-group `*`/`/` operators (generic vs typed) and mixed `+` dimension checks. */
+class KMixedUnitOperatorTest {
 
     /** Two unrelated groups combine via the generic cross-group `/` into a KMixedUnitInstance. */
     @Test
@@ -44,7 +37,7 @@ class KMixedUnitTest {
         val mixed = (20 of bytes) / (20 of meters)
         assertIs<KMixedUnitInstance>(mixed)
         assertEquals(1.0, mixed.value, 1e-9)
-        assertTrue(mixed.hasSameUnits(KMixedUnitInstance(1.0, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(org.pcsoft.framework.kunit.distance.KDistanceUnit.BASE, -1)))))
+        assertTrue(mixed.hasSameUnits(KMixedUnitInstance(1.0, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, -1)))))
     }
 
     /** The typed speed extension still wins over the generic operator (`length / time = speed`). */
@@ -63,16 +56,6 @@ class KMixedUnitTest {
         assertEquals(12.0, area.value, 1e-9)
     }
 
-    /** Building a composite via `of` on a `*`/`pow` expression yields a mixed unit with the right terms. */
-    @Test
-    fun `composite construction`() {
-        val x = 10 of meters * ((2 of seconds) pow 2) // 10 * (1 m * (2 s)²) = 40
-        assertEquals(40.0, x.value, 1e-9)
-        val sig = x.units.associate { it.unit to it.exponent }
-        assertEquals(1, sig[org.pcsoft.framework.kunit.distance.KDistanceUnit.BASE])
-        assertEquals(2, sig[KTimeUnit.SECOND])
-    }
-
     /** Mixed `+` requires matching dimensions; unrelated shapes fail. */
     @Test
     fun `mixed plus dimension check`() {
@@ -82,10 +65,41 @@ class KMixedUnitTest {
         assertFailsWith<IllegalStateException> { (10 of meters).toUnit() + (2 of seconds).toUnit() }
     }
 
-    /** `scaledBy` returns the same static/runtime type (backs `of`). */
+    /** Two unrelated groups combine via the generic cross-group `*` into a KMixedUnitInstance. */
     @Test
-    fun `scaledBy preserves type`() {
-        assertIs<KLengthUnitInstance>((1 of meters).scaledBy(3.0))
-        assertEquals(3.0, (1 of meters).scaledBy(3.0).value, 1e-9)
+    fun `generic cross-group times gives mixed`() {
+        val mixed = (20 of bytes) * (20 of meters)
+        assertIs<KMixedUnitInstance>(mixed)
+        assertEquals(400.0, mixed.value, 1e-9)
+        assertTrue(mixed.hasSameUnits(KMixedUnitInstance(1.0, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, 1)))))
+    }
+
+    /** Mixed `-` and `pow 0` (dimensionless). */
+    @Test
+    fun `mixed minus and pow zero`() {
+        val a = ((10 of meters) / (2 of seconds)).toUnit() // 5 m/s
+        val b = ((4 of meters) / (1 of seconds)).toUnit()  // 4 m/s
+        assertEquals(1.0, (a - b).value, 1e-9)
+        val dimensionless = (2 of meters).toUnit() pow 0
+        assertEquals(1.0, dimensionless.value, 1e-9)
+        assertTrue(dimensionless.units.isEmpty())
+    }
+
+    /** Mixed `+` with a different number of terms fails the dimension check. */
+    @Test
+    fun `mixed plus size mismatch fails`() {
+        val speed = ((10 of meters) / (2 of seconds)).toUnit() // 2 terms
+        val length = (3 of meters).toUnit()                    // 1 term
+        assertFailsWith<IllegalStateException> { speed + length }
+    }
+
+    /** Structural equality and hashCode of the generic mixed unit. */
+    @Test
+    fun `mixed equals and hashCode`() {
+        assertEquals((10 of meters).toUnit(), (10 of meters).toUnit())
+        assertEquals((10 of meters).toUnit().hashCode(), (10 of meters).toUnit().hashCode())
+        assertFalse((10 of meters).toUnit().equals(1.0))                            // not a KMixedUnitInstance
+        assertNotEquals((10 of meters).toUnit(), (20 of meters).toUnit())           // different value
+        assertNotEquals((10 of meters).toUnit(), (10 of seconds).toUnit())          // same value, different units
     }
 }

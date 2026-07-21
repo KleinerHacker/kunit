@@ -75,6 +75,7 @@ plugins:
             Distance: 거리
             Time: 시간
             Storage: 저장 용량
+            Temperature: 온도
             Speed: 속도
             Data Rate: 데이터 전송률
             API Docs: API 문서
@@ -91,6 +92,7 @@ plugins:
             Distance: 距离
             Time: 时间
             Storage: 存储
+            Temperature: 温度
             Speed: 速度
             Data Rate: 数据速率
             API Docs: API 文档
@@ -107,6 +109,7 @@ plugins:
             Distance: 距離
             Time: 時間
             Storage: ストレージ
+            Temperature: 温度
             Speed: 速度
             Data Rate: データレート
             API Docs: API ドキュメント
@@ -120,6 +123,7 @@ nav:
       - Distance: units/distance.md
       - Time: units/time.md
       - Storage: units/storage.md
+      - Temperature: units/temperature.md
   - Constructed Units:
       - Speed: units/speed.md
       - Data Rate: units/datarate.md

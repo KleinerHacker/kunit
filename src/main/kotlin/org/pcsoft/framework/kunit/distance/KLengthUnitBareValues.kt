@@ -47,23 +47,38 @@ val furlongs: KLengthUnitInstance = lengthOf(KDistanceUnit.FURLONG.baseValue)
 /** 1 astronomical unit ([KDistanceUnit.ASTRONOMICAL_UNIT]). */
 val astronomicalUnits: KLengthUnitInstance = lengthOf(KDistanceUnit.ASTRONOMICAL_UNIT.baseValue)
 
-/** 1 light-second ([KDistanceUnit.LIGHT_SECOND]). */
-val lightSeconds: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_SECOND.baseValue)
-
-/** 1 light-minute ([KDistanceUnit.LIGHT_MINUTE]). */
-val lightMinutes: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_MINUTE.baseValue)
-
-/** 1 light-hour ([KDistanceUnit.LIGHT_HOUR]). */
-val lightHours: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_HOUR.baseValue)
-
-/** 1 light-day ([KDistanceUnit.LIGHT_DAY]). */
-val lightDays: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_DAY.baseValue)
-
-/** 1 light-week ([KDistanceUnit.LIGHT_WEEK]). */
-val lightWeeks: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_WEEK.baseValue)
-
-/** 1 light-year ([KDistanceUnit.LIGHT_YEAR]). */
-val lightYears: KLengthUnitInstance = lengthOf(KDistanceUnit.LIGHT_YEAR.baseValue)
+// Light-travel distances (light-second … light-year) are grouped behind the prefix-free `light`
+// builder instead (`5 of light.seconds`, `3 of light.years`); see KLengthLightUnitBuilder.kt.
 
 /** 1 parsec ([KDistanceUnit.PARSEC]). */
 val parsecs: KLengthUnitInstance = lengthOf(KDistanceUnit.PARSEC.baseValue)
+
+/** 1 cubit / Elle ([KDistanceUnit.CUBIT]). */
+val cubits: KLengthUnitInstance = lengthOf(KDistanceUnit.CUBIT.baseValue)
+
+/** 1 Roman foot / pes ([KDistanceUnit.ROMAN_FOOT]). */
+val romanFeet: KLengthUnitInstance = lengthOf(KDistanceUnit.ROMAN_FOOT.baseValue)
+
+/** 1 Roman pace / passus ([KDistanceUnit.ROMAN_PACE]). */
+val romanPaces: KLengthUnitInstance = lengthOf(KDistanceUnit.ROMAN_PACE.baseValue)
+
+/** 1 stadium ([KDistanceUnit.STADIUM]). */
+val stadia: KLengthUnitInstance = lengthOf(KDistanceUnit.STADIUM.baseValue)
+
+/** 1 Roman mile / mille passus ([KDistanceUnit.ROMAN_MILE]). */
+val romanMiles: KLengthUnitInstance = lengthOf(KDistanceUnit.ROMAN_MILE.baseValue)
+
+/** 1 rod / perch ([KDistanceUnit.ROD]). */
+val rods: KLengthUnitInstance = lengthOf(KDistanceUnit.ROD.baseValue)
+
+/** 1 league ([KDistanceUnit.LEAGUE]). */
+val leagues: KLengthUnitInstance = lengthOf(KDistanceUnit.LEAGUE.baseValue)
+
+/** 1 cable length ([KDistanceUnit.CABLE_LENGTH]). */
+val cableLengths: KLengthUnitInstance = lengthOf(KDistanceUnit.CABLE_LENGTH.baseValue)
+
+/** 1 verst / Werst ([KDistanceUnit.VERST]). */
+val versts: KLengthUnitInstance = lengthOf(KDistanceUnit.VERST.baseValue)
+
+/** 1 Prussian mile ([KDistanceUnit.PRUSSIAN_MILE]). */
+val prussianMiles: KLengthUnitInstance = lengthOf(KDistanceUnit.PRUSSIAN_MILE.baseValue)

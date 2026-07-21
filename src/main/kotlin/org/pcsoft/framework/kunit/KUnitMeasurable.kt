@@ -95,6 +95,22 @@ interface KUnitMeasurable {
      * invariant holds: the receiver is never modified.
      */
     fun scaledBy(factor: Double): KUnitMeasurable
+
+    /**
+     * Reads a value given in this measure's **base scale** back into the reading of the unit this
+     * measure describes - the reading counterpart to [scaledBy] and the single hook behind [into].
+     *
+     * The generic engine ([KMixedUnitInstance]) implements this purely **linearly**: `baseValue / value`
+     * (the requested unit's scale is carried by this template's own [value], e.g.
+     * `kilo.meters.value == 1000.0`), and every "pure" wrapper inherits that via `by` delegation. Groups
+     * whose conversion is not a single factor override it to inject their transform; temperature
+     * (offset-and-scale, *affine*) overrides it to route the reading through its `fromBase` lambda. This
+     * keeps [into] correct for **every** group without any group-specific reading verb or shadow-prone
+     * overload.
+     *
+     * @param baseValue the value to read, already normalized to this measure's group base unit.
+     */
+    fun readBaseValue(baseValue: Double): Double
 }
 
 /**
@@ -128,10 +144,12 @@ infix fun <T : KUnitMeasurable> Number.of(template: T): T = template.scaledBy(th
  * [Double] count - the one and only reading verb of the library (there is no `valueAs`).
  *
  * Both sides are compared by their normalized unit signature (same unit groups, same exponents,
- * order-independent); the result is simply `this.value / target.value`, because both values are
- * normalized to their groups' base units. The scale of the requested unit is carried by the template's
+ * order-independent); the reading itself is delegated to the target template's
+ * [KUnitMeasurable.readBaseValue] hook (default `this.value / target.value`, because both values are
+ * normalized to their groups' base units). The scale of the requested unit is carried by the template's
  * own [value] (e.g. `kilo.meters.value == 1000.0`), so `v into kilo.meters` yields kilometers while
- * `v into meters` yields meters.
+ * `v into meters` yields meters. Groups with a non-linear conversion (e.g. the affine temperature group)
+ * override the hook, so `into` stays correct for every group with no group-specific reading verb.
  *
  * @throws IllegalStateException if [target] does not describe the same physical dimension as this value.
  *
@@ -149,7 +167,7 @@ infix fun KUnitMeasurable.into(target: KUnitMeasurable): Double {
     check(self.hasSameUnits(unit)) {
         "Cannot read $self in unit $unit: incompatible physical dimensions"
     }
-    return self.value / unit.value
+    return target.readBaseValue(self.value)
 }
 
 /**

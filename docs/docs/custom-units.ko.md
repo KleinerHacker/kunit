@@ -190,7 +190,7 @@ val density = (5 of kilograms) / (2 of liters)
   프로퍼티 확장(`kilograms`, `grams` 등)은 예외이며 언어적으로 자연스럽게 유지됩니다.
 - 파라미터화된 크로스 매트릭스 테스트 절차로 그룹을 커버합니다. `of`/`into`를 통해 구축하고(원시 enum은 결코
   사용하지 않음): 단위 → 단위 변환, 모든 단위 쌍에 대해 연산자별·비교별 하나의 메서드, 접두사 빌더 매트릭스,
-  `of` 타입 보존, `into` 오류 케이스 — `CLAUDE.md`의 "파라미터화된 크로스 매트릭스 테스트 절차" 절을 참조하세요.
+  `of` 타입 보존, `into` 오류 케이스 — `../../.claude/CLAUDE.md`의 "파라미터화된 크로스 매트릭스 테스트 절차" 절을 참조하세요.
 - 모든 public 멤버를 영어로, Markdown으로, 유용한 경우 예시와 함께 문서화합니다 — 특히 연산자.
 - 그룹이 크기 제한적이면(축소 접두사를 거부하는 저장 용량 같은), 그 단위 프로퍼티를 기반 `KPrefixBuilder`가 아닌
   `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder`에 달아, 허용되지 않는 접두사를 **컴파일 오류**로

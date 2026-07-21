@@ -63,6 +63,13 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
     override fun scaledBy(factor: Double): KMixedUnitInstance = KMixedUnitInstance(value * factor, units)
 
     /**
+     * Linear reading hook behind [into]: reads a base-normalized [baseValue] into this template's scale
+     * as `baseValue / value`. Every "pure" wrapper inherits this via `by` delegation; only groups with a
+     * non-linear (e.g. affine temperature) conversion override it.
+     */
+    override fun readBaseValue(baseValue: Double): Double = baseValue / value
+
+    /**
      * Multiplies two mixed units. Always allowed.
      *
      * The resulting [value] is `this.value * other.value`. The resulting [units] are computed by
@@ -259,7 +266,8 @@ infix fun KUnitMeasurable.pow(n: Int): KMixedUnitInstance = toUnit() pow n
 private fun combineUnits(a: List<KUnitTerm>, b: List<KUnitTerm>, sign: Int): List<KUnitTerm> {
     val exponents = LinkedHashMap<KUnit, Int>()
 
-    for (term in a) exponents[term.unit] = (exponents[term.unit] ?: 0) + term.exponent
+    // A single mixed unit never carries the same KUnit twice, so `a`'s terms are inserted directly.
+    for (term in a) exponents[term.unit] = term.exponent
     for (term in b) exponents[term.unit] = (exponents[term.unit] ?: 0) + sign * term.exponent
 
     return exponents.filterValues { it != 0 }.map { (unit, exponent) -> KUnitTerm(unit, exponent) }

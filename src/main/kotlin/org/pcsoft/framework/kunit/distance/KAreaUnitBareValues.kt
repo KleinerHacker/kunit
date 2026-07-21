@@ -25,3 +25,18 @@ val hectares: KAreaUnitInstance = areaOf(10_000.0)
 
 /** 1 international acre (4046.8564224 m²). */
 val acres: KAreaUnitInstance = areaOf(4046.8564224)
+
+/** 1 rood (1011.7141056 m² = 1/4 acre; historical English land area unit). */
+val roods: KAreaUnitInstance = areaOf(1011.7141056)
+
+/** 1 square perch, a.k.a. square rod (25.29285264 m²; historical surveyor's area unit). */
+val squarePerches: KAreaUnitInstance = areaOf(25.29285264)
+
+/** 1 Morgen (Prussian) (2553.22 m²; historical German land area unit). */
+val morgens: KAreaUnitInstance = areaOf(2553.22)
+
+/** 1 Joch (Austrian) (5754.642 m²; historical Austrian land area unit). */
+val jochs: KAreaUnitInstance = areaOf(5754.642)
+
+/** 1 Tagwerk (Bavarian) (3407.27 m²; historical Bavarian land area unit). */
+val tagwerks: KAreaUnitInstance = areaOf(3407.27)

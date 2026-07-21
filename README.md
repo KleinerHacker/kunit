@@ -4,9 +4,7 @@
 
 # kunit
 
-> 🌐 **English** · [한국어](README.ko.md) · [中文](README.zh.md) · [日本語](README.ja.md)
->
-> The full documentation is also available in all four languages on
+> 🌐 The full documentation is available in all four languages on
 > [GitHub Pages](https://kleinerhacker.github.io/kunit/)
 > ([EN](https://kleinerhacker.github.io/kunit/) ·
 > [KO](https://kleinerhacker.github.io/kunit/ko/) ·
@@ -97,16 +95,14 @@ classDiagram
         <<enum>>
         Quetta ... Quecto
     }
-    class KDerivedUnit {
-        <<interface>>
-        +referenceUnit: KUnit
-        +exponent: Int
-        +baseValue: Double
+    class KPrefixBuilder {
+        <<abstract>>
+        +prefix: KUnitPrefix
     }
 
     KMixedUnitInstance "1" o-- "many" KUnitTerm
     KUnitTerm --> KUnit
-    KDerivedUnit --> KUnit : referenceUnit
+    KPrefixBuilder --> KUnitPrefix : prefix
 
     class KDistanceUnit {
         <<enum>>
@@ -117,15 +113,9 @@ classDiagram
         +scaledBy(factor)
         +plus() minus() times() div()
     }
-    class KDistanceDerivedUnit {
-        <<enum>>
-        HECTARE, ARE, ACRE, LITER, ...
-    }
 
     KUnit <|.. KDistanceUnit
-    KDerivedUnit <|.. KDistanceDerivedUnit
     KLengthUnitInstance *-- KMixedUnitInstance : delegates to
-    KDistanceDerivedUnit --> KDistanceUnit : referenceUnit
 ```
 
 ### Package Structure
@@ -164,13 +154,15 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Distance | `org.pcsoft.framework.kunit.distance` | Meter (`KDistanceUnit.BASE`) |
 | Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
 | Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
+| Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
 | Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.speed` | Meter per second (`KSpeedUnit.BASE`) |
 | Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.datarate` | Byte per second (`KDataRateUnit.BASE`) |
 
 #### Distance (`KDistanceUnit`)
 
 Meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit, light-second …
-light-year, parsec.
+light-year, parsec, plus historical units: cubit, Roman foot (pes), Roman pace (passus), stadium,
+Roman mile (mille passus), rod (perch), league, cable length, verst, Prussian mile.
 
 #### Dimensioned subtypes (exponent as a type)
 
@@ -179,9 +171,11 @@ The distance group models exponents as their own compile-time-safe types under a
 
 * **`KLengthUnitInstance`** - exponent 1 (a length): `5 of meters`, `3 of kilo.meters`
 * **`KAreaUnitInstance`** - exponent 2 (an area): `(2 of meters) pow 2`, `(2 of kilo.meters) pow 2`, plus
-  the named special units `ares`, `hectares`, `acres`
+  the named special units `ares`, `hectares`, `acres`, `roods`, `squarePerches`, `morgens`, `jochs`,
+  `tagwerks`
 * **`KVolumeUnitInstance`** - exponent 3 (a volume): `(2 of meters) pow 3`, plus `liters`,
-  `usGallons`, `imperialGallons`, `usFluidOunces`, `oilBarrels`
+  `usGallons`, `imperialGallons`, `usFluidOunces`, `oilBarrels`, `imperialBushels`, `hogsheads`,
+  `imperialPints`, `imperialQuarts`
 
 `*`/`/` stay in this family where possible (`length * length = area`, `area / length = length`); a
 resulting exponent outside `{1,2,3}` falls back to `KDistanceUnitInstance`. Cross-dimension `+`/`-`/
@@ -190,6 +184,21 @@ comparison (`length + area`) are a **compile error**, not a runtime failure.
 Raise a unit to a power with the infix `pow` (Kotlin has no overloadable `^`): `(2 of meters) pow 2` is
 `(2 m)² = 4 m²`, `(2 of meters) pow 3` a volume, and `pow` works on every group (`(2 of hours) pow 2`).
 It is the only power syntax — there are no `squareXxx`/`cubicXxx` constructors.
+
+#### Temperature (`KTemperatureUnit`)
+
+Kelvin (base), Celsius, Fahrenheit. Temperature is the framework's **first (permanent) affine
+exception**: conversions are offset-and-scale (`°C = K − 273.15`), not a single factor. The shared engine
+stays multiplicative — the affine transform is injected through the `scaledBy` (behind `of`) and
+`readBaseValue` (behind `into`) hooks, so `25 of celsius` and `t into fahrenheit` use the normal verbs
+with no shadow-prone overloads. Values are stored as absolute kelvin (so `*`/`/`/`pow` run unchanged),
+and the group has **no prefixes**.
+
+```kotlin
+(0 of celsius) into kelvin       // 273.15
+(100 of celsius) into fahrenheit // 212.0
+(32 of fahrenheit) into celsius  // 0.0
+```
 
 #### Constructed groups (composed of two core groups)
 
@@ -203,7 +212,7 @@ It is the only power syntax — there are no `squareXxx`/`cubicXxx` constructors
 
 ### Still Open
 
-* Further unit groups following the `length` pattern (e.g. mass, temperature)
+* Further unit groups following the `length` pattern (e.g. mass)
 * Composite "pure" units that are themselves composed of a mixed unit (e.g. Newton)
 
 ## Quick Start

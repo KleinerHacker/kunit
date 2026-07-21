@@ -14,13 +14,13 @@ import com.github.jk1.license.render.ReportRenderer
 
 plugins {
     kotlin("jvm") version "2.4.10"
-    id("org.jetbrains.kotlinx.kover") version "0.9.8"
+    id("org.jetbrains.kotlinx.kover") version "0.9.9"
     id("org.jetbrains.dokka") version "2.2.0"
     id("com.github.jk1.dependency-license-report") version "3.1.4"
     // Pinned to 3.2.2: 3.2.3+ regressed on Gradle 9 — io.spring.dependency-management observes
     // the `cyclonedxDirectBom` configuration as a variant before the plugin registers its artifacts,
     // which Gradle 9 then rejects ("Cannot mutate ... consumed as a variant"). See cyclonedx #821.
-    id("org.cyclonedx.bom") version "3.2.4"
+    id("org.cyclonedx.bom") version "3.3.0"
     id("app.cash.licensee") version "1.14.1"
 }
 
