@@ -4,9 +4,7 @@
 
 # kunit
 
-> 🌐 **English** · [한국어](README.ko.md) · [中文](README.zh.md) · [日本語](README.ja.md)
->
-> The full documentation is also available in all four languages on
+> 🌐 The full documentation is available in all four languages on
 > [GitHub Pages](https://kleinerhacker.github.io/kunit/)
 > ([EN](https://kleinerhacker.github.io/kunit/) ·
 > [KO](https://kleinerhacker.github.io/kunit/ko/) ·
