@@ -14,6 +14,7 @@ tools:
 skills:
   - create-unit
   - Prefix
+  - Tests
 ---
 
 # Role

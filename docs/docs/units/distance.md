@@ -39,6 +39,16 @@ Build every value with `number of <token>` and read it back with `value into <to
 | Light-week | `KDistanceUnit.LIGHT_WEEK` | `lw` | `lightWeeks` | 1.813144785984e14 |
 | Light-year | `KDistanceUnit.LIGHT_YEAR` | `ly` | `lightYears` | 9.4607304725808e15 |
 | Parsec | `KDistanceUnit.PARSEC` | `pc` | `parsecs` | 3.0856775814913673e16 |
+| Cubit | `KDistanceUnit.CUBIT` | `cubit` | `cubits` | 0.4572 |
+| Roman foot (pes) | `KDistanceUnit.ROMAN_FOOT` | `pes` | `romanFeet` | 0.2957 |
+| Roman pace (passus) | `KDistanceUnit.ROMAN_PACE` | `passus` | `romanPaces` | 1.4787 |
+| Stadium | `KDistanceUnit.STADIUM` | `stadium` | `stadia` | 185.0 |
+| Roman mile (mille passus) | `KDistanceUnit.ROMAN_MILE` | `mp` | `romanMiles` | 1481.5 |
+| Rod (perch) | `KDistanceUnit.ROD` | `rod` | `rods` | 5.0292 |
+| League | `KDistanceUnit.LEAGUE` | `lea` | `leagues` | 4828.032 |
+| Cable length | `KDistanceUnit.CABLE_LENGTH` | `cable` | `cableLengths` | 185.2 |
+| Verst | `KDistanceUnit.VERST` | `verst` | `versts` | 1066.8 |
+| Prussian mile | `KDistanceUnit.PRUSSIAN_MILE` | `prussian mi` | `prussianMiles` | 7532.5 |
 
 Each `Token` is a value-1 `KLengthUnitInstance` used with both `of` (build) and `into` (read).
 
@@ -94,6 +104,11 @@ syntax (see [Powers with `pow`](#powers-with-pow)). The following named special-
 | Are | `a` | `ares` | 100.0 |
 | Hectare | `ha` | `hectares` | 10 000.0 |
 | Acre | `ac` | `acres` | 4046.8564224 |
+| Rood | `ro` | `roods` | 1011.7141056 |
+| Square perch (square rod) | `perch²` | `squarePerches` | 25.29285264 |
+| Morgen (Prussian) | `Mg` | `morgens` | 2553.22 |
+| Joch (Austrian) | `Joch` | `jochs` | 5754.642 |
+| Tagwerk (Bavarian) | `Tw` | `tagwerks` | 3407.27 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -125,6 +140,10 @@ use `pow` (see [Powers with `pow`](#powers-with-pow)). The following named speci
 | Imperial gallon | `gal (UK)` | `imperialGallons` | 0.00454609 |
 | US fluid ounce | `fl oz` | `usFluidOunces` | 2.95735295625e-5 |
 | Oil barrel | `bbl` | `oilBarrels` | 0.158987294928 |
+| Imperial bushel | `bu (UK)` | `imperialBushels` | 0.03636872 |
+| Imperial hogshead | `hhd` | `hogsheads` | 0.32731785 |
+| Imperial pint | `pt (UK)` | `imperialPints` | 0.00056826125 |
+| Imperial quart | `qt (UK)` | `imperialQuarts` | 0.0011365225 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

@@ -161,7 +161,8 @@ classDiagram
 #### 距離 (`KDistanceUnit`)
 
 メートル、マイル、海里、ヤード、フィート、インチ、ファゾム、チェーン、ファーロング、天文単位、光秒 … 光年、
-パーセク。
+パーセク、さらに歴史的単位: キュビット、ローマフィート (pes)、ローマパッスス (passus)、スタディオン、
+ローママイル (mille passus)、ロッド (perch)、リーグ、ケーブル長、ヴェルスタ、プロイセンマイル。
 
 #### 次元付きサブタイプ(型としての指数)
 
@@ -170,9 +171,10 @@ classDiagram
 
 * **`KLengthUnitInstance`** — 指数1(長さ): `5 of meters`、`3 of kilo.meters`
 * **`KAreaUnitInstance`** — 指数2(面積): `(2 of meters) pow 2`、`(2 of kilo.meters) pow 2`、および名前付き
-  特殊単位 `ares`、`hectares`、`acres`
+  特殊単位 `ares`、`hectares`、`acres`、`roods`、`squarePerches`、`morgens`、`jochs`、`tagwerks`
 * **`KVolumeUnitInstance`** — 指数3(体積): `(2 of meters) pow 3`、および `liters`、`usGallons`、
-  `imperialGallons`、`usFluidOunces`、`oilBarrels`
+  `imperialGallons`、`usFluidOunces`、`oilBarrels`、`imperialBushels`、`hogsheads`、`imperialPints`、
+  `imperialQuarts`
 
 `*`/`/` は可能な限りこのファミリー内に留まります(`length * length = area`、`area / length = length`);結果の
 指数が `{1,2,3}` の外に出ると `KDistanceUnitInstance` にフォールバックします。次元をまたぐ `+`/`-`/比較

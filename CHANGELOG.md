@@ -4,6 +4,29 @@
 
 ### Added
 
+- **Historical volume units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
+  **imperial bushel** (`imperialBushels`, 0.03636872 m³), **imperial hogshead** (`hogsheads`,
+  0.32731785 m³), **imperial pint** (`imperialPints`, 0.00056826125 m³) and **imperial quart**
+  (`imperialQuarts`, 0.0011365225 m³). All build/read via `of`/`into`, come with full SI prefix support
+  and are covered by tests; docs (EN/JA/ZH/KO) and READMEs updated. (Imperial gallon, US liquid gallon
+  and oil barrel already existed and are unchanged.)
+
+- **Historical area units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
+  **rood** (`roods`, 1011.7141056 m²), **square perch / square rod** (`squarePerches`, 25.29285264 m²),
+  **Morgen (Prussian)** (`morgens`, 2553.22 m²), **Joch (Austrian)** (`jochs`, 5754.642 m²) and
+  **Tagwerk (Bavarian)** (`tagwerks`, 3407.27 m²). All build/read via `of`/`into`, come with full SI
+  prefix support and are covered by tests; docs (EN/JA/ZH/KO) and READMEs updated. (The international
+  **acre** already existed and is unchanged.)
+
+- **Historical length units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
+  **cubit** (`cubits`, 0.4572 m), **Roman foot / pes** (`romanFeet`, 0.2957 m), **Roman pace / passus**
+  (`romanPaces`, 1.4787 m), **stadium** (`stadia`, 185.0 m), **Roman mile / mille passus** (`romanMiles`,
+  1481.5 m), **rod / perch** (`rods`, 5.0292 m), **league** (`leagues`, 4828.032 m), **cable length**
+  (`cableLengths`, 185.2 m), **verst** (`versts`, 1066.8 m) and **Prussian mile** (`prussianMiles`,
+  7532.5 m). All build/read via `of`/`into`, come with full SI prefix support and are covered by tests;
+  docs (EN/JA/ZH/KO) and READMEs updated. (Nautical mile, statute mile, fathom, furlong and inch already
+  existed and are unchanged.)
+
 - **New `Temperature` unit group** (`org.pcsoft.framework.kunit.temperature`) with **Kelvin** (base),
   **Celsius** and **Fahrenheit**. It is the framework's first **affine** group: conversions are
   offset-and-scale (`°C = K − 273.15`, `°F = (K − 273.15)·9/5 + 32`), not a single factor. Build and read

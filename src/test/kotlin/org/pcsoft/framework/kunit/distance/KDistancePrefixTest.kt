@@ -50,7 +50,17 @@ class KDistancePrefixTest {
         chains to KDistanceUnit.CHAIN.baseValue,
         furlongs to KDistanceUnit.FURLONG.baseValue,
         lightYears to KDistanceUnit.LIGHT_YEAR.baseValue,
-        parsecs to KDistanceUnit.PARSEC.baseValue
+        parsecs to KDistanceUnit.PARSEC.baseValue,
+        cubits to KDistanceUnit.CUBIT.baseValue,
+        romanFeet to KDistanceUnit.ROMAN_FOOT.baseValue,
+        romanPaces to KDistanceUnit.ROMAN_PACE.baseValue,
+        stadia to KDistanceUnit.STADIUM.baseValue,
+        romanMiles to KDistanceUnit.ROMAN_MILE.baseValue,
+        rods to KDistanceUnit.ROD.baseValue,
+        leagues to KDistanceUnit.LEAGUE.baseValue,
+        cableLengths to KDistanceUnit.CABLE_LENGTH.baseValue,
+        versts to KDistanceUnit.VERST.baseValue,
+        prussianMiles to KDistanceUnit.PRUSSIAN_MILE.baseValue
     )
 
     /** All 24 SI prefix builders paired with their scale factor. */
@@ -102,6 +112,16 @@ class KDistancePrefixTest {
         check(kilo.lightWeeks, KDistanceUnit.LIGHT_WEEK)
         check(kilo.lightYears, KDistanceUnit.LIGHT_YEAR)
         check(kilo.parsecs, KDistanceUnit.PARSEC)
+        check(kilo.cubits, KDistanceUnit.CUBIT)
+        check(kilo.romanFeet, KDistanceUnit.ROMAN_FOOT)
+        check(kilo.romanPaces, KDistanceUnit.ROMAN_PACE)
+        check(kilo.stadia, KDistanceUnit.STADIUM)
+        check(kilo.romanMiles, KDistanceUnit.ROMAN_MILE)
+        check(kilo.rods, KDistanceUnit.ROD)
+        check(kilo.leagues, KDistanceUnit.LEAGUE)
+        check(kilo.cableLengths, KDistanceUnit.CABLE_LENGTH)
+        check(kilo.versts, KDistanceUnit.VERST)
+        check(kilo.prussianMiles, KDistanceUnit.PRUSSIAN_MILE)
     }
 
     /** Every prefixed area/volume special-unit extension property scales by the builder factor. */
@@ -110,10 +130,19 @@ class KDistancePrefixTest {
         assertEquals(1000.0 * 10_000.0, (1 of kilo.hectares).value, rel(1e7))
         assertEquals(10.0 * 100.0, (1 of deca.ares).value, rel(1000.0))
         assertEquals(1000.0 * 4046.8564224, (1 of kilo.acres).value, rel(1000.0 * 4046.8564224))
+        assertEquals(1000.0 * 1011.7141056, (1 of kilo.roods).value, rel(1000.0 * 1011.7141056))
+        assertEquals(1000.0 * 25.29285264, (1 of kilo.squarePerches).value, rel(1000.0 * 25.29285264))
+        assertEquals(1000.0 * 2553.22, (1 of kilo.morgens).value, rel(1000.0 * 2553.22))
+        assertEquals(1000.0 * 5754.642, (1 of kilo.jochs).value, rel(1000.0 * 5754.642))
+        assertEquals(1000.0 * 3407.27, (1 of kilo.tagwerks).value, rel(1000.0 * 3407.27))
         assertEquals(0.001 * 0.001, (1 of milli.liters).value, 1e-12)
         assertEquals(1000.0 * 0.003785411784, (1 of kilo.usGallons).value, rel(1000.0 * 0.003785411784))
         assertEquals(1000.0 * 0.00454609, (1 of kilo.imperialGallons).value, rel(1000.0 * 0.00454609))
         assertEquals(1000.0 * 2.95735295625e-5, (1 of kilo.usFluidOunces).value, rel(1000.0 * 2.95735295625e-5))
         assertEquals(1000.0 * 0.158987294928, (1 of kilo.oilBarrels).value, rel(1000.0 * 0.158987294928))
+        assertEquals(1000.0 * 0.03636872, (1 of kilo.imperialBushels).value, rel(1000.0 * 0.03636872))
+        assertEquals(1000.0 * 0.32731785, (1 of kilo.hogsheads).value, rel(1000.0 * 0.32731785))
+        assertEquals(1000.0 * 0.00056826125, (1 of kilo.imperialPints).value, rel(1000.0 * 0.00056826125))
+        assertEquals(1000.0 * 0.0011365225, (1 of kilo.imperialQuarts).value, rel(1000.0 * 0.0011365225))
     }
 }

@@ -163,7 +163,8 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 #### Distance (`KDistanceUnit`)
 
 Meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit, light-second …
-light-year, parsec.
+light-year, parsec, plus historical units: cubit, Roman foot (pes), Roman pace (passus), stadium,
+Roman mile (mille passus), rod (perch), league, cable length, verst, Prussian mile.
 
 #### Dimensioned subtypes (exponent as a type)
 
@@ -172,9 +173,11 @@ The distance group models exponents as their own compile-time-safe types under a
 
 * **`KLengthUnitInstance`** - exponent 1 (a length): `5 of meters`, `3 of kilo.meters`
 * **`KAreaUnitInstance`** - exponent 2 (an area): `(2 of meters) pow 2`, `(2 of kilo.meters) pow 2`, plus
-  the named special units `ares`, `hectares`, `acres`
+  the named special units `ares`, `hectares`, `acres`, `roods`, `squarePerches`, `morgens`, `jochs`,
+  `tagwerks`
 * **`KVolumeUnitInstance`** - exponent 3 (a volume): `(2 of meters) pow 3`, plus `liters`,
-  `usGallons`, `imperialGallons`, `usFluidOunces`, `oilBarrels`
+  `usGallons`, `imperialGallons`, `usFluidOunces`, `oilBarrels`, `imperialBushels`, `hogsheads`,
+  `imperialPints`, `imperialQuarts`
 
 `*`/`/` stay in this family where possible (`length * length = area`, `area / length = length`); a
 resulting exponent outside `{1,2,3}` falls back to `KDistanceUnitInstance`. Cross-dimension `+`/`-`/

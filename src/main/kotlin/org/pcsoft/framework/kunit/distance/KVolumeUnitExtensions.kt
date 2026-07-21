@@ -34,3 +34,15 @@ val KPrefixBuilder.usFluidOunces: KVolumeUnitInstance get() = prefixedVolume(thi
 
 /** Prefixed oil barrels. */
 val KPrefixBuilder.oilBarrels: KVolumeUnitInstance get() = prefixedVolume(this, 0.158987294928)
+
+/** Prefixed imperial bushels. */
+val KPrefixBuilder.imperialBushels: KVolumeUnitInstance get() = prefixedVolume(this, 0.03636872)
+
+/** Prefixed imperial hogsheads. */
+val KPrefixBuilder.hogsheads: KVolumeUnitInstance get() = prefixedVolume(this, 0.32731785)
+
+/** Prefixed imperial pints. */
+val KPrefixBuilder.imperialPints: KVolumeUnitInstance get() = prefixedVolume(this, 0.00056826125)
+
+/** Prefixed imperial quarts. */
+val KPrefixBuilder.imperialQuarts: KVolumeUnitInstance get() = prefixedVolume(this, 0.0011365225)

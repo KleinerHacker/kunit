@@ -72,3 +72,33 @@ val KPrefixBuilder.lightYears: KLengthUnitInstance get() = prefixedLength(this, 
 
 /** Prefixed parsecs. */
 val KPrefixBuilder.parsecs: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.PARSEC)
+
+/** Prefixed cubits (Elle). */
+val KPrefixBuilder.cubits: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.CUBIT)
+
+/** Prefixed Roman feet (pes). */
+val KPrefixBuilder.romanFeet: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROMAN_FOOT)
+
+/** Prefixed Roman paces (passus). */
+val KPrefixBuilder.romanPaces: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROMAN_PACE)
+
+/** Prefixed stadia. */
+val KPrefixBuilder.stadia: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.STADIUM)
+
+/** Prefixed Roman miles (mille passus). */
+val KPrefixBuilder.romanMiles: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROMAN_MILE)
+
+/** Prefixed rods (perch). */
+val KPrefixBuilder.rods: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.ROD)
+
+/** Prefixed leagues. */
+val KPrefixBuilder.leagues: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.LEAGUE)
+
+/** Prefixed cable lengths. */
+val KPrefixBuilder.cableLengths: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.CABLE_LENGTH)
+
+/** Prefixed versts (Werst). */
+val KPrefixBuilder.versts: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.VERST)
+
+/** Prefixed Prussian miles. */
+val KPrefixBuilder.prussianMiles: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.PRUSSIAN_MILE)

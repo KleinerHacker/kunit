@@ -155,7 +155,8 @@ classDiagram
 
 #### 距离 (`KDistanceUnit`)
 
-米、英里、海里、码、英尺、英寸、英寻、链、弗隆、天文单位、光秒 … 光年、秒差距。
+米、英里、海里、码、英尺、英寸、英寻、链、弗隆、天文单位、光秒 … 光年、秒差距，以及历史单位：腕尺、
+罗马尺 (pes)、罗马步 (passus)、斯塔迪昂、罗马里 (mille passus)、杆 (perch)、里格、链长、俄里、普鲁士里。
 
 #### 带维度的子类型(指数作为类型)
 
@@ -163,9 +164,10 @@ classDiagram
 
 * **`KLengthUnitInstance`** —— 指数 1(长度): `5 of meters`、`3 of kilo.meters`
 * **`KAreaUnitInstance`** —— 指数 2(面积): `(2 of meters) pow 2`、`(2 of kilo.meters) pow 2`,以及命名特殊
-  单位 `ares`、`hectares`、`acres`
+  单位 `ares`、`hectares`、`acres`、`roods`、`squarePerches`、`morgens`、`jochs`、`tagwerks`
 * **`KVolumeUnitInstance`** —— 指数 3(体积): `(2 of meters) pow 3`,以及 `liters`、`usGallons`、
-  `imperialGallons`、`usFluidOunces`、`oilBarrels`
+  `imperialGallons`、`usFluidOunces`、`oilBarrels`、`imperialBushels`、`hogsheads`、`imperialPints`、
+  `imperialQuarts`
 
 `*`/`/` 尽可能留在这个家族内(`length * length = area`,`area / length = length`);结果指数在 `{1,2,3}` 之外时
 回退到 `KDistanceUnitInstance`。跨维度的 `+`/`-`/比较(`length + area`)是**编译错误**,而非运行时失败。

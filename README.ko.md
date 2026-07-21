@@ -156,7 +156,9 @@ classDiagram
 
 #### 거리 (`KDistanceUnit`)
 
-미터, 마일, 해리, 야드, 피트, 인치, 패덤, 체인, 펄롱, 천문단위, 광초 … 광년, 파섹.
+미터, 마일, 해리, 야드, 피트, 인치, 패덤, 체인, 펄롱, 천문단위, 광초 … 광년, 파섹, 그리고 역사적 단위:
+큐빗, 로마 피트 (pes), 로마 걸음 (passus), 스타디온, 로마 마일 (mille passus), 로드 (perch), 리그,
+케이블 길이, 베르스타, 프로이센 마일.
 
 #### 차원이 있는 서브타입(타입으로서의 지수)
 
@@ -165,9 +167,10 @@ classDiagram
 
 * **`KLengthUnitInstance`** — 지수 1 (길이): `5 of meters`, `3 of kilo.meters`
 * **`KAreaUnitInstance`** — 지수 2 (면적): `(2 of meters) pow 2`, `(2 of kilo.meters) pow 2`, 그리고 명명된
-  특수 단위 `ares`, `hectares`, `acres`
+  특수 단위 `ares`, `hectares`, `acres`, `roods`, `squarePerches`, `morgens`, `jochs`, `tagwerks`
 * **`KVolumeUnitInstance`** — 지수 3 (부피): `(2 of meters) pow 3`, 그리고 `liters`, `usGallons`,
-  `imperialGallons`, `usFluidOunces`, `oilBarrels`
+  `imperialGallons`, `usFluidOunces`, `oilBarrels`, `imperialBushels`, `hogsheads`, `imperialPints`,
+  `imperialQuarts`
 
 `*`/`/`는 가능한 한 이 패밀리 안에 머뭅니다(`length * length = area`, `area / length = length`); 결과 지수가
 `{1,2,3}` 밖이면 `KDistanceUnitInstance`로 폴백합니다. 차원을 넘나드는 `+`/`-`/비교(`length + area`)는 런타임
