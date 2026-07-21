@@ -12,9 +12,16 @@
 
 package org.pcsoft.framework.kunit
 
+import org.pcsoft.framework.kunit.acceleration.standardGravities
+import org.pcsoft.framework.kunit.areadensity.KAreaDensityUnitInstance
+import org.pcsoft.framework.kunit.areadensity.div
 import org.pcsoft.framework.kunit.distance.KAreaUnitInstance
 import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.force.KForceUnitInstance
+import org.pcsoft.framework.kunit.force.newtons
+import org.pcsoft.framework.kunit.force.times
+import org.pcsoft.framework.kunit.mass.grams
 import org.pcsoft.framework.kunit.speed.KSpeedUnitInstance
 import org.pcsoft.framework.kunit.speed.div
 import org.pcsoft.framework.kunit.storage.KStorageUnit
@@ -46,6 +53,21 @@ class KMixedUnitOperatorTest {
         val v = (100 of meters) / (5 of seconds)
         assertIs<KSpeedUnitInstance>(v)
         assertEquals(20.0, v.value, 1e-9)
+    }
+
+    /** The typed force extension wins over the generic operator (`mass * acceleration = force`). */
+    @Test
+    fun `typed force operator wins`() {
+        val f = (2 of kilo.grams) * (1 of standardGravities)
+        assertIs<KForceUnitInstance>(f)
+        assertEquals(2.0 * 9.80665, f into newtons, 1e-9)
+    }
+
+    /** The typed area-density extension wins over the generic operator (`mass / area = area density`). */
+    @Test
+    fun `typed area density operator wins`() {
+        val q = (10 of kilo.grams) / ((5 of meters) * (1 of meters))
+        assertIs<KAreaDensityUnitInstance>(q)
     }
 
     /** The member `length * length` still wins and returns a typed area. */

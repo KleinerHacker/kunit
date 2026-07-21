@@ -4,6 +4,44 @@
 
 ### Added
 
+- **New `Acceleration` unit group** (`org.pcsoft.framework.kunit.acceleration`): a *constructed*
+  quantity (length · time⁻²) with base unit **m/s²** (`KAccelerationUnit.BASE`). Named tokens `gals`
+  (Gal = cm/s²) and `standardGravities` (g₀ = 9.806 65 m/s²), both fully SI-prefixable (e.g. `milli.gals`
+  = mGal). Typed operators bridge it to speed and time: `speed / time = acceleration`,
+  `acceleration * time = speed` (commutative), `speed / acceleration = time`. `KMixedUnitInstance.toAcceleration()`
+  narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
+- **New `Force` unit group** (`org.pcsoft.framework.kunit.force`): a *constructed* quantity
+  (mass · length · time⁻²) with base unit **newton** (`KForceUnit.BASE`). Named tokens `newtons`,
+  `dynes`, `poundsForce` and `ponds` (gram-force); the **kilopond / kilogram-force (kgf) is deliberately
+  not a dedicated unit** — it is simply `kilo.ponds`, just as the kilonewton is `kilo.newtons`. Typed
+  operator `mass * acceleration = force` (Newton's second law, commutative), plus `force / mass =
+  acceleration` and `force / acceleration = mass`. `KMixedUnitInstance.toForce()` narrows a matching
+  mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
+- **New `Pressure` unit group** (`org.pcsoft.framework.kunit.pressure`): a *constructed* quantity
+  (mass · length⁻¹ · time⁻²) with base unit **pascal** (`KPressureUnit.BASE`). Named tokens `pascals`,
+  `bars`, `atmospheres`, `psis`, `torrs`; hPa/kPa/**MPa (= N/mm²)** are reached via the prefixes
+  (`hecto.pascals`, `kilo.pascals`, `mega.pascals`) rather than as own tokens. Typed operators
+  `force / area = pressure`, `pressure * area = force` (commutative) and `force / pressure = area`.
+  `KMixedUnitInstance.toPressure()` narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 %
+  test coverage included.
+
+- **New `Density` unit group** (`org.pcsoft.framework.kunit.density`): a *constructed* quantity
+  (mass · length⁻³) with base unit **kg/m³** (`KDensityUnit.BASE`). Density has no bare tokens (every
+  spelling is a ratio) — it is built as an expression (`kilo.grams / (meters pow 3)`) or produced by the
+  typed operator `mass / volume = density`, with the inverses `density * volume = mass` (commutative)
+  and `mass / density = volume`. `KMixedUnitInstance.toDensity()` narrows a matching mixed unit. Full
+  docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
+- **New `Area Density` unit group** (`org.pcsoft.framework.kunit.areadensity`): a *constructed* quantity
+  (mass · length⁻²), the surface mass / areal load used e.g. in construction statics, with base unit
+  **kg/m²** (`KAreaDensityUnit.BASE`). Like density it has no bare tokens; built as an expression
+  (`kilo.grams / (meters pow 2)`) or produced by `mass / area = area density`, with `area density *
+  area = mass` (commutative), `mass / area density = area`, and the density bridge
+  `density * length = area density` / `area density / length = density`. `KMixedUnitInstance.toAreaDensity()`
+  narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
 - **New `Mass` unit group** (`org.pcsoft.framework.kunit.mass`): a plain, one-dimensional native group
   with base unit **gram** (`KMassUnit.BASE == KMassUnit.GRAM`). The **kilogram is deliberately not a
   dedicated unit** — it is simply `kilo.grams` (the SI prefix `kilo` on the gram), like every other

@@ -159,6 +159,11 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Temperature Difference | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
 | Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.speed` | Meter per second (`KSpeedUnit.BASE`) |
 | Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.datarate` | Byte per second (`KDataRateUnit.BASE`) |
+| Acceleration (constructed: length·time⁻²) | `org.pcsoft.framework.kunit.acceleration` | Meter per second squared (`KAccelerationUnit.BASE`) |
+| Force (constructed: mass·length·time⁻²) | `org.pcsoft.framework.kunit.force` | Newton (`KForceUnit.BASE`) |
+| Pressure (constructed: mass·length⁻¹·time⁻²) | `org.pcsoft.framework.kunit.pressure` | Pascal (`KPressureUnit.BASE`) |
+| Density (constructed: mass·length⁻³) | `org.pcsoft.framework.kunit.density` | Kilogram per cubic meter (`KDensityUnit.BASE`) |
+| Area Density (constructed: mass·length⁻²) | `org.pcsoft.framework.kunit.areadensity` | Kilogram per square meter (`KAreaDensityUnit.BASE`) |
 
 #### Distance (`KDistanceUnit`)
 
@@ -246,11 +251,22 @@ d.toString()                                           // "20.0 ΔK"  (ΔK, dist
   or `5 of mega.bytes / seconds` (a `KDataRateUnitInstance`), recover the core units with `rate * time` /
   `storage / rate`. Built only as an expression (no `bytesPerSecond` token); binary numerator via
   `kibi.bytes / seconds`.
+* **Acceleration** (`KAccelerationUnit`) - `length · time⁻²`; named tokens `gals`, `standardGravities`
+  (both prefixable); build via `speed / time`, recover with `acceleration * time` / `speed / acceleration`.
+* **Force** (`KForceUnit`) - `mass · length · time⁻²`; tokens `newtons`, `dynes`, `poundsForce`, `ponds`
+  (kgf = `kilo.ponds`); build via `mass * acceleration`, recover with `force / mass` / `force / acceleration`.
+* **Pressure** (`KPressureUnit`) - `mass · length⁻¹ · time⁻²`; tokens `pascals`, `bars`, `atmospheres`,
+  `psis`, `torrs` (N/mm² = `mega.pascals`); build via `force / area`, recover with `pressure * area` /
+  `force / pressure`.
+* **Density** (`KDensityUnit`) - `mass · length⁻³`; no bare token, built as `kilo.grams / (meters pow 3)`
+  or via `mass / volume`, recover with `density * volume` / `mass / density`.
+* **Area Density** (`KAreaDensityUnit`) - `mass · length⁻²` (surface load, statics); built as
+  `kilo.grams / (meters pow 2)` or via `mass / area`; density bridge `density * length` / `area density / length`.
 
 ### Still Open
 
-* Further unit groups following the `length` pattern (e.g. mass)
-* Composite "pure" units that are themselves composed of a mixed unit (e.g. Newton)
+* Further unit groups following the `length` pattern
+* Further composite "pure" units composed of a mixed unit
 
 ## Quick Start
 
