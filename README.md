@@ -4,12 +4,14 @@
 
 # kunit
 
-> 🌐 The full documentation is available in all four languages on
+> 🌐 The full documentation is available in six languages on
 > [GitHub Pages](https://kleinerhacker.github.io/kunit/)
 > ([EN](https://kleinerhacker.github.io/kunit/) ·
 > [KO](https://kleinerhacker.github.io/kunit/ko/) ·
 > [ZH](https://kleinerhacker.github.io/kunit/zh/) ·
-> [JA](https://kleinerhacker.github.io/kunit/ja/)).
+> [JA](https://kleinerhacker.github.io/kunit/ja/) ·
+> [AR](https://kleinerhacker.github.io/kunit/ar/) ·
+> [HI](https://kleinerhacker.github.io/kunit/hi/)).
 
 Kotlin Unit Framework to calculate with different units in Kotlin (and Java) - calculate with real physical
 units in `Double` precision instead of bare numbers.
@@ -38,10 +40,12 @@ if needed).
 
 📖 **[Read the documentation on GitHub Pages](https://kleinerhacker.github.io/kunit/)**
 
-The full documentation (overview, quick start, mixed units, adding custom units, predefined units) is built
-with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and available in English, Korean,
-Chinese and Japanese via [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n), with a
-light/dark mode toggle.
+The full documentation (overview, quick start, mixed units, adding custom units, and the unit pages
+grouped by subject area — kinematics, mechanics, electrical engineering, thermodynamics, information
+technology, each with its own overview) is built with
+[MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and available in English, Korean, Chinese,
+Japanese, Arabic and Hindi via [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n),
+with a light/dark mode toggle.
 
 ```bash
 pip install -r docs/requirements.txt

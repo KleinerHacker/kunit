@@ -25,10 +25,21 @@
 
 * For each unit there MUST exist a MkDocs documentation file
   * /docs contains all MkDocs documentation files
-  * Supported languages: English, Japanese, Chinese, Korean
+  * Supported languages: English, Japanese, Chinese, Korean, Arabic, Hindi
   * Every MkDocs unit page MUST include at least one real-world example (e.g. area calculation, speed from distance/time) in every supported language
+* Unit doc pages are grouped by subject area (Fachgebiet) under `docs/docs/units/<field>/`
+  (currently: `kinematics`, `mechanics`, `electrical`, `thermodynamics`, `information`)
+  * A new unit page MUST be placed in the folder of its subject area (ask the user if a new field is needed)
+  * Every language variant (`.md`, `.ja.md`, …) of a page lives together in that same field folder
+* Each subject area MUST have an `overview.md` (in every supported language)
+  * The overview explains the field and MUST include at least one real-world worked example in
+    mathematical vs. Kotlin notation (the `## Notation` table form: `Mathematics | Kotlin | Meaning`)
+* Every unit detail page MUST state its unit type in the intro block: **native unit** (predefined,
+  measurable base unit) or **constructed unit** (standardized/composed unit)
+* A technically identical unit that belongs to several subject areas (e.g. energy as heat / kinetic /
+  electrical energy) gets its own field-specific page per area; these pages MUST cross-reference each other
 * README.md must be up to date for existing units and architecture
-  * Supported languages: English, Japanese, Chinese, Korean
+  * Supported languages: English, Japanese, Chinese, Korean, Arabic, Hindi
 * All user-relevant changes must be documented in CHANGELOG.md
   * CHANGELOG.md contains ONLY changes the user notices externally (new units, changed public API or behavior)
   * Purely internal changes (refactoring, private helpers) and documentation/KDoc fixes MUST NOT be listed

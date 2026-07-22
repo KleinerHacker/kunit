@@ -1,7 +1,7 @@
 # カスタム単位の追加
 
-kunit は現在いくつかの単位グループを提供しています([距離](units/distance.md)、[時間](units/time.md)、
-[ストレージ](units/storage.md)、[速度](units/speed.md)、[データ転送率](units/datarate.md))が、エンジン全体
+kunit は現在いくつかの単位グループを提供しています([距離](units/kinematics/distance.md)、[時間](units/kinematics/time.md)、
+[ストレージ](units/information/storage.md)、[速度](units/kinematics/speed.md)、[データ転送率](units/information/datarate.md))が、エンジン全体
 (`KUnit`、`KMixedUnitInstance`、`of`/`into` の動詞、接頭辞ビルダー)は汎用的でグループに依存しません。新しい
 物理量を追加するとは、同じパターンに従うことを意味します。このページでは、デモ用の**質量**グループ
 (`org.pcsoft.framework.kunit.mass`) — ストレージグループをモデルにした素朴な1次元グループ — の追加を順を追って

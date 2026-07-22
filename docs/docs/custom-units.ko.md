@@ -1,7 +1,7 @@
 # 사용자 정의 단위 추가
 
-kunit은 현재 여러 단위 그룹을 제공합니다([거리](units/distance.md), [시간](units/time.md),
-[저장 용량](units/storage.md), [속도](units/speed.md), [데이터 전송률](units/datarate.md)). 하지만 엔진 전체
+kunit은 현재 여러 단위 그룹을 제공합니다([거리](units/kinematics/distance.md), [시간](units/kinematics/time.md),
+[저장 용량](units/information/storage.md), [속도](units/kinematics/speed.md), [데이터 전송률](units/information/datarate.md)). 하지만 엔진 전체
 (`KUnit`, `KMixedUnitInstance`, `of`/`into` 동사, 접두사 빌더)는 범용적이며 그룹에 독립적입니다. 새로운 물리량을
 추가한다는 것은 같은 패턴을 따르는 것을 의미합니다. 이 페이지에서는 시연용 **질량** 그룹
 (`org.pcsoft.framework.kunit.mass`) — 저장 용량 그룹을 본뜬 단순한 1차원 그룹 — 을 추가하는 과정을 단계별로

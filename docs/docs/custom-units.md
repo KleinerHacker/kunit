@@ -1,7 +1,7 @@
 # Adding Custom Units
 
-kunit ships several unit groups today ([Distance](units/distance.md), [Time](units/time.md),
-[Storage](units/storage.md), [Speed](units/speed.md), [Data Rate](units/datarate.md)), but the whole engine
+kunit ships several unit groups today ([Distance](units/kinematics/distance.md), [Time](units/kinematics/time.md),
+[Storage](units/information/storage.md), [Speed](units/kinematics/speed.md), [Data Rate](units/information/datarate.md)), but the whole engine
 (`KUnit`, `KMixedUnitInstance`, the `of`/`into` verbs, prefix builders) is generic and group-independent.
 Adding a new physical quantity means following the same pattern. This page walks through adding a
 demonstrative **Mass** group (`org.pcsoft.framework.kunit.mass`) — a plain, one-dimensional group modeled on

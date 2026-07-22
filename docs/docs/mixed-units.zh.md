@@ -1,9 +1,9 @@
 # 混合单位
 
-**混合单位**(德语: *Mischeinheit*)是由多个 `KUnit` 组成的值,每个单位提升到各自的指数,例如速度为
+**混合单位**是由多个 `KUnit` 组成的值,每个单位提升到各自的指数,例如速度为
 `m^1 * s^-1`,力为 `m^1 * kg^1 * s^-2`。在 kunit 中,这由通用的 `KMixedUnitInstance` 类表示。
 
-虽然组特定的包装器类(如 `KLengthUnitInstance`,见[预定义单位](units/distance.md))便于处理单个物理维度,但当
+虽然组特定的包装器类(如 `KLengthUnitInstance`,见[预定义单位](units/kinematics/distance.md))便于处理单个物理维度,但当
 你需要组合**不同**组的单位,或者不想要包装器类提供的同组自动转换时,就要用到 `KMixedUnitInstance`。
 
 ## 结构
@@ -94,7 +94,7 @@ import org.pcsoft.framework.kunit.time.seconds
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5，units=[SECOND^-1]（0.5 Hz）
 ```
 
-仿射的**绝对温度**组是唯一的例外：用数字缩放绝对温度在物理上没有意义（其开尔文值带有 −273.15 的偏移），所以 `(20 of celsius) * 2` 是**编译错误**。请改为缩放线性的**温差**（参见[温差](units/temperature-difference.md)）。
+仿射的**绝对温度**组是唯一的例外：用数字缩放绝对温度在物理上没有意义（其开尔文值带有 −273.15 的偏移），所以 `(20 of celsius) * 2` 是**编译错误**。请改为缩放线性的**温差**（参见[温差](units/thermodynamics/temperature-difference.md)）。
 
 ## 加法和减法
 

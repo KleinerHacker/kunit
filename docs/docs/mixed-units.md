@@ -1,10 +1,10 @@
 # Mixed Units
 
-A **mixed unit** (German: *Mischeinheit*) is a value composed of several `KUnit`s, each raised to its own
+A **mixed unit** is a value composed of several `KUnit`s, each raised to its own
 exponent, e.g. `m^1 * s^-1` for a speed, or `m^1 * kg^1 * s^-2` for a force. In kunit this is represented by
 the generic `KMixedUnitInstance` class.
 
-While the group-specific wrapper classes (like `KLengthUnitInstance`, see [Predefined Units](units/distance.md))
+While the group-specific wrapper classes (like `KLengthUnitInstance`, see [Predefined Units](units/kinematics/distance.md))
 are convenient for working with a single physical dimension, `KMixedUnitInstance` is what you reach for once you
 need to combine units from **different** groups, or when you don't want the automatic same-group conversion
 that the wrapper classes provide.
@@ -106,7 +106,7 @@ val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECO
 The affine **absolute temperature** group is the one exception: scaling an absolute temperature by a number
 is physically meaningless (its kelvin value carries the −273.15 offset), so `(20 of celsius) * 2` is a
 **compile error**. Scale a linear **temperature difference** instead (see
-[Temperature Difference](units/temperature-difference.md)).
+[Temperature Difference](units/thermodynamics/temperature-difference.md)).
 
 ## Addition and subtraction
 

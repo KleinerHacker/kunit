@@ -70,8 +70,11 @@ plugins:
             Home: 홈
             Mixed Units: 혼합 단위
             Adding Custom Units: 사용자 정의 단위 추가
-            Predefined Units: 미리 정의된 단위
-            Constructed Units: 구성된 단위
+            Kinematics: 운동학
+            Mechanics: 역학
+            Electrical Engineering: 전기공학
+            Thermodynamics: 열역학
+            Information Technology: 정보 기술
             Distance: 거리
             Time: 시간
             Frequency: 주파수
@@ -100,8 +103,11 @@ plugins:
             Home: 首页
             Mixed Units: 混合单位
             Adding Custom Units: 添加自定义单位
-            Predefined Units: 预定义单位
-            Constructed Units: 构造单位
+            Kinematics: 运动学
+            Mechanics: 力学
+            Electrical Engineering: 电气工程
+            Thermodynamics: 热力学
+            Information Technology: 信息技术
             Distance: 距离
             Time: 时间
             Frequency: 频率
@@ -130,8 +136,11 @@ plugins:
             Home: ホーム
             Mixed Units: 混合単位
             Adding Custom Units: カスタム単位の追加
-            Predefined Units: 定義済み単位
-            Constructed Units: 構成単位
+            Kinematics: 運動学
+            Mechanics: 力学
+            Electrical Engineering: 電気工学
+            Thermodynamics: 熱力学
+            Information Technology: 情報技術
             Distance: 距離
             Time: 時間
             Frequency: 周波数
@@ -153,31 +162,105 @@ plugins:
             Resistance: 抵抗
             API Docs: API ドキュメント
             Licences: ライセンス
+        - locale: ar
+          name: العربية
+          build: true
+          nav_translations:
+            Home: الرئيسية
+            Mixed Units: الوحدات المركبة
+            Adding Custom Units: إضافة وحدات مخصصة
+            Kinematics: علم الحركة
+            Mechanics: الميكانيكا
+            Electrical Engineering: الهندسة الكهربائية
+            Thermodynamics: الديناميكا الحرارية
+            Information Technology: تقنية المعلومات
+            Distance: المسافة
+            Time: الزمن
+            Frequency: التردد
+            Mass: الكتلة
+            Electric Current: التيار الكهربائي
+            Storage: التخزين
+            Temperature: درجة الحرارة
+            Overview: نظرة عامة
+            Absolute Temperature: درجة الحرارة المطلقة
+            Temperature Difference: فرق درجة الحرارة
+            Speed: السرعة
+            Data Rate: معدل البيانات
+            Acceleration: التسارع
+            Force: القوة
+            Pressure: الضغط
+            Density: الكثافة
+            Area Density: الكثافة السطحية
+            Voltage: الجهد الكهربائي
+            Resistance: المقاومة
+            API Docs: وثائق API
+            Licences: التراخيص
+        - locale: hi
+          name: हिन्दी
+          build: true
+          nav_translations:
+            Home: होम
+            Mixed Units: मिश्रित इकाइयाँ
+            Adding Custom Units: कस्टम इकाइयाँ जोड़ना
+            Kinematics: शुद्धगतिकी
+            Mechanics: यांत्रिकी
+            Electrical Engineering: विद्युत अभियांत्रिकी
+            Thermodynamics: ऊष्मागतिकी
+            Information Technology: सूचना प्रौद्योगिकी
+            Distance: दूरी
+            Time: समय
+            Frequency: आवृत्ति
+            Mass: द्रव्यमान
+            Electric Current: विद्युत धारा
+            Storage: भंडारण
+            Temperature: तापमान
+            Overview: अवलोकन
+            Absolute Temperature: परम तापमान
+            Temperature Difference: तापमान अंतर
+            Speed: चाल
+            Data Rate: डेटा दर
+            Acceleration: त्वरण
+            Force: बल
+            Pressure: दाब
+            Density: घनत्व
+            Area Density: क्षेत्रीय घनत्व
+            Voltage: वोल्टता
+            Resistance: प्रतिरोध
+            API Docs: API दस्तावेज़
+            Licences: लाइसेंस
 
 nav:
   - Home: index.md
   - Mixed Units: mixed-units.md
   - Adding Custom Units: custom-units.md
-  - Predefined Units:
-      - Distance: units/distance.md
-      - Time: units/time.md
-      - Frequency: units/frequency.md
-      - Mass: units/mass.md
-      - Electric Current: units/ec.md
-      - Storage: units/storage.md
+  - Kinematics:
+      - Overview: units/kinematics/overview.md
+      - Distance: units/kinematics/distance.md
+      - Time: units/kinematics/time.md
+      - Frequency: units/kinematics/frequency.md
+      - Speed: units/kinematics/speed.md
+      - Acceleration: units/kinematics/acceleration.md
+  - Mechanics:
+      - Overview: units/mechanics/overview.md
+      - Mass: units/mechanics/mass.md
+      - Force: units/mechanics/force.md
+      - Pressure: units/mechanics/pressure.md
+      - Density: units/mechanics/density.md
+      - Area Density: units/mechanics/areadensity.md
+  - Electrical Engineering:
+      - Overview: units/electrical/overview.md
+      - Electric Current: units/electrical/ec.md
+      - Voltage: units/electrical/voltage.md
+      - Resistance: units/electrical/resistance.md
+  - Thermodynamics:
+      - Overview: units/thermodynamics/overview.md
       - Temperature:
-          - Overview: units/temperature-overview.md
-          - Absolute Temperature: units/temperature.md
-          - Temperature Difference: units/temperature-difference.md
-  - Constructed Units:
-      - Speed: units/speed.md
-      - Data Rate: units/datarate.md
-      - Acceleration: units/acceleration.md
-      - Force: units/force.md
-      - Pressure: units/pressure.md
-      - Density: units/density.md
-      - Area Density: units/areadensity.md
-      - Voltage: units/voltage.md
-      - Resistance: units/resistance.md
+        - Overview: units/thermodynamics/temperature-overview.md
+        - Absolute Temperature: units/thermodynamics/temperature.md
+        - Temperature Difference: units/thermodynamics/temperature-difference.md
+  - Information Technology:
+      - Overview: units/information/overview.md
+      - Storage: units/information/storage.md
+      - Data Rate: units/information/datarate.md
   - API Docs: dokka/html/index.html
   - Licences: licences/index.html

@@ -1,10 +1,10 @@
 # 混合単位
 
-**混合単位**(ドイツ語: *Mischeinheit*)は、それぞれが独自の指数を持つ複数の `KUnit` から構成される値です。
+**混合単位**は、それぞれが独自の指数を持つ複数の `KUnit` から構成される値です。
 例: 速度なら `m^1 * s^-1`、力なら `m^1 * kg^1 * s^-2`。kunit ではこれは汎用の `KMixedUnitInstance` クラスで
 表現されます。
 
-グループ固有のラッパークラス(`KLengthUnitInstance` など、[事前定義された単位](units/distance.md) を参照)は
+グループ固有のラッパークラス(`KLengthUnitInstance` など、[事前定義された単位](units/kinematics/distance.md) を参照)は
 単一の物理次元を扱うのに便利ですが、**異なる**グループの単位を組み合わせる必要がある場合や、ラッパークラスが
 提供する同一グループの自動変換を望まない場合には `KMixedUnitInstance` を使います。
 
@@ -96,7 +96,7 @@ import org.pcsoft.framework.kunit.time.seconds
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5、units=[SECOND^-1]（0.5 Hz）
 ```
 
-アフィンな**絶対温度**グループだけは例外です。絶対温度を数値でスケーリングすることは物理的に無意味なため（ケルビン値が −273.15 のオフセットを含むため）、`(20 of celsius) * 2` は**コンパイルエラー**になります。代わりに線形の**温度差**をスケーリングしてください（[温度差](units/temperature-difference.md)を参照）。
+アフィンな**絶対温度**グループだけは例外です。絶対温度を数値でスケーリングすることは物理的に無意味なため（ケルビン値が −273.15 のオフセットを含むため）、`(20 of celsius) * 2` は**コンパイルエラー**になります。代わりに線形の**温度差**をスケーリングしてください（[温度差](units/thermodynamics/temperature-difference.md)を参照）。
 
 ## 加算と減算
 

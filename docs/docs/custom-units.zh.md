@@ -1,7 +1,7 @@
 # 添加自定义单位
 
-kunit 今天提供了多个单位组([距离](units/distance.md)、[时间](units/time.md)、[存储](units/storage.md)、
-[速度](units/speed.md)、[数据传输率](units/datarate.md)),但整个引擎(`KUnit`、`KMixedUnitInstance`、`of`/`into`
+kunit 今天提供了多个单位组([距离](units/kinematics/distance.md)、[时间](units/kinematics/time.md)、[存储](units/information/storage.md)、
+[速度](units/kinematics/speed.md)、[数据传输率](units/information/datarate.md)),但整个引擎(`KUnit`、`KMixedUnitInstance`、`of`/`into`
 动词、前缀构建器)是通用且与组无关的。添加一个新的物理量意味着遵循相同的模式。本页逐步介绍如何添加一个演示性的
 **质量**组(`org.pcsoft.framework.kunit.mass`)—— 一个仿照存储组的简单一维组。
 

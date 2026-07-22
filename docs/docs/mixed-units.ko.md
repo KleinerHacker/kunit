@@ -1,10 +1,10 @@
 # 혼합 단위
 
-**혼합 단위**(독일어: *Mischeinheit*)는 각각 고유한 지수로 거듭제곱된 여러 `KUnit`로 구성된 값입니다. 예:
+**혼합 단위**는 각각 고유한 지수로 거듭제곱된 여러 `KUnit`로 구성된 값입니다. 예:
 속도의 경우 `m^1 * s^-1`, 힘의 경우 `m^1 * kg^1 * s^-2`. kunit에서 이것은 범용 `KMixedUnitInstance` 클래스로
 표현됩니다.
 
-그룹별 래퍼 클래스(`KLengthUnitInstance` 등, [사전 정의된 단위](units/distance.md) 참조)는 단일 물리 차원을
+그룹별 래퍼 클래스(`KLengthUnitInstance` 등, [사전 정의된 단위](units/kinematics/distance.md) 참조)는 단일 물리 차원을
 다루는 데 편리하지만, **서로 다른** 그룹의 단위를 결합해야 하거나 래퍼 클래스가 제공하는 같은 그룹 자동 변환을
 원하지 않을 때는 `KMixedUnitInstance`를 사용합니다.
 
@@ -97,7 +97,7 @@ import org.pcsoft.framework.kunit.time.seconds
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1] (0.5 Hz)
 ```
 
-아핀(affine) **절대 온도** 그룹만은 예외입니다. 절대 온도를 숫자로 스케일링하는 것은 물리적으로 무의미하므로(켈빈 값이 −273.15 오프셋을 포함), `(20 of celsius) * 2`는 **컴파일 오류**입니다. 대신 선형 **온도 차이**를 스케일링하세요([온도 차이](units/temperature-difference.md) 참조).
+아핀(affine) **절대 온도** 그룹만은 예외입니다. 절대 온도를 숫자로 스케일링하는 것은 물리적으로 무의미하므로(켈빈 값이 −273.15 오프셋을 포함), `(20 of celsius) * 2`는 **컴파일 오류**입니다. 대신 선형 **온도 차이**를 스케일링하세요([온도 차이](units/thermodynamics/temperature-difference.md) 참조).
 
 ## 덧셈과 뺄셈
 
