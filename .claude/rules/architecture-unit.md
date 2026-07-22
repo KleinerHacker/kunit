@@ -33,6 +33,18 @@ Every mixed unit can represent a standardized unit (example):
 
 They can generally be contained within mixed units.
 
+#### Multiple decompositions
+
+A standardized unit MAY be composed from several equivalent decompositions, all describing the same
+physical quantity (example - resistance):
+* voltage / current
+* mass * distance ^ 2 / (time ^ 3 * current ^ 2)
+
+Every standardized group has ONE canonical **base-dimension normal form** (resistance:
+`mass ^ 1 * distance ^ 2 * time ^ -3 * current ^ -2`). All decompositions reduce onto this normal form
+and MUST produce the same typed, value-equal instance. New decompositions are added additively (see
+`operators.md`, "Multiple decompositions of a standardized unit") without changing existing ones.
+
 
 ### Specific Units of a Unit System
 

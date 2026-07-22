@@ -36,6 +36,25 @@ Result type: if the combination yields a known, standardized unit (e.g. length /
 length * length = area, storage / time = data rate), the operation MUST return that **typed** unit. Any
 other, non-meaningful combination (e.g. meter * byte) MUST return a generic mixed unit.
 
+### Multiple decompositions of a standardized unit
+
+A standardized unit MAY be reachable through several equivalent decompositions (example: resistance =
+`voltage / current` = `mass * distance ^ 2 / (time ^ 3 * current ^ 2)`). All of them describe the same
+physical quantity and MUST yield the same typed value. The following rules apply:
+
+* All decompositions MUST funnel into **one** normalizing factory (e.g. `resistanceInstanceOf`) that
+  stores the value in the group's canonical **base-dimension normal form**.
+* A decomposition whose operands are already typed (e.g. `voltage / current`) is realised as an
+  overloaded operator returning the typed unit directly.
+* A decomposition expressed from native base units (the fully generic form, e.g.
+  `mass * distance ^ 2 / (time ^ 3 * current ^ 2)`) stays a generic mixed unit and is converted to the
+  typed unit through the group's `toX()` form-recognition hook (mirroring `toSpeed()`); the shared
+  engine MUST NOT be changed and MUST NOT learn about the standardized groups.
+* `toX()` recognises ONLY the canonical base-dimension normal form; any equivalent expression reduces
+  onto it automatically.
+* Decompositions are **additive**: a new decomposition adds only one operator (typed operands) or is
+  already covered by `toX()` (native form). It MUST NOT require changing existing decompositions.
+
 ## Special Operators
 
 ### Pow

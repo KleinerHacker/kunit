@@ -89,6 +89,8 @@ plugins:
             Pressure: 압력
             Density: 밀도
             Area Density: 면밀도
+            Voltage: 전압
+            Resistance: 저항
             API Docs: API 문서
             Licences: 라이선스
         - locale: zh
@@ -117,6 +119,8 @@ plugins:
             Pressure: 压力
             Density: 密度
             Area Density: 面密度
+            Voltage: 电压
+            Resistance: 电阻
             API Docs: API 文档
             Licences: 许可证
         - locale: ja
@@ -145,6 +149,8 @@ plugins:
             Pressure: 圧力
             Density: 密度
             Area Density: 面密度
+            Voltage: 電圧
+            Resistance: 抵抗
             API Docs: API ドキュメント
             Licences: ライセンス
 
@@ -171,5 +177,7 @@ nav:
       - Pressure: units/pressure.md
       - Density: units/density.md
       - Area Density: units/areadensity.md
+      - Voltage: units/voltage.md
+      - Resistance: units/resistance.md
   - API Docs: dokka/html/index.html
   - Licences: licences/index.html

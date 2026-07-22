@@ -4,6 +4,28 @@
 
 ### Added
 
+- **New `Voltage` unit group** (`org.pcsoft.framework.kunit.voltage`): a *constructed* quantity
+  (`mass¹ · distance² · time⁻³ · current⁻¹`, i.e. `kg·m²·s⁻³·A⁻¹`) with base unit **volt**
+  (`KVoltageUnit.BASE == KVoltageUnit.VOLT`). Bare tokens `volts`, `statvolts` (CGS-ESU), `abvolts`
+  (CGS-EMU), `westonCells` (Weston standard cell) and `daniells` (Daniell cell); full SI prefix support on
+  every unit (`milli.volts` = mV, `kilo.volts` = kV). `+`/`-`/comparison and `equals`/`hashCode` operate on
+  the normalized volt value (`(1 of kilo.volts) == (1000 of volts)`). It has **multiple equivalent
+  decompositions**: the typed Ohm's-law form `resistance * current = voltage` (see Resistance) and the
+  native canonical expression `mass·distance²/(time³·current)`, which is narrowed to a typed voltage via
+  `KMixedUnitInstance.toVoltage()`. Both yield the same value-equal result. 100 % test coverage included.
+
+- **New `Resistance` unit group** (`org.pcsoft.framework.kunit.resistance`): a *constructed* quantity
+  (`mass¹ · distance² · time⁻³ · current⁻²`, i.e. `kg·m²·s⁻³·A⁻²`) with base unit **ohm**
+  (`KResistanceUnit.BASE == KResistanceUnit.OHM`). Bare tokens `ohms`, `statohms` (CGS-ESU), `abohms`
+  (CGS-EMU), `internationalOhms`, `legalOhms` and `siemensUnits`; full SI prefix support on every unit
+  (`milli.ohms` = mΩ, `kilo.ohms` = kΩ). `+`/`-`/comparison and `equals`/`hashCode` operate on the
+  normalized ohm value (`(1 of kilo.ohms) == (1000 of ohms)`). Ohm's-law cross operators tie voltage,
+  resistance and current together: `voltage / current = resistance` (typed), `resistance * current = voltage`
+  and its commutative `current * resistance = voltage`, and `voltage / resistance = current` (typed).
+  Like voltage it has **multiple equivalent decompositions**: the typed `voltage / current` and the native
+  canonical expression `mass·distance²/(time³·current²)`, narrowed via `KMixedUnitInstance.toResistance()`;
+  both yield the same value-equal result. 100 % test coverage included.
+
 - **New `Electric Current` unit group** (`org.pcsoft.framework.kunit.ec`): a plain, one-dimensional native
   group with base unit **ampere** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`). Besides the
   SI ampere it offers the two classic CGS current units, the **biot / abampere** (EMU, `1 Bi = 10 A`, tokens

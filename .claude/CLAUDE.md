@@ -32,6 +32,9 @@
 * All user-relevant changes must be documented in CHANGELOG.md
   * CHANGELOG.md contains ONLY changes the user notices externally (new units, changed public API or behavior)
   * Purely internal changes (refactoring, private helpers) and documentation/KDoc fixes MUST NOT be listed
+* A standardized unit with multiple decompositions (see `rules/operators.md`) MUST document AND explicitly test every decomposition
+  * Each decomposition must be shown in the MkDocs page (typed operator form AND native expression form via `toX()`) in every supported language
+  * The tests must prove that all decompositions yield the same typed, value-equal result
 
 # Planning
 

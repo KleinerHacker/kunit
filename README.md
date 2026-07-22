@@ -176,6 +176,8 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Pressure (constructed: mass·length⁻¹·time⁻²) | `org.pcsoft.framework.kunit.pressure` | Pascal (`KPressureUnit.BASE`) |
 | Density (constructed: mass·length⁻³) | `org.pcsoft.framework.kunit.density` | Kilogram per cubic meter (`KDensityUnit.BASE`) |
 | Area Density (constructed: mass·length⁻²) | `org.pcsoft.framework.kunit.areadensity` | Kilogram per square meter (`KAreaDensityUnit.BASE`) |
+| Voltage (constructed: mass·length²·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.voltage` | Volt (`KVoltageUnit.BASE`) |
+| Resistance (constructed: mass·length²·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.resistance` | Ohm (`KResistanceUnit.BASE`) |
 
 #### Distance (`KDistanceUnit`)
 
@@ -304,6 +306,13 @@ d.toString()                                           // "20.0 ΔK"  (ΔK, dist
   or via `mass / volume`, recover with `density * volume` / `mass / density`.
 * **Area Density** (`KAreaDensityUnit`) - `mass · length⁻²` (surface load, statics); built as
   `kilo.grams / (meters pow 2)` or via `mass / area`; density bridge `density * length` / `area density / length`.
+* **Voltage** (`KVoltageUnit`) - `mass · length² · time⁻³ · current⁻¹`; tokens `volts`, `statvolts`,
+  `abvolts`, `westonCells`, `daniells`. **Multiple decompositions**: typed `resistance * current` (Ohm's
+  law) or the native `kg·m²·s⁻³·A⁻¹` expression narrowed with `toVoltage()` - both value-equal.
+* **Resistance** (`KResistanceUnit`) - `mass · length² · time⁻³ · current⁻²`; tokens `ohms`, `statohms`,
+  `abohms`, `internationalOhms`, `legalOhms`, `siemensUnits`. **Multiple decompositions**: typed
+  `voltage / current` (Ohm's law) or the native `kg·m²·s⁻³·A⁻²` expression narrowed with `toResistance()`;
+  inverse operators `resistance * current` / `voltage / resistance` - all value-equal.
 
 ### Still Open
 
