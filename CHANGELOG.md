@@ -4,6 +4,17 @@
 
 ### Added
 
+- **New `Electric Current` unit group** (`org.pcsoft.framework.kunit.ec`): a plain, one-dimensional native
+  group with base unit **ampere** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`). Besides the
+  SI ampere it offers the two classic CGS current units, the **biot / abampere** (EMU, `1 Bi = 10 A`, tokens
+  `biot` / `abamperes`) and the **statampere** (ESU, `1 statA ≈ 3.335 641 × 10⁻¹⁰ A`, token `statamperes`).
+  Build and read with `of`/`into` through the bare tokens (`amperes`, `biot`, `statamperes`); full SI prefix
+  support on every unit (`milli.amperes` = mA, `kilo.amperes` = kA). The group defines **no** cross-unit
+  typed results (any `*`/`/` with a foreign group yields a generic mixed unit); `+`/`-`/comparison operate on
+  the normalized ampere value, and `equals`/`hashCode` are by current quantity (`(1 of biot) == (10 of amperes)`);
+  `KMixedUnitInstance.toElectricCurrent()` converts a single current term back to the pure wrapper. Full docs
+  (EN/JA/ZH/KO) and 100 % test coverage included.
+
 - **New `Frequency` unit group** (`org.pcsoft.framework.kunit.frequency`): a native, one-dimensional group
   and the **inverse of time** (`1 Hz = 1/s`) with base unit **hertz** (`KFrequencyUnit.BASE`). Bare tokens
   `hertz`, `rps` (revolutions/s), `fps` (frames/s), `rpm` (revolutions/min, 1/60 Hz) and `bpm`

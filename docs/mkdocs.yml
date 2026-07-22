@@ -76,6 +76,7 @@ plugins:
             Time: 시간
             Frequency: 주파수
             Mass: 질량
+            Electric Current: 전류
             Storage: 저장 용량
             Temperature: 온도
             Overview: 개요
@@ -103,6 +104,7 @@ plugins:
             Time: 时间
             Frequency: 频率
             Mass: 质量
+            Electric Current: 电流
             Storage: 存储
             Temperature: 温度
             Overview: 概述
@@ -130,6 +132,7 @@ plugins:
             Time: 時間
             Frequency: 周波数
             Mass: 質量
+            Electric Current: 電流
             Storage: ストレージ
             Temperature: 温度
             Overview: 概要
@@ -154,6 +157,7 @@ nav:
       - Time: units/time.md
       - Frequency: units/frequency.md
       - Mass: units/mass.md
+      - Electric Current: units/ec.md
       - Storage: units/storage.md
       - Temperature:
           - Overview: units/temperature-overview.md

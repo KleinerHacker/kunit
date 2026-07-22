@@ -165,6 +165,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
 | Frequency (inverse of time) | `org.pcsoft.framework.kunit.frequency` | Hertz (`KFrequencyUnit.BASE`) |
 | Mass | `org.pcsoft.framework.kunit.mass` | Gram (`KMassUnit.BASE`) |
+| Electric Current | `org.pcsoft.framework.kunit.ec` | Ampere (`KElectricCurrentUnit.BASE`) |
 | Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
 | Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
 | Temperature Difference | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
@@ -215,6 +216,20 @@ SI prefix set; `+`/`-`/comparison and `equals` work on the normalized gram value
 val m = 2 of kilo.grams          // 2000 g (the kilogram is `kilo.grams`)
 m into pounds                    // ≈ 4.409
 (1 of kilo.grams) == (1000 of grams) // true
+```
+
+#### Electric Current (`KElectricCurrentUnit`)
+
+Ampere (base) plus the two classic CGS current units: the biot / abampere (`Bi`/`abA`, EMU, tokens
+`biot`/`abamperes`, `1 Bi = 10 A`) and the statampere (`statA`, ESU, token `statamperes`,
+`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`). Electric current is a plain native group with **no** cross-unit typed
+results; every unit takes the full SI prefix set (`milli.amperes` = mA, `kilo.amperes` = kA), and
+`+`/`-`/comparison and `equals` work on the normalized ampere value.
+
+```kotlin
+val i = 2 of milli.amperes           // 0.002 A
+(1 of biot) into amperes             // 10.0
+(1 of biot) == (10 of amperes)       // true
 ```
 
 #### Frequency (`KFrequencyUnit`)
