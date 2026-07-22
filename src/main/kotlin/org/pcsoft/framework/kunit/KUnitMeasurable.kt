@@ -338,12 +338,17 @@ operator fun <T : KUnitMeasurable> Number.times(unit: T): T = unit.scaledBy(this
  * exponent is negated and the value becomes `number / measure.value`. Because the dimension changes, the
  * result is a generic [KMixedUnitInstance] (there is no dimension-preserving type to keep).
  *
- * This is the idiomatic way to build a reciprocal quantity, e.g. a frequency from a period:
+ * This is the idiomatic way to build a reciprocal quantity whose dimension has no dedicated type, e.g.
+ * an inverse length:
  * ```kotlin
- * import org.pcsoft.framework.kunit.time.*
+ * import org.pcsoft.framework.kunit.distance.*
  *
- * val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1]  (0.5 Hz)
+ * val inverseLength = 1 / (2 of meters) // KMixedUnitInstance: value=0.5, units=[METER^-1]
  * ```
+ *
+ * Note: groups that offer a **typed** reciprocal declare a more specific overload that wins over this
+ * generic one - e.g. `1 / (2 of seconds)` is a typed `KFrequencyUnitInstance` (0.5 Hz), not a raw
+ * mixed unit (see `KFrequencyUnitOperators.kt`).
  */
 operator fun Number.div(unit: KUnitMeasurable): KMixedUnitInstance =
     KMixedUnitInstance(this.toDouble(), emptyList()) / unit.toUnit()

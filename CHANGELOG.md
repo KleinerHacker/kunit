@@ -4,11 +4,22 @@
 
 ### Added
 
+- **New `Frequency` unit group** (`org.pcsoft.framework.kunit.frequency`): a native, one-dimensional group
+  and the **inverse of time** (`1 Hz = 1/s`) with base unit **hertz** (`KFrequencyUnit.BASE`). Bare tokens
+  `hertz`, `rps` (revolutions/s), `fps` (frames/s), `rpm` (revolutions/min, 1/60 Hz) and `bpm`
+  (beats/min, 1/60 Hz); full SI prefix support on every unit (`kilo.hertz` = kHz, `mega.hertz` = MHz,
+  `giga.hertz` = GHz). `+`/`-`/comparison and `equals`/`hashCode` operate on the normalized hertz value
+  (`(1 of kilo.hertz) == (1000 of hertz)`). Its cross-group operators are defined to be **exactly inverse
+  to time**: `count / time = frequency` (typed, e.g. `1 / (2 of seconds)` = 0.5 Hz), `count / frequency =
+  time`, `frequency * time = count` (dimensionless, commutative), `length * frequency = speed`
+  (commutative), and `speed / frequency = distance`. `KMixedUnitInstance.toFrequency()` narrows a matching
+  mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+
 - **Scalar multiplication and division of units with plain numbers**: every unit can now be scaled by a
   `Number` while keeping its type and dimension — `unit * n`, `n * unit` and `unit / n` all return the
   same typed unit (e.g. `(12 of meters) * 3` stays a length, `Math.PI * (r * r)` stays an area, enabling
   circle-area style formulas directly through the unit system). `n / unit` inverts the dimension and
-  yields a generic mixed unit (e.g. `1 / (2 of seconds)` = s⁻¹, a frequency). Scalar `+`/`-` remains
+  yields a generic mixed unit (e.g. `1 / (2 of meters)` = m⁻¹, an inverse length). Scalar `+`/`-` remains
   unsupported. The affine **absolute temperature** (`KTemperatureUnitInstance`) deliberately rejects
   scalar `*`/`/` at compile time (scaling an affine point is meaningless); a linear **temperature
   difference** (`KTemperatureDifferenceUnitInstance`) scales normally.

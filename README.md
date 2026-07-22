@@ -163,6 +163,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 |---|---|---|
 | Distance | `org.pcsoft.framework.kunit.distance` | Meter (`KDistanceUnit.BASE`) |
 | Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
+| Frequency (inverse of time) | `org.pcsoft.framework.kunit.frequency` | Hertz (`KFrequencyUnit.BASE`) |
 | Mass | `org.pcsoft.framework.kunit.mass` | Gram (`KMassUnit.BASE`) |
 | Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
 | Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
@@ -214,6 +215,22 @@ SI prefix set; `+`/`-`/comparison and `equals` work on the normalized gram value
 val m = 2 of kilo.grams          // 2000 g (the kilogram is `kilo.grams`)
 m into pounds                    // ≈ 4.409
 (1 of kilo.grams) == (1000 of grams) // true
+```
+
+#### Frequency (`KFrequencyUnit`)
+
+Hertz (base), revolutions per second (`rps`), frames per second (`fps`), revolutions per minute (`rpm`,
+1/60 Hz) and beats per minute (`bpm`, 1/60 Hz). Frequency is a native group and the **inverse of time**
+(`1 Hz = 1/s`); every unit takes the full SI prefix set (`kilo.hertz` = kHz, `mega.hertz` = MHz). Its
+cross-group operators are exactly inverse to time — multiplying by a frequency behaves like dividing by a
+time: `count / time = frequency`, `frequency * time = count`, `length * frequency = speed`,
+`speed / frequency = distance`. `KMixedUnitInstance.toFrequency()` converts a single frequency term back
+to the pure wrapper.
+
+```kotlin
+val f = 60 / (1 of seconds)          // KFrequencyUnitInstance, 60 Hz
+(3000 of rpm) into hertz             // 50.0
+val v = (2 of meters) * (5 of hertz) // KSpeedUnitInstance, 10 m/s
 ```
 
 #### Temperature (`KTemperatureUnit`)
