@@ -2,6 +2,8 @@
 
 ## [UNRELEASED]
 
+## [0.6.0]
+
 ### Added
 
 - **New `format` verb and pluggable formatting.** The display counterpart of `into`: `format` reads a value
