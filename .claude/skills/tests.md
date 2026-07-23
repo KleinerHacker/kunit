@@ -38,3 +38,7 @@ for each specialization.
 ## Miscellaneous
 
 For the overarching mixed unit, the applicable test classes above exist at the package root level.
+
+## Formatter
+
+Each formatter implementation MUST have a corresponding test class, named `K<UnitName>FormatterTest`.
