@@ -12,6 +12,8 @@
 
 package org.pcsoft.framework.kunit.ec
 
+import org.pcsoft.framework.kunit.KUnitDisplay
+
 // Bare, value-1 electric current tokens (each = 1 unit, normalized to amperes). Vocabulary for building
 // (`10 of amperes`) and reading (`v into biot`); combine with the prefix builders (`milli.amperes`).
 // Prefixed forms live in KElectricCurrentUnitExtensions.kt.
@@ -19,15 +21,15 @@ package org.pcsoft.framework.kunit.ec
 // --- SI ------------------------------------------------------------------------------------------
 
 /** 1 ampere ([KElectricCurrentUnit.AMPERE]). */
-val amperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.AMPERE.baseValue)
+val amperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.AMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.AMPERE))
 
 // --- CGS -----------------------------------------------------------------------------------------
 
 /** 1 biot / abampere ([KElectricCurrentUnit.BIOT]). */
-val biot: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue)
+val biot: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue, KUnitDisplay(KElectricCurrentUnit.BIOT))
 
 /** 1 abampere, the alias spelling of the biot ([KElectricCurrentUnit.BIOT]). */
-val abamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue)
+val abamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue, KUnitDisplay(KElectricCurrentUnit.BIOT))
 
 /** 1 statampere ([KElectricCurrentUnit.STATAMPERE]). */
-val statamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.STATAMPERE.baseValue)
+val statamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.STATAMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.STATAMPERE))

@@ -14,6 +14,7 @@ package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -88,5 +89,12 @@ class KMassUnitSystemTest {
     fun `toMass on non-mass fails`() {
         assertFailsWith<IllegalStateException> { (1 of seconds).toUnit().toMass() }
         assertFailsWith<IllegalStateException> { ((1 of grams).toUnit() / (1 of grams).toUnit()).toMass() }
+    }
+
+    /** `format` into kilograms and pounds. */
+    @Test
+    fun `format compositions`() {
+        assertEquals("1.5 kg", (1500 of grams) format kilo.grams)
+        assertEquals("1.0 lb", (1 of pounds) format pounds)
     }
 }

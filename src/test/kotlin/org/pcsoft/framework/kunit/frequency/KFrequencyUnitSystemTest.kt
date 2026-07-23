@@ -14,6 +14,7 @@ package org.pcsoft.framework.kunit.frequency
 
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -88,5 +89,11 @@ class KFrequencyUnitSystemTest {
     fun `toFrequency on non-frequency fails`() {
         assertFailsWith<IllegalStateException> { (1 of seconds).toUnit().toFrequency() }
         assertFailsWith<IllegalStateException> { ((1 of hertz).toUnit() / (1 of hertz).toUnit()).toFrequency() }
+    }
+
+    /** `format` into kilohertz. */
+    @Test
+    fun `format compositions`() {
+        assertEquals("1.0 kHz", (1000 of hertz) format kilo.hertz)
     }
 }

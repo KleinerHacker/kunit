@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.distance
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
 
@@ -165,8 +166,8 @@ infix fun KDistanceUnitInstance.pow(n: Int): KDistanceUnitInstance =
  * given [exponent]: a [KLengthUnitInstance]/[KAreaUnitInstance]/[KVolumeUnitInstance] for exponent
  * 1/2/3, otherwise the general [KDistanceUnitInstance].
  */
-internal fun distanceOf(value: Double, exponent: Int): KDistanceUnitInstance {
-    val instance = KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, exponent)))
+internal fun distanceOf(value: Double, exponent: Int, display: KUnitDisplay? = null): KDistanceUnitInstance {
+    val instance = KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, exponent, display)))
     return when (exponent) {
         1 -> KLengthUnitInstance(instance)
         2 -> KAreaUnitInstance(instance)
@@ -176,16 +177,16 @@ internal fun distanceOf(value: Double, exponent: Int): KDistanceUnitInstance {
 }
 
 /** Builds a [KLengthUnitInstance] (exponent 1) from a value already expressed in meters. */
-internal fun lengthOf(value: Double): KLengthUnitInstance =
-    KLengthUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, 1))))
+internal fun lengthOf(value: Double, display: KUnitDisplay? = null): KLengthUnitInstance =
+    KLengthUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, 1, display))))
 
 /** Builds a [KAreaUnitInstance] (exponent 2) from a value already expressed in square meters. */
-internal fun areaOf(value: Double): KAreaUnitInstance =
-    KAreaUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, 2))))
+internal fun areaOf(value: Double, display: KUnitDisplay? = null): KAreaUnitInstance =
+    KAreaUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, 2, display))))
 
 /** Builds a [KVolumeUnitInstance] (exponent 3) from a value already expressed in cubic meters. */
-internal fun volumeOf(value: Double): KVolumeUnitInstance =
-    KVolumeUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, 3))))
+internal fun volumeOf(value: Double, display: KUnitDisplay? = null): KVolumeUnitInstance =
+    KVolumeUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KDistanceUnit.BASE, 3, display))))
 
 // --- Conversions from the generic engine --------------------------------------------------------
 

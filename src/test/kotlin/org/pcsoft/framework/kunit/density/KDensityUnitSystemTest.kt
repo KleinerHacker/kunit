@@ -19,6 +19,7 @@ import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mass.grams
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -90,5 +91,12 @@ class KDensityUnitSystemTest {
         val m = (1 of meters).toUnit()
         assertFailsWith<IllegalStateException> { ((g pow 2) / (m pow 3)).toDensity() } // mass^2
         assertFailsWith<IllegalStateException> { (g / m).toDensity() }                 // length^-1
+    }
+
+    /** `format` a density into base dimensions kg/m^3. */
+    @Test
+    fun `format compositions`() {
+        val d = (1 of kilo.grams) / (1 of liters)
+        assertEquals("1000.0 kg/m^3", d format (kilo.grams / (meters pow 3)))
     }
 }

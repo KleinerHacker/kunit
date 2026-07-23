@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.time
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
+import org.pcsoft.framework.kunit.KUnitDisplay
 
 // Prefixed, value-1 time templates: one property per time unit on the prefix builder (e.g.
 // `milli.seconds` = 0.001 s, `micro.seconds` = 1e-6 s). Time accepts *any* magnitude, so the properties
@@ -20,7 +21,7 @@ import org.pcsoft.framework.kunit.KPrefixBuilder
 // `v into micro.seconds`, or as a rate denominator `meters / milli.seconds`.
 
 private fun prefixedTime(builder: KPrefixBuilder, unit: KTimeUnit): KTimeUnitInstance =
-    timeUnitInstanceOf(builder.prefix.factor * unit.baseValue)
+    timeUnitInstanceOf(builder.prefix.factor * unit.baseValue, KUnitDisplay(unit, builder.prefix.symbol))
 
 /** Prefixed seconds, e.g. `milli.seconds` = 0.001 s, `kilo.seconds` = 1000 s. */
 val KPrefixBuilder.seconds: KTimeUnitInstance get() = prefixedTime(this, KTimeUnit.SECOND)

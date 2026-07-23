@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
+import org.pcsoft.framework.kunit.KUnitDisplay
 
 // Prefixed, value-1 mass templates: one property per mass unit on the prefix builder (e.g.
 // `kilo.grams` = 1000 g, `milli.grams` = 0.001 g). Mass accepts *any* magnitude, so the properties
@@ -20,7 +21,7 @@ import org.pcsoft.framework.kunit.KPrefixBuilder
 // e.g. `2 of kilo.grams`, `v into milli.grams`.
 
 private fun prefixedMass(builder: KPrefixBuilder, unit: KMassUnit): KMassUnitInstance =
-    massOf(builder.prefix.factor * unit.baseValue)
+    massOf(builder.prefix.factor * unit.baseValue, KUnitDisplay(unit, builder.prefix.symbol))
 
 // --- Metric / SI ---------------------------------------------------------------------------------
 

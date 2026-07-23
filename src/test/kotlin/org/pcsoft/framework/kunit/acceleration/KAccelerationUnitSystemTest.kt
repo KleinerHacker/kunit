@@ -15,7 +15,9 @@ package org.pcsoft.framework.kunit.acceleration
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -73,5 +75,11 @@ class KAccelerationUnitSystemTest {
         // two terms, but the distance term has the wrong exponent (area, not length)
         val areaOverTimeSq = ((2 of meters).toUnit() pow 2) / ((1 of seconds).toUnit() pow 2)
         assertFailsWith<IllegalStateException> { areaOverTimeSq.toAcceleration() }
+    }
+
+    /** `format` into the base-dimension m/s^2. */
+    @Test
+    fun `format compositions`() {
+        assertEquals("0.01 m/s^2", (1 of gals) format (meters / (seconds pow 2)))
     }
 }

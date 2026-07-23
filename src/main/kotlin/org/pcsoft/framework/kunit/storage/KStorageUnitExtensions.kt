@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.storage
 
 import org.pcsoft.framework.kunit.KAugmentingPrefixBuilder
+import org.pcsoft.framework.kunit.KUnitDisplay
 
 // Prefixed, value-1 storage templates. A fraction of a bit is not a meaningful data amount, so the
 // `bytes`/`bits` properties hang **only** on the augmenting (supra-unity) SI builder and on the binary
@@ -23,10 +24,10 @@ import org.pcsoft.framework.kunit.KAugmentingPrefixBuilder
 // one helper per builder instead of the single `prefixed<Name>` helper of the single-builder groups.
 
 private fun augmentedStorage(builder: KAugmentingPrefixBuilder, unit: KStorageUnit): KStorageUnitInstance =
-    storageOf(builder.prefix.factor * unit.baseValue)
+    storageOf(builder.prefix.factor * unit.baseValue, KUnitDisplay(unit, builder.prefix.symbol))
 
 private fun binaryStorage(builder: KStorageBinaryPrefixBuilder, unit: KStorageUnit): KStorageUnitInstance =
-    storageOf(builder.factor * unit.baseValue)
+    storageOf(builder.factor * unit.baseValue, KUnitDisplay(unit, builder.symbol))
 
 /** Decimal SI-prefixed bytes, e.g. `kilo.bytes` = 1000 B, `mega.bytes` = 1e6 B. */
 val KAugmentingPrefixBuilder.bytes: KStorageUnitInstance get() = augmentedStorage(this, KStorageUnit.BYTE)

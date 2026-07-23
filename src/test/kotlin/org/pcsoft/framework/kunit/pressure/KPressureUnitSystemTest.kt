@@ -17,7 +17,10 @@ import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mass.grams
+import org.pcsoft.framework.kunit.format
+import org.pcsoft.framework.kunit.div
 import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -78,5 +81,11 @@ class KPressureUnitSystemTest {
         assertFailsWith<IllegalStateException> { ((g pow 2) / m / s2).toPressure() }       // mass^2
         assertFailsWith<IllegalStateException> { (g / (m pow 2) / s2).toPressure() }        // length^-2
         assertFailsWith<IllegalStateException> { (g / m / ((1 of seconds).toUnit() pow 3)).toPressure() } // time^-3
+    }
+
+    /** `format` a pressure into its base dimensions kg*m^-1*s^-2. */
+    @Test
+    fun `format compositions`() {
+        assertEquals("50.0 kg*m^-1*s^-2", (50 of pascals) format (kilo.grams / meters / (seconds pow 2)))
     }
 }

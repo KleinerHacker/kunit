@@ -14,6 +14,8 @@ package org.pcsoft.framework.kunit.datarate
 
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
+import org.pcsoft.framework.kunit.format
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.storage.bits
 import org.pcsoft.framework.kunit.storage.bytes
@@ -57,5 +59,11 @@ class KDataRateUnitSystemTest {
         assertEquals("10.0 B/s", r.toString())
         assertNotEquals(10 of bytes / seconds, 20 of bytes / seconds)
         assertFalse(r.equals(1.0)) // not a KDataRateUnitInstance
+    }
+
+    /** `format` a data rate into kB/s (generic target keeps the prefixed display symbol). */
+    @Test
+    fun `format compositions`() {
+        assertEquals("0.01 kB/s", (10 of bytes / seconds) format (kilo.bytes.toUnit() / seconds.toUnit()))
     }
 }

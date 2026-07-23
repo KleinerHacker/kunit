@@ -12,18 +12,24 @@
 
 package org.pcsoft.framework.kunit.time
 
+import org.pcsoft.framework.kunit.KUnitDisplay
+
 // Bare, value-1 time tokens (each = 1 unit, normalized to seconds). Vocabulary for building
 // (`10 of seconds`) and reading (`v into hours`); combine with the prefix builders (`milli.seconds`)
 // and operators (`meters / seconds`). Prefixed forms live in KTimeUnitExtensions.kt.
 
+// Each token carries its own [KUnitDisplay] so that formatting renders the written-down symbol
+// (`"h"`, `"min"`) rather than the base symbol `"s"`; the value stays normalized to seconds.
+private fun bareTime(unit: KTimeUnit): KTimeUnitInstance = timeUnitInstanceOf(unit.baseValue, KUnitDisplay(unit))
+
 /** 1 second ([KTimeUnit.SECOND]). */
-val seconds: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.SECOND.baseValue)
+val seconds: KTimeUnitInstance = bareTime(KTimeUnit.SECOND)
 
 /** 1 minute ([KTimeUnit.MINUTE]). */
-val minutes: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.MINUTE.baseValue)
+val minutes: KTimeUnitInstance = bareTime(KTimeUnit.MINUTE)
 
 /** 1 hour ([KTimeUnit.HOUR]). */
-val hours: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.HOUR.baseValue)
+val hours: KTimeUnitInstance = bareTime(KTimeUnit.HOUR)
 
 /** 1 day ([KTimeUnit.DAY]). */
-val days: KTimeUnitInstance = timeUnitInstanceOf(KTimeUnit.DAY.baseValue)
+val days: KTimeUnitInstance = bareTime(KTimeUnit.DAY)

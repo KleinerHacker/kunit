@@ -12,21 +12,23 @@
 
 package org.pcsoft.framework.kunit.frequency
 
+import org.pcsoft.framework.kunit.KUnitDisplay
+
 // Bare, value-1 frequency tokens (each = 1 unit, normalized to hertz). Vocabulary for building
 // (`10 of hertz`) and reading (`v into rpm`); combine with the prefix builders (`kilo.hertz`).
 // Prefixed forms live in KFrequencyUnitExtensions.kt.
 
 /** 1 hertz ([KFrequencyUnit.HERTZ]). */
-val hertz: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.HERTZ.baseValue)
+val hertz: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.HERTZ.baseValue, KUnitDisplay(KFrequencyUnit.HERTZ))
 
 /** 1 revolution per second ([KFrequencyUnit.RPS]). */
-val rps: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.RPS.baseValue)
+val rps: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.RPS.baseValue, KUnitDisplay(KFrequencyUnit.RPS))
 
 /** 1 frame per second ([KFrequencyUnit.FPS]). */
-val fps: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.FPS.baseValue)
+val fps: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.FPS.baseValue, KUnitDisplay(KFrequencyUnit.FPS))
 
 /** 1 revolution per minute ([KFrequencyUnit.RPM]). */
-val rpm: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.RPM.baseValue)
+val rpm: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.RPM.baseValue, KUnitDisplay(KFrequencyUnit.RPM))
 
 /** 1 beat per minute ([KFrequencyUnit.BPM]). */
-val bpm: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.BPM.baseValue)
+val bpm: KFrequencyUnitInstance = frequencyOf(KFrequencyUnit.BPM.baseValue, KUnitDisplay(KFrequencyUnit.BPM))

@@ -67,8 +67,11 @@ mkdocs build
 * **Wrapper classes** (e.g. `KLengthUnitInstance`) - encapsulate a `KMixedUnitInstance` via delegation for a
   concrete group and always keep their value normalized to that group's base unit. They are not limited to
   exponent 1 - they also cover derived quantities of the same group (e.g. area = length², volume = length³).
-* **`of` / `into`** - the two verbs for units. Build with `number of <value-1 unit template>`
-  (`10.5 of kilo.meters`), read with `value into <unit>` (`v into kilo.meters`, returns `Double`).
+* **`of` / `into` / `format`** - the verbs for units. Build with `number of <value-1 unit template>`
+  (`10.5 of kilo.meters`), read with `value into <unit>` (`v into kilo.meters`, returns `Double`), and
+  render value **and** unit symbol with `value format <unit>` (`v format kilo.meters / hours` → `"… km/h"`;
+  a `format(target, pattern, locale, formatter)` overload adds number formatting and a pluggable
+  `KUnitFormatter` for custom notations like LaTeX).
 * **`KUnitPrefix` & prefix builders** - the complete SI prefix table (Quetta/Q to Quecto/q) is exposed as
   **builder values** (`kilo`, `milli`, …) that turn a bare token into a value-1 template via property
   access (`kilo.meters`, `milli.seconds`). A compile-time hierarchy
@@ -155,7 +158,8 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 ### Root Engine
 
 * `KMixedUnitInstance`/`KUnitTerm` mixed-unit engine with full operators and base-unit `toString`
-* `of` / `into` construction & reading verbs (`Number.of`, `KUnitMeasurable.into`, `scaledBy`)
+* `of` / `into` / `format` construction, reading & rendering verbs (`Number.of`, `KUnitMeasurable.into`,
+  `KUnitMeasurable.format`, `scaledBy`), with a pluggable `KUnitFormatter`/`KDefaultUnitFormatter`
 * Complete SI prefix table (24 values) exposed as prefix **builders** (`kilo`, `milli`, …), plus the
   binary IEC builders (`kibi`, …); the `KPrefixBuilder` hierarchy enforces per-unit prefix policy at
   compile time

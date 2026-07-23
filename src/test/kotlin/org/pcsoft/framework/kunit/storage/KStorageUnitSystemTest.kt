@@ -13,6 +13,8 @@
 package org.pcsoft.framework.kunit.storage
 
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.format
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.time.seconds
 import org.junit.jupiter.api.TestInstance
@@ -64,5 +66,14 @@ class KStorageUnitSystemTest {
         assertFailsWith<IllegalStateException> { (1 of seconds).toUnit().toStorage() }
         // a dimensionless (no-term) mixed unit also fails (the term is null)
         assertFailsWith<IllegalStateException> { ((1 of bytes).toUnit() / (1 of bytes).toUnit()).toStorage() }
+    }
+
+    /** `toString` (bytes) and `format` into binary/decimal prefixes and bytes. */
+    @Test
+    fun `toString and format compositions`() {
+        assertEquals("1024.0 B", (1 of kibi.bytes).toString())
+        assertEquals("1.0 KiB", (1024 of bytes) format kibi.bytes)
+        assertEquals("1.0 kB", (1000 of bytes) format kilo.bytes)
+        assertEquals("1.0 B", (8 of bits) format bytes)
     }
 }

@@ -4,6 +4,19 @@
 
 ### Added
 
+- **New `format` verb and pluggable formatting.** The display counterpart of `into`: `format` reads a value
+  into a target unit and returns value **and** unit symbol as a `String` (`(3 of meters / seconds) format
+  kilo.meters / hours` → `"10.799999999999999 km/h"`). An overload accepts a `java.util.Formatter` number
+  pattern and `Locale` (`v.format(kilo.meters / hours, "%.1f", Locale.US)` → `"10.8 km/h"`). The unit part
+  now renders the **written-down** symbol of prefixed/alternate units (`km`, `h`, `mi`, `KiB`) via new
+  cosmetic display metadata on the terms, and uses fraction notation (`km/h`, `m/s^2`) for a single
+  denominator. Rendering goes through a new public **`KUnitFormatter`** interface with a
+  `KUnitFormatContext`; the shipped `KDefaultUnitFormatter` produces plain text, and a custom formatter
+  (e.g. LaTeX/MathML) can be supplied via the `formatter` parameter. A new `KUnitMeasurable.toString`
+  overload applies the same pattern/locale/formatter to the base-unit output; the no-argument `toString`
+  is unchanged. Full docs (Formatting Output + Custom Formatters, EN/JA/ZH/KO/AR/HI) and 100 % test
+  coverage included.
+
 - **New `Voltage` unit group** (`org.pcsoft.framework.kunit.voltage`): a *constructed* quantity
   (`mass¹ · distance² · time⁻³ · current⁻¹`, i.e. `kg·m²·s⁻³·A⁻¹`) with base unit **volt**
   (`KVoltageUnit.BASE == KVoltageUnit.VOLT`). Bare tokens `volts`, `statvolts` (CGS-ESU), `abvolts`

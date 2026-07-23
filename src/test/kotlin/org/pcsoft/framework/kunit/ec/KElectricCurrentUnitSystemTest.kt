@@ -16,6 +16,8 @@ import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.format
+import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -86,5 +88,12 @@ class KElectricCurrentUnitSystemTest {
     fun `toElectricCurrent on non-current fails`() {
         assertFailsWith<IllegalStateException> { (1 of seconds).toUnit().toElectricCurrent() }
         assertFailsWith<IllegalStateException> { ((1 of amperes).toUnit() / (1 of amperes).toUnit()).toElectricCurrent() }
+    }
+
+    /** `format` into kiloamperes and amperes. */
+    @Test
+    fun `format compositions`() {
+        assertEquals("2.0 kA", (2000 of amperes) format kilo.amperes)
+        assertEquals("10.0 A", (1 of biot) format amperes)
     }
 }

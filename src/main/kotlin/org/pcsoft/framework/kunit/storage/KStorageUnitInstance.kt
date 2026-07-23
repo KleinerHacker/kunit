@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.storage
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -80,8 +81,8 @@ class KStorageUnitInstance internal constructor(internal val instance: KMixedUni
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 
 /** Builds a [KStorageUnitInstance] from a value already expressed in bytes ([KStorageUnit.BASE]). */
-internal fun storageOf(value: Double): KStorageUnitInstance =
-    KStorageUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KStorageUnit.BASE, 1))))
+internal fun storageOf(value: Double, display: KUnitDisplay? = null): KStorageUnitInstance =
+    KStorageUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KStorageUnit.BASE, 1, display))))
 
 // --- Conversion from the generic engine ----------------------------------------------------------
 

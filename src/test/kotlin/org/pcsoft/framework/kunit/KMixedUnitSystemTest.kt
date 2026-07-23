@@ -12,14 +12,17 @@
 
 package org.pcsoft.framework.kunit
 
+import org.pcsoft.framework.kunit.formatter.displaySymbol
 import org.pcsoft.framework.kunit.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.time.KTimeUnit
+import org.pcsoft.framework.kunit.time.hours
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlin.test.assertNull
 
 /** Surface of the generic engine: the `of`/`into` verbs, composite construction, and `scaledBy`. */
 class KMixedUnitSystemTest {
@@ -47,5 +50,35 @@ class KMixedUnitSystemTest {
     fun `scaledBy preserves type`() {
         assertIs<KLengthUnitInstance>((1 of meters).scaledBy(3.0))
         assertEquals(3.0, (1 of meters).scaledBy(3.0).value, 1e-9)
+    }
+
+    /** `combineUnits` keeps each term's cosmetic display metadata (so `km/h` still renders prefixed). */
+    @Test
+    fun `division preserves display metadata`() {
+        val target = kilo.meters / hours
+        val km = target.units.single { it.unit == KDistanceUnit.BASE }
+        val h = target.units.single { it.unit == KTimeUnit.BASE }
+        assertEquals("km", km.displaySymbol)
+        assertEquals("h", h.displaySymbol)
+    }
+
+    /** `pow` carries the per-term display metadata through unchanged. */
+    @Test
+    fun `pow preserves display metadata`() {
+        val squared = kilo.meters pow 2
+        assertEquals("km", squared.units.single().displaySymbol)
+    }
+
+    /** On a display collision (same unit on both sides), the left side's display wins in `combineUnits`. */
+    @Test
+    fun `display collision keeps left side`() {
+        val product = kilo.meters.toUnit() * milli.meters.toUnit() // both KDistanceUnit.BASE -> exponent 2
+        assertEquals("km", product.units.single().displaySymbol)
+    }
+
+    /** A value built via `of` drops the template's display (base-unit rendering for computed values). */
+    @Test
+    fun `of drops display on constructed value`() {
+        assertNull((1 of kilo.meters).toUnit().units.single().display)
     }
 }

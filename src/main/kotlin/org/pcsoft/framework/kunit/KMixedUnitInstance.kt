@@ -12,6 +12,9 @@
 
 package org.pcsoft.framework.kunit
 
+import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
+import org.pcsoft.framework.kunit.formatter.KUnitFormatContext
+
 /**
  * One (unit, exponent) pair inside a [KMixedUnitInstance].
  *
@@ -23,8 +26,39 @@ package org.pcsoft.framework.kunit
  * Example: a pure length value (e.g. `5.meters`) is represented internally as a single
  * `KUnitTerm(KDistanceUnit.METER, 1)`. Multiplying two lengths together (`5.meters * 3.meters`)
  * yields a single term `KUnitTerm(KDistanceUnit.METER, 2)` (an area, in square meters).
+ *
+ * @property display purely **cosmetic** metadata describing how this term was written down (see
+ * [KUnitDisplay]), e.g. `kilo.meters` records "kilo" + "meter" so that formatting can render `"km"`
+ * although [unit] stays the group's base unit. It is **never** value-relevant - every scale factor is,
+ * as always, already folded into [KMixedUnitInstance.value] - and it is ignored by equality, dimension
+ * checks and all arithmetic.
  */
-data class KUnitTerm(val unit: KUnit, val exponent: Int)
+data class KUnitTerm(val unit: KUnit, val exponent: Int, val display: KUnitDisplay? = null)
+
+/**
+ * Purely **cosmetic** description of how a [KUnitTerm] was written down: the [unit] the value-1 template
+ * was built from and the (already rendered) [prefixSymbol] of the magnitude prefix applied to it (e.g.
+ * `kilo.meters` -> `KUnitDisplay(METER, "k")`, `kibi.bytes` -> `KUnitDisplay(BYTE, "Ki")`,
+ * `hours` -> `KUnitDisplay(HOUR)`).
+ *
+ * It exists because a template always normalizes its value to its group's **base** unit
+ * (`hours` is `1 h` stored as `3600 s` with a `SECOND^1` term), so the written-down unit would otherwise
+ * be lost for formatting. It carries **no** value semantics whatsoever - it only supplies the symbol used
+ * by [KUnitFormatter] implementations (`"km"`, `"h"`) instead of the base unit's symbol (`"m"`, `"s"`).
+ *
+ * The prefix is stored as a plain symbol string (rather than a typed [KUnitPrefix]) so that both the SI
+ * prefixes and the binary IEC prefixes (`kibi`, `mebi`, ...) can be represented uniformly.
+ *
+ * Example:
+ * ```kotlin
+ * (3 of meters / seconds) format kilo.meters / hours // "10.8 km/h" - the display metadata of the target
+ * ```
+ */
+data class KUnitDisplay(val unit: KUnit, val prefixSymbol: String? = null) {
+
+    /** The rendered symbol of this display form, e.g. `"km"` for kilo + meter, `"h"` for hour. */
+    val symbol: String get() = (prefixSymbol ?: "") + unit.symbol
+}
 
 /**
  * Represents a "mixed unit" (Mischeinheit): a numeric [value] together with one or more [units]
@@ -226,19 +260,18 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
 
     /**
      * Base-unit representation of this instance, e.g. `"10.0 m/s"` for a speed built from meters and
-     * seconds - each term is printed using its own [KUnit.symbol] (with `^exponent` appended when the
-     * exponent is not `1`), in [units] order, joined with `"*"`. No unit conversion is performed;
-     * to read a value in a specific unit use [into].
+     * seconds. Rendering is delegated to [KDefaultUnitFormatter]: each term uses its own
+     * [KUnitTerm.displaySymbol] (honouring any cosmetic display metadata), the exponent is appended as
+     * `^n` when it is not `1`, and a single denominator term yields fraction notation (`"m/s"`). No unit
+     * conversion is performed; to read a value in a specific unit use [into], and to render into a specific
+     * unit use [format].
      *
      * Example:
      * ```kotlin
-     * (10 of meters / 2.let { 2 of seconds }).toString() // "5.0 m*s^-1"
+     * (10 of meters / (2 of seconds)).toString() // "5.0 m/s"
      * ```
      */
-    override fun toString(): String =
-        "$value " + units.joinToString("*") { term ->
-            term.unit.symbol + if (term.exponent != 1) "^${term.exponent}" else ""
-        }
+    override fun toString(): String = KDefaultUnitFormatter.format(KUnitFormatContext(value, units))
 
     override fun equals(other: Any?): Boolean =
         other is KMixedUnitInstance && value == other.value && hasSameUnits(other)
@@ -265,10 +298,19 @@ infix fun KUnitMeasurable.pow(n: Int): KMixedUnitInstance = toUnit() pow n
 
 private fun combineUnits(a: List<KUnitTerm>, b: List<KUnitTerm>, sign: Int): List<KUnitTerm> {
     val exponents = LinkedHashMap<KUnit, Int>()
+    // Display metadata is carried along so that a composed template such as `kilo.meters / hours` still
+    // knows it should be rendered as "km/h"; on a collision the left side wins.
+    val displays = LinkedHashMap<KUnit, KUnitDisplay?>()
 
     // A single mixed unit never carries the same KUnit twice, so `a`'s terms are inserted directly.
-    for (term in a) exponents[term.unit] = term.exponent
-    for (term in b) exponents[term.unit] = (exponents[term.unit] ?: 0) + sign * term.exponent
+    for (term in a) {
+        exponents[term.unit] = term.exponent
+        displays[term.unit] = term.display
+    }
+    for (term in b) {
+        exponents[term.unit] = (exponents[term.unit] ?: 0) + sign * term.exponent
+        if (displays[term.unit] == null) displays[term.unit] = term.display
+    }
 
-    return exponents.filterValues { it != 0 }.map { (unit, exponent) -> KUnitTerm(unit, exponent) }
+    return exponents.filterValues { it != 0 }.map { (unit, exponent) -> KUnitTerm(unit, exponent, displays[unit]) }
 }

@@ -14,6 +14,7 @@ package org.pcsoft.framework.kunit.temperature
 
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -82,5 +83,12 @@ class KTemperatureUnitSystemTest {
         assertFailsWith<IllegalStateException> { (1 of seconds).toUnit().toTemperature() }
         // a dimensionless (no-term) mixed unit also fails (the term is null)
         assertFailsWith<IllegalStateException> { ((1 of kelvin).toUnit() / (1 of kelvin).toUnit()).toTemperature() }
+    }
+
+    /** `format` into the affine Fahrenheit/Kelvin units (value converted first, then symbol). */
+    @Test
+    fun `format compositions`() {
+        assertEquals("77.0 °F", (25 of celsius) format fahrenheit)
+        assertEquals("273.15 K", (0 of celsius) format kelvin)
     }
 }

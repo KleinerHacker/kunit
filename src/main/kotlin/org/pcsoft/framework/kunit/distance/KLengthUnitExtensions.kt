@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.distance
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
+import org.pcsoft.framework.kunit.KUnitDisplay
 
 // Prefixed, value-1 length templates: one property per length unit on the prefix builder (e.g.
 // `kilo.meters` = 1000 m, `milli.meters` = 0.001 m). Length accepts *any* magnitude, so the properties
@@ -20,7 +21,7 @@ import org.pcsoft.framework.kunit.KPrefixBuilder
 // builders). Use with `of`/`into`, e.g. `10 of kilo.meters`, `v into milli.meters`.
 
 private fun prefixedLength(builder: KPrefixBuilder, unit: KDistanceUnit): KLengthUnitInstance =
-    lengthOf(builder.prefix.factor * unit.baseValue)
+    lengthOf(builder.prefix.factor * unit.baseValue, KUnitDisplay(unit, builder.prefix.symbol))
 
 /** Prefixed meters, e.g. `kilo.meters` = 1000 m, `milli.meters` = 0.001 m. */
 val KPrefixBuilder.meters: KLengthUnitInstance get() = prefixedLength(this, KDistanceUnit.METER)

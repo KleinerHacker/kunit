@@ -70,6 +70,9 @@ plugins:
             Home: 홈
             Mixed Units: 혼합 단위
             Adding Custom Units: 사용자 정의 단위 추가
+            Formatter: 포매터
+            Default Formatter: 기본 포매터
+            Custom Formatter: 사용자 정의 포매터
             Kinematics: 운동학
             Mechanics: 역학
             Electrical Engineering: 전기공학
@@ -103,6 +106,9 @@ plugins:
             Home: 首页
             Mixed Units: 混合单位
             Adding Custom Units: 添加自定义单位
+            Formatter: 格式化器
+            Default Formatter: 默认格式化器
+            Custom Formatter: 自定义格式化器
             Kinematics: 运动学
             Mechanics: 力学
             Electrical Engineering: 电气工程
@@ -136,6 +142,9 @@ plugins:
             Home: ホーム
             Mixed Units: 混合単位
             Adding Custom Units: カスタム単位の追加
+            Formatter: フォーマッター
+            Default Formatter: デフォルトフォーマッター
+            Custom Formatter: カスタムフォーマッター
             Kinematics: 運動学
             Mechanics: 力学
             Electrical Engineering: 電気工学
@@ -169,6 +178,9 @@ plugins:
             Home: الرئيسية
             Mixed Units: الوحدات المركبة
             Adding Custom Units: إضافة وحدات مخصصة
+            Formatter: المُنسِّق
+            Default Formatter: المُنسِّق الافتراضي
+            Custom Formatter: مُنسِّق مخصص
             Kinematics: علم الحركة
             Mechanics: الميكانيكا
             Electrical Engineering: الهندسة الكهربائية
@@ -202,6 +214,9 @@ plugins:
             Home: होम
             Mixed Units: मिश्रित इकाइयाँ
             Adding Custom Units: कस्टम इकाइयाँ जोड़ना
+            Formatter: फ़ॉर्मैटर
+            Default Formatter: डिफ़ॉल्ट फ़ॉर्मैटर
+            Custom Formatter: कस्टम फ़ॉर्मैटर
             Kinematics: शुद्धगतिकी
             Mechanics: यांत्रिकी
             Electrical Engineering: विद्युत अभियांत्रिकी
@@ -233,6 +248,10 @@ nav:
   - Home: index.md
   - Mixed Units: mixed-units.md
   - Adding Custom Units: custom-units.md
+  - Formatter:
+      - Overview: formatter/formatting.md
+      - Default Formatter: formatter/default-formatter.md
+      - Custom Formatter: formatter/custom-formatters.md
   - Kinematics:
       - Overview: units/kinematics/overview.md
       - Distance: units/kinematics/distance.md

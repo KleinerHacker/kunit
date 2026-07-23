@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.temperature
 
 import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -72,5 +73,11 @@ class KTemperatureDifferenceUnitSystemTest {
             (KTemperatureDifference.ofKelvin(1).toUnit() / KTemperatureDifference.ofKelvin(1).toUnit())
                 .toTemperatureDifference()
         }
+    }
+
+    /** `format` into a kelvin-difference template. */
+    @Test
+    fun `format compositions`() {
+        assertEquals("20.0 ΔK", KTemperatureDifference.ofKelvin(20) format KTemperatureDifference.ofKelvin(1))
     }
 }

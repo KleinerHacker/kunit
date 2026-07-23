@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.ec
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -83,8 +84,8 @@ class KElectricCurrentUnitInstance internal constructor(internal val instance: K
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 
 /** Builds a [KElectricCurrentUnitInstance] from a value already expressed in amperes ([KElectricCurrentUnit.BASE]). */
-internal fun electricCurrentOf(value: Double): KElectricCurrentUnitInstance =
-    KElectricCurrentUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KElectricCurrentUnit.BASE, 1))))
+internal fun electricCurrentOf(value: Double, display: KUnitDisplay? = null): KElectricCurrentUnitInstance =
+    KElectricCurrentUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KElectricCurrentUnit.BASE, 1, display))))
 
 // --- Conversion from the generic engine ----------------------------------------------------------
 

@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -79,8 +80,8 @@ class KMassUnitInstance internal constructor(internal val instance: KMixedUnitIn
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 
 /** Builds a [KMassUnitInstance] from a value already expressed in grams ([KMassUnit.BASE]). */
-internal fun massOf(value: Double): KMassUnitInstance =
-    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1))))
+internal fun massOf(value: Double, display: KUnitDisplay? = null): KMassUnitInstance =
+    KMassUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KMassUnit.BASE, 1, display))))
 
 // --- Conversion from the generic engine ----------------------------------------------------------
 

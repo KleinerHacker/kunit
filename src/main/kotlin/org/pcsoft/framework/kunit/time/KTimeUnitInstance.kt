@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.time
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -26,7 +27,7 @@ import kotlin.math.roundToLong
  * [duration] is the single source of truth: `+`, `-`, comparison and equality operate directly on it
  * (nanosecond-exact), and the full [Duration] API is forwarded (see the `plusXxx`/`minusXxx`/`toXxx`
  * members below). On top of that, it offers the same surface as every other "pure" unit wrapper (e.g.
- * `KLengthUnitInstance`): [value]/[valueAs]/`*`/`/`/[toString]/[toUnit], so it plugs into the
+ * `KLengthUnitInstance`): [value]/`*`/`/`/[toString]/[toUnit], so it plugs into the
  * generic mixed-unit engine (e.g. `length / time` = speed).
  *
  * Unlike the other wrappers, a time value always represents exponent 1 (a [Duration] cannot represent a
@@ -45,8 +46,10 @@ import kotlin.math.roundToLong
  * t.toDuration()        // PT2H
  * ```
  */
-class KTimeUnitInstance internal constructor(internal val duration: Duration) :
-    KUnitInstance<KTimeUnitInstance>, KUnitMeasurable by baseInstanceOf(duration) {
+class KTimeUnitInstance internal constructor(
+    internal val duration: Duration,
+    internal val display: KUnitDisplay? = null,
+) : KUnitInstance<KTimeUnitInstance>, KUnitMeasurable by baseInstanceOf(duration, display) {
 
     /**
      * Returns a new time value with [value] (seconds) scaled by [factor]. Backs number-times-unit
@@ -254,16 +257,17 @@ fun KMixedUnitInstance.toTime(): KTimeUnitInstance {
  */
 fun Duration.toTime(): KTimeUnitInstance = KTimeUnitInstance(this)
 
-internal fun timeUnitInstanceOf(seconds: Double): KTimeUnitInstance = KTimeUnitInstance(secondsToDuration(seconds))
+internal fun timeUnitInstanceOf(seconds: Double, display: KUnitDisplay? = null): KTimeUnitInstance =
+    KTimeUnitInstance(secondsToDuration(seconds), display)
 
 /**
  * Builds the generic single-term (`SECOND^1`) [KMixedUnitInstance] representation for a [duration],
  * the delegate backing [KTimeUnitInstance]'s [KUnitMeasurable] surface. The value is the duration's
  * whole seconds plus its nanosecond part (avoids [Duration.toNanos] to stay safe for very large
- * durations).
+ * durations). [display] is the (cosmetic) written-down unit carried onto the term for formatting.
  */
-private fun baseInstanceOf(duration: Duration): KMixedUnitInstance =
-    KMixedUnitInstance(duration.seconds.toDouble() + duration.nano / 1e9, listOf(KUnitTerm(KTimeUnit.BASE, 1)))
+private fun baseInstanceOf(duration: Duration, display: KUnitDisplay?): KMixedUnitInstance =
+    KMixedUnitInstance(duration.seconds.toDouble() + duration.nano / 1e9, listOf(KUnitTerm(KTimeUnit.BASE, 1, display)))
 
 /** Builds a nanosecond-exact [Duration] from a fractional number of [seconds] (rounded to the nearest nanosecond). */
 private fun secondsToDuration(seconds: Double): Duration {

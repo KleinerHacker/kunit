@@ -18,6 +18,7 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mass.grams
 import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.time.seconds
@@ -90,5 +91,12 @@ class KAreaDensityUnitSystemTest {
         val m = (1 of meters).toUnit()
         assertFailsWith<IllegalStateException> { ((g pow 2) / (m pow 2)).toAreaDensity() } // mass^2
         assertFailsWith<IllegalStateException> { (g / m).toAreaDensity() }                  // length^-1
+    }
+
+    /** `format` an area density into base dimensions kg/m^2. */
+    @Test
+    fun `format compositions`() {
+        val q = (1 of kilo.grams) / ((1 of meters) * (1 of meters))
+        assertEquals("1.0 kg/m^2", q format (kilo.grams / (meters pow 2)))
     }
 }

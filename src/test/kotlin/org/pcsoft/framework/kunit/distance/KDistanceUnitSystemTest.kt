@@ -17,6 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.time.seconds
 import kotlin.math.abs
@@ -137,5 +138,17 @@ class KDistanceUnitSystemTest {
         assertFailsWith<IllegalStateException> { (1 of seconds).toUnit().toDistance() }
         // a dimensionless (no-term) mixed unit also fails (the term is null)
         assertFailsWith<IllegalStateException> { ((1 of meters).toUnit() / (1 of meters).toUnit()).toDistance() }
+    }
+
+    /** `toString` and `format` render length/area/volume with sensible compositions. */
+    @Test
+    fun `toString and format compositions`() {
+        assertEquals("1500.0 m", (1500 of meters).toString())
+        assertEquals("1.5 km", (1500 of meters) format kilo.meters)
+        assertEquals("1.0 mi", (1609.344 of meters) format miles)
+        assertEquals("20000.0 m^2", (2 of hectares).toString())
+        assertEquals("20000.0 m^2", (2 of hectares) format (meters * meters))
+        assertEquals("0.002 m^3", (2 of liters).toString())
+        assertEquals("0.002 m^3", (2 of liters) format (meters * meters * meters))
     }
 }

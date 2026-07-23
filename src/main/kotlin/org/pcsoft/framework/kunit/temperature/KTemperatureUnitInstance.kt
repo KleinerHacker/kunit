@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.temperature
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -144,8 +145,12 @@ class KTemperatureUnitInstance internal constructor(
 
     override fun hashCode(): Int = value.hashCode()
 
-    /** Base-unit (kelvin) representation, e.g. `"298.15 K"`. */
-    override fun toString(): String = instance.toString()
+    /**
+     * Base-unit (kelvin) representation, e.g. `"298.15 K"`. Always rendered in absolute kelvin (the base
+     * symbol), independent of any cosmetic display metadata a construction template might carry - the
+     * stored [value] is only meaningful in kelvin, so rendering it under a `°C`/`°F` symbol would be wrong.
+     */
+    override fun toString(): String = "$value ${KTemperatureUnit.BASE.symbol}"
 }
 
 // --- Reverse cross-group operators ---------------------------------------------------------------
@@ -188,8 +193,12 @@ operator fun Number.div(unit: KTemperatureUnitInstance): Nothing =
  * Builds a [KTemperatureUnitInstance] from a value already expressed in absolute kelvin
  * ([KTemperatureUnit.BASE]). [unit] records the intended construction unit (defaults to kelvin).
  */
-internal fun temperatureOf(value: Double, unit: KTemperatureUnit = KTemperatureUnit.BASE): KTemperatureUnitInstance =
-    KTemperatureUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KTemperatureUnit.BASE, 1))), unit)
+internal fun temperatureOf(
+    value: Double,
+    unit: KTemperatureUnit = KTemperatureUnit.BASE,
+    display: KUnitDisplay? = null,
+): KTemperatureUnitInstance =
+    KTemperatureUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KTemperatureUnit.BASE, 1, display))), unit)
 
 // --- Conversion from the generic engine ----------------------------------------------------------
 

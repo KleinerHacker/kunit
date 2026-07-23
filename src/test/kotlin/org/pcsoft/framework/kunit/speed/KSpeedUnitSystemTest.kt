@@ -15,6 +15,7 @@ package org.pcsoft.framework.kunit.speed
 import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.time.hours
 import org.pcsoft.framework.kunit.time.seconds
@@ -50,5 +51,11 @@ class KSpeedUnitSystemTest {
         assertEquals("10.0 m/s", v.toString())
         assertNotEquals(10 of meters / seconds, 20 of meters / seconds)
         assertFalse(v.equals(1.0)) // not a KSpeedUnitInstance
+    }
+
+    /** `format` a speed into km/h (prefixed length over hours; generic target keeps the display symbols). */
+    @Test
+    fun `format compositions`() {
+        assertEquals("36.0 km/h", (10 of meters / seconds) format (kilo.meters.toUnit() / hours.toUnit()))
     }
 }

@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.frequency
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
+import org.pcsoft.framework.kunit.KUnitDisplay
 
 // Prefixed, value-1 frequency templates: one property per frequency unit on the prefix builder (e.g.
 // `kilo.hertz` = 1000 Hz, `mega.hertz` = 1e6 Hz, `milli.hertz` = 0.001 Hz). Frequency accepts *any*
@@ -20,7 +21,7 @@ import org.pcsoft.framework.kunit.KPrefixBuilder
 // `5 of kilo.hertz`, `v into mega.hertz`.
 
 private fun prefixedFrequency(builder: KPrefixBuilder, unit: KFrequencyUnit): KFrequencyUnitInstance =
-    frequencyOf(builder.prefix.factor * unit.baseValue)
+    frequencyOf(builder.prefix.factor * unit.baseValue, KUnitDisplay(unit, builder.prefix.symbol))
 
 /** Prefixed hertz, e.g. `kilo.hertz` = 1000 Hz (kHz), `mega.hertz` = 1e6 Hz (MHz). */
 val KPrefixBuilder.hertz: KFrequencyUnitInstance get() = prefixedFrequency(this, KFrequencyUnit.HERTZ)

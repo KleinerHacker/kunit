@@ -14,6 +14,7 @@ package org.pcsoft.framework.kunit.time
 
 import org.pcsoft.framework.kunit.distance.meters
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.junit.jupiter.api.TestInstance
@@ -128,5 +129,13 @@ class KTimeUnitSystemTest {
         assertFailsWith<IllegalStateException> { (5 of meters).toUnit().toTime() }
         // a multi-term mixed unit (a speed shape) also fails (singleOrNull returns null)
         assertFailsWith<IllegalStateException> { ((10 of meters).toUnit() / (2 of seconds).toUnit()).toTime() }
+    }
+
+    /** `toString` (seconds) and `format` into hours/minutes. */
+    @Test
+    fun `toString and format compositions`() {
+        assertEquals("5400.0 s", (90 of minutes).toString())
+        assertEquals("1.5 h", (90 of minutes) format hours)
+        assertEquals("90.0 min", (90 of minutes) format minutes)
     }
 }

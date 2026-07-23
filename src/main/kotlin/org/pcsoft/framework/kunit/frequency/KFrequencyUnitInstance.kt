@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.frequency
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitDisplay
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
@@ -101,8 +102,8 @@ class KFrequencyUnitInstance internal constructor(internal val instance: KMixedU
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 
 /** Builds a [KFrequencyUnitInstance] from a value already expressed in hertz ([KFrequencyUnit.BASE]). */
-internal fun frequencyOf(value: Double): KFrequencyUnitInstance =
-    KFrequencyUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KFrequencyUnit.BASE, 1))))
+internal fun frequencyOf(value: Double, display: KUnitDisplay? = null): KFrequencyUnitInstance =
+    KFrequencyUnitInstance(KMixedUnitInstance(value, listOf(KUnitTerm(KFrequencyUnit.BASE, 1, display))))
 
 // --- Conversion from the generic engine ----------------------------------------------------------
 

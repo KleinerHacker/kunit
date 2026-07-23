@@ -13,6 +13,7 @@
 package org.pcsoft.framework.kunit.ec
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
+import org.pcsoft.framework.kunit.KUnitDisplay
 
 // Prefixed, value-1 electric current templates: one property per current unit on the prefix builder
 // (e.g. `milli.amperes` = 0.001 A, `kilo.amperes` = 1000 A). Electric current accepts *any* magnitude,
@@ -20,7 +21,7 @@ import org.pcsoft.framework.kunit.KPrefixBuilder
 // `2 of milli.amperes`, `v into kilo.amperes`.
 
 private fun prefixedElectricCurrent(builder: KPrefixBuilder, unit: KElectricCurrentUnit): KElectricCurrentUnitInstance =
-    electricCurrentOf(builder.prefix.factor * unit.baseValue)
+    electricCurrentOf(builder.prefix.factor * unit.baseValue, KUnitDisplay(unit, builder.prefix.symbol))
 
 // --- SI ------------------------------------------------------------------------------------------
 

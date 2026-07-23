@@ -60,28 +60,28 @@ enum class KStorageBinaryPrefix(val symbol: String, val factor: Double) {
  * are inherently *supra-unity*, only the `bytes`/`bits` properties (declared in
  * `KStorageUnitExtensions.kt`) hang on it - it mirrors the augmenting SI builder exactly.
  */
-class KStorageBinaryPrefixBuilder internal constructor(internal val factor: Double)
+class KStorageBinaryPrefixBuilder internal constructor(internal val factor: Double, internal val symbol: String)
 
 /** Kibi builder (1024^1). Use as `kibi.bytes`, `kibi.bits`. */
-val kibi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.KIBI.factor)
+val kibi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.KIBI.factor, KStorageBinaryPrefix.KIBI.symbol)
 
 /** Mebi builder (1024^2). */
-val mebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.MEBI.factor)
+val mebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.MEBI.factor, KStorageBinaryPrefix.MEBI.symbol)
 
 /** Gibi builder (1024^3). */
-val gibi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.GIBI.factor)
+val gibi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.GIBI.factor, KStorageBinaryPrefix.GIBI.symbol)
 
 /** Tebi builder (1024^4). */
-val tebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.TEBI.factor)
+val tebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.TEBI.factor, KStorageBinaryPrefix.TEBI.symbol)
 
 /** Pebi builder (1024^5). */
-val pebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.PEBI.factor)
+val pebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.PEBI.factor, KStorageBinaryPrefix.PEBI.symbol)
 
 /** Exbi builder (1024^6). */
-val exbi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.EXBI.factor)
+val exbi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.EXBI.factor, KStorageBinaryPrefix.EXBI.symbol)
 
 /** Zebi builder (1024^7). */
-val zebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.ZEBI.factor)
+val zebi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.ZEBI.factor, KStorageBinaryPrefix.ZEBI.symbol)
 
 /** Yobi builder (1024^8). */
-val yobi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.YOBI.factor)
+val yobi: KStorageBinaryPrefixBuilder = KStorageBinaryPrefixBuilder(KStorageBinaryPrefix.YOBI.factor, KStorageBinaryPrefix.YOBI.symbol)
