@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.resistance</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.resistance////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.resistance</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="619447881%2FClasslikes%2F-251573632" anchor-label="KResistanceUnit" id="619447881%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-resistance-unit/index.html"><span>KResistance</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="619447881%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-resistance-unit/index.html">KResistanceUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-resistance-unit/index.html">KResistanceUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of <strong>electrical resistance</strong> (a <i>constructed</i> quantity: <code class="lang-kotlin">mass¹ · distance² · time⁻³ · current⁻²</code>, i.e. <code class="lang-kotlin">kg·m²·s⁻³·A⁻²</code>). <span data-unresolved-link="org.pcsoft.framework.kunit.resistance/KResistanceUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-resistance-unit/-companion/-b-a-s-e.html">BASE</a>, ohm): <code class="lang-kotlin">1 unit = baseValue * Ω</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1494992076%2FClasslikes%2F-251573632" anchor-label="KResistanceUnitInstance" id="-1494992076%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-resistance-unit-instance/index.html"><span>KResistance</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1494992076%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing an <strong>electrical resistance</strong>, i.e. exactly four terms in the canonical normal form <code class="lang-kotlin">mass¹ · distance² · time⁻³ · current⁻²</code> (<code class="lang-kotlin">kg·m²·s⁻³·A⁻²</code>). The <span data-unresolved-link="org.pcsoft.framework.kunit.resistance/KResistanceUnitInstance/value/#/PointingToDeclaration/">value</span> is always normalized internally to ohms (<a href="-k-resistance-unit/-companion/-b-a-s-e.html">KResistanceUnit.BASE</a>), regardless of which <a href="-k-resistance-unit/index.html">KResistanceUnit</a>, SI <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/index.html">org.pcsoft.framework.kunit.KUnitPrefix</a>, or mass/length/time/current combination it was constructed from.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="444838510%2FProperties%2F-251573632" anchor-label="abohms" id="444838510%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="abohms.html"><span><span>abohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="444838510%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="abohms.html">abohms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 abohm (<a href="-k-resistance-unit/-a-b-o-h-m/index.html">KResistanceUnit.ABOHM</a>, CGS-EMU, 10⁻⁹ Ω).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1135120898%2FProperties%2F-251573632" anchor-label="abohms" id="1135120898%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="abohms.html"><span><span>abohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1135120898%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="abohms.html">abohms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed abohms, e.g. <code class="lang-kotlin">kilo.abohms</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1364885311%2FProperties%2F-251573632" anchor-label="internationalOhms" id="1364885311%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="international-ohms.html"><span>international</span><wbr></wbr><span><span>Ohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1364885311%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="international-ohms.html">internationalOhms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 international ohm (<a href="-k-resistance-unit/-i-n-t-e-r-n-a-t-i-o-n-a-l_-o-h-m/index.html">KResistanceUnit.INTERNATIONAL_OHM</a>, 1.000049 Ω).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-444095407%2FProperties%2F-251573632" anchor-label="internationalOhms" id="-444095407%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="international-ohms.html"><span>international</span><wbr></wbr><span><span>Ohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-444095407%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="international-ohms.html">internationalOhms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed international ohms, e.g. <code class="lang-kotlin">milli.internationalOhms</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1736777204%2FProperties%2F-251573632" anchor-label="legalOhms" id="1736777204%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="legal-ohms.html"><span>legal</span><wbr></wbr><span><span>Ohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1736777204%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="legal-ohms.html">legalOhms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 legal ohm (<a href="-k-resistance-unit/-l-e-g-a-l_-o-h-m/index.html">KResistanceUnit.LEGAL_OHM</a>, 0.9972 Ω).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-134916804%2FProperties%2F-251573632" anchor-label="legalOhms" id="-134916804%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="legal-ohms.html"><span>legal</span><wbr></wbr><span><span>Ohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-134916804%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="legal-ohms.html">legalOhms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed legal ohms, e.g. <code class="lang-kotlin">milli.legalOhms</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="580833071%2FProperties%2F-251573632" anchor-label="ohms" id="580833071%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ohms.html"><span><span>ohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="580833071%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="ohms.html">ohms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 ohm (<a href="-k-resistance-unit/-o-h-m/index.html">KResistanceUnit.OHM</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2064253537%2FProperties%2F-251573632" anchor-label="ohms" id="2064253537%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ohms.html"><span><span>ohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2064253537%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="ohms.html">ohms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed ohms, e.g. <code class="lang-kotlin">kilo.ohms</code> = 1000 Ω, <code class="lang-kotlin">milli.ohms</code> = 0.001 Ω.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="709025739%2FProperties%2F-251573632" anchor-label="siemensUnits" id="709025739%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="siemens-units.html"><span>siemens</span><wbr></wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="709025739%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="siemens-units.html">siemensUnits</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 Siemens mercury unit (<a href="-k-resistance-unit/-s-i-e-m-e-n-s_-u-n-i-t/index.html">KResistanceUnit.SIEMENS_UNIT</a>, 0.9534 Ω).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="820269381%2FProperties%2F-251573632" anchor-label="siemensUnits" id="820269381%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="siemens-units.html"><span>siemens</span><wbr></wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="820269381%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="siemens-units.html">siemensUnits</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed Siemens units, e.g. <code class="lang-kotlin">milli.siemensUnits</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="628132059%2FProperties%2F-251573632" anchor-label="statohms" id="628132059%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="statohms.html"><span><span>statohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="628132059%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="statohms.html">statohms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 statohm (<a href="-k-resistance-unit/-s-t-a-t-o-h-m/index.html">KResistanceUnit.STATOHM</a>, CGS-ESU, 8.98755179e11 Ω).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="851188277%2FProperties%2F-251573632" anchor-label="statohms" id="851188277%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="statohms.html"><span><span>statohms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="851188277%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="statohms.html">statohms</a><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed statohms, e.g. <code class="lang-kotlin">kilo.statohms</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="39296174%2FFunctions%2F-251573632" anchor-label="div" id="39296174%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="39296174%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">current<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.ec/-k-electric-current-unit-instance/index.html">KElectricCurrentUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Decomposition A - Ohm's law solved for resistance: <code class="lang-kotlin">voltage / current = resistance</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">resistance<span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.ec/-k-electric-current-unit-instance/index.html">KElectricCurrentUnitInstance</a></div><div class="brief "><p class="paragraph">Inverse of Ohm's law solved for current - <code class="lang-kotlin">voltage / resistance = current</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="245876414%2FFunctions%2F-251573632" anchor-label="times" id="245876414%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="245876414%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.ec/-k-electric-current-unit-instance/index.html">KElectricCurrentUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">resistance<span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a></div><div class="brief "><p class="paragraph">Commutative form of <a href="times.html">times</a> - <code class="lang-kotlin">current · resistance = voltage</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">current<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.ec/-k-electric-current-unit-instance/index.html">KElectricCurrentUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a></div><div class="brief "><p class="paragraph">Inverse of Ohm's law - <code class="lang-kotlin">resistance · current = voltage</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1909936479%2FFunctions%2F-251573632" anchor-label="toResistance" id="-1909936479%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-resistance.html"><span>to</span><wbr></wbr><span><span>Resistance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1909936479%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-resistance.html"><span class="token function">toResistance</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; resistance value, as long as it matches the canonical resistance normal form: exactly one <a href="../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code>, one <a href="../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+2</code>, one <a href="../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-3</code> and one <a href="../org.pcsoft.framework.kunit.ec/-k-electric-current-unit/index.html">KElectricCurrentUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized over their <a href="../org.pcsoft.framework.kunit/-k-unit/base-value.html">org.pcsoft.framework.kunit.KUnit.baseValue</a>s, so the resulting resistance is expressed in ohms regardless of which concrete mass/length/time/current units the terms were tagged with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

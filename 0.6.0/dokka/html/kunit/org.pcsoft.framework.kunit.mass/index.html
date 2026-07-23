@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.mass</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.mass////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.mass</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="2022410259%2FClasslikes%2F-251573632" anchor-label="KMassUnit" id="2022410259%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-mass-unit/index.html"><span>KMass</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2022410259%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-mass-unit/index.html">KMassUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-mass-unit/index.html">KMassUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The units of the <strong>mass</strong> group.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1701991166%2FClasslikes%2F-251573632" anchor-label="KMassUnitInstance" id="1701991166%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-mass-unit-instance/index.html"><span>KMass</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1701991166%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a>, <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A <strong>mass</strong> value: the &quot;pure&quot; wrapper of the mass group, a single <a href="-k-mass-unit/-companion/-b-a-s-e.html">KMassUnit.BASE</a> (gram) term at exponent 1, always normalized internally to grams.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1371736743%2FProperties%2F-251573632" anchor-label="carats" id="1371736743%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="carats.html"><span><span>carats</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1371736743%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="carats.html">carats</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 metric carat (<a href="-k-mass-unit/-c-a-r-a-t/index.html">KMassUnit.CARAT</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1863650793%2FProperties%2F-251573632" anchor-label="carats" id="1863650793%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="carats.html"><span><span>carats</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1863650793%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="carats.html">carats</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed carats, e.g. <code class="lang-kotlin">milli.carats</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="107030552%2FProperties%2F-251573632" anchor-label="daltons" id="107030552%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="daltons.html"><span><span>daltons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="107030552%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="daltons.html">daltons</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 dalton / unified atomic mass unit (<a href="-k-mass-unit/-d-a-l-t-o-n/index.html">KMassUnit.DALTON</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1092090984%2FProperties%2F-251573632" anchor-label="daltons" id="-1092090984%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="daltons.html"><span><span>daltons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1092090984%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="daltons.html">daltons</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed daltons, e.g. <code class="lang-kotlin">kilo.daltons</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1579741422%2FProperties%2F-251573632" anchor-label="drams" id="1579741422%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="drams.html"><span><span>drams</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1579741422%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="drams.html">drams</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 dram, avoirdupois (<a href="-k-mass-unit/-d-r-a-m/index.html">KMassUnit.DRAM</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-753163390%2FProperties%2F-251573632" anchor-label="drams" id="-753163390%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="drams.html"><span><span>drams</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-753163390%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="drams.html">drams</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed drams, e.g. <code class="lang-kotlin">milli.drams</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-269329658%2FProperties%2F-251573632" anchor-label="germanPounds" id="-269329658%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="german-pounds.html"><span>german</span><wbr></wbr><span><span>Pounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-269329658%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="german-pounds.html">germanPounds</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 German pound (<a href="-k-mass-unit/-g-e-r-m-a-n_-p-o-u-n-d/index.html">KMassUnit.GERMAN_POUND</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1326549910%2FProperties%2F-251573632" anchor-label="germanPounds" id="-1326549910%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="german-pounds.html"><span>german</span><wbr></wbr><span><span>Pounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1326549910%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="german-pounds.html">germanPounds</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed German pounds, e.g. <code class="lang-kotlin">kilo.germanPounds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="556874523%2FProperties%2F-251573632" anchor-label="grains" id="556874523%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grains.html"><span><span>grains</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="556874523%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="grains.html">grains</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 grain (<a href="-k-mass-unit/-g-r-a-i-n/index.html">KMassUnit.GRAIN</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1489440779%2FProperties%2F-251573632" anchor-label="grains" id="-1489440779%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grains.html"><span><span>grains</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1489440779%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="grains.html">grains</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed grains, e.g. <code class="lang-kotlin">milli.grains</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1613689803%2FProperties%2F-251573632" anchor-label="grams" id="1613689803%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grams.html"><span><span>grams</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1613689803%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="grams.html">grams</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 gram (<a href="-k-mass-unit/-g-r-a-m/index.html">KMassUnit.GRAM</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2090777925%2FProperties%2F-251573632" anchor-label="grams" id="2090777925%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grams.html"><span><span>grams</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2090777925%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="grams.html">grams</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed grams, e.g. <code class="lang-kotlin">kilo.grams</code> = 1000 g (the kilogram), <code class="lang-kotlin">milli.grams</code> = 0.001 g.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="734155504%2FProperties%2F-251573632" anchor-label="hundredweightsUK" id="734155504%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hundredweights-u-k.html"><span>hundredweights</span><wbr></wbr><span><span>UK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="734155504%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hundredweights-u-k.html">hundredweightsUK</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 hundredweight, UK / long (<a href="-k-mass-unit/-h-u-n-d-r-e-d-w-e-i-g-h-t_-u-k/index.html">KMassUnit.HUNDREDWEIGHT_UK</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="851635136%2FProperties%2F-251573632" anchor-label="hundredweightsUK" id="851635136%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hundredweights-u-k.html"><span>hundredweights</span><wbr></wbr><span><span>UK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="851635136%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="hundredweights-u-k.html">hundredweightsUK</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed UK hundredweights, e.g. <code class="lang-kotlin">kilo.hundredweightsUK</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="982313960%2FProperties%2F-251573632" anchor-label="hundredweightsUS" id="982313960%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hundredweights-u-s.html"><span>hundredweights</span><wbr></wbr><span><span>US</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="982313960%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hundredweights-u-s.html">hundredweightsUS</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 hundredweight, US / short (<a href="-k-mass-unit/-h-u-n-d-r-e-d-w-e-i-g-h-t_-u-s/index.html">KMassUnit.HUNDREDWEIGHT_US</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="281987528%2FProperties%2F-251573632" anchor-label="hundredweightsUS" id="281987528%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hundredweights-u-s.html"><span>hundredweights</span><wbr></wbr><span><span>US</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="281987528%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="hundredweights-u-s.html">hundredweightsUS</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed US hundredweights, e.g. <code class="lang-kotlin">kilo.hundredweightsUS</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1134452632%2FProperties%2F-251573632" anchor-label="jin" id="1134452632%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="jin.html"><span><span>jin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1134452632%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="jin.html">jin</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 jin / catty (<a href="-k-mass-unit/-j-i-n/index.html">KMassUnit.JIN</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="995048472%2FProperties%2F-251573632" anchor-label="jin" id="995048472%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="jin.html"><span><span>jin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="995048472%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="jin.html">jin</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed jin / catty, e.g. <code class="lang-kotlin">kilo.jin</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1776738543%2FProperties%2F-251573632" anchor-label="kan" id="1776738543%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kan.html"><span><span>kan</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1776738543%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="kan.html">kan</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 kan / kanme (<a href="-k-mass-unit/-k-a-n/index.html">KMassUnit.KAN</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1227942049%2FProperties%2F-251573632" anchor-label="kan" id="1227942049%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kan.html"><span><span>kan</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1227942049%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="kan.html">kan</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed kan / kanme, e.g. <code class="lang-kotlin">kilo.kan</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="316698794%2FProperties%2F-251573632" anchor-label="liang" id="316698794%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="liang.html"><span><span>liang</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="316698794%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="liang.html">liang</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 liang / tael (<a href="-k-mass-unit/-l-i-a-n-g/index.html">KMassUnit.LIANG</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1005717318%2FProperties%2F-251573632" anchor-label="liang" id="1005717318%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="liang.html"><span><span>liang</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1005717318%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="liang.html">liang</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed liang / tael, e.g. <code class="lang-kotlin">kilo.liang</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="475779927%2FProperties%2F-251573632" anchor-label="longTons" id="475779927%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="long-tons.html"><span>long</span><wbr></wbr><span><span>Tons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="475779927%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="long-tons.html">longTons</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 long ton, UK (<a href="-k-mass-unit/-l-o-n-g_-t-o-n/index.html">KMassUnit.LONG_TON</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1768830151%2FProperties%2F-251573632" anchor-label="longTons" id="-1768830151%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="long-tons.html"><span>long</span><wbr></wbr><span><span>Tons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1768830151%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="long-tons.html">longTons</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed long tons, e.g. <code class="lang-kotlin">kilo.longTons</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-587918351%2FProperties%2F-251573632" anchor-label="lots" id="-587918351%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lots.html"><span><span>lots</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-587918351%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="lots.html">lots</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 Lot (<a href="-k-mass-unit/-l-o-t/index.html">KMassUnit.LOT</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1447198687%2FProperties%2F-251573632" anchor-label="lots" id="1447198687%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lots.html"><span><span>lots</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1447198687%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="lots.html">lots</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed Lot, e.g. <code class="lang-kotlin">milli.lots</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="406132932%2FProperties%2F-251573632" anchor-label="momme" id="406132932%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="momme.html"><span><span>momme</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="406132932%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="momme.html">momme</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 momme (<a href="-k-mass-unit/-m-o-m-m-e/index.html">KMassUnit.MOMME</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1883358316%2FProperties%2F-251573632" anchor-label="momme" id="1883358316%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="momme.html"><span><span>momme</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1883358316%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="momme.html">momme</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed momme, e.g. <code class="lang-kotlin">milli.momme</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="986470282%2FProperties%2F-251573632" anchor-label="ounces" id="986470282%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ounces.html"><span><span>ounces</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="986470282%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="ounces.html">ounces</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 ounce, avoirdupois (<a href="-k-mass-unit/-o-u-n-c-e/index.html">KMassUnit.OUNCE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="514808934%2FProperties%2F-251573632" anchor-label="ounces" id="514808934%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ounces.html"><span><span>ounces</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="514808934%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="ounces.html">ounces</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed ounces, e.g. <code class="lang-kotlin">kilo.ounces</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="962213628%2FProperties%2F-251573632" anchor-label="pennyweights" id="962213628%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pennyweights.html"><span><span>pennyweights</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="962213628%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="pennyweights.html">pennyweights</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 pennyweight (<a href="-k-mass-unit/-p-e-n-n-y-w-e-i-g-h-t/index.html">KMassUnit.PENNYWEIGHT</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1759902412%2FProperties%2F-251573632" anchor-label="pennyweights" id="-1759902412%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pennyweights.html"><span><span>pennyweights</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1759902412%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="pennyweights.html">pennyweights</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed pennyweights, e.g. <code class="lang-kotlin">milli.pennyweights</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1937597972%2FProperties%2F-251573632" anchor-label="pounds" id="-1937597972%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pounds.html"><span><span>pounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1937597972%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="pounds.html">pounds</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 pound, avoirdupois (<a href="-k-mass-unit/-p-o-u-n-d/index.html">KMassUnit.POUND</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1641435068%2FProperties%2F-251573632" anchor-label="pounds" id="-1641435068%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pounds.html"><span><span>pounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1641435068%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="pounds.html">pounds</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed pounds, e.g. <code class="lang-kotlin">kilo.pounds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="34004907%2FProperties%2F-251573632" anchor-label="shortTons" id="34004907%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="short-tons.html"><span>short</span><wbr></wbr><span><span>Tons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="34004907%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="short-tons.html">shortTons</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 short ton, US (<a href="-k-mass-unit/-s-h-o-r-t_-t-o-n/index.html">KMassUnit.SHORT_TON</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-117854875%2FProperties%2F-251573632" anchor-label="shortTons" id="-117854875%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="short-tons.html"><span>short</span><wbr></wbr><span><span>Tons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-117854875%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="short-tons.html">shortTons</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed short tons, e.g. <code class="lang-kotlin">kilo.shortTons</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-388639969%2FProperties%2F-251573632" anchor-label="slugs" id="-388639969%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="slugs.html"><span><span>slugs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-388639969%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="slugs.html">slugs</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 slug (<a href="-k-mass-unit/-s-l-u-g/index.html">KMassUnit.SLUG</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-46912399%2FProperties%2F-251573632" anchor-label="slugs" id="-46912399%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="slugs.html"><span><span>slugs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-46912399%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="slugs.html">slugs</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed slugs, e.g. <code class="lang-kotlin">kilo.slugs</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="269353605%2FProperties%2F-251573632" anchor-label="stones" id="269353605%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stones.html"><span><span>stones</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="269353605%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="stones.html">stones</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 stone (<a href="-k-mass-unit/-s-t-o-n-e/index.html">KMassUnit.STONE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-602929205%2FProperties%2F-251573632" anchor-label="stones" id="-602929205%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stones.html"><span><span>stones</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-602929205%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="stones.html">stones</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed stones, e.g. <code class="lang-kotlin">kilo.stones</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-129528790%2FProperties%2F-251573632" anchor-label="tonnes" id="-129528790%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tonnes.html"><span><span>tonnes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-129528790%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="tonnes.html">tonnes</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 tonne / metric ton (<a href="-k-mass-unit/-t-o-n-n-e/index.html">KMassUnit.TONNE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1247814714%2FProperties%2F-251573632" anchor-label="tonnes" id="-1247814714%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tonnes.html"><span><span>tonnes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1247814714%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="tonnes.html">tonnes</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed tonnes, e.g. <code class="lang-kotlin">kilo.tonnes</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1954844030%2FProperties%2F-251573632" anchor-label="troyOunces" id="-1954844030%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="troy-ounces.html"><span>troy</span><wbr></wbr><span><span>Ounces</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1954844030%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="troy-ounces.html">troyOunces</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 troy ounce (<a href="-k-mass-unit/-t-r-o-y_-o-u-n-c-e/index.html">KMassUnit.TROY_OUNCE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1873741714%2FProperties%2F-251573632" anchor-label="troyOunces" id="-1873741714%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="troy-ounces.html"><span>troy</span><wbr></wbr><span><span>Ounces</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1873741714%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="troy-ounces.html">troyOunces</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed troy ounces, e.g. <code class="lang-kotlin">kilo.troyOunces</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-583944988%2FProperties%2F-251573632" anchor-label="troyPounds" id="-583944988%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="troy-pounds.html"><span>troy</span><wbr></wbr><span><span>Pounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-583944988%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="troy-pounds.html">troyPounds</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 troy pound (<a href="-k-mass-unit/-t-r-o-y_-p-o-u-n-d/index.html">KMassUnit.TROY_POUND</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="264981580%2FProperties%2F-251573632" anchor-label="troyPounds" id="264981580%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="troy-pounds.html"><span>troy</span><wbr></wbr><span><span>Pounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="264981580%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="troy-pounds.html">troyPounds</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed troy pounds, e.g. <code class="lang-kotlin">kilo.troyPounds</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1682014762%2FProperties%2F-251573632" anchor-label="zentners" id="1682014762%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zentners.html"><span><span>zentners</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1682014762%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="zentners.html">zentners</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">1 Zentner (<a href="-k-mass-unit/-z-e-n-t-n-e-r/index.html">KMassUnit.ZENTNER</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1764579898%2FProperties%2F-251573632" anchor-label="zentners" id="-1764579898%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zentners.html"><span><span>zentners</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1764579898%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="zentners.html">zentners</a><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed Zentner, e.g. <code class="lang-kotlin">kilo.zentners</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1516496745%2FFunctions%2F-251573632" anchor-label="toMass" id="-1516496745%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-mass.html"><span>to</span><wbr></wbr><span><span>Mass</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1516496745%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-mass.html"><span class="token function">toMass</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="-k-mass-unit-instance/index.html">KMassUnitInstance</a>, as long as it consists of exactly one term of any <a href="-k-mass-unit/index.html">KMassUnit</a> - normalizing it to <a href="-k-mass-unit/-companion/-b-a-s-e.html">KMassUnit.BASE</a> (grams) if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

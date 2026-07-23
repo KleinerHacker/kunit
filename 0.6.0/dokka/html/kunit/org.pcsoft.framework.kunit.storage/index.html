@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.storage</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.storage////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.storage</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-730926268%2FClasslikes%2F-251573632" anchor-label="KStorageBinaryPrefix" id="-730926268%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-storage-binary-prefix/index.html"><span>KStorage</span><wbr></wbr><span>Binary</span><wbr></wbr><span><span>Prefix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-730926268%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-storage-binary-prefix/index.html">KStorageBinaryPrefix</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-storage-binary-prefix/index.html">KStorageBinaryPrefix</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A binary (IEC 80000-13) magnitude prefix for the storage group, based on powers of <strong>1024</strong> (<code class="lang-kotlin">2^10</code>) rather than the decimal powers of 1000 used by <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/index.html">org.pcsoft.framework.kunit.KUnitPrefix</a>. This is what lets a data amount distinguish a kilobyte (<code class="lang-kotlin">kilo</code>, 1000 B) from a kibibyte (<code class="lang-kotlin">kibi</code>, 1024 B).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="568702627%2FClasslikes%2F-251573632" anchor-label="KStorageBinaryPrefixBuilder" id="568702627%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-storage-binary-prefix-builder/index.html"><span>KStorage</span><wbr></wbr><span>Binary</span><wbr></wbr><span>Prefix</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="568702627%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">A binary prefix <strong>builder</strong> (the IEC counterpart of <a href="../org.pcsoft.framework.kunit/-k-augmenting-prefix-builder/index.html">org.pcsoft.framework.kunit.KAugmentingPrefixBuilder</a>): it turns the storage <code class="lang-kotlin">bytes</code>/<code class="lang-kotlin">bits</code> tokens into a value-1 template scaled by a power of 1024, e.g. <code class="lang-kotlin">kibi.bytes</code> (1024 B). Since binary prefixes are inherently <i>supra-unity</i>, only the <code class="lang-kotlin">bytes</code>/<code class="lang-kotlin">bits</code> properties (declared in <code class="lang-kotlin">KStorageUnitExtensions.kt</code>) hang on it - it mirrors the augmenting SI builder exactly.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-270173485%2FClasslikes%2F-251573632" anchor-label="KStorageUnit" id="-270173485%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-storage-unit/index.html"><span>KStorage</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-270173485%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-storage-unit/index.html">KStorageUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-storage-unit/index.html">KStorageUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The units of the <strong>storage</strong> group (digital information / data amount).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1477281214%2FClasslikes%2F-251573632" anchor-label="KStorageUnitInstance" id="1477281214%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-storage-unit-instance/index.html"><span>KStorage</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1477281214%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a>, <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A <strong>storage</strong> value (data amount): the &quot;pure&quot; wrapper of the storage group, a single <a href="-k-storage-unit/-companion/-b-a-s-e.html">KStorageUnit.BASE</a> (byte) term at exponent 1, always normalized internally to bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="407615730%2FProperties%2F-251573632" anchor-label="bits" id="407615730%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bits.html"><span><span>bits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="407615730%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="bits.html">bits</a><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">1 bit (<a href="-k-storage-unit/-b-i-t/index.html">KStorageUnit.BIT</a> = 0.125 B).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1602878336%2FProperties%2F-251573632" anchor-label="bits" id="-1602878336%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bits.html"><span><span>bits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1602878336%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a><span class="token punctuation">.</span><a href="bits.html">bits</a><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">Decimal SI-prefixed bits, e.g. <code class="lang-kotlin">kilo.bits</code>.</p></div><div class="symbol monospace"><span class="token keyword">val </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a><span class="token punctuation">.</span><a href="bits.html">bits</a><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">Binary IEC-prefixed bits, e.g. <code class="lang-kotlin">kibi.bits</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1055528553%2FProperties%2F-251573632" anchor-label="bytes" id="-1055528553%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bytes.html"><span><span>bytes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1055528553%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="bytes.html">bytes</a><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">1 byte (<a href="-k-storage-unit/-b-y-t-e/index.html">KStorageUnit.BYTE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="106281858%2FProperties%2F-251573632" anchor-label="bytes" id="106281858%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bytes.html"><span><span>bytes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="106281858%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-augmenting-prefix-builder/index.html">KAugmentingPrefixBuilder</a><span class="token punctuation">.</span><a href="bytes.html">bytes</a><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">Decimal SI-prefixed bytes, e.g. <code class="lang-kotlin">kilo.bytes</code> = 1000 B, <code class="lang-kotlin">mega.bytes</code> = 1e6 B.</p></div><div class="symbol monospace"><span class="token keyword">val </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a><span class="token punctuation">.</span><a href="bytes.html">bytes</a><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">Binary IEC-prefixed bytes, e.g. <code class="lang-kotlin">kibi.bytes</code> = 1024 B, <code class="lang-kotlin">mebi.bytes</code> = 1 048 576 B.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1773508546%2FProperties%2F-251573632" anchor-label="exbi" id="-1773508546%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exbi.html"><span><span>exbi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1773508546%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="exbi.html">exbi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Exbi builder (1024^6).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-861224273%2FProperties%2F-251573632" anchor-label="gibi" id="-861224273%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gibi.html"><span><span>gibi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-861224273%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="gibi.html">gibi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Gibi builder (1024^3).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1911182515%2FProperties%2F-251573632" anchor-label="kibi" id="1911182515%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kibi.html"><span><span>kibi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1911182515%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="kibi.html">kibi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Kibi builder (1024^1). Use as <code class="lang-kotlin">kibi.bytes</code>, <code class="lang-kotlin">kibi.bits</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="21364793%2FProperties%2F-251573632" anchor-label="mebi" id="21364793%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mebi.html"><span><span>mebi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="21364793%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="mebi.html">mebi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Mebi builder (1024^2).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2100669884%2FProperties%2F-251573632" anchor-label="pebi" id="2100669884%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pebi.html"><span><span>pebi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2100669884%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="pebi.html">pebi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Pebi builder (1024^5).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="578109376%2FProperties%2F-251573632" anchor-label="tebi" id="578109376%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tebi.html"><span><span>tebi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="578109376%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="tebi.html">tebi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Tebi builder (1024^4).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1496252411%2FProperties%2F-251573632" anchor-label="yobi" id="1496252411%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="yobi.html"><span><span>yobi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1496252411%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="yobi.html">yobi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Yobi builder (1024^8).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="441752262%2FProperties%2F-251573632" anchor-label="zebi" id="441752262%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zebi.html"><span><span>zebi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="441752262%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="zebi.html">zebi</a><span class="token operator">: </span><a href="-k-storage-binary-prefix-builder/index.html">KStorageBinaryPrefixBuilder</a></div><div class="brief "><p class="paragraph">Zebi builder (1024^7).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="590730745%2FFunctions%2F-251573632" anchor-label="toStorage" id="590730745%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-storage.html"><span>to</span><wbr></wbr><span><span>Storage</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="590730745%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-storage.html"><span class="token function">toStorage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="-k-storage-unit-instance/index.html">KStorageUnitInstance</a>, as long as it consists of exactly one term of any <a href="-k-storage-unit/index.html">KStorageUnit</a> - normalizing it to <a href="-k-storage-unit/-companion/-b-a-s-e.html">KStorageUnit.BASE</a> (bytes) if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

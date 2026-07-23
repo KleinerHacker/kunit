@@ -1,0 +1,1917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/custom-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/custom-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/mixed-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/mixed-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/formatter/custom-formatters/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/custom-formatters/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/formatter/default-formatter/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/default-formatter/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/formatter/formatting/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/formatting/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/ec/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/ec/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/resistance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/resistance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/voltage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/voltage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/information/datarate/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/datarate/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/information/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/information/storage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/storage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/acceleration/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/acceleration/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/distance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/distance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/frequency/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/frequency/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/speed/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/speed/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/time/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/time/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/areadensity/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/areadensity/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/density/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/density/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/force/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/force/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/mass/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/mass/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/pressure/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/pressure/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/temperature-difference/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-difference/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/temperature-overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/temperature/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/custom-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/custom-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/mixed-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/mixed-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/formatter/custom-formatters/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/custom-formatters/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/formatter/default-formatter/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/default-formatter/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/formatter/formatting/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/formatting/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/ec/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/ec/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/resistance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/resistance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/voltage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/voltage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/information/datarate/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/datarate/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/information/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/information/storage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/storage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/acceleration/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/acceleration/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/distance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/distance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/frequency/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/frequency/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/speed/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/speed/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/time/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/time/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/areadensity/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/areadensity/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/density/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/density/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/force/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/force/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/mass/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/mass/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/pressure/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/pressure/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/temperature-difference/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-difference/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/temperature-overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/temperature/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ko/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/custom-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/custom-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/mixed-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/mixed-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/formatter/custom-formatters/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/custom-formatters/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/formatter/default-formatter/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/default-formatter/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/formatter/formatting/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/formatting/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/ec/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/ec/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/resistance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/resistance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/voltage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/voltage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/information/datarate/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/datarate/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/information/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/information/storage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/storage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/acceleration/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/acceleration/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/distance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/distance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/frequency/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/frequency/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/speed/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/speed/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/time/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/time/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/areadensity/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/areadensity/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/density/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/density/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/force/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/force/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/mass/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/mass/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/pressure/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/pressure/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/temperature-difference/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-difference/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/temperature-overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/temperature/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/custom-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/custom-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/mixed-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/mixed-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/formatter/custom-formatters/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/custom-formatters/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/formatter/default-formatter/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/default-formatter/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/formatter/formatting/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/formatting/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/ec/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/ec/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/resistance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/resistance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/voltage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/voltage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/information/datarate/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/datarate/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/information/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/information/storage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/storage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/acceleration/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/acceleration/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/distance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/distance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/frequency/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/frequency/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/speed/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/speed/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/time/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/time/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/areadensity/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/areadensity/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/density/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/density/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/force/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/force/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/mass/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/mass/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/pressure/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/pressure/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/temperature-difference/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-difference/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/temperature-overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/temperature/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/custom-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/custom-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/mixed-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/mixed-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/formatter/custom-formatters/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/custom-formatters/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/formatter/default-formatter/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/default-formatter/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/formatter/formatting/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/formatting/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/ec/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/ec/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/resistance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/resistance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/voltage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/voltage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/information/datarate/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/datarate/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/information/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/information/storage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/storage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/acceleration/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/acceleration/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/distance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/distance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/frequency/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/frequency/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/speed/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/speed/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/time/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/time/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/areadensity/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/areadensity/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/density/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/density/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/force/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/force/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/mass/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/mass/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/pressure/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/pressure/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/temperature-difference/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-difference/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/temperature-overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/temperature/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ar/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0hi/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/custom-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/custom-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/custom-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/mixed-units/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/mixed-units/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/mixed-units/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/formatter/custom-formatters/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/custom-formatters/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/custom-formatters/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/formatter/default-formatter/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/default-formatter/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/default-formatter/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/formatter/formatting/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/formatter/formatting/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/formatter/formatting/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/ec/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/ec/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/ec/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/resistance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/resistance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/resistance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/voltage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/electrical/voltage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/electrical/voltage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/information/datarate/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/datarate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/datarate/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/information/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/information/storage/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/information/storage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/information/storage/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/acceleration/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/acceleration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/acceleration/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/distance/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/distance/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/distance/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/frequency/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/frequency/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/frequency/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/speed/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/speed/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/speed/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/time/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/kinematics/time/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/kinematics/time/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/areadensity/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/areadensity/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/areadensity/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/density/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/density/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/density/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/force/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/force/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/force/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/mass/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/mass/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/mass/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/pressure/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/mechanics/pressure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/mechanics/pressure/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/temperature-difference/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-difference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-difference/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/temperature-overview/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature-overview/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature-overview/"/>
+    </url>
+    <url>
+        <loc>https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/temperature/</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/hi/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ar/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://kleinerhacker.github.io/kunit/latest/0.6.0units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ja/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://kleinerhacker.github.io/kunit/latest/0.6.0ko/units/thermodynamics/temperature/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://kleinerhacker.github.io/kunit/latest/0.6.0zh/units/thermodynamics/temperature/"/>
+    </url>
+</urlset>

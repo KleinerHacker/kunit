@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>KMixedUnitInstance</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="kunit::org.pcsoft.framework.kunit/KMixedUnitInstance///PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../../index.html">kunit</a><span class="delimiter">/</span><a href="../index.html">org.pcsoft.framework.kunit</a><span class="delimiter">/</span><span class="current">KMixedUnitInstance</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>KMixed</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">KMixedUnitInstance</a> : <a href="../-k-unit-measurable/index.html">KUnitMeasurable</a></div><p class="paragraph">Represents a &quot;mixed unit&quot; (Mischeinheit): a numeric <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(0)/">value</span> together with one or more <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(1)/">units</span> (<a href="../-k-unit-term/index.html">KUnitTerm</a>s) describing its physical dimension, e.g. &quot;10.0 m/s&quot; (a length term and a time term).</p><p class="paragraph"><a href="index.html">KMixedUnitInstance</a> is the generic engine underlying every &quot;pure&quot; unit wrapper class (e.g. <code class="lang-kotlin">KLengthUnitInstance</code>); those wrappers always normalize their <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(0)/">value</span> to their group's base unit, but <a href="index.html">KMixedUnitInstance</a> itself performs <strong>no</strong> normalization - <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(0)/">value</span> is only meaningful together with its exact <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(1)/">units</span>, in the scale they were constructed with.</p><p class="paragraph">Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val speed = 10.meters / 2.seconds // KMixedUnitInstance: value = 5.0, units = [METER^1, SECOND^-1]</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-833435043%2FProperties%2F-251573632" anchor-label="units" id="-833435043%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="units.html"><span><span>units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-833435043%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="units.html">units</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-k-unit-term/index.html">KUnitTerm</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1479379301%2FProperties%2F-251573632" anchor-label="value" id="-1479379301%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="value.html"><span><span>value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1479379301%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">The normalized value, always stored/exposed as <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a> regardless of the <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a> type passed to the constructor (e.g. <code class="lang-kotlin">KMixedUnitInstance(5, ...)</code> and <code class="lang-kotlin">KMixedUnitInstance(5.0, ...)</code> produce the same <a href="value.html">value</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="607461192%2FFunctions%2F-251573632" anchor-label="div" id="607461192%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="607461192%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Divides two mixed units. Always allowed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1872818451%2FFunctions%2F-251573632" anchor-label="equals" id="1872818451%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1872818451%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="8815063%2FFunctions%2F-251573632" anchor-label="format" id="8815063%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../format.html"><span><span>format</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="8815063%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="../format.html"><span class="token function">format</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Reads this value in the unit described by <a href="../format.html">target</a> and renders it - value <strong>and</strong> unit symbol - as a string: the display counterpart of <a href="../into.html">into</a> (which returns only the plain <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>). The one and only formatting verb of the library.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="../format.html"><span class="token function">format</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">, </span></span><span class="parameter ">pattern<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">locale<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Locale.html">Locale</a><span class="token operator"> = </span>Locale.getDefault()<span class="token punctuation">, </span></span><span class="parameter ">formatter<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.formatter/-k-unit-formatter/index.html">KUnitFormatter</a><span class="token operator"> = </span>KDefaultUnitFormatter</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Reads this value in <a href="../format.html">target</a> and renders it with an optional number <a href="../format.html">pattern</a>/<a href="../format.html">locale</a> and an optional <a href="../format.html">formatter</a>. The options-carrying counterpart of the infix <a href="../format.html">format</a> verb.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1246550413%2FFunctions%2F-251573632" anchor-label="hashCode" id="-1246550413%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hash-code.html"><span>hash</span><wbr></wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1246550413%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2118832548%2FFunctions%2F-251573632" anchor-label="hasSameUnits" id="2118832548%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="has-same-units.html"><span>has</span><wbr></wbr><span>Same</span><wbr></wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2118832548%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="has-same-units.html"><span class="token function">hasSameUnits</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Checks whether <code class="lang-kotlin">this</code> and <a href="has-same-units.html">other</a> describe exactly the same physical dimension: the same set of <a href="../-k-unit/index.html">KUnit</a>s, each with the same exponent, independent of the order in which they appear in <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(1)/">units</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-548803707%2FFunctions%2F-251573632" anchor-label="into" id="-548803707%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../into.html"><span><span>into</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-548803707%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="../into.html"><span class="token function">into</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Reads this value in the unit described by <a href="../into.html">target</a> (a value-1 unit template), returning the plain <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a> count - the one and only reading verb of the library (there is no <code class="lang-kotlin">valueAs</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-125546585%2FFunctions%2F-251573632" anchor-label="minus" id="-125546585%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus.html"><span><span>minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-125546585%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Subtracts two mixed units. Same rules as <a href="plus.html">plus</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-435054385%2FFunctions%2F-251573632" anchor-label="plus" id="-435054385%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus.html"><span><span>plus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-435054385%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Adds two mixed units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1734068238%2FFunctions%2F-251573632" anchor-label="pow" id="-1734068238%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pow.html"><span><span>pow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1734068238%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">n<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Raises this mixed unit to the integer power <a href="pow.html">n</a>. Always allowed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1448996085%2FFunctions%2F-251573632" anchor-label="pow" id="1448996085%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../pow.html"><span><span>pow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1448996085%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="../pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">n<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Raises <strong>any</strong> measurable value to the integer power <a href="../pow.html">n</a>, producing a generic <a href="index.html">KMixedUnitInstance</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-719627902%2FFunctions%2F-251573632" anchor-label="readBaseValue" id="-719627902%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="read-base-value.html"><span>read</span><wbr></wbr><span>Base</span><wbr></wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-719627902%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="read-base-value.html"><span class="token function">readBaseValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">baseValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Linear reading hook behind <a href="../into.html">into</a>: reads a base-normalized <a href="read-base-value.html">baseValue</a> into this template's scale as <code class="lang-kotlin">baseValue / value</code>. Every &quot;pure&quot; wrapper inherits this via <code class="lang-kotlin">by</code> delegation; only groups with a non-linear (e.g. affine temperature) conversion override it.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-31039641%2FFunctions%2F-251573632" anchor-label="scaledBy" id="-31039641%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="scaled-by.html"><span>scaled</span><wbr></wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-31039641%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="scaled-by.html"><span class="token function">scaledBy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">factor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Returns a new <a href="index.html">KMixedUnitInstance</a> with the same <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(1)/">units</span> and <span data-unresolved-link="org.pcsoft.framework.kunit/KMixedUnitInstance//#kotlin.Number#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]/PointingToCallableParameters(0)/">value</span> scaled by <a href="scaled-by.html">factor</a> - the scaling primitive behind number-times-unit construction (see <a href="../of.html">of</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1989166589%2FFunctions%2F-251573632" anchor-label="times" id="1989166589%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1989166589%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies two mixed units. Always allowed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2123800913%2FFunctions%2F-251573632" anchor-label="toAcceleration" id="-2123800913%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.acceleration/to-acceleration.html"><span>to</span><wbr></wbr><span><span>Acceleration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2123800913%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.acceleration/to-acceleration.html"><span class="token function">toAcceleration</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.acceleration/-k-acceleration-unit-instance/index.html">KAccelerationUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; acceleration value, as long as it consists of exactly two terms: one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized to <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/-companion/-b-a-s-e.html">KDistanceUnit.BASE</a>/<a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a>, so the resulting acceleration is expressed in meters per second squared.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-734994511%2FFunctions%2F-251573632" anchor-label="toArea" id="-734994511%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.distance/to-area.html"><span>to</span><wbr></wbr><span><span>Area</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-734994511%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.distance/to-area.html"><span class="token function">toArea</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a <a href="../../org.pcsoft.framework.kunit.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a>, requiring it to be a single <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at <strong>exponent 2</strong>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1023798567%2FFunctions%2F-251573632" anchor-label="toAreaDensity" id="-1023798567%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.areadensity/to-area-density.html"><span>to</span><wbr></wbr><span>Area</span><wbr></wbr><span><span>Density</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1023798567%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.areadensity/to-area-density.html"><span class="token function">toAreaDensity</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.areadensity/-k-area-density-unit-instance/index.html">KAreaDensityUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; area-density value, as long as it consists of exactly two terms: one <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized to their component base units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1311723933%2FFunctions%2F-251573632" anchor-label="toDataRate" id="-1311723933%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.datarate/to-data-rate.html"><span>to</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Rate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1311723933%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.datarate/to-data-rate.html"><span class="token function">toDataRate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.datarate/-k-data-rate-unit-instance/index.html">KDataRateUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; data-rate value, as long as it consists of exactly two terms: one <a href="../../org.pcsoft.framework.kunit.storage/-k-storage-unit/index.html">KStorageUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-1</code> (order independent). The terms are normalized to <a href="../../org.pcsoft.framework.kunit.storage/-k-storage-unit/-companion/-b-a-s-e.html">KStorageUnit.BASE</a>/<a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a>, so the resulting data rate is expressed in bytes per second regardless of which storage/time units the terms were tagged with (e.g. a <code class="lang-kotlin">[BIT^1, HOUR^-1]</code> instance is converted to the equivalent B/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1346639833%2FFunctions%2F-251573632" anchor-label="toDensity" id="1346639833%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.density/to-density.html"><span>to</span><wbr></wbr><span><span>Density</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1346639833%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.density/to-density.html"><span class="token function">toDensity</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; density value, as long as it consists of exactly two terms: one <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">-3</code> (order independent). The terms are normalized to their component base units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1453206041%2FFunctions%2F-251573632" anchor-label="toDistance" id="1453206041%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.distance/to-distance.html"><span>to</span><wbr></wbr><span><span>Distance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1453206041%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.distance/to-distance.html"><span class="token function">toDistance</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit-instance/index.html">KDistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; distance value (length, area, volume, or any other exponent), as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a>, at any exponent - normalizing it to <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/-companion/-b-a-s-e.html">KDistanceUnit.BASE</a> if it isn't already. The concrete runtime type is the matching leaf (<a href="../../org.pcsoft.framework.kunit.distance/-k-length-unit-instance/index.html">KLengthUnitInstance</a>/<a href="../../org.pcsoft.framework.kunit.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a>/<a href="../../org.pcsoft.framework.kunit.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a>) for exponent 1/2/3, or the general <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit-instance/index.html">KDistanceUnitInstance</a> otherwise.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1324896661%2FFunctions%2F-251573632" anchor-label="toElectricCurrent" id="-1324896661%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.ec/to-electric-current.html"><span>to</span><wbr></wbr><span>Electric</span><wbr></wbr><span><span>Current</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1324896661%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.ec/to-electric-current.html"><span class="token function">toElectricCurrent</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.ec/-k-electric-current-unit-instance/index.html">KElectricCurrentUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="../../org.pcsoft.framework.kunit.ec/-k-electric-current-unit-instance/index.html">KElectricCurrentUnitInstance</a>, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.ec/-k-electric-current-unit/index.html">KElectricCurrentUnit</a> - normalizing it to <a href="../../org.pcsoft.framework.kunit.ec/-k-electric-current-unit/-companion/-b-a-s-e.html">KElectricCurrentUnit.BASE</a> (amperes) if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-988599943%2FFunctions%2F-251573632" anchor-label="toForce" id="-988599943%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.force/to-force.html"><span>to</span><wbr></wbr><span><span>Force</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-988599943%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.force/to-force.html"><span class="token function">toForce</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.force/-k-force-unit-instance/index.html">KForceUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; force value, as long as it consists of exactly three terms: one <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code>, one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized to their component base units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-773824999%2FFunctions%2F-251573632" anchor-label="toFrequency" id="-773824999%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.frequency/to-frequency.html"><span>to</span><wbr></wbr><span><span>Frequency</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-773824999%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.frequency/to-frequency.html"><span class="token function">toFrequency</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.frequency/-k-frequency-unit-instance/index.html">KFrequencyUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="../../org.pcsoft.framework.kunit.frequency/-k-frequency-unit-instance/index.html">KFrequencyUnitInstance</a>, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.frequency/-k-frequency-unit/index.html">KFrequencyUnit</a> - normalizing it to <a href="../../org.pcsoft.framework.kunit.frequency/-k-frequency-unit/-companion/-b-a-s-e.html">KFrequencyUnit.BASE</a> (hertz) if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1945867830%2FFunctions%2F-251573632" anchor-label="toLength" id="-1945867830%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.distance/to-length.html"><span>to</span><wbr></wbr><span><span>Length</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1945867830%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.distance/to-length.html"><span class="token function">toLength</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.distance/-k-length-unit-instance/index.html">KLengthUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a <a href="../../org.pcsoft.framework.kunit.distance/-k-length-unit-instance/index.html">KLengthUnitInstance</a>, requiring it to be a single <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at <strong>exponent 1</strong>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1516496745%2FFunctions%2F-251573632" anchor-label="toMass" id="-1516496745%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.mass/to-mass.html"><span>to</span><wbr></wbr><span><span>Mass</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1516496745%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.mass/to-mass.html"><span class="token function">toMass</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a>, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> - normalizing it to <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/-companion/-b-a-s-e.html">KMassUnit.BASE</a> (grams) if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-831172935%2FFunctions%2F-251573632" anchor-label="toPressure" id="-831172935%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.pressure/to-pressure.html"><span>to</span><wbr></wbr><span><span>Pressure</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-831172935%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.pressure/to-pressure.html"><span class="token function">toPressure</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.pressure/-k-pressure-unit-instance/index.html">KPressureUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; pressure value, as long as it consists of exactly three terms: one <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code>, one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">-1</code> and one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized to their component base units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1909936479%2FFunctions%2F-251573632" anchor-label="toResistance" id="-1909936479%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.resistance/to-resistance.html"><span>to</span><wbr></wbr><span><span>Resistance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1909936479%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.resistance/to-resistance.html"><span class="token function">toResistance</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.resistance/-k-resistance-unit-instance/index.html">KResistanceUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; resistance value, as long as it matches the canonical resistance normal form: exactly one <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code>, one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+2</code>, one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-3</code> and one <a href="../../org.pcsoft.framework.kunit.ec/-k-electric-current-unit/index.html">KElectricCurrentUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized over their <a href="../-k-unit/base-value.html">org.pcsoft.framework.kunit.KUnit.baseValue</a>s, so the resulting resistance is expressed in ohms regardless of which concrete mass/length/time/current units the terms were tagged with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1486606585%2FFunctions%2F-251573632" anchor-label="toSpeed" id="1486606585%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.speed/to-speed.html"><span>to</span><wbr></wbr><span><span>Speed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1486606585%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.speed/to-speed.html"><span class="token function">toSpeed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.speed/-k-speed-unit-instance/index.html">KSpeedUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; speed value, as long as it consists of exactly two terms: one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-1</code> (order independent). The terms are normalized to <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/-companion/-b-a-s-e.html">KDistanceUnit.BASE</a>/<a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a>, so the resulting speed is expressed in meters per second regardless of which length/time units the terms were tagged with (e.g. a <code class="lang-kotlin">[MILE^1, HOUR^-1]</code> instance is converted to the equivalent m/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="590730745%2FFunctions%2F-251573632" anchor-label="toStorage" id="590730745%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.storage/to-storage.html"><span>to</span><wbr></wbr><span><span>Storage</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="590730745%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.storage/to-storage.html"><span class="token function">toStorage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.storage/-k-storage-unit-instance/index.html">KStorageUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="../../org.pcsoft.framework.kunit.storage/-k-storage-unit-instance/index.html">KStorageUnitInstance</a>, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.storage/-k-storage-unit/index.html">KStorageUnit</a> - normalizing it to <a href="../../org.pcsoft.framework.kunit.storage/-k-storage-unit/-companion/-b-a-s-e.html">KStorageUnit.BASE</a> (bytes) if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1424716478%2FFunctions%2F-251573632" anchor-label="toString" id="-1424716478%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1424716478%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Base-unit representation of this instance, e.g. <code class="lang-kotlin">&quot;10.0 m/s&quot;</code> for a speed built from meters and seconds. Rendering is delegated to <a href="../../org.pcsoft.framework.kunit.formatter/-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a>: each term uses its own KUnitTerm.displaySymbol (honouring any cosmetic display metadata), the exponent is appended as <code class="lang-kotlin">^n</code> when it is not <code class="lang-kotlin">1</code>, and a single denominator term yields fraction notation (<code class="lang-kotlin">&quot;m/s&quot;</code>). No unit conversion is performed; to read a value in a specific unit use <a href="../into.html">into</a>, and to render into a specific unit use <a href="../format.html">format</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-317512255%2FFunctions%2F-251573632" anchor-label="toString" id="-317512255%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-317512255%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-k-unit-measurable/index.html">KUnitMeasurable</a><span class="token punctuation">.</span><a href="../to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pattern<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">locale<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Locale.html">Locale</a><span class="token operator"> = </span>Locale.getDefault()<span class="token punctuation">, </span></span><span class="parameter ">formatter<span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.formatter/-k-unit-formatter/index.html">KUnitFormatter</a><span class="token operator"> = </span>KDefaultUnitFormatter</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Renders this value in its own <strong>base unit(s)</strong> with an optional number <a href="../to-string.html">pattern</a>/<a href="../to-string.html">locale</a> and an optional <a href="../to-string.html">formatter</a> - the parameterised counterpart of the plain <a href="../to-string.html">toString</a>. It is the <a href="../format.html">format</a> verb without a target: the value is not converted, only rendered.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1489269209%2FFunctions%2F-251573632" anchor-label="toTemperature" id="1489269209%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.temperature/to-temperature.html"><span>to</span><wbr></wbr><span><span>Temperature</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1489269209%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.temperature/to-temperature.html"><span class="token function">toTemperature</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.temperature/-k-temperature-unit-instance/index.html">KTemperatureUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="../../org.pcsoft.framework.kunit.temperature/-k-temperature-unit-instance/index.html">KTemperatureUnitInstance</a>, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.temperature/-k-temperature-unit/index.html">KTemperatureUnit</a> - normalizing it to absolute kelvin if it isn't already.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1189919670%2FFunctions%2F-251573632" anchor-label="toTemperatureDifference" id="1189919670%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.temperature/to-temperature-difference.html"><span>to</span><wbr></wbr><span>Temperature</span><wbr></wbr><span><span>Difference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1189919670%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.temperature/to-temperature-difference.html"><span class="token function">toTemperatureDifference</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.temperature/-k-temperature-difference-unit-instance/index.html">KTemperatureDifferenceUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; <a href="../../org.pcsoft.framework.kunit.temperature/-k-temperature-difference-unit-instance/index.html">KTemperatureDifferenceUnitInstance</a>, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.temperature/-k-temperature-difference-unit/index.html">KTemperatureDifferenceUnit</a>, normalizing it to kelvin.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-811472439%2FFunctions%2F-251573632" anchor-label="toTime" id="-811472439%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.time/to-time.html"><span>to</span><wbr></wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-811472439%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.time/to-time.html"><span class="token function">toTime</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; time value, as long as it consists of exactly one term of any <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> - normalizing it to <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a> (second) if it isn't already (e.g. a term tagged with <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/-h-o-u-r/index.html">KTimeUnit.HOUR</a> is converted to the equivalent number of seconds). The term's exponent is irrelevant to this conversion: a <code class="lang-kotlin">KTimeUnit</code> term is a time-typed unit regardless of exponent (even a &quot;square second&quot;), and the resulting <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a> simply wraps the numeric value as a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Duration.html">Duration</a>. This is what lets an arbitrary single-<a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> mixed instance (whose term may be tagged with any <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a>) be converted into a <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="716189871%2FFunctions%2F-251573632" anchor-label="toUnit" id="716189871%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-unit.html"><span>to</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="716189871%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-unit.html"><span class="token function">toUnit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">KMixedUnitInstance</a></div><div class="brief "><p class="paragraph">Returns <code class="lang-kotlin">this</code>. A <a href="index.html">KMixedUnitInstance</a> is already the generic mixed-unit representation, so the <a href="../-k-unit-measurable/index.html">KUnitMeasurable</a> conversion is the identity here (it is the &quot;pure&quot; unit wrappers that produce a genuinely new <a href="index.html">KMixedUnitInstance</a> from their internal state).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="308797977%2FFunctions%2F-251573632" anchor-label="toVoltage" id="308797977%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.voltage/to-voltage.html"><span>to</span><wbr></wbr><span><span>Voltage</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="308797977%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.voltage/to-voltage.html"><span class="token function">toVoltage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; voltage value, as long as it matches the canonical voltage normal form: exactly one <a href="../../org.pcsoft.framework.kunit.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code>, one <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+2</code>, one <a href="../../org.pcsoft.framework.kunit.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-3</code> and one <a href="../../org.pcsoft.framework.kunit.ec/-k-electric-current-unit/index.html">KElectricCurrentUnit</a> term at exponent <code class="lang-kotlin">-1</code> (order independent). The terms are normalized over their <a href="../-k-unit/base-value.html">org.pcsoft.framework.kunit.KUnit.baseValue</a>s, so the resulting voltage is expressed in volts regardless of which concrete mass/length/time/current units the terms were tagged with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1712292098%2FFunctions%2F-251573632" anchor-label="toVolume" id="-1712292098%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../org.pcsoft.framework.kunit.distance/to-volume.html"><span>to</span><wbr></wbr><span><span>Volume</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1712292098%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="../../org.pcsoft.framework.kunit.distance/to-volume.html"><span class="token function">toVolume</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.pcsoft.framework.kunit.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a <a href="../../org.pcsoft.framework.kunit.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a>, requiring it to be a single <a href="../../org.pcsoft.framework.kunit.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at <strong>exponent 3</strong>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

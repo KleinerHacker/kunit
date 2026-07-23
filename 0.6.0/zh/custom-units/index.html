@@ -1,0 +1,2032 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Kotlin Unit Framework to calculate with different units in Kotlin (and Java)">
+      
+      
+      
+        <link rel="canonical" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/zh/custom-units/">
+      
+      
+        <link rel="prev" href="../mixed-units/">
+      
+      
+        <link rel="next" href="../formatter/formatting/">
+      
+      
+        
+          <link rel="alternate" href="../../custom-units/" hreflang="en">
+        
+          <link rel="alternate" href="../../ko/custom-units/" hreflang="ko">
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+          <link rel="alternate" href="../../ja/custom-units/" hreflang="ja">
+        
+          <link rel="alternate" href="../../ar/custom-units/" hreflang="ar">
+        
+          <link rel="alternate" href="../../hi/custom-units/" hreflang="hi">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>添加自定义单位 - KUnit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../" title="KUnit" class="md-header__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KUnit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              添加自定义单位
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../custom-units/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../ko/custom-units/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../ja/custom-units/" hreflang="ja" class="md-select__link">
+              日本語
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../ar/custom-units/" hreflang="ar" class="md-select__link">
+              العربية
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../hi/custom-units/" hreflang="hi" class="md-select__link">
+              हिन्दी
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KleinerHacker/kunit" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../" title="KUnit" class="md-nav__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    KUnit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KleinerHacker/kunit" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mixed-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    混合单位
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    添加自定义单位
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    添加自定义单位
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-kunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 创建子包和 KUnit 枚举
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 创建包装器类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 添加值为 1 的裸令牌和前缀构建器属性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.(可选)添加特殊/派生单位
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 与其他组组合
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 命名与测试清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    格式化器
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    格式化器
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/default-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    默认格式化器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/custom-formatters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义格式化器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    运动学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    运动学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/frequency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    频率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/speed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    速度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/acceleration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加速度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/mass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    质量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/force/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/pressure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    压力
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    密度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/areadensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    面密度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    电气工程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    电气工程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/ec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    电流
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/voltage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    电压
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/resistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    电阻
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    热力学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    热力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    温度
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    温度
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    绝对温度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature-difference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    温度差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息技术
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息技术
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    存储
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/datarate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据速率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dokka/html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 文档
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../licences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    许可证
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-kunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 创建子包和 KUnit 枚举
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 创建包装器类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 添加值为 1 的裸令牌和前缀构建器属性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.(可选)添加特殊/派生单位
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 与其他组组合
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 命名与测试清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">添加自定义单位<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>kunit 今天提供了多个单位组(<a href="../units/kinematics/distance/">距离</a>、<a href="../units/kinematics/time/">时间</a>、<a href="../units/information/storage/">存储</a>、
+<a href="../units/kinematics/speed/">速度</a>、<a href="../units/information/datarate/">数据传输率</a>),但整个引擎(<code>KUnit</code>、<code>KMixedUnitInstance</code>、<code>of</code>/<code>into</code>
+动词、前缀构建器)是通用且与组无关的。添加一个新的物理量意味着遵循相同的模式。本页逐步介绍如何添加一个演示性的
+<strong>质量</strong>组(<code>org.pcsoft.framework.kunit.mass</code>)—— 一个仿照存储组的简单一维组。</p>
+<h2 id="1-kunit">1. 创建子包和 <code>KUnit</code> 枚举<a class="headerlink" href="#1-kunit" title="Permanent link">&para;</a></h2>
+<p>每个单位组在 <code>org.pcsoft.framework.kunit</code> 下拥有自己的子包,其单位声明为实现 <code>KUnit</code> 的 <code>enum class</code>。
+<code>baseValue</code> 是到该组基本单位的转换系数 —— 基本单位本身的 <code>baseValue == 1.0</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KUnit</span>
+
+<span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">KMassUnit</span><span class="p">(</span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">symbol</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">baseValue</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KUnit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/** 千克,质量的 SI 基本单位;根据定义 [baseValue] = 1.0。 */</span>
+<span class="w">    </span><span class="n">KILOGRAM</span><span class="p">(</span><span class="s">&quot;kg&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1.0</span><span class="p">),</span>
+
+<span class="w">    </span><span class="cm">/** 克,1 g = 0.001 kg。 */</span>
+<span class="w">    </span><span class="n">GRAM</span><span class="p">(</span><span class="s">&quot;g&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">0.001</span><span class="p">),</span>
+
+<span class="w">    </span><span class="cm">/** 国际常衡磅,1 lb = 0.45359237 kg。 */</span>
+<span class="w">    </span><span class="n">POUND</span><span class="p">(</span><span class="s">&quot;lb&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">0.45359237</span><span class="p">),</span>
+
+<span class="w">    </span><span class="cm">/** 国际常衡盎司,1 oz = 0.028349523125 kg。 */</span>
+<span class="w">    </span><span class="n">OUNCE</span><span class="p">(</span><span class="s">&quot;oz&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">0.028349523125</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+<span class="w">        </span><span class="cm">/** 质量组的基本单位;[KMassUnitInstance] 的所有内部值都归一化为此单位。 */</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">BASE</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KILOGRAM</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="2">2. 创建包装器类<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>包装器(<code>KMassUnitInstance</code>)通过<strong>委托</strong>(<code>KUnitMeasurable by instance</code>)封装一个 <code>KMixedUnitInstance</code>,并实现
+<code>KUnitInstance&lt;KMassUnitInstance&gt;</code>。它只手写 <code>KUnitInstance</code> 专属的成员(<code>plus</code>/<code>minus</code>/<code>compareTo</code>)、支撑 <code>of</code>
+的 <code>scaledBy</code> 重写,以及 <code>equals</code>/<code>hashCode</code>/<code>toString</code>。<strong>没有</strong> <code>valueAs</code>/<code>toString(target)</code> —— 读取是与组无关的
+<code>into</code> 动词。复制 <code>KStorageUnitInstance</code> 的形态。</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KMixedUnitInstance</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KUnitInstance</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KUnitMeasurable</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KUnitTerm</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">KMassUnitInstance</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span><span class="kd">internal</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">instance</span><span class="p">:</span><span class="w"> </span><span class="n">KMixedUnitInstance</span><span class="p">)</span><span class="w"> </span><span class="p">:</span>
+<span class="w">    </span><span class="n">KUnitMeasurable</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">KUnitInstance</span><span class="o">&lt;</span><span class="n">KMassUnitInstance</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/** 支撑 `of`: 缩放值(千克),返回相同类型。 */</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">scaledBy</span><span class="p">(</span><span class="n">factor</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="p">):</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="p">):</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">value</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">minus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="p">):</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">value</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">operator</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="p">):</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">value</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="w"> </span><span class="kt">Any?</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">value</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">():</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">hashCode</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">toString</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instance</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="cm">/** 从已经以千克([KMassUnit.BASE])表示的值构建一个 [KMassUnitInstance]。 */</span>
+<span class="kd">internal</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">massUnitInstanceOf</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="p">):</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">KMassUnitInstance</span><span class="p">(</span><span class="n">KMixedUnitInstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="n">KUnitTerm</span><span class="p">(</span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">BASE</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))))</span>
+
+<span class="cm">/** 将纯质量 [KMixedUnitInstance] 转换回 [KMassUnitInstance],归一化为 [KMassUnit.BASE]。 */</span>
+<span class="kd">fun</span><span class="w"> </span><span class="n">KMixedUnitInstance</span><span class="p">.</span><span class="nf">toMass</span><span class="p">():</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="p">.</span><span class="na">singleOrNull</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">term</span><span class="o">?.</span><span class="na">unit</span>
+<span class="w">    </span><span class="n">check</span><span class="p">(</span><span class="n">term</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">KMassUnit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;KMixedUnitInstance </span><span class="si">$</span><span class="n">this</span><span class="s"> does not represent a pure mass value (expected exactly one term of a KMassUnit)&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="na">baseValue</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="3-1">3. 添加值为 1 的裸令牌和前缀构建器属性<a class="headerlink" href="#3-1" title="Permanent link">&para;</a></h2>
+<p>按照项目约定,将 DSL 词汇拆分到两个文件: 值为 1 的裸令牌放入 <code>K...UnitBareValues.kt</code>,前缀构建器属性扩展放入
+<code>K...UnitExtensions.kt</code>。二者结合让调用者可以写 <code>5 of kilograms</code> 或 <code>5 of kilo.grams</code>,并用 <code>into</code> 读回。</p>
+<p><code>KMassUnitBareValues.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass</span>
+
+<span class="cm">/** 1 千克([KMassUnit.KILOGRAM])。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">kilograms</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">KILOGRAM</span><span class="p">.</span><span class="na">baseValue</span><span class="p">)</span>
+
+<span class="cm">/** 1 克([KMassUnit.GRAM])。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">grams</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">GRAM</span><span class="p">.</span><span class="na">baseValue</span><span class="p">)</span>
+
+<span class="cm">/** 1 磅([KMassUnit.POUND])。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">pounds</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">POUND</span><span class="p">.</span><span class="na">baseValue</span><span class="p">)</span>
+
+<span class="cm">/** 1 盎司([KMassUnit.OUNCE])。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">ounces</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">OUNCE</span><span class="p">.</span><span class="na">baseValue</span><span class="p">)</span>
+</code></pre></div>
+<p><code>KMassUnitExtensions.kt</code>(质量接受任何量级,因此属性挂在公共基类 <code>KPrefixBuilder</code> 上):</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KPrefixBuilder</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">prefixedMass</span><span class="p">(</span><span class="n">builder</span><span class="p">:</span><span class="w"> </span><span class="n">KPrefixBuilder</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnit</span><span class="p">):</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="na">prefix</span><span class="p">.</span><span class="na">factor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="na">baseValue</span><span class="p">)</span>
+
+<span class="cm">/** 带前缀的千克,例如 `kilo.kilograms`。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">KPrefixBuilder</span><span class="p">.</span><span class="na">kilograms</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefixedMass</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">KILOGRAM</span><span class="p">)</span>
+
+<span class="cm">/** 带前缀的克,例如 `milli.grams` = 1 mg。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">KPrefixBuilder</span><span class="p">.</span><span class="na">grams</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefixedMass</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">GRAM</span><span class="p">)</span>
+
+<span class="cm">/** 带前缀的磅。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">KPrefixBuilder</span><span class="p">.</span><span class="na">pounds</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefixedMass</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">POUND</span><span class="p">)</span>
+
+<span class="cm">/** 带前缀的盎司。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">KPrefixBuilder</span><span class="p">.</span><span class="na">ounces</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefixedMass</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">KMassUnit</span><span class="p">.</span><span class="na">OUNCE</span><span class="p">)</span>
+</code></pre></div>
+<p>就是这样 —— 这已经免费给了你完整的 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、比较、SI 前缀构建器(<code>5 of milli.grams</code>),以及
+<code>toUnit()</code>/<code>toMass()</code> 往返转换。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">grams</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">pounds</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w">            </span><span class="c1">// KMassUnitInstance, 归一化为千克</span>
+<span class="n">println</span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilograms</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">grams</span><span class="p">)</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">heavier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w">          </span><span class="c1">// true</span>
+</code></pre></div>
+<h2 id="4">4.(可选)添加特殊/派生单位<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>如果你的组有绑定到特定缩放的常用命名单位(如面积的公顷),将它们作为命名的值 1 实例添加 —— 不需要单独的目标类型:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass</span>
+
+<span class="cm">/** 1 公吨(1000 kg)。 */</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">tonnes</span><span class="p">:</span><span class="w"> </span><span class="n">KMassUnitInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massUnitInstanceOf</span><span class="p">(</span><span class="m">1000.0</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass.*</span>
+
+<span class="n">println</span><span class="p">((</span><span class="m">2500</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">grams</span><span class="p">)</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">tonnes</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0.0025</span>
+</code></pre></div>
+<h2 id="5">5. 与其他组组合<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>由于一切最终都汇入通用的 <code>KMixedUnitInstance</code> 引擎,你的新组立即可以通过 <code>*</code>/<code>/</code> 与任何其他组组合 —— 规则见
+<a href="../mixed-units/">混合单位</a>。对于强类型的跨组结果(如 <code>mass / volume = density</code>),在 <code>K...UnitOperators.kt</code> 中
+添加带类型的运算符扩展,仿照 <code>KSpeedUnitOperators.kt</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mass.*</span>
+
+<span class="c1">// 密度 = 质量 / 体积(通用 KMixedUnitInstance: [KILOGRAM^1, METER^-3])</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilograms</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">liters</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="6">6. 命名与测试清单<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<ul>
+<li>所有 public 类型以 <code>K</code> 开头(<code>KMassUnit</code>、<code>KMassUnitInstance</code> 等);值为 1 的裸令牌和前缀构建器属性扩展
+  (<code>kilograms</code>、<code>grams</code> 等)是例外,保持语言自然。</li>
+<li>用参数化的交叉矩阵测试流程覆盖该组,通过 <code>of</code>/<code>into</code> 构建(绝不使用原始枚举): 单位 → 单位转换,每个运算符
+  和每个比较对每个单位对各一个方法,前缀构建器矩阵,<code>of</code> 类型保持,以及 <code>into</code> 错误用例 —— 参见 <code>../../.claude/CLAUDE.md</code>
+  中的"参数化交叉矩阵测试流程"一节。</li>
+<li>用英文、以 Markdown 记录每个 public 成员,在有用处附上示例 —— 尤其是运算符。</li>
+<li>如果该组是量级受限的(如拒绝缩小前缀的存储),将其单位属性挂在 <code>KAugmentingPrefixBuilder</code>/
+  <code>KDiminishingPrefixBuilder</code> 而非基类 <code>KPrefixBuilder</code> 上,使不允许的前缀成为<strong>编译错误</strong>。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

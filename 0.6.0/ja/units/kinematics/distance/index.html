@@ -1,0 +1,2549 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Kotlin Unit Framework to calculate with different units in Kotlin (and Java)">
+      
+      
+      
+        <link rel="canonical" href="https://kleinerhacker.github.io/kunit/latest/0.6.0/ja/units/kinematics/distance/">
+      
+      
+        <link rel="prev" href="../overview/">
+      
+      
+        <link rel="next" href="../time/">
+      
+      
+        
+          <link rel="alternate" href="../../../../units/kinematics/distance/" hreflang="en">
+        
+          <link rel="alternate" href="../../../../ko/units/kinematics/distance/" hreflang="ko">
+        
+          <link rel="alternate" href="../../../../zh/units/kinematics/distance/" hreflang="zh">
+        
+          <link rel="alternate" href="./" hreflang="ja">
+        
+          <link rel="alternate" href="../../../../ar/units/kinematics/distance/" hreflang="ar">
+        
+          <link rel="alternate" href="../../../../hi/units/kinematics/distance/" hreflang="hi">
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>距離 - KUnit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="../../../" title="KUnit" class="md-header__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KUnit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              距離
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="言語切り替え">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../../units/kinematics/distance/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../../ko/units/kinematics/distance/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../../zh/units/kinematics/distance/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="ja" class="md-select__link">
+              日本語
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../../ar/units/kinematics/distance/" hreflang="ar" class="md-select__link">
+              العربية
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../../hi/units/kinematics/distance/" hreflang="hi" class="md-select__link">
+              हिन्दी
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KleinerHacker/kunit" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../" title="KUnit" class="md-nav__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    KUnit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KleinerHacker/kunit" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mixed-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    混合単位
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custom-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    カスタム単位の追加
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    フォーマッター
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    フォーマッター
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/default-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    デフォルトフォーマッター
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/custom-formatters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    カスタムフォーマッター
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    運動学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    運動学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    距離
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    距離
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指数1 - 長さ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指数1 - 長さ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#light" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        光の到達距離（プレフィックス不可の light グループ）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演算子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数値によるスケーリング
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        比較と等価性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指数2 - 面積
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指数3 - 体積
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pow によるべき乗
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SI 接頭辞
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        toString フォーマット
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        記法
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    時間
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frequency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    周波数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    速度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acceleration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加速度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/mass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    質量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/force/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    力
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/pressure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    圧力
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    密度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/areadensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    面密度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電気工学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    電気工学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../electrical/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../electrical/ec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電流
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../electrical/voltage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    電圧
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../electrical/resistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    抵抗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    熱力学
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    熱力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    温度
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    温度
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    絶対温度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature-difference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    温度差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    情報技術
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    情報技術
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ストレージ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/datarate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    データレート
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../dokka/html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API ドキュメント
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../licences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ライセンス
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指数1 - 長さ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指数1 - 長さ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#light" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        光の到達距離（プレフィックス不可の light グループ）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演算子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数値によるスケーリング
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        比較と等価性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指数2 - 面積
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指数3 - 体積
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pow によるべき乗
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SI 接頭辞
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        toString フォーマット
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        記法
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">距離<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>パッケージ: <code>org.pcsoft.framework.kunit.distance</code>
+基本単位: <strong>メートル</strong>(<code>KDistanceUnit.BASE == KDistanceUnit.METER</code>)</p>
+<p>種別: <strong>ネイティブ単位</strong></p>
+<p>距離グループは、開いた基底ラッパー <code>KDistanceUnitInstance</code>(<code>KDistanceUnit.BASE</code> の単一の項、<strong>任意の</strong>指数)
+の下で、各指数をそれぞれ独立したコンパイル時安全な型としてモデル化します:</p>
+<ul>
+<li><strong><code>KLengthUnitInstance</code></strong> — 指数1(長さ)</li>
+<li><strong><code>KAreaUnitInstance</code></strong> — 指数2(面積)</li>
+<li><strong><code>KVolumeUnitInstance</code></strong> — 指数3(体積)</li>
+</ul>
+<p>値は常にメートル(または平方/立方メートル)に正規化されて保存されます。長さ、面積、体積は異なる型であるため、
+<code>+</code>/<code>-</code>/比較でそれらを混在させると<strong>コンパイルエラー</strong>になります(そのような演算子は存在しません)。一方
+<code>*</code>/<code>/</code> は可能な限り同じ型ファミリー内に留まり(<code>length * length = area</code>、<code>area / length = length</code>)、
+<code>{1,2,3}</code> 以外の指数(または指数0の無次元の結果)については <code>KDistanceUnitInstance</code>/<code>KMixedUnitInstance</code>
+にフォールバックします。</p>
+<p>すべての値は <code>number of &lt;トークン&gt;</code> で作成し、<code>value into &lt;トークン&gt;</code> で読み戻します。</p>
+<h2 id="1-">指数1 - 長さ<a class="headerlink" href="#1-" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>単位</th>
+<th>Enum 値</th>
+<th>記号</th>
+<th style="text-align: right;">トークン</th>
+<th style="text-align: right;">メートル換算(1単位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メートル</td>
+<td><code>KDistanceUnit.METER</code></td>
+<td><code>m</code></td>
+<td style="text-align: right;"><code>meters</code></td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr>
+<td>マイル</td>
+<td><code>KDistanceUnit.MILE</code></td>
+<td><code>mi</code></td>
+<td style="text-align: right;"><code>miles</code></td>
+<td style="text-align: right;">1609.344</td>
+</tr>
+<tr>
+<td>海里</td>
+<td><code>KDistanceUnit.NAUTICAL_MILE</code></td>
+<td><code>nmi</code></td>
+<td style="text-align: right;"><code>nauticalMiles</code></td>
+<td style="text-align: right;">1852.0</td>
+</tr>
+<tr>
+<td>ヤード</td>
+<td><code>KDistanceUnit.YARD</code></td>
+<td><code>yd</code></td>
+<td style="text-align: right;"><code>yards</code></td>
+<td style="text-align: right;">0.9144</td>
+</tr>
+<tr>
+<td>フィート</td>
+<td><code>KDistanceUnit.FOOT</code></td>
+<td><code>ft</code></td>
+<td style="text-align: right;"><code>feet</code></td>
+<td style="text-align: right;">0.3048</td>
+</tr>
+<tr>
+<td>インチ</td>
+<td><code>KDistanceUnit.INCH</code></td>
+<td><code>in</code></td>
+<td style="text-align: right;"><code>inches</code></td>
+<td style="text-align: right;">0.0254</td>
+</tr>
+<tr>
+<td>ファゾム</td>
+<td><code>KDistanceUnit.FATHOM</code></td>
+<td><code>ftm</code></td>
+<td style="text-align: right;"><code>fathoms</code></td>
+<td style="text-align: right;">1.8288</td>
+</tr>
+<tr>
+<td>チェーン</td>
+<td><code>KDistanceUnit.CHAIN</code></td>
+<td><code>ch</code></td>
+<td style="text-align: right;"><code>chains</code></td>
+<td style="text-align: right;">20.1168</td>
+</tr>
+<tr>
+<td>ファーロング</td>
+<td><code>KDistanceUnit.FURLONG</code></td>
+<td><code>fur</code></td>
+<td style="text-align: right;"><code>furlongs</code></td>
+<td style="text-align: right;">201.168</td>
+</tr>
+<tr>
+<td>天文単位</td>
+<td><code>KDistanceUnit.ASTRONOMICAL_UNIT</code></td>
+<td><code>AU</code></td>
+<td style="text-align: right;"><code>astronomicalUnits</code></td>
+<td style="text-align: right;">1.495978707e11</td>
+</tr>
+<tr>
+<td>パーセク</td>
+<td><code>KDistanceUnit.PARSEC</code></td>
+<td><code>pc</code></td>
+<td style="text-align: right;"><code>parsecs</code></td>
+<td style="text-align: right;">3.0856775814913673e16</td>
+</tr>
+<tr>
+<td>キュビット</td>
+<td><code>KDistanceUnit.CUBIT</code></td>
+<td><code>cubit</code></td>
+<td style="text-align: right;"><code>cubits</code></td>
+<td style="text-align: right;">0.4572</td>
+</tr>
+<tr>
+<td>ローマフィート (pes)</td>
+<td><code>KDistanceUnit.ROMAN_FOOT</code></td>
+<td><code>pes</code></td>
+<td style="text-align: right;"><code>romanFeet</code></td>
+<td style="text-align: right;">0.2957</td>
+</tr>
+<tr>
+<td>ローマパッスス (passus)</td>
+<td><code>KDistanceUnit.ROMAN_PACE</code></td>
+<td><code>passus</code></td>
+<td style="text-align: right;"><code>romanPaces</code></td>
+<td style="text-align: right;">1.4787</td>
+</tr>
+<tr>
+<td>スタディオン</td>
+<td><code>KDistanceUnit.STADIUM</code></td>
+<td><code>stadium</code></td>
+<td style="text-align: right;"><code>stadia</code></td>
+<td style="text-align: right;">185.0</td>
+</tr>
+<tr>
+<td>ローママイル (mille passus)</td>
+<td><code>KDistanceUnit.ROMAN_MILE</code></td>
+<td><code>mp</code></td>
+<td style="text-align: right;"><code>romanMiles</code></td>
+<td style="text-align: right;">1481.5</td>
+</tr>
+<tr>
+<td>ロッド (perch)</td>
+<td><code>KDistanceUnit.ROD</code></td>
+<td><code>rod</code></td>
+<td style="text-align: right;"><code>rods</code></td>
+<td style="text-align: right;">5.0292</td>
+</tr>
+<tr>
+<td>リーグ</td>
+<td><code>KDistanceUnit.LEAGUE</code></td>
+<td><code>lea</code></td>
+<td style="text-align: right;"><code>leagues</code></td>
+<td style="text-align: right;">4828.032</td>
+</tr>
+<tr>
+<td>ケーブル長</td>
+<td><code>KDistanceUnit.CABLE_LENGTH</code></td>
+<td><code>cable</code></td>
+<td style="text-align: right;"><code>cableLengths</code></td>
+<td style="text-align: right;">185.2</td>
+</tr>
+<tr>
+<td>ヴェルスタ</td>
+<td><code>KDistanceUnit.VERST</code></td>
+<td><code>verst</code></td>
+<td style="text-align: right;"><code>versts</code></td>
+<td style="text-align: right;">1066.8</td>
+</tr>
+<tr>
+<td>プロイセンマイル</td>
+<td><code>KDistanceUnit.PRUSSIAN_MILE</code></td>
+<td><code>prussian mi</code></td>
+<td style="text-align: right;"><code>prussianMiles</code></td>
+<td style="text-align: right;">7532.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="light">光の到達距離（プレフィックス不可の <code>light</code> グループ）<a class="headerlink" href="#light" title="Permanent link">&para;</a></h3>
+<p>光の到達距離はプレフィックス不可の <code>light</code> ビルダーにまとめられ、<code>5 of light.seconds</code>、
+<code>3 of light.years</code> のようにほぼ自然な文として記述できます。これらは SI プレフィックスを一切
+受け付けません（<code>kilo.lightYears</code> は物理的に無意味なため）。</p>
+<table>
+<thead>
+<tr>
+<th>単位</th>
+<th>列挙値</th>
+<th>記号</th>
+<th style="text-align: right;">トークン</th>
+<th style="text-align: right;">1 単位のメートル値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>光秒</td>
+<td><code>KDistanceUnit.LIGHT_SECOND</code></td>
+<td><code>ls</code></td>
+<td style="text-align: right;"><code>light.seconds</code></td>
+<td style="text-align: right;">299792458.0</td>
+</tr>
+<tr>
+<td>光分</td>
+<td><code>KDistanceUnit.LIGHT_MINUTE</code></td>
+<td><code>lmin</code></td>
+<td style="text-align: right;"><code>light.minutes</code></td>
+<td style="text-align: right;">1.798754748e10</td>
+</tr>
+<tr>
+<td>光時</td>
+<td><code>KDistanceUnit.LIGHT_HOUR</code></td>
+<td><code>lh</code></td>
+<td style="text-align: right;"><code>light.hours</code></td>
+<td style="text-align: right;">1.0792528488e12</td>
+</tr>
+<tr>
+<td>光日</td>
+<td><code>KDistanceUnit.LIGHT_DAY</code></td>
+<td><code>ld</code></td>
+<td style="text-align: right;"><code>light.days</code></td>
+<td style="text-align: right;">2.59020683712e13</td>
+</tr>
+<tr>
+<td>光週</td>
+<td><code>KDistanceUnit.LIGHT_WEEK</code></td>
+<td><code>lw</code></td>
+<td style="text-align: right;"><code>light.weeks</code></td>
+<td style="text-align: right;">1.813144785984e14</td>
+</tr>
+<tr>
+<td>光年</td>
+<td><code>KDistanceUnit.LIGHT_YEAR</code></td>
+<td><code>ly</code></td>
+<td style="text-align: right;"><code>light.years</code></td>
+<td style="text-align: right;">9.4607304725808e15</td>
+</tr>
+</tbody>
+</table>
+<p>各 <code>トークン</code> は値1の <code>KLengthUnitInstance</code> であり、<code>of</code>(作成)と <code>into</code>(読み取り)の両方で使用します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span>
+<span class="n">d</span><span class="p">.</span><span class="na">value</span><span class="w">               </span><span class="c1">// 8046.72(メートルに正規化)</span>
+<span class="n">d</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">miles</span><span class="w">          </span><span class="c1">// 5.0(マイルに戻して読み取り)</span>
+<span class="n">d</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">feet</span><span class="w">           </span><span class="c1">// 26400.0</span>
+<span class="n">d</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">nauticalMiles</span><span class="w">  </span><span class="c1">// ≈ 4.3452</span>
+</code></pre></div>
+<h3 id="_2">演算子<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="c1">// + / - : 同じグループ内、異なる長さの単位間の自動変換</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="m">500</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">   </span><span class="c1">// KLengthUnitInstance、メートルに正規化</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="m">800</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span>
+
+<span class="c1">// 比較</span>
+<span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span><span class="p">)</span><span class="w">              </span><span class="c1">// true</span>
+<span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="m">1609.344</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">     </span><span class="c1">// true(正規化された値が同じ)</span>
+<span class="c1">// (5 of hectares) &gt; (5 of meters)       // コンパイルされない: 面積と長さは異なる型</span>
+
+<span class="c1">// * / / : 両方のオペランドが静的に次元付けされている場合、長さファミリー内に留まる</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">200</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">50</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">   </span><span class="c1">// KAreaUnitInstance: value=10000.0(m²)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">lengthAgain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">50</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">       </span><span class="c1">// KLengthUnitInstance: value=200.0(m)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">10</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">    </span><span class="c1">// KMixedUnitInstance(無次元)、value=5.0</span>
+</code></pre></div>
+<h3 id="_3">数値によるスケーリング<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>距離の値は、型を保ったまま単なる <code>Number</code> でスケーリングできます（長さは長さのまま、面積は面積のまま）。これにより、円の面積 <code>A = π · r²</code> のような計算を単位システムだけで自然に書けます。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.times</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.centi</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">centi</span><span class="p">.</span><span class="na">meters</span><span class="w">       </span><span class="c1">// KLengthUnitInstance、0.12 m</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w">     </span><span class="c1">// KAreaUnitInstance: π·r² ≈ 0.04524 m²</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">tripled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">12</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="c1">// KLengthUnitInstance、36 m</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">half</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w">              </span><span class="c1">// KAreaUnitInstance、円の面積の半分</span>
+</code></pre></div>
+<h3 id="_4">比較と等価性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code> は<strong>同じ型</strong>(同じ次元)を持つ2つの値の正規化された <code>value</code> を比較します。
+異なる次元(例: 長さと面積)を混在させることは、<code>+</code>/<code>-</code> のルールと同様にコンパイラによって拒否されます —
+そのような演算子は存在しません。次元をまたぐ <code>equals</code> は単に <code>false</code> を返します。</p>
+<h2 id="2-">指数2 - 面積<a class="headerlink" href="#2-" title="Permanent link">&para;</a></h2>
+<p><code>KAreaUnitInstance</code> は面積を表します(例: <code>length * length</code> の結果、または長さを infix <code>pow</code> 演算子で
+2乗した結果: <code>(2 of meters) pow 2</code> == <code>(2 m)²</code> == 4 m²、<code>(2 of kilo.meters) pow 2</code> == 4 000 000 m²)。
+<code>squareXxx</code> トークンはありません — <code>pow</code> が唯一のべき乗構文です(下記「<a href="#pow"><code>pow</code> によるべき乗</a>」の節を
+参照)。次の名前付き特殊単位トークンが利用できます。</p>
+<table>
+<thead>
+<tr>
+<th>特殊単位</th>
+<th style="text-align: right;">記号</th>
+<th style="text-align: right;">トークン</th>
+<th style="text-align: right;">m²換算(1単位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アール</td>
+<td style="text-align: right;"><code>a</code></td>
+<td style="text-align: right;"><code>ares</code></td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td>ヘクタール</td>
+<td style="text-align: right;"><code>ha</code></td>
+<td style="text-align: right;"><code>hectares</code></td>
+<td style="text-align: right;">10 000.0</td>
+</tr>
+<tr>
+<td>エーカー</td>
+<td style="text-align: right;"><code>ac</code></td>
+<td style="text-align: right;"><code>acres</code></td>
+<td style="text-align: right;">4046.8564224</td>
+</tr>
+<tr>
+<td>ルード</td>
+<td style="text-align: right;"><code>ro</code></td>
+<td style="text-align: right;"><code>roods</code></td>
+<td style="text-align: right;">1011.7141056</td>
+</tr>
+<tr>
+<td>平方パーチ（平方ロッド）</td>
+<td style="text-align: right;"><code>perch²</code></td>
+<td style="text-align: right;"><code>squarePerches</code></td>
+<td style="text-align: right;">25.29285264</td>
+</tr>
+<tr>
+<td>モルゲン（プロイセン）</td>
+<td style="text-align: right;"><code>Mg</code></td>
+<td style="text-align: right;"><code>morgens</code></td>
+<td style="text-align: right;">2553.22</td>
+</tr>
+<tr>
+<td>ヨッホ（オーストリア）</td>
+<td style="text-align: right;"><code>Joch</code></td>
+<td style="text-align: right;"><code>jochs</code></td>
+<td style="text-align: right;">5754.642</td>
+</tr>
+<tr>
+<td>タークヴェルク（バイエルン）</td>
+<td style="text-align: right;"><code>Tw</code></td>
+<td style="text-align: right;"><code>tagwerks</code></td>
+<td style="text-align: right;">3407.27</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">hectares</span>
+<span class="n">plot</span><span class="p">.</span><span class="na">value</span><span class="w">        </span><span class="c1">// 30000.0(m²)</span>
+<span class="n">plot</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">ares</span><span class="w">    </span><span class="c1">// 300.0</span>
+<span class="n">plot</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">acres</span><span class="w">   </span><span class="c1">// ≈ 7.4132</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">computed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">200</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">50</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">  </span><span class="c1">// KAreaUnitInstance(10 000 m²)</span>
+<span class="n">computed</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">hectares</span><span class="w">                           </span><span class="c1">// 1.0</span>
+
+<span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">computed</span><span class="w">   </span><span class="c1">// 許可される: 両方とも面積 -&gt; KAreaUnitInstance</span>
+<span class="c1">// plot + (5 of meters)  // コンパイルされない: 面積と長さ</span>
+</code></pre></div>
+<h2 id="3-">指数3 - 体積<a class="headerlink" href="#3-" title="Permanent link">&para;</a></h2>
+<p><code>KVolumeUnitInstance</code> は体積を表します(例: <code>length * length * length</code>、<code>area * length</code>、または長さを
+3乗した結果: <code>(2 of meters) pow 3</code> == 8 m³)。面積と同様に <code>cubicXxx</code> トークンはなく、<code>pow</code> を使用します
+(下記「<a href="#pow"><code>pow</code> によるべき乗</a>」の節を参照)。次の名前付き特殊単位トークンが利用できます。</p>
+<table>
+<thead>
+<tr>
+<th>特殊単位</th>
+<th style="text-align: right;">記号</th>
+<th style="text-align: right;">トークン</th>
+<th style="text-align: right;">m³換算(1単位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>リットル</td>
+<td style="text-align: right;"><code>L</code></td>
+<td style="text-align: right;"><code>liters</code></td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr>
+<td>米国液量ガロン</td>
+<td style="text-align: right;"><code>gal (US)</code></td>
+<td style="text-align: right;"><code>usGallons</code></td>
+<td style="text-align: right;">0.003785411784</td>
+</tr>
+<tr>
+<td>英国ガロン</td>
+<td style="text-align: right;"><code>gal (UK)</code></td>
+<td style="text-align: right;"><code>imperialGallons</code></td>
+<td style="text-align: right;">0.00454609</td>
+</tr>
+<tr>
+<td>米国液量オンス</td>
+<td style="text-align: right;"><code>fl oz</code></td>
+<td style="text-align: right;"><code>usFluidOunces</code></td>
+<td style="text-align: right;">2.95735295625e-5</td>
+</tr>
+<tr>
+<td>オイルバレル</td>
+<td style="text-align: right;"><code>bbl</code></td>
+<td style="text-align: right;"><code>oilBarrels</code></td>
+<td style="text-align: right;">0.158987294928</td>
+</tr>
+<tr>
+<td>英ブッシェル</td>
+<td style="text-align: right;"><code>bu (UK)</code></td>
+<td style="text-align: right;"><code>imperialBushels</code></td>
+<td style="text-align: right;">0.03636872</td>
+</tr>
+<tr>
+<td>英ホッグズヘッド</td>
+<td style="text-align: right;"><code>hhd</code></td>
+<td style="text-align: right;"><code>hogsheads</code></td>
+<td style="text-align: right;">0.32731785</td>
+</tr>
+<tr>
+<td>英パイント</td>
+<td style="text-align: right;"><code>pt (UK)</code></td>
+<td style="text-align: right;"><code>imperialPints</code></td>
+<td style="text-align: right;">0.00056826125</td>
+</tr>
+<tr>
+<td>英クォート</td>
+<td style="text-align: right;"><code>qt (UK)</code></td>
+<td style="text-align: right;"><code>imperialQuarts</code></td>
+<td style="text-align: right;">0.0011365225</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">tank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">liters</span>
+<span class="n">tank</span><span class="p">.</span><span class="na">value</span><span class="w">          </span><span class="c1">// 0.2(m³)</span>
+<span class="n">tank</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">usGallons</span><span class="w"> </span><span class="c1">// ≈ 52.834</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">cube</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w">  </span><span class="c1">// KVolumeUnitInstance(8 m³)</span>
+<span class="n">cube</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">liters</span><span class="w">                                          </span><span class="c1">// 8000.0</span>
+
+<span class="n">tank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cube</span><span class="w">         </span><span class="c1">// 許可される: 両方とも体積 -&gt; KVolumeUnitInstance</span>
+</code></pre></div>
+<h2 id="pow"><a name="pow"></a><code>pow</code> によるべき乗<a class="headerlink" href="#pow" title="Permanent link">&para;</a></h2>
+<p>infix <code>pow</code> 演算子で値を整数乗します。Kotlin にはオーバーロード可能な <code>^</code> 演算子(および <code>^=</code>)がないため、
+<code>pow</code> がグループ全体で唯一のべき乗構文です — <code>squareXxx</code>/<code>cubicXxx</code> トークンは存在しません。</p>
+<p><code>pow</code> は値をべき乗し、<strong>さらに</strong>すべての指数に <code>n</code> を掛けます。したがって <code>(2 of meters) pow 2</code> は
+<code>(2 m)² = 4 m²</code> です(指数だけでなく値もべき乗されます)。距離グループでは結果が次元を持ちます: <code>pow 2</code>
+は <code>KAreaUnitInstance</code>、<code>pow 3</code> は <code>KVolumeUnitInstance</code>、その他の指数は一般の <code>KDistanceUnitInstance</code>
+になります。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="n">pow</span><span class="w"> </span><span class="m">2</span><span class="w">         </span><span class="c1">// KAreaUnitInstance: 4.0 m²</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">big</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span><span class="w"> </span><span class="n">pow</span><span class="w"> </span><span class="m">2</span><span class="w">     </span><span class="c1">// KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="n">pow</span><span class="w"> </span><span class="m">3</span><span class="w">       </span><span class="c1">// KVolumeUnitInstance: 8.0 m³</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">m4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="n">pow</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">pow</span><span class="w"> </span><span class="m">2</span><span class="w">     </span><span class="c1">// KDistanceUnitInstance: 16.0 m⁴  ((4 m²)²)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">inverse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="n">pow</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="w">     </span><span class="c1">// KDistanceUnitInstance: 0.5 m⁻¹</span>
+</code></pre></div>
+<p><code>pow</code> は <code>* / + -</code> よりも<strong>弱く</strong>結合します。混合式では括弧を付けてください(<code>(a * b) pow 2</code>)。すべての単位
+グループで使用できます — 例: <code>(2 of hours) pow 2</code>(時間には次元を持つべき乗型がないため、一般の
+<code>KMixedUnitInstance</code> になります)。</p>
+<h2 id="si">SI 接頭辞<a class="headerlink" href="#si" title="Permanent link">&para;</a></h2>
+<p>任意の長さ単位は、24種類の SI 接頭辞<strong>ビルダー</strong>(<code>kilo</code>、<code>milli</code> など、ルートパッケージ)のいずれとも
+プロパティアクセスで組み合わせることができ、<code>of</code>/<code>into</code> 用の値1テンプレートを生成します:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.milli</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="c1">// 構築: &quot;5 of kilo.meters&quot; -&gt; KLengthUnitInstance(== 5000 m)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">fiveKm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">meters</span>
+<span class="n">fiveKm</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="c1">// 5000.0</span>
+
+<span class="c1">// 接頭辞付きの単位で値を読み戻す</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span>
+<span class="n">d</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">meters</span><span class="w">  </span><span class="c1">// 8.04672(km)</span>
+
+<span class="c1">// 接頭辞は名前付きの面積/体積トークンとも組み合わせ可能</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">tank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">liters</span>
+<span class="n">tank</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">milli</span><span class="p">.</span><span class="na">liters</span><span class="w">  </span><span class="c1">// 200000.0(mL)</span>
+</code></pre></div>
+<h2 id="tostring">toString フォーマット<a class="headerlink" href="#tostring" title="Permanent link">&para;</a></h2>
+<p>基本単位の <code>toString()</code> のみが存在します。特定の単位は <code>into</code> を使ってフォーマットします:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.distance.*</span>
+
+<span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">).</span><span class="na">toString</span><span class="p">()</span><span class="w">               </span><span class="c1">// &quot;5.0 m&quot;(基本単位表現)</span>
+<span class="s">&quot;</span><span class="si">${</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">miles</span><span class="p">)</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">miles</span><span class="si">}</span><span class="s"> mi&quot;</span><span class="w">        </span><span class="c1">// &quot;5.0 mi&quot;</span>
+<span class="s">&quot;</span><span class="si">${</span><span class="p">((</span><span class="m">200</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">50</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">))</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">hectares</span><span class="si">}</span><span class="s"> ha&quot;</span><span class="w"> </span><span class="c1">// &quot;1.0 ha&quot;</span>
+</code></pre></div>
+<h2 id="_5">記法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（<code>²</code>、<code>³</code>、<code>⁻¹</code>）で表し、<code>·</code> は乗算、<code>/</code> は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。</p>
+<table>
+<thead>
+<tr>
+<th>数学</th>
+<th>Kotlin</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>m</code></td>
+<td><code>meters</code></td>
+<td>長さ、基本単位（メートル）</td>
+</tr>
+<tr>
+<td><code>km</code></td>
+<td><code>kilo.meters</code></td>
+<td>接頭辞付きの長さ（キロメートル）</td>
+</tr>
+<tr>
+<td><code>m²</code></td>
+<td><code>meters pow 2</code></td>
+<td>面積（メートルの2乗）</td>
+</tr>
+<tr>
+<td><code>m³</code></td>
+<td><code>meters pow 3</code></td>
+<td>体積（メートルの3乗）</td>
+</tr>
+<tr>
+<td><code>m⁻¹</code></td>
+<td><code>meters pow -1</code></td>
+<td>長さの逆数</td>
+</tr>
+<tr>
+<td><code>2 m · 2 m</code></td>
+<td><code>(2 of meters) * (2 of meters)</code></td>
+<td>長さ×長さで作る面積</td>
+</tr>
+<tr>
+<td><code>π · A</code></td>
+<td><code>Math.PI * area</code></td>
+<td>スカラー×面積（大きさのスケーリング、面積のまま）</td>
+</tr>
+<tr>
+<td><code>A / 2</code></td>
+<td><code>area / 2</code></td>
+<td>面積を数値で割る（面積のまま）</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
