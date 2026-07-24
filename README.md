@@ -71,7 +71,9 @@ mkdocs build
   (`10.5 of kilo.meters`), read with `value into <unit>` (`v into kilo.meters`, returns `Double`), and
   render value **and** unit symbol with `value format <unit>` (`v format kilo.meters / hours` → `"… km/h"`;
   a `format(target, pattern, locale, formatter)` overload adds number formatting and a pluggable
-  `KUnitFormatter` for custom notations like LaTeX).
+  `KUnitFormatter` for custom notations like LaTeX). The library ships `KDefaultUnitFormatter` (plain
+  text) and `KConsoleUnitFormatter` (ANSI-coloured console output, with a selectable `KConsoleColorPalette`
+  – `CLASSIC`, `VIVID`, `MONOCHROME`, or your own).
 * **`KUnitPrefix` & prefix builders** - the complete SI prefix table (Quetta/Q to Quecto/q) is exposed as
   **builder values** (`kilo`, `milli`, …) that turn a bare token into a value-1 template via property
   access (`kilo.meters`, `milli.seconds`). A compile-time hierarchy

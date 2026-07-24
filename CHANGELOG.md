@@ -2,6 +2,16 @@
 
 ## [UNRELEASED]
 
+### Added
+
+- **New `KConsoleUnitFormatter` for coloured console output.** A shipped `KUnitFormatter` that produces the
+  same notation as `KDefaultUnitFormatter` (`"10.8 km/h"`, `"m^2"`, `"m*s^-3*A^-2"`) but wraps each visual
+  role – number, unit symbol, operators (`*`, `/`) and exponents (`^n`) – in ANSI SGR colours. Colours are a
+  value type `KConsoleColorPalette` with three predefined palettes (`CLASSIC` – the default, `VIVID`,
+  `MONOCHROME`) and a fully custom option; the parameterless `KConsoleUnitFormatter()` uses `CLASSIC`. Pass
+  it like any other formatter (`v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter())`).
+  Full docs (Console Formatter, EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
 ## [0.6.0]
 
 ### Added
