@@ -6,6 +6,13 @@
 * The skillset and ruleset must be observed for every change
 * Test coverage must reach 100% at all times
   * If it does not, the tests must be extended appropriately to cover what is missing
+  * 100% tool-reported coverage is NOT sufficient on its own: every public API member
+    (builders, enum entries, constants, factories) MUST be verified by a real assertion
+  * Rationale: top-level `val` initializers and enum entries run in the class `<clinit>` at
+    class-loading, so a coverage tool marks them "covered" even when NO test ever reads or
+    asserts their value — such unused public API stays effectively untested despite 100%
+  * Therefore: unused/open public API MUST have its own assertion (e.g. every prefix builder,
+    not just a representative subset)
 * Do NOT scan ANY code of ANY project
   * Create code only based on the skillset and ruleset
 * Do NOT add new dependencies without asking

@@ -36,7 +36,16 @@ class KStoragePrefixTest {
         listOf(kilo to 1e3, mega to 1e6, giga to 1e9)
 
     private val binaryPrefixes: List<Pair<KStorageBinaryPrefixBuilder, Double>> =
-        listOf(kibi to 1024.0, mebi to 1_048_576.0, gibi to 1_073_741_824.0)
+        listOf(
+            kibi to 1024.0,
+            mebi to 1_048_576.0,
+            gibi to 1_073_741_824.0,
+            tebi to 1_099_511_627_776.0,
+            pebi to 1_125_899_906_842_624.0,
+            exbi to 1_152_921_504_606_846_976.0,
+            zebi to 1_180_591_620_717_411_303_424.0,
+            yobi to 1_208_925_819_614_629_174_706_176.0,
+        )
 
     private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-12)
     private fun siArgs(): List<Array<Any>> = siPrefixes.map { arrayOf<Any>(it.first, it.second) }
