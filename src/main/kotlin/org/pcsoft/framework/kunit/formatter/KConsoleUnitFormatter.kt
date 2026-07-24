@@ -34,9 +34,11 @@ import org.pcsoft.framework.kunit.KUnitTerm
  * dimensionless value renders as the coloured number alone.
  *
  * @property palette the colours applied to each visual role; defaults to [KConsoleColorPalette.CLASSIC].
+ * @property config the exponent style and arithmetic signs; defaults to [KConsoleFormatConfig.DEFAULT].
  */
 class KConsoleUnitFormatter(
     val palette: KConsoleColorPalette = KConsoleColorPalette.CLASSIC,
+    val config: KConsoleFormatConfig = KConsoleFormatConfig.DEFAULT,
 ) : KUnitFormatter {
 
     override fun format(context: KUnitFormatContext): String {
@@ -49,16 +51,22 @@ class KConsoleUnitFormatter(
     private fun wrap(code: String, text: String): String =
         if (code.isEmpty()) text else code + text + palette.reset
 
-    /** Renders a single term as a coloured `symbol` or `symbol^exponent` (the exponent kept with its sign). */
+    /** Renders a non-`1` exponent either as `^n` or as real superscript digits, per the config. */
+    private fun exponent(value: Int): String = when (config.exponentStyle) {
+        KConsoleExponentStyle.CARET -> "^$value"
+        KConsoleExponentStyle.SUPERSCRIPT -> renderSuperscriptExponent(value)
+    }
+
+    /** Renders a single term as a coloured symbol plus its (coloured) exponent marker, if any. */
     private fun signedTerm(term: KUnitTerm): String =
         wrap(palette.symbolColor, term.displaySymbol) +
-            if (term.exponent != 1) wrap(palette.exponentColor, "^${term.exponent}") else ""
+            if (term.exponent != 1) wrap(palette.exponentColor, exponent(term.exponent)) else ""
 
     private fun renderUnits(units: List<KUnitTerm>): String {
         if (units.isEmpty()) return ""
         val positives = units.filter { it.exponent > 0 }
         val negatives = units.filter { it.exponent < 0 }
-        val star = wrap(palette.operatorColor, "*")
+        val star = wrap(palette.operatorColor, config.multiplication.symbol)
 
         // Fraction notation only for the clean "a / b" shape: some numerator and exactly one denominator.
         if (positives.isNotEmpty() && negatives.size == 1) {
@@ -66,8 +74,8 @@ class KConsoleUnitFormatter(
             val denom = negatives.single()
             val magnitude = -denom.exponent
             val denominator = wrap(palette.symbolColor, denom.displaySymbol) +
-                if (magnitude != 1) wrap(palette.exponentColor, "^$magnitude") else ""
-            return numerator + wrap(palette.operatorColor, "/") + denominator
+                if (magnitude != 1) wrap(palette.exponentColor, exponent(magnitude)) else ""
+            return numerator + wrap(palette.operatorColor, config.division.symbol) + denominator
         }
 
         return units.joinToString(star) { signedTerm(it) }

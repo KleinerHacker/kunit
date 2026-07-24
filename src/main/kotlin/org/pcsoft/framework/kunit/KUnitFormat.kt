@@ -40,7 +40,7 @@ import java.util.Locale
  * ```
  */
 infix fun KUnitMeasurable.format(target: KUnitMeasurable): String =
-    format(target, null, Locale.getDefault(), KDefaultUnitFormatter)
+    format(target, null, Locale.getDefault(), KDefaultUnitFormatter())
 
 /**
  * Reads this value in [target] and renders it with an optional number [pattern]/[locale] and an optional
@@ -65,7 +65,7 @@ fun KUnitMeasurable.format(
     target: KUnitMeasurable,
     pattern: String?,
     locale: Locale = Locale.getDefault(),
-    formatter: KUnitFormatter = KDefaultUnitFormatter,
+    formatter: KUnitFormatter = KDefaultUnitFormatter(),
 ): String {
     val reading = this into target
     return formatter.format(KUnitFormatContext(reading, target.toUnit().units, pattern, locale))
@@ -91,7 +91,7 @@ fun KUnitMeasurable.format(
 fun KUnitMeasurable.toString(
     pattern: String?,
     locale: Locale = Locale.getDefault(),
-    formatter: KUnitFormatter = KDefaultUnitFormatter,
+    formatter: KUnitFormatter = KDefaultUnitFormatter(),
 ): String {
     val self = toUnit()
     return formatter.format(KUnitFormatContext(self.value, self.units, pattern, locale))

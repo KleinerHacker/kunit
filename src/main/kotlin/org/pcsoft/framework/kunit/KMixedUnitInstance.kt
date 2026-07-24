@@ -271,7 +271,7 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
      * (10 of meters / (2 of seconds)).toString() // "5.0 m/s"
      * ```
      */
-    override fun toString(): String = KDefaultUnitFormatter.format(KUnitFormatContext(value, units))
+    override fun toString(): String = KDefaultUnitFormatter().format(KUnitFormatContext(value, units))
 
     override fun equals(other: Any?): Boolean =
         other is KMixedUnitInstance && value == other.value && hasSameUnits(other)

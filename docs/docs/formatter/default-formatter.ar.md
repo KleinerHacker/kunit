@@ -5,7 +5,8 @@
 الذي ينتج النتيجة — نصًا بسيطًا قابلًا للقراءة مثل `"10.8 km/h"`. توضح هذه الصفحة بدقة **ماذا** يعرض
 و**كيف**، مع أمثلة للإخراج، وتبيّن كيفية استخدامه صراحةً.
 
-إنه `object` عديم الحالة (آمن للخيوط) ويقع في الحزمة `org.pcsoft.framework.kunit.formatter`.
+إنه `class` غير قابل للتغيير وآمن للخيوط ويقع في الحزمة `org.pcsoft.framework.kunit.formatter`. أنشئه بدون
+وسائط للسلوك التاريخي، أو مرّر `KDefaultFormatConfig` لتغيير طريقة العرض.
 
 ## ما الذي يُنتجه
 
@@ -69,10 +70,10 @@ import java.util.Locale
 val v = 3 of meters / seconds
 
 // مُنسِّق صريح، نفس نتيجة الاستدعاء الافتراضي
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // عرض الوحدات الأساسية بالمُنسِّق الافتراضي دون هدف
-(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter) // "5.0 m"
+(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"
 ```
 
 لإخراج تدوين مختلف تمامًا، راجع [مُنسِّق مخصص](custom-formatters.md).

@@ -6,7 +6,8 @@
 **क्या** और **कैसे** रेंडर करता है, आउटपुट उदाहरणों के साथ, और इसे स्पष्ट रूप से उपयोग करने का तरीका
 दिखाता है।
 
-यह एक स्टेटलेस `object` (थ्रेड-सुरक्षित) है और `org.pcsoft.framework.kunit.formatter` पैकेज में स्थित है।
+यह एक अपरिवर्तनीय, थ्रेड-सुरक्षित `class` है और `org.pcsoft.framework.kunit.formatter` पैकेज में स्थित है।
+ऐतिहासिक व्यवहार के लिए इसे बिना तर्क के बनाएं, या रेंडरिंग बदलने के लिए `KDefaultFormatConfig` पास करें।
 
 ## यह क्या उत्पन्न करता है
 
@@ -73,10 +74,10 @@ import java.util.Locale
 val v = 3 of meters / seconds
 
 // स्पष्ट फ़ॉर्मैटर, डिफ़ॉल्ट कॉल के समान परिणाम
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // लक्ष्य के बिना डिफ़ॉल्ट फ़ॉर्मैटर से आधार इकाइयाँ रेंडर करें
-(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter) // "5.0 m"
+(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"
 ```
 
 पूरी तरह से भिन्न संकेतन उत्पन्न करने के लिए, [कस्टम फ़ॉर्मैटर](custom-formatters.md) देखें।

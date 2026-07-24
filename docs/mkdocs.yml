@@ -78,6 +78,11 @@ plugins:
             Formatter: 포매터
             Default Formatter: 기본 포매터
             Console Formatter: 콘솔 포매터
+            Graphical Formatter: 그래픽 포매터
+            LaTeX Formatter: LaTeX 포매터
+            MathML Formatter: MathML 포매터
+            AsciiMath Formatter: AsciiMath 포매터
+            Typst Formatter: Typst 포매터
             Custom Formatter: 사용자 정의 포매터
             Kinematics: 운동학
             Mechanics: 역학
@@ -115,6 +120,11 @@ plugins:
             Formatter: 格式化器
             Default Formatter: 默认格式化器
             Console Formatter: 控制台格式化器
+            Graphical Formatter: 图形格式化器
+            LaTeX Formatter: LaTeX 格式化器
+            MathML Formatter: MathML 格式化器
+            AsciiMath Formatter: AsciiMath 格式化器
+            Typst Formatter: Typst 格式化器
             Custom Formatter: 自定义格式化器
             Kinematics: 运动学
             Mechanics: 力学
@@ -152,6 +162,11 @@ plugins:
             Formatter: フォーマッター
             Default Formatter: デフォルトフォーマッター
             Console Formatter: コンソールフォーマッター
+            Graphical Formatter: グラフィカルフォーマッター
+            LaTeX Formatter: LaTeX フォーマッター
+            MathML Formatter: MathML フォーマッター
+            AsciiMath Formatter: AsciiMath フォーマッター
+            Typst Formatter: Typst フォーマッター
             Custom Formatter: カスタムフォーマッター
             Kinematics: 運動学
             Mechanics: 力学
@@ -189,6 +204,11 @@ plugins:
             Formatter: المُنسِّق
             Default Formatter: المُنسِّق الافتراضي
             Console Formatter: مُنسِّق الطرفية
+            Graphical Formatter: المُنسِّق الرسومي
+            LaTeX Formatter: مُنسِّق LaTeX
+            MathML Formatter: مُنسِّق MathML
+            AsciiMath Formatter: مُنسِّق AsciiMath
+            Typst Formatter: مُنسِّق Typst
             Custom Formatter: مُنسِّق مخصص
             Kinematics: علم الحركة
             Mechanics: الميكانيكا
@@ -226,6 +246,11 @@ plugins:
             Formatter: फ़ॉर्मैटर
             Default Formatter: डिफ़ॉल्ट फ़ॉर्मैटर
             Console Formatter: कंसोल फ़ॉर्मैटर
+            Graphical Formatter: ग्राफ़िकल फ़ॉर्मैटर
+            LaTeX Formatter: LaTeX फ़ॉर्मैटर
+            MathML Formatter: MathML फ़ॉर्मैटर
+            AsciiMath Formatter: AsciiMath फ़ॉर्मैटर
+            Typst Formatter: Typst फ़ॉर्मैटर
             Custom Formatter: कस्टम फ़ॉर्मैटर
             Kinematics: शुद्धगतिकी
             Mechanics: यांत्रिकी
@@ -262,6 +287,11 @@ nav:
       - Overview: formatter/formatting.md
       - Default Formatter: formatter/default-formatter.md
       - Console Formatter: formatter/console-formatter.md
+      - Graphical Formatter: formatter/graphical-formatter.md
+      - LaTeX Formatter: formatter/latex-formatter.md
+      - MathML Formatter: formatter/mathml-formatter.md
+      - AsciiMath Formatter: formatter/asciimath-formatter.md
+      - Typst Formatter: formatter/typst-formatter.md
       - Custom Formatter: formatter/custom-formatters.md
   - Kinematics:
       - Overview: units/kinematics/overview.md

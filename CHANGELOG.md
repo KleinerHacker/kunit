@@ -4,6 +4,31 @@
 
 ### Added
 
+- **New math-formula formatters (LaTeX, MathML, AsciiMath, Typst).** Four shipped `KUnitFormatter`s that
+  translate a rendered value into the input syntax of the common formula renderers (MathJax, KaTeX,
+  browser MathML, Typst): `KLatexUnitFormatter` (`1.5\,\frac{\mathrm{km}}{\mathrm{h}}`),
+  `KMathMlUnitFormatter` (an inline `<math>` with `<mfrac>`), `KAsciiMathUnitFormatter` (`10.8 "km"/"h"`)
+  and `KTypstUnitFormatter` (`$1.5 upright("km")/upright("h")$`). Each is a configurable, immutable class
+  with a parameterless default and a matching config value type plus presets
+  (`KLatexFormatConfig`/`KMathMlFormatConfig`/`KAsciiMathFormatConfig`/`KTypstFormatConfig`): fraction vs.
+  inline/exponent layout, unit wrapping/quoting, multiplication marker and delimiter/root wrapper. Pass
+  them like any other formatter (`v.format(target, "%.1f", Locale.US, KLatexUnitFormatter())`). Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New `KGraphicalConsoleUnitFormatter` for multi-line graphical console output.** Renders a fraction as a
+  real two-dimensional stack (numerator, horizontal bar, denominator) with the value on the bar line, using
+  real Unicode superscript exponents and ANSI colours for all five roles (number, symbol, operator,
+  exponent, bar) via the new `KGraphicalConsoleColorPalette` (`CLASSIC`/`VIVID`/`MONOCHROME`). Configurable
+  through `KGraphicalConsoleFormatConfig` (palette, fraction-bar character, multiplication sign, function
+  symbols). Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **Configurable exponent style, arithmetic signs and function symbols for the console-based formatters.**
+  `KDefaultUnitFormatter` and `KConsoleUnitFormatter` now take a config value type (`KDefaultFormatConfig`
+  / `KConsoleFormatConfig`) offering real Unicode superscript exponents (`m²`, `s⁻¹`) instead of `^n`, a
+  choice of multiplication (`*`, `·`, `×`) and division (`/`, `÷`) sign, and a user-overridable function-symbol
+  table (`√`, `∛`, `∜`, `±`, `∞`, `°` with an `ASCII` fallback). The parameterless constructors keep the
+  historical `m^2`/`*`/`/` output. The graphical formatter always uses superscript exponents.
+
 - **New `KConsoleUnitFormatter` for coloured console output.** A shipped `KUnitFormatter` that produces the
   same notation as `KDefaultUnitFormatter` (`"10.8 km/h"`, `"m^2"`, `"m*s^-3*A^-2"`) but wraps each visual
   role – number, unit symbol, operators (`*`, `/`) and exponents (`^n`) – in ANSI SGR colours. Colours are a
@@ -11,6 +36,13 @@
   `MONOCHROME`) and a fully custom option; the parameterless `KConsoleUnitFormatter()` uses `CLASSIC`. Pass
   it like any other formatter (`v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter())`).
   Full docs (Console Formatter, EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+### Changed
+
+- **Breaking: `KDefaultUnitFormatter` is now a class instead of an `object`.** To make its rendering
+  configurable it became `class KDefaultUnitFormatter(config = KDefaultFormatConfig.DEFAULT)`. Replace the
+  object reference `KDefaultUnitFormatter` with an instance `KDefaultUnitFormatter()`; the default output is
+  unchanged.
 
 ## [0.6.0]
 

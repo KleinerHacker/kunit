@@ -92,3 +92,12 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 色だけでなくまったく異なる記法を出力するには、独自の
 [カスタムフォーマッター](custom-formatters.md) を実装してください。
+
+## 設定（指数・記号・関数記号）
+
+色とは独立に、2 番目の引数 `KConsoleFormatConfig` が記法を制御します（[デフォルトフォーマッター](default-formatter.md)
+と同じ）: `exponentStyle`（`CARET` = `m^2` / `SUPERSCRIPT` = `m²`）、`multiplication`（`*` / `·` / `×`）、
+`division`（`/` / `÷`）、および `functionSymbols`（`UNICODE` / `ASCII`）。両引数とも既定値があるため
+`KConsoleUnitFormatter()` は従来どおりです。`KConsoleUnitFormatter(palette, config)` のように渡します。
+
+本物の分数線を持つ複数行の 2 次元分数には [グラフィカルフォーマッター](graphical-formatter.md) を参照してください。

@@ -5,7 +5,9 @@
 produces the result — plain, human-readable text such as `"10.8 km/h"`. This page describes exactly **what**
 it renders and **how**, with example outputs, and shows how to use it explicitly.
 
-It is a stateless `object` (thread-safe) and lives in the `org.pcsoft.framework.kunit.formatter` package.
+It is an immutable, thread-safe `class` and lives in the `org.pcsoft.framework.kunit.formatter` package.
+Construct it without arguments for the historical behaviour, or pass a `KDefaultFormatConfig` to change how
+it renders (see [Configuration](#configuration)).
 
 ## What it produces
 
@@ -55,6 +57,30 @@ import org.pcsoft.framework.kunit.time.*
 (9.81 of meters / (seconds pow 2)).format(meters / (seconds pow 2), "%.2f") // "9.81 m/s^2"
 ```
 
+## Configuration
+
+`KDefaultFormatConfig` (a value type) changes the rendering without affecting the layout rules:
+
+| Option            | Values                                     | Default   |
+|-------------------|--------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)      | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)              | `SLASH`   |
+| `functionSymbols` | `KDefaultFunctionSymbols` — `UNICODE`, `ASCII` (`√`/`sqrt`, …) | `UNICODE` |
+
+The `functionSymbols` table (roots `√`/`∛`/`∜`, `±`, `∞`, `°`) is prepared configuration for where a function
+representation applies; with plain integer exponents it is not used. Presets: `DEFAULT` (historical output),
+`SUPERSCRIPT` (real superscript exponents).
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
+import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
+
+(9.81 of meters / (seconds pow 2))
+    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+// "9.81 m/s²"
+```
+
 ## Using it explicitly
 
 The default formatter is applied automatically, so you rarely name it. You may still pass it explicitly —
@@ -71,10 +97,10 @@ import java.util.Locale
 val v = 3 of meters / seconds
 
 // explicit formatter, same result as the default call
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // base-unit rendering with the default formatter and no target
-(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter) // "5.0 m"
+(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"
 ```
 
 To emit a completely different notation instead, see [Custom Formatter](custom-formatters.md).

@@ -92,3 +92,12 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 केवल रंग ही नहीं, बल्कि पूरी तरह भिन्न संकेतन उत्पन्न करने के लिए, इसके बजाय अपना स्वयं का
 [कस्टम फ़ॉर्मैटर](custom-formatters.md) कार्यान्वित करें।
+
+## कॉन्फ़िगरेशन (घातांक, चिह्न, फलन प्रतीक)
+
+रंगों से स्वतंत्र, दूसरा तर्क `KConsoleFormatConfig` नोटेशन को नियंत्रित करता है ([डिफ़ॉल्ट फ़ॉर्मैटर](default-formatter.md)
+के समान): `exponentStyle` (`CARET` = `m^2` / `SUPERSCRIPT` = `m²`), `multiplication` (`*` / `·` / `×`),
+`division` (`/` / `÷`), और `functionSymbols` (`UNICODE` / `ASCII`)। दोनों तर्कों में डिफ़ॉल्ट हैं, इसलिए
+`KConsoleUnitFormatter()` पहले जैसा ही है। इसे `KConsoleUnitFormatter(palette, config)` के रूप में पास करें।
+
+वास्तविक भिन्न-रेखा वाले बहु-पंक्ति द्वि-आयामी भिन्न के लिए, [ग्राफ़िकल फ़ॉर्मैटर](graphical-formatter.md) देखें।

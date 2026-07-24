@@ -136,4 +136,47 @@ class KConsoleUnitFormatterTest {
         val expected = "N1R" + " " + "SmR" + "O/R" + "SsR"
         assertEquals(expected, KConsoleUnitFormatter(p).format(context))
     }
+
+    /** SUPERSCRIPT config colours a real superscript exponent (`s⁻¹`). */
+    @Test
+    fun `superscript exponent`() {
+        val sup = 0x207B.toChar().toString() + 0x00B9.toChar().toString()
+        val context = KUnitFormatContext(2.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)), "%.1f", Locale.US)
+        val expected = col(classic.numberColor, "2.0") + " " +
+            col(classic.symbolColor, "s") + col(classic.exponentColor, sup)
+        val formatter = KConsoleUnitFormatter(classic, KConsoleFormatConfig.SUPERSCRIPT)
+        assertEquals(expected, formatter.format(context))
+    }
+
+    /** A MIDDLE_DOT multiplication sign is coloured as the operator. */
+    @Test
+    fun `middle dot multiplication`() {
+        val dot = KConsoleMultiplication.MIDDLE_DOT.symbol
+        val context = KUnitFormatContext(
+            1.0,
+            listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, 1)),
+            "%.0f",
+            Locale.US,
+        )
+        val config = KConsoleFormatConfig(multiplication = KConsoleMultiplication.MIDDLE_DOT)
+        val expected = col(classic.numberColor, "1") + " " +
+            col(classic.symbolColor, "m") + col(classic.operatorColor, dot) + col(classic.symbolColor, "s")
+        assertEquals(expected, KConsoleUnitFormatter(classic, config).format(context))
+    }
+
+    /** An OBELUS division sign is coloured as the operator. */
+    @Test
+    fun `obelus division`() {
+        val obelus = KConsoleDivision.OBELUS.symbol
+        val context = KUnitFormatContext(
+            10.8,
+            listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1)),
+            "%.1f",
+            Locale.US,
+        )
+        val config = KConsoleFormatConfig(division = KConsoleDivision.OBELUS)
+        val expected = col(classic.numberColor, "10.8") + " " +
+            col(classic.symbolColor, "m") + col(classic.operatorColor, obelus) + col(classic.symbolColor, "s")
+        assertEquals(expected, KConsoleUnitFormatter(classic, config).format(context))
+    }
 }

@@ -89,3 +89,12 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 若需输出完全不同的记法（而不仅是颜色），请改为实现你自己的
 [自定义格式化器](custom-formatters.md)。
+
+## 配置（指数、符号、函数符号）
+
+与颜色无关，第二个参数 `KConsoleFormatConfig` 控制记法（与[默认格式化器](default-formatter.md)相同）：
+`exponentStyle`（`CARET` = `m^2` / `SUPERSCRIPT` = `m²`）、`multiplication`（`*` / `·` / `×`）、
+`division`（`/` / `÷`）以及 `functionSymbols`（`UNICODE` / `ASCII`）。两个参数都有默认值，因此
+`KConsoleUnitFormatter()` 与以往一致。按 `KConsoleUnitFormatter(palette, config)` 传入。
+
+若需带真实分数线的多行二维分数，请参阅[图形格式化器](graphical-formatter.md)。

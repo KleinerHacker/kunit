@@ -73,7 +73,11 @@ mkdocs build
   a `format(target, pattern, locale, formatter)` overload adds number formatting and a pluggable
   `KUnitFormatter` for custom notations like LaTeX). The library ships `KDefaultUnitFormatter` (plain
   text) and `KConsoleUnitFormatter` (ANSI-coloured console output, with a selectable `KConsoleColorPalette`
-  – `CLASSIC`, `VIVID`, `MONOCHROME`, or your own).
+  – `CLASSIC`, `VIVID`, `MONOCHROME`, or your own) – both configurable for real superscript exponents (`m²`),
+  the multiplication/division sign and function symbols. Math-formula renderers are covered by
+  `KLatexUnitFormatter`, `KMathMlUnitFormatter`, `KAsciiMathUnitFormatter` and `KTypstUnitFormatter`
+  (each with its own config + presets), and `KGraphicalConsoleUnitFormatter` draws multi-line coloured
+  fractions with a real fraction bar in the terminal.
 * **`KUnitPrefix` & prefix builders** - the complete SI prefix table (Quetta/Q to Quecto/q) is exposed as
   **builder values** (`kilo`, `milli`, …) that turn a bare token into a value-1 template via property
   access (`kilo.meters`, `milli.seconds`). A compile-time hierarchy
@@ -161,7 +165,8 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 
 * `KMixedUnitInstance`/`KUnitTerm` mixed-unit engine with full operators and base-unit `toString`
 * `of` / `into` / `format` construction, reading & rendering verbs (`Number.of`, `KUnitMeasurable.into`,
-  `KUnitMeasurable.format`, `scaledBy`), with a pluggable `KUnitFormatter`/`KDefaultUnitFormatter`
+  `KUnitMeasurable.format`, `scaledBy`), with a pluggable `KUnitFormatter` and shipped formatters for plain
+  text, ANSI console, multi-line graphical console, LaTeX, MathML, AsciiMath and Typst
 * Complete SI prefix table (24 values) exposed as prefix **builders** (`kilo`, `milli`, …), plus the
   binary IEC builders (`kibi`, …); the `KPrefixBuilder` hierarchy enforces per-unit prefix policy at
   compile time

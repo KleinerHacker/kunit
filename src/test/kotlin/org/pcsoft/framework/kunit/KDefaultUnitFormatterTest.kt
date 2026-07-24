@@ -12,6 +12,9 @@
 
 package org.pcsoft.framework.kunit
 
+import org.pcsoft.framework.kunit.formatter.KDefaultDivision
+import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
+import org.pcsoft.framework.kunit.formatter.KDefaultMultiplication
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.formatter.KUnitFormatContext
 import org.pcsoft.framework.kunit.distance.KDistanceUnit
@@ -29,8 +32,13 @@ import kotlin.test.assertFailsWith
  */
 class KDefaultUnitFormatterTest {
 
-    private fun render(value: Double, units: List<KUnitTerm>, pattern: String? = null, locale: Locale = Locale.US) =
-        KDefaultUnitFormatter.format(KUnitFormatContext(value, units, pattern, locale))
+    private fun render(
+        value: Double,
+        units: List<KUnitTerm>,
+        pattern: String? = null,
+        locale: Locale = Locale.US,
+        config: KDefaultFormatConfig = KDefaultFormatConfig.DEFAULT,
+    ) = KDefaultUnitFormatter(config).format(KUnitFormatContext(value, units, pattern, locale))
 
     /** No terms -> just the number, no trailing unit part. */
     @Test
@@ -116,5 +124,52 @@ class KDefaultUnitFormatterTest {
         assertFailsWith<java.util.IllegalFormatException> {
             render(1.0, listOf(KUnitTerm(KDistanceUnit.BASE, 1)), pattern = "%.2d")
         }
+    }
+
+    /** SUPERSCRIPT config renders a positive exponent as real superscript digits (`m²`). */
+    @Test
+    fun `superscript positive exponent`() {
+        val sup2 = 0x00B2.toChar().toString()
+        assertEquals(
+            "20000.0 m$sup2",
+            render(20000.0, listOf(KUnitTerm(KDistanceUnit.BASE, 2)), config = KDefaultFormatConfig.SUPERSCRIPT),
+        )
+    }
+
+    /** SUPERSCRIPT config renders a negative exponent with the superscript minus (`s⁻¹`). */
+    @Test
+    fun `superscript negative exponent`() {
+        val supMinus1 = 0x207B.toChar().toString() + 0x00B9.toChar().toString()
+        assertEquals(
+            "2.0 s$supMinus1",
+            render(2.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)), config = KDefaultFormatConfig.SUPERSCRIPT),
+        )
+    }
+
+    /** The MIDDLE_DOT multiplication sign is used between product terms. */
+    @Test
+    fun `middle dot multiplication`() {
+        val dot = KDefaultMultiplication.MIDDLE_DOT.symbol
+        val units = listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KMassUnit.BASE, 1))
+        val config = KDefaultFormatConfig(multiplication = KDefaultMultiplication.MIDDLE_DOT)
+        assertEquals("1.0 m${dot}g", render(1.0, units, config = config))
+    }
+
+    /** The CROSS multiplication sign is used between product terms. */
+    @Test
+    fun `cross multiplication`() {
+        val cross = KDefaultMultiplication.CROSS.symbol
+        val units = listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KMassUnit.BASE, 1))
+        val config = KDefaultFormatConfig(multiplication = KDefaultMultiplication.CROSS)
+        assertEquals("1.0 m${cross}g", render(1.0, units, config = config))
+    }
+
+    /** The OBELUS division sign is used between numerator and denominator. */
+    @Test
+    fun `obelus division`() {
+        val obelus = KDefaultDivision.OBELUS.symbol
+        val units = listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))
+        val config = KDefaultFormatConfig(division = KDefaultDivision.OBELUS)
+        assertEquals("10.8 m${obelus}s", render(10.8, units, config = config))
     }
 }

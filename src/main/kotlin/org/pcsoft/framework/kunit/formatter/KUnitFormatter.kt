@@ -74,8 +74,9 @@ val KUnitTerm.displaySymbol: String get() = if (display == null) unit.symbol els
  * explicitly (`v.format(target, null, formatter = LatexFormatter)`), so the default behaviour never changes
  * unless asked for.
  *
- * Implementations should be **stateless** and therefore thread-safe (like [KDefaultUnitFormatter], an
- * `object`); the reusable helpers [renderValue] and [displaySymbol] cover the common building blocks.
+ * Implementations should be **stateless** (or immutable) and therefore thread-safe (like
+ * [KDefaultUnitFormatter], an immutable `class`); the reusable helpers [renderValue] and [displaySymbol]
+ * cover the common building blocks.
  *
  * Example:
  * ```kotlin

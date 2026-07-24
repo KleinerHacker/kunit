@@ -70,6 +70,33 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))
 ```
 
+## Configuration (exponents, signs, function symbols)
+
+Independently of the colours, a second argument `KConsoleFormatConfig` controls the notation, exactly like
+the [Default Formatter](default-formatter.md):
+
+| Option            | Values                                     | Default   |
+|-------------------|--------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)      | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)              | `SLASH`   |
+| `functionSymbols` | `KConsoleFunctionSymbols` — `UNICODE`, `ASCII` | `UNICODE` |
+
+Both constructor arguments default, so `KConsoleUnitFormatter()` is the classic palette with the historical
+notation. Pass the config as the second argument (`KConsoleUnitFormatter(palette, config)`):
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
+import org.pcsoft.framework.kunit.formatter.KConsoleFormatConfig
+import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
+
+val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleFormatConfig.SUPERSCRIPT)
+// renders "m²", "s⁻¹" with real superscript exponents, coloured as usual
+```
+
+For a multi-line, two-dimensional fraction (a real fraction bar), see the
+[Graphical Formatter](graphical-formatter.md).
+
 ## Defining your own palette
 
 `KConsoleColorPalette` is a plain data class, so you can supply your own colour sequences. Each field

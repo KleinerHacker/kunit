@@ -90,3 +90,13 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 لإخراج ترميز مختلف تمامًا (وليس مجرد ألوان)، نفِّذ بدلًا من ذلك
 [مُنسِّقًا مخصصًا](custom-formatters.md) خاصًا بك.
+
+## الإعداد (الأُسّ والعلامات والرموز الدالّية)
+
+بمعزل عن الألوان، تتحكم الوسيطة الثانية `KConsoleFormatConfig` في التدوين (كما في
+[المُنسِّق الافتراضي](default-formatter.md)): `exponentStyle` (`CARET` = `m^2` / `SUPERSCRIPT` = `m²`)،
+و`multiplication` (`*` / `·` / `×`)، و`division` (`/` / `÷`)، و`functionSymbols` (`UNICODE` / `ASCII`).
+لكلتا الوسيطتين قيم افتراضية، لذا `KConsoleUnitFormatter()` كما كان. مرّرها بالشكل
+`KConsoleUnitFormatter(palette, config)`.
+
+للكسر ثنائي الأبعاد متعدد الأسطر بخط كسر حقيقي، راجع [المُنسِّق الرسومي](graphical-formatter.md).

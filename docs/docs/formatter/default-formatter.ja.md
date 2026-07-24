@@ -5,8 +5,8 @@
 生成します。出力は `"10.8 km/h"` のような、人が読めるプレーンテキストです。このページでは、**何を**
 **どのように**描画するのかを、出力例とともに正確に説明し、明示的な使い方も示します。
 
-これはステートレスな `object`（スレッドセーフ）であり、`org.pcsoft.framework.kunit.formatter`
-パッケージにあります。
+これは不変でスレッドセーフな `class` であり、`org.pcsoft.framework.kunit.formatter` パッケージにあります。
+既定の動作には引数なしで構築し、描画方法を変えるには `KDefaultFormatConfig` を渡します。
 
 ## 生成される内容
 
@@ -73,10 +73,10 @@ import java.util.Locale
 val v = 3 of meters / seconds
 
 // 明示的なフォーマッター、デフォルト呼び出しと同じ結果
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // ターゲットなしで基準単位をデフォルトフォーマッターで描画
-(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter) // "5.0 m"
+(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"
 ```
 
 まったく異なる記法を出力するには、[カスタムフォーマッター](custom-formatters.md) を参照してください。

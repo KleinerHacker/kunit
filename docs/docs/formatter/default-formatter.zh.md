@@ -4,7 +4,8 @@
 `toString` 而 **不** 传入自己的格式化器时，都会由它生成结果 —— 纯粹、易读的文本，例如 `"10.8 km/h"`。
 本页精确说明它 **渲染什么** 以及 **如何渲染**，附带输出示例，并展示如何显式使用它。
 
-它是一个无状态的 `object`（线程安全），位于 `org.pcsoft.framework.kunit.formatter` 包中。
+它是不可变且线程安全的 `class`，位于 `org.pcsoft.framework.kunit.formatter` 包中。无参构造保持历史行为，
+或传入 `KDefaultFormatConfig` 以更改渲染方式。
 
 ## 生成的内容
 
@@ -68,10 +69,10 @@ import java.util.Locale
 val v = 3 of meters / seconds
 
 // 显式格式化器，结果与默认调用相同
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // 不带目标，用默认格式化器渲染基准单位
-(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter) // "5.0 m"
+(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"
 ```
 
 若要输出完全不同的记法，请参阅 [自定义格式化器](custom-formatters.md)。

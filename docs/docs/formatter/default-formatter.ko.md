@@ -5,7 +5,8 @@
 생성합니다 — `"10.8 km/h"` 처럼 사람이 읽을 수 있는 평문 텍스트입니다. 이 페이지는 **무엇을**
 **어떻게** 렌더링하는지 출력 예시와 함께 정확히 설명하고, 명시적으로 사용하는 방법도 보여줍니다.
 
-이것은 상태가 없는 `object`(스레드 안전)이며 `org.pcsoft.framework.kunit.formatter` 패키지에 있습니다.
+이것은 불변이고 스레드 안전한 `class`이며 `org.pcsoft.framework.kunit.formatter` 패키지에 있습니다.
+기존 동작에는 인수 없이 생성하고, 렌더링을 바꾸려면 `KDefaultFormatConfig`를 전달하세요.
 
 ## 생성되는 내용
 
@@ -71,10 +72,10 @@ import java.util.Locale
 val v = 3 of meters / seconds
 
 // 명시적 포매터, 기본 호출과 동일한 결과
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // 타깃 없이 기본 포매터로 기준 단위 렌더링
-(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter) // "5.0 m"
+(5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"
 ```
 
 완전히 다른 표기법을 출력하려면 [사용자 정의 포매터](custom-formatters.md) 를 참조하세요.
