@@ -4,6 +4,14 @@
 
 ### Added
 
+- **New standardized unit Storage Density (`storage · length⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.storagedensity` with base unit byte per square meter (`B/m²`,
+  `KStorageDensityUnit.BASE`). Built as a storage-per-area expression (`(100 of bytes) / area`,
+  `5 of mega.bytes / area`); the typed cross-group operators `storage / area = storage density`,
+  `storage density * area = storage` (and its commutative form), and `storage / storage density = area`
+  move between the core units without a raw mixed unit. `KMixedUnitInstance.toStorageDensity()` recognizes
+  the canonical `B·m⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
 - **New math-formula formatters (LaTeX, MathML, AsciiMath, Typst).** Four shipped `KUnitFormatter`s that
   translate a rendered value into the input syntax of the common formula renderers (MathJax, KaTeX,
   browser MathML, Typst): `KLatexUnitFormatter` (`1.5\,\frac{\mathrm{km}}{\mathrm{h}}`),

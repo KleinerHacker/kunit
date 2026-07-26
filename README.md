@@ -186,6 +186,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Temperature Difference | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
 | Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.speed` | Meter per second (`KSpeedUnit.BASE`) |
 | Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.datarate` | Byte per second (`KDataRateUnit.BASE`) |
+| Storage Density (constructed: storage·length⁻²) | `org.pcsoft.framework.kunit.storagedensity` | Byte per square meter (`KStorageDensityUnit.BASE`) |
 | Acceleration (constructed: length·time⁻²) | `org.pcsoft.framework.kunit.acceleration` | Meter per second squared (`KAccelerationUnit.BASE`) |
 | Force (constructed: mass·length·time⁻²) | `org.pcsoft.framework.kunit.force` | Newton (`KForceUnit.BASE`) |
 | Pressure (constructed: mass·length⁻¹·time⁻²) | `org.pcsoft.framework.kunit.pressure` | Pascal (`KPressureUnit.BASE`) |
@@ -310,6 +311,9 @@ d.toString()                                           // "20.0 ΔK"  (ΔK, dist
   or `5 of mega.bytes / seconds` (a `KDataRateUnitInstance`), recover the core units with `rate * time` /
   `storage / rate`. Built only as an expression (no `bytesPerSecond` token); binary numerator via
   `kibi.bytes / seconds`.
+* **Storage Density** (`KStorageDensityUnit`) - `storage · length⁻²`; build it with
+  `(100 of bytes) / area` or `5 of mega.bytes / area` (a `KStorageDensityUnitInstance`), recover the core
+  units with `density * area` / `storage / density`. Built only as an expression (no spelled-out token).
 * **Acceleration** (`KAccelerationUnit`) - `length · time⁻²`; named tokens `gals`, `standardGravities`
   (both prefixable); build via `speed / time`, recover with `acceleration * time` / `speed / acceleration`.
 * **Force** (`KForceUnit`) - `mass · length · time⁻²`; tokens `newtons`, `dynes`, `poundsForce`, `ponds`

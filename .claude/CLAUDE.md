@@ -21,6 +21,7 @@
   * Keep the old code and mark it as deprecated with a reference to the new code (recommended)
   * Keep the old code and mark it for removal with a reference to the new code
   * Apply the change without regard for the breaking change (remove the old code, add the new one)
+* ALWAYS edit ANY file at one time (not in parts)
 
 # Communication Notes
 
@@ -58,6 +59,12 @@
 
 * A plan describes multiple tasks to do
   * Describe each part in short bullet points (max. 20 words each)
-  * Do NOT create a plan summary
-    * All bullet points MUST describe each task to implement it
-* Do not execute the whole plan at once; work through it task by task
+  * All bullet points MUST describe each task to implement it
+* Do NOT create a plan summary at ANY TIME
+
+# GIT
+
+* ALWAYS use GIt commands for:
+  * Renaming and Moving: git mv
+  * Deleting: git rm
+  * Creating: git add

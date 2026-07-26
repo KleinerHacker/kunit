@@ -101,6 +101,7 @@ plugins:
             Temperature Difference: 온도 차
             Speed: 속도
             Data Rate: 데이터 전송률
+            Storage Density: 저장 밀도
             Acceleration: 가속도
             Force: 힘
             Pressure: 압력
@@ -143,6 +144,7 @@ plugins:
             Temperature Difference: 温度差
             Speed: 速度
             Data Rate: 数据速率
+            Storage Density: 存储密度
             Acceleration: 加速度
             Force: 力
             Pressure: 压力
@@ -185,6 +187,7 @@ plugins:
             Temperature Difference: 温度差
             Speed: 速度
             Data Rate: データレート
+            Storage Density: 記憶密度
             Acceleration: 加速度
             Force: 力
             Pressure: 圧力
@@ -227,6 +230,7 @@ plugins:
             Temperature Difference: فرق درجة الحرارة
             Speed: السرعة
             Data Rate: معدل البيانات
+            Storage Density: كثافة التخزين
             Acceleration: التسارع
             Force: القوة
             Pressure: الضغط
@@ -269,6 +273,7 @@ plugins:
             Temperature Difference: तापमान अंतर
             Speed: चाल
             Data Rate: डेटा दर
+            Storage Density: भंडारण घनत्व
             Acceleration: त्वरण
             Force: बल
             Pressure: दाब
@@ -322,5 +327,6 @@ nav:
       - Overview: units/information/overview.md
       - Storage: units/information/storage.md
       - Data Rate: units/information/datarate.md
+      - Storage Density: units/information/storage-density.md
   - API Docs: dokka/html/index.html
   - Licences: licences/index.html
