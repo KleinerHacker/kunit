@@ -4,6 +4,30 @@
 
 ### Added
 
+- **New standardized unit Charge (`current · time`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.charge` with base unit coulomb (`C`, `KChargeUnit.BASE`) and the tokens
+  `coulombs`, `ampereSeconds`, `ampereHours`, `abcoulombs`, `statcoulombs`, `faradays`,
+  `elementaryCharges` (all combinable with every prefix, e.g. `milli.ampereHours`). Typed cross-group
+  operators `current * time` (and its commutative form), `current / frequency`, `charge / time = current`,
+  `charge / current = time` and `charge * frequency = current`; `KMixedUnitInstance.toCharge()` recognizes
+  the canonical `A·s` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Conductance (`mass⁻¹ · length⁻² · time³ · current²`).** A constructed unit group
+  in `org.pcsoft.framework.kunit.conductance` with base unit siemens (`S`, `KConductanceUnit.BASE`) and the
+  tokens `siemens`, `mhos`, `abmhos`, `statmhos` (all prefix-combinable, e.g. `milli.siemens`). Typed
+  cross-group operators `current / voltage`, the reciprocal `1 / resistance = conductance` and
+  `1 / conductance = resistance`, plus `conductance * voltage = current` (and its commutative form) and
+  `current / conductance = voltage`; `KMixedUnitInstance.toConductance()` recognizes the canonical
+  `kg⁻¹·m⁻²·s³·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Magnetic Field Strength (`current · length⁻¹`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.magneticfieldstrength` with base unit ampere per meter (`A/m`,
+  `KMagneticFieldStrengthUnit.BASE`) and the tokens `amperesPerMeter`, `oersteds`, `gilbertsPerCentimeter`,
+  `ampereTurnsPerInch` (all prefix-combinable, e.g. `kilo.amperesPerMeter`). Typed cross-group operators
+  `current / length = field strength` and `field strength * length = current` (magnetomotive force, plus
+  its commutative form); `KMixedUnitInstance.toMagneticFieldStrength()` recognizes the canonical `A·m⁻¹`
+  normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
 - **New standardized unit Storage Density (`storage · length⁻²`).** A constructed unit group in
   `org.pcsoft.framework.kunit.storagedensity` with base unit byte per square meter (`B/m²`,
   `KStorageDensityUnit.BASE`). Built as a storage-per-area expression (`(100 of bytes) / area`,

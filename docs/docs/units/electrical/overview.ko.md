@@ -1,10 +1,12 @@
 # 전기공학 — 개요
 
-패키지: `org.pcsoft.framework.kunit.ec`, `…voltage`, `…resistance`
+패키지: `org.pcsoft.framework.kunit.ec`, `…voltage`, `…resistance`, `…charge`, `…conductance`,
+`…magneticfieldstrength`
 
 전기공학은 회로를 흐르는 전류, 그것을 구동하는 전압, 그리고 그것을 방해하는 저항을 함께 묶습니다. 이
 셋은 **옴의 법칙**으로 연결되며, KUnit은 그 법칙을 타입이 지정된 `*`와 `/` 연산자로 직접 표현합니다.
-1개의 **네이티브** 기본량(전류)과 기본 차원에서 **구성된** 2개의 양(전압과 저항)입니다.
+1개의 **네이티브** 기본량(전류)과 기본 차원에서 **구성된** 양들(전압, 저항, 전하, 컨덕턴스, 자기장
+세기)입니다.
 
 ## 이 주제의 단위
 
@@ -13,6 +15,9 @@
 | 전류 | 네이티브 | 암페어(`A`) | [전류](ec.md) |
 | 전압 | 구성 | 볼트(`V`) | [전압](voltage.md) |
 | 저항 | 구성 | 옴(`Ω`) | [저항](resistance.md) |
+| 전하 | 구성 | 쿨롬(`C`) | [전하](charge.md) |
+| 컨덕턴스 | 구성 | 지멘스(`S`) | [컨덕턴스](conductance.md) |
+| 자기장 세기 | 구성 | 미터당 암페어(`A/m`) | [자기장 세기](magneticfieldstrength.md) |
 
 ## 타입 지정 연산자로서의 옴의 법칙
 
@@ -22,10 +27,27 @@
 | `current * resistance` | 전압 | `U = R · I`(교환 가능) |
 | `voltage / current` | 저항 | `R = U / I` |
 | `voltage / resistance` | 전류 | `I = U / R` |
+| `current / voltage` | 컨덕턴스 | `G = I / U` |
+| `1 / resistance` | 컨덕턴스 | `G = 1 / R` |
+| `1 / conductance` | 저항 | `R = 1 / G` |
+| `conductance * voltage` | 전류 | `I = G · U` |
+| `current / conductance` | 전압 | `U = I / G` |
 
-각 결과는 올바른 타입의 양이 됩니다 — 원시 혼합 단위를 손으로 조립하지 않습니다. 또한 전압과 저항은
-완전히 **네이티브**한 분해(`kg·m²·s⁻³·A⁻¹` 및 `kg·m²·s⁻³·A⁻²`)를 `toVoltage()` / `toResistance()`로
-인식합니다.
+## 그 밖의 타입 지정 연산자
+
+| 식 | 결과 | 공식 |
+|---|---|---|
+| `current * time` | 전하 | `Q = I · t` |
+| `current / frequency` | 전하 | `Q = I / f` |
+| `charge / time` | 전류 | `I = Q / t` |
+| `charge / current` | 시간 | `t = Q / I` |
+| `current / length` | 자기장 세기 | `H = I / l` |
+| `field strength * length` | 전류 | `I = H · l` |
+
+각 결과는 올바른 타입의 양이 됩니다 — 원시 혼합 단위를 손으로 조립하지 않습니다. 또한 전압, 저항, 전하,
+컨덕턴스, 자기장 세기는 완전히 **네이티브**한 분해(`kg·m²·s⁻³·A⁻¹`, `kg·m²·s⁻³·A⁻²`, `A·s`,
+`kg⁻¹·m⁻²·s³·A²`, `A·m⁻¹`)를 `toVoltage()` / `toResistance()` / `toCharge()` / `toConductance()` /
+`toMagneticFieldStrength()`로 인식합니다.
 
 ## 실전 예제 — 한 회로에서의 옴의 법칙
 
@@ -82,3 +104,6 @@ u.toString()               // "230.0 V" (기준 단위)
 * [전류](ec.md) — 네이티브 암페어 그룹(및 CGS의 비오와 스탯암페어).
 * [전압](voltage.md) — 볼트와 그 분해 `R · I` 및 네이티브 형식.
 * [저항](resistance.md) — 옴, `U / I`, 그리고 역 옴의 법칙 연산자.
+* [전하](charge.md) — 쿨롬, `I · t`, 그리고 배터리 용량 단위 암페어시.
+* [컨덕턴스](conductance.md) — 지멘스, `1 / R`, 그리고 `I / U`.
+* [자기장 세기](magneticfieldstrength.md) — 미터당 암페어, `I / l`, 그리고 외르스테드.

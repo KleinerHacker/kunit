@@ -1,10 +1,12 @@
 # 電気工学 — 概要
 
-パッケージ: `org.pcsoft.framework.kunit.ec`、`…voltage`、`…resistance`
+パッケージ: `org.pcsoft.framework.kunit.ec`、`…voltage`、`…resistance`、`…charge`、`…conductance`、
+`…magneticfieldstrength`
 
 電気工学は、回路を流れる電流、それを駆動する電圧、そしてそれを妨げる抵抗を結び付けます。これら 3 つは
 **オームの法則**で結ばれており、KUnit はその法則を型付きの `*` と `/` 演算子として直接表現します。
-1 つの**ネイティブ**基本量(電流)と、基本次元から**構成された** 2 つの量(電圧と抵抗)です。
+1 つの**ネイティブ**基本量(電流)と、基本次元から**構成された**量(電圧、抵抗、電荷、コンダクタンス、
+磁界の強さ)です。
 
 ## この話題の単位
 
@@ -13,6 +15,9 @@
 | 電流 | ネイティブ | アンペア(`A`) | [電流](ec.md) |
 | 電圧 | 構成 | ボルト(`V`) | [電圧](voltage.md) |
 | 抵抗 | 構成 | オーム(`Ω`) | [抵抗](resistance.md) |
+| 電荷 | 構成 | クーロン(`C`) | [電荷](charge.md) |
+| コンダクタンス | 構成 | ジーメンス(`S`) | [コンダクタンス](conductance.md) |
+| 磁界の強さ | 構成 | アンペア毎メートル(`A/m`) | [磁界の強さ](magneticfieldstrength.md) |
 
 ## 型付き演算子としてのオームの法則
 
@@ -22,10 +27,27 @@
 | `current * resistance` | 電圧 | `U = R · I`(可換) |
 | `voltage / current` | 抵抗 | `R = U / I` |
 | `voltage / resistance` | 電流 | `I = U / R` |
+| `current / voltage` | コンダクタンス | `G = I / U` |
+| `1 / resistance` | コンダクタンス | `G = 1 / R` |
+| `1 / conductance` | 抵抗 | `R = 1 / G` |
+| `conductance * voltage` | 電流 | `I = G · U` |
+| `current / conductance` | 電圧 | `U = I / G` |
 
-各結果は正しい型付き量になります — 生の混合単位を手作業で組み立てることはありません。さらに電圧と抵抗は、
-完全に**ネイティブ**な分解(`kg·m²·s⁻³·A⁻¹` と `kg·m²·s⁻³·A⁻²`)を `toVoltage()` / `toResistance()`
-で認識します。
+## その他の型付き演算子
+
+| 式 | 結果 | 公式 |
+|---|---|---|
+| `current * time` | 電荷 | `Q = I · t` |
+| `current / frequency` | 電荷 | `Q = I / f` |
+| `charge / time` | 電流 | `I = Q / t` |
+| `charge / current` | 時間 | `t = Q / I` |
+| `current / length` | 磁界の強さ | `H = I / l` |
+| `field strength * length` | 電流 | `I = H · l` |
+
+各結果は正しい型付き量になります — 生の混合単位を手作業で組み立てることはありません。さらに電圧、抵抗、
+電荷、コンダクタンス、磁界の強さは、完全に**ネイティブ**な分解(`kg·m²·s⁻³·A⁻¹`、`kg·m²·s⁻³·A⁻²`、
+`A·s`、`kg⁻¹·m⁻²·s³·A²`、`A·m⁻¹`)を `toVoltage()` / `toResistance()` / `toCharge()` /
+`toConductance()` / `toMagneticFieldStrength()` で認識します。
 
 ## 実例 — 1 つの回路でのオームの法則
 
@@ -82,3 +104,6 @@ u.toString()               // "230.0 V"(基準単位)
 * [電流](ec.md) — ネイティブなアンペアのグループ(および CGS のビオとスタットアンペア)。
 * [電圧](voltage.md) — ボルトと、その分解 `R · I` およびネイティブ形式。
 * [抵抗](resistance.md) — オーム、`U / I`、および逆オームの法則の演算子。
+* [電荷](charge.md) — クーロン、`I · t`、および電池容量のアンペア時。
+* [コンダクタンス](conductance.md) — ジーメンス、`1 / R`、および `I / U`。
+* [磁界の強さ](magneticfieldstrength.md) — アンペア毎メートル、`I / l`、およびエルステッド。

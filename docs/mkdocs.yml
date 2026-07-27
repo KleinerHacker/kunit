@@ -109,6 +109,9 @@ plugins:
             Area Density: 면밀도
             Voltage: 전압
             Resistance: 저항
+            Charge: 전하
+            Conductance: 컨덕턴스
+            Magnetic Field Strength: 자기장 세기
             API Docs: API 문서
             Licences: 라이선스
         - locale: zh
@@ -152,6 +155,9 @@ plugins:
             Area Density: 面密度
             Voltage: 电压
             Resistance: 电阻
+            Charge: 电荷
+            Conductance: 电导
+            Magnetic Field Strength: 磁场强度
             API Docs: API 文档
             Licences: 许可证
         - locale: ja
@@ -195,6 +201,9 @@ plugins:
             Area Density: 面密度
             Voltage: 電圧
             Resistance: 抵抗
+            Charge: 電荷
+            Conductance: コンダクタンス
+            Magnetic Field Strength: 磁界の強さ
             API Docs: API ドキュメント
             Licences: ライセンス
         - locale: ar
@@ -238,6 +247,9 @@ plugins:
             Area Density: الكثافة السطحية
             Voltage: الجهد الكهربائي
             Resistance: المقاومة
+            Charge: الشحنة الكهربائية
+            Conductance: المواصَلة
+            Magnetic Field Strength: شدّة المجال المغناطيسي
             API Docs: وثائق API
             Licences: التراخيص
         - locale: hi
@@ -281,6 +293,9 @@ plugins:
             Area Density: क्षेत्रीय घनत्व
             Voltage: वोल्टता
             Resistance: प्रतिरोध
+            Charge: आवेश
+            Conductance: चालकता
+            Magnetic Field Strength: चुंबकीय क्षेत्र तीव्रता
             API Docs: API दस्तावेज़
             Licences: लाइसेंस
 
@@ -317,6 +332,9 @@ nav:
       - Electric Current: units/electrical/ec.md
       - Voltage: units/electrical/voltage.md
       - Resistance: units/electrical/resistance.md
+      - Charge: units/electrical/charge.md
+      - Conductance: units/electrical/conductance.md
+      - Magnetic Field Strength: units/electrical/magneticfieldstrength.md
   - Thermodynamics:
       - Overview: units/thermodynamics/overview.md
       - Temperature:

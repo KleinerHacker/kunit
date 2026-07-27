@@ -194,6 +194,9 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Area Density (constructed: mass·length⁻²) | `org.pcsoft.framework.kunit.areadensity` | Kilogram per square meter (`KAreaDensityUnit.BASE`) |
 | Voltage (constructed: mass·length²·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.voltage` | Volt (`KVoltageUnit.BASE`) |
 | Resistance (constructed: mass·length²·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.resistance` | Ohm (`KResistanceUnit.BASE`) |
+| Charge (constructed: current·time) | `org.pcsoft.framework.kunit.charge` | Coulomb (`KChargeUnit.BASE`) |
+| Conductance (constructed: mass⁻¹·length⁻²·time³·current²) | `org.pcsoft.framework.kunit.conductance` | Siemens (`KConductanceUnit.BASE`) |
+| Magnetic Field Strength (constructed: current·length⁻¹) | `org.pcsoft.framework.kunit.magneticfieldstrength` | Ampere per meter (`KMagneticFieldStrengthUnit.BASE`) |
 
 #### Distance (`KDistanceUnit`)
 
@@ -332,6 +335,20 @@ d.toString()                                           // "20.0 ΔK"  (ΔK, dist
   `abohms`, `internationalOhms`, `legalOhms`, `siemensUnits`. **Multiple decompositions**: typed
   `voltage / current` (Ohm's law) or the native `kg·m²·s⁻³·A⁻²` expression narrowed with `toResistance()`;
   inverse operators `resistance * current` / `voltage / resistance` - all value-equal.
+* **Charge** (`KChargeUnit`) - `current · time`; tokens `coulombs`, `ampereSeconds`, `ampereHours`,
+  `abcoulombs`, `statcoulombs`, `faradays`, `elementaryCharges`. **Multiple decompositions**: typed
+  `current * time` (and its commutative form), `current / frequency`, or the native `A·s` expression
+  narrowed with `toCharge()`; inverse operators `charge / time` / `charge / current` / `charge * frequency`
+  - all value-equal.
+* **Conductance** (`KConductanceUnit`) - `mass⁻¹ · length⁻² · time³ · current²`; tokens `siemens`, `mhos`,
+  `abmhos`, `statmhos`. **Multiple decompositions**: typed `current / voltage`, the reciprocal
+  `1 / resistance`, or the native `kg⁻¹·m⁻²·s³·A²` expression narrowed with `toConductance()`; inverse
+  operators `1 / conductance` / `conductance * voltage` / `current / conductance` - all value-equal.
+* **Magnetic Field Strength** (`KMagneticFieldStrengthUnit`) - `current · length⁻¹`; tokens
+  `amperesPerMeter`, `oersteds`, `gilbertsPerCentimeter`, `ampereTurnsPerInch`. **Multiple
+  decompositions**: typed `current / length` or the native `A·m⁻¹` expression narrowed with
+  `toMagneticFieldStrength()`; inverse operator `fieldStrength * length` (magnetomotive force) - all
+  value-equal.
 
 ### Still Open
 
