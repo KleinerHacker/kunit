@@ -1,7 +1,8 @@
 # 电气工程 — 概述
 
 包：`org.pcsoft.framework.kunit.ec`、`…voltage`、`…resistance`、`…charge`、`…conductance`、
-`…magneticfieldstrength`
+`…magneticfieldstrength`、`…capacitance`、`…inductance`、`…magneticflux`、`…magneticfluxdensity`、
+`…currentdensity`、`…chargedensity`、`…resistivity`、`…conductivity`、`…power`、`…energy`
 
 电气工程将流过电路的电流、驱动它的电压,以及阻碍它的电阻联系在一起。这三者由**欧姆定律**相连,
 KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原生**基本量(电流)以及由基本量纲
@@ -17,6 +18,20 @@ KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原�
 | 电荷 | 构造 | 库仑(`C`) | [电荷](charge.md) |
 | 电导 | 构造 | 西门子(`S`) | [电导](conductance.md) |
 | 磁场强度 | 构造 | 安培每米(`A/m`) | [磁场强度](magneticfieldstrength.md) |
+| 电容 | 构造 | 法拉(`F`) | [电容](capacitance.md) |
+| 电感 | 构造 | 亨利(`H`) | [电感](inductance.md) |
+| 磁通量 | 构造 | 韦伯(`Wb`) | [磁通量](magneticflux.md) |
+| 磁通密度 | 构造 | 特斯拉(`T`) | [磁通密度](magneticfluxdensity.md) |
+| 电流密度 | 构造 | 安培每平方米(`A/m²`) | [电流密度](currentdensity.md) |
+| 电荷密度 | 构造 | 库仑每立方米(`C/m³`) | [电荷密度](chargedensity.md) |
+| 电阻率 | 构造 | 欧姆米(`Ω·m`) | [电阻率](resistivity.md) |
+| 电导率 | 构造 | 西门子每米(`S/m`) | [电导率](conductivity.md) |
+| 功率 | 构造 | 瓦特(`W`) | [功率(电气)](power.md) |
+| 能量 | 构造 | 焦耳(`J`) | [能量(电气)](energy.md) |
+
+功率与能量在技术上分别是**同一个**量,与其他学科领域共享;它们按领域分别记录并互相交叉引用
+([功率(力学)](../mechanics/power.md)、[功率(热力学)](../thermodynamics/power.md)、
+[能量(力学)](../mechanics/energy.md)、[能量(热力学)](../thermodynamics/energy.md))。
 
 ## 作为类型化运算符的欧姆定律
 
@@ -42,10 +57,40 @@ KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原�
 | `charge / current` | 时间 | `t = Q / I` |
 | `current / length` | 磁场强度 | `H = I / l` |
 | `field strength * length` | 电流 | `I = H · l` |
+| `charge / voltage` | 电容 | `C = Q / U` |
+| `capacitance * voltage` | 电荷 | `Q = C · U` |
+| `voltage * time` | 磁通量 | `Φ = U · t` |
+| `flux / time` | 电压 | `U = Φ / t` |
+| `flux / current` | 电感 | `L = Φ / I` |
+| `inductance * current` | 磁通量 | `Φ = L · I` |
+| `resistance / frequency` | 电感 | `L = X / ω` |
+| `flux / area` | 磁通密度 | `B = Φ / A` |
+| `flux density * area` | 磁通量 | `Φ = B · A` |
+| `current / area` | 电流密度 | `J = I / A` |
+| `current density * area` | 电流 | `I = J · A` |
+| `charge / volume` | 电荷密度 | `ρ = Q / V` |
+| `charge density * volume` | 电荷 | `Q = ρ · V` |
+| `resistance * length` | 电阻率 | `ρ = R · A / l` |
+| `1 / resistivity` | 电导率 | `σ = 1 / ρ` |
+| `1 / conductivity` | 电阻率 | `ρ = 1 / σ` |
+| `conductance / length` | 电导率 | `σ = G · l / A` |
+| `conductivity * length` | 电导 | `G = σ · A / l` |
+| `voltage * current` | 功率 | `P = U · I` |
+| `power / voltage` | 电流 | `I = P / U` |
+| `power / current` | 电压 | `U = P / I` |
+| `power * time` | 能量 | `W = P · t` |
+| `energy / time` | 功率 | `P = W / t` |
+| `charge * voltage` | 能量 | `W = Q · U` |
+| `energy / charge` | 电压 | `U = W / Q` |
 
 每个结果都是正确的类型化量 —— 无需手工组装原始混合单位。此外,电压、电阻、电荷、电导与磁场强度通过
 `toVoltage()` / `toResistance()` / `toCharge()` / `toConductance()` / `toMagneticFieldStrength()`
 识别其完全**原生**的分解式(`kg·m²·s⁻³·A⁻¹`、`kg·m²·s⁻³·A⁻²`、`A·s`、`kg⁻¹·m⁻²·s³·A²`、`A·m⁻¹`)。
+较新的组同样适用:`toCapacitance()`(`kg⁻¹·m⁻²·s⁴·A²`)、`toInductance()`(`kg·m²·s⁻²·A⁻²`)、
+`toMagneticFlux()`(`kg·m²·s⁻²·A⁻¹`)、`toMagneticFluxDensity()`(`kg·s⁻²·A⁻¹`)、
+`toCurrentDensity()`(`A·m⁻²`)、`toChargeDensity()`(`A·s·m⁻³`)、`toResistivity()`
+(`kg·m³·s⁻³·A⁻²`)、`toConductivity()`(`kg⁻¹·m⁻³·s³·A²`)、`toPower()`(`kg·m²·s⁻³`)以及
+`toEnergy()`(`kg·m²·s⁻²`)。
 
 ## 实例 —— 单个回路中的欧姆定律
 
@@ -67,6 +112,27 @@ u into volts                              // 230.0
 
 val i = (230 of volts) / (115 of ohms)    // KElectricCurrentUnitInstance
 i into amperes                            // 2.0
+```
+
+## 实例 —— 从市电功率到消耗的能量
+
+一个 **230 V** 插座为 **10 A** 的负载供电,产生 `P = U · I`;运行三小时消耗 `W = P · t`:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.ec.amperes
+import org.pcsoft.framework.kunit.voltage.volts
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.energy.*
+
+val p = (230 of volts) * (10 of amperes)  // KPowerUnitInstance
+p into kilo.watts                         // 2.3
+
+val w = p * (3 of hours)                  // KEnergyUnitInstance
+w into kilo.joules                        // 24840.0
 ```
 
 ## 输出值(`toString`)
@@ -105,3 +171,13 @@ u.toString()               // "230.0 V"(基准单位)
 * [电荷](charge.md) —— 库仑、`I · t`,以及电池容量的安时。
 * [电导](conductance.md) —— 西门子、`1 / R`,以及 `I / U`。
 * [磁场强度](magneticfieldstrength.md) —— 安培每米、`I / l`,以及奥斯特。
+* [电容](capacitance.md) —— 法拉、`Q / U`,以及 CGS 的绝对法拉/静电法拉。
+* [电感](inductance.md) —— 亨利、`Φ / I`,以及电抗形式 `X / ω`。
+* [磁通量](magneticflux.md) —— 韦伯、`U · t`,以及麦克斯韦。
+* [磁通密度](magneticfluxdensity.md) —— 特斯拉、`Φ / A`,以及高斯。
+* [电流密度](currentdensity.md) —— 安培每平方米、`I / A`,用于导线选型。
+* [电荷密度](chargedensity.md) —— 库仑每立方米、`Q / V`。
+* [电阻率](resistivity.md) —— 欧姆米、`R · A / l`,即电阻背后的材料属性。
+* [电导率](conductivity.md) —— 西门子每米、`1 / ρ`,以及 `G · l / A`。
+* [功率(电气)](power.md) —— 瓦特、`U · I`,以及马力单位。
+* [能量(电气)](energy.md) —— 焦耳、`Q · U`、`P · t`,以及作为 `kilo.watts * hours` 的千瓦时。

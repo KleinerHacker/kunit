@@ -4,6 +4,90 @@
 
 ### Added
 
+- **New standardized unit Power (`mass · length² · time⁻³`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.power` with base unit watt (`W`, `KPowerUnit.BASE`) and the tokens `watts`,
+  `metricHorsePowers`, `mechanicalHorsePowers`, `ergsPerSecond` (all prefix-combinable, e.g. `kilo.watts`).
+  Typed cross-group operators for both readings of the quantity: electrical `voltage * current` (and its
+  commutative form), `power / current = voltage`, `power / voltage = current`, and mechanical
+  `force * speed` (and its commutative form), `power / force = speed`, `power / speed = force`;
+  `KMixedUnitInstance.toPower()` recognizes the canonical `kg·m²·s⁻³` normal form. Documented per subject
+  area (electrical, mechanics, thermodynamics) with cross-references, full docs (EN/JA/ZH/KO/AR/HI) and
+  100 % test coverage included.
+
+- **New standardized unit Energy (`mass · length² · time⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.energy` with base unit joule (`J`, `KEnergyUnit.BASE`) and the tokens
+  `joules`, `ergs`, `calories`, `electronVolts`, `britishThermalUnits` (all prefix-combinable, e.g.
+  `kilo.joules`, `mega.electronVolts`). The kilowatt hour deliberately has no token and is built as
+  `kilo.watts * hours`. Typed cross-group operators `power * time` (and its commutative form),
+  `power / frequency`, `force * length` (work, and its commutative form), `charge * voltage` (and its
+  commutative form), `energy / time = power`, `energy / power = time`, `energy / charge = voltage`;
+  `KMixedUnitInstance.toEnergy()` recognizes the canonical `kg·m²·s⁻²` normal form. Documented per subject
+  area (electrical, mechanics, thermodynamics) with cross-references, full docs (EN/JA/ZH/KO/AR/HI) and
+  100 % test coverage included.
+
+- **New standardized unit Capacitance (`mass⁻¹ · length⁻² · time⁴ · current²`).** A constructed unit group
+  in `org.pcsoft.framework.kunit.capacitance` with base unit farad (`F`, `KCapacitanceUnit.BASE`) and the
+  tokens `farads`, `abfarads`, `statfarads`, `jars` (all prefix-combinable, e.g. `micro.farads`). Typed
+  cross-group operators `charge / voltage`, `capacitance * voltage = charge` (and its commutative form) and
+  `charge / capacitance = voltage`; `KMixedUnitInstance.toCapacitance()` recognizes the canonical
+  `kg⁻¹·m⁻²·s⁴·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Magnetic Flux (`mass · length² · time⁻² · current⁻¹`).** A constructed unit group
+  in `org.pcsoft.framework.kunit.magneticflux` with base unit weber (`Wb`, `KMagneticFluxUnit.BASE`) and the
+  tokens `webers`, `maxwells`, `unitPoles` (all prefix-combinable, e.g. `milli.webers`). Typed cross-group
+  operators `voltage * time` (Faraday's induction law, and its commutative form), `voltage / frequency`,
+  `flux / time = voltage`, `flux * frequency = voltage` and `flux / voltage = time`;
+  `KMixedUnitInstance.toMagneticFlux()` recognizes the canonical `kg·m²·s⁻²·A⁻¹` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Magnetic Flux Density (`mass · time⁻² · current⁻¹`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.magneticfluxdensity` with base unit tesla (`T`,
+  `KMagneticFluxDensityUnit.BASE`) and the tokens `teslas`, `gauss`, `gammas` (all prefix-combinable, e.g.
+  `milli.teslas`). Typed cross-group operators `flux / area`, `fluxDensity * area = flux` (and its
+  commutative form) and `flux / fluxDensity = area`; `KMixedUnitInstance.toMagneticFluxDensity()` recognizes
+  the canonical `kg·s⁻²·A⁻¹` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Inductance (`mass · length² · time⁻² · current⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.inductance` with base unit henry (`H`, `KInductanceUnit.BASE`) and the tokens
+  `henries`, `abhenries`, `stathenries` (all prefix-combinable, e.g. `milli.henries`). Typed cross-group
+  operators `flux / current`, the reactance form `resistance / frequency`, `inductance * current = flux`
+  (and its commutative form), `flux / inductance = current` and `inductance * frequency = resistance`;
+  `KMixedUnitInstance.toInductance()` recognizes the canonical `kg·m²·s⁻²·A⁻²` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Current Density (`current · length⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.currentdensity` with base unit ampere per square meter (`A/m²`,
+  `KCurrentDensityUnit.BASE`). Built as a current-per-area expression (`amperes / (milli.meters pow 2)`);
+  the typed cross-group operators `current / area = current density`, `current density * area = current`
+  (and its commutative form) and `current / current density = area` move between the core units without a
+  raw mixed unit. `KMixedUnitInstance.toCurrentDensity()` recognizes the canonical `A·m⁻²` normal form.
+  Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Charge Density (`current · time · length⁻³`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.chargedensity` with base unit coulomb per cubic meter (`C/m³`,
+  `KChargeDensityUnit.BASE`). Built as a charge-per-volume expression (`coulombs / (meters pow 3)`); the
+  typed cross-group operators `charge / volume = charge density`, `charge density * volume = charge` (and its
+  commutative form) and `charge / charge density = volume`. `KMixedUnitInstance.toChargeDensity()` recognizes
+  the canonical `A·s·m⁻³` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Resistivity (`mass · length³ · time⁻³ · current⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.resistivity` with base unit ohm meter (`Ω·m`, `KResistivityUnit.BASE`) and the
+  tokens `ohmMeters`, `ohmCentimeters`, `statohmCentimeters` (all prefix-combinable, e.g.
+  `nano.ohmMeters`). Typed cross-group operators `resistance * length` (the conductor geometry factor
+  `A / l`, and its commutative form), `resistivity / length = resistance` and
+  `resistivity / resistance = length`; `KMixedUnitInstance.toResistivity()` recognizes the canonical
+  `kg·m³·s⁻³·A⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Conductivity (`mass⁻¹ · length⁻³ · time³ · current²`).** A constructed unit group
+  in `org.pcsoft.framework.kunit.conductivity` with base unit siemens per meter (`S/m`,
+  `KConductivityUnit.BASE`) and the tokens `siemensPerMeter`, `siemensPerCentimeter`,
+  `microsiemensPerCentimeter`, `megasiemensPerMeter` (all prefix-combinable, e.g. `mega.siemensPerMeter`).
+  Typed cross-group operators: the reciprocal pair `1 / resistivity = conductivity` and
+  `1 / conductivity = resistivity`, plus `conductance / length = conductivity` (the geometry factor
+  `l / A`), `conductivity * length = conductance` (and its commutative form) and
+  `conductance / conductivity = length`; `KMixedUnitInstance.toConductivity()` recognizes the canonical
+  `kg⁻¹·m⁻³·s³·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
 - **New standardized unit Charge (`current · time`).** A constructed unit group in
   `org.pcsoft.framework.kunit.charge` with base unit coulomb (`C`, `KChargeUnit.BASE`) and the tokens
   `coulombs`, `ampereSeconds`, `ampereHours`, `abcoulombs`, `statcoulombs`, `faradays`,

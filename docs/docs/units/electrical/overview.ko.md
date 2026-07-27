@@ -1,7 +1,8 @@
 # 전기공학 — 개요
 
 패키지: `org.pcsoft.framework.kunit.ec`, `…voltage`, `…resistance`, `…charge`, `…conductance`,
-`…magneticfieldstrength`
+`…magneticfieldstrength`, `…capacitance`, `…inductance`, `…magneticflux`, `…magneticfluxdensity`,
+`…currentdensity`, `…chargedensity`, `…resistivity`, `…conductivity`, `…power`, `…energy`
 
 전기공학은 회로를 흐르는 전류, 그것을 구동하는 전압, 그리고 그것을 방해하는 저항을 함께 묶습니다. 이
 셋은 **옴의 법칙**으로 연결되며, KUnit은 그 법칙을 타입이 지정된 `*`와 `/` 연산자로 직접 표현합니다.
@@ -18,6 +19,21 @@
 | 전하 | 구성 | 쿨롬(`C`) | [전하](charge.md) |
 | 컨덕턴스 | 구성 | 지멘스(`S`) | [컨덕턴스](conductance.md) |
 | 자기장 세기 | 구성 | 미터당 암페어(`A/m`) | [자기장 세기](magneticfieldstrength.md) |
+| 정전용량 | 구성 | 패럿(`F`) | [정전용량](capacitance.md) |
+| 인덕턴스 | 구성 | 헨리(`H`) | [인덕턴스](inductance.md) |
+| 자속 | 구성 | 베버(`Wb`) | [자속](magneticflux.md) |
+| 자속밀도 | 구성 | 테슬라(`T`) | [자속밀도](magneticfluxdensity.md) |
+| 전류밀도 | 구성 | 제곱미터당 암페어(`A/m²`) | [전류밀도](currentdensity.md) |
+| 전하밀도 | 구성 | 세제곱미터당 쿨롬(`C/m³`) | [전하밀도](chargedensity.md) |
+| 저항률 | 구성 | 옴미터(`Ω·m`) | [저항률](resistivity.md) |
+| 전도율 | 구성 | 미터당 지멘스(`S/m`) | [전도율](conductivity.md) |
+| 전력 | 구성 | 와트(`W`) | [전력(전기)](power.md) |
+| 에너지 | 구성 | 줄(`J`) | [에너지(전기)](energy.md) |
+
+전력과 에너지는 각각 기술적으로 **하나**의 양이며, 다른 주제 분야와 공유됩니다. 이들은 분야별로
+문서화되며 서로 참조합니다([전력(역학)](../mechanics/power.md),
+[전력(열역학)](../thermodynamics/power.md), [에너지(역학)](../mechanics/energy.md),
+[에너지(열역학)](../thermodynamics/energy.md)).
 
 ## 타입 지정 연산자로서의 옴의 법칙
 
@@ -43,11 +59,40 @@
 | `charge / current` | 시간 | `t = Q / I` |
 | `current / length` | 자기장 세기 | `H = I / l` |
 | `field strength * length` | 전류 | `I = H · l` |
+| `charge / voltage` | 정전용량 | `C = Q / U` |
+| `capacitance * voltage` | 전하 | `Q = C · U` |
+| `voltage * time` | 자속 | `Φ = U · t` |
+| `flux / time` | 전압 | `U = Φ / t` |
+| `flux / current` | 인덕턴스 | `L = Φ / I` |
+| `inductance * current` | 자속 | `Φ = L · I` |
+| `resistance / frequency` | 인덕턴스 | `L = X / ω` |
+| `flux / area` | 자속밀도 | `B = Φ / A` |
+| `flux density * area` | 자속 | `Φ = B · A` |
+| `current / area` | 전류밀도 | `J = I / A` |
+| `current density * area` | 전류 | `I = J · A` |
+| `charge / volume` | 전하밀도 | `ρ = Q / V` |
+| `charge density * volume` | 전하 | `Q = ρ · V` |
+| `resistance * length` | 저항률 | `ρ = R · A / l` |
+| `1 / resistivity` | 전도율 | `σ = 1 / ρ` |
+| `1 / conductivity` | 저항률 | `ρ = 1 / σ` |
+| `conductance / length` | 전도율 | `σ = G · l / A` |
+| `conductivity * length` | 컨덕턴스 | `G = σ · A / l` |
+| `voltage * current` | 전력 | `P = U · I` |
+| `power / voltage` | 전류 | `I = P / U` |
+| `power / current` | 전압 | `U = P / I` |
+| `power * time` | 에너지 | `W = P · t` |
+| `energy / time` | 전력 | `P = W / t` |
+| `charge * voltage` | 에너지 | `W = Q · U` |
+| `energy / charge` | 전압 | `U = W / Q` |
 
 각 결과는 올바른 타입의 양이 됩니다 — 원시 혼합 단위를 손으로 조립하지 않습니다. 또한 전압, 저항, 전하,
 컨덕턴스, 자기장 세기는 완전히 **네이티브**한 분해(`kg·m²·s⁻³·A⁻¹`, `kg·m²·s⁻³·A⁻²`, `A·s`,
 `kg⁻¹·m⁻²·s³·A²`, `A·m⁻¹`)를 `toVoltage()` / `toResistance()` / `toCharge()` / `toConductance()` /
-`toMagneticFieldStrength()`로 인식합니다.
+`toMagneticFieldStrength()`로 인식합니다. 더 새로운 그룹들도 마찬가지입니다: `toCapacitance()`
+(`kg⁻¹·m⁻²·s⁴·A²`), `toInductance()`(`kg·m²·s⁻²·A⁻²`), `toMagneticFlux()`(`kg·m²·s⁻²·A⁻¹`),
+`toMagneticFluxDensity()`(`kg·s⁻²·A⁻¹`), `toCurrentDensity()`(`A·m⁻²`), `toChargeDensity()`
+(`A·s·m⁻³`), `toResistivity()`(`kg·m³·s⁻³·A⁻²`), `toConductivity()`(`kg⁻¹·m⁻³·s³·A²`), `toPower()`
+(`kg·m²·s⁻³`), `toEnergy()`(`kg·m²·s⁻²`).
 
 ## 실전 예제 — 한 회로에서의 옴의 법칙
 
@@ -69,6 +114,28 @@ u into volts                              // 230.0
 
 val i = (230 of volts) / (115 of ohms)    // KElectricCurrentUnitInstance
 i into amperes                            // 2.0
+```
+
+## 실전 예제 — 상용 전력에서 소비 에너지까지
+
+**230 V** 콘센트가 **10 A** 부하에 전력을 공급하면 `P = U · I`가 됩니다. 3시간 동안 가동하면
+`W = P · t`만큼 소비합니다:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.ec.amperes
+import org.pcsoft.framework.kunit.voltage.volts
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.energy.*
+
+val p = (230 of volts) * (10 of amperes)  // KPowerUnitInstance
+p into kilo.watts                         // 2.3
+
+val w = p * (3 of hours)                  // KEnergyUnitInstance
+w into kilo.joules                        // 24840.0
 ```
 
 ## 값 출력(`toString`)
@@ -107,3 +174,13 @@ u.toString()               // "230.0 V" (기준 단위)
 * [전하](charge.md) — 쿨롬, `I · t`, 그리고 배터리 용량 단위 암페어시.
 * [컨덕턴스](conductance.md) — 지멘스, `1 / R`, 그리고 `I / U`.
 * [자기장 세기](magneticfieldstrength.md) — 미터당 암페어, `I / l`, 그리고 외르스테드.
+* [정전용량](capacitance.md) — 패럿, `Q / U`, 그리고 CGS의 앱패럿/스탯패럿.
+* [인덕턴스](inductance.md) — 헨리, `Φ / I`, 그리고 리액턴스 형태 `X / ω`.
+* [자속](magneticflux.md) — 베버, `U · t`, 그리고 맥스웰.
+* [자속밀도](magneticfluxdensity.md) — 테슬라, `Φ / A`, 그리고 가우스.
+* [전류밀도](currentdensity.md) — 제곱미터당 암페어, `I / A`, 전선 규격 산정용.
+* [전하밀도](chargedensity.md) — 세제곱미터당 쿨롬, `Q / V`.
+* [저항률](resistivity.md) — 옴미터, `R · A / l`, 저항의 배후에 있는 재료 물성.
+* [전도율](conductivity.md) — 미터당 지멘스, `1 / ρ`, 그리고 `G · l / A`.
+* [전력(전기)](power.md) — 와트, `U · I`, 그리고 마력 단위.
+* [에너지(전기)](energy.md) — 줄, `Q · U`, `P · t`, 그리고 `kilo.watts * hours`로 표현되는 킬로와트시.

@@ -112,6 +112,20 @@ plugins:
             Charge: 전하
             Conductance: 컨덕턴스
             Magnetic Field Strength: 자기장 세기
+            Capacitance: 전기 용량
+            Inductance: 인덕턴스
+            Magnetic Flux: 자기 플럭스
+            Magnetic Flux Density: 자기 플럭스 밀도
+            Current Density: 전류 밀도
+            Charge Density: 전하 밀도
+            Resistivity: 비저항
+            Conductivity: 전기 전도율
+            Power (Electrical): 전력 (전기)
+            Energy (Electrical): 에너지 (전기)
+            Power (Mechanics): 일률 (역학)
+            Energy (Mechanics): 에너지 (역학)
+            Power (Thermodynamics): 열유량 (열역학)
+            Energy (Thermodynamics): 열에너지 (열역학)
             API Docs: API 문서
             Licences: 라이선스
         - locale: zh
@@ -158,6 +172,20 @@ plugins:
             Charge: 电荷
             Conductance: 电导
             Magnetic Field Strength: 磁场强度
+            Capacitance: 电容
+            Inductance: 电感
+            Magnetic Flux: 磁通量
+            Magnetic Flux Density: 磁通密度
+            Current Density: 电流密度
+            Charge Density: 电荷密度
+            Resistivity: 电阻率
+            Conductivity: 电导率
+            Power (Electrical): 功率（电气）
+            Energy (Electrical): 能量（电气）
+            Power (Mechanics): 功率（力学）
+            Energy (Mechanics): 能量（力学）
+            Power (Thermodynamics): 热流率（热力学）
+            Energy (Thermodynamics): 热能（热力学）
             API Docs: API 文档
             Licences: 许可证
         - locale: ja
@@ -204,6 +232,20 @@ plugins:
             Charge: 電荷
             Conductance: コンダクタンス
             Magnetic Field Strength: 磁界の強さ
+            Capacitance: 静電容量
+            Inductance: インダクタンス
+            Magnetic Flux: 磁束
+            Magnetic Flux Density: 磁束密度
+            Current Density: 電流密度
+            Charge Density: 電荷密度
+            Resistivity: 抵抗率
+            Conductivity: 導電率
+            Power (Electrical): 電力（電気）
+            Energy (Electrical): エネルギー（電気）
+            Power (Mechanics): 仕事率（力学）
+            Energy (Mechanics): エネルギー（力学）
+            Power (Thermodynamics): 熱流量（熱力学）
+            Energy (Thermodynamics): 熱エネルギー（熱力学）
             API Docs: API ドキュメント
             Licences: ライセンス
         - locale: ar
@@ -250,6 +292,20 @@ plugins:
             Charge: الشحنة الكهربائية
             Conductance: المواصَلة
             Magnetic Field Strength: شدّة المجال المغناطيسي
+            Capacitance: السعة الكهربائية
+            Inductance: المحاثة
+            Magnetic Flux: التدفق المغناطيسي
+            Magnetic Flux Density: كثافة التدفق المغناطيسي
+            Current Density: كثافة التيار
+            Charge Density: كثافة الشحنة
+            Resistivity: المقاومة النوعية
+            Conductivity: الموصلية الكهربائية
+            Power (Electrical): القدرة (الكهربائية)
+            Energy (Electrical): الطاقة (الكهربائية)
+            Power (Mechanics): القدرة (الميكانيكية)
+            Energy (Mechanics): الطاقة (الميكانيكية)
+            Power (Thermodynamics): معدل التدفق الحراري (الديناميكا الحرارية)
+            Energy (Thermodynamics): الطاقة الحرارية (الديناميكا الحرارية)
             API Docs: وثائق API
             Licences: التراخيص
         - locale: hi
@@ -296,6 +352,20 @@ plugins:
             Charge: आवेश
             Conductance: चालकता
             Magnetic Field Strength: चुंबकीय क्षेत्र तीव्रता
+            Capacitance: धारिता
+            Inductance: प्रेरकत्व
+            Magnetic Flux: चुंबकीय फ्लक्स
+            Magnetic Flux Density: चुंबकीय फ्लक्स घनत्व
+            Current Density: धारा घनत्व
+            Charge Density: आवेश घनत्व
+            Resistivity: प्रतिरोधकता
+            Conductivity: चालकता गुणांक
+            Power (Electrical): शक्ति (विद्युत)
+            Energy (Electrical): ऊर्जा (विद्युत)
+            Power (Mechanics): शक्ति (यांत्रिकी)
+            Energy (Mechanics): ऊर्जा (यांत्रिकी)
+            Power (Thermodynamics): ऊष्मा प्रवाह दर (ऊष्मागतिकी)
+            Energy (Thermodynamics): ऊष्मा ऊर्जा (ऊष्मागतिकी)
             API Docs: API दस्तावेज़
             Licences: लाइसेंस
 
@@ -327,6 +397,8 @@ nav:
       - Pressure: units/mechanics/pressure.md
       - Density: units/mechanics/density.md
       - Area Density: units/mechanics/areadensity.md
+      - Power (Mechanics): units/mechanics/power.md
+      - Energy (Mechanics): units/mechanics/energy.md
   - Electrical Engineering:
       - Overview: units/electrical/overview.md
       - Electric Current: units/electrical/ec.md
@@ -335,12 +407,24 @@ nav:
       - Charge: units/electrical/charge.md
       - Conductance: units/electrical/conductance.md
       - Magnetic Field Strength: units/electrical/magneticfieldstrength.md
+      - Capacitance: units/electrical/capacitance.md
+      - Inductance: units/electrical/inductance.md
+      - Magnetic Flux: units/electrical/magneticflux.md
+      - Magnetic Flux Density: units/electrical/magneticfluxdensity.md
+      - Current Density: units/electrical/currentdensity.md
+      - Charge Density: units/electrical/chargedensity.md
+      - Resistivity: units/electrical/resistivity.md
+      - Conductivity: units/electrical/conductivity.md
+      - Power (Electrical): units/electrical/power.md
+      - Energy (Electrical): units/electrical/energy.md
   - Thermodynamics:
       - Overview: units/thermodynamics/overview.md
       - Temperature:
         - Overview: units/thermodynamics/temperature-overview.md
         - Absolute Temperature: units/thermodynamics/temperature.md
         - Temperature Difference: units/thermodynamics/temperature-difference.md
+      - Power (Thermodynamics): units/thermodynamics/power.md
+      - Energy (Thermodynamics): units/thermodynamics/energy.md
   - Information Technology:
       - Overview: units/information/overview.md
       - Storage: units/information/storage.md

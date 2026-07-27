@@ -1,6 +1,7 @@
 # 力学 — 概述
 
-包：`org.pcsoft.framework.kunit.mass`、`…force`、`…pressure`、`…density`、`…areadensity`
+包：`org.pcsoft.framework.kunit.mass`、`…force`、`…pressure`、`…density`、`…areadensity`、`…power`、
+`…energy`
 
 力学(动力学)追问物体**为何**运动,以及物质如何分布 —— 质量、作用于它的力、力在面积上施加的压力,
 以及体积或表面中填充了多少质量之间的相互作用。在[运动学](../kinematics/overview.md)的速率之上,
@@ -15,6 +16,12 @@
 | 压力 | 构造 | 帕斯卡(`Pa`) | [压力](pressure.md) |
 | 密度 | 构造 | 千克每立方米(`kg/m³`) | [密度](density.md) |
 | 面密度 | 构造 | 千克每平方米(`kg/m²`) | [面密度](areadensity.md) |
+| 功率 | 构造 | 瓦特(`W`) | [功率(力学)](power.md) |
+| 能量 | 构造 | 焦耳(`J`) | [能量(力学)](energy.md) |
+
+功率与能量在技术上分别是**同一个**量,与其他学科领域共享;它们按领域分别记录并互相交叉引用
+([功率(电气)](../electrical/power.md)、[功率(热力学)](../thermodynamics/power.md)、
+[能量(电气)](../electrical/energy.md)、[能量(热力学)](../thermodynamics/energy.md))。
 
 ## 各量之间的关系
 
@@ -25,6 +32,13 @@
 | `pressure * area` | 力 | `F = p · A` |
 | `mass / volume` | 密度 | `ρ = m / V` |
 | `density * length` | 面密度 | `ρ_A = ρ · d` |
+| `force * speed` | 功率 | `P = F · v` |
+| `power / speed` | 力 | `F = P / v` |
+| `power / force` | 速度 | `v = P / F` |
+| `force * length` | 能量(功) | `W = F · s` |
+| `power * time` | 能量 | `W = P · t` |
+| `energy / time` | 功率 | `P = W / t` |
+| `energy / power` | 时间 | `t = W / P` |
 
 ## 实例 —— 牛顿第二定律与接地压强
 

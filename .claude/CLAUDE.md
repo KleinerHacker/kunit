@@ -1,5 +1,6 @@
 # Global Rules
 
+* NEVER EVER write project context to your memory!!!
 * All code is written in Kotlin
   * Code must be created accordingly, observing all applicable rules
   * All public members must be documented with KDoc
@@ -31,6 +32,9 @@
 
 # Documentation
 
+* Use ALWAYS the translator agent for MKDocs documentation.
+* Each new MKDocs page MUST write in English ONLY; all other languages should be added EXPLICITLY BY USER
+  * Supported languages: English, Japanese, Chinese, Korean, Arabic, Hindi
 * For each unit there MUST exist a MkDocs documentation file
   * /docs contains all MkDocs documentation files
   * Supported languages: English, Japanese, Chinese, Korean, Arabic, Hindi
@@ -47,7 +51,6 @@
 * A technically identical unit that belongs to several subject areas (e.g. energy as heat / kinetic /
   electrical energy) gets its own field-specific page per area; these pages MUST cross-reference each other
 * README.md must be up to date for existing units and architecture
-  * Supported languages: English, Japanese, Chinese, Korean, Arabic, Hindi
 * All user-relevant changes must be documented in CHANGELOG.md
   * CHANGELOG.md contains ONLY changes the user notices externally (new units, changed public API or behavior)
   * Purely internal changes (refactoring, private helpers) and documentation/KDoc fixes MUST NOT be listed
@@ -61,6 +64,12 @@
   * Describe each part in short bullet points (max. 20 words each)
   * All bullet points MUST describe each task to implement it
 * Do NOT create a plan summary at ANY TIME
+* ALWAYS write a plan to .clude/plans/
+  * After finishing the plan / all plans, you MUST clean up this path completely
+* ALWAYS write the development status into .claude/plans/<name>_status.md
+  * If there is a problem, you MUST continue by this information
+  * If you continue, you MUST write the development status again
+  * If you continue, you MUST change to ato mode
 
 # GIT
 

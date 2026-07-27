@@ -1,10 +1,12 @@
 # ऊष्मागतिकी — अवलोकन
 
-पैकेज: `org.pcsoft.framework.kunit.temperature`
+पैकेज: `org.pcsoft.framework.kunit.temperature`, `…energy`, `…power`
 
-ऊष्मागतिकी **ऊष्मा और तापमान** का भौतिकी है। KUnit में यह क्षेत्र वर्तमान में तापमान पर केंद्रित है, जिसे
+ऊष्मागतिकी **ऊष्मा और तापमान** का भौतिकी है। KUnit में यह क्षेत्र तापमान पर केंद्रित है, जिसे
 **दो संबंधित नेटिव समूहों** से मॉडल किया जाता है — क्योंकि तापमान का *पठन* और तापमान का *परिवर्तन*
-भौतिक रूप से भिन्न प्रकार की राशियाँ हैं, और इन्हें अलग रखना ही गणित को सही बनाता है।
+भौतिक रूप से भिन्न प्रकार की राशियाँ हैं, और इन्हें अलग रखना ही गणित को सही बनाता है। इनके इर्द-गिर्द हर
+ऊष्मा संतुलन की दो **संघटित** राशियाँ होती हैं: स्वयं ऊष्मा (ऊर्जा) और वह दर जिससे वह प्रवाहित होती है
+(शक्ति)।
 
 ## इस विषय की इकाइयाँ
 
@@ -12,6 +14,13 @@
 |---|---|---|---|---|
 | परम तापमान | नेटिव | ऐफ़ाइन **बिंदु** | केल्विन (`K`) | [परम तापमान](temperature.md) |
 | तापमान अंतर | नेटिव | रैखिक **अंतराल** | केल्विन (`ΔK`) | [तापमान अंतर](temperature-difference.md) |
+| ऊर्जा | संघटित | रैखिक राशि | जूल (`J`) | [ऊर्जा (ऊष्मागतिकी)](energy.md) |
+| शक्ति | संघटित | रैखिक राशि | वाट (`W`) | [शक्ति (ऊष्मागतिकी)](power.md) |
+
+ऊर्जा (ऊष्मा) और शक्ति (ऊष्मा प्रवाह दर) तकनीकी रूप से प्रत्येक **एक ही** राशि हैं, जो अन्य विषय क्षेत्रों
+के साथ साझा होती हैं; इन्हें प्रत्येक क्षेत्र के अनुसार दस्तावेज़ीकृत किया गया है और ये एक-दूसरे का
+संदर्भ देती हैं ([ऊर्जा (विद्युत)](../electrical/energy.md), [ऊर्जा (यांत्रिकी)](../mechanics/energy.md),
+[शक्ति (विद्युत)](../electrical/power.md), [शक्ति (यांत्रिकी)](../mechanics/power.md))।
 
 समर्पित [तापमान अवलोकन](temperature-overview.md) बिंदु बनाम अंतराल के भेद को गहराई से समझाता है; यह पृष्ठ
 समूची ऊष्मागतिकी का प्रवेश-बिंदु है।
@@ -25,6 +34,15 @@
 | `परम − अंतर` | परम तापमान |
 | `अंतर ± अंतर` | तापमान अंतर |
 | `परम + परम` | **संकलन त्रुटि** (भौतिक रूप से निरर्थक) |
+
+## टाइप-निर्धारित संकारकों के रूप में ऊष्मा और ऊष्मा प्रवाह
+
+| अभिव्यक्ति | परिणाम | सूत्र |
+|---|---|---|
+| `power * time` | ऊर्जा (ऊष्मा) | `Q = Φ · t` |
+| `energy / time` | शक्ति (ऊष्मा प्रवाह) | `Φ = Q / t` |
+| `energy / power` | समय | `t = Q / Φ` |
+| `power / frequency` | ऊर्जा | `Q = Φ / f` |
 
 ## वास्तविक उदाहरण — एक तापन चरण
 
@@ -43,6 +61,28 @@ val deltaT = end - start                     // KTemperatureDifferenceUnitInstan
 deltaT.value                                 // 20.0 (केल्विन अंतराल)
 
 val back = start + KTemperatureDifference.ofKelvin(20) // KTemperatureUnitInstance: 303.15 K
+```
+
+## वास्तविक उदाहरण — बॉयलर की ऊष्मा और तापन समय
+
+एक **2 kW** का बॉयलर **10 मिनट** तक चलता है। दी गई ऊष्मा `Q = Φ · t` है; इसे ऊष्मा प्रवाह से पुनः विभाजित
+करने पर तापन समय मिलता है:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.time.minutes
+import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.energy.*
+
+val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
+q into kilo.joules                            // 1200.0
+q into kilo.calories                          // ≈ 286.8 (kcal)
+
+val t = q / (2 of kilo.watts)                 // KTimeUnitInstance
+t into seconds                                // 600.0
 ```
 
 ## मान छापना (`toString`)
@@ -69,6 +109,8 @@ KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK" (अंतरा�
 | `T + ΔT` | `(10 of celsius) + KTemperatureDifference.ofKelvin(20)` | अंतराल से खिसका परम तापमान |
 | `ΔK` | `KTemperatureDifference.ofKelvin(20)` | एक स्पष्ट तापमान अंतराल |
 | `20 ΔK + 10 ΔK` | `KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)` | दो अंतरालों का योग |
+| `Q = Φ · t` | `(2 of kilo.watts) * (10 of minutes)` | ऊष्मा प्रवाह × समय से ऊष्मा |
+| `Φ = Q / t` | `(1200 of kilo.joules) / (10 of minutes)` | ऊष्मा ÷ समय से ऊष्मा प्रवाह |
 
 ## आगे कहाँ जाएँ
 
@@ -76,3 +118,5 @@ KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK" (अंतरा�
   महत्वपूर्ण है (ऊष्मा ऊर्जा, विकिरण, आदर्श गैस नियम)।
 * [परम तापमान](temperature.md) — केल्विन, सेल्सियस, फ़ारेनहाइट, रैंकिन और ऐफ़ाइन संकारक।
 * [तापमान अंतर](temperature-difference.md) — रैखिक केल्विन अंतराल समूह।
+* [ऊर्जा (ऊष्मागतिकी)](energy.md) — ऊष्मा के रूप में जूल, साथ ही कैलोरी और BTU।
+* [शक्ति (ऊष्मागतिकी)](power.md) — ऊष्मा प्रवाह दर के रूप में वाट, `Q / t`।

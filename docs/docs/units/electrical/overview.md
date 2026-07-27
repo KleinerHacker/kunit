@@ -1,7 +1,8 @@
 # Electrical Engineering — Overview
 
 Packages: `org.pcsoft.framework.kunit.ec`, `…voltage`, `…resistance`, `…charge`, `…conductance`,
-`…magneticfieldstrength`
+`…magneticfieldstrength`, `…capacitance`, `…inductance`, `…magneticflux`, `…magneticfluxdensity`,
+`…currentdensity`, `…chargedensity`, `…resistivity`, `…conductivity`, `…power`, `…energy`
 
 Electrical engineering ties together the current flowing through a circuit, the voltage driving it, and
 the resistance opposing it. These three are bound by **Ohm's law**, and KUnit expresses that law directly
@@ -19,6 +20,21 @@ strength).
 | Charge | constructed | coulomb (`C`) | [Charge](charge.md) |
 | Conductance | constructed | siemens (`S`) | [Conductance](conductance.md) |
 | Magnetic Field Strength | constructed | ampere per meter (`A/m`) | [Magnetic Field Strength](magneticfieldstrength.md) |
+| Capacitance | constructed | farad (`F`) | [Capacitance](capacitance.md) |
+| Inductance | constructed | henry (`H`) | [Inductance](inductance.md) |
+| Magnetic Flux | constructed | weber (`Wb`) | [Magnetic Flux](magneticflux.md) |
+| Magnetic Flux Density | constructed | tesla (`T`) | [Magnetic Flux Density](magneticfluxdensity.md) |
+| Current Density | constructed | ampere per square meter (`A/m²`) | [Current Density](currentdensity.md) |
+| Charge Density | constructed | coulomb per cubic meter (`C/m³`) | [Charge Density](chargedensity.md) |
+| Resistivity | constructed | ohm meter (`Ω·m`) | [Resistivity](resistivity.md) |
+| Conductivity | constructed | siemens per meter (`S/m`) | [Conductivity](conductivity.md) |
+| Power | constructed | watt (`W`) | [Power (Electrical)](power.md) |
+| Energy | constructed | joule (`J`) | [Energy (Electrical)](energy.md) |
+
+Power and energy are technically **one** quantity each, shared with other subject areas; they are documented
+per field and cross-reference each other ([Power (Mechanics)](../mechanics/power.md),
+[Power (Thermodynamics)](../thermodynamics/power.md), [Energy (Mechanics)](../mechanics/energy.md),
+[Energy (Thermodynamics)](../thermodynamics/energy.md)).
 
 ## Ohm's law as typed operators
 
@@ -44,11 +60,40 @@ strength).
 | `charge / current` | Time | `t = Q / I` |
 | `current / length` | Magnetic Field Strength | `H = I / l` |
 | `field strength * length` | Electric Current | `I = H · l` |
+| `charge / voltage` | Capacitance | `C = Q / U` |
+| `capacitance * voltage` | Charge | `Q = C · U` |
+| `voltage * time` | Magnetic Flux | `Φ = U · t` |
+| `flux / time` | Voltage | `U = Φ / t` |
+| `flux / current` | Inductance | `L = Φ / I` |
+| `inductance * current` | Magnetic Flux | `Φ = L · I` |
+| `resistance / frequency` | Inductance | `L = X / ω` |
+| `flux / area` | Magnetic Flux Density | `B = Φ / A` |
+| `flux density * area` | Magnetic Flux | `Φ = B · A` |
+| `current / area` | Current Density | `J = I / A` |
+| `current density * area` | Electric Current | `I = J · A` |
+| `charge / volume` | Charge Density | `ρ = Q / V` |
+| `charge density * volume` | Charge | `Q = ρ · V` |
+| `resistance * length` | Resistivity | `ρ = R · A / l` |
+| `1 / resistivity` | Conductivity | `σ = 1 / ρ` |
+| `1 / conductivity` | Resistivity | `ρ = 1 / σ` |
+| `conductance / length` | Conductivity | `σ = G · l / A` |
+| `conductivity * length` | Conductance | `G = σ · A / l` |
+| `voltage * current` | Power | `P = U · I` |
+| `power / voltage` | Electric Current | `I = P / U` |
+| `power / current` | Voltage | `U = P / I` |
+| `power * time` | Energy | `W = P · t` |
+| `energy / time` | Power | `P = W / t` |
+| `charge * voltage` | Energy | `W = Q · U` |
+| `energy / charge` | Voltage | `U = W / Q` |
 
 Each result is the correct typed quantity — no raw mixed unit is assembled by hand. Voltage, resistance,
 charge, conductance and magnetic field strength additionally recognise their fully **native**
 decomposition (`kg·m²·s⁻³·A⁻¹`, `kg·m²·s⁻³·A⁻²`, `A·s`, `kg⁻¹·m⁻²·s³·A²`, `A·m⁻¹`) via `toVoltage()` /
-`toResistance()` / `toCharge()` / `toConductance()` / `toMagneticFieldStrength()`.
+`toResistance()` / `toCharge()` / `toConductance()` / `toMagneticFieldStrength()`. The same holds for the
+newer groups: `toCapacitance()` (`kg⁻¹·m⁻²·s⁴·A²`), `toInductance()` (`kg·m²·s⁻²·A⁻²`), `toMagneticFlux()`
+(`kg·m²·s⁻²·A⁻¹`), `toMagneticFluxDensity()` (`kg·s⁻²·A⁻¹`), `toCurrentDensity()` (`A·m⁻²`),
+`toChargeDensity()` (`A·s·m⁻³`), `toResistivity()` (`kg·m³·s⁻³·A⁻²`), `toConductivity()`
+(`kg⁻¹·m⁻³·s³·A²`), `toPower()` (`kg·m²·s⁻³`) and `toEnergy()` (`kg·m²·s⁻²`).
 
 ## Worked example — Ohm's law around one circuit
 
@@ -70,6 +115,28 @@ u into volts                              // 230.0
 
 val i = (230 of volts) / (115 of ohms)    // KElectricCurrentUnitInstance
 i into amperes                            // 2.0
+```
+
+## Worked example — from mains power to consumed energy
+
+A **230 V** socket feeding a **10 A** load delivers `P = U · I`; running it for three hours consumes
+`W = P · t`:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.ec.amperes
+import org.pcsoft.framework.kunit.voltage.volts
+import org.pcsoft.framework.kunit.time.hours
+import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.energy.*
+
+val p = (230 of volts) * (10 of amperes)  // KPowerUnitInstance
+p into kilo.watts                         // 2.3
+
+val w = p * (3 of hours)                  // KEnergyUnitInstance
+w into kilo.joules                        // 24840.0
 ```
 
 ## Printing a value (`toString`)
@@ -108,3 +175,13 @@ The table shows Ohm's law mathematically versus in Kotlin with KUnit. Exponents 
 * [Charge](charge.md) — the coulomb, `I · t`, and the battery-capacity ampere hour.
 * [Conductance](conductance.md) — the siemens, `1 / R`, and `I / U`.
 * [Magnetic Field Strength](magneticfieldstrength.md) — ampere per meter, `I / l`, and the oersted.
+* [Capacitance](capacitance.md) — the farad, `Q / U`, and the CGS abfarad/statfarad.
+* [Inductance](inductance.md) — the henry, `Φ / I`, and the reactance form `X / ω`.
+* [Magnetic Flux](magneticflux.md) — the weber, `U · t`, and the maxwell.
+* [Magnetic Flux Density](magneticfluxdensity.md) — the tesla, `Φ / A`, and the gauss.
+* [Current Density](currentdensity.md) — ampere per square meter, `I / A`, for wire sizing.
+* [Charge Density](chargedensity.md) — coulomb per cubic meter, `Q / V`.
+* [Resistivity](resistivity.md) — the ohm meter, `R · A / l`, the material property behind a resistance.
+* [Conductivity](conductivity.md) — siemens per meter, `1 / ρ`, and `G · l / A`.
+* [Power (Electrical)](power.md) — the watt, `U · I`, and the horsepower units.
+* [Energy (Electrical)](energy.md) — the joule, `Q · U`, `P · t`, and the kilowatt hour as `kilo.watts * hours`.

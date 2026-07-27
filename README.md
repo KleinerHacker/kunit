@@ -197,6 +197,16 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Charge (constructed: current·time) | `org.pcsoft.framework.kunit.charge` | Coulomb (`KChargeUnit.BASE`) |
 | Conductance (constructed: mass⁻¹·length⁻²·time³·current²) | `org.pcsoft.framework.kunit.conductance` | Siemens (`KConductanceUnit.BASE`) |
 | Magnetic Field Strength (constructed: current·length⁻¹) | `org.pcsoft.framework.kunit.magneticfieldstrength` | Ampere per meter (`KMagneticFieldStrengthUnit.BASE`) |
+| Capacitance (constructed: mass⁻¹·length⁻²·time⁴·current²) | `org.pcsoft.framework.kunit.capacitance` | Farad (`KCapacitanceUnit.BASE`) |
+| Inductance (constructed: mass·length²·time⁻²·current⁻²) | `org.pcsoft.framework.kunit.inductance` | Henry (`KInductanceUnit.BASE`) |
+| Magnetic Flux (constructed: mass·length²·time⁻²·current⁻¹) | `org.pcsoft.framework.kunit.magneticflux` | Weber (`KMagneticFluxUnit.BASE`) |
+| Magnetic Flux Density (constructed: mass·time⁻²·current⁻¹) | `org.pcsoft.framework.kunit.magneticfluxdensity` | Tesla (`KMagneticFluxDensityUnit.BASE`) |
+| Current Density (constructed: current·length⁻²) | `org.pcsoft.framework.kunit.currentdensity` | Ampere per square meter (`KCurrentDensityUnit.BASE`) |
+| Charge Density (constructed: current·time·length⁻³) | `org.pcsoft.framework.kunit.chargedensity` | Coulomb per cubic meter (`KChargeDensityUnit.BASE`) |
+| Resistivity (constructed: mass·length³·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.resistivity` | Ohm meter (`KResistivityUnit.BASE`) |
+| Conductivity (constructed: mass⁻¹·length⁻³·time³·current²) | `org.pcsoft.framework.kunit.conductivity` | Siemens per meter (`KConductivityUnit.BASE`) |
+| Power (constructed: mass·length²·time⁻³) | `org.pcsoft.framework.kunit.power` | Watt (`KPowerUnit.BASE`) |
+| Energy (constructed: mass·length²·time⁻²) | `org.pcsoft.framework.kunit.energy` | Joule (`KEnergyUnit.BASE`) |
 
 #### Distance (`KDistanceUnit`)
 
@@ -349,6 +359,54 @@ d.toString()                                           // "20.0 ΔK"  (ΔK, dist
   decompositions**: typed `current / length` or the native `A·m⁻¹` expression narrowed with
   `toMagneticFieldStrength()`; inverse operator `fieldStrength * length` (magnetomotive force) - all
   value-equal.
+* **Capacitance** (`KCapacitanceUnit`) - `mass⁻¹ · length⁻² · time⁴ · current²`; tokens `farads`,
+  `abfarads`, `statfarads`, `jars`. **Multiple decompositions**: typed `charge / voltage` or the native
+  `kg⁻¹·m⁻²·s⁴·A²` expression narrowed with `toCapacitance()`; inverse operators `capacitance * voltage`
+  (and its commutative form) / `charge / capacitance` - all value-equal.
+* **Inductance** (`KInductanceUnit`) - `mass · length² · time⁻² · current⁻²`; tokens `henries`, `abhenries`,
+  `stathenries`. **Multiple decompositions**: typed `flux / current`, the reactance form
+  `resistance / frequency`, or the native `kg·m²·s⁻²·A⁻²` expression narrowed with `toInductance()`; inverse
+  operators `inductance * current` (and its commutative form) / `flux / inductance` /
+  `inductance * frequency` - all value-equal.
+* **Magnetic Flux** (`KMagneticFluxUnit`) - `mass · length² · time⁻² · current⁻¹`; tokens `webers`,
+  `maxwells`, `unitPoles`. **Multiple decompositions**: typed `voltage * time` (induction law, and its
+  commutative form), `voltage / frequency`, `inductance * current`, `fluxDensity * area`, or the native
+  `kg·m²·s⁻²·A⁻¹` expression narrowed with `toMagneticFlux()`; inverse operators `flux / time` /
+  `flux * frequency` / `flux / voltage` - all value-equal.
+* **Magnetic Flux Density** (`KMagneticFluxDensityUnit`) - `mass · time⁻² · current⁻¹`; tokens `teslas`,
+  `gauss`, `gammas`. **Multiple decompositions**: typed `flux / area` or the native `kg·s⁻²·A⁻¹` expression
+  narrowed with `toMagneticFluxDensity()`; inverse operators `fluxDensity * area` (and its commutative
+  form) / `flux / fluxDensity` - all value-equal.
+* **Current Density** (`KCurrentDensityUnit`) - `current · length⁻²`; no tokens (built as an expression,
+  e.g. `amperes / (milli.meters pow 2)`). **Multiple decompositions**: typed `current / area` or the native
+  `A·m⁻²` expression narrowed with `toCurrentDensity()`; inverse operators `currentDensity * area` (and its
+  commutative form) / `current / currentDensity` - all value-equal.
+* **Charge Density** (`KChargeDensityUnit`) - `current · time · length⁻³`; no tokens (built as an
+  expression, e.g. `coulombs / (meters pow 3)`). **Multiple decompositions**: typed `charge / volume` or the
+  native `A·s·m⁻³` expression narrowed with `toChargeDensity()`; inverse operators
+  `chargeDensity * volume` (and its commutative form) / `charge / chargeDensity` - all value-equal.
+* **Resistivity** (`KResistivityUnit`) - `mass · length³ · time⁻³ · current⁻²`; tokens `ohmMeters`,
+  `ohmCentimeters`, `statohmCentimeters`. **Multiple decompositions**: typed `resistance * length` (the
+  geometry factor `A / l`, and its commutative form), the reciprocal `1 / conductivity`, or the native
+  `kg·m³·s⁻³·A⁻²` expression narrowed with `toResistivity()`; inverse operators `resistivity / length` /
+  `resistivity / resistance` - all value-equal.
+* **Conductivity** (`KConductivityUnit`) - `mass⁻¹ · length⁻³ · time³ · current²`; tokens
+  `siemensPerMeter`, `siemensPerCentimeter`, `microsiemensPerCentimeter`, `megasiemensPerMeter`.
+  **Multiple decompositions**: the reciprocal `1 / resistivity`, typed `conductance / length` (the geometry
+  factor `l / A`), or the native `kg⁻¹·m⁻³·s³·A²` expression narrowed with `toConductivity()`; inverse
+  operators `1 / conductivity` / `conductivity * length` (and its commutative form) /
+  `conductance / conductivity` - all value-equal.
+* **Power** (`KPowerUnit`) - `mass · length² · time⁻³`; tokens `watts`, `metricHorsePowers`,
+  `mechanicalHorsePowers`, `ergsPerSecond`. **Multiple decompositions**: typed `voltage * current`
+  (electrical), `force * speed` (mechanical), `energy / time`, all with commutative forms where
+  applicable, or the native `kg·m²·s⁻³` expression narrowed with `toPower()`; inverse operators
+  `power / current` / `power / voltage` / `power / force` / `power / speed` - all value-equal.
+* **Energy** (`KEnergyUnit`) - `mass · length² · time⁻²`; tokens `joules`, `ergs`, `calories`,
+  `electronVolts`, `britishThermalUnits` (the kilowatt hour is deliberately no token - build it as
+  `kilo.watts * hours`). **Multiple decompositions**: typed `power * time`, `power / frequency`,
+  `force * length` (work), `charge * voltage` (electrical), all with commutative forms where applicable, or
+  the native `kg·m²·s⁻²` expression narrowed with `toEnergy()`; inverse operators `energy / time` /
+  `energy / power` / `energy / charge` - all value-equal.
 
 ### Still Open
 

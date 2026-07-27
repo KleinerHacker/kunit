@@ -1,11 +1,12 @@
 # Thermodynamics — Overview
 
-Package: `org.pcsoft.framework.kunit.temperature`
+Packages: `org.pcsoft.framework.kunit.temperature`, `…energy`, `…power`
 
-Thermodynamics is the physics of **heat and temperature**. In KUnit the field currently centres on
-temperature, which is modelled by **two related native groups** — because a temperature *reading* and a
-temperature *change* are physically different kinds of quantity, and keeping them apart is what makes the
-arithmetic correct.
+Thermodynamics is the physics of **heat and temperature**. In KUnit the field centres on temperature, which
+is modelled by **two related native groups** — because a temperature *reading* and a temperature *change* are
+physically different kinds of quantity, and keeping them apart is what makes the arithmetic correct. Around
+them sit the two **constructed** quantities of every heat balance: the heat itself (energy) and the rate at
+which it flows (power).
 
 ## Units in this topic
 
@@ -13,6 +14,13 @@ arithmetic correct.
 |---|---|---|---|---|
 | Absolute Temperature | native | affine **point** | kelvin (`K`) | [Absolute Temperature](temperature.md) |
 | Temperature Difference | native | linear **interval** | kelvin (`ΔK`) | [Temperature Difference](temperature-difference.md) |
+| Energy | constructed | linear quantity | joule (`J`) | [Energy (Thermodynamics)](energy.md) |
+| Power | constructed | linear quantity | watt (`W`) | [Power (Thermodynamics)](power.md) |
+
+Energy (heat) and power (heat flow rate) are technically **one** quantity each, shared with other subject
+areas; they are documented per field and cross-reference each other
+([Energy (Electrical)](../electrical/energy.md), [Energy (Mechanics)](../mechanics/energy.md),
+[Power (Electrical)](../electrical/power.md), [Power (Mechanics)](../mechanics/power.md)).
 
 A dedicated [Temperature Overview](temperature-overview.md) explains the point-vs-interval distinction in
 depth; this page is the entry point for the whole thermodynamics field.
@@ -26,6 +34,15 @@ depth; this page is the entry point for the whole thermodynamics field.
 | `AbsTemp − Difference` | Absolute Temperature |
 | `Difference ± Difference` | Temperature Difference |
 | `AbsTemp + AbsTemp` | **compile error** (physically meaningless) |
+
+## Heat and heat flow as typed operators
+
+| Expression | Result | Formula |
+|---|---|---|
+| `power * time` | Energy (heat) | `Q = Φ · t` |
+| `energy / time` | Power (heat flow) | `Φ = Q / t` |
+| `energy / power` | Time | `t = Q / Φ` |
+| `power / frequency` | Energy | `Q = Φ / f` |
 
 ## Worked example — a heating step
 
@@ -44,6 +61,28 @@ val deltaT = end - start                     // KTemperatureDifferenceUnitInstan
 deltaT.value                                 // 20.0 (kelvin interval)
 
 val back = start + KTemperatureDifference.ofKelvin(20) // KTemperatureUnitInstance: 303.15 K
+```
+
+## Worked example — heat and heating time of a boiler
+
+A **2 kW** boiler runs for **10 minutes**. The heat delivered is `Q = Φ · t`; dividing it back by the heat
+flow returns the heating time:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.time.minutes
+import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.energy.*
+
+val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
+q into kilo.joules                            // 1200.0
+q into kilo.calories                          // ≈ 286.8 (kcal)
+
+val t = q / (2 of kilo.watts)                 // KTimeUnitInstance
+t into seconds                                // 600.0
 ```
 
 ## Printing a value (`toString`)
@@ -70,6 +109,8 @@ interval quantity, deliberately distinct from an absolute point.
 | `T + ΔT` | `(10 of celsius) + KTemperatureDifference.ofKelvin(20)` | absolute temperature shifted by an interval |
 | `ΔK` | `KTemperatureDifference.ofKelvin(20)` | an explicit temperature interval |
 | `20 ΔK + 10 ΔK` | `KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)` | sum of two intervals |
+| `Q = Φ · t` | `(2 of kilo.watts) * (10 of minutes)` | heat from heat flow × time |
+| `Φ = Q / t` | `(1200 of kilo.joules) / (10 of minutes)` | heat flow from heat ÷ time |
 
 ## Where to go next
 
@@ -77,3 +118,5 @@ interval quantity, deliberately distinct from an absolute point.
   matters physically (heat energy, radiation, the ideal-gas law).
 * [Absolute Temperature](temperature.md) — Kelvin, Celsius, Fahrenheit, Rankine and the affine operators.
 * [Temperature Difference](temperature-difference.md) — the linear kelvin interval group.
+* [Energy (Thermodynamics)](energy.md) — the joule as heat, plus the calorie and the BTU.
+* [Power (Thermodynamics)](power.md) — the watt as heat flow rate, `Q / t`.
