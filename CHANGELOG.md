@@ -2,9 +2,11 @@
 
 ## [UNRELEASED]
 
+## [0.7.0]
+
 ### Changed (breaking)
 
-- **Unit packages are now grouped by subject area.** Every unit group moved from
+- **Breaking: Unit packages are now grouped by subject area.** Every unit group moved from
   `org.pcsoft.framework.kunit.<unit>` to `org.pcsoft.framework.kunit.<field>.<unit>` with the fields
   `common` (units belonging to several fields: `energy`, `power`), `kinematic` (`distance`, `time`,
   `frequency`, `speed`, `acceleration`), `mechanic` (`mass`, `force`, `pressure`, `density`,
