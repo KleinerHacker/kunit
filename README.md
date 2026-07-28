@@ -205,6 +205,14 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Charge Density (constructed: current·time·length⁻³) | `org.pcsoft.framework.kunit.chargedensity` | Coulomb per cubic meter (`KChargeDensityUnit.BASE`) |
 | Resistivity (constructed: mass·length³·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.resistivity` | Ohm meter (`KResistivityUnit.BASE`) |
 | Conductivity (constructed: mass⁻¹·length⁻³·time³·current²) | `org.pcsoft.framework.kunit.conductivity` | Siemens per meter (`KConductivityUnit.BASE`) |
+| Electric Field Strength (constructed: mass·length·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.electricfieldstrength` | Volt per meter (`KElectricFieldStrengthUnit.BASE`) |
+| Electric Flux Density (constructed: current·time·length⁻²) | `org.pcsoft.framework.kunit.electricfluxdensity` | Coulomb per square meter (`KElectricFluxDensityUnit.BASE`) |
+| Permittivity (constructed: mass⁻¹·length⁻³·time⁴·current²) | `org.pcsoft.framework.kunit.permittivity` | Farad per meter (`KPermittivityUnit.BASE`) |
+| Permeability (constructed: mass·length·time⁻²·current⁻²) | `org.pcsoft.framework.kunit.permeability` | Henry per meter (`KPermeabilityUnit.BASE`) |
+| Linear Charge Density (constructed: current·time·length⁻¹) | `org.pcsoft.framework.kunit.linearchargedensity` | Coulomb per meter (`KLinearChargeDensityUnit.BASE`) |
+| Magnetic Reluctance (constructed: mass⁻¹·length⁻²·time²·current²) | `org.pcsoft.framework.kunit.reluctance` | Ampere per weber (`KReluctanceUnit.BASE`) |
+| Electric Mobility (constructed: mass⁻¹·time²·current) | `org.pcsoft.framework.kunit.electricmobility` | Square meter per volt second (`KElectricMobilityUnit.BASE`) |
+| Electric Dipole Moment (constructed: current·time·length) | `org.pcsoft.framework.kunit.electricdipolemoment` | Coulomb meter (`KElectricDipoleMomentUnit.BASE`) |
 | Power (constructed: mass·length²·time⁻³) | `org.pcsoft.framework.kunit.power` | Watt (`KPowerUnit.BASE`) |
 | Energy (constructed: mass·length²·time⁻²) | `org.pcsoft.framework.kunit.energy` | Joule (`KEnergyUnit.BASE`) |
 
@@ -253,7 +261,9 @@ m into pounds                    // ≈ 4.409
 
 Ampere (base) plus the two classic CGS current units: the biot / abampere (`Bi`/`abA`, EMU, tokens
 `biot`/`abamperes`, `1 Bi = 10 A`) and the statampere (`statA`, ESU, token `statamperes`,
-`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`). Electric current is a plain native group with **no** cross-unit typed
+`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`), plus the ampere turn (`At`, token `ampereTurns`) for the magnetomotive
+force `Θ = N · I` of a magnetic circuit - dimensionally identical to the ampere, since the number of turns
+is a pure count. Electric current is a plain native group with **no** cross-unit typed
 results; every unit takes the full SI prefix set (`milli.amperes` = mA, `kilo.amperes` = kA), and
 `+`/`-`/comparison and `equals` work on the normalized ampere value.
 
@@ -396,8 +406,56 @@ d.toString()                                           // "20.0 ΔK"  (ΔK, dist
   factor `l / A`), or the native `kg⁻¹·m⁻³·s³·A²` expression narrowed with `toConductivity()`; inverse
   operators `1 / conductivity` / `conductivity * length` (and its commutative form) /
   `conductance / conductivity` - all value-equal.
+* **Electric Field Strength** (`KElectricFieldStrengthUnit`) - `mass · length · time⁻³ · current⁻¹`; tokens
+  `voltsPerMeter`, `voltsPerCentimeter`, `statvoltsPerCentimeter`. **Multiple decompositions**: typed
+  `voltage / length` (`E = U / l`), `force / charge` (`E = F / Q`), or the native `kg·m·s⁻³·A⁻¹` expression
+  narrowed with `toElectricFieldStrength()`; inverse operators `electricFieldStrength * length` /
+  `voltage / electricFieldStrength` / `electricFieldStrength * charge` (both with commutative forms) /
+  `force / electricFieldStrength` - all value-equal.
+* **Electric Flux Density** (`KElectricFluxDensityUnit`) - `current · time · length⁻²`; tokens
+  `coulombsPerSquareMeter`, `coulombsPerSquareCentimeter`. Also carries the dimensionally identical surface
+  charge density `σ`. **Multiple decompositions**: typed `charge / area` (`D = Q / A`),
+  `permittivity * electricFieldStrength` (`D = ε · E`), or the native `A·s·m⁻²` expression narrowed with
+  `toElectricFluxDensity()`; inverse operators `electricFluxDensity * area` (and its commutative form) /
+  `charge / electricFluxDensity` - all value-equal.
+* **Permittivity** (`KPermittivityUnit`) - `mass⁻¹ · length⁻³ · time⁴ · current²`; tokens `faradsPerMeter`,
+  `faradsPerCentimeter` plus the constant `vacuumPermittivity` (`ε₀`). **Multiple decompositions**: typed
+  `capacitance / length` (the geometry factor `d / A`), `electricFluxDensity / electricFieldStrength`
+  (`ε = D / E`), or the native `kg⁻¹·m⁻³·s⁴·A²` expression narrowed with `toPermittivity()`; inverse
+  operators `permittivity * length` / `capacitance / permittivity` /
+  `permittivity * electricFieldStrength` (both with commutative forms) /
+  `electricFluxDensity / permittivity` - all value-equal.
+* **Permeability** (`KPermeabilityUnit`) - `mass · length · time⁻² · current⁻²`; tokens `henriesPerMeter`,
+  `henriesPerCentimeter` plus the constant `vacuumPermeability` (`μ₀`). **Multiple decompositions**: typed
+  `inductance / length` (the coil geometry factor), `magneticFluxDensity / magneticFieldStrength`
+  (`μ = B / H`), or the native `kg·m·s⁻²·A⁻²` expression narrowed with `toPermeability()`; inverse
+  operators `permeability * length` / `inductance / permeability` /
+  `permeability * magneticFieldStrength` (both with commutative forms) /
+  `magneticFluxDensity / permeability` - all value-equal.
+* **Linear Charge Density** (`KLinearChargeDensityUnit`) - `current · time · length⁻¹`; no tokens (the
+  quantity has no named unit), built as `charge / length`. **Multiple decompositions**: typed
+  `charge / length` (`λ = Q / l`) or the native `A·s·m⁻¹` expression narrowed with
+  `toLinearChargeDensity()`; inverse operators `linearChargeDensity * length` (and its commutative form) /
+  `charge / linearChargeDensity` - all value-equal.
+* **Magnetic Reluctance** (`KReluctanceUnit`) - `mass⁻¹ · length⁻² · time² · current²`; tokens
+  `amperesPerWeber`, `inverseHenries`, `ampereTurnsPerWeber`. **Multiple decompositions**: typed
+  `current / magneticFlux` (Hopkinson's law `Rm = Θ / Φ`), the reciprocal `1 / inductance` (the permeance
+  `Λ`), or the native `kg⁻¹·m⁻²·s²·A²` expression narrowed with `toReluctance()`; inverse operators
+  `reluctance * magneticFlux` (and its commutative form) / `current / reluctance` / `1 / reluctance` - all
+  value-equal.
+* **Electric Mobility** (`KElectricMobilityUnit`) - `mass⁻¹ · time² · current`; tokens
+  `squareMetersPerVoltSecond`, `squareCentimetersPerVoltSecond`. **Multiple decompositions**: typed
+  `speed / electricFieldStrength` (`μ = v / E`) or the native `kg⁻¹·s²·A` expression narrowed with
+  `toElectricMobility()`; inverse operators `electricMobility * electricFieldStrength` (and its commutative
+  form) / `speed / electricMobility` - all value-equal.
+* **Electric Dipole Moment** (`KElectricDipoleMomentUnit`) - `current · time · length`; tokens
+  `coulombMeters`, `debyes`. **Multiple decompositions**: typed `charge * length` (`p = Q · d`, and its
+  commutative form) or the native `A·s·m` expression narrowed with `toElectricDipoleMoment()`; inverse
+  operators `electricDipoleMoment / charge` / `electricDipoleMoment / length` - all value-equal.
 * **Power** (`KPowerUnit`) - `mass · length² · time⁻³`; tokens `watts`, `metricHorsePowers`,
-  `mechanicalHorsePowers`, `ergsPerSecond`. **Multiple decompositions**: typed `voltage * current`
+  `mechanicalHorsePowers`, `ergsPerSecond`, plus the alternating-current spellings `voltAmperes` (`VA`,
+  apparent power) and `vars` (`var`, reactive power) - both dimensionally identical to the watt, so
+  nameplate ratings read as `630 of kilo.voltAmperes`. **Multiple decompositions**: typed `voltage * current`
   (electrical), `force * speed` (mechanical), `energy / time`, all with commutative forms where
   applicable, or the native `kg·m²·s⁻³` expression narrowed with `toPower()`; inverse operators
   `power / current` / `power / voltage` / `power / force` / `power / speed` - all value-equal.

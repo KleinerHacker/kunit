@@ -25,8 +25,35 @@
 | 公制马力 | `PS` | `metricHorsePowers` | 735.49875 |
 | 机械马力 | `hp` | `mechanicalHorsePowers` | 745.6998715822702 |
 | 尔格每秒（CGS） | `erg/s` | `ergsPerSecond` | 1.0e-7 |
+| 伏安（视在功率） | `VA` | `voltAmperes` | 1.0 |
+| 无功伏安 | `var` | `vars` | 1.0 |
 
 命名单位通过 `KPrefixBuilder` 支持 SI 前缀（`kilo.watts`、`mega.watts`、`milli.watts` 等）。
+
+### 视在功率与无功功率（VA、var）
+
+在交流电系统中，会区分三种功率，它们在量纲上都与瓦特相同：
+
+* **有功功率** `P = U · I · cos φ`，单位为瓦特（`W`）—— 实际做功的部分，
+* **视在功率** `S = U · I`，单位为伏安（`VA`）—— 有效电压与有效电流的乘积，
+* **无功功率** `Q = U · I · sin φ`，单位为无功伏安（`var`）—— 在电源与负载之间振荡而不做功的部分。
+
+由于这三者只在约定上有所区别，KUnit 将它们保留在同一个组中，仅通过符号加以区分：
+`1 VA = 1 var = 1 W`。前缀照常适用，因此 `kilo.voltAmperes` 是 1 kVA，`kilo.vars` 是 1 kvar。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.power.*
+
+// 一台额定 25 kVA 的变压器，为功率因数 cos φ = 0.8 的负载供电：
+val s = 25 of kilo.voltAmperes
+val p = (25 * 0.8) of kilo.watts     // 20 kW 有功功率
+val q = (25 * 0.6) of kilo.vars      // 15 kvar 无功功率
+s into kilo.voltAmperes               // 25.0
+q into kilo.vars                      // 15.0
+```
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -118,3 +145,7 @@ import org.pcsoft.framework.kunit.power.*
 | `kg·m²/s³` | `(kilo.grams * (meters pow 2)) / (seconds pow 3)` | 功率作为质量·长度² / 时间³（分数形式） |
 | `kg·m²·s⁻³` | `kilo.grams * (meters pow 2) * (seconds pow -3)` | 相同功率作为纯乘积形式 |
 | `kW` | `kilo.watts` | 带前缀的功率（千瓦） |
+| `S = U · I`，单位 `VA` | `voltAmperes` | 视在功率（交流电） |
+| `Q`，单位 `var` | `vars` | 无功功率（交流电） |
+| `kVA` | `kilo.voltAmperes` | 带前缀的视在功率（千伏安） |
+| `kvar` | `kilo.vars` | 带前缀的无功功率 |

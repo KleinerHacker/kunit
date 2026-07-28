@@ -27,3 +27,9 @@ val mechanicalHorsePowers: KPowerUnitInstance = powerInstanceOf(KPowerUnit.MECHA
 
 /** 1 erg per second ([KPowerUnit.ERG_PER_SECOND], CGS, 1e-7 W). */
 val ergsPerSecond: KPowerUnitInstance = powerInstanceOf(KPowerUnit.ERG_PER_SECOND.baseValue)
+
+/** 1 volt ampere ([KPowerUnit.VOLT_AMPERE], apparent power, 1 VA = 1 W). */
+val voltAmperes: KPowerUnitInstance = powerInstanceOf(KPowerUnit.VOLT_AMPERE.baseValue)
+
+/** 1 volt ampere reactive ([KPowerUnit.VAR], reactive power, 1 var = 1 W). */
+val vars: KPowerUnitInstance = powerInstanceOf(KPowerUnit.VAR.baseValue)

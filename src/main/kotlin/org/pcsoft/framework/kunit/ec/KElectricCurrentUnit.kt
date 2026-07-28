@@ -48,7 +48,17 @@ enum class KElectricCurrentUnit(override val symbol: String, override val baseVa
      * Statampere ("statA"), the current unit of the CGS electrostatic system (ESU),
      * 1 statA ≈ 3.335 641 × 10⁻¹⁰ A.
      */
-    STATAMPERE("statA", 3.335641e-10);
+    STATAMPERE("statA", 3.335641e-10),
+
+    // --- Magnetic circuit -----------------------------------------------------------------------
+
+    /**
+     * Ampere turn ("At"), the unit of **magnetomotive force** `Θ = N · I` (the drive of a magnetic
+     * circuit), 1 At = 1 A. Dimensionally identical to the ampere - the number of turns `N` is a pure
+     * count - the distinct symbol documents that the value describes a coil's total drive rather than a
+     * single conductor's current.
+     */
+    AMPERE_TURN("At", 1.0);
 
     companion object {
         /**

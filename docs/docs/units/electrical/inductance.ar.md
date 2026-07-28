@@ -90,6 +90,28 @@ val raw = 2 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow 2
 raw.toInductance() == (2 of henries)   // true
 ```
 
+## النفاذية المغناطيسية العكسية
+
+**النفاذية المغناطيسية العكسية** `Λ` لدارة مغناطيسية هي مقلوب
+[الممانعة المغناطيسية](reluctance.md) الخاصة بها، `Λ = 1 / Rm`. وهي **مطابقة بُعديًا** للمحاثة وتُقاس
+بالهنري أيضًا، لذا تُنمذجها KUnit بهذه المجموعة وبالرمز `H`؛ ولا يوجد رمز برمجي منفصل ولا نوع منفصل.
+تربط معاملات المقلوب المجموعتين معًا:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.reluctance.*
+
+// دارة مغناطيسية بممانعة Rm = 500 A/Wb لها نفاذية عكسية قدرها 2 mH.
+val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
+permeance into milli.henries                    // 2.0
+
+// …وبالعكس:
+1 / (2 of milli.henries) == (500 of amperesPerWeber)  // true
+```
+
 ## المعاملات
 
 ```kotlin

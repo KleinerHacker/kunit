@@ -2,7 +2,9 @@
 
 包：`org.pcsoft.framework.kunit.ec`、`…voltage`、`…resistance`、`…charge`、`…conductance`、
 `…magneticfieldstrength`、`…capacitance`、`…inductance`、`…magneticflux`、`…magneticfluxdensity`、
-`…currentdensity`、`…chargedensity`、`…resistivity`、`…conductivity`、`…power`、`…energy`
+`…currentdensity`、`…chargedensity`、`…resistivity`、`…conductivity`、`…power`、`…energy`,
+`…electricfieldstrength`、`…electricfluxdensity`、`…permittivity`、`…permeability`、
+`…linearchargedensity`、`…reluctance`、`…electricmobility`、`…electricdipolemoment`
 
 电气工程将流过电路的电流、驱动它的电压,以及阻碍它的电阻联系在一起。这三者由**欧姆定律**相连,
 KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原生**基本量(电流)以及由基本量纲
@@ -26,6 +28,14 @@ KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原�
 | 电荷密度 | 构造 | 库仑每立方米(`C/m³`) | [电荷密度](chargedensity.md) |
 | 电阻率 | 构造 | 欧姆米(`Ω·m`) | [电阻率](resistivity.md) |
 | 电导率 | 构造 | 西门子每米(`S/m`) | [电导率](conductivity.md) |
+| 电场强度 | 构造 | 伏特每米(`V/m`) | [电场强度](electricfieldstrength.md) |
+| 电通密度 | 构造 | 库仑每平方米(`C/m²`) | [电通密度](electricfluxdensity.md) |
+| 介电常数 | 构造 | 法拉每米(`F/m`) | [介电常数](permittivity.md) |
+| 磁导率 | 构造 | 亨利每米(`H/m`) | [磁导率](permeability.md) |
+| 线电荷密度 | 构造 | 库仑每米(`C/m`) | [线电荷密度](linearchargedensity.md) |
+| 磁阻 | 构造 | 安培每韦伯(`A/Wb`) | [磁阻](reluctance.md) |
+| 电迁移率 | 构造 | 平方米每伏秒(`m²/(V·s)`) | [电迁移率](electricmobility.md) |
+| 电偶极矩 | 构造 | 库仑米(`C·m`) | [电偶极矩](electricdipolemoment.md) |
 | 功率 | 构造 | 瓦特(`W`) | [功率(电气)](power.md) |
 | 能量 | 构造 | 焦耳(`J`) | [能量(电气)](energy.md) |
 
@@ -82,6 +92,30 @@ KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原�
 | `energy / time` | 功率 | `P = W / t` |
 | `charge * voltage` | 能量 | `W = Q · U` |
 | `energy / charge` | 电压 | `U = W / Q` |
+| `voltage / length` | 电场强度 | `E = U / l` |
+| `force / charge` | 电场强度 | `E = F / Q` |
+| `field strength * length` | 电压 | `U = E · l` |
+| `field strength * charge` | 力 | `F = E · Q` |
+| `charge / area` | 电通密度 | `D = Q / A` |
+| `flux density * area` | 电荷 | `Q = D · A` |
+| `flux density / field strength` | 介电常数 | `ε = D / E` |
+| `permittivity * field strength` | 电通密度 | `D = ε · E` |
+| `capacitance / length` | 介电常数 | `ε = C · d / A` |
+| `permittivity * length` | 电容 | `C = ε · A / d` |
+| `magnetic flux density / magnetic field strength` | 磁导率 | `μ = B / H` |
+| `permeability * magnetic field strength` | 磁通密度 | `B = μ · H` |
+| `inductance / length` | 磁导率 | `μ = L · l / (N² · A)` |
+| `permeability * length` | 电感 | `L = μ · N² · A / l` |
+| `charge / length` | 线电荷密度 | `λ = Q / l` |
+| `linear charge density * length` | 电荷 | `Q = λ · l` |
+| `current / magnetic flux` | 磁阻 | `Rm = Θ / Φ` |
+| `reluctance * magnetic flux` | 电流 | `Θ = Rm · Φ` |
+| `1 / inductance` | 磁阻 | `Rm = 1 / Λ` |
+| `1 / reluctance` | 电感 | `Λ = 1 / Rm` |
+| `speed / field strength` | 电迁移率 | `μ = v / E` |
+| `mobility * field strength` | 速度 | `v = μ · E` |
+| `charge * length` | 电偶极矩 | `p = Q · d` |
+| `dipole moment / charge` | 长度 | `d = p / Q` |
 
 每个结果都是正确的类型化量 —— 无需手工组装原始混合单位。此外,电压、电阻、电荷、电导与磁场强度通过
 `toVoltage()` / `toResistance()` / `toCharge()` / `toConductance()` / `toMagneticFieldStrength()`
@@ -90,7 +124,24 @@ KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原�
 `toMagneticFlux()`(`kg·m²·s⁻²·A⁻¹`)、`toMagneticFluxDensity()`(`kg·s⁻²·A⁻¹`)、
 `toCurrentDensity()`(`A·m⁻²`)、`toChargeDensity()`(`A·s·m⁻³`)、`toResistivity()`
 (`kg·m³·s⁻³·A⁻²`)、`toConductivity()`(`kg⁻¹·m⁻³·s³·A²`)、`toPower()`(`kg·m²·s⁻³`)以及
-`toEnergy()`(`kg·m²·s⁻²`)。
+`toEnergy()`(`kg·m²·s⁻²`)。场、材料与磁路相关的组遵循相同的模式:
+`toElectricFieldStrength()`(`kg·m·s⁻³·A⁻¹`)、`toElectricFluxDensity()`(`A·s·m⁻²`)、
+`toPermittivity()`(`kg⁻¹·m⁻³·s⁴·A²`)、`toPermeability()`(`kg·m·s⁻²·A⁻²`)、
+`toLinearChargeDensity()`(`A·s·m⁻¹`)、`toReluctance()`(`kg⁻¹·m⁻²·s²·A²`)、
+`toElectricMobility()`(`kg⁻¹·s²·A`)以及`toElectricDipoleMoment()`(`A·s·m`)。
+
+某些量在**量纲上**与某个已有的组相同,因此由该组承载,而不是拥有各自独立的组 ——
+只有符号不同,用来说明其具体含义:
+
+| 量 | 组 | 符号 |
+|---|---|---|
+| 阻抗 `Z`、电抗 `X` | [电阻](resistance.md) | `Ω` |
+| 导纳 `Y`、电纳 `B` | [电导](conductance.md) | `S`(`℧`) |
+| 视在功率 `S`、无功功率 `Q` | [功率(电气)](power.md) | `VA`、`var` |
+| 磁动势 `Θ` | [电流](ec.md) | `At` |
+| 电通量 `Ψ` | [电荷](charge.md) | `C` |
+| 磁导 `Λ` | [电感](inductance.md) | `H` |
+| 面电荷密度 `σ` | [电通密度](electricfluxdensity.md) | `C/m²` |
 
 ## 实例 —— 单个回路中的欧姆定律
 
@@ -181,3 +232,11 @@ u.toString()               // "230.0 V"(基准单位)
 * [电导率](conductivity.md) —— 西门子每米、`1 / ρ`,以及 `G · l / A`。
 * [功率(电气)](power.md) —— 瓦特、`U · I`,以及马力单位。
 * [能量(电气)](energy.md) —— 焦耳、`Q · U`、`P · t`,以及作为 `kilo.watts * hours` 的千瓦时。
+* [电场强度](electricfieldstrength.md) —— 伏特每米、`U / l`,以及 `F / Q`。
+* [电通密度](electricfluxdensity.md) —— 库仑每平方米、`Q / A`,亦为面电荷密度 `σ`。
+* [介电常数](permittivity.md) —— 法拉每米、`D / E`,以及真空常数 `ε₀`。
+* [磁导率](permeability.md) —— 亨利每米、`B / H`,以及真空常数 `μ₀`。
+* [线电荷密度](linearchargedensity.md) —— 库仑每米、`Q / l`,用于导线与细丝。
+* [磁阻](reluctance.md) —— 安培每韦伯、霍普金森定律 `Θ / Φ`,以及磁导 `1 / Λ`。
+* [电迁移率](electricmobility.md) —— 平方米每伏秒、`v / E`,用于半导体。
+* [电偶极矩](electricdipolemoment.md) —— 库仑米、`Q · d`,以及德拜。

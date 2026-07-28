@@ -26,9 +26,38 @@
 | حصان بخاري متري | `PS` | `metricHorsePowers` | 735.49875 |
 | حصان بخاري ميكانيكي | `hp` | `mechanicalHorsePowers` | 745.6998715822702 |
 | إرغ لكل ثانية (CGS) | `erg/s` | `ergsPerSecond` | 1.0e-7 |
+| فولت أمبير (قدرة ظاهرية) | `VA` | `voltAmperes` | 1.0 |
+| فولت أمبير تفاعلي | `var` | `vars` | 1.0 |
 
 تدعم الوحدات المسمّاة بادئات النظام الدولي عبر `KPrefixBuilder` (`kilo.watts`، `mega.watts`،
 `milli.watts`، …).
+
+### القدرة الظاهرية والتفاعلية (VA، var)
+
+في أنظمة التيار المتردد تُميَّز ثلاث قدرات، جميعها متطابقة بُعديًا مع الواط:
+
+* **القدرة الفعّالة** `P = U · I · cos φ` بالواط (`W`) — الجزء الذي يبذل شغلًا،
+* **القدرة الظاهرية** `S = U · I` بالفولت أمبير (`VA`) — حاصل ضرب الجهد الفعّال والتيار الفعّال،
+* **القدرة التفاعلية** `Q = U · I · sin φ` بالفولت أمبير التفاعلي (`var`) — الجزء المتذبذب بين
+  المصدر والحمل دون بذل شغل.
+
+ولأن الثلاثة تختلف بالاصطلاح فقط، تحتفظ KUnit بها في هذه المجموعة الواحدة وتفصلها بالرمز:
+`1 VA = 1 var = 1 W`. تعمل البادئات كالمعتاد، فـ `kilo.voltAmperes` تساوي 1 kVA و`kilo.vars` تساوي
+1 kvar.
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.power.*
+
+// محوّل بقدرة اسمية 25 kVA يغذّي حملًا بمعامل قدرة cos φ = 0.8:
+val s = 25 of kilo.voltAmperes
+val p = (25 * 0.8) of kilo.watts     // 20 kW قدرة فعّالة
+val q = (25 * 0.6) of kilo.vars      // 15 kvar قدرة تفاعلية
+s into kilo.voltAmperes               // 25.0
+q into kilo.vars                      // 15.0
+```
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -120,3 +149,7 @@ import org.pcsoft.framework.kunit.power.*
 | `kg·m²/s³` | `(kilo.grams * (meters pow 2)) / (seconds pow 3)` | القدرة ككتلة·طول² / زمن³ (صيغة الكسر) |
 | `kg·m²·s⁻³` | `kilo.grams * (meters pow 2) * (seconds pow -3)` | نفس القدرة كحاصل ضرب خالص |
 | `kW` | `kilo.watts` | قدرة ببادئة (كيلوواط) |
+| `S = U · I` بـ `VA` | `voltAmperes` | القدرة الظاهرية (تيار متردد) |
+| `Q` بـ `var` | `vars` | القدرة التفاعلية (تيار متردد) |
+| `kVA` | `kilo.voltAmperes` | قدرة ظاهرية ببادئة (كيلوفولت أمبير) |
+| `kvar` | `kilo.vars` | قدرة تفاعلية ببادئة |

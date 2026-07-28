@@ -92,6 +92,28 @@ val raw = 2 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow 2
 raw.toInductance() == (2 of henries)   // true
 ```
 
+## Permeance
+
+The **permeance** `Λ` of a magnetic circuit is the reciprocal of its
+[magnetic reluctance](reluctance.md), `Λ = 1 / Rm`. It is **dimensionally identical** to the inductance
+and is measured in henries as well, so KUnit models it with this group and the symbol `H`; there is no
+separate token and no separate type. The reciprocal operators tie both groups together:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.reluctance.*
+
+// A magnetic circuit of Rm = 500 A/Wb has a permeance of 2 mH.
+val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
+permeance into milli.henries                    // 2.0
+
+// …and back again:
+1 / (2 of milli.henries) == (500 of amperesPerWeber)  // true
+```
+
 ## Operators
 
 ```kotlin

@@ -38,3 +38,8 @@ val KPrefixBuilder.abamperes: KElectricCurrentUnitInstance get() = prefixedElect
 
 /** Prefixed statamperes, e.g. `kilo.statamperes`. */
 val KPrefixBuilder.statamperes: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.STATAMPERE)
+
+// --- Magnetic circuit ----------------------------------------------------------------------------
+
+/** Prefixed ampere turns, e.g. `kilo.ampereTurns` = 1000 At. */
+val KPrefixBuilder.ampereTurns: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.AMPERE_TURN)

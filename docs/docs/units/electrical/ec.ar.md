@@ -20,8 +20,30 @@
 | SI | أمبير | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
 | CGS | بيوت / أب-أمبير | `KElectricCurrentUnit.BIOT` | `Bi` (`abA`) | `biot` / `abamperes` | 10 |
 | CGS | ستات-أمبير | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
+| دارة مغناطيسية | أمبير-لفة | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
 
 كل `Token` هو `KElectricCurrentUnitInstance` قيمته 1 يُستخدم مع `of` (البناء) و`into` (القراءة).
+
+### القوّة المحرّكة المغناطيسية (أمبير-لفة)
+
+**القوّة المحرّكة المغناطيسية** `Θ = N · I` — دافع الدارة المغناطيسية — مطابقة بُعديًا للتيار الكهربائي،
+لأن عدد اللفات `N` عدد صرف. لذا فهي لا تحصل على مجموعة خاصّة بها: تستخدم الأمبير-لفة (`At`) داخل هذه
+المجموعة. يوثّق الرمز المميّز أن القيمة تصف دافع ملف كامل بدلًا من تيّار موصّل واحد. `1 At = 1 A`، وتعمل
+البادئات كالمعتاد (`kilo.ampereTurns`).
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.ec.*
+
+// ملف بـ 500 لفة يحمل 0.4 A ينتج Θ = 200 At.
+val theta = (500 * 0.4) of ampereTurns
+theta into ampereTurns          // 200.0
+theta == (200 of amperes)       // true (متطابقة بُعديًا)
+```
+
+تدفع القوّة المحرّكة المغناطيسية [الفيض المغناطيسي](magneticflux.md) عبر
+[الممانعة المغناطيسية](reluctance.md): `Θ = Rm · Φ`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -127,4 +149,6 @@ Unicode المرتفعة (`²`، `³`، `⁻¹`)، ويرمز `·` إلى الض
 | `mA` | `milli.amperes` | ميلي أمبير (بادئة مطبَّقة على الأمبير) |
 | `kA` | `kilo.amperes` | كيلوأمبير |
 | `Bi` | `biot` | بيوت / أب-أمبير (10 A) |
+| `At` | `ampereTurns` | أمبير-لفة، القوّة المحرّكة المغناطيسية `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | أمبير-لفة ببادئة (كيلو أمبير-لفة) |
 | `A²` | `amperes pow 2` | أمبير تربيعًا (وحدة مختلطة عامّة) |

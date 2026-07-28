@@ -87,6 +87,25 @@ val raw = (2 of amperes).toUnit() * (1 of hours).toUnit()  // KMixedUnitInstance
 raw.toCharge() == typed                                    // true
 ```
 
+## Electric flux
+
+The **electric flux** `Ψ` through a closed surface equals the charge enclosed by it (Gauss's law,
+`Ψ = Q`). It is therefore **dimensionally identical** to the charge and is measured in coulombs as well.
+KUnit models it with this group and the symbol `C`; there is no separate token and no separate type:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.micro
+import org.pcsoft.framework.kunit.charge.*
+
+// A sphere enclosing 2 µC carries an electric flux of 2 µC.
+val psi = 2 of micro.coulombs
+psi into micro.coulombs        // 2.0
+```
+
+Divided by an area the flux yields the [electric flux density](electricfluxdensity.md) `D = Ψ / A`.
+
 ## Operators
 
 ```kotlin

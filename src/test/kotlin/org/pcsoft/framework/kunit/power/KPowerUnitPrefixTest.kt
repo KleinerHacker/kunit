@@ -89,6 +89,15 @@ class KPowerUnitPrefixTest {
             (1 of kilo.ergsPerSecond).value,
             rel(f * KPowerUnit.ERG_PER_SECOND.baseValue),
         )
+        assertEquals(f * KPowerUnit.VOLT_AMPERE.baseValue, (1 of kilo.voltAmperes).value, rel(f))
+        assertEquals(f * KPowerUnit.VAR.baseValue, (1 of kilo.vars).value, rel(f))
+    }
+
+    /** The nameplate of a transformer: `630 kVA` apparent power, and `120 kvar` of reactive power. */
+    @Test
+    fun `transformer nameplate in kilo volt amperes`() {
+        assertEquals(630_000.0, (630 of kilo.voltAmperes).value, 1e-9)
+        assertEquals(120_000.0, (120 of kilo.vars).value, 1e-9)
     }
 
     /** The real-world household notation `3.5 kW` of a kettle. */

@@ -78,6 +78,35 @@ val raw = 115 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow
 raw.toResistance() == (115 of ohms)      // true
 ```
 
+## インピーダンスとリアクタンス
+
+交流システムでは回路の抵抗成分は3つの量に分けられ、いずれも抵抗と**次元的に同一**であり、すべてオーム
+で測定されます:
+
+* **抵抗** `R` — エネルギーを消費する実数部、
+* **リアクタンス** `X = ωL − 1/(ωC)` — インダクタンスとキャパシタンスによる部分、
+* **インピーダンス** `Z = √(R² + X²)` — 複素インピーダンスの大きさ。
+
+これらは解釈が異なるだけなので、KUnitはこの1つのグループと単一の記号 `Ω` ですべてをモデル化します。
+専用のトークンや専用の型はありません。リアクタンスやインピーダンスも抵抗とまったく同様に作成できます:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import kotlin.math.PI
+import kotlin.math.sqrt
+import org.pcsoft.framework.kunit.resistance.*
+
+// 10 mHのコイルと30 Ωが50 Hzで直列に接続されている場合:
+val x = (2 * PI * 50 * 0.010) of ohms          // リアクタンス X ≈ 3.14 Ω
+val r = 30 of ohms                              // 抵抗 R
+val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // インピーダンス Z ≈ 30.16 Ω
+z into ohms                                     // ≈ 30.164
+```
+
+リアクタンス成分は[インダクタンス](inductance.md)と[静電容量](capacitance.md)によって駆動され、それが運ぶ
+電力は `var` で表されます。[電力（電気）](power.md)を参照してください。
+
 ## 演算子
 
 ```kotlin

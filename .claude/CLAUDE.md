@@ -64,12 +64,25 @@
   * Describe each part in short bullet points (max. 20 words each)
   * All bullet points MUST describe each task to implement it
 * Do NOT create a plan summary at ANY TIME
-* ALWAYS write a plan to .clude/plans/
+* ALWAYS write a plan to `.claude/plans/<name>.md`
   * After finishing the plan / all plans, you MUST clean up this path completely
-* ALWAYS write the development status into .claude/plans/<name>_status.md
-  * If there is a problem, you MUST continue by this information
-  * If you continue, you MUST write the development status again
-  * If you continue, you MUST change to ato mode
+* ALWAYS write the development status into `.claude/plans/<name>_status.md`
+  * You MUST update this file after every completed task, not only at the end
+
+## Continuation protocol (MANDATORY, no exceptions)
+
+Whenever work is resumed - after `/clear`, after a context summary, after an interruption, an
+error, a new session, or ANY user message like "weiter" / "mach weiter" / "continue" - the FIRST
+action of that turn MUST be, in exactly this order and BEFORE any code, edit, tool or analysis:
+
+1. Read `.claude/plans/<name>.md` and `.claude/plans/<name>_status.md`.
+2. DISPLAY the plan and the current development status to the user in the console (in German),
+   including which tasks are done and which is the next one.
+3. Only AFTER this output: continue the work, switch to auto mode, and write the development
+   status again.
+
+Skipping step 2 is a rule violation. If NO plan file exists, say so explicitly and create a plan
+first. NEVER continue work silently from a plan the user has not seen in the current context.
 
 # GIT
 

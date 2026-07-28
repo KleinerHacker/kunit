@@ -84,6 +84,25 @@ val raw = (2 of amperes).toUnit() * (1 of hours).toUnit()  // KMixedUnitInstance
 raw.toCharge() == typed                                    // true
 ```
 
+## 電束
+
+閉曲面を貫く**電束** `Ψ` は、その中に囲まれた電荷に等しくなります（ガウスの法則、`Ψ = Q`）。したがって
+電荷と**次元的に同一**であり、同様にクーロンで測定されます。KUnitはこのグループと記号 `C` でこれをモデル化
+します。専用のトークンや専用の型はありません:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.micro
+import org.pcsoft.framework.kunit.charge.*
+
+// 2 µC を囲む球は 2 µC の電束を持つ。
+val psi = 2 of micro.coulombs
+psi into micro.coulombs        // 2.0
+```
+
+電束を面積で割ると、[電束密度](electricfluxdensity.md) `D = Ψ / A` が得られます。
+
 ## 演算子
 
 ```kotlin

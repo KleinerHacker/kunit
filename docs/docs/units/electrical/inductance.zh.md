@@ -87,6 +87,27 @@ val raw = 2 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow 2
 raw.toInductance() == (2 of henries)   // true
 ```
 
+## 磁导
+
+磁路的**磁导** `Λ` 是其[磁阻](reluctance.md)的倒数,`Λ = 1 / Rm`。它与电感在**量纲上相同**,
+同样以亨利为单位,因此 KUnit 用该组和符号 `H` 来表示它;没有单独的令牌,也没有单独的类型。
+倒数运算符将两个组联系在一起:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.reluctance.*
+
+// 一个 Rm = 500 A/Wb 的磁路,其磁导为 2 mH。
+val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
+permeance into milli.henries                    // 2.0
+
+// ……反过来也一样:
+1 / (2 of milli.henries) == (500 of amperesPerWeber)  // true
+```
+
 ## 运算符
 
 ```kotlin

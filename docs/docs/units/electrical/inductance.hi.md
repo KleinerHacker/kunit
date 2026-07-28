@@ -91,6 +91,28 @@ val raw = 2 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow 2
 raw.toInductance() == (2 of henries)   // true
 ```
 
+## पर्मिएंस
+
+किसी चुंबकीय परिपथ का **पर्मिएंस** `Λ` उसकी [चुंबकीय अनिच्छा (reluctance)](reluctance.md) का व्युत्क्रम
+है, `Λ = 1 / Rm`। यह प्रेरकत्व के **विमीय रूप से समान** है और हेनरी में ही मापा जाता है, इसलिए KUnit इसे
+इसी समूह और प्रतीक `H` से मॉडल करता है; कोई अलग टोकन और कोई अलग प्रकार नहीं है। व्युत्क्रम संकारक दोनों
+समूहों को एक साथ बाँधते हैं:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.reluctance.*
+
+// Rm = 500 A/Wb वाले एक चुंबकीय परिपथ का पर्मिएंस 2 mH है।
+val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
+permeance into milli.henries                    // 2.0
+
+// …और वापस:
+1 / (2 of milli.henries) == (500 of amperesPerWeber)  // true
+```
+
 ## संकारक
 
 ```kotlin

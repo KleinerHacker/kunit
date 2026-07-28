@@ -27,6 +27,14 @@
 | 電荷密度 | 構成 | クーロン毎立方メートル(`C/m³`) | [電荷密度](chargedensity.md) |
 | 抵抗率 | 構成 | オームメートル(`Ω·m`) | [抵抗率](resistivity.md) |
 | 導電率 | 構成 | ジーメンス毎メートル(`S/m`) | [導電率](conductivity.md) |
+| 電界の強さ | 構成 | ボルト毎メートル(`V/m`) | [電界の強さ](electricfieldstrength.md) |
+| 電束密度 | 構成 | クーロン毎平方メートル(`C/m²`) | [電束密度](electricfluxdensity.md) |
+| 誘電率 | 構成 | ファラド毎メートル(`F/m`) | [誘電率](permittivity.md) |
+| 透磁率 | 構成 | ヘンリー毎メートル(`H/m`) | [透磁率](permeability.md) |
+| 線電荷密度 | 構成 | クーロン毎メートル(`C/m`) | [線電荷密度](linearchargedensity.md) |
+| 磁気抵抗 | 構成 | アンペア毎ウェーバ(`A/Wb`) | [磁気抵抗](reluctance.md) |
+| 電気移動度 | 構成 | 平方メートル毎ボルト秒(`m²/(V·s)`) | [電気移動度](electricmobility.md) |
+| 電気双極子モーメント | 構成 | クーロンメートル(`C·m`) | [電気双極子モーメント](electricdipolemoment.md) |
 | 電力 | 構成 | ワット(`W`) | [電力(電気)](power.md) |
 | エネルギー | 構成 | ジュール(`J`) | [エネルギー(電気)](energy.md) |
 
@@ -84,6 +92,30 @@
 | `energy / time` | 電力 | `P = W / t` |
 | `charge * voltage` | エネルギー | `W = Q · U` |
 | `energy / charge` | 電圧 | `U = W / Q` |
+| `voltage / length` | 電界の強さ | `E = U / l` |
+| `force / charge` | 電界の強さ | `E = F / Q` |
+| `field strength * length` | 電圧 | `U = E · l` |
+| `field strength * charge` | 力 | `F = E · Q` |
+| `charge / area` | 電束密度 | `D = Q / A` |
+| `flux density * area` | 電荷 | `Q = D · A` |
+| `flux density / field strength` | 誘電率 | `ε = D / E` |
+| `permittivity * field strength` | 電束密度 | `D = ε · E` |
+| `capacitance / length` | 誘電率 | `ε = C · d / A` |
+| `permittivity * length` | キャパシタンス | `C = ε · A / d` |
+| `magnetic flux density / magnetic field strength` | 透磁率 | `μ = B / H` |
+| `permeability * magnetic field strength` | 磁束密度 | `B = μ · H` |
+| `inductance / length` | 透磁率 | `μ = L · l / (N² · A)` |
+| `permeability * length` | インダクタンス | `L = μ · N² · A / l` |
+| `charge / length` | 線電荷密度 | `λ = Q / l` |
+| `linear charge density * length` | 電荷 | `Q = λ · l` |
+| `current / magnetic flux` | 磁気抵抗 | `Rm = Θ / Φ` |
+| `reluctance * magnetic flux` | 電流 | `Θ = Rm · Φ` |
+| `1 / inductance` | 磁気抵抗 | `Rm = 1 / Λ` |
+| `1 / reluctance` | インダクタンス | `Λ = 1 / Rm` |
+| `speed / field strength` | 電気移動度 | `μ = v / E` |
+| `mobility * field strength` | 速さ | `v = μ · E` |
+| `charge * length` | 電気双極子モーメント | `p = Q · d` |
+| `dipole moment / charge` | 長さ | `d = p / Q` |
 
 各結果は正しい型付き量になります — 生の混合単位を手作業で組み立てることはありません。さらに電圧、抵抗、
 電荷、コンダクタンス、磁界の強さは、完全に**ネイティブ**な分解(`kg·m²·s⁻³·A⁻¹`、`kg·m²·s⁻³·A⁻²`、
@@ -92,7 +124,24 @@
 `toCapacitance()`(`kg⁻¹·m⁻²·s⁴·A²`)、`toInductance()`(`kg·m²·s⁻²·A⁻²`)、`toMagneticFlux()`
 (`kg·m²·s⁻²·A⁻¹`)、`toMagneticFluxDensity()`(`kg·s⁻²·A⁻¹`)、`toCurrentDensity()`(`A·m⁻²`)、
 `toChargeDensity()`(`A·s·m⁻³`)、`toResistivity()`(`kg·m³·s⁻³·A⁻²`)、`toConductivity()`
-(`kg⁻¹·m⁻³·s³·A²`)、`toPower()`(`kg·m²·s⁻³`)、`toEnergy()`(`kg·m²·s⁻²`)。
+(`kg⁻¹·m⁻³·s³·A²`)、`toPower()`(`kg·m²·s⁻³`)、`toEnergy()`(`kg·m²·s⁻²`)。フィールド、材料、
+磁気回路のグループも同じパターンに従います: `toElectricFieldStrength()`(`kg·m·s⁻³·A⁻¹`)、
+`toElectricFluxDensity()`(`A·s·m⁻²`)、`toPermittivity()`(`kg⁻¹·m⁻³·s⁴·A²`)、`toPermeability()`
+(`kg·m·s⁻²·A⁻²`)、`toLinearChargeDensity()`(`A·s·m⁻¹`)、`toReluctance()`(`kg⁻¹·m⁻²·s²·A²`)、
+`toElectricMobility()`(`kg⁻¹·s²·A`)、`toElectricDipoleMoment()`(`A·s·m`)。
+
+一部の量は既存のグループと**次元的に同一**であり、そのため独自のグループではなく既存のグループで扱われ
+ます — 意味を示すために記号のみが異なります:
+
+| 量 | グループ | 記号 |
+|---|---|---|
+| インピーダンス `Z`、リアクタンス `X` | [抵抗](resistance.md) | `Ω` |
+| アドミタンス `Y`、サセプタンス `B` | [コンダクタンス](conductance.md) | `S`(`℧`) |
+| 皮相電力 `S`、無効電力 `Q` | [電力(電気)](power.md) | `VA`、`var` |
+| 起磁力 `Θ` | [電流](ec.md) | `At` |
+| 電束 `Ψ` | [電荷](charge.md) | `C` |
+| パーミアンス `Λ` | [インダクタンス](inductance.md) | `H` |
+| 表面電荷密度 `σ` | [電束密度](electricfluxdensity.md) | `C/m²` |
 
 ## 実例 — 1 つの回路でのオームの法則
 
@@ -184,3 +233,11 @@ u.toString()               // "230.0 V"(基準単位)
 * [導電率](conductivity.md) — ジーメンス毎メートル、`1 / ρ`、および `G · l / A`。
 * [電力(電気)](power.md) — ワット、`U · I`、およびホースパワー単位。
 * [エネルギー(電気)](energy.md) — ジュール、`Q · U`、`P · t`、および `kilo.watts * hours` としてのキロワット時。
+* [電界の強さ](electricfieldstrength.md) — ボルト毎メートル、`U / l`、および `F / Q`。
+* [電束密度](electricfluxdensity.md) — クーロン毎平方メートル、`Q / A`、表面電荷密度 `σ` でもある。
+* [誘電率](permittivity.md) — ファラド毎メートル、`D / E`、および真空定数 `ε₀`。
+* [透磁率](permeability.md) — ヘンリー毎メートル、`B / H`、および真空定数 `μ₀`。
+* [線電荷密度](linearchargedensity.md) — クーロン毎メートル、`Q / l`、電線やフィラメント向け。
+* [磁気抵抗](reluctance.md) — アンペア毎ウェーバ、ホプキンソンの法則 `Θ / Φ`、およびパーミアンス `1 / Λ`。
+* [電気移動度](electricmobility.md) — 平方メートル毎ボルト秒、`v / E`、半導体向け。
+* [電気双極子モーメント](electricdipolemoment.md) — クーロンメートル、`Q · d`、およびデバイ。

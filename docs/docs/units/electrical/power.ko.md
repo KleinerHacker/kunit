@@ -26,9 +26,38 @@
 | 미터법 마력 | `PS` | `metricHorsePowers` | 735.49875 |
 | 기계식 마력 | `hp` | `mechanicalHorsePowers` | 745.6998715822702 |
 | 초당 에르그(CGS) | `erg/s` | `ergsPerSecond` | 1.0e-7 |
+| 볼트 암페어 (피상 전력) | `VA` | `voltAmperes` | 1.0 |
+| 무효 볼트 암페어 | `var` | `vars` | 1.0 |
 
 이름이 붙은 단위는 `KPrefixBuilder`를 통해 SI 접두사를 지원합니다(`kilo.watts`, `mega.watts`,
 `milli.watts` 등).
+
+### 피상 전력과 무효 전력 (VA, var)
+
+교류 시스템에서는 세 가지 전력을 구분하며, 모두 와트와 차원적으로 동일합니다:
+
+* **유효 전력** `P = U · I · cos φ` (와트, `W`) — 실제로 일을 하는 부분,
+* **피상 전력** `S = U · I` (볼트 암페어, `VA`) — 실효 전압과 실효 전류의 곱,
+* **무효 전력** `Q = U · I · sin φ` (무효 볼트 암페어, `var`) — 전원과 부하 사이를 오가며 일을 하지
+  않는 부분.
+
+세 가지는 관례상으로만 차이가 나므로, KUnit 은 이들을 하나의 그룹에 두고 기호로 구분합니다:
+`1 VA = 1 var = 1 W`. 접두사도 평소처럼 동작하므로 `kilo.voltAmperes` 는 1 kVA, `kilo.vars` 는
+1 kvar 입니다.
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.power.*
+
+// 25 kVA 정격 변압기가 역률 cos φ = 0.8 인 부하에 공급하는 경우:
+val s = 25 of kilo.voltAmperes
+val p = (25 * 0.8) of kilo.watts     // 20 kW 유효 전력
+val q = (25 * 0.6) of kilo.vars      // 15 kvar 무효 전력
+s into kilo.voltAmperes               // 25.0
+q into kilo.vars                      // 15.0
+```
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -122,3 +151,7 @@ import org.pcsoft.framework.kunit.power.*
 | `kg·m²/s³` | `(kilo.grams * (meters pow 2)) / (seconds pow 3)` | 질량·길이² / 시간³으로서의 전력(분수 형식) |
 | `kg·m²·s⁻³` | `kilo.grams * (meters pow 2) * (seconds pow -3)` | 순수 곱으로서의 동일한 전력 |
 | `kW` | `kilo.watts` | 접두사가 붙은 전력(킬로와트) |
+| `S = U · I` (`VA` 단위) | `voltAmperes` | 피상 전력(교류) |
+| `Q` (`var` 단위) | `vars` | 무효 전력(교류) |
+| `kVA` | `kilo.voltAmperes` | 접두사가 붙은 피상 전력(킬로볼트암페어) |
+| `kvar` | `kilo.vars` | 접두사가 붙은 무효 전력 |

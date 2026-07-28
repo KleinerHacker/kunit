@@ -90,6 +90,28 @@ val raw = 2 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow 2
 raw.toInductance() == (2 of henries)   // true
 ```
 
+## 퍼미언스
+
+자기 회로의 **퍼미언스**(permeance) `Λ` 는 [자기 릴럭턴스](reluctance.md)의 역수입니다,
+`Λ = 1 / Rm`. 이는 인덕턴스와 **차원적으로 동일**하며 마찬가지로 헨리로 측정되므로, KUnit 은 이를
+이 그룹과 기호 `H` 로 모델링합니다. 별도의 토큰이나 별도의 타입은 없습니다. 역수 연산자는 두 그룹을
+서로 연결합니다:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.reluctance.*
+
+// Rm = 500 A/Wb 인 자기 회로의 퍼미언스는 2 mH 입니다.
+val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
+permeance into milli.henries                    // 2.0
+
+// …그리고 다시 원래대로:
+1 / (2 of milli.henries) == (500 of amperesPerWeber)  // true
+```
+
 ## 연산자
 
 ```kotlin

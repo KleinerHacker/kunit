@@ -80,6 +80,35 @@ val raw = 115 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow
 raw.toResistance() == (115 of ohms)      // true
 ```
 
+## प्रतिबाधा और प्रतिघात
+
+प्रत्यावर्ती धारा प्रणालियों में परिपथ के विरोध को तीन राशियों में विभाजित किया जाता है, जो सभी प्रतिरोध
+के **विमीय रूप से समान** हैं और सभी ओम में मापी जाती हैं:
+
+* **प्रतिरोध** `R` — वास्तविक, ऊर्जा-क्षय करने वाला भाग,
+* **प्रतिघात (reactance)** `X = ωL − 1/(ωC)` — प्रेरकत्व और धारिता के कारण उत्पन्न भाग,
+* **प्रतिबाधा (impedance)** `Z = √(R² + X²)` — जटिल विरोध का परिमाण।
+
+चूँकि वे केवल व्याख्या में भिन्न हैं, KUnit तीनों को इसी एक समूह और एकल प्रतीक `Ω` से मॉडल करता है; कोई
+अलग टोकन और कोई अलग प्रकार नहीं है। प्रतिघात या प्रतिबाधा को ठीक प्रतिरोध की तरह बनाएँ:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import kotlin.math.PI
+import kotlin.math.sqrt
+import org.pcsoft.framework.kunit.resistance.*
+
+// 30 Ω के साथ श्रेणी में 10 mH की एक कुंडली, 50 Hz पर:
+val x = (2 * PI * 50 * 0.010) of ohms          // प्रतिघात X ≈ 3.14 Ω
+val r = 30 of ohms                              // प्रतिरोध R
+val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // प्रतिबाधा Z ≈ 30.16 Ω
+z into ohms                                     // ≈ 30.164
+```
+
+रिएक्टिव भाग [प्रेरकत्व](inductance.md) और [धारिता](capacitance.md) द्वारा चालित होता है; इसके द्वारा
+वहन की जाने वाली शक्ति `var` में व्यक्त होती है, देखें [शक्ति (विद्युत)](power.md)।
+
 ## संकारक
 
 ```kotlin

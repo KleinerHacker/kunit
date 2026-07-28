@@ -85,5 +85,13 @@ class KElectricCurrentPrefixTest {
         assertEquals(1e3 * KElectricCurrentUnit.BIOT.baseValue, (1 of kilo.biot).value, rel(1e4))
         assertEquals(1e3 * KElectricCurrentUnit.BIOT.baseValue, (1 of kilo.abamperes).value, rel(1e4))
         assertEquals(1e3 * KElectricCurrentUnit.STATAMPERE.baseValue, (1 of kilo.statamperes).value, rel(1e-6))
+        assertEquals(1e3 * KElectricCurrentUnit.AMPERE_TURN.baseValue, (1 of kilo.ampereTurns).value, rel(1e3))
+    }
+
+    /** A relay coil of 800 turns at 2.5 A drives `2 kAt` of magnetomotive force. */
+    @Test
+    fun `relay coil magnetomotive force in kilo ampere turns`() {
+        assertEquals(2000.0, (800 * 2.5 of ampereTurns).value, 1e-9)
+        assertEquals(2.0, (800 * 2.5 of ampereTurns) into kilo.ampereTurns, 1e-9)
     }
 }

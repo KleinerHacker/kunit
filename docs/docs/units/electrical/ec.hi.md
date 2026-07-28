@@ -20,9 +20,32 @@ SI ऐम्पियर के अतिरिक्त, समूह दो �
 | SI | ऐम्पियर | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
 | CGS | बायो / ऐब-ऐम्पियर | `KElectricCurrentUnit.BIOT` | `Bi` (`abA`) | `biot` / `abamperes` | 10 |
 | CGS | स्टैट-ऐम्पियर | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
+| चुंबकीय परिपथ | ऐम्पियर टर्न | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
 
 प्रत्येक `Token` एक मान-1 `KElectricCurrentUnitInstance` है जो `of` (निर्माण) और `into` (पठन) के साथ
 प्रयुक्त होता है।
+
+### चुंबकत्वचालक बल (ऐम्पियर टर्न)
+
+**चुंबकत्वचालक बल** `Θ = N · I` — किसी चुंबकीय परिपथ का चालन — विमीय रूप से विद्युत धारा के समान है,
+क्योंकि फेरों की संख्या `N` एक शुद्ध गणना है। इसलिए इसका अपना कोई समूह नहीं है: यह इसी समूह के भीतर
+ऐम्पियर टर्न (`At`) का उपयोग करता है। अलग प्रतीक यह दस्तावेज़ित करता है कि मान एक तार की एकल धारा के
+बजाय किसी कुंडली के कुल चालन को वर्णित करता है। `1 At = 1 A`, और उपसर्ग सामान्य रूप से कार्य करते हैं
+(`kilo.ampereTurns`)।
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.ec.*
+
+// 500 फेरों वाली एक कुंडली जिसमें 0.4 A बहती है, Θ = 200 At उत्पन्न करती है।
+val theta = (500 * 0.4) of ampereTurns
+theta into ampereTurns          // 200.0
+theta == (200 of amperes)       // true (विमीय रूप से समान)
+```
+
+चुंबकत्वचालक बल [चुंबकीय अनिच्छा (reluctance)](reluctance.md) के माध्यम से
+[चुंबकीय फ्लक्स](magneticflux.md) को चलाता है: `Θ = Rm · Φ`।
 
 ```kotlin
 import org.pcsoft.framework.kunit.of

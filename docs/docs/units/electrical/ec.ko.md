@@ -19,8 +19,30 @@ SI 암페어 외에도 이 그룹은 두 가지 고전적인 CGS 전류 단위�
 | SI | 암페어 | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
 | CGS | 비오 / abampere | `KElectricCurrentUnit.BIOT` | `Bi`(`abA`) | `biot` / `abamperes` | 10 |
 | CGS | 스탯암페어 | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
+| 자기 회로 | 암페어 턴 | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
 
 각 `토큰` 은 `of`(생성)와 `into`(읽기)에 사용하는 값 1 의 `KElectricCurrentUnitInstance` 입니다.
+
+### 기자력 (암페어 턴)
+
+**기자력**(magnetomotive force) `Θ = N · I` — 자기 회로를 구동하는 힘 — 은 권선 수 `N` 이 순수한
+개수이므로 전류와 차원적으로 동일합니다. 따라서 별도의 그룹을 갖지 않고, 이 그룹 안의 암페어 턴(`At`)을
+사용합니다. 별도의 기호는 그 값이 단일 도체의 전류가 아니라 코일 전체의 구동력을 나타낸다는 것을
+문서화합니다. `1 At = 1 A` 이며, 접두사도 평소처럼 동작합니다(`kilo.ampereTurns`).
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.ec.*
+
+// 500 회 권선에 0.4 A 가 흐르는 코일은 Θ = 200 At 를 만듭니다.
+val theta = (500 * 0.4) of ampereTurns
+theta into ampereTurns          // 200.0
+theta == (200 of amperes)       // true (차원적으로 동일)
+```
+
+기자력은 [자기 릴럭턴스](reluctance.md)를 통해 [자기 선속](magneticflux.md)을 구동합니다:
+`Θ = Rm · Φ`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -126,4 +148,6 @@ import org.pcsoft.framework.kunit.ec.*
 | `mA` | `milli.amperes` | 밀리암페어(암페어에 접두사 적용) |
 | `kA` | `kilo.amperes` | 킬로암페어 |
 | `Bi` | `biot` | 비오 / abampere(10 A) |
+| `At` | `ampereTurns` | 암페어 턴, 기자력 `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | 접두사가 붙은 암페어 턴(킬로암페어 턴) |
 | `A²` | `amperes pow 2` | 암페어 제곱(일반 혼합 단위) |

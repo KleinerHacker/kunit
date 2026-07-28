@@ -33,3 +33,9 @@ val KPrefixBuilder.mechanicalHorsePowers: KPowerUnitInstance
 
 /** Prefixed ergs per second, e.g. `mega.ergsPerSecond`. */
 val KPrefixBuilder.ergsPerSecond: KPowerUnitInstance get() = prefixedPower(this, KPowerUnit.ERG_PER_SECOND)
+
+/** Prefixed volt amperes (apparent power), e.g. `kilo.voltAmperes` = 1 kVA. */
+val KPrefixBuilder.voltAmperes: KPowerUnitInstance get() = prefixedPower(this, KPowerUnit.VOLT_AMPERE)
+
+/** Prefixed volt amperes reactive, e.g. `kilo.vars` = 1 kvar. */
+val KPrefixBuilder.vars: KPowerUnitInstance get() = prefixedPower(this, KPowerUnit.VAR)

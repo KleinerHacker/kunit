@@ -27,6 +27,14 @@
 | आवेश घनत्व | निर्मित | कूलॉम प्रति घन मीटर (`C/m³`) | [आवेश घनत्व](chargedensity.md) |
 | प्रतिरोधकता | निर्मित | ओम मीटर (`Ω·m`) | [प्रतिरोधकता](resistivity.md) |
 | चालकता (सामग्री) | निर्मित | सीमेंस प्रति मीटर (`S/m`) | [चालकता (सामग्री)](conductivity.md) |
+| विद्युत क्षेत्र तीव्रता | निर्मित | वोल्ट प्रति मीटर (`V/m`) | [विद्युत क्षेत्र तीव्रता](electricfieldstrength.md) |
+| विद्युत फ्लक्स घनत्व | निर्मित | कूलॉम प्रति वर्ग मीटर (`C/m²`) | [विद्युत फ्लक्स घनत्व](electricfluxdensity.md) |
+| पर्मिटिविटी | निर्मित | फैरड प्रति मीटर (`F/m`) | [पर्मिटिविटी](permittivity.md) |
+| पर्मिएबिलिटी | निर्मित | हेनरी प्रति मीटर (`H/m`) | [पर्मिएबिलिटी](permeability.md) |
+| रैखिक आवेश घनत्व | निर्मित | कूलॉम प्रति मीटर (`C/m`) | [रैखिक आवेश घनत्व](linearchargedensity.md) |
+| चुंबकीय अनिच्छा | निर्मित | ऐम्पियर प्रति वेबर (`A/Wb`) | [चुंबकीय अनिच्छा](reluctance.md) |
+| विद्युत गतिशीलता | निर्मित | वर्ग मीटर प्रति वोल्ट सेकंड (`m²/(V·s)`) | [विद्युत गतिशीलता](electricmobility.md) |
+| विद्युत द्विध्रुव आघूर्ण | निर्मित | कूलॉम मीटर (`C·m`) | [विद्युत द्विध्रुव आघूर्ण](electricdipolemoment.md) |
 | शक्ति | निर्मित | वाट (`W`) | [शक्ति (विद्युत)](power.md) |
 | ऊर्जा | निर्मित | जूल (`J`) | [ऊर्जा (विद्युत)](energy.md) |
 
@@ -84,6 +92,30 @@
 | `energy / time` | शक्ति | `P = W / t` |
 | `charge * voltage` | ऊर्जा | `W = Q · U` |
 | `energy / charge` | वोल्टता | `U = W / Q` |
+| `voltage / length` | विद्युत क्षेत्र तीव्रता | `E = U / l` |
+| `force / charge` | विद्युत क्षेत्र तीव्रता | `E = F / Q` |
+| `field strength * length` | वोल्टता | `U = E · l` |
+| `field strength * charge` | बल | `F = E · Q` |
+| `charge / area` | विद्युत फ्लक्स घनत्व | `D = Q / A` |
+| `flux density * area` | आवेश | `Q = D · A` |
+| `flux density / field strength` | पर्मिटिविटी | `ε = D / E` |
+| `permittivity * field strength` | विद्युत फ्लक्स घनत्व | `D = ε · E` |
+| `capacitance / length` | पर्मिटिविटी | `ε = C · d / A` |
+| `permittivity * length` | धारिता | `C = ε · A / d` |
+| `magnetic flux density / magnetic field strength` | पर्मिएबिलिटी | `μ = B / H` |
+| `permeability * magnetic field strength` | चुंबकीय फ्लक्स घनत्व | `B = μ · H` |
+| `inductance / length` | पर्मिएबिलिटी | `μ = L · l / (N² · A)` |
+| `permeability * length` | प्रेरकत्व | `L = μ · N² · A / l` |
+| `charge / length` | रैखिक आवेश घनत्व | `λ = Q / l` |
+| `linear charge density * length` | आवेश | `Q = λ · l` |
+| `current / magnetic flux` | चुंबकीय अनिच्छा | `Rm = Θ / Φ` |
+| `reluctance * magnetic flux` | विद्युत धारा | `Θ = Rm · Φ` |
+| `1 / inductance` | चुंबकीय अनिच्छा | `Rm = 1 / Λ` |
+| `1 / reluctance` | प्रेरकत्व | `Λ = 1 / Rm` |
+| `speed / field strength` | विद्युत गतिशीलता | `μ = v / E` |
+| `mobility * field strength` | गति | `v = μ · E` |
+| `charge * length` | विद्युत द्विध्रुव आघूर्ण | `p = Q · d` |
+| `dipole moment / charge` | लंबाई | `d = p / Q` |
 
 प्रत्येक परिणाम सही प्रकार-युक्त राशि है — कोई कच्ची मिश्रित इकाई हाथ से नहीं बनाई जाती। इसके अलावा वोल्टता,
 प्रतिरोध, आवेश, चालकता और चुंबकीय क्षेत्र तीव्रता अपने पूर्ण **नेटिव** अपघटन (`kg·m²·s⁻³·A⁻¹`,
@@ -92,7 +124,24 @@
 होती है: `toCapacitance()` (`kg⁻¹·m⁻²·s⁴·A²`), `toInductance()` (`kg·m²·s⁻²·A⁻²`), `toMagneticFlux()`
 (`kg·m²·s⁻²·A⁻¹`), `toMagneticFluxDensity()` (`kg·s⁻²·A⁻¹`), `toCurrentDensity()` (`A·m⁻²`),
 `toChargeDensity()` (`A·s·m⁻³`), `toResistivity()` (`kg·m³·s⁻³·A⁻²`), `toConductivity()`
-(`kg⁻¹·m⁻³·s³·A²`), `toPower()` (`kg·m²·s⁻³`) और `toEnergy()` (`kg·m²·s⁻²`)।
+(`kg⁻¹·m⁻³·s³·A²`), `toPower()` (`kg·m²·s⁻³`) और `toEnergy()` (`kg·m²·s⁻²`)। क्षेत्र, सामग्री और
+चुंबकीय-परिपथ समूहों में भी यही पैटर्न लागू होता है: `toElectricFieldStrength()` (`kg·m·s⁻³·A⁻¹`),
+`toElectricFluxDensity()` (`A·s·m⁻²`), `toPermittivity()` (`kg⁻¹·m⁻³·s⁴·A²`), `toPermeability()`
+(`kg·m·s⁻²·A⁻²`), `toLinearChargeDensity()` (`A·s·m⁻¹`), `toReluctance()` (`kg⁻¹·m⁻²·s²·A²`),
+`toElectricMobility()` (`kg⁻¹·s²·A`) और `toElectricDipoleMoment()` (`A·s·m`)।
+
+कुछ राशियाँ किसी मौजूदा समूह के **विमीय रूप से समान** हैं और इसलिए अपने स्वयं के समूह के बजाय उसी समूह
+द्वारा वहन की जाती हैं — केवल प्रतीक भिन्न होता है ताकि पठन दस्तावेज़ित हो सके:
+
+| राशि | समूह | प्रतीक |
+|---|---|---|
+| प्रतिबाधा `Z`, प्रतिघात `X` | [प्रतिरोध](resistance.md) | `Ω` |
+| एडमिटेंस `Y`, सस्सेप्टेंस `B` | [चालकता](conductance.md) | `S` (`℧`) |
+| प्रकट शक्ति `S`, रिएक्टिव शक्ति `Q` | [शक्ति (विद्युत)](power.md) | `VA`, `var` |
+| चुंबकत्वचालक बल `Θ` | [विद्युत धारा](ec.md) | `At` |
+| विद्युत फ्लक्स `Ψ` | [आवेश](charge.md) | `C` |
+| पर्मिएंस `Λ` | [प्रेरकत्व](inductance.md) | `H` |
+| पृष्ठ आवेश घनत्व `σ` | [विद्युत फ्लक्स घनत्व](electricfluxdensity.md) | `C/m²` |
 
 ## वास्तविक उदाहरण — एक परिपथ के इर्द-गिर्द ओम का नियम
 
@@ -184,3 +233,11 @@ u.toString()               // "230.0 V" (मूल इकाई)
 * [चालकता (सामग्री)](conductivity.md) — सीमेंस प्रति मीटर, `1 / ρ`, और `G · l / A`।
 * [शक्ति (विद्युत)](power.md) — वाट, `U · I`, और अश्वशक्ति इकाइयाँ।
 * [ऊर्जा (विद्युत)](energy.md) — जूल, `Q · U`, `P · t`, और किलोवाट-घंटा `kilo.watts * hours` के रूप में।
+* [विद्युत क्षेत्र तीव्रता](electricfieldstrength.md) — वोल्ट प्रति मीटर, `U / l`, और `F / Q`।
+* [विद्युत फ्लक्स घनत्व](electricfluxdensity.md) — कूलॉम प्रति वर्ग मीटर, `Q / A`, साथ ही पृष्ठ आवेश घनत्व `σ`।
+* [पर्मिटिविटी](permittivity.md) — फैरड प्रति मीटर, `D / E`, और निर्वात स्थिरांक `ε₀`।
+* [पर्मिएबिलिटी](permeability.md) — हेनरी प्रति मीटर, `B / H`, और निर्वात स्थिरांक `μ₀`।
+* [रैखिक आवेश घनत्व](linearchargedensity.md) — कूलॉम प्रति मीटर, `Q / l`, तारों और फिलामेंट के लिए।
+* [चुंबकीय अनिच्छा](reluctance.md) — ऐम्पियर प्रति वेबर, हॉपकिंसन का नियम `Θ / Φ`, और पर्मिएंस `1 / Λ`।
+* [विद्युत गतिशीलता](electricmobility.md) — वर्ग मीटर प्रति वोल्ट सेकंड, `v / E`, अर्धचालकों के लिए।
+* [विद्युत द्विध्रुव आघूर्ण](electricdipolemoment.md) — कूलॉम मीटर, `Q · d`, और डिबाई।

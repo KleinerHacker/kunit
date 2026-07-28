@@ -33,6 +33,8 @@ class KPowerUnitTest {
         Triple("metricHorsePowers", metricHorsePowers, KPowerUnit.METRIC_HORSE_POWER),
         Triple("mechanicalHorsePowers", mechanicalHorsePowers, KPowerUnit.MECHANICAL_HORSE_POWER),
         Triple("ergsPerSecond", ergsPerSecond, KPowerUnit.ERG_PER_SECOND),
+        Triple("voltAmperes", voltAmperes, KPowerUnit.VOLT_AMPERE),
+        Triple("vars", vars, KPowerUnit.VAR),
     )
 
     private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-30)
@@ -57,8 +59,10 @@ class KPowerUnitTest {
         assertEquals("PS", KPowerUnit.METRIC_HORSE_POWER.symbol)
         assertEquals("hp", KPowerUnit.MECHANICAL_HORSE_POWER.symbol)
         assertEquals("erg/s", KPowerUnit.ERG_PER_SECOND.symbol)
+        assertEquals("VA", KPowerUnit.VOLT_AMPERE.symbol)
+        assertEquals("var", KPowerUnit.VAR.symbol)
         assertEquals(KPowerUnit.WATT, KPowerUnit.BASE)
-        assertEquals(4, KPowerUnit.entries.size)
+        assertEquals(6, KPowerUnit.entries.size)
     }
 
     /** The declared base values (relative to the watt) of every power unit. */
@@ -68,5 +72,7 @@ class KPowerUnitTest {
         assertEquals(735.49875, KPowerUnit.METRIC_HORSE_POWER.baseValue, 1e-9)
         assertEquals(745.6998715822702, KPowerUnit.MECHANICAL_HORSE_POWER.baseValue, 1e-9)
         assertEquals(1.0e-7, KPowerUnit.ERG_PER_SECOND.baseValue, 1e-30)
+        assertEquals(1.0, KPowerUnit.VOLT_AMPERE.baseValue, 1e-30)
+        assertEquals(1.0, KPowerUnit.VAR.baseValue, 1e-30)
     }
 }

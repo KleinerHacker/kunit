@@ -120,6 +120,14 @@ plugins:
             Charge Density: 전하 밀도
             Resistivity: 비저항
             Conductivity: 전기 전도율
+            Electric Field Strength: 전기장 세기
+            Electric Flux Density: 전기 선속 밀도
+            Permittivity: 유전율
+            Permeability: 투자율
+            Linear Charge Density: 선전하 밀도
+            Magnetic Reluctance: 자기 저항
+            Electric Mobility: 전기 이동도
+            Electric Dipole Moment: 전기 쌍극자 모멘트
             Power (Electrical): 전력 (전기)
             Energy (Electrical): 에너지 (전기)
             Power (Mechanics): 일률 (역학)
@@ -180,6 +188,14 @@ plugins:
             Charge Density: 电荷密度
             Resistivity: 电阻率
             Conductivity: 电导率
+            Electric Field Strength: 电场强度
+            Electric Flux Density: 电通密度
+            Permittivity: 介电常数
+            Permeability: 磁导率
+            Linear Charge Density: 线电荷密度
+            Magnetic Reluctance: 磁阻
+            Electric Mobility: 电迁移率
+            Electric Dipole Moment: 电偶极矩
             Power (Electrical): 功率（电气）
             Energy (Electrical): 能量（电气）
             Power (Mechanics): 功率（力学）
@@ -240,6 +256,14 @@ plugins:
             Charge Density: 電荷密度
             Resistivity: 抵抗率
             Conductivity: 導電率
+            Electric Field Strength: 電場の強さ
+            Electric Flux Density: 電束密度
+            Permittivity: 誘電率
+            Permeability: 透磁率
+            Linear Charge Density: 線電荷密度
+            Magnetic Reluctance: 磁気抵抗
+            Electric Mobility: 電気移動度
+            Electric Dipole Moment: 電気双極子モーメント
             Power (Electrical): 電力（電気）
             Energy (Electrical): エネルギー（電気）
             Power (Mechanics): 仕事率（力学）
@@ -300,6 +324,14 @@ plugins:
             Charge Density: كثافة الشحنة
             Resistivity: المقاومة النوعية
             Conductivity: الموصلية الكهربائية
+            Electric Field Strength: شدة المجال الكهربائي
+            Electric Flux Density: كثافة التدفق الكهربائي
+            Permittivity: السماحية الكهربائية
+            Permeability: النفاذية المغناطيسية
+            Linear Charge Density: كثافة الشحنة الخطية
+            Magnetic Reluctance: الممانعة المغناطيسية
+            Electric Mobility: الحركية الكهربائية
+            Electric Dipole Moment: عزم ثنائي القطب الكهربائي
             Power (Electrical): القدرة (الكهربائية)
             Energy (Electrical): الطاقة (الكهربائية)
             Power (Mechanics): القدرة (الميكانيكية)
@@ -360,6 +392,14 @@ plugins:
             Charge Density: आवेश घनत्व
             Resistivity: प्रतिरोधकता
             Conductivity: चालकता गुणांक
+            Electric Field Strength: विद्युत क्षेत्र तीव्रता
+            Electric Flux Density: विद्युत फ्लक्स घनत्व
+            Permittivity: विद्युतशीलता
+            Permeability: चुंबकशीलता
+            Linear Charge Density: रैखिक आवेश घनत्व
+            Magnetic Reluctance: चुंबकीय प्रतिष्टंभ
+            Electric Mobility: विद्युत गतिशीलता
+            Electric Dipole Moment: विद्युत द्विध्रुव आघूर्ण
             Power (Electrical): शक्ति (विद्युत)
             Energy (Electrical): ऊर्जा (विद्युत)
             Power (Mechanics): शक्ति (यांत्रिकी)
@@ -415,6 +455,14 @@ nav:
       - Charge Density: units/electrical/chargedensity.md
       - Resistivity: units/electrical/resistivity.md
       - Conductivity: units/electrical/conductivity.md
+      - Electric Field Strength: units/electrical/electricfieldstrength.md
+      - Electric Flux Density: units/electrical/electricfluxdensity.md
+      - Permittivity: units/electrical/permittivity.md
+      - Permeability: units/electrical/permeability.md
+      - Linear Charge Density: units/electrical/linearchargedensity.md
+      - Magnetic Reluctance: units/electrical/reluctance.md
+      - Electric Mobility: units/electrical/electricmobility.md
+      - Electric Dipole Moment: units/electrical/electricdipolemoment.md
       - Power (Electrical): units/electrical/power.md
       - Energy (Electrical): units/electrical/energy.md
   - Thermodynamics:

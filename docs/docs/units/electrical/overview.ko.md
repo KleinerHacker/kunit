@@ -27,6 +27,14 @@
 | 전하밀도 | 구성 | 세제곱미터당 쿨롬(`C/m³`) | [전하밀도](chargedensity.md) |
 | 저항률 | 구성 | 옴미터(`Ω·m`) | [저항률](resistivity.md) |
 | 전도율 | 구성 | 미터당 지멘스(`S/m`) | [전도율](conductivity.md) |
+| 전기장 세기 | 구성 | 미터당 볼트(`V/m`) | [전기장 세기](electricfieldstrength.md) |
+| 전기선속밀도 | 구성 | 제곱미터당 쿨롬(`C/m²`) | [전기선속밀도](electricfluxdensity.md) |
+| 유전율 | 구성 | 미터당 패럿(`F/m`) | [유전율](permittivity.md) |
+| 투자율 | 구성 | 미터당 헨리(`H/m`) | [투자율](permeability.md) |
+| 선전하밀도 | 구성 | 미터당 쿨롬(`C/m`) | [선전하밀도](linearchargedensity.md) |
+| 자기 릴럭턴스 | 구성 | 베버당 암페어(`A/Wb`) | [자기 릴럭턴스](reluctance.md) |
+| 전기 이동도 | 구성 | 볼트초당 제곱미터(`m²/(V·s)`) | [전기 이동도](electricmobility.md) |
+| 전기 쌍극자 모멘트 | 구성 | 쿨롬미터(`C·m`) | [전기 쌍극자 모멘트](electricdipolemoment.md) |
 | 전력 | 구성 | 와트(`W`) | [전력(전기)](power.md) |
 | 에너지 | 구성 | 줄(`J`) | [에너지(전기)](energy.md) |
 
@@ -84,6 +92,30 @@
 | `energy / time` | 전력 | `P = W / t` |
 | `charge * voltage` | 에너지 | `W = Q · U` |
 | `energy / charge` | 전압 | `U = W / Q` |
+| `voltage / length` | 전기장 세기 | `E = U / l` |
+| `force / charge` | 전기장 세기 | `E = F / Q` |
+| `field strength * length` | 전압 | `U = E · l` |
+| `field strength * charge` | 힘 | `F = E · Q` |
+| `charge / area` | 전기선속밀도 | `D = Q / A` |
+| `flux density * area` | 전하 | `Q = D · A` |
+| `flux density / field strength` | 유전율 | `ε = D / E` |
+| `permittivity * field strength` | 전기선속밀도 | `D = ε · E` |
+| `capacitance / length` | 유전율 | `ε = C · d / A` |
+| `permittivity * length` | 정전용량 | `C = ε · A / d` |
+| `magnetic flux density / magnetic field strength` | 투자율 | `μ = B / H` |
+| `permeability * magnetic field strength` | 자속밀도 | `B = μ · H` |
+| `inductance / length` | 투자율 | `μ = L · l / (N² · A)` |
+| `permeability * length` | 인덕턴스 | `L = μ · N² · A / l` |
+| `charge / length` | 선전하밀도 | `λ = Q / l` |
+| `linear charge density * length` | 전하 | `Q = λ · l` |
+| `current / magnetic flux` | 자기 릴럭턴스 | `Rm = Θ / Φ` |
+| `reluctance * magnetic flux` | 전류 | `Θ = Rm · Φ` |
+| `1 / inductance` | 자기 릴럭턴스 | `Rm = 1 / Λ` |
+| `1 / reluctance` | 인덕턴스 | `Λ = 1 / Rm` |
+| `speed / field strength` | 전기 이동도 | `μ = v / E` |
+| `mobility * field strength` | 속도 | `v = μ · E` |
+| `charge * length` | 전기 쌍극자 모멘트 | `p = Q · d` |
+| `dipole moment / charge` | 길이 | `d = p / Q` |
 
 각 결과는 올바른 타입의 양이 됩니다 — 원시 혼합 단위를 손으로 조립하지 않습니다. 또한 전압, 저항, 전하,
 컨덕턴스, 자기장 세기는 완전히 **네이티브**한 분해(`kg·m²·s⁻³·A⁻¹`, `kg·m²·s⁻³·A⁻²`, `A·s`,
@@ -92,7 +124,24 @@
 (`kg⁻¹·m⁻²·s⁴·A²`), `toInductance()`(`kg·m²·s⁻²·A⁻²`), `toMagneticFlux()`(`kg·m²·s⁻²·A⁻¹`),
 `toMagneticFluxDensity()`(`kg·s⁻²·A⁻¹`), `toCurrentDensity()`(`A·m⁻²`), `toChargeDensity()`
 (`A·s·m⁻³`), `toResistivity()`(`kg·m³·s⁻³·A⁻²`), `toConductivity()`(`kg⁻¹·m⁻³·s³·A²`), `toPower()`
-(`kg·m²·s⁻³`), `toEnergy()`(`kg·m²·s⁻²`).
+(`kg·m²·s⁻³`), `toEnergy()`(`kg·m²·s⁻²`)입니다. 전기장, 재료, 자기 회로 그룹도 같은 패턴을 따릅니다:
+`toElectricFieldStrength()`(`kg·m·s⁻³·A⁻¹`), `toElectricFluxDensity()`(`A·s·m⁻²`), `toPermittivity()`
+(`kg⁻¹·m⁻³·s⁴·A²`), `toPermeability()`(`kg·m·s⁻²·A⁻²`), `toLinearChargeDensity()`(`A·s·m⁻¹`),
+`toReluctance()`(`kg⁻¹·m⁻²·s²·A²`), `toElectricMobility()`(`kg⁻¹·s²·A`),
+`toElectricDipoleMoment()`(`A·s·m`)입니다.
+
+몇몇 물리량은 기존 그룹과 **차원적으로 동일**하므로 독자적인 그룹 대신 그 그룹으로 표현됩니다 — 표기를
+설명하기 위해 기호만 다릅니다:
+
+| 물리량 | 그룹 | 기호 |
+|---|---|---|
+| 임피던스 `Z`, 리액턴스 `X` | [저항](resistance.md) | `Ω` |
+| 어드미턴스 `Y`, 서셉턴스 `B` | [컨덕턴스](conductance.md) | `S`(`℧`) |
+| 피상 전력 `S`, 무효 전력 `Q` | [전력(전기)](power.md) | `VA`, `var` |
+| 기자력 `Θ` | [전류](ec.md) | `At` |
+| 전기 선속 `Ψ` | [전하](charge.md) | `C` |
+| 퍼미언스 `Λ` | [인덕턴스](inductance.md) | `H` |
+| 표면전하밀도 `σ` | [전기선속밀도](electricfluxdensity.md) | `C/m²` |
 
 ## 실전 예제 — 한 회로에서의 옴의 법칙
 
@@ -184,3 +233,11 @@ u.toString()               // "230.0 V" (기준 단위)
 * [전도율](conductivity.md) — 미터당 지멘스, `1 / ρ`, 그리고 `G · l / A`.
 * [전력(전기)](power.md) — 와트, `U · I`, 그리고 마력 단위.
 * [에너지(전기)](energy.md) — 줄, `Q · U`, `P · t`, 그리고 `kilo.watts * hours`로 표현되는 킬로와트시.
+* [전기장 세기](electricfieldstrength.md) — 미터당 볼트, `U / l`, 그리고 `F / Q`.
+* [전기선속밀도](electricfluxdensity.md) — 제곱미터당 쿨롬, `Q / A`, 그리고 표면전하밀도 `σ`.
+* [유전율](permittivity.md) — 미터당 패럿, `D / E`, 그리고 진공 상수 `ε₀`.
+* [투자율](permeability.md) — 미터당 헨리, `B / H`, 그리고 진공 상수 `μ₀`.
+* [선전하밀도](linearchargedensity.md) — 미터당 쿨롬, `Q / l`, 전선 및 필라멘트용.
+* [자기 릴럭턴스](reluctance.md) — 베버당 암페어, 홉킨슨 법칙 `Θ / Φ`, 그리고 퍼미언스 `1 / Λ`.
+* [전기 이동도](electricmobility.md) — 볼트초당 제곱미터, `v / E`, 반도체용.
+* [전기 쌍극자 모멘트](electricdipolemoment.md) — 쿨롬미터, `Q · d`, 그리고 디바이.

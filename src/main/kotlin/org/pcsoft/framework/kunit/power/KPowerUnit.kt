@@ -41,7 +41,23 @@ enum class KPowerUnit(override val symbol: String, override val baseValue: Doubl
     MECHANICAL_HORSE_POWER("hp", 745.6998715822702),
 
     /** Erg per second ("erg/s"), the power unit of the CGS system, 1 erg/s = 1e-7 W. */
-    ERG_PER_SECOND("erg/s", 1.0e-7);
+    ERG_PER_SECOND("erg/s", 1.0e-7),
+
+    // --- Alternating current: dimensionally identical to the watt, kept apart by name ---
+
+    /**
+     * Volt ampere ("VA"), the unit of **apparent power** `S = U · I` in alternating current systems,
+     * 1 VA = 1 W. Dimensionally identical to the watt; the distinct symbol documents that the value is
+     * the product of RMS voltage and RMS current rather than a real power.
+     */
+    VOLT_AMPERE("VA", 1.0),
+
+    /**
+     * Volt ampere reactive ("var"), the unit of **reactive power** `Q = U · I · sin φ` in alternating
+     * current systems, 1 var = 1 W. Dimensionally identical to the watt; the distinct symbol documents
+     * the reactive portion that oscillates between source and load without doing work.
+     */
+    VAR("var", 1.0);
 
     companion object {
         /**

@@ -86,6 +86,25 @@ val raw = (2 of amperes).toUnit() * (1 of hours).toUnit()  // KMixedUnitInstance
 raw.toCharge() == typed                                    // true
 ```
 
+## 전기 선속
+
+닫힌 곡면을 통과하는 **전기 선속** `Ψ` 는 그 안에 둘러싸인 전하와 같습니다(가우스 법칙, `Ψ = Q`).
+따라서 전하와 **차원적으로 동일**하며 마찬가지로 쿨롱으로 측정됩니다. KUnit 은 이를 이 그룹과 기호
+`C` 로 모델링합니다. 별도의 토큰이나 별도의 타입은 없습니다:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.micro
+import org.pcsoft.framework.kunit.charge.*
+
+// 2 µC 를 둘러싼 구는 2 µC 의 전기 선속을 갖습니다.
+val psi = 2 of micro.coulombs
+psi into micro.coulombs        // 2.0
+```
+
+선속을 면적으로 나누면 [전기 선속 밀도](electricfluxdensity.md) `D = Ψ / A` 를 얻습니다.
+
 ## 연산자
 
 ```kotlin

@@ -78,6 +78,35 @@ val raw = 115 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow
 raw.toResistance() == (115 of ohms)      // true
 ```
 
+## المعاوقة والمفاعلة
+
+في أنظمة التيار المتردد تُقسَم معارضة الدارة إلى ثلاث كمّيات متطابقة **بُعديًا** كلّها مع المقاومة
+وتُقاس جميعها بالأوم:
+
+* **المقاومة** `R` — الجزء الحقيقي المُبدِّد للطاقة،
+* **المفاعلة** `X = ωL − 1/(ωC)` — الجزء الناتج عن الحث والسعة،
+* **المعاوقة** `Z = √(R² + X²)` — مقدار المعارضة المركّبة.
+
+ولأنّها تختلف في التفسير فقط، تُنمذج KUnit الثلاثة بهذه المجموعة الواحدة والرمز المفرد `Ω`؛ ولا يوجد رمز
+برمجي منفصل ولا نوع منفصل. ابنِ مفاعلة أو معاوقة تمامًا كالمقاومة:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import kotlin.math.PI
+import kotlin.math.sqrt
+import org.pcsoft.framework.kunit.resistance.*
+
+// ملف بحثّ 10 mH على التوالي مع 30 Ω عند 50 Hz:
+val x = (2 * PI * 50 * 0.010) of ohms          // المفاعلة X ≈ 3.14 Ω
+val r = 30 of ohms                              // المقاومة R
+val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // المعاوقة Z ≈ 30.16 Ω
+z into ohms                                     // ≈ 30.164
+```
+
+يُدفع الجزء المفاعِل بواسطة [الحثّ](inductance.md) و[السعة](capacitance.md)؛ وتُعبَّر القدرة التي
+يحملها بوحدة `var`، انظر [القدرة (كهربائية)](power.md).
+
 ## المعاملات
 
 ```kotlin

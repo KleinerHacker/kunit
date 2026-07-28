@@ -20,8 +20,31 @@ electromagnetic system (`1 Bi = 10 A`) and the **statampere** of the electrostat
 | SI | Ampere | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
 | CGS | Biot / abampere | `KElectricCurrentUnit.BIOT` | `Bi` (`abA`) | `biot` / `abamperes` | 10 |
 | CGS | Statampere | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
+| Magnetic circuit | Ampere turn | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
 
 Each `Token` is a value-1 `KElectricCurrentUnitInstance` used with `of` (build) and `into` (read).
+
+### Magnetomotive force (ampere turn)
+
+The **magnetomotive force** `Θ = N · I` — the drive of a magnetic circuit — is dimensionally identical to
+the electric current, because the number of turns `N` is a pure count. It therefore gets no group of its
+own: it uses the ampere turn (`At`) inside this group. The distinct symbol documents that the value
+describes a coil's total drive rather than a single conductor's current. `1 At = 1 A`, and prefixes work
+as usual (`kilo.ampereTurns`).
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.ec.*
+
+// A coil with 500 turns carrying 0.4 A produces Θ = 200 At.
+val theta = (500 * 0.4) of ampereTurns
+theta into ampereTurns          // 200.0
+theta == (200 of amperes)       // true (dimensionally identical)
+```
+
+The magnetomotive force drives the [magnetic flux](magneticflux.md) through the
+[magnetic reluctance](reluctance.md): `Θ = Rm · Φ`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -130,4 +153,6 @@ The table below shows how this unit and its components are written mathematicall
 | `mA` | `milli.amperes` | milliampere (prefix applied to the ampere) |
 | `kA` | `kilo.amperes` | kiloampere |
 | `Bi` | `biot` | biot / abampere (10 A) |
+| `At` | `ampereTurns` | ampere turn, magnetomotive force `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | prefixed ampere turn (kiloampere turn) |
 | `A²` | `amperes pow 2` | ampere squared (generic mixed unit) |

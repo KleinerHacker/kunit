@@ -82,6 +82,24 @@ val raw = (2 of amperes).toUnit() * (1 of hours).toUnit()  // KMixedUnitInstance
 raw.toCharge() == typed                                    // true
 ```
 
+## 电通量
+
+穿过一个闭合曲面的**电通量** `Ψ` 等于该曲面所包围的电荷（高斯定律,`Ψ = Q`）。因此它与电荷在
+**量纲上相同**,同样以库仑为单位。KUnit 用该组和符号 `C` 来表示它;没有单独的令牌,也没有单独的类型:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.micro
+import org.pcsoft.framework.kunit.charge.*
+
+// 一个包围 2 µC 电荷的球面,其电通量为 2 µC。
+val psi = 2 of micro.coulombs
+psi into micro.coulombs        // 2.0
+```
+
+用面积除以通量得到[电通量密度](electricfluxdensity.md) `D = Ψ / A`。
+
 ## 运算符
 
 ```kotlin

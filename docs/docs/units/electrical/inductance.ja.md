@@ -90,6 +90,27 @@ val raw = 2 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow 2
 raw.toInductance() == (2 of henries)   // true
 ```
 
+## パーミアンス
+
+磁気回路の**パーミアンス** `Λ` は、その[磁気抵抗](reluctance.md)の逆数です（`Λ = 1 / Rm`）。これは
+インダクタンスと**次元的に同一**であり、同様にヘンリーで測定されるため、KUnitはこのグループと記号 `H` で
+モデル化します。専用のトークンや専用の型はありません。逆数演算子が両グループを結び付けます:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.reluctance.*
+
+// Rm = 500 A/Wb の磁気回路のパーミアンスは 2 mH。
+val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
+permeance into milli.henries                    // 2.0
+
+// …そして逆も同様:
+1 / (2 of milli.henries) == (500 of amperesPerWeber)  // true
+```
+
 ## 演算子
 
 ```kotlin

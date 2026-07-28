@@ -76,6 +76,34 @@ val raw = 115 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow
 raw.toResistance() == (115 of ohms)      // true
 ```
 
+## 阻抗与电抗
+
+在交流电系统中,电路的阻碍作用被分为三个量,它们都与电阻在**量纲上相同**,并且都以欧姆为单位:
+
+* **电阻** `R` —— 实际耗散能量的部分,
+* **电抗** `X = ωL − 1/(ωC)` —— 由电感和电容引起的部分,
+* **阻抗** `Z = √(R² + X²)` —— 复合阻碍作用的模。
+
+由于三者只是解释不同,KUnit 用同一个组、同一个符号 `Ω` 来表示;没有单独的令牌,也没有单独的类型。
+构建电抗或阻抗的方式与构建电阻完全相同:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import kotlin.math.PI
+import kotlin.math.sqrt
+import org.pcsoft.framework.kunit.resistance.*
+
+// 一个 10 mH 的线圈与 30 Ω 串联,频率为 50 Hz:
+val x = (2 * PI * 50 * 0.010) of ohms          // 电抗 X ≈ 3.14 Ω
+val r = 30 of ohms                              // 电阻 R
+val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // 阻抗 Z ≈ 30.16 Ω
+z into ohms                                     // ≈ 30.164
+```
+
+无功部分由[电感](inductance.md)和[电容](capacitance.md)驱动;其所携带的功率以 `var` 表示,
+参见[功率（电学）](power.md)。
+
 ## 运算符
 
 ```kotlin

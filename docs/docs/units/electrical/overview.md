@@ -28,6 +28,14 @@ strength).
 | Charge Density | constructed | coulomb per cubic meter (`C/m³`) | [Charge Density](chargedensity.md) |
 | Resistivity | constructed | ohm meter (`Ω·m`) | [Resistivity](resistivity.md) |
 | Conductivity | constructed | siemens per meter (`S/m`) | [Conductivity](conductivity.md) |
+| Electric Field Strength | constructed | volt per meter (`V/m`) | [Electric Field Strength](electricfieldstrength.md) |
+| Electric Flux Density | constructed | coulomb per square meter (`C/m²`) | [Electric Flux Density](electricfluxdensity.md) |
+| Permittivity | constructed | farad per meter (`F/m`) | [Permittivity](permittivity.md) |
+| Permeability | constructed | henry per meter (`H/m`) | [Permeability](permeability.md) |
+| Linear Charge Density | constructed | coulomb per meter (`C/m`) | [Linear Charge Density](linearchargedensity.md) |
+| Magnetic Reluctance | constructed | ampere per weber (`A/Wb`) | [Magnetic Reluctance](reluctance.md) |
+| Electric Mobility | constructed | square meter per volt second (`m²/(V·s)`) | [Electric Mobility](electricmobility.md) |
+| Electric Dipole Moment | constructed | coulomb meter (`C·m`) | [Electric Dipole Moment](electricdipolemoment.md) |
 | Power | constructed | watt (`W`) | [Power (Electrical)](power.md) |
 | Energy | constructed | joule (`J`) | [Energy (Electrical)](energy.md) |
 
@@ -85,6 +93,30 @@ per field and cross-reference each other ([Power (Mechanics)](../mechanics/power
 | `energy / time` | Power | `P = W / t` |
 | `charge * voltage` | Energy | `W = Q · U` |
 | `energy / charge` | Voltage | `U = W / Q` |
+| `voltage / length` | Electric Field Strength | `E = U / l` |
+| `force / charge` | Electric Field Strength | `E = F / Q` |
+| `field strength * length` | Voltage | `U = E · l` |
+| `field strength * charge` | Force | `F = E · Q` |
+| `charge / area` | Electric Flux Density | `D = Q / A` |
+| `flux density * area` | Charge | `Q = D · A` |
+| `flux density / field strength` | Permittivity | `ε = D / E` |
+| `permittivity * field strength` | Electric Flux Density | `D = ε · E` |
+| `capacitance / length` | Permittivity | `ε = C · d / A` |
+| `permittivity * length` | Capacitance | `C = ε · A / d` |
+| `magnetic flux density / magnetic field strength` | Permeability | `μ = B / H` |
+| `permeability * magnetic field strength` | Magnetic Flux Density | `B = μ · H` |
+| `inductance / length` | Permeability | `μ = L · l / (N² · A)` |
+| `permeability * length` | Inductance | `L = μ · N² · A / l` |
+| `charge / length` | Linear Charge Density | `λ = Q / l` |
+| `linear charge density * length` | Charge | `Q = λ · l` |
+| `current / magnetic flux` | Magnetic Reluctance | `Rm = Θ / Φ` |
+| `reluctance * magnetic flux` | Electric Current | `Θ = Rm · Φ` |
+| `1 / inductance` | Magnetic Reluctance | `Rm = 1 / Λ` |
+| `1 / reluctance` | Inductance | `Λ = 1 / Rm` |
+| `speed / field strength` | Electric Mobility | `μ = v / E` |
+| `mobility * field strength` | Speed | `v = μ · E` |
+| `charge * length` | Electric Dipole Moment | `p = Q · d` |
+| `dipole moment / charge` | Length | `d = p / Q` |
 
 Each result is the correct typed quantity — no raw mixed unit is assembled by hand. Voltage, resistance,
 charge, conductance and magnetic field strength additionally recognise their fully **native**
@@ -93,7 +125,24 @@ decomposition (`kg·m²·s⁻³·A⁻¹`, `kg·m²·s⁻³·A⁻²`, `A·s`, `kg
 newer groups: `toCapacitance()` (`kg⁻¹·m⁻²·s⁴·A²`), `toInductance()` (`kg·m²·s⁻²·A⁻²`), `toMagneticFlux()`
 (`kg·m²·s⁻²·A⁻¹`), `toMagneticFluxDensity()` (`kg·s⁻²·A⁻¹`), `toCurrentDensity()` (`A·m⁻²`),
 `toChargeDensity()` (`A·s·m⁻³`), `toResistivity()` (`kg·m³·s⁻³·A⁻²`), `toConductivity()`
-(`kg⁻¹·m⁻³·s³·A²`), `toPower()` (`kg·m²·s⁻³`) and `toEnergy()` (`kg·m²·s⁻²`).
+(`kg⁻¹·m⁻³·s³·A²`), `toPower()` (`kg·m²·s⁻³`) and `toEnergy()` (`kg·m²·s⁻²`). The field, material and
+magnetic-circuit groups follow the same pattern: `toElectricFieldStrength()` (`kg·m·s⁻³·A⁻¹`),
+`toElectricFluxDensity()` (`A·s·m⁻²`), `toPermittivity()` (`kg⁻¹·m⁻³·s⁴·A²`), `toPermeability()`
+(`kg·m·s⁻²·A⁻²`), `toLinearChargeDensity()` (`A·s·m⁻¹`), `toReluctance()` (`kg⁻¹·m⁻²·s²·A²`),
+`toElectricMobility()` (`kg⁻¹·s²·A`) and `toElectricDipoleMoment()` (`A·s·m`).
+
+Some quantities are **dimensionally identical** to an existing group and are therefore carried by that
+group rather than by one of their own — only the symbol differs to document the reading:
+
+| Quantity | Group | Symbol |
+|---|---|---|
+| Impedance `Z`, reactance `X` | [Resistance](resistance.md) | `Ω` |
+| Admittance `Y`, susceptance `B` | [Conductance](conductance.md) | `S` (`℧`) |
+| Apparent power `S`, reactive power `Q` | [Power (Electrical)](power.md) | `VA`, `var` |
+| Magnetomotive force `Θ` | [Electric Current](ec.md) | `At` |
+| Electric flux `Ψ` | [Charge](charge.md) | `C` |
+| Permeance `Λ` | [Inductance](inductance.md) | `H` |
+| Surface charge density `σ` | [Electric Flux Density](electricfluxdensity.md) | `C/m²` |
 
 ## Worked example — Ohm's law around one circuit
 
@@ -185,3 +234,11 @@ The table shows Ohm's law mathematically versus in Kotlin with KUnit. Exponents 
 * [Conductivity](conductivity.md) — siemens per meter, `1 / ρ`, and `G · l / A`.
 * [Power (Electrical)](power.md) — the watt, `U · I`, and the horsepower units.
 * [Energy (Electrical)](energy.md) — the joule, `Q · U`, `P · t`, and the kilowatt hour as `kilo.watts * hours`.
+* [Electric Field Strength](electricfieldstrength.md) — volt per meter, `U / l`, and `F / Q`.
+* [Electric Flux Density](electricfluxdensity.md) — coulomb per square meter, `Q / A`, also the surface charge density `σ`.
+* [Permittivity](permittivity.md) — farad per meter, `D / E`, and the vacuum constant `ε₀`.
+* [Permeability](permeability.md) — henry per meter, `B / H`, and the vacuum constant `μ₀`.
+* [Linear Charge Density](linearchargedensity.md) — coulomb per meter, `Q / l`, for wires and filaments.
+* [Magnetic Reluctance](reluctance.md) — ampere per weber, Hopkinson's law `Θ / Φ`, and the permeance `1 / Λ`.
+* [Electric Mobility](electricmobility.md) — square meter per volt second, `v / E`, for semiconductors.
+* [Electric Dipole Moment](electricdipolemoment.md) — coulomb meter, `Q · d`, and the debye.

@@ -27,6 +27,14 @@
 | كثافة الشحنة | مركّبة | كولوم لكل متر مكعّب (`C/m³`) | [كثافة الشحنة](chargedensity.md) |
 | المقاومية | مركّبة | أوم متر (`Ω·m`) | [المقاومية](resistivity.md) |
 | الموصّلية | مركّبة | سيمنز لكل متر (`S/m`) | [الموصّلية](conductivity.md) |
+| شدّة المجال الكهربائي | مركّبة | فولت لكل متر (`V/m`) | [شدّة المجال الكهربائي](electricfieldstrength.md) |
+| كثافة التدفّق الكهربائي | مركّبة | كولوم لكل متر مربّع (`C/m²`) | [كثافة التدفّق الكهربائي](electricfluxdensity.md) |
+| السماحية | مركّبة | فاراد لكل متر (`F/m`) | [السماحية](permittivity.md) |
+| النفاذية المغناطيسية | مركّبة | هنري لكل متر (`H/m`) | [النفاذية المغناطيسية](permeability.md) |
+| الكثافة الخطّية للشحنة | مركّبة | كولوم لكل متر (`C/m`) | [الكثافة الخطّية للشحنة](linearchargedensity.md) |
+| الممانعة المغناطيسية | مركّبة | أمبير لكل ويبر (`A/Wb`) | [الممانعة المغناطيسية](reluctance.md) |
+| الحراك الكهربائي | مركّبة | متر مربّع لكل فولت ثانية (`m²/(V·s)`) | [الحراك الكهربائي](electricmobility.md) |
+| العزم ثنائي القطب الكهربائي | مركّبة | كولوم متر (`C·m`) | [العزم ثنائي القطب الكهربائي](electricdipolemoment.md) |
 | القدرة | مركّبة | واط (`W`) | [القدرة (كهربائية)](power.md) |
 | الطاقة | مركّبة | جول (`J`) | [الطاقة (كهربائية)](energy.md) |
 
@@ -84,6 +92,30 @@
 | `energy / time` | القدرة | `P = W / t` |
 | `charge * voltage` | الطاقة | `W = Q · U` |
 | `energy / charge` | الجهد | `U = W / Q` |
+| `voltage / length` | شدّة المجال الكهربائي | `E = U / l` |
+| `force / charge` | شدّة المجال الكهربائي | `E = F / Q` |
+| `field strength * length` | الجهد | `U = E · l` |
+| `field strength * charge` | القوّة | `F = E · Q` |
+| `charge / area` | كثافة التدفّق الكهربائي | `D = Q / A` |
+| `flux density * area` | الشحنة الكهربائية | `Q = D · A` |
+| `flux density / field strength` | السماحية | `ε = D / E` |
+| `permittivity * field strength` | كثافة التدفّق الكهربائي | `D = ε · E` |
+| `capacitance / length` | السماحية | `ε = C · d / A` |
+| `permittivity * length` | السعة الكهربائية | `C = ε · A / d` |
+| `magnetic flux density / magnetic field strength` | النفاذية المغناطيسية | `μ = B / H` |
+| `permeability * magnetic field strength` | كثافة التدفّق المغناطيسي | `B = μ · H` |
+| `inductance / length` | النفاذية المغناطيسية | `μ = L · l / (N² · A)` |
+| `permeability * length` | الحثّ الكهربائي | `L = μ · N² · A / l` |
+| `charge / length` | الكثافة الخطّية للشحنة | `λ = Q / l` |
+| `linear charge density * length` | الشحنة الكهربائية | `Q = λ · l` |
+| `current / magnetic flux` | الممانعة المغناطيسية | `Rm = Θ / Φ` |
+| `reluctance * magnetic flux` | التيار الكهربائي | `Θ = Rm · Φ` |
+| `1 / inductance` | الممانعة المغناطيسية | `Rm = 1 / Λ` |
+| `1 / reluctance` | الحثّ الكهربائي | `Λ = 1 / Rm` |
+| `speed / field strength` | الحراك الكهربائي | `μ = v / E` |
+| `mobility * field strength` | السرعة | `v = μ · E` |
+| `charge * length` | العزم ثنائي القطب الكهربائي | `p = Q · d` |
+| `dipole moment / charge` | الطول | `d = p / Q` |
 
 كل نتيجة هي الكمّية المحكومة بالنوع الصحيحة — دون تجميع وحدة مختلطة خامًا بيدك. كما يتعرّف الجهد والمقاومة
 والشحنة والمواصَلة وشدّة المجال المغناطيسي على تفكيكها **الأصلي** الكامل (`kg·m²·s⁻³·A⁻¹` و`kg·m²·s⁻³·A⁻²`
@@ -92,7 +124,24 @@
 `toCapacitance()` (`kg⁻¹·m⁻²·s⁴·A²`)، و`toInductance()` (`kg·m²·s⁻²·A⁻²`)، و`toMagneticFlux()`
 (`kg·m²·s⁻²·A⁻¹`)، و`toMagneticFluxDensity()` (`kg·s⁻²·A⁻¹`)، و`toCurrentDensity()` (`A·m⁻²`)،
 و`toChargeDensity()` (`A·s·m⁻³`)، و`toResistivity()` (`kg·m³·s⁻³·A⁻²`)، و`toConductivity()`
-(`kg⁻¹·m⁻³·s³·A²`)، و`toPower()` (`kg·m²·s⁻³`) و`toEnergy()` (`kg·m²·s⁻²`).
+(`kg⁻¹·m⁻³·s³·A²`)، و`toPower()` (`kg·m²·s⁻³`) و`toEnergy()` (`kg·m²·s⁻²`). وتتبع مجموعات المجال
+والمادّة والدارة المغناطيسية النمط نفسه: `toElectricFieldStrength()` (`kg·m·s⁻³·A⁻¹`)،
+و`toElectricFluxDensity()` (`A·s·m⁻²`)، و`toPermittivity()` (`kg⁻¹·m⁻³·s⁴·A²`)، و`toPermeability()`
+(`kg·m·s⁻²·A⁻²`)، و`toLinearChargeDensity()` (`A·s·m⁻¹`)، و`toReluctance()` (`kg⁻¹·m⁻²·s²·A²`)،
+و`toElectricMobility()` (`kg⁻¹·s²·A`) و`toElectricDipoleMoment()` (`A·s·m`).
+
+بعض الكمّيات **مطابقة بُعديًا** لمجموعة موجودة، لذا تُحمَل ضمن تلك المجموعة بدلًا من مجموعة خاصّة
+بها — ويختلف الرمز فقط ليوثّق القراءة:
+
+| الكمّية | المجموعة | الرمز |
+|---|---|---|
+| المعاوقة `Z`، المفاعلة `X` | [المقاومة](resistance.md) | `Ω` |
+| المواصَلة الظاهرية `Y`، القابلية التوصيلية `B` | [المواصَلة](conductance.md) | `S` (`℧`) |
+| القدرة الظاهرية `S`، القدرة التفاعلية `Q` | [القدرة (كهربائية)](power.md) | `VA`، `var` |
+| القوّة المحرّكة المغناطيسية `Θ` | [التيار الكهربائي](ec.md) | `At` |
+| الفيض الكهربائي `Ψ` | [الشحنة الكهربائية](charge.md) | `C` |
+| النفاذية المغناطيسية العكسية `Λ` | [الحثّ الكهربائي](inductance.md) | `H` |
+| كثافة الشحنة السطحية `σ` | [كثافة التدفّق الكهربائي](electricfluxdensity.md) | `C/m²` |
 
 ## مثال واقعي — قانون أوم حول دارة واحدة
 
@@ -184,3 +233,11 @@ u.toString()               // "230.0 V" (الوحدة الأساسية)
 * [الموصّلية](conductivity.md) — سيمنز لكل متر، و`1 / ρ`، و`G · l / A`.
 * [القدرة (كهربائية)](power.md) — الواط، و`U · I`، ووحدات الحصان.
 * [الطاقة (كهربائية)](energy.md) — الجول، و`Q · U`، و`P · t`، والكيلوواط ساعة كصيغة `kilo.watts * hours`.
+* [شدّة المجال الكهربائي](electricfieldstrength.md) — فولت لكل متر، و`U / l`، و`F / Q`.
+* [كثافة التدفّق الكهربائي](electricfluxdensity.md) — كولوم لكل متر مربّع، و`Q / A`، وكذلك كثافة الشحنة السطحية `σ`.
+* [السماحية](permittivity.md) — فاراد لكل متر، و`D / E`، وثابت الفراغ `ε₀`.
+* [النفاذية المغناطيسية](permeability.md) — هنري لكل متر، و`B / H`، وثابت الفراغ `μ₀`.
+* [الكثافة الخطّية للشحنة](linearchargedensity.md) — كولوم لكل متر، و`Q / l`، للأسلاك والخيوط.
+* [الممانعة المغناطيسية](reluctance.md) — أمبير لكل ويبر، وقانون هوبكنسون `Θ / Φ`، والنفاذية المغناطيسية العكسية `1 / Λ`.
+* [الحراك الكهربائي](electricmobility.md) — متر مربّع لكل فولت ثانية، و`v / E`، لأشباه الموصّلات.
+* [العزم ثنائي القطب الكهربائي](electricdipolemoment.md) — كولوم متر، و`Q · d`، والديباي.

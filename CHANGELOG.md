@@ -4,6 +4,92 @@
 
 ### Added
 
+- **New standardized unit Electric Field Strength (`mass · length · time⁻³ · current⁻¹`).** A constructed
+  unit group in `org.pcsoft.framework.kunit.electricfieldstrength` with base unit volt per meter (`V/m`,
+  `KElectricFieldStrengthUnit.BASE`) and the tokens `voltsPerMeter`, `voltsPerCentimeter`,
+  `statvoltsPerCentimeter` (all prefix-combinable, e.g. `kilo.voltsPerMeter`). Typed cross-group operators
+  `voltage / length`, `electricFieldStrength * length = voltage` (and its commutative form),
+  `voltage / electricFieldStrength = length`, `force / charge`, `electricFieldStrength * charge = force`
+  (and its commutative form) and `force / electricFieldStrength = charge`;
+  `KMixedUnitInstance.toElectricFieldStrength()` recognizes the canonical `kg·m·s⁻³·A⁻¹` normal form. Full
+  docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Electric Flux Density (`current · time · length⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.electricfluxdensity` with base unit coulomb per square meter (`C/m²`,
+  `KElectricFluxDensityUnit.BASE`) and the tokens `coulombsPerSquareMeter`, `coulombsPerSquareCentimeter`
+  (all prefix-combinable, e.g. `micro.coulombsPerSquareMeter`). The group also carries the dimensionally
+  identical surface charge density `σ`. Typed cross-group operators `charge / area`,
+  `electricFluxDensity * area = charge` (and its commutative form) and `charge / electricFluxDensity = area`;
+  `KMixedUnitInstance.toElectricFluxDensity()` recognizes the canonical `A·s·m⁻²` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Permittivity (`mass⁻¹ · length⁻³ · time⁴ · current²`).** A constructed unit group
+  in `org.pcsoft.framework.kunit.permittivity` with base unit farad per meter (`F/m`,
+  `KPermittivityUnit.BASE`), the tokens `faradsPerMeter`, `faradsPerCentimeter` (prefix-combinable, e.g.
+  `pico.faradsPerMeter`) and the constant token `vacuumPermittivity`
+  (`KPermittivityUnit.VACUUM_PERMITTIVITY`, 8.854 187 8188e-12 F/m). Typed cross-group operators
+  `capacitance / length`, `permittivity * length = capacitance` (and its commutative form),
+  `capacitance / permittivity = length`, `electricFluxDensity / electricFieldStrength`,
+  `permittivity * electricFieldStrength = electricFluxDensity` (and its commutative form) and
+  `electricFluxDensity / permittivity = electricFieldStrength`; `KMixedUnitInstance.toPermittivity()`
+  recognizes the canonical `kg⁻¹·m⁻³·s⁴·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test
+  coverage included.
+
+- **New standardized unit Permeability (`mass · length · time⁻² · current⁻²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.permeability` with base unit henry per meter (`H/m`,
+  `KPermeabilityUnit.BASE`), the tokens `henriesPerMeter`, `henriesPerCentimeter` (prefix-combinable, e.g.
+  `micro.henriesPerMeter`) and the constant token `vacuumPermeability`
+  (`KPermeabilityUnit.VACUUM_PERMEABILITY`, 1.256 637 061 27e-6 H/m). Typed cross-group operators
+  `inductance / length`, `permeability * length = inductance` (and its commutative form),
+  `inductance / permeability = length`, `magneticFluxDensity / magneticFieldStrength`,
+  `permeability * magneticFieldStrength = magneticFluxDensity` (and its commutative form) and
+  `magneticFluxDensity / permeability = magneticFieldStrength`; `KMixedUnitInstance.toPermeability()`
+  recognizes the canonical `kg·m·s⁻²·A⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test
+  coverage included.
+
+- **New standardized unit Linear Charge Density (`current · time · length⁻¹`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.linearchargedensity` with base unit coulomb per meter (`C/m`,
+  `KLinearChargeDensityUnit.BASE`). The quantity has no named unit, so the group intentionally offers no
+  bare tokens and no prefix builders - values are built as `charge / length`. Typed cross-group operators
+  `charge / length`, `linearChargeDensity * length = charge` (and its commutative form) and
+  `charge / linearChargeDensity = length`; `KMixedUnitInstance.toLinearChargeDensity()` recognizes the
+  canonical `A·s·m⁻¹` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Magnetic Reluctance (`mass⁻¹ · length⁻² · time² · current²`).** A constructed unit
+  group in `org.pcsoft.framework.kunit.reluctance` with base unit ampere per weber (`A/Wb`,
+  `KReluctanceUnit.BASE`) and the tokens `amperesPerWeber`, `inverseHenries`, `ampereTurnsPerWeber` (all
+  prefix-combinable, e.g. `mega.amperesPerWeber`). Typed cross-group operators for Hopkinson's law
+  `current / magneticFlux`, `reluctance * magneticFlux = current` (and its commutative form),
+  `current / reluctance = magneticFlux`, plus the reciprocal pair with the permeance `1 / inductance` and
+  `1 / reluctance`; `KMixedUnitInstance.toReluctance()` recognizes the canonical `kg⁻¹·m⁻²·s²·A²` normal
+  form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Electric Mobility (`mass⁻¹ · time² · current`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.electricmobility` with base unit square meter per volt second (`m²/(V·s)`,
+  `KElectricMobilityUnit.BASE`) and the tokens `squareMetersPerVoltSecond`,
+  `squareCentimetersPerVoltSecond` (all prefix-combinable). Typed cross-group operators
+  `speed / electricFieldStrength`, `electricMobility * electricFieldStrength = speed` (and its commutative
+  form) and `speed / electricMobility = electricFieldStrength`;
+  `KMixedUnitInstance.toElectricMobility()` recognizes the canonical `kg⁻¹·s²·A` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New standardized unit Electric Dipole Moment (`current · time · length`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.electricdipolemoment` with base unit coulomb meter (`C·m`,
+  `KElectricDipoleMomentUnit.BASE`) and the tokens `coulombMeters`, `debyes` (all prefix-combinable, e.g.
+  `pico.coulombMeters`). Typed cross-group operators `charge * length` (and its commutative form),
+  `electricDipoleMoment / charge = length` and `electricDipoleMoment / length = charge`;
+  `KMixedUnitInstance.toElectricDipoleMoment()` recognizes the canonical `A·s·m` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+
+- **New power units for alternating current.** `KPowerUnit` gained `VOLT_AMPERE` (`VA`, apparent power) and
+  `VAR` (`var`, reactive power), each with a bare token (`voltAmperes`, `vars`) and a prefix builder, so
+  nameplate ratings such as `630 of kilo.voltAmperes` and `120 of kilo.vars` are expressible. Both are
+  dimensionally identical to the watt; the distinct symbols document the AC reading.
+
+- **New electric current unit for the magnetic circuit.** `KElectricCurrentUnit` gained `AMPERE_TURN`
+  (`At`), with the bare token `ampereTurns` and a prefix builder, for the magnetomotive force `Θ = N · I`.
+  It is dimensionally identical to the ampere - the number of turns is a pure count.
+
 - **New standardized unit Power (`mass · length² · time⁻³`).** A constructed unit group in
   `org.pcsoft.framework.kunit.power` with base unit watt (`W`, `KPowerUnit.BASE`) and the tokens `watts`,
   `metricHorsePowers`, `mechanicalHorsePowers`, `ergsPerSecond` (all prefix-combinable, e.g. `kilo.watts`).

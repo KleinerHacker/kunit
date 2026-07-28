@@ -20,8 +20,29 @@ SI のアンペアに加えて、このグループは古典的な CGS 電流単
 | SI | アンペア | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
 | CGS | ビオ / アブアンペア | `KElectricCurrentUnit.BIOT` | `Bi`（`abA`） | `biot` / `abamperes` | 10 |
 | CGS | スタットアンペア | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
+| 磁気回路 | アンペアターン | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
 
 各 `トークン` は、`of`（生成）と `into`（読み取り）で使用する値 1 の `KElectricCurrentUnitInstance` です。
+
+### 起磁力（アンペアターン）
+
+**起磁力** `Θ = N · I`（磁気回路を駆動する力）は、巻数 `N` が単なる個数であるため、電流と次元的に
+同一です。そのため専用のグループを持たず、このグループ内のアンペアターン（`At`）を使用します。異なる記号
+を使うことで、その値が単一導体の電流ではなくコイル全体の駆動力を表すことを明示します。`1 At = 1 A` であり、
+接頭辞も通常どおり使用できます（`kilo.ampereTurns`）。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.ec.*
+
+// 500 回巻きのコイルに 0.4 A を流すと Θ = 200 At になる。
+val theta = (500 * 0.4) of ampereTurns
+theta into ampereTurns          // 200.0
+theta == (200 of amperes)       // true（次元的に同一）
+```
+
+起磁力は[磁気抵抗](reluctance.md)を通じて[磁束](magneticflux.md)を駆動します: `Θ = Rm · Φ`。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -127,4 +148,6 @@ import org.pcsoft.framework.kunit.ec.*
 | `mA` | `milli.amperes` | ミリアンペア（アンペアに接頭辞を適用） |
 | `kA` | `kilo.amperes` | キロアンペア |
 | `Bi` | `biot` | ビオ / アブアンペア（10 A） |
+| `At` | `ampereTurns` | アンペアターン、起磁力 `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | 接頭辞付きアンペアターン（キロアンペアターン） |
 | `A²` | `amperes pow 2` | アンペアの 2 乗（汎用の混合単位） |

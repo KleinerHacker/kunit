@@ -86,6 +86,25 @@ val raw = (2 of amperes).toUnit() * (1 of hours).toUnit()  // KMixedUnitInstance
 raw.toCharge() == typed                                    // true
 ```
 
+## الفيض الكهربائي
+
+يساوي **الفيض الكهربائي** `Ψ` عبر سطح مغلق الشحنة المحصورة فيه (قانون غاوس، `Ψ = Q`). لذا فهو
+**مطابق بُعديًا** للشحنة ويُقاس بالكولوم أيضًا. تُنمذجه KUnit بهذه المجموعة وبالرمز `C`؛ ولا يوجد رمز
+برمجي منفصل ولا نوع منفصل:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.micro
+import org.pcsoft.framework.kunit.charge.*
+
+// كرة تحصر 2 µC تحمل فيضًا كهربائيًا مقداره 2 µC.
+val psi = 2 of micro.coulombs
+psi into micro.coulombs        // 2.0
+```
+
+عند قسمته على مساحة، يُعطي الفيض [كثافة الفيض الكهربائي](electricfluxdensity.md) `D = Ψ / A`.
+
 ## العمليات
 
 ```kotlin

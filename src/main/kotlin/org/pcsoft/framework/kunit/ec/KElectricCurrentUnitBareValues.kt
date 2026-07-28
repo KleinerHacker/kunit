@@ -33,3 +33,8 @@ val abamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrent
 
 /** 1 statampere ([KElectricCurrentUnit.STATAMPERE]). */
 val statamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.STATAMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.STATAMPERE))
+
+// --- Magnetic circuit ----------------------------------------------------------------------------
+
+/** 1 ampere turn ([KElectricCurrentUnit.AMPERE_TURN]), the magnetomotive force `Θ = N · I`. */
+val ampereTurns: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.AMPERE_TURN.baseValue, KUnitDisplay(KElectricCurrentUnit.AMPERE_TURN))

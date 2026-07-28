@@ -26,8 +26,35 @@
 | メートル法馬力 | `PS` | `metricHorsePowers` | 735.49875 |
 | 機械的馬力 | `hp` | `mechanicalHorsePowers` | 745.6998715822702 |
 | 秒あたりのエルグ（CGS） | `erg/s` | `ergsPerSecond` | 1.0e-7 |
+| ボルトアンペア（皮相電力） | `VA` | `voltAmperes` | 1.0 |
+| 無効電力（バール） | `var` | `vars` | 1.0 |
 
 名前付き単位は `KPrefixBuilder` を通じてSI接頭辞をサポートします（`kilo.watts`、`mega.watts`、`milli.watts` など）。
+
+### 皮相電力と無効電力（VA、var）
+
+交流システムでは3種類の電力が区別されますが、いずれもワットと次元的に同一です。
+
+* **有効電力** `P = U · I · cos φ`（ワット、`W`）— 仕事をする成分、
+* **皮相電力** `S = U · I`（ボルトアンペア、`VA`）— 実効電圧と実効電流の積、
+* **無効電力** `Q = U · I · sin φ`（バール、`var`）— 電源と負荷の間で振動し、仕事をしない成分。
+
+この3つは慣習上異なるだけなので、KUnitはこれらを1つのグループに保持し、記号で区別します:
+`1 VA = 1 var = 1 W`。接頭辞も通常どおり使用でき、`kilo.voltAmperes` は 1 kVA、`kilo.vars` は 1 kvar です。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.power.*
+
+// 25 kVA定格のトランスが力率 cos φ = 0.8 の負荷に給電する場合:
+val s = 25 of kilo.voltAmperes
+val p = (25 * 0.8) of kilo.watts     // 20 kW の有効電力
+val q = (25 * 0.6) of kilo.vars      // 15 kvar の無効電力
+s into kilo.voltAmperes               // 25.0
+q into kilo.vars                      // 15.0
+```
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -119,3 +146,7 @@ import org.pcsoft.framework.kunit.power.*
 | `kg·m²/s³` | `(kilo.grams * (meters pow 2)) / (seconds pow 3)` | 質量・長さ² / 時間³ としての電力（分数形式） |
 | `kg·m²·s⁻³` | `kilo.grams * (meters pow 2) * (seconds pow -3)` | 純粋な積としての同じ電力 |
 | `kW` | `kilo.watts` | 接頭辞付き電力（キロワット） |
+| `S = U · I` を `VA` で | `voltAmperes` | 皮相電力（交流） |
+| `Q` を `var` で | `vars` | 無効電力（交流） |
+| `kVA` | `kilo.voltAmperes` | 接頭辞付き皮相電力（キロボルトアンペア） |
+| `kvar` | `kilo.vars` | 接頭辞付き無効電力 |

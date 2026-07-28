@@ -34,6 +34,7 @@ class KElectricCurrentUnitTest {
         Triple("biot", biot, KElectricCurrentUnit.BIOT.baseValue),
         Triple("abamperes", abamperes, KElectricCurrentUnit.BIOT.baseValue),
         Triple("statamperes", statamperes, KElectricCurrentUnit.STATAMPERE.baseValue),
+        Triple("ampereTurns", ampereTurns, KElectricCurrentUnit.AMPERE_TURN.baseValue),
     )
 
     private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-20)
@@ -53,5 +54,30 @@ class KElectricCurrentUnitTest {
     fun `abampere is biot`() {
         assertEquals(biot, abamperes)
         assertEquals(1 of biot, 1 of abamperes)
+    }
+
+    /** The declared symbols and base values of every electric current unit. */
+    @Test
+    fun `unit symbols and base values`() {
+        assertEquals("A", KElectricCurrentUnit.AMPERE.symbol)
+        assertEquals("Bi", KElectricCurrentUnit.BIOT.symbol)
+        assertEquals("statA", KElectricCurrentUnit.STATAMPERE.symbol)
+        assertEquals("At", KElectricCurrentUnit.AMPERE_TURN.symbol)
+        assertEquals(1.0, KElectricCurrentUnit.AMPERE.baseValue, 1e-20)
+        assertEquals(10.0, KElectricCurrentUnit.BIOT.baseValue, 1e-20)
+        assertEquals(3.335641e-10, KElectricCurrentUnit.STATAMPERE.baseValue, 1e-20)
+        assertEquals(1.0, KElectricCurrentUnit.AMPERE_TURN.baseValue, 1e-20)
+        assertEquals(KElectricCurrentUnit.AMPERE, KElectricCurrentUnit.BASE)
+        assertEquals(4, KElectricCurrentUnit.entries.size)
+    }
+
+    /**
+     * The magnetomotive force of a coil: 800 turns carrying 2.5 A drive 2000 At - dimensionally the same
+     * as 2000 A, but named to document the magnetic circuit context.
+     */
+    @Test
+    fun `ampere turn equals ampere`() {
+        assertEquals(2000.0, (800 * 2.5 of ampereTurns).value, 1e-9)
+        assertEquals(1 of amperes, 1 of ampereTurns)
     }
 }

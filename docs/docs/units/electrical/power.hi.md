@@ -27,9 +27,38 @@
 | मीट्रिक अश्वशक्ति | `PS` | `metricHorsePowers` | 735.49875 |
 | यांत्रिक अश्वशक्ति | `hp` | `mechanicalHorsePowers` | 745.6998715822702 |
 | अर्ग प्रति सेकंड (CGS) | `erg/s` | `ergsPerSecond` | 1.0e-7 |
+| वोल्ट ऐम्पियर (प्रकट शक्ति) | `VA` | `voltAmperes` | 1.0 |
+| वोल्ट ऐम्पियर रिएक्टिव | `var` | `vars` | 1.0 |
 
 नामित इकाइयाँ `KPrefixBuilder` के माध्यम से SI उपसर्गों का समर्थन करती हैं (`kilo.watts`, `mega.watts`,
 `milli.watts`, …)।
+
+### प्रकट और रिएक्टिव शक्ति (VA, var)
+
+प्रत्यावर्ती धारा प्रणालियों में तीन शक्तियों को अलग किया जाता है, जो सभी वाट के विमीय रूप से समान हैं:
+
+* **सक्रिय शक्ति** `P = U · I · cos φ` वाट (`W`) में — वह भाग जो कार्य करता है,
+* **प्रकट शक्ति** `S = U · I` वोल्ट ऐम्पियर (`VA`) में — RMS वोल्टता और RMS धारा का गुणनफल,
+* **रिएक्टिव शक्ति** `Q = U · I · sin φ` वोल्ट ऐम्पियर रिएक्टिव (`var`) में — वह भाग जो स्रोत और भार के
+  बीच बिना कार्य किए दोलन करता है।
+
+चूँकि तीनों केवल परंपरा में भिन्न हैं, KUnit उन्हें इसी एक समूह में रखता है और प्रतीक से अलग करता है:
+`1 VA = 1 var = 1 W`। उपसर्ग सामान्य रूप से कार्य करते हैं, इसलिए `kilo.voltAmperes` 1 kVA है और
+`kilo.vars` 1 kvar है।
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.power.*
+
+// 25 kVA रेटेड ट्रांसफार्मर एक भार को खिलाते हुए जिसका पावर फैक्टर cos φ = 0.8 है:
+val s = 25 of kilo.voltAmperes
+val p = (25 * 0.8) of kilo.watts     // 20 kW सक्रिय शक्ति
+val q = (25 * 0.6) of kilo.vars      // 15 kvar रिएक्टिव शक्ति
+s into kilo.voltAmperes               // 25.0
+q into kilo.vars                      // 15.0
+```
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -121,3 +150,7 @@ import org.pcsoft.framework.kunit.power.*
 | `kg·m²/s³` | `(kilo.grams * (meters pow 2)) / (seconds pow 3)` | द्रव्यमान·लंबाई² / समय³ के रूप में शक्ति (भिन्न रूप) |
 | `kg·m²·s⁻³` | `kilo.grams * (meters pow 2) * (seconds pow -3)` | वही शक्ति शुद्ध गुणनफल के रूप में |
 | `kW` | `kilo.watts` | उपसर्ग सहित शक्ति (किलोवाट) |
+| `S = U · I` in `VA` | `voltAmperes` | प्रकट शक्ति (प्रत्यावर्ती धारा) |
+| `Q` in `var` | `vars` | रिएक्टिव शक्ति (प्रत्यावर्ती धारा) |
+| `kVA` | `kilo.voltAmperes` | उपसर्ग सहित प्रकट शक्ति (किलोवोल्ट ऐम्पियर) |
+| `kvar` | `kilo.vars` | उपसर्ग सहित रिएक्टिव शक्ति |

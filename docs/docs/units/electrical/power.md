@@ -26,8 +26,38 @@ Build a power with a named token, or from a decomposition (see below). Named uni
 | Metric horsepower | `PS` | `metricHorsePowers` | 735.49875 |
 | Mechanical horsepower | `hp` | `mechanicalHorsePowers` | 745.6998715822702 |
 | Erg per second (CGS) | `erg/s` | `ergsPerSecond` | 1.0e-7 |
+| Volt ampere (apparent power) | `VA` | `voltAmperes` | 1.0 |
+| Volt ampere reactive | `var` | `vars` | 1.0 |
 
 Named units support the SI prefixes via `KPrefixBuilder` (`kilo.watts`, `mega.watts`, `milli.watts`, …).
+
+### Apparent and reactive power (VA, var)
+
+In alternating current systems three powers are distinguished, all of them dimensionally identical to the
+watt:
+
+* **active power** `P = U · I · cos φ` in watts (`W`) — the part that does work,
+* **apparent power** `S = U · I` in volt amperes (`VA`) — the product of RMS voltage and RMS current,
+* **reactive power** `Q = U · I · sin φ` in volt amperes reactive (`var`) — the part that oscillates
+  between source and load without doing work.
+
+Because the three differ only by convention, KUnit keeps them in this one group and separates them by
+symbol: `1 VA = 1 var = 1 W`. Prefixes work as usual, so `kilo.voltAmperes` is 1 kVA and `kilo.vars` is
+1 kvar.
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.power.*
+
+// A transformer rated 25 kVA feeding a load with power factor cos φ = 0.8:
+val s = 25 of kilo.voltAmperes
+val p = (25 * 0.8) of kilo.watts     // 20 kW active power
+val q = (25 * 0.6) of kilo.vars      // 15 kvar reactive power
+s into kilo.voltAmperes               // 25.0
+q into kilo.vars                      // 15.0
+```
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -119,3 +149,7 @@ The table below shows how this unit and its components are written mathematicall
 | `kg·m²/s³` | `(kilo.grams * (meters pow 2)) / (seconds pow 3)` | power as mass·length² / time³ (fraction form) |
 | `kg·m²·s⁻³` | `kilo.grams * (meters pow 2) * (seconds pow -3)` | same power as a pure product |
 | `kW` | `kilo.watts` | prefixed power (kilowatt) |
+| `S = U · I` in `VA` | `voltAmperes` | apparent power (alternating current) |
+| `Q` in `var` | `vars` | reactive power (alternating current) |
+| `kVA` | `kilo.voltAmperes` | prefixed apparent power (kilovolt ampere) |
+| `kvar` | `kilo.vars` | prefixed reactive power |

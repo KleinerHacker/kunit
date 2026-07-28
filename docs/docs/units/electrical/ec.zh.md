@@ -18,8 +18,28 @@
 | SI | 安培 | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
 | CGS | 毕奥 / abampere | `KElectricCurrentUnit.BIOT` | `Bi`（`abA`） | `biot` / `abamperes` | 10 |
 | CGS | 静安培 | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
+| 磁路 | 安匝 | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
 
 每个 `令牌` 都是值为 1 的 `KElectricCurrentUnitInstance`，配合 `of`（构建）和 `into`（读取）使用。
+
+### 磁动势（安匝）
+
+**磁动势** `Θ = N · I` —— 磁路的驱动力 —— 与电流在量纲上是相同的，因为匝数 `N` 是一个纯计数。
+因此它不需要拥有自己的组：它使用该组内的安匝（`At`）。这个独立的符号表明该值描述的是线圈的
+总驱动力，而不是单根导体的电流。`1 At = 1 A`，前缀照常适用（`kilo.ampereTurns`）。
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.ec.*
+
+// 一个 500 匝的线圈通过 0.4 A 电流，产生 Θ = 200 At。
+val theta = (500 * 0.4) of ampereTurns
+theta into ampereTurns          // 200.0
+theta == (200 of amperes)       // true（量纲上相同）
+```
+
+磁动势通过[磁阻](reluctance.md)驱动[磁通量](magneticflux.md)：`Θ = Rm · Φ`。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -125,4 +145,6 @@ import org.pcsoft.framework.kunit.ec.*
 | `mA` | `milli.amperes` | 毫安（前缀应用于安培） |
 | `kA` | `kilo.amperes` | 千安 |
 | `Bi` | `biot` | 毕奥 / abampere（10 A） |
+| `At` | `ampereTurns` | 安匝，磁动势 `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | 带前缀的安匝（千安匝） |
 | `A²` | `amperes pow 2` | 安培平方（通用混合单位） |

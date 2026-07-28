@@ -79,6 +79,36 @@ val raw = 115 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow
 raw.toResistance() == (115 of ohms)      // true
 ```
 
+## Impedance and reactance
+
+In alternating current systems the opposition of a circuit is split into three quantities that are all
+**dimensionally identical** to the resistance and all measured in ohms:
+
+* **resistance** `R` — the real, energy-dissipating part,
+* **reactance** `X = ωL − 1/(ωC)` — the part caused by inductance and capacitance,
+* **impedance** `Z = √(R² + X²)` — the magnitude of the complex opposition.
+
+Because they differ only in interpretation, KUnit models all three with this one group and the single
+symbol `Ω`; there is no separate token and no separate type. Build a reactance or an impedance exactly
+like a resistance:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import kotlin.math.PI
+import kotlin.math.sqrt
+import org.pcsoft.framework.kunit.resistance.*
+
+// A coil of 10 mH in series with 30 Ω at 50 Hz:
+val x = (2 * PI * 50 * 0.010) of ohms          // reactance X ≈ 3.14 Ω
+val r = 30 of ohms                              // resistance R
+val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // impedance Z ≈ 30.16 Ω
+z into ohms                                     // ≈ 30.164
+```
+
+The reactive part is driven by [inductance](inductance.md) and [capacitance](capacitance.md); the power
+it carries is expressed in `var`, see [Power (Electrical)](power.md).
+
 ## Operators
 
 ```kotlin

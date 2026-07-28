@@ -86,6 +86,26 @@ val raw = (2 of amperes).toUnit() * (1 of hours).toUnit()  // KMixedUnitInstance
 raw.toCharge() == typed                                    // true
 ```
 
+## विद्युत फ्लक्स
+
+किसी बंद पृष्ठ के माध्यम से **विद्युत फ्लक्स** `Ψ` उसमें संलग्न आवेश के बराबर होता है (गॉस का नियम,
+`Ψ = Q`)। इसलिए यह आवेश के **विमीय रूप से समान** है और कूलॉम में ही मापा जाता है। KUnit इसे इसी समूह और
+प्रतीक `C` से मॉडल करता है; कोई अलग टोकन और कोई अलग प्रकार नहीं है:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.micro
+import org.pcsoft.framework.kunit.charge.*
+
+// 2 µC संलग्न करने वाला एक गोला 2 µC का विद्युत फ्लक्स वहन करता है।
+val psi = 2 of micro.coulombs
+psi into micro.coulombs        // 2.0
+```
+
+किसी क्षेत्रफल से विभाजित करने पर फ्लक्स [विद्युत फ्लक्स घनत्व](electricfluxdensity.md) `D = Ψ / A`
+देता है।
+
 ## ऑपरेटर
 
 ```kotlin

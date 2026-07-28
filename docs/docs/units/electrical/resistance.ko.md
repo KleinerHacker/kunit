@@ -78,6 +78,35 @@ val raw = 115 of (kilo.grams * (meters pow 2)) / ((amperes pow 2) * (seconds pow
 raw.toResistance() == (115 of ohms)      // true
 ```
 
+## 임피던스와 리액턴스
+
+교류 시스템에서 회로의 저항 성분은 세 가지 물리량으로 나뉘며, 모두 저항과 **차원적으로 동일**하고 모두
+옴으로 측정됩니다:
+
+* **저항** `R` — 에너지를 소모하는 실수 부분,
+* **리액턴스** `X = ωL − 1/(ωC)` — 인덕턴스와 커패시턴스에 의한 부분,
+* **임피던스** `Z = √(R² + X²)` — 복소 저항의 크기.
+
+이들은 해석 방식만 다르므로, KUnit 은 세 가지 모두를 이 하나의 그룹과 단일 기호 `Ω` 로 모델링합니다.
+별도의 토큰이나 별도의 타입은 없습니다. 리액턴스나 임피던스는 저항과 정확히 같은 방식으로 만듭니다:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import kotlin.math.PI
+import kotlin.math.sqrt
+import org.pcsoft.framework.kunit.resistance.*
+
+// 50 Hz 에서 30 Ω 과 직렬로 연결된 10 mH 코일:
+val x = (2 * PI * 50 * 0.010) of ohms          // 리액턴스 X ≈ 3.14 Ω
+val r = 30 of ohms                              // 저항 R
+val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // 임피던스 Z ≈ 30.16 Ω
+z into ohms                                     // ≈ 30.164
+```
+
+리액턴스 성분은 [인덕턴스](inductance.md)와 [커패시턴스](capacitance.md)에 의해 구동되며, 그것이
+운반하는 전력은 `var` 로 표현됩니다. [전력(전기)](power.md)을 참고하세요.
+
 ## 연산자
 
 ```kotlin
