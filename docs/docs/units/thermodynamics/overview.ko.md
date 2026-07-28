@@ -1,6 +1,6 @@
 # 열역학 — 개요
 
-패키지: `org.pcsoft.framework.kunit.temperature`, `…energy`, `…power`
+패키지: `org.pcsoft.framework.kunit.thermo.temperature`, `…energy`, `…power`
 
 열역학은 **열과 온도**의 물리학입니다. KUnit에서 이 분야는 현재 온도를 중심으로 하며, 온도는 **관련된
 2개의 네이티브 그룹**으로 모델링됩니다 — 왜냐하면 온도의 *측정값*과 온도의 *변화*는 물리적으로 다른
@@ -50,7 +50,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val start = 10 of celsius
 val end   = 30 of celsius
@@ -70,10 +70,10 @@ val back = start + KTemperatureDifference.ofKelvin(20) // KTemperatureUnitInstan
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
 q into kilo.joules                            // 1200.0
@@ -90,7 +90,7 @@ t into seconds                                // 600.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()                       // "298.15 K" (절대, 기준 단위)
 KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK" (구간)

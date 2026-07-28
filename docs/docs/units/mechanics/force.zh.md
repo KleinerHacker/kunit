@@ -1,6 +1,6 @@
 # 力
 
-包: `org.pcsoft.framework.kunit.force`
+包: `org.pcsoft.framework.kunit.mechanic.force`
 基本单位: **牛顿**(`KForceUnit.BASE == KForceUnit.NEWTON`)
 
 类型：**构造单位**
@@ -28,7 +28,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.force.*
+import org.pcsoft.framework.kunit.mechanic.force.*
 
 val f = 10 of newtons
 f into newtons               // 10.0
@@ -50,9 +50,9 @@ f into poundsForce           // ≈ 2.248
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.acceleration.*
-import org.pcsoft.framework.kunit.force.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
+import org.pcsoft.framework.kunit.mechanic.force.*
 
 val f = (2 of kilo.grams) * (3 of standardGravities) // KForceUnitInstance
 f into newtons               // ≈ 58.84
@@ -64,7 +64,7 @@ val a = (10 of newtons) / (2 of kilo.grams)          // KAccelerationUnitInstanc
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.force.*
+import org.pcsoft.framework.kunit.mechanic.force.*
 
 val s = (10 of newtons) + (4 of newtons)  // 14 N
 (10 of newtons) > (4 of newtons)          // true
@@ -76,7 +76,7 @@ val s = (10 of newtons) + (4 of newtons)  // 14 N
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.force.*
+import org.pcsoft.framework.kunit.mechanic.force.*
 
 (10 of newtons).toString()   // "10.0 N"(基本单位)
 "${(1 of kilo.ponds) into newtons} N" // "9.80665 N"

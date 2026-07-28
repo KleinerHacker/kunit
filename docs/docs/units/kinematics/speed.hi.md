@@ -1,6 +1,6 @@
 # चाल
 
-पैकेज: `org.pcsoft.framework.kunit.speed`
+पैकेज: `org.pcsoft.framework.kunit.kinematic.speed`
 मूल इकाई: **मीटर प्रति सेकंड** (`KSpeedUnit.BASE == KSpeedUnit.METERS_PER_SECOND`)
 
 प्रकार: **निर्मित इकाई**
@@ -34,10 +34,10 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.miles
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.miles
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = 50 of kilo.meters / hours
 v.value                        // 13.888...(m/s में प्रसामान्यीकृत)
@@ -64,9 +64,9 @@ v into mach                    // ≈ 0.0408 (ध्वनि की चाल �
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 // --- मूल इकाइयाँ -> चाल ------------------------------------------
 val v = (100 of meters) / (10 of seconds)  // KSpeedUnitInstance (.toSpeed() की आवश्यकता नहीं!)
@@ -97,8 +97,8 @@ time into minutes          // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val area = (2 of meters) * (2 of meters)         // KAreaUnitInstance
 val areaPerTime = area.toUnit() / (2 of seconds).toUnit() // KMixedUnitInstance, [METER^2, SECOND^-1]
@@ -109,10 +109,10 @@ val areaPerTime = area.toUnit() / (2 of seconds).toUnit() // KMixedUnitInstance,
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 // + / - : समान समूह, भिन्न चाल व्यंजकों के बीच स्वचालित रूपांतरण
 val a = (36 of kilo.meters / hours) + (10 of meters / seconds)  // KSpeedUnitInstance, 20 m/s
@@ -134,10 +134,10 @@ val squared = (10 of meters / seconds) * (2 of meters / seconds) // KMixedUnitIn
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 (10 of meters / seconds).toString()   // "10.0 m/s" (मूल इकाई)
 "${(10 of meters / seconds) into (kilo.meters / hours)} km/h" // "36.0 km/h"

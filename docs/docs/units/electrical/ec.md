@@ -1,6 +1,6 @@
 # Electric Current
 
-Package: `org.pcsoft.framework.kunit.ec`
+Package: `org.pcsoft.framework.kunit.electric.ec`
 Base unit: **ampere** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`)
 
 Type: **native unit**
@@ -35,7 +35,7 @@ as usual (`kilo.ampereTurns`).
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // A coil with 500 turns carrying 0.4 A produces Θ = 200 At.
 val theta = (500 * 0.4) of ampereTurns
@@ -50,7 +50,7 @@ The magnetomotive force drives the [magnetic flux](magneticflux.md) through the
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val i = 2 of milli.amperes    // 0.002 A
 i.value                       // 0.002 (normalized to amperes)
@@ -67,7 +67,7 @@ the current unit:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val voltage = 5.0    // V
 val resistance = 220.0 // Ω
@@ -79,7 +79,7 @@ current into milli.amperes                         // ≈ 22.7 mA
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // + / - : same group, automatic conversion between units
 val a = (1 of amperes) + (1 of biot)   // KElectricCurrentUnitInstance: 11.0 A
@@ -105,7 +105,7 @@ power type):
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val squared = (2 of amperes) pow 2     // KMixedUnitInstance: 4.0 A²
 ```
@@ -121,7 +121,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of milli.amperes).value   // 0.001      (milliampere)
 (1 of kilo.amperes).value    // 1000.0     (kiloampere)
@@ -137,7 +137,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of biot).toString()                       // "10.0 A" (base unit representation)
 "${(0.002 of amperes) into milli.amperes} mA" // "2.0 mA"

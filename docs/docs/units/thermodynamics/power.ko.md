@@ -1,6 +1,6 @@
 # 전력 (Power, 열역학)
 
-패키지: `org.pcsoft.framework.kunit.power`
+패키지: `org.pcsoft.framework.kunit.common.power`
 기본 단위: **와트(watt)** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 유형: **구성 단위(constructed unit)**
@@ -35,7 +35,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val heatFlow = 9 of kilo.watts   // 실내 히터
 heatFlow into kilo.watts         // 9.0
@@ -69,12 +69,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.energy.*
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.energy.*
+import org.pcsoft.framework.kunit.common.power.*
 
 // 실제 사례 - 온수기: 10분 이내에 전달된 1200 kJ의 열은 2 kW의 열유량입니다.
 val heatFlow = (1200 of kilo.joules) / (10 of minutes)   // KPowerUnitInstance
@@ -92,7 +92,7 @@ raw.toPower() == (2 of kilo.watts)                       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -104,7 +104,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (9 of kilo.watts).toString()     // "9000.0 W" (기본 단위)
 ```

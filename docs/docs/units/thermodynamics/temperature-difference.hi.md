@@ -1,6 +1,6 @@
 # तापमान अंतर
 
-पैकेज: `org.pcsoft.framework.kunit.temperature`
+पैकेज: `org.pcsoft.framework.kunit.thermo.temperature`
 मूल इकाई: **केल्विन** (`KTemperatureDifferenceUnit.BASE == KTemperatureDifferenceUnit.KELVIN`)
 
 प्रकार: **नेटिव इकाई**
@@ -33,7 +33,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val d1 = (30 of celsius) - (10 of celsius)   // KTemperatureDifferenceUnitInstance: 20 ΔK
 val d2 = KTemperatureDifference.ofKelvin(20) // स्पष्ट, d1 के बराबर
@@ -45,7 +45,7 @@ d1.value                                      // 20.0 (केल्विन)
 `+`/`-`/तुलना साधारण रैखिक समान-प्रकार संकारक हैं (एक अंतर जमा एक अंतर एक अंतर है):
 
 ```kotlin
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val sum  = KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10) // 30 ΔK
 val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin(10) // 10 ΔK
@@ -67,7 +67,7 @@ val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUn
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius) + KTemperatureDifference.ofKelvin(5) // KTemperatureUnitInstance: 303.15 K
 ```
@@ -78,9 +78,9 @@ import org.pcsoft.framework.kunit.temperature.*
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.bytes
 import org.pcsoft.framework.kunit.times
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 KTemperatureDifference.ofKelvin(2) * (3 of bytes) // KMixedUnitInstance
 ```
@@ -90,7 +90,7 @@ KTemperatureDifference.ofKelvin(2) * (3 of bytes) // KMixedUnitInstance
 केवल मूल-इकाई `toString()` मौजूद है (केल्विन):
 
 ```kotlin
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 KTemperatureDifference.ofKelvin(20).toString() // "20.0 ΔK"
 ```

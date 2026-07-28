@@ -1,6 +1,6 @@
 # 磁束
 
-パッケージ: `org.pcsoft.framework.kunit.magneticflux`
+パッケージ: `org.pcsoft.framework.kunit.electric.magneticflux`
 基本単位: **ウェーバ** (`KMagneticFluxUnit.BASE == KMagneticFluxUnit.WEBER`)
 
 種別: **構成単位（constructed unit）**
@@ -29,7 +29,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 val phi = 20 of milli.webers
 phi into milli.webers          // 20.0
@@ -66,13 +66,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.frequency.hertz
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 // 実例 - 点火コイル: 20 mWbのコア磁束が4 ms以内に消滅すると5 Vが誘導される。
 val u = (20 of milli.webers) / (4 of milli.seconds)   // KVoltageUnitInstance, 5 V
@@ -90,7 +90,7 @@ raw.toMagneticFlux() == (2 of webers)                 // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 val s = (100 of webers) + (40 of webers)  // 140 Wb
 (100 of webers) > (40 of webers)          // true
@@ -101,7 +101,7 @@ val s = (100 of webers) + (40 of webers)  // 140 Wb
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 (20 of webers).toString()     // "20.0 Wb"（基本単位）
 ```

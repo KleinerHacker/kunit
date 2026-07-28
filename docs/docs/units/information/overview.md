@@ -1,6 +1,6 @@
 # Information Technology — Overview
 
-Packages: `org.pcsoft.framework.kunit.storage`, `…datarate`
+Packages: `org.pcsoft.framework.kunit.it.storage`, `…datarate`
 
 Information technology deals with **digital data amounts** and how fast they move. KUnit models a stored
 amount as a **native** base quantity (storage, in bytes) and the throughput as a quantity **constructed**
@@ -35,9 +35,9 @@ rate by that time reproduces the amount `amount = r · t`:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val amount = 500 of mega.bytes
 val rate   = 10 of mega.bytes / seconds        // KDataRateUnitInstance, 10 MB/s
@@ -58,7 +58,7 @@ versus 1024:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 4096 of bytes
 size into kilo.bytes    // 4.096 (kB, decimal 1000)
@@ -73,9 +73,9 @@ with `into` inside a string template and append the symbol yourself:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = (10 of bytes) / (1 of seconds)   // KDataRateUnitInstance
 r.toString()                             // "10.0 B/s" (base unit)

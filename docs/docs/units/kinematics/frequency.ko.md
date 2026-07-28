@@ -1,6 +1,6 @@
 # 주파수
 
-패키지: `org.pcsoft.framework.kunit.frequency`
+패키지: `org.pcsoft.framework.kunit.kinematic.frequency`
 기준 단위: **헤르츠** (`KFrequencyUnit.BASE == KFrequencyUnit.HERTZ`)
 
 유형: **네이티브 단위**
@@ -28,7 +28,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val f = 2 of kilo.hertz      // 2000 Hz (SI 접두사로 kHz)
 f.value                      // 2000.0 (헤르츠로 정규화)
@@ -41,7 +41,7 @@ f.value                      // 2000.0 (헤르츠로 정규화)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 // + / - : 같은 그룹, 단위 간 자동 변환
 val a = (1 of kilo.hertz) + (500 of hertz)   // KFrequencyUnitInstance: 1500.0 Hz
@@ -59,9 +59,9 @@ val b = (1 of kilo.hertz) - (500 of hertz)   // KFrequencyUnitInstance: 500.0 Hz
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val f = 60 / (1 of seconds)          // KFrequencyUnitInstance, 60 Hz (횟수 / 시간 = 주파수)
 val period = 1 / (2 of hertz)        // KTimeUnitInstance, 0.5 s (횟수 / 주파수 = 시간)
@@ -79,8 +79,8 @@ val v = (2 of meters) * (5 of hertz) // KSpeedUnitInstance, 10 m/s (길이 * 주
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val circumference = 2 of meters
 val revolutions = 5 of rps               // 5 Hz
@@ -96,7 +96,7 @@ surfaceSpeed.value                       // 10.0 m/s
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val squared = (2 of hertz) pow 2     // KMixedUnitInstance: 4.0 Hz²
 ```
@@ -111,7 +111,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.giga
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 (1 of mega.hertz).value          // 1000000.0 (MHz)
 (2_400_000_000 of hertz) into giga.hertz // 2.4 (GHz)
@@ -125,7 +125,7 @@ import org.pcsoft.framework.kunit.frequency.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 (1 of kilo.hertz).toString()             // "1000.0 Hz" (기준 단위 표현)
 "${(50 of hertz) into rpm} rpm"          // "3000.0 rpm"

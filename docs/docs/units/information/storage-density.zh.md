@@ -1,6 +1,6 @@
 # 存储密度
 
-包: `org.pcsoft.framework.kunit.storagedensity`
+包: `org.pcsoft.framework.kunit.it.storagedensity`
 基本单位: **字节每平方米**(`KStorageDensityUnit.BASE == KStorageDensityUnit.BYTES_PER_SQUARE_METER`)
 
 类型: **构成单位**
@@ -21,9 +21,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.storagedensity.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.it.storagedensity.*
 
 val area = (1 of meters) * (1 of meters)  // 1 m²
 val d = 100 of bytes / area
@@ -40,9 +40,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.giga
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.storagedensity.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.it.storagedensity.*
 
 val data = 256 of giga.bytes                       // 256 GB
 val side = 10 of milli.meters                      // 10 mm × 10 mm 的晶粒 = 100 mm²
@@ -67,9 +67,9 @@ density into (giga.bytes / (side * side))           // 256.0(每 100 mm² 的 GB
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.storagedensity.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.it.storagedensity.*
 
 val area = (1 of meters) * (1 of meters)   // 1 m²
 
@@ -95,9 +95,9 @@ val a = (600 of bytes) / d      // KAreaUnitInstance (6 m²)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.storagedensity.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.it.storagedensity.*
 
 val area = (1 of meters) * (1 of meters)
 
@@ -123,9 +123,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.storagedensity.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.it.storagedensity.*
 
 val mm2 = (1 of milli.meters) * (1 of milli.meters)  // 1 mm²
 val d = 1 of kilo.bytes / mm2                         // 1 kB/mm²
@@ -140,9 +140,9 @@ d into (kilo.bytes / mm2)  // 1.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.storagedensity.*
+import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.it.storagedensity.*
 
 val area = (1 of meters) * (1 of meters)
 ((1000 of bytes) / area).toString()  // "1000.0 B/m²"(基本单位)

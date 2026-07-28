@@ -1,6 +1,6 @@
 # 전력 (Power, 역학)
 
-패키지: `org.pcsoft.framework.kunit.power`
+패키지: `org.pcsoft.framework.kunit.common.power`
 기본 단위: **와트(watt)** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 유형: **구성 단위(constructed unit)**
@@ -35,7 +35,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val p = 100 of metricHorsePowers
 p into kilo.watts               // 73.549875
@@ -69,12 +69,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.div
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.common.power.*
 
 // 실제 사례 - 화물 윈치: 5 m/s에서 100 N의 견인력에는 500 W가 필요합니다.
 val p = (100 of newtons) * ((5 of meters) / (1 of seconds))  // KPowerUnitInstance
@@ -95,7 +95,7 @@ raw.toPower() == (500 of watts)                               // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -106,7 +106,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (1 of metricHorsePowers).toString()     // "735.49875 W" (기본 단위)
 ```

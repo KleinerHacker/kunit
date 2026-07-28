@@ -1,6 +1,6 @@
 # التخزين
 
-الحزمة: `org.pcsoft.framework.kunit.storage`
+الحزمة: `org.pcsoft.framework.kunit.it.storage`
 الوحدة الأساسية: **بايت** (`KStorageUnit.BASE == KStorageUnit.BYTE`)
 
 النوع: **وحدة أصلية**
@@ -31,7 +31,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 5 of bytes
 size.value          // 5.0 (مُطبَّع إلى البايتات)
@@ -44,8 +44,8 @@ size into bits      // 40.0 (يُقرأ ثانيةً بالبتات)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // + / - : المجموعة نفسها، تحويل تلقائي بين البت والبايت
 val a = (1 of bytes) + (8 of bits)   // KStorageUnitInstance: 2.0 B
@@ -72,7 +72,7 @@ val rate = (1000 of bytes) / (2 of seconds)  // KDataRateUnitInstance: 500 B/s
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 ```
@@ -87,7 +87,7 @@ val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val fiveKb = 5 of kilo.bytes         // KStorageUnitInstance (== 5000 B)
 fiveKb.value                         // 5000.0
@@ -107,7 +107,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1 of kilo.bytes).value   // 1000.0     (عشري)
 (1 of kibi.bytes).value   // 1024.0     (ثنائي)
@@ -136,8 +136,8 @@ file into kibi.bytes      // 4096.0 (KiB)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (1000 of bytes) / (1 of seconds)  // 1000 B/s (KDataRateUnitInstance محكوم بالنوع)
 val amount = rate * (60 of seconds)          // 60000 B (KStorageUnitInstance محكوم بالنوع)
@@ -151,7 +151,7 @@ amount into kibi.bytes                        // ≈ 58.59 (KiB)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1024 of bytes).toString()               // "1024.0 B" (تمثيل الوحدة الأساسية)
 "${(5 of bits) into bits} bit"           // "5.0 bit"

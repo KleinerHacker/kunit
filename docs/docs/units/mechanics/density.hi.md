@@ -1,6 +1,6 @@
 # घनत्व
 
-पैकेज: `org.pcsoft.framework.kunit.density`
+पैकेज: `org.pcsoft.framework.kunit.mechanic.density`
 मूल इकाई: **किलोग्राम प्रति घन मीटर** (`KDensityUnit.BASE == KDensityUnit.KILOGRAM_PER_CUBIC_METER`)
 
 प्रकार: **निर्मित इकाई**
@@ -21,11 +21,11 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.density.*
+import org.pcsoft.framework.kunit.mechanic.density.*
 
 val steel = (7850 of kilo.grams) / (1 of (meters pow 3)) // KDensityUnitInstance, 7850 kg/m³
 steel into (kilo.grams / (meters pow 3))   // 7850.0
@@ -48,8 +48,8 @@ val d = (6 of kilo.grams) / (2 of liters)  // 3 kg/L = 3000 kg/m³
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.density.*
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.mechanic.density.*
 
 val d = (2 of kilo.grams) / (1 of liters)  // 2 kg/L
 val m = d * (3 of liters)                  // KMassUnitInstance
@@ -64,10 +64,10 @@ v into liters                              // 3.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.density.*
+import org.pcsoft.framework.kunit.mechanic.density.*
 
 val a = (3 of kilo.grams) / (1 of liters)
 val b = (1 of kilo.grams) / (1 of liters)
@@ -80,8 +80,8 @@ a > b                                       // true
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.density.*
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.mechanic.density.*
 
 ((1 of kilo.grams) / (1 of liters)).toString() // "1000.0 kg/m³" (मूल इकाई)
 ```

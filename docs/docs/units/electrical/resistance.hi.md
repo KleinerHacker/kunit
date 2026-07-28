@@ -1,6 +1,6 @@
 # प्रतिरोध
 
-पैकेज: `org.pcsoft.framework.kunit.resistance`
+पैकेज: `org.pcsoft.framework.kunit.electric.resistance`
 मूल इकाई: **ओम** (`KResistanceUnit.BASE == KResistanceUnit.OHM`)
 
 प्रकार: **निर्मित इकाई**
@@ -32,7 +32,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val r = 470 of ohms
 r into ohms                  // 470.0
@@ -65,12 +65,12 @@ r into kilo.ohms             // 0.47
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 // वास्तविक उदाहरण - ओम का नियम: 2 A खींचते किसी भार पर 230 V का अर्थ है 115 Ω प्रतिरोध।
 val r = (230 of volts) / (2 of amperes)  // KResistanceUnitInstance, 115 Ω
@@ -97,7 +97,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import kotlin.math.PI
 import kotlin.math.sqrt
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 // 30 Ω के साथ श्रेणी में 10 mH की एक कुंडली, 50 Hz पर:
 val x = (2 * PI * 50 * 0.010) of ohms          // प्रतिघात X ≈ 3.14 Ω
@@ -113,7 +113,7 @@ z into ohms                                     // ≈ 30.164
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val s = (100 of ohms) + (40 of ohms)  // 140 Ω
 (100 of ohms) > (40 of ohms)          // true
@@ -124,7 +124,7 @@ val s = (100 of ohms) + (40 of ohms)  // 140 Ω
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 (470 of ohms).toString()     // "470.0 Ω" (मूल इकाई)
 ```

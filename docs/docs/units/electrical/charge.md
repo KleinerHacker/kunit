@@ -1,6 +1,6 @@
 # Charge
 
-Package: `org.pcsoft.framework.kunit.charge`
+Package: `org.pcsoft.framework.kunit.electric.charge`
 Base unit: **coulomb** (`KChargeUnit.BASE == KChargeUnit.COULOMB`)
 
 Type: **constructed unit**
@@ -33,7 +33,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 val q = 470 of coulombs
 q into coulombs                        // 470.0
@@ -70,10 +70,10 @@ The inverse operators tie charge, current and time together:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.charge.*
 
 // Real-world example - battery capacity: a 2000 mAh cell stores 7200 C.
 val battery = 2000 of milli.ampereHours   // KChargeUnitInstance, 7200 C
@@ -97,7 +97,7 @@ KUnit models it with this group and the symbol `C`; there is no separate token a
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 // A sphere enclosing 2 µC carries an electric flux of 2 µC.
 val psi = 2 of micro.coulombs
@@ -110,7 +110,7 @@ Divided by an area the flux yields the [electric flux density](electricfluxdensi
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 val s = (100 of coulombs) + (40 of coulombs)  // 140 C
 (100 of coulombs) > (40 of coulombs)          // true
@@ -121,7 +121,7 @@ val s = (100 of coulombs) + (40 of coulombs)  // 140 C
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 (470 of coulombs).toString()   // "470.0 C" (base unit)
 (1 of ampereHours).toString()  // "3600.0 C" (base unit)

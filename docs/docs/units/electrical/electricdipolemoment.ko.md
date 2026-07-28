@@ -1,6 +1,6 @@
 # 전기 쌍극자 모멘트 (Electric Dipole Moment)
 
-패키지: `org.pcsoft.framework.kunit.electricdipolemoment`
+패키지: `org.pcsoft.framework.kunit.electric.electricdipolemoment`
 기본 단위: **쿨롬미터(coulomb meter)**
 (`KElectricDipoleMomentUnit.BASE == KElectricDipoleMomentUnit.COULOMB_METER`)
 
@@ -31,7 +31,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 val p = 1.85 of debyes        // 물 분자
 p into debyes                 // 1.85
@@ -65,11 +65,11 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.nano
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 // 실제 사례 - 1 nm 떨어진 1 pC은 1e-21 C·m, 약 3.0e8 디바이를 만듭니다.
 val p = (1 of pico.coulombs) * (1 of nano.meters)   // KElectricDipoleMomentUnitInstance
@@ -87,7 +87,7 @@ raw.toElectricDipoleMoment() == (6 of coulombMeters) // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 val s = (2 of coulombMeters) + (3 of coulombMeters)  // 5 C·m
 (1 of coulombMeters) > (1 of debyes)                 // true
@@ -98,7 +98,7 @@ val s = (2 of coulombMeters) + (3 of coulombMeters)  // 5 C·m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 (2 of coulombMeters).toString()   // "2.0 C·m" (기본 단위)
 ```

@@ -1,6 +1,6 @@
 # 電圧
 
-パッケージ: `org.pcsoft.framework.kunit.voltage`
+パッケージ: `org.pcsoft.framework.kunit.electric.voltage`
 基本単位: **ボルト**(`KVoltageUnit.BASE == KVoltageUnit.VOLT`)
 
 種別: **構成された単位**
@@ -30,7 +30,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val u = 230 of volts
 u into volts                 // 230.0
@@ -56,12 +56,12 @@ u into kilo.volts            // 0.23
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 // 実例 - オームの法則: 2 A を流す 115 Ω の抵抗は 230 V の電圧降下を生じます。
 val u = (115 of ohms) * (2 of amperes)   // KVoltageUnitInstance、230 V
@@ -75,7 +75,7 @@ raw.toVoltage() == (230 of volts)        // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val s = (100 of volts) + (40 of volts)  // 140 V
 (100 of volts) > (40 of volts)          // true
@@ -86,7 +86,7 @@ val s = (100 of volts) + (40 of volts)  // 140 V
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 (230 of volts).toString()    // "230.0 V"(基本単位)
 ```

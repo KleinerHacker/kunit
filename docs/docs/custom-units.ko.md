@@ -4,7 +4,7 @@ kunit은 현재 여러 단위 그룹을 제공합니다([거리](units/kinematic
 [저장 용량](units/information/storage.md), [속도](units/kinematics/speed.md), [데이터 전송률](units/information/datarate.md)). 하지만 엔진 전체
 (`KUnit`, `KMixedUnitInstance`, `of`/`into` 동사, 접두사 빌더)는 범용적이며 그룹에 독립적입니다. 새로운 물리량을
 추가한다는 것은 같은 패턴을 따르는 것을 의미합니다. 이 페이지에서는 시연용 **질량** 그룹
-(`org.pcsoft.framework.kunit.mass`) — 저장 용량 그룹을 본뜬 단순한 1차원 그룹 — 을 추가하는 과정을 단계별로
+(`org.pcsoft.framework.kunit.mechanic.mass`) — 저장 용량 그룹을 본뜬 단순한 1차원 그룹 — 을 추가하는 과정을 단계별로
 설명합니다.
 
 ## 1. 서브 패키지와 `KUnit` enum 만들기
@@ -14,7 +14,7 @@ kunit은 현재 여러 단위 그룹을 제공합니다([거리](units/kinematic
 `baseValue == 1.0`을 가집니다.
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -47,7 +47,7 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 형태를 복사하세요.
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -93,7 +93,7 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 `KMassUnitBareValues.kt`:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 킬로그램([KMassUnit.KILOGRAM]). */
 val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
@@ -111,7 +111,7 @@ val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 `KMassUnitExtensions.kt`(질량은 임의의 크기를 받아들이므로 프로퍼티는 공통 기반 `KPrefixBuilder`에 달립니다):
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
@@ -137,7 +137,7 @@ val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUni
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val a = 500 of grams
 val b = 2 of pounds
@@ -154,7 +154,7 @@ val heavier = b > a          // true
 추가합니다 — 별도의 대상 타입은 필요 없습니다:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 미터톤(1000 kg). */
 val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
@@ -163,7 +163,7 @@ val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 println((2500 of grams) into tonnes) // 0.0025
 ```
@@ -177,8 +177,8 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // 밀도 = 질량 / 부피(범용 KMixedUnitInstance: [KILOGRAM^1, METER^-3])
 val density = (5 of kilograms) / (2 of liters)

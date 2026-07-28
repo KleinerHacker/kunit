@@ -1,6 +1,6 @@
 # विद्युत फ्लक्स घनत्व
 
-पैकेज: `org.pcsoft.framework.kunit.electricfluxdensity`
+पैकेज: `org.pcsoft.framework.kunit.electric.electricfluxdensity`
 आधार इकाई: **कूलम्ब प्रति वर्ग मीटर**
 (`KElectricFluxDensityUnit.BASE == KElectricFluxDensityUnit.COULOMB_PER_SQUARE_METER`)
 
@@ -35,7 +35,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 val d = 5 of micro.coulombsPerSquareMeter   // एक आवेशित संधारित्र प्लेट
 d into micro.coulombsPerSquareMeter         // 5.0
@@ -70,13 +70,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.distance.ares
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.ares
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 // वास्तविक उदाहरण - 4 m² के संधारित्र प्लेट पर फैले 20 µC से 5 µC/m² मिलता है।
 val plate: KAreaUnitInstance = 0.04 of ares            // 4 m²
@@ -91,7 +91,7 @@ raw.toElectricFluxDensity() == d                       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 val s = (1 of coulombsPerSquareMeter) + (1 of coulombsPerSquareCentimeter)  // 10001 C/m²
 (1 of coulombsPerSquareCentimeter) > (1 of coulombsPerSquareMeter)          // true
@@ -102,7 +102,7 @@ val s = (1 of coulombsPerSquareMeter) + (1 of coulombsPerSquareCentimeter)  // 1
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 (1 of coulombsPerSquareCentimeter).toString()   // "10000.0 C/m²" (आधार इकाई)
 ```

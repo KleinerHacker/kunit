@@ -68,9 +68,9 @@ object LatexFormatter : KUnitFormatter {
 
 ```kotlin
 import org.pcsoft.framework.kunit.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import java.util.Locale
 
 val v = 3 of meters / seconds

@@ -1,6 +1,6 @@
 # विद्युत द्विध्रुव आघूर्ण
 
-पैकेज: `org.pcsoft.framework.kunit.electricdipolemoment`
+पैकेज: `org.pcsoft.framework.kunit.electric.electricdipolemoment`
 आधार इकाई: **कूलॉम मीटर**
 (`KElectricDipoleMomentUnit.BASE == KElectricDipoleMomentUnit.COULOMB_METER`)
 
@@ -31,7 +31,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 val p = 1.85 of debyes        // जल अणु
 p into debyes                 // 1.85
@@ -65,11 +65,11 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.nano
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 // वास्तविक उदाहरण - 1 pC, 1 nm पर पृथक्कृत होने पर 1e-21 C·m देता है, जो लगभग 3.0e8 डिबाई है।
 val p = (1 of pico.coulombs) * (1 of nano.meters)   // KElectricDipoleMomentUnitInstance
@@ -87,7 +87,7 @@ raw.toElectricDipoleMoment() == (6 of coulombMeters) // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 val s = (2 of coulombMeters) + (3 of coulombMeters)  // 5 C·m
 (1 of coulombMeters) > (1 of debyes)                 // true
@@ -98,7 +98,7 @@ val s = (2 of coulombMeters) + (3 of coulombMeters)  // 5 C·m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 (2 of coulombMeters).toString()   // "2.0 C·m" (आधार इकाई)
 ```

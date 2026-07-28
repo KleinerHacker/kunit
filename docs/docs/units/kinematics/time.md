@@ -1,6 +1,6 @@
 # Time
 
-Package: `org.pcsoft.framework.kunit.time`
+Package: `org.pcsoft.framework.kunit.kinematic.time`
 Base unit: **second** (`KTimeUnit.BASE == KTimeUnit.SECOND`)
 
 Type: **native unit**
@@ -34,7 +34,7 @@ reached generically via the SI prefix builders on `seconds` (see [SI prefixes](#
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 2 of hours
 t.value          // 7200.0 (normalized to seconds)
@@ -46,7 +46,7 @@ t into minutes   // 120.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 // + / - : same group, automatic conversion between different time units (exact Duration arithmetic)
 val a = (1 of hours) + (30 of minutes)   // KTimeUnitInstance, normalized to seconds (5400.0)
@@ -77,7 +77,7 @@ one, and use the forwarded `Duration` methods directly (those returning a `Durat
 import java.time.Duration
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
 t.toDuration()                  // PT1H30M
@@ -104,7 +104,7 @@ extreme prefixes on a multi-second base are not representable:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 // Construction: "5 of milli.seconds" -> KTimeUnitInstance
 val fiveMillis = 5 of milli.seconds
@@ -130,7 +130,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 (2 of hours).toString()          // "7200.0 s" (base unit representation)
 "${(2 of hours) into hours} h"   // "2.0 h"
@@ -143,8 +143,8 @@ import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val speed = (10 of meters) / (1 of seconds)  // KSpeedUnitInstance
 speed into (kilo.meters / hours)             // 36.0 (km/h)

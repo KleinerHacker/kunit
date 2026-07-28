@@ -24,7 +24,7 @@ class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 Every "pure" unit exposes a `toUnit()` extension to convert to this generic representation:
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
@@ -41,7 +41,7 @@ multiplying/dividing units is always physically meaningful.
 - A resulting exponent of `0` removes that unit from the result entirely.
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val distance = (10 of meters).toUnit()   // units=[METER^1]
 val width = (4 of meters).toUnit()       // units=[METER^1]
@@ -54,7 +54,7 @@ Mixing two different unit groups (e.g. length and, once available, time) works e
 produces a genuinely mixed unit:
 
 ```kotlin
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val distance = (100 of meters).toUnit()
 val time = (10 of seconds).toUnit()
@@ -80,7 +80,7 @@ A real-world example — the area of a circle, `A = π · r²`, computed entirel
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
 val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -98,7 +98,7 @@ Dividing a number **by** a unit inverts the dimension, e.g. a frequency from a p
 
 ```kotlin
 import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1]  (0.5 Hz)
 ```
@@ -119,8 +119,8 @@ result is expressed in the left-hand operand's `units`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.miles
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.miles
 
 val a = (5 of meters).toUnit()
 val b = (3 of meters).toUnit()
@@ -133,7 +133,7 @@ val c = (3 of miles).toUnit()
 Mismatched unit groups or mismatched exponents still fail:
 
 ```kotlin
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 a + (3 of seconds).toUnit()       // throws IllegalStateException: no matching unit group for a time term
 a + ((2 of meters) pow 2).toUnit() // throws IllegalStateException: mismatched exponents (1 vs 2)
@@ -157,9 +157,9 @@ no `valueAs` and no custom-unit `toString`; format a specific unit as `"${v into
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val speed = (10 of meters) / (1 of seconds)
 
@@ -179,7 +179,7 @@ Every pure unit wrapper class supports `*`/`/` directly against a `KMixedUnitIns
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
@@ -194,8 +194,8 @@ into that group's wrapper class via the group-specific `toXxxUnit()` extension (
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
 val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]

@@ -1,6 +1,6 @@
 # Mechanics — Overview
 
-Packages: `org.pcsoft.framework.kunit.mass`, `…force`, `…pressure`, `…density`, `…areadensity`, `…power`,
+Packages: `org.pcsoft.framework.kunit.mechanic.mass`, `…force`, `…pressure`, `…density`, `…areadensity`, `…power`,
 `…energy`
 
 Mechanics (dynamics) asks **why** bodies move and how matter is distributed: the interplay of mass, the
@@ -51,11 +51,11 @@ A **2 kg** block is accelerated at standard gravity, and the resulting weight fo
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.acceleration.*
-import org.pcsoft.framework.kunit.force.*
-import org.pcsoft.framework.kunit.pressure.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
+import org.pcsoft.framework.kunit.mechanic.force.*
+import org.pcsoft.framework.kunit.mechanic.pressure.*
 
 val f = (2 of kilo.grams) * (1 of standardGravities)  // KForceUnitInstance
 f into newtons                                         // ≈ 19.61 (N)
@@ -73,10 +73,10 @@ Steel has a density of **7850 kg/m³**. The mass of a **2 L** part is `m = ρ ·
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.density.*
+import org.pcsoft.framework.kunit.mechanic.density.*
 
 val steel = (7850 of kilo.grams) / (1 of (meters pow 3)) // KDensityUnitInstance, 7850 kg/m³
 val mass = steel * (2 of liters)                          // KMassUnitInstance
@@ -91,12 +91,12 @@ which equals the direct mechanical form `P = F · v`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.div
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val w = (100 of newtons) * (5 of meters)                    // KEnergyUnitInstance
 w into joules                                                // 500.0
@@ -117,7 +117,7 @@ with `into` inside a string template and append the symbol yourself:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.force.*
+import org.pcsoft.framework.kunit.mechanic.force.*
 
 val f = 10 of newtons
 f.toString()                 // "10.0 N" (base unit)

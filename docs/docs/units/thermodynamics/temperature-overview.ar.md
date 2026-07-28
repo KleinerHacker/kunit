@@ -1,6 +1,6 @@
 # درجة الحرارة — نظرة عامة
 
-الحزمة: `org.pcsoft.framework.kunit.temperature`
+الحزمة: `org.pcsoft.framework.kunit.thermo.temperature`
 
 تُنمذَج درجة الحرارة بـ**مجموعتين مترابطتين**، لأنّ قراءة درجة الحرارة و*تغيّرها* كمّيتان مختلفتان
 فيزيائيًا. وضبط هذا التمييز هو ما يجعل الحساب صحيحًا.
@@ -20,7 +20,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val a = 30 of celsius
 val b = 10 of celsius

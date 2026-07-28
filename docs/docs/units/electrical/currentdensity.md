@@ -1,6 +1,6 @@
 # Current Density
 
-Package: `org.pcsoft.framework.kunit.currentdensity`
+Package: `org.pcsoft.framework.kunit.electric.currentdensity`
 Base unit: **ampere per square meter** (`KCurrentDensityUnit.BASE == KCurrentDensityUnit.AMPERE_PER_SQUARE_METER`)
 
 Type: **constructed unit**
@@ -21,9 +21,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val crossSection = (2.5 of milli.meters) * (1 of milli.meters)  // 2.5 mm²
 val j = (16 of amperes) / crossSection                          // KCurrentDensityUnitInstance
@@ -55,9 +55,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 // Real-world example - wire sizing: 16 A through a 2.5 mm² copper wire is 6.4 A/mm².
 val j = (16 of amperes) / ((2.5 of milli.meters) * (1 of milli.meters))
@@ -77,9 +77,9 @@ raw.toCurrentDensity() == j                 // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val a = (3 of amperes) / ((1 of meters) * (1 of meters))
 val b = (1 of amperes) / ((1 of meters) * (1 of meters))
@@ -92,9 +92,9 @@ a * b                                     // KMixedUnitInstance (escapes the gro
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 ((5 of amperes) / ((1 of meters) * (1 of meters))).toString()  // "5.0 A/m²" (base unit)
 ```

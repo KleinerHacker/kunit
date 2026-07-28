@@ -1,6 +1,6 @@
 # 자기 릴럭턴스 (Magnetic Reluctance)
 
-패키지: `org.pcsoft.framework.kunit.reluctance`
+패키지: `org.pcsoft.framework.kunit.electric.reluctance`
 기본 단위: **웨버당 암페어(ampere per weber)** (`KReluctanceUnit.BASE == KReluctanceUnit.AMPERE_PER_WEBER`)
 
 유형: **구성 단위(constructed unit)**
@@ -36,7 +36,7 @@ SI 접두사를 지원합니다(`mega.amperesPerWeber`, `kilo.inverseHenries` �
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 val rm = 2 of mega.amperesPerWeber    // 공극이 있는 철심
 rm into mega.amperesPerWeber          // 2.0
@@ -72,14 +72,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.ec.ampereTurns
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.inductance.henries
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.current.ampereTurns
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.inductance.henries
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // 실제 사례 - 2 kAt의 기자력이 2 MA/Wb 철심을 통과하면 1 mWb의 자속이 생깁니다.
 val rm = 2_000_000 of amperesPerWeber
@@ -99,7 +99,7 @@ raw.toReluctance() == (2 of amperesPerWeber)         // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 val series = (1 of amperesPerWeber) + (1 of inverseHenries)  // 2 A/Wb (직렬 자기 회로)
 (3 of amperesPerWeber) > (2 of amperesPerWeber)              // true
@@ -110,7 +110,7 @@ val series = (1 of amperesPerWeber) + (1 of inverseHenries)  // 2 A/Wb (직렬 �
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 (2 of inverseHenries).toString()   // "2.0 A/Wb" (기본 단위)
 ```

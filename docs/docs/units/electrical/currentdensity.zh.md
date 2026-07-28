@@ -1,6 +1,6 @@
 # 电流密度
 
-包：`org.pcsoft.framework.kunit.currentdensity`
+包：`org.pcsoft.framework.kunit.electric.currentdensity`
 基本单位：**安培每平方米**（`KCurrentDensityUnit.BASE == KCurrentDensityUnit.AMPERE_PER_SQUARE_METER`）
 
 类型：**构造单位**
@@ -21,9 +21,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val crossSection = (2.5 of milli.meters) * (1 of milli.meters)  // 2.5 mm²
 val j = (16 of amperes) / crossSection                          // KCurrentDensityUnitInstance
@@ -55,9 +55,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 // 现实示例 - 导线规格：16 A 的电流流过 2.5 mm² 的铜导线，电流密度为 6.4 A/mm²。
 val j = (16 of amperes) / ((2.5 of milli.meters) * (1 of milli.meters))
@@ -77,9 +77,9 @@ raw.toCurrentDensity() == j                 // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val a = (3 of amperes) / ((1 of meters) * (1 of meters))
 val b = (1 of amperes) / ((1 of meters) * (1 of meters))
@@ -92,9 +92,9 @@ a * b                                     // KMixedUnitInstance（脱离该组�
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 ((5 of amperes) / ((1 of meters) * (1 of meters))).toString()  // "5.0 A/m²"（基本单位）
 ```

@@ -1,6 +1,6 @@
 # 电流
 
-包: `org.pcsoft.framework.kunit.ec`
+包: `org.pcsoft.framework.kunit.electric.ec`
 基准单位: **安培** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`)
 
 类型：**原生单位**
@@ -31,7 +31,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // 一个 500 匝的线圈通过 0.4 A 电流，产生 Θ = 200 At。
 val theta = (500 * 0.4) of ampereTurns
@@ -45,7 +45,7 @@ theta == (200 of amperes)       // true（量纲上相同）
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val i = 2 of milli.amperes    // 0.002 A
 i.value                       // 0.002（归一化为安培）
@@ -61,7 +61,7 @@ i into amperes                // 0.002（以安培读回）
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val voltage = 5.0       // V
 val resistance = 220.0  // Ω
@@ -73,7 +73,7 @@ current into milli.amperes                         // ≈ 22.7 mA
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // + / - : 同组，单位间自动换算
 val a = (1 of amperes) + (1 of biot)   // KElectricCurrentUnitInstance: 11.0 A
@@ -97,7 +97,7 @@ val b = (1 of biot) - (1 of amperes)   // KElectricCurrentUnitInstance: 9.0 A
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val squared = (2 of amperes) pow 2     // KMixedUnitInstance: 4.0 A²
 ```
@@ -112,7 +112,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of milli.amperes).value   // 0.001      （毫安）
 (1 of kilo.amperes).value    // 1000.0     （千安）
@@ -128,7 +128,7 @@ import org.pcsoft.framework.kunit.ec.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of biot).toString()                       // "10.0 A"（基准单位表示）
 "${(0.002 of amperes) into milli.amperes} mA" // "2.0 mA"

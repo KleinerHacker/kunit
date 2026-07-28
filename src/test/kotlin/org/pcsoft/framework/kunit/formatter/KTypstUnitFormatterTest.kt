@@ -13,16 +13,16 @@
 package org.pcsoft.framework.kunit.formatter
 
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.div
 import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.KMassUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.time.KTimeUnit
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertEquals

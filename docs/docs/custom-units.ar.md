@@ -5,7 +5,7 @@
 [السرعة](units/kinematics/speed.md)، [معدّل البيانات](units/information/datarate.md))، لكنّ المحرّك
 بأكمله (`KUnit`، `KMixedUnitInstance`، فِعلا `of`/`into`، بانيات البادئات) عامّ ومستقلّ عن المجموعة.
 إضافة كمّية فيزيائية جديدة تعني اتّباع النمط نفسه. تشرح هذه الصفحة إضافة مجموعة **الكتلة** التوضيحية
-(`org.pcsoft.framework.kunit.mass`) — مجموعة بسيطة أحادية البُعد مبنية على غرار مجموعة التخزين.
+(`org.pcsoft.framework.kunit.mechanic.mass`) — مجموعة بسيطة أحادية البُعد مبنية على غرار مجموعة التخزين.
 
 ## 1. أنشئ الحزمة الفرعية وتعداد `KUnit`
 
@@ -14,7 +14,7 @@
 نفسها لها `baseValue == 1.0`.
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -47,7 +47,7 @@ instance`) ويُنفّذ `KUnitInstance<KMassUnitInstance>`. يكتب يدوي�
 `KStorageUnitInstance`.
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -93,7 +93,7 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 `KMassUnitBareValues.kt`:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 كيلوغرام ([KMassUnit.KILOGRAM]). */
 val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
@@ -111,7 +111,7 @@ val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 `KMassUnitExtensions.kt` (الكتلة تقبل أي مقدار، فتُعلَّق الخصائص على الأساس المشترك `KPrefixBuilder`):
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
@@ -137,7 +137,7 @@ val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUni
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val a = 500 of grams
 val b = 2 of pounds
@@ -154,7 +154,7 @@ val heavier = b > a          // true
 كنُسخ قيمتها 1 مسمّاة — دون الحاجة إلى نوع هدف منفصل:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 طنّ متري (1000 kg). */
 val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
@@ -163,7 +163,7 @@ val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 println((2500 of grams) into tonnes) // 0.0025
 ```
@@ -177,8 +177,8 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // الكثافة = الكتلة / الحجم (KMixedUnitInstance عامّ: [KILOGRAM^1, METER^-3])
 val density = (5 of kilograms) / (2 of liters)

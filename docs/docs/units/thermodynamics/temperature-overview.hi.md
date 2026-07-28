@@ -1,6 +1,6 @@
 # तापमान — अवलोकन
 
-पैकेज: `org.pcsoft.framework.kunit.temperature`
+पैकेज: `org.pcsoft.framework.kunit.thermo.temperature`
 
 तापमान को **दो संबंधित समूहों** से मॉडल किया जाता है, क्योंकि तापमान का पठन और तापमान का *परिवर्तन*
 भौतिक रूप से भिन्न प्रकार की राशियाँ हैं। इस भेद को सही रखना ही अंकगणित को सही बनाता है।
@@ -21,7 +21,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val a = 30 of celsius
 val b = 10 of celsius

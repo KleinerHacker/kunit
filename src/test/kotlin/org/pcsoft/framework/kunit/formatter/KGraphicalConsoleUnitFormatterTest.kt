@@ -13,9 +13,9 @@
 package org.pcsoft.framework.kunit.formatter
 
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.mass.KMassUnit
-import org.pcsoft.framework.kunit.time.KTimeUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -1,6 +1,6 @@
 # كثافة التيار
 
-الحزمة: `org.pcsoft.framework.kunit.currentdensity`
+الحزمة: `org.pcsoft.framework.kunit.electric.currentdensity`
 الوحدة الأساسية: **أمبير لكل متر مربع** (`KCurrentDensityUnit.BASE == KCurrentDensityUnit.AMPERE_PER_SQUARE_METER`)
 
 النوع: **وحدة مركّبة**
@@ -20,9 +20,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val crossSection = (2.5 of milli.meters) * (1 of milli.meters)  // 2.5 mm²
 val j = (16 of amperes) / crossSection                          // KCurrentDensityUnitInstance
@@ -54,9 +54,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 // مثال واقعي - اختيار حجم السلك: مرور 16 A عبر سلك نحاسي 2.5 mm² يعطي 6.4 A/mm².
 val j = (16 of amperes) / ((2.5 of milli.meters) * (1 of milli.meters))
@@ -76,9 +76,9 @@ raw.toCurrentDensity() == j                 // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val a = (3 of amperes) / ((1 of meters) * (1 of meters))
 val b = (1 of amperes) / ((1 of meters) * (1 of meters))
@@ -91,9 +91,9 @@ a * b                                     // KMixedUnitInstance (يخرج من �
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 ((5 of amperes) / ((1 of meters) * (1 of meters))).toString()  // "5.0 A/m²" (الوحدة الأساسية)
 ```

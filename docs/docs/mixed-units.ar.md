@@ -24,7 +24,7 @@ class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 تكشف كل وحدة «نقيّة» امتداد `toUnit()` للتحويل إلى هذا التمثيل العامّ:
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
@@ -41,7 +41,7 @@ val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 - الأُسّ الناتج `0` يزيل تلك الوحدة من النتيجة كليًا.
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val distance = (10 of meters).toUnit()   // units=[METER^1]
 val width = (4 of meters).toUnit()       // units=[METER^1]
@@ -54,7 +54,7 @@ val backToLength = area / width                 // value=10.0, units=[METER^1]
 فعليًا:
 
 ```kotlin
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val distance = (100 of meters).toUnit()
 val time = (10 of seconds).toUnit()
@@ -79,7 +79,7 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val r = 12 of centi.meters       // KLengthUnitInstance، 0.12 m
 val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -97,7 +97,7 @@ val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance، 2.5 km (رُبع ال
 
 ```kotlin
 import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1]  (0.5 Hz)
 ```
@@ -116,8 +116,8 @@ val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECO
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.miles
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.miles
 
 val a = (5 of meters).toUnit()
 val b = (3 of meters).toUnit()
@@ -130,7 +130,7 @@ val c = (3 of miles).toUnit()
 اختلاف مجموعات الوحدات أو اختلاف الأُسّس ما زال يفشل:
 
 ```kotlin
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 a + (3 of seconds).toUnit()       // يُطلق IllegalStateException: لا مجموعة وحدات مطابقة لحدّ زمني
 a + ((2 of meters) pow 2).toUnit() // يُطلق IllegalStateException: أُسّس غير متطابقة (1 مقابل 2)
@@ -154,9 +154,9 @@ x.hasSameUnits(y) // يقارن توقيع (unit -> exponent)، بصرف الن�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val speed = (10 of meters) / (1 of seconds)
 
@@ -176,7 +176,7 @@ area into hectares                 // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
@@ -191,8 +191,8 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
 val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]

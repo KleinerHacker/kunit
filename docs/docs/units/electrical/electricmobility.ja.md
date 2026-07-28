@@ -1,6 +1,6 @@
 # 電気移動度
 
-パッケージ: `org.pcsoft.framework.kunit.electricmobility`
+パッケージ: `org.pcsoft.framework.kunit.electric.electricmobility`
 基本単位: **ボルト秒あたりの平方メートル**
 (`KElectricMobilityUnit.BASE == KElectricMobilityUnit.SQUARE_METER_PER_VOLT_SECOND`)
 
@@ -32,7 +32,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 val mu = 1400 of squareCentimetersPerVoltSecond   // シリコン中の電子移動度
 mu into squareCentimetersPerVoltSecond            // 1400.0
@@ -64,13 +64,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.speed.div
-import org.pcsoft.framework.kunit.electricfieldstrength.voltsPerMeter
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.electric.fieldstrength.voltsPerMeter
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 // 実例 - 1400 cm²/(V·s)のシリコン電子は1 kV/mの電界で140 m/sのドリフト速度になる。
 val v = (1400 of squareCentimetersPerVoltSecond) * (1000 of voltsPerMeter)  // KSpeedUnitInstance, 140 m/s
@@ -87,7 +87,7 @@ raw.toElectricMobility() == (2 of squareMetersPerVoltSecond)       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 val s = (1 of squareMetersPerVoltSecond) + (1 of squareCentimetersPerVoltSecond)  // 1.0001 m²/(V·s)
 (1 of squareMetersPerVoltSecond) > (1 of squareCentimetersPerVoltSecond)          // true
@@ -98,7 +98,7 @@ val s = (1 of squareMetersPerVoltSecond) + (1 of squareCentimetersPerVoltSecond)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 (1400 of squareCentimetersPerVoltSecond).toString()   // "0.14 m²/(V·s)"（基本単位）
 ```

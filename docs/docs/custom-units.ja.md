@@ -4,7 +4,7 @@ kunit は現在いくつかの単位グループを提供しています([距離
 [ストレージ](units/information/storage.md)、[速度](units/kinematics/speed.md)、[データ転送率](units/information/datarate.md))が、エンジン全体
 (`KUnit`、`KMixedUnitInstance`、`of`/`into` の動詞、接頭辞ビルダー)は汎用的でグループに依存しません。新しい
 物理量を追加するとは、同じパターンに従うことを意味します。このページでは、デモ用の**質量**グループ
-(`org.pcsoft.framework.kunit.mass`) — ストレージグループをモデルにした素朴な1次元グループ — の追加を順を追って
+(`org.pcsoft.framework.kunit.mechanic.mass`) — ストレージグループをモデルにした素朴な1次元グループ — の追加を順を追って
 説明します。
 
 ## 1. サブパッケージと `KUnit` enum を作成する
@@ -14,7 +14,7 @@ kunit は現在いくつかの単位グループを提供しています([距離
 `baseValue == 1.0` を持ちます。
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -47,7 +47,7 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 グループ非依存の `into` 動詞です。`KStorageUnitInstance` の形をコピーしてください。
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -93,7 +93,7 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 `KMassUnitBareValues.kt`:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 キログラム([KMassUnit.KILOGRAM])。 */
 val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
@@ -111,7 +111,7 @@ val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 `KMassUnitExtensions.kt`(質量は任意の大きさを受け付けるため、プロパティは共通の基底 `KPrefixBuilder` に付きます):
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
@@ -137,7 +137,7 @@ val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUni
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val a = 500 of grams
 val b = 2 of pounds
@@ -154,7 +154,7 @@ val heavier = b > a          // true
 名前付きの値1インスタンスとして追加します — 別のターゲット型は不要です:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 メートルトン(1000 kg)。 */
 val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
@@ -163,7 +163,7 @@ val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 println((2500 of grams) into tonnes) // 0.0025
 ```
@@ -177,8 +177,8 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // 密度 = 質量 / 体積(汎用 KMixedUnitInstance: [KILOGRAM^1, METER^-3])
 val density = (5 of kilograms) / (2 of liters)

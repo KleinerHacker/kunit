@@ -17,10 +17,10 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultMultiplication
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.formatter.KUnitFormatContext
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.ec.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mass.KMassUnit
-import org.pcsoft.framework.kunit.time.KTimeUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -1,6 +1,6 @@
 # Voltage
 
-Package: `org.pcsoft.framework.kunit.voltage`
+Package: `org.pcsoft.framework.kunit.electric.voltage`
 Base unit: **volt** (`KVoltageUnit.BASE == KVoltageUnit.VOLT`)
 
 Type: **constructed unit**
@@ -31,7 +31,7 @@ Named units support the SI prefixes via `KPrefixBuilder` (`kilo.volts`, `mega.vo
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val u = 230 of volts
 u into volts                 // 230.0
@@ -58,12 +58,12 @@ and throws `IllegalStateException` otherwise). Both routes are value-equal.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 // Real-world example - Ohm's law: a 115 Ω resistor carrying 2 A drops 230 V.
 val u = (115 of ohms) * (2 of amperes)   // KVoltageUnitInstance, 230 V
@@ -77,7 +77,7 @@ raw.toVoltage() == (230 of volts)        // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val s = (100 of volts) + (40 of volts)  // 140 V
 (100 of volts) > (40 of volts)          // true
@@ -88,7 +88,7 @@ val s = (100 of volts) + (40 of volts)  // 140 V
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 (230 of volts).toString()    // "230.0 V" (base unit)
 ```

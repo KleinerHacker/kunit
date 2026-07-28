@@ -1,6 +1,6 @@
 # 电荷密度
 
-包: `org.pcsoft.framework.kunit.chargedensity`
+包: `org.pcsoft.framework.kunit.electric.chargedensity`
 基本单位: **库仑每立方米**(`KChargeDensityUnit.BASE == KChargeDensityUnit.COULOMB_PER_CUBIC_METER`)
 
 类型: **构成单位**
@@ -22,10 +22,10 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.centi
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 val rho = (6 of coulombs) / (2 of liters)  // KChargeDensityUnitInstance,3 C/L = 3000 C/m³
 rho into (coulombs / (meters pow 3))       // 3000.0
@@ -57,10 +57,10 @@ rho into (milli.coulombs / (meters pow 3)) // 3000000.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 // 实际示例 —— 电解液中的空间电荷:4 升电解液中溶解 12 mC 净电荷,电荷密度为 3 C/m³。
 val rho = (0.012 of coulombs) / (4 of liters)   // KChargeDensityUnitInstance,3 C/m³
@@ -82,10 +82,10 @@ v into liters                                   // 4.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 val a = (3 of coulombs) / (1 of liters)     // 3000 C/m³
 val b = (1 of coulombs) / (1 of liters)     // 1000 C/m³
@@ -99,9 +99,9 @@ a * b                                       // KMixedUnitInstance(离开该单�
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 ((1 of coulombs) / (1 of liters)).toString() // "1000.0 C/m³"(基本单位)
 ```

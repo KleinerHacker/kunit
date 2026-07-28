@@ -1,6 +1,6 @@
 # データ転送率
 
-パッケージ: `org.pcsoft.framework.kunit.datarate`
+パッケージ: `org.pcsoft.framework.kunit.it.datarate`
 基本単位: **バイト毎秒**(`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
 
 種別: **構成された単位**
@@ -24,9 +24,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = 100 of bytes / seconds
 r.value                  // 100.0(B/s に正規化)
@@ -49,9 +49,9 @@ r into (bits / seconds)  // 800.0(bit/s に戻して読み取り)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // --- 中核単位 -> データ転送率 --------------------------------------------
 val r = (100 of bytes) / (10 of seconds)   // KDataRateUnitInstance(.toDataRate() は不要!)
@@ -81,9 +81,9 @@ time into minutes     // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // + / - : 同じグループ内、バイトベースとビットベースの転送率の間の自動変換
 val a = (1 of bytes / seconds) + (8 of bits / seconds)   // KDataRateUnitInstance、2 B/s
@@ -107,9 +107,9 @@ val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInst
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // 10進 vs 2進: 1000(kilo)!= 1024(kibi)
 (1 of kilo.bytes / seconds).value // 1000.0
@@ -128,10 +128,10 @@ r into (kibi.bytes / seconds)  // 4.0  (KiB/s)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.storage.kibi
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.kibi
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 (10 of bytes / seconds).toString()  // "10.0 B/s"(基本単位)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"

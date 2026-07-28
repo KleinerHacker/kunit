@@ -1,6 +1,6 @@
 # Inductance
 
-Package: `org.pcsoft.framework.kunit.inductance`
+Package: `org.pcsoft.framework.kunit.electric.inductance`
 Base unit: **henry** (`KInductanceUnit.BASE == KInductanceUnit.HENRY`)
 
 Type: **constructed unit**
@@ -32,7 +32,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val l = 470 of micro.henries
 l into henries               // 0.00047
@@ -68,14 +68,14 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.frequency.hertz
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 // Real-world example - a choke in a switching power supply: a 470 µH coil carrying 2 A links 0.00094 Wb,
 // and at an angular frequency of 100 kHz it presents a reactance of 47 Ω.
@@ -103,8 +103,8 @@ separate token and no separate type. The reciprocal operators tie both groups to
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.inductance.*
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // A magnetic circuit of Rm = 500 A/Wb has a permeance of 2 mH.
 val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
@@ -118,7 +118,7 @@ permeance into milli.henries                    // 2.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val s = (100 of henries) + (40 of henries)  // 140 H
 (100 of henries) > (40 of henries)          // true
@@ -129,7 +129,7 @@ val s = (100 of henries) + (40 of henries)  // 140 H
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 (2 of henries).toString()     // "2.0 H" (base unit)
 ```

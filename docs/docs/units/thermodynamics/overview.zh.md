@@ -1,6 +1,6 @@
 # 热力学 — 概述
 
-包:`org.pcsoft.framework.kunit.temperature`、`…energy`、`…power`
+包:`org.pcsoft.framework.kunit.thermo.temperature`、`…energy`、`…power`
 
 热力学是**热与温度**的物理学。在 KUnit 中,该领域以温度为核心,温度由**两个相关的原生组**建模 ——
 因为温度的*读数*与温度的*变化*在物理上是不同类型的量,而将二者区分开正是使运算正确的关键。围绕它们的,
@@ -47,7 +47,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val start = 10 of celsius
 val end   = 30 of celsius
@@ -66,10 +66,10 @@ val back = start + KTemperatureDifference.ofKelvin(20) // KTemperatureUnitInstan
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
 q into kilo.joules                            // 1200.0
@@ -85,7 +85,7 @@ t into seconds                                // 600.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()                       // "298.15 K"(绝对,基准单位)
 KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK"(区间)

@@ -1,6 +1,6 @@
 # 온도 — 개요
 
-패키지: `org.pcsoft.framework.kunit.temperature`
+패키지: `org.pcsoft.framework.kunit.thermo.temperature`
 
 온도는 **두 개의 관련 그룹**으로 모델링됩니다. 온도 값과 온도 *변화*는 물리적으로 서로 다른 종류의 양이기
 때문입니다. 이 구별을 올바르게 다루는 것이 연산을 올바르게 만드는 핵심입니다.
@@ -20,7 +20,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val a = 30 of celsius
 val b = 10 of celsius

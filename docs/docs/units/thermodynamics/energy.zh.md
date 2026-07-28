@@ -1,6 +1,6 @@
 # 能量（热力学）
 
-包：`org.pcsoft.framework.kunit.energy`
+包：`org.pcsoft.framework.kunit.common.energy`
 基本单位：**焦耳**（`KEnergyUnit.BASE == KEnergyUnit.JOULE`）
 
 类型：**构造单位**
@@ -37,7 +37,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = 2000 of kilo.calories   // 每日饮食摄入
 q into kilo.joules              // 8368.0
@@ -72,12 +72,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.watts
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.common.energy.*
 
 // 现实示例 - 电热水器：2 kW 的热流率在 10 分钟内释放 1200 kJ 的热量。
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
@@ -98,7 +98,7 @@ raw.toEnergy() == (1200 of kilo.joules)            // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val s = (100 of joules) + (40 of joules)  // 140 J
 (100 of joules) > (40 of joules)          // true
@@ -109,7 +109,7 @@ val s = (100 of joules) + (40 of joules)  // 140 J
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 (1 of britishThermalUnits).toString()     // "1055.05585262 J"（基本单位）
 ```

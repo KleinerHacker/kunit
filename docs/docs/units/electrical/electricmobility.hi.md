@@ -1,6 +1,6 @@
 # विद्युत गतिशीलता
 
-पैकेज: `org.pcsoft.framework.kunit.electricmobility`
+पैकेज: `org.pcsoft.framework.kunit.electric.electricmobility`
 आधार इकाई: **वर्ग मीटर प्रति वोल्ट सेकंड**
 (`KElectricMobilityUnit.BASE == KElectricMobilityUnit.SQUARE_METER_PER_VOLT_SECOND`)
 
@@ -34,7 +34,7 @@ SI उपसर्गों का समर्थन करती हैं (`m
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 val mu = 1400 of squareCentimetersPerVoltSecond   // सिलिकॉन में इलेक्ट्रॉन गतिशीलता
 mu into squareCentimetersPerVoltSecond            // 1400.0
@@ -66,13 +66,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.speed.div
-import org.pcsoft.framework.kunit.electricfieldstrength.voltsPerMeter
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.electric.fieldstrength.voltsPerMeter
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 // वास्तविक उदाहरण - 1400 cm²/(V·s) पर सिलिकॉन इलेक्ट्रॉन 1 kV/m के क्षेत्र में 140 m/s बहते हैं।
 val v = (1400 of squareCentimetersPerVoltSecond) * (1000 of voltsPerMeter)  // KSpeedUnitInstance, 140 m/s
@@ -89,7 +89,7 @@ raw.toElectricMobility() == (2 of squareMetersPerVoltSecond)       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 val s = (1 of squareMetersPerVoltSecond) + (1 of squareCentimetersPerVoltSecond)  // 1.0001 m²/(V·s)
 (1 of squareMetersPerVoltSecond) > (1 of squareCentimetersPerVoltSecond)          // true
@@ -100,7 +100,7 @@ val s = (1 of squareMetersPerVoltSecond) + (1 of squareCentimetersPerVoltSecond)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricmobility.*
+import org.pcsoft.framework.kunit.electric.mobility.*
 
 (1400 of squareCentimetersPerVoltSecond).toString()   // "0.14 m²/(V·s)" (आधार इकाई)
 ```

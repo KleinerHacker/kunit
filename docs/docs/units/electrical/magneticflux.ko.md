@@ -1,6 +1,6 @@
 # 자기 선속 (Magnetic Flux)
 
-패키지: `org.pcsoft.framework.kunit.magneticflux`
+패키지: `org.pcsoft.framework.kunit.electric.magneticflux`
 기본 단위: **웨버(weber)** (`KMagneticFluxUnit.BASE == KMagneticFluxUnit.WEBER`)
 
 유형: **구성 단위(constructed unit)**
@@ -29,7 +29,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 val phi = 20 of milli.webers
 phi into milli.webers          // 20.0
@@ -66,13 +66,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.frequency.hertz
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 // 실제 사례 - 점화 코일: 20 mWb의 코어 선속이 4 ms 내에 붕괴되면 5 V가 유도됩니다.
 val u = (20 of milli.webers) / (4 of milli.seconds)   // KVoltageUnitInstance, 5 V
@@ -90,7 +90,7 @@ raw.toMagneticFlux() == (2 of webers)                 // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 val s = (100 of webers) + (40 of webers)  // 140 Wb
 (100 of webers) > (40 of webers)          // true
@@ -101,7 +101,7 @@ val s = (100 of webers) + (40 of webers)  // 140 Wb
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticflux.*
+import org.pcsoft.framework.kunit.electric.magneticflux.*
 
 (20 of webers).toString()     // "20.0 Wb" (기본 단위)
 ```

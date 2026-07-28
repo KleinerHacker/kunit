@@ -1,6 +1,6 @@
 # 抵抗
 
-パッケージ: `org.pcsoft.framework.kunit.resistance`
+パッケージ: `org.pcsoft.framework.kunit.electric.resistance`
 基本単位: **オーム**(`KResistanceUnit.BASE == KResistanceUnit.OHM`)
 
 種別: **構成された単位**
@@ -31,7 +31,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val r = 470 of ohms
 r into ohms                  // 470.0
@@ -63,12 +63,12 @@ r into kilo.ohms             // 0.47
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 // 実例 - オームの法則: 負荷に 230 V が加わり 2 A が流れると、抵抗は 115 Ω です。
 val r = (230 of volts) / (2 of amperes)  // KResistanceUnitInstance、115 Ω
@@ -95,7 +95,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import kotlin.math.PI
 import kotlin.math.sqrt
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 // 10 mHのコイルと30 Ωが50 Hzで直列に接続されている場合:
 val x = (2 * PI * 50 * 0.010) of ohms          // リアクタンス X ≈ 3.14 Ω
@@ -111,7 +111,7 @@ z into ohms                                     // ≈ 30.164
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val s = (100 of ohms) + (40 of ohms)  // 140 Ω
 (100 of ohms) > (40 of ohms)          // true
@@ -122,7 +122,7 @@ val s = (100 of ohms) + (40 of ohms)  // 140 Ω
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 (470 of ohms).toString()     // "470.0 Ω"(基本単位)
 ```

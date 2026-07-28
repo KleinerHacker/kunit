@@ -1,6 +1,6 @@
 # Frequency
 
-Package: `org.pcsoft.framework.kunit.frequency`
+Package: `org.pcsoft.framework.kunit.kinematic.frequency`
 Base unit: **hertz** (`KFrequencyUnit.BASE == KFrequencyUnit.HERTZ`)
 
 Type: **native unit**
@@ -29,7 +29,7 @@ Each `Token` is a value-1 `KFrequencyUnitInstance` used with `of` (build) and `i
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val f = 2 of kilo.hertz      // 2000 Hz (kHz via the SI prefix)
 f.value                      // 2000.0 (normalized to hertz)
@@ -42,7 +42,7 @@ f.value                      // 2000.0 (normalized to hertz)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 // + / - : same group, automatic conversion between units
 val a = (1 of kilo.hertz) + (500 of hertz)   // KFrequencyUnitInstance: 1500.0 Hz
@@ -60,9 +60,9 @@ A frequency and a time are reciprocals, so they combine into strongly typed resu
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val f = 60 / (1 of seconds)          // KFrequencyUnitInstance, 60 Hz (count / time = frequency)
 val period = 1 / (2 of hertz)        // KTimeUnitInstance, 0.5 s   (count / frequency = time)
@@ -81,8 +81,8 @@ the inverse of the familiar `length / time = speed`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val circumference = 2 of meters
 val revolutions = 5 of rps               // 5 Hz
@@ -99,7 +99,7 @@ frequency group `pow` returns a generic `KMixedUnitInstance` (frequency has no d
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val squared = (2 of hertz) pow 2     // KMixedUnitInstance: 4.0 Hz²
 ```
@@ -114,7 +114,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.giga
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 (1 of mega.hertz).value          // 1000000.0 (MHz)
 (2_400_000_000 of hertz) into giga.hertz // 2.4 (GHz)
@@ -128,7 +128,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 (1 of kilo.hertz).toString()             // "1000.0 Hz" (base unit representation)
 "${(50 of hertz) into rpm} rpm"          // "3000.0 rpm"

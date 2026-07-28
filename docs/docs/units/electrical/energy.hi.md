@@ -1,6 +1,6 @@
 # ऊर्जा (विद्युत)
 
-पैकेज: `org.pcsoft.framework.kunit.energy`
+पैकेज: `org.pcsoft.framework.kunit.common.energy`
 आधार इकाई: **जूल** (`KEnergyUnit.BASE == KEnergyUnit.JOULE`)
 
 प्रकार: **संरचित इकाई**
@@ -39,9 +39,9 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.power.watts
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.common.energy.*
 
 val w = 500 of kilo.joules
 w into kilo.joules                          // 500.0
@@ -80,14 +80,14 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.power.watts
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.common.energy.*
 
 // वास्तविक उदाहरण - 3 घंटे चलने वाला 2 kW हीटर 6 kWh = 21600 kJ उपभोग करता है।
 val w = (2 of kilo.watts) * (3 of hours)   // KEnergyUnitInstance
@@ -108,7 +108,7 @@ raw.toEnergy() == (500 of joules)                  // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val s = (100 of joules) + (40 of joules)  // 140 J
 (100 of joules) > (40 of joules)          // true
@@ -120,7 +120,7 @@ val s = (100 of joules) + (40 of joules)  // 140 J
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 (1 of kilo.joules).toString()     // "1000.0 J" (आधार इकाई)
 ```

@@ -1,6 +1,6 @@
 # 질량
 
-패키지: `org.pcsoft.framework.kunit.mass`
+패키지: `org.pcsoft.framework.kunit.mechanic.mass`
 기준 단위: **그램** (`KMassUnit.BASE == KMassUnit.GRAM`)
 
 유형: **네이티브 단위**
@@ -48,7 +48,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val m = 2 of kilo.grams      // 2000 g(킬로그램은 `kilo.grams`)
 m.value                      // 2000.0(그램으로 정규화)
@@ -61,7 +61,7 @@ m into pounds                // ≈ 4.409(파운드로 읽기)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // + / - : 같은 그룹, 단위 간 자동 변환
 val a = (1 of kilo.grams) + (500 of grams)   // KMassUnitInstance: 1500.0 g
@@ -85,7 +85,7 @@ val b = (1 of kilo.grams) - (500 of grams)   // KMassUnitInstance: 500.0 g
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val squared = (2 of grams) pow 2     // KMixedUnitInstance: 4.0 g²
 ```
@@ -100,7 +100,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).value    // 1000.0     (킬로그램)
 (1 of milli.grams).value   // 0.001      (밀리그램)
@@ -116,7 +116,7 @@ import org.pcsoft.framework.kunit.mass.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).toString()             // "1000.0 g"(기준 단위 표현)
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"

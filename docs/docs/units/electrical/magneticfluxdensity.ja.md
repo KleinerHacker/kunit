@@ -1,6 +1,6 @@
 # 磁束密度
 
-パッケージ: `org.pcsoft.framework.kunit.magneticfluxdensity`
+パッケージ: `org.pcsoft.framework.kunit.electric.magneticfluxdensity`
 基本単位: **テスラ**(`KMagneticFluxDensityUnit.BASE == KMagneticFluxDensityUnit.TESLA`)
 
 種別: **構成された単位**
@@ -29,7 +29,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.magneticfluxdensity.*
+import org.pcsoft.framework.kunit.electric.magneticfluxdensity.*
 
 val b = 50 of micro.teslas
 b into teslas                 // 5.0e-5
@@ -63,12 +63,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.magneticfluxdensity.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.magneticfluxdensity.*
 
 // 実例 - MRI 装置: 6 m² のコイルを貫く 18 Wb の磁束は 3 T の磁場です。
 val b = (18 of webers) / ((2 of meters) * (3 of meters))  // KMagneticFluxDensityUnitInstance、3 T
@@ -85,7 +85,7 @@ val flux = (50 of micro.teslas) * ((2 of meters) * (1 of meters))  // KMagneticF
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticfluxdensity.*
+import org.pcsoft.framework.kunit.electric.magneticfluxdensity.*
 
 val s = (3 of teslas) + (1 of teslas)  // 4 T
 (3 of teslas) > (1 of teslas)          // true
@@ -96,7 +96,7 @@ val s = (3 of teslas) + (1 of teslas)  // 4 T
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticfluxdensity.*
+import org.pcsoft.framework.kunit.electric.magneticfluxdensity.*
 
 (3 of teslas).toString()     // "3.0 T"(基本単位)
 ```

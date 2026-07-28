@@ -1,6 +1,6 @@
 # 磁阻
 
-包：`org.pcsoft.framework.kunit.reluctance`
+包：`org.pcsoft.framework.kunit.electric.reluctance`
 基本单位：**安培每韦伯**（`KReluctanceUnit.BASE == KReluctanceUnit.AMPERE_PER_WEBER`）
 
 类型：**构造单位**
@@ -34,7 +34,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 val rm = 2 of mega.amperesPerWeber    // 带气隙的铁芯
 rm into mega.amperesPerWeber          // 2.0
@@ -70,14 +70,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.ec.ampereTurns
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.inductance.henries
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.current.ampereTurns
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.inductance.henries
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // 现实示例 - 2 kAt 的磁动势通过 2 MA/Wb 的铁芯得到 1 mWb 的磁通量。
 val rm = 2_000_000 of amperesPerWeber
@@ -97,7 +97,7 @@ raw.toReluctance() == (2 of amperesPerWeber)         // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 val series = (1 of amperesPerWeber) + (1 of inverseHenries)  // 2 A/Wb（串联磁路）
 (3 of amperesPerWeber) > (2 of amperesPerWeber)              // true
@@ -108,7 +108,7 @@ val series = (1 of amperesPerWeber) + (1 of inverseHenries)  // 2 A/Wb（串联�
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 (2 of inverseHenries).toString()   // "2.0 A/Wb"（基本单位）
 ```

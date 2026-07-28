@@ -23,7 +23,7 @@ class KMixedUnitInstance(value: Number, val units: List<KUnitTerm>)
 모든 "순수" 단위는 이 범용 표현으로 변환하는 `toUnit()` 확장을 노출합니다:
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val d = 5 of meters
 val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
@@ -39,7 +39,7 @@ val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 - 결과 지수가 `0`이 되면 그 단위는 결과에서 완전히 제거됩니다.
 
 ```kotlin
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val distance = (10 of meters).toUnit()   // units=[METER^1]
 val width = (4 of meters).toUnit()       // units=[METER^1]
@@ -52,7 +52,7 @@ val backToLength = area / width                 // value=10.0, units=[METER^1]
 생성합니다:
 
 ```kotlin
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val distance = (100 of meters).toUnit()
 val time = (10 of seconds).toUnit()
@@ -74,7 +74,7 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
 val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -92,7 +92,7 @@ val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance, 2.5 km (경로의 4분
 
 ```kotlin
 import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1] (0.5 Hz)
 ```
@@ -109,8 +109,8 @@ val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECO
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.miles
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.miles
 
 val a = (5 of meters).toUnit()
 val b = (3 of meters).toUnit()
@@ -123,7 +123,7 @@ val c = (3 of miles).toUnit()
 일치하지 않는 단위 그룹이나 일치하지 않는 지수는 여전히 실패합니다:
 
 ```kotlin
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 a + (3 of seconds).toUnit()       // IllegalStateException 던짐: 시간 항에 일치하는 단위 그룹 없음
 a + ((2 of meters) pow 2).toUnit() // IllegalStateException 던짐: 지수 불일치(1 대 2)
@@ -147,9 +147,9 @@ x.hasSameUnits(y) // (unit -> exponent) 시그니처를 순서 무관하게 비�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val speed = (10 of meters) / (1 of seconds)
 
@@ -169,7 +169,7 @@ area into hectares                 // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val distance = 100 of meters        // KLengthUnitInstance
 val mixed = distance.toUnit()       // KMixedUnitInstance
@@ -184,8 +184,8 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val speed = (10 of meters) / (2 of seconds)    // KSpeedUnitInstance
 val distanceAgain = speed.toUnit() * (2 of seconds).toUnit() // units=[METER^1]

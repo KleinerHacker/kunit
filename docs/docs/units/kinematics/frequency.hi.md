@@ -1,6 +1,6 @@
 # आवृत्ति
 
-पैकेज: `org.pcsoft.framework.kunit.frequency`
+पैकेज: `org.pcsoft.framework.kunit.kinematic.frequency`
 मूल इकाई: **हर्ट्ज़** (`KFrequencyUnit.BASE == KFrequencyUnit.HERTZ`)
 
 प्रकार: **नेटिव इकाई**
@@ -30,7 +30,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val f = 2 of kilo.hertz      // 2000 Hz (SI उपसर्ग द्वारा kHz)
 f.value                      // 2000.0 (हर्ट्ज़ में प्रसामान्यीकृत)
@@ -43,7 +43,7 @@ f.value                      // 2000.0 (हर्ट्ज़ में प्�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 // + / - : समान समूह, इकाइयों के बीच स्वचालित रूपांतरण
 val a = (1 of kilo.hertz) + (500 of hertz)   // KFrequencyUnitInstance: 1500.0 Hz
@@ -61,9 +61,9 @@ val b = (1 of kilo.hertz) - (500 of hertz)   // KFrequencyUnitInstance: 500.0 Hz
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val f = 60 / (1 of seconds)          // KFrequencyUnitInstance, 60 Hz (गणना / समय = आवृत्ति)
 val period = 1 / (2 of hertz)        // KTimeUnitInstance, 0.5 s   (गणना / आवृत्ति = समय)
@@ -82,8 +82,8 @@ val v = (2 of meters) * (5 of hertz) // KSpeedUnitInstance, 10 m/s (लंबा
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val circumference = 2 of meters
 val revolutions = 5 of rps               // 5 Hz
@@ -101,7 +101,7 @@ infix `pow` संकारक से किसी मान को एक प�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 val squared = (2 of hertz) pow 2     // KMixedUnitInstance: 4.0 Hz²
 ```
@@ -117,7 +117,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.giga
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 (1 of mega.hertz).value          // 1000000.0 (MHz)
 (2_400_000_000 of hertz) into giga.hertz // 2.4 (GHz)
@@ -131,7 +131,7 @@ import org.pcsoft.framework.kunit.frequency.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.frequency.*
+import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 (1 of kilo.hertz).toString()             // "1000.0 Hz" (मूल इकाई निरूपण)
 "${(50 of hertz) into rpm} rpm"          // "3000.0 rpm"

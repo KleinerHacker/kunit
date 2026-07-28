@@ -1,6 +1,6 @@
 # 距离
 
-包：`org.pcsoft.framework.kunit.distance`
+包：`org.pcsoft.framework.kunit.kinematic.distance`
 基础单位：**米**（`KDistanceUnit.BASE == KDistanceUnit.METER`）
 
 类型：**原生单位**
@@ -64,7 +64,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val d = 5 of miles
 d.value               // 8046.72（归一化为米）
@@ -78,7 +78,7 @@ d into nauticalMiles  // ≈ 4.3452
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // + / - : 同一组内，不同长度单位之间自动换算
 val a = (1 of miles) + (500 of meters)   // KLengthUnitInstance，归一化为米
@@ -103,7 +103,7 @@ val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance（无量纲�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val r = 12 of centi.meters       // KLengthUnitInstance，0.12 m
 val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -138,7 +138,7 @@ val half = area / 2              // KAreaUnitInstance，圆面积的一半
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val plot = 3 of hectares
 plot.value        // 30000.0（平方米）
@@ -173,7 +173,7 @@ plot + computed   // 允许：两者都是面积 -> KAreaUnitInstance
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val tank = 200 of liters
 tank.value          // 0.2（立方米）
@@ -197,7 +197,7 @@ tank + cube         // 允许：两者都是体积 -> KVolumeUnitInstance
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val area = (2 of meters) pow 2         // KAreaUnitInstance: 4.0 m²
 val big = (2 of kilo.meters) pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
@@ -219,7 +219,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // 构造："5 of kilo.meters" -> KLengthUnitInstance（== 5000 m）
 val fiveKm = 5 of kilo.meters
@@ -241,7 +241,7 @@ tank into milli.liters  // 200000.0（毫升）
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 (5 of meters).toString()               // "5.0 m"（基础单位表示）
 "${(5 of miles) into miles} mi"        // "5.0 mi"

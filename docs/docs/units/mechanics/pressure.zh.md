@@ -1,6 +1,6 @@
 # 压力
 
-包: `org.pcsoft.framework.kunit.pressure`
+包: `org.pcsoft.framework.kunit.mechanic.pressure`
 基本单位: **帕斯卡**(`KPressureUnit.BASE == KPressureUnit.PASCAL`)
 
 类型：**构造单位**
@@ -28,7 +28,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.pressure.*
+import org.pcsoft.framework.kunit.mechanic.pressure.*
 
 val p = 2 of bars
 p into pascals               // 200000.0
@@ -48,9 +48,9 @@ p into atmospheres           // ≈ 1.974
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.pressure.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.mechanic.pressure.*
 
 val area = (2 of meters) * (1 of meters)   // KAreaUnitInstance, 2 m²
 val p = (100 of newtons) / area            // KPressureUnitInstance, 50 Pa
@@ -62,7 +62,7 @@ val f = p * area                           // KForceUnitInstance, 100 N
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.pressure.*
+import org.pcsoft.framework.kunit.mechanic.pressure.*
 
 val s = (10 of pascals) + (4 of pascals)  // 14 Pa
 (2 of bars) > (1 of atmospheres)          // true
@@ -74,7 +74,7 @@ val s = (10 of pascals) + (4 of pascals)  // 14 Pa
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.pressure.*
+import org.pcsoft.framework.kunit.mechanic.pressure.*
 
 (50 of pascals).toString()   // "50.0 Pa"(基本单位)
 "${(1 of bars) into pascals} Pa" // "100000.0 Pa"

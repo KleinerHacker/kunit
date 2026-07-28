@@ -1,6 +1,6 @@
 # शक्ति (यांत्रिकी)
 
-पैकेज: `org.pcsoft.framework.kunit.power`
+पैकेज: `org.pcsoft.framework.kunit.common.power`
 आधार इकाई: **वाट** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 प्रकार: **संरचित इकाई**
@@ -35,7 +35,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val p = 100 of metricHorsePowers
 p into kilo.watts               // 73.549875
@@ -69,12 +69,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.div
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.common.power.*
 
 // वास्तविक उदाहरण - एक कार्गो विंच: 5 m/s पर 100 N के खिंचाव के लिए 500 W चाहिए।
 val p = (100 of newtons) * ((5 of meters) / (1 of seconds))  // KPowerUnitInstance
@@ -95,7 +95,7 @@ raw.toPower() == (500 of watts)                               // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -106,7 +106,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (1 of metricHorsePowers).toString()     // "735.49875 W" (आधार इकाई)
 ```

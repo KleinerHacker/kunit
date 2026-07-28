@@ -1,6 +1,6 @@
 # विद्युत क्षेत्र तीव्रता
 
-पैकेज: `org.pcsoft.framework.kunit.electricfieldstrength`
+पैकेज: `org.pcsoft.framework.kunit.electric.electricfieldstrength`
 आधार इकाई: **वोल्ट प्रति मीटर** (`KElectricFieldStrengthUnit.BASE == KElectricFieldStrengthUnit.VOLT_PER_METER`)
 
 प्रकार: **संरचित इकाई**
@@ -36,7 +36,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 val e = 3 of mega.voltsPerMeter        // हवा की परावैद्युत शक्ति
 e into mega.voltsPerMeter              // 3.0
@@ -74,14 +74,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 // वास्तविक उदाहरण - 2 mm के वायु अंतराल पर मुख्य वोल्टेज से 115 kV/m मिलता है।
 val e = (230 of volts) / (2 of milli.meters)   // KElectricFieldStrengthUnitInstance, 115000 V/m
@@ -98,7 +98,7 @@ raw.toElectricFieldStrength() == (2 of voltsPerMeter)  // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 val s = (1 of voltsPerMeter) + (1 of voltsPerCentimeter)  // 101 V/m
 (1 of voltsPerCentimeter) > (1 of voltsPerMeter)          // true
@@ -109,7 +109,7 @@ val s = (1 of voltsPerMeter) + (1 of voltsPerCentimeter)  // 101 V/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 (1 of voltsPerCentimeter).toString()   // "100.0 V/m" (आधार इकाई)
 ```

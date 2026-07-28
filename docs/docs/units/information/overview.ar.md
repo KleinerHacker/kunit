@@ -1,6 +1,6 @@
 # تقنية المعلومات — نظرة عامة
 
-الحزم: `org.pcsoft.framework.kunit.storage`، `…datarate`
+الحزم: `org.pcsoft.framework.kunit.it.storage`، `…datarate`
 
 تتعامل تقنية المعلومات مع **كمّيات البيانات الرقمية** ومدى سرعة انتقالها. يُنمذج KUnit الكمّية المخزّنة
 ككمّية أساسية **أصلية** (التخزين، بالبايت) والإنتاجية ككمّية **مركّبة** منها (معدّل البيانات = تخزين لكل
@@ -34,9 +34,9 @@ SI العشرية (`kilo` = 1000) عائلة **ثنائية (IEC)** ثانية (
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val amount = 500 of mega.bytes
 val rate   = 10 of mega.bytes / seconds        // KDataRateUnitInstance، 10 MB/s
@@ -56,7 +56,7 @@ transferred into mega.bytes                     // 500.0 (MB)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 4096 of bytes
 size into kilo.bytes    // 4.096 (kB، عشري 1000)
@@ -71,9 +71,9 @@ size into kibi.bytes    // 4.0   (KiB، ثنائي 1024)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = (10 of bytes) / (1 of seconds)   // KDataRateUnitInstance
 r.toString()                             // "10.0 B/s" (الوحدة الأساسية)

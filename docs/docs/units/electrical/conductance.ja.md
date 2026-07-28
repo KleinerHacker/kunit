@@ -1,6 +1,6 @@
 # コンダクタンス
 
-パッケージ: `org.pcsoft.framework.kunit.conductance`
+パッケージ: `org.pcsoft.framework.kunit.electric.conductance`
 基本単位: **ジーメンス**(`KConductanceUnit.BASE == KConductanceUnit.SIEMENS`)
 
 種別: **構成された単位**
@@ -29,7 +29,7 @@
 
 !!! note "`siemens` と `siemensUnits`"
     `siemens`(本パッケージ)は**コンダクタンス**の SI 単位です。名前の似た
-    `org.pcsoft.framework.kunit.resistance` の `siemensUnits` は歴史的な**ジーメンス水銀単位**で、
+    `org.pcsoft.framework.kunit.electric.resistance` の `siemensUnits` は歴史的な**ジーメンス水銀単位**で、
     0.9534 Ω の*抵抗*です。両者は別パッケージの無関係な量です。
 
 名前付き単位は `KPrefixBuilder` 経由で SI 接頭辞に対応します(`milli.siemens`、`micro.siemens`、
@@ -39,7 +39,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val g = 4 of siemens
 g into siemens                    // 4.0
@@ -73,13 +73,13 @@ g into milli.siemens              // 4000.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 // 実例 - 給電ケーブルのコンダクタンス: 2 A が流れ、電圧降下が 1 V のケーブルの
 // コンダクタンスは 2 S です(つまり抵抗は 0.5 Ω)。
@@ -98,7 +98,7 @@ raw.toConductance() == (2 of siemens)    // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val s = (100 of siemens) + (40 of siemens)  // 140 S
 (100 of siemens) > (40 of siemens)          // true
@@ -109,7 +109,7 @@ val s = (100 of siemens) + (40 of siemens)  // 140 S
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 (4 of siemens).toString()     // "4.0 S"(基本単位)
 ```

@@ -1,6 +1,6 @@
 # 电导率
 
-包：`org.pcsoft.framework.kunit.conductivity`
+包：`org.pcsoft.framework.kunit.electric.conductivity`
 基本单位：**西门子每米**（`KConductivityUnit.BASE == KConductivityUnit.SIEMENS_PER_METER`）
 
 类型：**构造单位**
@@ -31,7 +31,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.conductivity.*
+import org.pcsoft.framework.kunit.electric.conductivity.*
 
 val sigma = 58 of mega.siemensPerMeter        // 铜
 sigma into mega.siemensPerMeter               // 58.0
@@ -68,13 +68,13 @@ import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mega
 import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.conductance.siemens
-import org.pcsoft.framework.kunit.resistivity.ohmMeters
-import org.pcsoft.framework.kunit.conductivity.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.conductance.siemens
+import org.pcsoft.framework.kunit.electric.resistivity.ohmMeters
+import org.pcsoft.framework.kunit.electric.conductivity.*
 
 // 现实示例 - 铜：电阻率 17 nΩ·m 对应约 58.8 MS/m 的电导率。
 val sigma = 1 / (17 of nano.ohmMeters)
@@ -95,7 +95,7 @@ raw.toConductivity() == (2 of siemensPerMeter) // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductivity.*
+import org.pcsoft.framework.kunit.electric.conductivity.*
 
 val s = (100 of siemensPerMeter) + (40 of siemensPerMeter)  // 140 S/m
 (100 of siemensPerMeter) > (40 of siemensPerMeter)          // true
@@ -106,7 +106,7 @@ val s = (100 of siemensPerMeter) + (40 of siemensPerMeter)  // 140 S/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductivity.*
+import org.pcsoft.framework.kunit.electric.conductivity.*
 
 (1 of siemensPerCentimeter).toString()   // "100.0 S/m"（基本单位）
 ```

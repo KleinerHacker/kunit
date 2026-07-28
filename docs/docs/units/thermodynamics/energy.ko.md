@@ -1,6 +1,6 @@
 # 에너지 (Energy, 열역학)
 
-패키지: `org.pcsoft.framework.kunit.energy`
+패키지: `org.pcsoft.framework.kunit.common.energy`
 기본 단위: **줄(joule)** (`KEnergyUnit.BASE == KEnergyUnit.JOULE`)
 
 유형: **구성 단위(constructed unit)**
@@ -39,7 +39,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = 2000 of kilo.calories   // 일일 식단
 q into kilo.joules              // 8368.0
@@ -74,12 +74,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.watts
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.common.energy.*
 
 // 실제 사례 - 온수기: 10분에 걸친 2 kW의 열유량은 1200 kJ의 열을 전달합니다.
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
@@ -100,7 +100,7 @@ raw.toEnergy() == (1200 of kilo.joules)            // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val s = (100 of joules) + (40 of joules)  // 140 J
 (100 of joules) > (40 of joules)          // true
@@ -111,7 +111,7 @@ val s = (100 of joules) + (40 of joules)  // 140 J
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 (1 of britishThermalUnits).toString()     // "1055.05585262 J" (기본 단위)
 ```

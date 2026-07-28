@@ -1,6 +1,6 @@
 # Resistance
 
-Package: `org.pcsoft.framework.kunit.resistance`
+Package: `org.pcsoft.framework.kunit.electric.resistance`
 Base unit: **ohm** (`KResistanceUnit.BASE == KResistanceUnit.OHM`)
 
 Type: **constructed unit**
@@ -31,7 +31,7 @@ Named units support the SI prefixes via `KPrefixBuilder` (`kilo.ohms`, `mega.ohm
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val r = 470 of ohms
 r into ohms                  // 470.0
@@ -64,12 +64,12 @@ The inverse Ohm's-law operators tie voltage, resistance and current together:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 // Real-world example - Ohm's law: 230 V across a load drawing 2 A means a 115 Ω resistance.
 val r = (230 of volts) / (2 of amperes)  // KResistanceUnitInstance, 115 Ω
@@ -97,7 +97,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import kotlin.math.PI
 import kotlin.math.sqrt
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 // A coil of 10 mH in series with 30 Ω at 50 Hz:
 val x = (2 * PI * 50 * 0.010) of ohms          // reactance X ≈ 3.14 Ω
@@ -113,7 +113,7 @@ it carries is expressed in `var`, see [Power (Electrical)](power.md).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val s = (100 of ohms) + (40 of ohms)  // 140 Ω
 (100 of ohms) > (40 of ohms)          // true
@@ -124,7 +124,7 @@ val s = (100 of ohms) + (40 of ohms)  // 140 Ω
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 (470 of ohms).toString()     // "470.0 Ω" (base unit)
 ```

@@ -1,6 +1,6 @@
 # 運動学 — 概要
 
-パッケージ: `org.pcsoft.framework.kunit.distance`、`…time`、`…speed`、`…acceleration`、`…frequency`
+パッケージ: `org.pcsoft.framework.kunit.kinematic.distance`、`…time`、`…speed`、`…acceleration`、`…frequency`
 
 運動学は**運動**の記述です — どれだけ遠く、どれだけ長く、どれだけ速く、そして運動の割合そのものが
 どう変化するか — 背後にある力はまだ問いません(それは[力学](../mechanics/overview.md)の話題です)。
@@ -39,9 +39,9 @@ KUnit はこの分野を 2 つの**ネイティブ**基本量と、それらか�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = (120 of kilo.meters) / (1.5 of hours)   // KSpeedUnitInstance
 v into (kilo.meters / hours)                     // 80.0(km/h)
@@ -58,10 +58,10 @@ distance into kilo.meters                        // 240.0(3 h での km)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
-import org.pcsoft.framework.kunit.acceleration.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 val a = ((10 of meters) / (1 of seconds)) / (2 of seconds) // KAccelerationUnitInstance、5 m/s²
 val reached = a * (2 of seconds)                            // KSpeedUnitInstance、10 m/s
@@ -78,10 +78,10 @@ a into standardGravities                                    // ≈ 0.51(g に対
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = (10 of meters) / (2 of seconds)   // KSpeedUnitInstance
 v.toString()                              // "5.0 m/s"(基準単位)

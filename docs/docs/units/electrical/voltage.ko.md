@@ -1,6 +1,6 @@
 # 전압
 
-패키지: `org.pcsoft.framework.kunit.voltage`
+패키지: `org.pcsoft.framework.kunit.electric.voltage`
 기본 단위: **볼트**(`KVoltageUnit.BASE == KVoltageUnit.VOLT`)
 
 유형: **구성된 단위**
@@ -30,7 +30,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val u = 230 of volts
 u into volts                 // 230.0
@@ -56,12 +56,12 @@ u into kilo.volts            // 0.23
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 // 실제 예시 - 옴의 법칙: 2 A 가 흐르는 115 Ω 저항은 230 V 의 전압 강하를 만듭니다.
 val u = (115 of ohms) * (2 of amperes)   // KVoltageUnitInstance, 230 V
@@ -75,7 +75,7 @@ raw.toVoltage() == (230 of volts)        // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val s = (100 of volts) + (40 of volts)  // 140 V
 (100 of volts) > (40 of volts)          // true
@@ -86,7 +86,7 @@ val s = (100 of volts) + (40 of volts)  // 140 V
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 (230 of volts).toString()    // "230.0 V"(기본 단위)
 ```

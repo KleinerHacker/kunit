@@ -1,6 +1,6 @@
 # インダクタンス
 
-パッケージ: `org.pcsoft.framework.kunit.inductance`
+パッケージ: `org.pcsoft.framework.kunit.electric.inductance`
 基本単位: **ヘンリー**(`KInductanceUnit.BASE == KInductanceUnit.HENRY`)
 
 種別: **構成された単位**
@@ -31,7 +31,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val l = 470 of micro.henries
 l into henries               // 0.00047
@@ -66,14 +66,14 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.frequency.hertz
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 // 実例 - スイッチング電源のチョークコイル: 470 µH のコイルに 2 A が流れると鎖交磁束は 0.00094 Wb となり、
 // 角周波数 100 kHz ではリアクタンスは 47 Ω になります。
@@ -100,8 +100,8 @@ raw.toInductance() == (2 of henries)   // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.inductance.*
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // Rm = 500 A/Wb の磁気回路のパーミアンスは 2 mH。
 val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
@@ -115,7 +115,7 @@ permeance into milli.henries                    // 2.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val s = (100 of henries) + (40 of henries)  // 140 H
 (100 of henries) > (40 of henries)          // true
@@ -126,7 +126,7 @@ val s = (100 of henries) + (40 of henries)  // 140 H
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 (2 of henries).toString()     // "2.0 H"(基本単位)
 ```

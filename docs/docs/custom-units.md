@@ -4,7 +4,7 @@ kunit ships several unit groups today ([Distance](units/kinematics/distance.md),
 [Storage](units/information/storage.md), [Speed](units/kinematics/speed.md), [Data Rate](units/information/datarate.md)), but the whole engine
 (`KUnit`, `KMixedUnitInstance`, the `of`/`into` verbs, prefix builders) is generic and group-independent.
 Adding a new physical quantity means following the same pattern. This page walks through adding a
-demonstrative **Mass** group (`org.pcsoft.framework.kunit.mass`) — a plain, one-dimensional group modeled on
+demonstrative **Mass** group (`org.pcsoft.framework.kunit.mechanic.mass`) — a plain, one-dimensional group modeled on
 the storage group.
 
 ## 1. Create the sub-package and the `KUnit` enum
@@ -14,7 +14,7 @@ an `enum class` implementing `KUnit`. `baseValue` is the conversion factor to th
 the base unit itself has `baseValue == 1.0`.
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -47,7 +47,7 @@ members (`plus`/`minus`/`compareTo`) plus the `scaledBy` override (which backs `
 `into` verb. Copy the shape of `KStorageUnitInstance`.
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -93,7 +93,7 @@ they let callers write `5 of kilograms` or `5 of kilo.grams` and read back with 
 `KMassUnitBareValues.kt`:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 kilogram ([KMassUnit.KILOGRAM]). */
 val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
@@ -112,7 +112,7 @@ val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 `KPrefixBuilder`):
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
@@ -138,7 +138,7 @@ That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, the SI 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val a = 500 of grams
 val b = 2 of pounds
@@ -155,7 +155,7 @@ If your group has commonly used named units bound to a specific scaling (like he
 named value-1 instances — no separate target type is needed:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 metric ton (1000 kg). */
 val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
@@ -164,7 +164,7 @@ val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 println((2500 of grams) into tonnes) // 0.0025
 ```
@@ -178,8 +178,8 @@ a strongly-typed cross-group result (like `mass / volume = density`), add typed 
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // density = mass / volume (generic KMixedUnitInstance: [KILOGRAM^1, METER^-3])
 val density = (5 of kilograms) / (2 of liters)

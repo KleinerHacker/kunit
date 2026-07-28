@@ -3,7 +3,7 @@
 > **तापमान** विषय का भाग — [अवलोकन](temperature-overview.md) और रैखिक समकक्ष
 > [तापमान अंतर](temperature-difference.md) देखें।
 
-पैकेज: `org.pcsoft.framework.kunit.temperature`
+पैकेज: `org.pcsoft.framework.kunit.thermo.temperature`
 मूल इकाई: **केल्विन** (`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
 
 प्रकार: **नेटिव इकाई**
@@ -38,7 +38,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val t = 25 of celsius
 t.value             // 298.15 (परम केल्विन में प्रसामान्यीकृत)
@@ -66,7 +66,7 @@ t into kelvin       // 298.15
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 // परम − परम = तापमान अंतर (केल्विन में)
 val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
@@ -97,7 +97,7 @@ infix `pow` संकारक से किसी मान को एक प�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 ```
@@ -109,8 +109,8 @@ val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.thermo.temperature.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```
@@ -122,7 +122,7 @@ val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()               // "298.15 K" (मूल इकाई निरूपण)
 "${(25 of celsius) into fahrenheit} °F"  // "77.0 °F"

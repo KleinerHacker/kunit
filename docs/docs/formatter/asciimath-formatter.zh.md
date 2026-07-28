@@ -29,10 +29,10 @@
 ```kotlin
 import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.formatter.KAsciiMathUnitFormatter
-import org.pcsoft.framework.kunit.distance.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.kilo
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import java.util.Locale
 
 val v = 150 of kilo.meters / (6000 of seconds)   // 25 m/s

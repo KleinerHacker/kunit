@@ -1,6 +1,6 @@
 # शक्ति (विद्युत)
 
-पैकेज: `org.pcsoft.framework.kunit.power`
+पैकेज: `org.pcsoft.framework.kunit.common.power`
 आधार इकाई: **वाट** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 प्रकार: **संरचित इकाई**
@@ -50,7 +50,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 // 25 kVA रेटेड ट्रांसफार्मर एक भार को खिलाते हुए जिसका पावर फैक्टर cos φ = 0.8 है:
 val s = 25 of kilo.voltAmperes
@@ -64,7 +64,7 @@ q into kilo.vars                      // 15.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val p = 2 of kilo.watts
 p into kilo.watts               // 2.0
@@ -99,12 +99,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.common.power.*
 
 // वास्तविक उदाहरण - एक मेन सॉकेट: 10 A पर 230 V, 2.3 kW देता है।
 val p = (230 of volts) * (10 of amperes)   // KPowerUnitInstance
@@ -122,7 +122,7 @@ raw.toPower() == (2.3 of kilo.watts)       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -134,7 +134,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (1 of kilo.watts).toString()     // "1000.0 W" (आधार इकाई)
 ```

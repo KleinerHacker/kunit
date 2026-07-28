@@ -1,6 +1,6 @@
 # الطاقة (ميكانيكا)
 
-الحزمة: `org.pcsoft.framework.kunit.energy`
+الحزمة: `org.pcsoft.framework.kunit.common.energy`
 الوحدة الأساسية: **جول** (`KEnergyUnit.BASE == KEnergyUnit.JOULE`)
 
 النوع: **وحدة مركّبة**
@@ -38,7 +38,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val w = 500 of joules
 w into joules                   // 500.0
@@ -74,12 +74,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.power.watts
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.common.energy.*
 
 // مثال واقعي - شغل الرفع: السحب بقوة 100 N عبر مسافة 5 m يعطي 500 J من الشغل.
 val w = (100 of newtons) * (5 of meters)   // KEnergyUnitInstance
@@ -100,7 +100,7 @@ raw.toEnergy() == (500 of joules)          // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val s = (100 of joules) + (40 of joules)  // 140 J
 (100 of joules) > (40 of joules)          // true
@@ -111,7 +111,7 @@ val s = (100 of joules) + (40 of joules)  // 140 J
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 (1 of calories).toString()     // "4.184 J" (الوحدة الأساسية)
 ```

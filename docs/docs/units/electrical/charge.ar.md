@@ -1,6 +1,6 @@
 # الشحنة الكهربائية
 
-الحزمة: `org.pcsoft.framework.kunit.charge`
+الحزمة: `org.pcsoft.framework.kunit.electric.charge`
 الوحدة الأساسية: **كولوم** (`KChargeUnit.BASE == KChargeUnit.COULOMB`)
 
 النوع: **وحدة مركبة**
@@ -33,7 +33,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 val q = 470 of coulombs
 q into coulombs                        // 470.0
@@ -69,10 +69,10 @@ q into kilo.coulombs                   // 0.47
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.charge.*
 
 // مثال واقعي - سعة البطارية: خلية 2000 mAh تخزّن 7200 C.
 val battery = 2000 of milli.ampereHours   // KChargeUnitInstance، 7200 C
@@ -96,7 +96,7 @@ raw.toCharge() == typed                                    // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 // كرة تحصر 2 µC تحمل فيضًا كهربائيًا مقداره 2 µC.
 val psi = 2 of micro.coulombs
@@ -109,7 +109,7 @@ psi into micro.coulombs        // 2.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 val s = (100 of coulombs) + (40 of coulombs)  // 140 C
 (100 of coulombs) > (40 of coulombs)          // true
@@ -120,7 +120,7 @@ val s = (100 of coulombs) + (40 of coulombs)  // 140 C
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 (470 of coulombs).toString()   // "470.0 C" (الوحدة الأساسية)
 (1 of ampereHours).toString()  // "3600.0 C" (الوحدة الأساسية)

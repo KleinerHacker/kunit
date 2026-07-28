@@ -1,6 +1,6 @@
 # القدرة (ديناميكا حرارية)
 
-الحزمة: `org.pcsoft.framework.kunit.power`
+الحزمة: `org.pcsoft.framework.kunit.common.power`
 الوحدة الأساسية: **واط** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 النوع: **وحدة مركّبة**
@@ -35,7 +35,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val heatFlow = 9 of kilo.watts   // سخّان غرفة
 heatFlow into kilo.watts         // 9.0
@@ -69,12 +69,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.energy.*
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.energy.*
+import org.pcsoft.framework.kunit.common.power.*
 
 // مثال واقعي - سخّان ماء: تسليم 1200 kJ من الحرارة خلال 10 دقائق هو تدفق حراري مقداره 2 kW.
 val heatFlow = (1200 of kilo.joules) / (10 of minutes)   // KPowerUnitInstance
@@ -92,7 +92,7 @@ raw.toPower() == (2 of kilo.watts)                       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -104,7 +104,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (9 of kilo.watts).toString()     // "9000.0 W" (الوحدة الأساسية)
 ```

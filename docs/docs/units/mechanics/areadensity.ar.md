@@ -1,6 +1,6 @@
 # الكثافة السطحية
 
-الحزمة: `org.pcsoft.framework.kunit.areadensity`
+الحزمة: `org.pcsoft.framework.kunit.mechanic.areadensity`
 الوحدة الأساسية: **كيلوغرام لكل متر مربّع** (`KAreaDensityUnit.BASE == KAreaDensityUnit.KILOGRAM_PER_SQUARE_METER`)
 
 النوع: **وحدة مركّبة**
@@ -20,10 +20,10 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 val q = (25 of kilo.grams) / ((5 of meters) * (1 of meters)) // KAreaDensityUnitInstance، 5 kg/m²
 q into (kilo.grams / (meters pow 2))       // 5.0
@@ -45,11 +45,11 @@ q into (grams / (milli.meters pow 2))      // 0.005 (= معبَّرًا عنه �
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.density.*
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.mechanic.density.*
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 // صفيحة فولاذ بسُمك 3 m: الكثافة × السُمك = الكتلة السطحية
 val density = (2 of kilo.grams) / (1 of liters)      // 2000 kg/m³
@@ -64,9 +64,9 @@ val back = q / (3 of meters)                         // KDensityUnitInstance، 2
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 val area = (5 of meters) * (1 of meters)
 val a = (15 of kilo.grams) / area   // 3 kg/m²
@@ -80,8 +80,8 @@ a > b                                       // true
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 ((5 of kilo.grams) / ((5 of meters) * (1 of meters))).toString() // "1.0 kg/m²" (الوحدة الأساسية)
 ```

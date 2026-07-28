@@ -1,6 +1,6 @@
 # المواصَلة
 
-الحزمة: `org.pcsoft.framework.kunit.conductance`
+الحزمة: `org.pcsoft.framework.kunit.electric.conductance`
 الوحدة الأساسية: **سيمنز** (`KConductanceUnit.BASE == KConductanceUnit.SIEMENS`)
 
 النوع: **وحدة مركّبة**
@@ -29,7 +29,7 @@
 
 !!! note "`siemens` مقابل `siemensUnits`"
     `siemens` (في هذه الحزمة) هي وحدة **المواصَلة** في النظام الدولي. أمّا `siemensUnits` المشابهة في
-    الاسم داخل `org.pcsoft.framework.kunit.resistance` فهي **وحدة سيمنز الزئبقية** التاريخية، وهي
+    الاسم داخل `org.pcsoft.framework.kunit.electric.resistance` فهي **وحدة سيمنز الزئبقية** التاريخية، وهي
     *مقاومة* مقدارها 0.9534 Ω. وهما كمّيتان غير مرتبطتين في حزمتين مختلفتين.
 
 تدعم الوحدات المسمّاة بادئات SI عبر `KPrefixBuilder` (`milli.siemens`، `micro.siemens`،
@@ -39,7 +39,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val g = 4 of siemens
 g into siemens                    // 4.0
@@ -73,13 +73,13 @@ g into milli.siemens              // 4000.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 // مثال واقعي - مواصَلة كابل تغذية: كابل يمرّ به 2 A مع هبوط جهد مقيس 1 V
 // مواصَلته 2 S (أي مقاومة 0.5 Ω).
@@ -98,7 +98,7 @@ raw.toConductance() == (2 of siemens)    // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val s = (100 of siemens) + (40 of siemens)  // 140 S
 (100 of siemens) > (40 of siemens)          // true
@@ -109,7 +109,7 @@ val s = (100 of siemens) + (40 of siemens)  // 140 S
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 (4 of siemens).toString()     // "4.0 S" (الوحدة الأساسية)
 ```

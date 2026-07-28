@@ -1,6 +1,6 @@
 # 温度差
 
-パッケージ: `org.pcsoft.framework.kunit.temperature`
+パッケージ: `org.pcsoft.framework.kunit.thermo.temperature`
 基本単位: **ケルビン**(`KTemperatureDifferenceUnit.BASE == KTemperatureDifferenceUnit.KELVIN`)
 
 種別: **ネイティブ単位**
@@ -32,7 +32,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val d1 = (30 of celsius) - (10 of celsius)   // KTemperatureDifferenceUnitInstance: 20 ΔK
 val d2 = KTemperatureDifference.ofKelvin(20) // 明示的、d1 と等しい
@@ -44,7 +44,7 @@ d1.value                                      // 20.0(ケルビン)
 `+`/`-`/比較は通常の線形な同型演算子です(差と差の和は差):
 
 ```kotlin
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val sum  = KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10) // 30 ΔK
 val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin(10) // 10 ΔK
@@ -64,7 +64,7 @@ val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUn
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius) + KTemperatureDifference.ofKelvin(5) // KTemperatureUnitInstance: 303.15 K
 ```
@@ -75,9 +75,9 @@ import org.pcsoft.framework.kunit.temperature.*
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.bytes
 import org.pcsoft.framework.kunit.times
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 KTemperatureDifference.ofKelvin(2) * (3 of bytes) // KMixedUnitInstance
 ```
@@ -87,7 +87,7 @@ KTemperatureDifference.ofKelvin(2) * (3 of bytes) // KMixedUnitInstance
 基本単位の `toString()` のみが存在します(ケルビン):
 
 ```kotlin
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 KTemperatureDifference.ofKelvin(20).toString() // "20.0 ΔK"
 ```

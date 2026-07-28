@@ -1,6 +1,6 @@
 # 电压
 
-包: `org.pcsoft.framework.kunit.voltage`
+包: `org.pcsoft.framework.kunit.electric.voltage`
 基本单位:**伏特**(`KVoltageUnit.BASE == KVoltageUnit.VOLT`)
 
 类型：**构造单位**
@@ -29,7 +29,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val u = 230 of volts
 u into volts                 // 230.0
@@ -54,12 +54,12 @@ u into kilo.volts            // 0.23
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 // 实际示例 —— 欧姆定律:通过 2 A 电流的 115 Ω 电阻产生 230 V 电压降。
 val u = (115 of ohms) * (2 of amperes)   // KVoltageUnitInstance,230 V
@@ -73,7 +73,7 @@ raw.toVoltage() == (230 of volts)        // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val s = (100 of volts) + (40 of volts)  // 140 V
 (100 of volts) > (40 of volts)          // true
@@ -84,7 +84,7 @@ val s = (100 of volts) + (40 of volts)  // 140 V
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 (230 of volts).toString()    // "230.0 V"(基本单位)
 ```

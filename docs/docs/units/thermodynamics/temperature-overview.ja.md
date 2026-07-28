@@ -1,6 +1,6 @@
 # 温度 — 概要
 
-パッケージ: `org.pcsoft.framework.kunit.temperature`
+パッケージ: `org.pcsoft.framework.kunit.thermo.temperature`
 
 温度は**2つの関連グループ**でモデル化されます。温度の読み値と温度の*変化*は物理的に異なる種類の量だからです。
 この区別を正しく扱うことが、演算を正しくする鍵です。
@@ -20,7 +20,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val a = 30 of celsius
 val b = 10 of celsius

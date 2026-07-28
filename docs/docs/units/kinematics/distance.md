@@ -1,6 +1,6 @@
 # Distance
 
-Package: `org.pcsoft.framework.kunit.distance`
+Package: `org.pcsoft.framework.kunit.kinematic.distance`
 Base unit: **meter** (`KDistanceUnit.BASE == KDistanceUnit.METER`)
 
 Type: **native unit**
@@ -66,7 +66,7 @@ Each `Token` is a value-1 `KLengthUnitInstance` used with both `of` (build) and 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val d = 5 of miles
 d.value               // 8046.72 (normalized to meters)
@@ -80,7 +80,7 @@ d into nauticalMiles  // ≈ 4.3452
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // + / - : same group, automatic conversion between different length units
 val a = (1 of miles) + (500 of meters)   // KLengthUnitInstance, normalized to meters
@@ -107,7 +107,7 @@ circle `A = π · r²` entirely through the unit system:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
 val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -143,7 +143,7 @@ syntax (see [Powers with `pow`](#powers-with-pow)). The following named special-
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val plot = 3 of hectares
 plot.value        // 30000.0 (m²)
@@ -178,7 +178,7 @@ use `pow` (see [Powers with `pow`](#powers-with-pow)). The following named speci
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val tank = 200 of liters
 tank.value          // 0.2 (m³)
@@ -203,7 +203,7 @@ yields a `KAreaUnitInstance`, `pow 3` a `KVolumeUnitInstance`, other exponents t
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val area = (2 of meters) pow 2         // KAreaUnitInstance: 4.0 m²
 val big = (2 of kilo.meters) pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
@@ -226,7 +226,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // Construction: "5 of kilo.meters" -> KLengthUnitInstance (== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -249,7 +249,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 (5 of meters).toString()               // "5.0 m" (base unit representation)
 "${(5 of miles) into miles} mi"        // "5.0 mi"

@@ -1,6 +1,6 @@
 # द्रव्यमान
 
-पैकेज: `org.pcsoft.framework.kunit.mass`
+पैकेज: `org.pcsoft.framework.kunit.mechanic.mass`
 मूल इकाई: **ग्राम** (`KMassUnit.BASE == KMassUnit.GRAM`)
 
 प्रकार: **नेटिव इकाई**
@@ -49,7 +49,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val m = 2 of kilo.grams      // 2000 g (किलोग्राम `kilo.grams` है)
 m.value                      // 2000.0 (ग्राम में प्रसामान्यीकृत)
@@ -62,7 +62,7 @@ m into pounds                // ≈ 4.409 (पाउंड में वाप�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // + / - : समान समूह, इकाइयों के बीच स्वचालित रूपांतरण
 val a = (1 of kilo.grams) + (500 of grams)   // KMassUnitInstance: 1500.0 g
@@ -87,7 +87,7 @@ infix `pow` संकारक से किसी मान को एक प�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val squared = (2 of grams) pow 2     // KMixedUnitInstance: 4.0 g²
 ```
@@ -103,7 +103,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).value    // 1000.0     (किलोग्राम)
 (1 of milli.grams).value   // 0.001      (मिलीग्राम)
@@ -119,7 +119,7 @@ import org.pcsoft.framework.kunit.mass.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).toString()             // "1000.0 g" (मूल इकाई निरूपण)
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"

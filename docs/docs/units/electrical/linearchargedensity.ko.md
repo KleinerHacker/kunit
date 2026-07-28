@@ -1,6 +1,6 @@
 # 선전하 밀도 (Linear Charge Density)
 
-패키지: `org.pcsoft.framework.kunit.linearchargedensity`
+패키지: `org.pcsoft.framework.kunit.electric.linearchargedensity`
 기본 단위: **미터당 쿨롬(coulomb per meter)**
 (`KLinearChargeDensityUnit.BASE == KLinearChargeDensityUnit.COULOMB_PER_METER`)
 
@@ -24,9 +24,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 val lambda = (5 of micro.coulombs) / (2 of meters)  // 2.5e-6 C/m
 lambda.value                                        // 2.5e-6 (C/m으로 정규화)
@@ -57,11 +57,11 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 // 실제 사례 - 2 m에 걸쳐 5 µC을 운반하는 필라멘트는 2.5 µC/m의 선전하 밀도를 가집니다.
 val lambda = (5 of micro.coulombs) / (2 of meters)   // 2.5e-6 C/m
@@ -79,9 +79,9 @@ raw.toLinearChargeDensity() == lambda                // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 val a = (2 of coulombs) / (1 of meters)
 val b = (3 of coulombs) / (1 of meters)
@@ -94,9 +94,9 @@ b > a            // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 ((2 of coulombs) / (1 of meters)).toString()   // "2.0 C/m" (기본 단위)
 ```

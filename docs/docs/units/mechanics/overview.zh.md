@@ -1,6 +1,6 @@
 # 力学 — 概述
 
-包：`org.pcsoft.framework.kunit.mass`、`…force`、`…pressure`、`…density`、`…areadensity`、`…power`、
+包：`org.pcsoft.framework.kunit.mechanic.mass`、`…force`、`…pressure`、`…density`、`…areadensity`、`…power`、
 `…energy`
 
 力学(动力学)追问物体**为何**运动,以及物质如何分布 —— 质量、作用于它的力、力在面积上施加的压力,
@@ -49,11 +49,11 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.acceleration.*
-import org.pcsoft.framework.kunit.force.*
-import org.pcsoft.framework.kunit.pressure.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
+import org.pcsoft.framework.kunit.mechanic.force.*
+import org.pcsoft.framework.kunit.mechanic.pressure.*
 
 val f = (2 of kilo.grams) * (1 of standardGravities)  // KForceUnitInstance
 f into newtons                                         // ≈ 19.61(N)
@@ -71,10 +71,10 @@ p into pascals                                         // ≈ 39.23(Pa)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.density.*
+import org.pcsoft.framework.kunit.mechanic.density.*
 
 val steel = (7850 of kilo.grams) / (1 of (meters pow 3)) // KDensityUnitInstance,7850 kg/m³
 val mass = steel * (2 of liters)                          // KMassUnitInstance
@@ -90,7 +90,7 @@ mass into kilo.grams                                      // 15.7(每 2 L 的 kg
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.force.*
+import org.pcsoft.framework.kunit.mechanic.force.*
 
 val f = 10 of newtons
 f.toString()                 // "10.0 N"(基准单位)

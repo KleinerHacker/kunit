@@ -1,6 +1,6 @@
 # Temperature — Overview
 
-Package: `org.pcsoft.framework.kunit.temperature`
+Package: `org.pcsoft.framework.kunit.thermo.temperature`
 
 Temperature is modelled by **two related groups**, because a temperature reading and a temperature
 *change* are physically different kinds of quantity. Getting this distinction right is what makes the
@@ -22,7 +22,7 @@ This is exactly the point/vector distinction of an affine space, and it dictates
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val a = 30 of celsius
 val b = 10 of celsius

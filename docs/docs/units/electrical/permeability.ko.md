@@ -1,6 +1,6 @@
 # 투자율 (Permeability)
 
-패키지: `org.pcsoft.framework.kunit.permeability`
+패키지: `org.pcsoft.framework.kunit.electric.permeability`
 기본 단위: **미터당 헨리(henry per meter)** (`KPermeabilityUnit.BASE == KPermeabilityUnit.HENRY_PER_METER`)
 
 유형: **구성 단위(constructed unit)**
@@ -34,7 +34,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.permeability.*
+import org.pcsoft.framework.kunit.electric.permeability.*
 
 val mu = 1 of vacuumPermeability      // μ₀
 mu into henriesPerMeter               // 1.25663706127e-6
@@ -71,14 +71,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.inductance.henries
-import org.pcsoft.framework.kunit.magneticfieldstrength.amperesPerMeter
-import org.pcsoft.framework.kunit.magneticfluxdensity.teslas
-import org.pcsoft.framework.kunit.permeability.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.inductance.henries
+import org.pcsoft.framework.kunit.electric.magneticfieldstrength.amperesPerMeter
+import org.pcsoft.framework.kunit.electric.magneticfluxdensity.teslas
+import org.pcsoft.framework.kunit.electric.permeability.*
 
 // 실제 사례 - 진공에서 1000 A/m의 장은 1.257 mT의 자속 밀도를 만듭니다.
 val b = (1 of vacuumPermeability) * (1000 of amperesPerMeter)  // 1.25663706127e-3 T
@@ -96,7 +96,7 @@ raw.toPermeability() == (2 of henriesPerMeter)                 // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.permeability.*
+import org.pcsoft.framework.kunit.electric.permeability.*
 
 val s = (1 of henriesPerMeter) + (1 of henriesPerCentimeter)  // 101 H/m
 (1 of henriesPerCentimeter) > (1 of henriesPerMeter)          // true
@@ -107,7 +107,7 @@ val s = (1 of henriesPerMeter) + (1 of henriesPerCentimeter)  // 101 H/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.permeability.*
+import org.pcsoft.framework.kunit.electric.permeability.*
 
 (1 of henriesPerCentimeter).toString()   // "100.0 H/m" (기본 단위)
 ```

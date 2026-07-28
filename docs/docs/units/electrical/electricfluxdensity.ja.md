@@ -1,6 +1,6 @@
 # 電束密度
 
-パッケージ: `org.pcsoft.framework.kunit.electricfluxdensity`
+パッケージ: `org.pcsoft.framework.kunit.electric.electricfluxdensity`
 基本単位: **平方メートルあたりのクーロン**
 (`KElectricFluxDensityUnit.BASE == KElectricFluxDensityUnit.COULOMB_PER_SQUARE_METER`)
 
@@ -34,7 +34,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 val d = 5 of micro.coulombsPerSquareMeter   // 帯電したコンデンサ板
 d into micro.coulombsPerSquareMeter         // 5.0
@@ -69,13 +69,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.distance.ares
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.ares
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 // 実例 - 20 µCが4 m²のコンデンサ板に広がると5 µC/m²になる。
 val plate: KAreaUnitInstance = 0.04 of ares            // 4 m²
@@ -90,7 +90,7 @@ raw.toElectricFluxDensity() == d                       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 val s = (1 of coulombsPerSquareMeter) + (1 of coulombsPerSquareCentimeter)  // 10001 C/m²
 (1 of coulombsPerSquareCentimeter) > (1 of coulombsPerSquareMeter)          // true
@@ -101,7 +101,7 @@ val s = (1 of coulombsPerSquareMeter) + (1 of coulombsPerSquareCentimeter)  // 1
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfluxdensity.*
+import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 (1 of coulombsPerSquareCentimeter).toString()   // "10000.0 C/m²"（基本単位）
 ```

@@ -62,7 +62,7 @@ group you need.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // Build pure length values with `of` from any Number type
 val distance = 5 of meters
@@ -95,7 +95,7 @@ println(tank into usGallons)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 
 // `5 of kilo.meters` -> KLengthUnitInstance (== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -107,8 +107,8 @@ println(fiveKm.value) // 5000.0 (normalized to meters)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // Compose a unit expression from value-1 templates and scale it with `of`
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²

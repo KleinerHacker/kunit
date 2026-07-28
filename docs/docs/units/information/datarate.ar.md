@@ -1,6 +1,6 @@
 # معدّل البيانات
 
-الحزمة: `org.pcsoft.framework.kunit.datarate`
+الحزمة: `org.pcsoft.framework.kunit.it.datarate`
 الوحدة الأساسية: **بايت لكل ثانية** (`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
 
 النوع: **وحدة مركّبة**
@@ -24,9 +24,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = 100 of bytes / seconds
 r.value                  // 100.0 (مُطبَّع إلى B/s)
@@ -49,9 +49,9 @@ r into (bits / seconds)  // 800.0 (يُقرأ ثانيةً بـ bit/s)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // --- الوحدات الأساسية -> معدّل بيانات --------------------------------------
 val r = (100 of bytes) / (10 of seconds)   // KDataRateUnitInstance (لا حاجة إلى .toDataRate()!)
@@ -81,9 +81,9 @@ time into minutes     // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // + / - : المجموعة نفسها، تحويل تلقائي بين المعدّلات القائمة على البايت والبت
 val a = (1 of bytes / seconds) + (8 of bits / seconds)   // KDataRateUnitInstance، 2 B/s
@@ -107,9 +107,9 @@ val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInst
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // عشري مقابل ثنائي: 1000 (kilo) != 1024 (kibi)
 (1 of kilo.bytes / seconds).value // 1000.0
@@ -128,10 +128,10 @@ r into (kibi.bytes / seconds)  // 4.0   (KiB/s)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.storage.kibi
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.kibi
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 (10 of bytes / seconds).toString()  // "10.0 B/s" (الوحدة الأساسية)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"

@@ -1,6 +1,6 @@
 # Energy (Thermodynamics)
 
-Package: `org.pcsoft.framework.kunit.energy`
+Package: `org.pcsoft.framework.kunit.common.energy`
 Base unit: **joule** (`KEnergyUnit.BASE == KEnergyUnit.JOULE`)
 
 Type: **constructed unit**
@@ -38,7 +38,7 @@ The **kilowatt hour has no token of its own** — it is not a genuinely named un
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = 2000 of kilo.calories   // a daily diet
 q into kilo.joules              // 8368.0
@@ -74,12 +74,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.watts
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.common.energy.*
 
 // Real-world example - a water boiler: a 2 kW heat flow over 10 minutes delivers 1200 kJ of heat.
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
@@ -100,7 +100,7 @@ raw.toEnergy() == (1200 of kilo.joules)            // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val s = (100 of joules) + (40 of joules)  // 140 J
 (100 of joules) > (40 of joules)          // true
@@ -111,7 +111,7 @@ val s = (100 of joules) + (40 of joules)  // 140 J
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 (1 of britishThermalUnits).toString()     // "1055.05585262 J" (base unit)
 ```

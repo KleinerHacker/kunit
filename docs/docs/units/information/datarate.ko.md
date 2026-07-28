@@ -1,6 +1,6 @@
 # 데이터 전송률
 
-패키지: `org.pcsoft.framework.kunit.datarate`
+패키지: `org.pcsoft.framework.kunit.it.datarate`
 기본 단위: **초당 바이트** (`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
 
 유형: **구성된 단위**
@@ -23,9 +23,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = 100 of bytes / seconds
 r.value                  // 100.0(B/s로 정규화)
@@ -48,9 +48,9 @@ r into (bits / seconds)  // 800.0(bit/s로 다시 읽기)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // --- 핵심 단위 -> 데이터 전송률 --------------------------------------------
 val r = (100 of bytes) / (10 of seconds)   // KDataRateUnitInstance (.toDataRate() 불필요!)
@@ -80,9 +80,9 @@ time into minutes     // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // + / - : 같은 그룹, 바이트 기반과 비트 기반 전송률 간 자동 변환
 val a = (1 of bytes / seconds) + (8 of bits / seconds)   // KDataRateUnitInstance, 2 B/s
@@ -106,9 +106,9 @@ val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInst
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // 십진 vs 이진: 1000(kilo)!= 1024(kibi)
 (1 of kilo.bytes / seconds).value // 1000.0
@@ -127,10 +127,10 @@ r into (kibi.bytes / seconds)  // 4.0  (KiB/s)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.storage.kibi
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.kibi
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 (10 of bytes / seconds).toString()  // "10.0 B/s"(기본 단위)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"

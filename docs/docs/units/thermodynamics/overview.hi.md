@@ -1,6 +1,6 @@
 # ऊष्मागतिकी — अवलोकन
 
-पैकेज: `org.pcsoft.framework.kunit.temperature`, `…energy`, `…power`
+पैकेज: `org.pcsoft.framework.kunit.thermo.temperature`, `…energy`, `…power`
 
 ऊष्मागतिकी **ऊष्मा और तापमान** का भौतिकी है। KUnit में यह क्षेत्र तापमान पर केंद्रित है, जिसे
 **दो संबंधित नेटिव समूहों** से मॉडल किया जाता है — क्योंकि तापमान का *पठन* और तापमान का *परिवर्तन*
@@ -52,7 +52,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val start = 10 of celsius
 val end   = 30 of celsius
@@ -72,10 +72,10 @@ val back = start + KTemperatureDifference.ofKelvin(20) // KTemperatureUnitInstan
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
 q into kilo.joules                            // 1200.0
@@ -92,7 +92,7 @@ t into seconds                                // 600.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()                       // "298.15 K" (परम, मूल इकाई)
 KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK" (अंतराल)

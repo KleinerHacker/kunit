@@ -3,7 +3,7 @@
 > **温度**主题的一部分 —— 参见[概述](temperature-overview.md)以及线性对应物
 > [温度差](temperature-difference.md)。
 
-包: `org.pcsoft.framework.kunit.temperature`
+包: `org.pcsoft.framework.kunit.thermo.temperature`
 基本单位: **开尔文**(`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
 
 类型：**原生单位**
@@ -33,7 +33,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val t = 25 of celsius
 t.value             // 298.15(归一化为绝对开尔文)
@@ -59,7 +59,7 @@ t into kelvin       // 298.15
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 // 绝对 − 绝对 = 温度差(开尔文)
 val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
@@ -89,7 +89,7 @@ val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUn
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 ```
@@ -100,8 +100,8 @@ val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.thermo.temperature.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```
@@ -113,7 +113,7 @@ val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()               // "298.15 K"(基本单位表示)
 "${(25 of celsius) into fahrenheit} °F"  // "77.0 °F"

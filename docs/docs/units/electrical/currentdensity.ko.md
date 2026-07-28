@@ -1,6 +1,6 @@
 # 전류 밀도 (Current Density)
 
-패키지: `org.pcsoft.framework.kunit.currentdensity`
+패키지: `org.pcsoft.framework.kunit.electric.currentdensity`
 기본 단위: **제곱미터당 암페어(ampere per square meter)**
 (`KCurrentDensityUnit.BASE == KCurrentDensityUnit.AMPERE_PER_SQUARE_METER`)
 
@@ -22,9 +22,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val crossSection = (2.5 of milli.meters) * (1 of milli.meters)  // 2.5 mm²
 val j = (16 of amperes) / crossSection                          // KCurrentDensityUnitInstance
@@ -56,9 +56,9 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 // 실제 사례 - 전선 규격: 2.5 mm² 구리 전선을 통과하는 16 A는 6.4 A/mm²입니다.
 val j = (16 of amperes) / ((2.5 of milli.meters) * (1 of milli.meters))
@@ -78,9 +78,9 @@ raw.toCurrentDensity() == j                 // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 val a = (3 of amperes) / ((1 of meters) * (1 of meters))
 val b = (1 of amperes) / ((1 of meters) * (1 of meters))
@@ -93,9 +93,9 @@ a * b                                     // KMixedUnitInstance (그룹을 벗�
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.currentdensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 ((5 of amperes) / ((1 of meters) * (1 of meters))).toString()  // "5.0 A/m²" (기본 단위)
 ```

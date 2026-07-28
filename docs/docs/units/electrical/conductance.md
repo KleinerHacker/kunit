@@ -1,6 +1,6 @@
 # Conductance
 
-Package: `org.pcsoft.framework.kunit.conductance`
+Package: `org.pcsoft.framework.kunit.electric.conductance`
 Base unit: **siemens** (`KConductanceUnit.BASE == KConductanceUnit.SIEMENS`)
 
 Type: **constructed unit**
@@ -29,7 +29,7 @@ value-1 tokens (used with `of`/`into`):
 
 !!! note "`siemens` vs. `siemensUnits`"
     `siemens` (this package) is the SI unit of **conductance**. The similarly named
-    `siemensUnits` in `org.pcsoft.framework.kunit.resistance` is the historical **Siemens mercury unit**,
+    `siemensUnits` in `org.pcsoft.framework.kunit.electric.resistance` is the historical **Siemens mercury unit**,
     a *resistance* of 0.9534 Ω. They are unrelated quantities in different packages.
 
 Named units support the SI prefixes via `KPrefixBuilder` (`milli.siemens`, `micro.siemens`,
@@ -39,7 +39,7 @@ Named units support the SI prefixes via `KPrefixBuilder` (`milli.siemens`, `micr
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val g = 4 of siemens
 g into siemens                    // 4.0
@@ -74,13 +74,13 @@ The inverse operators tie conductance, voltage and current together:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 // Real-world example - conductance of a supply cable: a cable carrying 2 A with a
 // measured voltage drop of 1 V has a conductance of 2 S (i.e. a resistance of 0.5 Ω).
@@ -99,7 +99,7 @@ raw.toConductance() == (2 of siemens)    // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val s = (100 of siemens) + (40 of siemens)  // 140 S
 (100 of siemens) > (40 of siemens)          // true
@@ -110,7 +110,7 @@ val s = (100 of siemens) + (40 of siemens)  // 140 S
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 (4 of siemens).toString()     // "4.0 S" (base unit)
 ```

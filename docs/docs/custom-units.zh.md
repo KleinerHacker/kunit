@@ -3,7 +3,7 @@
 kunit 今天提供了多个单位组([距离](units/kinematics/distance.md)、[时间](units/kinematics/time.md)、[存储](units/information/storage.md)、
 [速度](units/kinematics/speed.md)、[数据传输率](units/information/datarate.md)),但整个引擎(`KUnit`、`KMixedUnitInstance`、`of`/`into`
 动词、前缀构建器)是通用且与组无关的。添加一个新的物理量意味着遵循相同的模式。本页逐步介绍如何添加一个演示性的
-**质量**组(`org.pcsoft.framework.kunit.mass`)—— 一个仿照存储组的简单一维组。
+**质量**组(`org.pcsoft.framework.kunit.mechanic.mass`)—— 一个仿照存储组的简单一维组。
 
 ## 1. 创建子包和 `KUnit` 枚举
 
@@ -11,7 +11,7 @@ kunit 今天提供了多个单位组([距离](units/kinematics/distance.md)、[�
 `baseValue` 是到该组基本单位的转换系数 —— 基本单位本身的 `baseValue == 1.0`。
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -43,7 +43,7 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 `into` 动词。复制 `KStorageUnitInstance` 的形态。
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -88,7 +88,7 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 `KMassUnitBareValues.kt`:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 千克([KMassUnit.KILOGRAM])。 */
 val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
@@ -106,7 +106,7 @@ val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 `KMassUnitExtensions.kt`(质量接受任何量级,因此属性挂在公共基类 `KPrefixBuilder` 上):
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
@@ -132,7 +132,7 @@ val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUni
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val a = 500 of grams
 val b = 2 of pounds
@@ -148,7 +148,7 @@ val heavier = b > a          // true
 如果你的组有绑定到特定缩放的常用命名单位(如面积的公顷),将它们作为命名的值 1 实例添加 —— 不需要单独的目标类型:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 公吨(1000 kg)。 */
 val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
@@ -157,7 +157,7 @@ val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 println((2500 of grams) into tonnes) // 0.0025
 ```
@@ -170,8 +170,8 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // 密度 = 质量 / 体积(通用 KMixedUnitInstance: [KILOGRAM^1, METER^-3])
 val density = (5 of kilograms) / (2 of liters)

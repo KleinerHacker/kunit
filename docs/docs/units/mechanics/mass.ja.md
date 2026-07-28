@@ -1,6 +1,6 @@
 # 質量
 
-パッケージ: `org.pcsoft.framework.kunit.mass`
+パッケージ: `org.pcsoft.framework.kunit.mechanic.mass`
 基準単位: **グラム** (`KMassUnit.BASE == KMassUnit.GRAM`)
 
 種別: **ネイティブ単位**
@@ -48,7 +48,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val m = 2 of kilo.grams      // 2000 g（キログラムは `kilo.grams`）
 m.value                      // 2000.0（グラムに正規化）
@@ -61,7 +61,7 @@ m into pounds                // ≈ 4.409（ポンドで読み取り）
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // + / - : 同一グループ、単位間の自動変換
 val a = (1 of kilo.grams) + (500 of grams)   // KMassUnitInstance: 1500.0 g
@@ -85,7 +85,7 @@ val b = (1 of kilo.grams) - (500 of grams)   // KMassUnitInstance: 500.0 g
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val squared = (2 of grams) pow 2     // KMixedUnitInstance: 4.0 g²
 ```
@@ -100,7 +100,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).value    // 1000.0     （キログラム）
 (1 of milli.grams).value   // 0.001      （ミリグラム）
@@ -116,7 +116,7 @@ import org.pcsoft.framework.kunit.mass.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).toString()             // "1000.0 g"（基準単位表現）
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"

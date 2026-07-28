@@ -1,6 +1,6 @@
 # 电气工程 — 概述
 
-包：`org.pcsoft.framework.kunit.ec`、`…voltage`、`…resistance`、`…charge`、`…conductance`、
+包：`org.pcsoft.framework.kunit.electric.ec`、`…voltage`、`…resistance`、`…charge`、`…conductance`、
 `…magneticfieldstrength`、`…capacitance`、`…inductance`、`…magneticflux`、`…magneticfluxdensity`、
 `…currentdensity`、`…chargedensity`、`…resistivity`、`…conductivity`、`…power`、`…energy`,
 `…electricfieldstrength`、`…electricfluxdensity`、`…permittivity`、`…permeability`、
@@ -151,9 +151,9 @@ KUnit 将该定律直接表达为类型化的 `*` 与 `/` 运算符:1 个**原�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val r = (230 of volts) / (2 of amperes)   // KResistanceUnitInstance,115 Ω
 r into ohms                               // 115.0
@@ -173,11 +173,11 @@ i into amperes                            // 2.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val p = (230 of volts) * (10 of amperes)  // KPowerUnitInstance
 p into kilo.watts                         // 2.3
@@ -195,7 +195,7 @@ w into kilo.joules                        // 24840.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val u = 230 of volts
 u.toString()               // "230.0 V"(基准单位)

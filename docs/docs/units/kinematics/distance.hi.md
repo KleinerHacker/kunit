@@ -1,6 +1,6 @@
 # दूरी
 
-पैकेज: `org.pcsoft.framework.kunit.distance`
+पैकेज: `org.pcsoft.framework.kunit.kinematic.distance`
 मूल इकाई: **मीटर** (`KDistanceUnit.BASE == KDistanceUnit.METER`)
 
 प्रकार: **नेटिव इकाई**
@@ -66,7 +66,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val d = 5 of miles
 d.value               // 8046.72 (मीटर में प्रसामान्यीकृत)
@@ -80,7 +80,7 @@ d into nauticalMiles  // ≈ 4.3452
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // + / - : समान समूह, भिन्न लंबाई इकाइयों के बीच स्वचालित रूपांतरण
 val a = (1 of miles) + (500 of meters)   // KLengthUnitInstance, मीटर में प्रसामान्यीकृत
@@ -107,7 +107,7 @@ val ratio = (10 of meters) / (2 of meters)    // KMixedUnitInstance (विम�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
 val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -143,7 +143,7 @@ val half = area / 2              // KAreaUnitInstance, वृत्त क्ष
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val plot = 3 of hectares
 plot.value        // 30000.0 (m²)
@@ -178,7 +178,7 @@ plot + computed   // अनुमत: दोनों क्षेत्रफ�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val tank = 200 of liters
 tank.value          // 0.2 (m³)
@@ -204,7 +204,7 @@ infix `pow` संकारक से किसी मान को एक प�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 val area = (2 of meters) pow 2         // KAreaUnitInstance: 4.0 m²
 val big = (2 of kilo.meters) pow 2     // KAreaUnitInstance: 4 000 000 m²  ((2000 m)²)
@@ -227,7 +227,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // निर्माण: "5 of kilo.meters" -> KLengthUnitInstance (== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -250,7 +250,7 @@ tank into milli.liters  // 200000.0 (mL)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 (5 of meters).toString()               // "5.0 m" (मूल इकाई निरूपण)
 "${(5 of miles) into miles} mi"        // "5.0 mi"

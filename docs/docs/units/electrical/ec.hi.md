@@ -1,6 +1,6 @@
 # विद्युत धारा
 
-पैकेज: `org.pcsoft.framework.kunit.ec`
+पैकेज: `org.pcsoft.framework.kunit.electric.ec`
 मूल इकाई: **ऐम्पियर** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`)
 
 प्रकार: **नेटिव इकाई**
@@ -36,7 +36,7 @@ SI ऐम्पियर के अतिरिक्त, समूह दो �
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // 500 फेरों वाली एक कुंडली जिसमें 0.4 A बहती है, Θ = 200 At उत्पन्न करती है।
 val theta = (500 * 0.4) of ampereTurns
@@ -51,7 +51,7 @@ theta == (200 of amperes)       // true (विमीय रूप से सम
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val i = 2 of milli.amperes    // 0.002 A
 i.value                       // 0.002 (ऐम्पियर में प्रसामान्यीकृत)
@@ -68,7 +68,7 @@ i into amperes                // 0.002 (ऐम्पियर में वा�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val voltage = 5.0    // V
 val resistance = 220.0 // Ω
@@ -80,7 +80,7 @@ current into milli.amperes                         // ≈ 22.7 mA
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // + / - : समान समूह, इकाइयों के बीच स्वचालित रूपांतरण
 val a = (1 of amperes) + (1 of biot)   // KElectricCurrentUnitInstance: 11.0 A
@@ -106,7 +106,7 @@ infix `pow` संकारक से किसी मान को एक प�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val squared = (2 of amperes) pow 2     // KMixedUnitInstance: 4.0 A²
 ```
@@ -122,7 +122,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of milli.amperes).value   // 0.001      (मिलीऐम्पियर)
 (1 of kilo.amperes).value    // 1000.0     (किलोऐम्पियर)
@@ -138,7 +138,7 @@ import org.pcsoft.framework.kunit.ec.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of biot).toString()                       // "10.0 A" (मूल इकाई निरूपण)
 "${(0.002 of amperes) into milli.amperes} mA" // "2.0 mA"

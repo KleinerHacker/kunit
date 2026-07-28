@@ -1,6 +1,6 @@
 # 信息技术 — 概述
 
-包：`org.pcsoft.framework.kunit.storage`、`…datarate`
+包：`org.pcsoft.framework.kunit.it.storage`、`…datarate`
 
 信息技术处理**数字数据量**及其移动的速度。KUnit 将存储的量建模为**原生**基本量(存储,以字节计),
 将吞吐量建模为由它**构造**的量(数据速率 = 存储 ÷ 时间),从而把"这个下载要多久?"这类日常问题变成
@@ -34,9 +34,9 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val amount = 500 of mega.bytes
 val rate   = 10 of mega.bytes / seconds        // KDataRateUnitInstance,10 MB/s
@@ -56,7 +56,7 @@ transferred into mega.bytes                     // 500.0(MB)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 4096 of bytes
 size into kilo.bytes    // 4.096(kB,十进制 1000)
@@ -71,9 +71,9 @@ size into kibi.bytes    // 4.0  (KiB,二进制 1024)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = (10 of bytes) / (1 of seconds)   // KDataRateUnitInstance
 r.toString()                             // "10.0 B/s"(基准单位)

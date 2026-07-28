@@ -288,7 +288,7 @@ operator fun KUnitInstance<*>.div(other: KUnitInstance<*>): KMixedUnitInstance =
  *
  * Example:
  * ```kotlin
- * import org.pcsoft.framework.kunit.distance.*
+ * import org.pcsoft.framework.kunit.kinematic.distance.*
  *
  * val r = 12 of centi.meters       // KLengthUnitInstance, 0.12 m
  * val area = (r * r) * Math.PI     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -309,7 +309,7 @@ operator fun <T : KUnitMeasurable> T.times(factor: Number): T = scaledBy(factor.
  *
  * Example:
  * ```kotlin
- * import org.pcsoft.framework.kunit.distance.*
+ * import org.pcsoft.framework.kunit.kinematic.distance.*
  *
  * val leg = (10 of kilo.meters) / 4 // KLengthUnitInstance, 2.5 km (one quarter of the route)
  * ```
@@ -324,7 +324,7 @@ operator fun <T : KUnitMeasurable> T.div(factor: Number): T = scaledBy(1.0 / fac
  *
  * Example:
  * ```kotlin
- * import org.pcsoft.framework.kunit.distance.*
+ * import org.pcsoft.framework.kunit.kinematic.distance.*
  *
  * val r = 12 of centi.meters
  * val area = Math.PI * (r * r)  // KAreaUnitInstance: π·r² ≈ 0.04524 m²
@@ -341,7 +341,7 @@ operator fun <T : KUnitMeasurable> Number.times(unit: T): T = unit.scaledBy(this
  * This is the idiomatic way to build a reciprocal quantity whose dimension has no dedicated type, e.g.
  * an inverse length:
  * ```kotlin
- * import org.pcsoft.framework.kunit.distance.*
+ * import org.pcsoft.framework.kunit.kinematic.distance.*
  *
  * val inverseLength = 1 / (2 of meters) // KMixedUnitInstance: value=0.5, units=[METER^-1]
  * ```

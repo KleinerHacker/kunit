@@ -1,6 +1,6 @@
 # 加速度
 
-パッケージ: `org.pcsoft.framework.kunit.acceleration`
+パッケージ: `org.pcsoft.framework.kunit.kinematic.acceleration`
 基本単位: **メートル毎秒毎秒**(`KAccelerationUnit.BASE == KAccelerationUnit.METERS_PER_SECOND_SQUARED`)
 
 種別: **構成された単位**
@@ -27,7 +27,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.acceleration.*
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 val a = 5 of gals               // KAccelerationUnitInstance
 a.value                         // 0.05(m/s² に正規化)
@@ -47,10 +47,10 @@ a into standardGravities        // ≈ 0.0051
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
-import org.pcsoft.framework.kunit.acceleration.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 val a = ((100 of meters) / (10 of seconds)) / (5 of seconds) // KAccelerationUnitInstance, 2 m/s²
 val v = a * (3 of seconds)      // KSpeedUnitInstance, 6 m/s
@@ -62,7 +62,7 @@ t into seconds                  // 5.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.acceleration.*
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 // + / - : 同じグループ、異なる加速度式の間で自動変換
 val s = (10 of gals) + (4 of gals)   // 0.14 m/s²
@@ -78,7 +78,7 @@ val s = (10 of gals) + (4 of gals)   // 0.14 m/s²
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.acceleration.*
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 (1 of gals).toString()               // "0.01 m/s²"(基本単位)
 "${(1 of standardGravities) into gals} Gal" // "980.665 Gal"

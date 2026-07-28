@@ -1,6 +1,6 @@
 # Storage
 
-Package: `org.pcsoft.framework.kunit.storage`
+Package: `org.pcsoft.framework.kunit.it.storage`
 Base unit: **byte** (`KStorageUnit.BASE == KStorageUnit.BYTE`)
 
 Type: **native unit**
@@ -33,7 +33,7 @@ One byte is eight bits. Each `Token` is a value-1 `KStorageUnitInstance` used wi
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 5 of bytes
 size.value          // 5.0 (normalized to bytes)
@@ -46,8 +46,8 @@ size into bits      // 40.0 (read back in bits)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // + / - : same group, automatic conversion between bit and byte
 val a = (1 of bytes) + (8 of bits)   // KStorageUnitInstance: 2.0 B
@@ -74,7 +74,7 @@ storage group `pow` returns a generic `KMixedUnitInstance` (storage has no dimen
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 ```
@@ -90,7 +90,7 @@ does not compile.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val fiveKb = 5 of kilo.bytes         // KStorageUnitInstance (== 5000 B)
 fiveKb.value                         // 5000.0
@@ -110,7 +110,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1 of kilo.bytes).value   // 1000.0     (decimal)
 (1 of kibi.bytes).value   // 1024.0     (binary)
@@ -139,8 +139,8 @@ A storage value combined with a time forms a data rate (`byte·second⁻¹`), an
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (1000 of bytes) / (1 of seconds)  // 1000 B/s (typed KDataRateUnitInstance)
 val amount = rate * (60 of seconds)          // 60000 B (typed KStorageUnitInstance)
@@ -154,7 +154,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1024 of bytes).toString()               // "1024.0 B" (base unit representation)
 "${(5 of bits) into bits} bit"           // "5.0 bit"

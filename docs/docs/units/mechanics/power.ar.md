@@ -1,6 +1,6 @@
 # القدرة (ميكانيكا)
 
-الحزمة: `org.pcsoft.framework.kunit.power`
+الحزمة: `org.pcsoft.framework.kunit.common.power`
 الوحدة الأساسية: **واط** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 النوع: **وحدة مركّبة**
@@ -34,7 +34,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val p = 100 of metricHorsePowers
 p into kilo.watts               // 73.549875
@@ -68,12 +68,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.div
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.common.power.*
 
 // مثال واقعي - رافعة شحن: سحب بقوة 100 N عند سرعة 5 m/s يتطلب 500 W.
 val p = (100 of newtons) * ((5 of meters) / (1 of seconds))  // KPowerUnitInstance
@@ -94,7 +94,7 @@ raw.toPower() == (500 of watts)                               // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -105,7 +105,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (1 of metricHorsePowers).toString()     // "735.49875 W" (الوحدة الأساسية)
 ```

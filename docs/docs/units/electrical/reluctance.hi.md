@@ -1,6 +1,6 @@
 # चुंबकीय प्रतिश्रांति
 
-पैकेज: `org.pcsoft.framework.kunit.reluctance`
+पैकेज: `org.pcsoft.framework.kunit.electric.reluctance`
 आधार इकाई: **ऐम्पियर प्रति वेबर** (`KReluctanceUnit.BASE == KReluctanceUnit.AMPERE_PER_WEBER`)
 
 प्रकार: **संरचित इकाई**
@@ -38,7 +38,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 val rm = 2 of mega.amperesPerWeber    // हवा-अंतराल वाला लोहे का क्रोड
 rm into mega.amperesPerWeber          // 2.0
@@ -74,14 +74,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.ec.ampereTurns
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.inductance.henries
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.current.ampereTurns
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.inductance.henries
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // वास्तविक उदाहरण - 2 kAt चुंबकवाहक बल एक 2 MA/Wb क्रोड से होकर 1 mWb का फ्लक्स देता है।
 val rm = 2_000_000 of amperesPerWeber
@@ -101,7 +101,7 @@ raw.toReluctance() == (2 of amperesPerWeber)         // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 val series = (1 of amperesPerWeber) + (1 of inverseHenries)  // 2 A/Wb (श्रेणी चुंबकीय परिपथ)
 (3 of amperesPerWeber) > (2 of amperesPerWeber)              // true
@@ -112,7 +112,7 @@ val series = (1 of amperesPerWeber) + (1 of inverseHenries)  // 2 A/Wb (श्�
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 (2 of inverseHenries).toString()   // "2.0 A/Wb" (आधार इकाई)
 ```

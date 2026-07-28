@@ -23,6 +23,6 @@ You are an explorer agent to check the structure and style of an existing unit.
 
 This is an explorer only for MIXED UNITS.
 
-Unit pattern can be read in the package `org.pcsoft.framework.kunit.speed`, both, main and test. ONLY SCAN CODE HERE! 
+Unit pattern can be read in the package `org.pcsoft.framework.kunit.kinematic.speed`, both, main and test. ONLY SCAN CODE HERE! 
 
 DO NOT scan ANY OTHER files!

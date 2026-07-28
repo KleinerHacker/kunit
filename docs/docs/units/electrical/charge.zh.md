@@ -1,6 +1,6 @@
 # 电荷
 
-包: `org.pcsoft.framework.kunit.charge`
+包: `org.pcsoft.framework.kunit.electric.charge`
 基本单位: **库仑**(`KChargeUnit.BASE == KChargeUnit.COULOMB`)
 
 类型: **构造单位**
@@ -30,7 +30,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 val q = 470 of coulombs
 q into coulombs                        // 470.0
@@ -65,10 +65,10 @@ q into kilo.coulombs                   // 0.47
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.charge.*
 
 // 实际例子 —— 电池容量: 一节 2000 mAh 的电池存储 7200 C。
 val battery = 2000 of milli.ampereHours   // KChargeUnitInstance,7200 C
@@ -91,7 +91,7 @@ raw.toCharge() == typed                                    // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 // 一个包围 2 µC 电荷的球面,其电通量为 2 µC。
 val psi = 2 of micro.coulombs
@@ -104,7 +104,7 @@ psi into micro.coulombs        // 2.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 val s = (100 of coulombs) + (40 of coulombs)  // 140 C
 (100 of coulombs) > (40 of coulombs)          // true
@@ -115,7 +115,7 @@ val s = (100 of coulombs) + (40 of coulombs)  // 140 C
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.*
+import org.pcsoft.framework.kunit.electric.charge.*
 
 (470 of coulombs).toString()   // "470.0 C"(基本单位)
 (1 of ampereHours).toString()  // "3600.0 C"(基本单位)

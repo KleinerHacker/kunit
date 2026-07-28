@@ -1,6 +1,6 @@
 # भंडारण
 
-पैकेज: `org.pcsoft.framework.kunit.storage`
+पैकेज: `org.pcsoft.framework.kunit.it.storage`
 मूल इकाई: **बाइट** (`KStorageUnit.BASE == KStorageUnit.BYTE`)
 
 प्रकार: **नेटिव इकाई**
@@ -32,7 +32,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 5 of bytes
 size.value          // 5.0 (बाइट में प्रसामान्यीकृत)
@@ -45,8 +45,8 @@ size into bits      // 40.0 (बिट में वापस पढ़ा)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // + / - : समान समूह, बिट और बाइट के बीच स्वचालित रूपांतरण
 val a = (1 of bytes) + (8 of bits)   // KStorageUnitInstance: 2.0 B
@@ -73,7 +73,7 @@ infix `pow` संकारक से किसी मान को एक प�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 ```
@@ -89,7 +89,7 @@ val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val fiveKb = 5 of kilo.bytes         // KStorageUnitInstance (== 5000 B)
 fiveKb.value                         // 5000.0
@@ -109,7 +109,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1 of kilo.bytes).value   // 1000.0     (दशमलव)
 (1 of kibi.bytes).value   // 1024.0     (द्विआधारी)
@@ -139,8 +139,8 @@ file into kibi.bytes      // 4096.0 (KiB)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (1000 of bytes) / (1 of seconds)  // 1000 B/s (प्रकार-युक्त KDataRateUnitInstance)
 val amount = rate * (60 of seconds)          // 60000 B (प्रकार-युक्त KStorageUnitInstance)
@@ -154,7 +154,7 @@ amount into kibi.bytes                        // ≈ 58.59 (KiB)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1024 of bytes).toString()               // "1024.0 B" (मूल इकाई निरूपण)
 "${(5 of bits) into bits} bit"           // "5.0 bit"

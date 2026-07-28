@@ -1,6 +1,6 @@
 # Charge Density
 
-Package: `org.pcsoft.framework.kunit.chargedensity`
+Package: `org.pcsoft.framework.kunit.electric.chargedensity`
 Base unit: **coulomb per cubic meter** (`KChargeDensityUnit.BASE == KChargeDensityUnit.COULOMB_PER_CUBIC_METER`)
 
 Type: **constructed unit**
@@ -23,10 +23,10 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.centi
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 val rho = (6 of coulombs) / (2 of liters)  // KChargeDensityUnitInstance, 3 C/L = 3000 C/m³
 rho into (coulombs / (meters pow 3))       // 3000.0
@@ -60,10 +60,10 @@ The inverse operators tie charge, volume and charge density together:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 // Real-world example - space charge in an electrolyte: 12 mC of net charge dissolved in 4 litres of
 // electrolyte gives a charge density of 3 C/m³.
@@ -86,10 +86,10 @@ v into liters                                   // 4.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 val a = (3 of coulombs) / (1 of liters)     // 3000 C/m³
 val b = (1 of coulombs) / (1 of liters)     // 1000 C/m³
@@ -103,9 +103,9 @@ a * b                                       // KMixedUnitInstance (escapes the g
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.chargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.electric.chargedensity.*
 
 ((1 of coulombs) / (1 of liters)).toString() // "1000.0 C/m³" (base unit)
 ```

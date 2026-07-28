@@ -1,6 +1,6 @@
 # 温度 —— 概述
 
-包: `org.pcsoft.framework.kunit.temperature`
+包: `org.pcsoft.framework.kunit.thermo.temperature`
 
 温度由**两个相关的组**建模,因为温度读数与温度*变化*在物理上是不同种类的量。正确处理这一区别,正是让运算
 保持正确的关键。
@@ -20,7 +20,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val a = 30 of celsius
 val b = 10 of celsius

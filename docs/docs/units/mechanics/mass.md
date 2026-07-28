@@ -1,6 +1,6 @@
 # Mass
 
-Package: `org.pcsoft.framework.kunit.mass`
+Package: `org.pcsoft.framework.kunit.mechanic.mass`
 Base unit: **gram** (`KMassUnit.BASE == KMassUnit.GRAM`)
 
 Type: **native unit**
@@ -48,7 +48,7 @@ Each `Token` is a value-1 `KMassUnitInstance` used with `of` (build) and `into` 
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val m = 2 of kilo.grams      // 2000 g (the kilogram is `kilo.grams`)
 m.value                      // 2000.0 (normalized to grams)
@@ -61,7 +61,7 @@ m into pounds                // ≈ 4.409 (read back in pounds)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // + / - : same group, automatic conversion between units
 val a = (1 of kilo.grams) + (500 of grams)   // KMassUnitInstance: 1500.0 g
@@ -85,7 +85,7 @@ the mass group `pow` returns a generic `KMixedUnitInstance` (mass has no dimensi
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val squared = (2 of grams) pow 2     // KMixedUnitInstance: 4.0 g²
 ```
@@ -100,7 +100,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).value    // 1000.0     (kilogram)
 (1 of milli.grams).value   // 0.001      (milligram)
@@ -116,7 +116,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).toString()             // "1000.0 g" (base unit representation)
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"

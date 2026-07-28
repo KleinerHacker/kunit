@@ -2,6 +2,20 @@
 
 ## [UNRELEASED]
 
+### Changed (breaking)
+
+- **Unit packages are now grouped by subject area.** Every unit group moved from
+  `org.pcsoft.framework.kunit.<unit>` to `org.pcsoft.framework.kunit.<field>.<unit>` with the fields
+  `common` (units belonging to several fields: `energy`, `power`), `kinematic` (`distance`, `time`,
+  `frequency`, `speed`, `acceleration`), `mechanic` (`mass`, `force`, `pressure`, `density`,
+  `areadensity`), `electric` (`ec`, `voltage`, `resistance`, `charge`, `conductance`, `capacitance`,
+  `inductance`, `magneticfieldstrength`, `magneticflux`, `magneticfluxdensity`, `currentdensity`,
+  `chargedensity`, `linearchargedensity`, `resistivity`, `conductivity`, `fieldstrength`,
+  `fluxdensity`, `permittivity`, `permeability`, `reluctance`, `mobility`,
+  `dipolemoment`), `thermo` (`temperature`) and `it` (`storage`, `datarate`,
+  `storagedensity`). The framework-wide root types and the `formatter` package are unchanged. No
+  type, member or behavior changed - only the imports have to be adjusted.
+
 ### Added
 
 - **New standardized unit Electric Field Strength (`mass · length · time⁻³ · current⁻¹`).** A constructed

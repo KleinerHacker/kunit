@@ -1,6 +1,6 @@
 # Data Rate
 
-Package: `org.pcsoft.framework.kunit.datarate`
+Package: `org.pcsoft.framework.kunit.it.datarate`
 Base unit: **byte per second** (`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
 
 Type: **constructed unit**
@@ -24,9 +24,9 @@ Base unit: a *byte* per second, consistent with the storage group. The networkin
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = 100 of bytes / seconds
 r.value                  // 100.0 (normalized to B/s)
@@ -49,9 +49,9 @@ data rate - with plain `*` and `/`; each result is **strongly typed**.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // --- core units -> data rate --------------------------------------------
 val r = (100 of bytes) / (10 of seconds)   // KDataRateUnitInstance (NO .toDataRate() needed!)
@@ -82,9 +82,9 @@ time into minutes     // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // + / - : same group, automatic conversion between byte- and bit-based rates
 val a = (1 of bytes / seconds) + (8 of bits / seconds)   // KDataRateUnitInstance, 2 B/s
@@ -109,9 +109,9 @@ does not compile.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // Decimal vs binary: 1000 (kilo) != 1024 (kibi)
 (1 of kilo.bytes / seconds).value // 1000.0
@@ -130,10 +130,10 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.storage.kibi
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.kibi
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 (10 of bytes / seconds).toString()  // "10.0 B/s" (base unit)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"

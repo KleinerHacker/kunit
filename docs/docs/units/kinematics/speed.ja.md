@@ -1,6 +1,6 @@
 # 速度
 
-パッケージ: `org.pcsoft.framework.kunit.speed`
+パッケージ: `org.pcsoft.framework.kunit.kinematic.speed`
 基本単位: **メートル毎秒**(`KSpeedUnit.BASE == KSpeedUnit.METERS_PER_SECOND`)
 
 種別: **構成された単位**
@@ -32,10 +32,10 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.miles
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.miles
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = 50 of kilo.meters / hours
 v.value                        // 13.888...(m/s に正規化)
@@ -62,9 +62,9 @@ v into mach                    // ≈ 0.0408(音速に対する割合)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 // --- 中核単位 -> 速度 ------------------------------------------------
 val v = (100 of meters) / (10 of seconds)  // KSpeedUnitInstance(.toSpeed() は不要!)
@@ -95,8 +95,8 @@ time into minutes          // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val area = (2 of meters) * (2 of meters)         // KAreaUnitInstance
 val areaPerTime = area.toUnit() / (2 of seconds).toUnit() // KMixedUnitInstance, [METER^2, SECOND^-1]
@@ -107,10 +107,10 @@ val areaPerTime = area.toUnit() / (2 of seconds).toUnit() // KMixedUnitInstance,
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 // + / - : 同じグループ内、異なる速度の式の間の自動変換
 val a = (36 of kilo.meters / hours) + (10 of meters / seconds)  // KSpeedUnitInstance、20 m/s
@@ -132,10 +132,10 @@ val squared = (10 of meters / seconds) * (2 of meters / seconds) // KMixedUnitIn
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 (10 of meters / seconds).toString()   // "10.0 m/s"(基本単位)
 "${(10 of meters / seconds) into (kilo.meters / hours)} km/h" // "36.0 km/h"

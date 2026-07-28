@@ -1,6 +1,6 @@
 # रैखिक आवेश घनत्व
 
-पैकेज: `org.pcsoft.framework.kunit.linearchargedensity`
+पैकेज: `org.pcsoft.framework.kunit.electric.linearchargedensity`
 आधार इकाई: **कूलम्ब प्रति मीटर**
 (`KLinearChargeDensityUnit.BASE == KLinearChargeDensityUnit.COULOMB_PER_METER`)
 
@@ -25,9 +25,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 val lambda = (5 of micro.coulombs) / (2 of meters)  // 2.5e-6 C/m
 lambda.value                                        // 2.5e-6 (C/m में सामान्यीकृत)
@@ -58,11 +58,11 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 // वास्तविक उदाहरण - 2 m लंबे तंतु में वहन किए गए 5 µC से 2.5 µC/m का रैखिक आवेश घनत्व मिलता है।
 val lambda = (5 of micro.coulombs) / (2 of meters)   // 2.5e-6 C/m
@@ -80,9 +80,9 @@ raw.toLinearChargeDensity() == lambda                // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 val a = (2 of coulombs) / (1 of meters)
 val b = (3 of coulombs) / (1 of meters)
@@ -95,9 +95,9 @@ b > a            // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.linearchargedensity.*
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.linearchargedensity.*
 
 ((2 of coulombs) / (1 of meters)).toString()   // "2.0 C/m" (आधार इकाई)
 ```

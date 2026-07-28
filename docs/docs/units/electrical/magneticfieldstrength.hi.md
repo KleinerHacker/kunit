@@ -1,6 +1,6 @@
 # चुंबकीय क्षेत्र तीव्रता
 
-पैकेज: `org.pcsoft.framework.kunit.magneticfieldstrength`
+पैकेज: `org.pcsoft.framework.kunit.electric.magneticfieldstrength`
 आधार इकाई: **ऐम्पियर प्रति मीटर** (`KMagneticFieldStrengthUnit.BASE == KMagneticFieldStrengthUnit.AMPERE_PER_METER`)
 
 प्रकार: **रचित इकाई**
@@ -31,7 +31,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.magneticfieldstrength.*
+import org.pcsoft.framework.kunit.electric.magneticfieldstrength.*
 
 val h = 470 of amperesPerMeter
 h into amperesPerMeter                  // 470.0
@@ -62,9 +62,9 @@ h into kilo.amperesPerMeter             // 0.47
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.magneticfieldstrength.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.magneticfieldstrength.*
 
 // वास्तविक उदाहरण - 500 फेरों वाली कुंडली में 2 A धारा, लंबाई 0.25 m:
 // H = N · I / l = 500 · 2 A / 0.25 m = 4000 A/m
@@ -79,7 +79,7 @@ raw.toMagneticFieldStrength() == (4000 of amperesPerMeter)  // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticfieldstrength.*
+import org.pcsoft.framework.kunit.electric.magneticfieldstrength.*
 
 val s = (100 of amperesPerMeter) + (40 of amperesPerMeter)  // 140 A/m
 (100 of amperesPerMeter) > (40 of amperesPerMeter)          // true
@@ -90,7 +90,7 @@ val s = (100 of amperesPerMeter) + (40 of amperesPerMeter)  // 140 A/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.magneticfieldstrength.*
+import org.pcsoft.framework.kunit.electric.magneticfieldstrength.*
 
 (470 of amperesPerMeter).toString()     // "470.0 A/m" (आधार इकाई)
 ```

@@ -1,6 +1,6 @@
 # 유전율 (Permittivity)
 
-패키지: `org.pcsoft.framework.kunit.permittivity`
+패키지: `org.pcsoft.framework.kunit.electric.permittivity`
 기본 단위: **미터당 패럿(farad per meter)** (`KPermittivityUnit.BASE == KPermittivityUnit.FARAD_PER_METER`)
 
 유형: **구성 단위(constructed unit)**
@@ -34,7 +34,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 val eps = 1 of vacuumPermittivity     // ε₀
 eps into faradsPerMeter               // 8.8541878188e-12
@@ -71,14 +71,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.capacitance.farads
-import org.pcsoft.framework.kunit.electricfieldstrength.voltsPerMeter
-import org.pcsoft.framework.kunit.electricfluxdensity.coulombsPerSquareMeter
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.capacitance.farads
+import org.pcsoft.framework.kunit.electric.fieldstrength.voltsPerMeter
+import org.pcsoft.framework.kunit.electric.fluxdensity.coulombsPerSquareMeter
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 // 실제 사례 - 진공에서 1 MV/m의 장은 8.854 µC/m²의 전속 밀도를 만듭니다.
 val d = (1 of vacuumPermittivity) * (1_000_000 of voltsPerMeter)  // 8.8541878188e-6 C/m²
@@ -96,7 +96,7 @@ raw.toPermittivity() == (2 of faradsPerMeter)                     // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 val s = (1 of faradsPerMeter) + (1 of faradsPerCentimeter)  // 101 F/m
 (1 of faradsPerCentimeter) > (1 of faradsPerMeter)          // true
@@ -107,7 +107,7 @@ val s = (1 of faradsPerMeter) + (1 of faradsPerCentimeter)  // 101 F/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 (1 of faradsPerCentimeter).toString()   // "100.0 F/m" (기본 단위)
 ```

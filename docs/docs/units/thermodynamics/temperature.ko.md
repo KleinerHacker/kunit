@@ -3,7 +3,7 @@
 > **온도** 주제의 일부입니다 — [개요](temperature-overview.md) 및 선형 대응물
 > [온도 차](temperature-difference.md)를 참조하세요.
 
-패키지: `org.pcsoft.framework.kunit.temperature`
+패키지: `org.pcsoft.framework.kunit.thermo.temperature`
 기본 단위: **켈빈**(`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
 
 유형: **네이티브 단위**
@@ -36,7 +36,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val t = 25 of celsius
 t.value             // 298.15(절대 켈빈으로 정규화)
@@ -62,7 +62,7 @@ t into kelvin       // 298.15
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 // 절대 − 절대 = 온도 차(켈빈)
 val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
@@ -92,7 +92,7 @@ val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUn
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 ```
@@ -104,8 +104,8 @@ val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.thermo.temperature.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```
@@ -117,7 +117,7 @@ val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()               // "298.15 K"(기본 단위 표현)
 "${(25 of celsius) into fahrenheit} °F"  // "77.0 °F"

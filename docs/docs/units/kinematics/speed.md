@@ -1,6 +1,6 @@
 # Speed
 
-Package: `org.pcsoft.framework.kunit.speed`
+Package: `org.pcsoft.framework.kunit.kinematic.speed`
 Base unit: **meter per second** (`KSpeedUnit.BASE == KSpeedUnit.METERS_PER_SECOND`)
 
 Type: **constructed unit**
@@ -34,10 +34,10 @@ Only speeds with a genuinely single, conventional name survive as value-1 tokens
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.miles
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.miles
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = 50 of kilo.meters / hours
 v.value                        // 13.888... (normalized to m/s)
@@ -64,9 +64,9 @@ between the three quantities - length, time and speed - with plain `*` and `/`, 
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 // --- core units -> speed ------------------------------------------------
 val v = (100 of meters) / (10 of seconds)  // KSpeedUnitInstance (NO .toSpeed() needed!)
@@ -97,8 +97,8 @@ time into minutes          // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val area = (2 of meters) * (2 of meters)         // KAreaUnitInstance
 val areaPerTime = area.toUnit() / (2 of seconds).toUnit() // KMixedUnitInstance, [METER^2, SECOND^-1]
@@ -109,10 +109,10 @@ val areaPerTime = area.toUnit() / (2 of seconds).toUnit() // KMixedUnitInstance,
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 // + / - : same group, automatic conversion between different speed expressions
 val a = (36 of kilo.meters / hours) + (10 of meters / seconds)  // KSpeedUnitInstance, 20 m/s
@@ -134,10 +134,10 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 (10 of meters / seconds).toString()   // "10.0 m/s" (base unit)
 "${(10 of meters / seconds) into (kilo.meters / hours)} km/h" // "36.0 km/h"

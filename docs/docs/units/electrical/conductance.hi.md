@@ -1,6 +1,6 @@
 # चालकता
 
-पैकेज: `org.pcsoft.framework.kunit.conductance`
+पैकेज: `org.pcsoft.framework.kunit.electric.conductance`
 आधार इकाई: **सीमेंस** (`KConductanceUnit.BASE == KConductanceUnit.SIEMENS`)
 
 प्रकार: **संरचित इकाई**
@@ -29,7 +29,7 @@
 
 !!! note "`siemens` बनाम `siemensUnits`"
     `siemens` (इस पैकेज में) **चालकता** की SI इकाई है। मिलते-जुलते नाम वाला
-    `org.pcsoft.framework.kunit.resistance` का `siemensUnits` ऐतिहासिक **सीमेंस मरकरी इकाई** है, जो
+    `org.pcsoft.framework.kunit.electric.resistance` का `siemensUnits` ऐतिहासिक **सीमेंस मरकरी इकाई** है, जो
     0.9534 Ω का *प्रतिरोध* है। ये अलग-अलग पैकेजों की असंबंधित राशियाँ हैं।
 
 नामित इकाइयाँ `KPrefixBuilder` के माध्यम से SI उपसर्गों का समर्थन करती हैं (`milli.siemens`,
@@ -39,7 +39,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val g = 4 of siemens
 g into siemens                    // 4.0
@@ -73,13 +73,13 @@ g into milli.siemens              // 4000.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 // वास्तविक उदाहरण - आपूर्ति केबल की चालकता: 2 A धारा वहन करने वाली केबल में
 // मापा गया वोल्टेज पतन 1 V हो, तो उसकी चालकता 2 S है (अर्थात् प्रतिरोध 0.5 Ω)।
@@ -98,7 +98,7 @@ raw.toConductance() == (2 of siemens)    // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 val s = (100 of siemens) + (40 of siemens)  // 140 S
 (100 of siemens) > (40 of siemens)          // true
@@ -109,7 +109,7 @@ val s = (100 of siemens) + (40 of siemens)  // 140 S
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.conductance.*
+import org.pcsoft.framework.kunit.electric.conductance.*
 
 (4 of siemens).toString()     // "4.0 S" (आधार इकाई)
 ```

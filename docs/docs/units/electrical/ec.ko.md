@@ -1,6 +1,6 @@
 # 전류
 
-패키지: `org.pcsoft.framework.kunit.ec`
+패키지: `org.pcsoft.framework.kunit.electric.ec`
 기준 단위: **암페어** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`)
 
 유형: **네이티브 단위**
@@ -33,7 +33,7 @@ SI 암페어 외에도 이 그룹은 두 가지 고전적인 CGS 전류 단위�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // 500 회 권선에 0.4 A 가 흐르는 코일은 Θ = 200 At 를 만듭니다.
 val theta = (500 * 0.4) of ampereTurns
@@ -48,7 +48,7 @@ theta == (200 of amperes)       // true (차원적으로 동일)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val i = 2 of milli.amperes    // 0.002 A
 i.value                       // 0.002 (암페어로 정규화)
@@ -64,7 +64,7 @@ i into amperes                // 0.002 (암페어로 다시 읽기)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val voltage = 5.0       // V
 val resistance = 220.0  // Ω
@@ -76,7 +76,7 @@ current into milli.amperes                         // ≈ 22.7 mA
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 // + / - : 같은 그룹, 단위 간 자동 변환
 val a = (1 of amperes) + (1 of biot)   // KElectricCurrentUnitInstance: 11.0 A
@@ -100,7 +100,7 @@ val b = (1 of biot) - (1 of amperes)   // KElectricCurrentUnitInstance: 9.0 A
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 val squared = (2 of amperes) pow 2     // KMixedUnitInstance: 4.0 A²
 ```
@@ -115,7 +115,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of milli.amperes).value   // 0.001      (밀리암페어)
 (1 of kilo.amperes).value    // 1000.0     (킬로암페어)
@@ -131,7 +131,7 @@ import org.pcsoft.framework.kunit.ec.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.ec.*
+import org.pcsoft.framework.kunit.electric.current.*
 
 (1 of biot).toString()                       // "10.0 A" (기준 단위 표현)
 "${(0.002 of amperes) into milli.amperes} mA" // "2.0 mA"

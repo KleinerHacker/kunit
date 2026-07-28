@@ -24,6 +24,15 @@
   * Apply the change without regard for the breaking change (remove the old code, add the new one)
 * ALWAYS edit ANY file at one time (not in parts)
 
+# Package Structure
+
+* Unit packages are grouped by subject area: `org.pcsoft.framework.kunit.<field>.<unit>`
+  (fields: `common`, `kinematic`, `mechanic`, `electric`, `thermo`, `it`)
+* The code fields mirror the MkDocs field folders (`kinematics`, `mechanics`, `electrical`,
+  `thermodynamics`, `information`); `it` corresponds to `information`
+* A unit documented in MORE THAN ONE MkDocs field goes into `common` (currently energy, power)
+* Details and the rule for new fields: `rules/package.md`
+
 # Communication Notes
 
 * Every output the AI writes to the console must be in German

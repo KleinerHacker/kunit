@@ -1,6 +1,6 @@
 # 전기장 세기 (Electric Field Strength)
 
-패키지: `org.pcsoft.framework.kunit.electricfieldstrength`
+패키지: `org.pcsoft.framework.kunit.electric.electricfieldstrength`
 기본 단위: **미터당 볼트(volt per meter)** (`KElectricFieldStrengthUnit.BASE == KElectricFieldStrengthUnit.VOLT_PER_METER`)
 
 유형: **구성 단위(constructed unit)**
@@ -34,7 +34,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 val e = 3 of mega.voltsPerMeter        // 공기의 유전 강도
 e into mega.voltsPerMeter              // 3.0
@@ -71,14 +71,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.force.newtons
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 // 실제 사례 - 2 mm 공기 간극에 걸친 상용 전원 전압은 115 kV/m을 만듭니다.
 val e = (230 of volts) / (2 of milli.meters)   // KElectricFieldStrengthUnitInstance, 115000 V/m
@@ -95,7 +95,7 @@ raw.toElectricFieldStrength() == (2 of voltsPerMeter)  // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 val s = (1 of voltsPerMeter) + (1 of voltsPerCentimeter)  // 101 V/m
 (1 of voltsPerCentimeter) > (1 of voltsPerMeter)          // true
@@ -106,7 +106,7 @@ val s = (1 of voltsPerMeter) + (1 of voltsPerCentimeter)  // 101 V/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricfieldstrength.*
+import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 (1 of voltsPerCentimeter).toString()   // "100.0 V/m" (기본 단위)
 ```

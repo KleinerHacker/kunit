@@ -1,6 +1,6 @@
 # 저장 용량
 
-패키지: `org.pcsoft.framework.kunit.storage`
+패키지: `org.pcsoft.framework.kunit.it.storage`
 기본 단위: **바이트** (`KStorageUnit.BASE == KStorageUnit.BYTE`)
 
 유형: **네이티브 단위**
@@ -30,7 +30,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 5 of bytes
 size.value          // 5.0(바이트로 정규화)
@@ -43,8 +43,8 @@ size into bits      // 40.0(비트로 다시 읽기)
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // + / - : 같은 그룹, 비트와 바이트 간 자동 변환
 val a = (1 of bytes) + (8 of bits)   // KStorageUnitInstance: 2.0 B
@@ -71,7 +71,7 @@ infix `pow` 연산자로 값을 정수 거듭제곱합니다(Kotlin에는 오버
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 ```
@@ -86,7 +86,7 @@ val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val fiveKb = 5 of kilo.bytes         // KStorageUnitInstance(== 5000 B)
 fiveKb.value                         // 5000.0
@@ -106,7 +106,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1 of kilo.bytes).value   // 1000.0     (십진)
 (1 of kibi.bytes).value   // 1024.0     (이진)
@@ -135,8 +135,8 @@ file into kibi.bytes      // 4096.0(KiB)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (1000 of bytes) / (1 of seconds)  // 1000 B/s(타입이 지정된 KDataRateUnitInstance)
 val amount = rate * (60 of seconds)          // 60000 B(타입이 지정된 KStorageUnitInstance)
@@ -150,7 +150,7 @@ amount into kibi.bytes                        // ≈ 58.59(KiB)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 (1024 of bytes).toString()               // "1024.0 B"(기본 단위 표현)
 "${(5 of bits) into bits} bit"           // "5.0 bit"

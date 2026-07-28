@@ -1,6 +1,6 @@
 # 电容
 
-包: `org.pcsoft.framework.kunit.capacitance`
+包: `org.pcsoft.framework.kunit.electric.capacitance`
 基本单位: **法拉**(`KCapacitanceUnit.BASE == KCapacitanceUnit.FARAD`)
 
 类型: **构成单位**
@@ -29,7 +29,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.capacitance.*
+import org.pcsoft.framework.kunit.electric.capacitance.*
 
 val c = 470 of micro.farads
 c into micro.farads            // 470.0
@@ -61,13 +61,13 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.capacitance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.capacitance.*
 
 // 实际例子 - 已充电的电容器: 470 µF 充到 12 V 储存 5.64 mC。
 val q = (470 of micro.farads) * (12 of volts)  // KChargeUnitInstance,0.00564 C
@@ -84,7 +84,7 @@ raw.toCapacitance() == (2 of farads)           // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.capacitance.*
+import org.pcsoft.framework.kunit.electric.capacitance.*
 
 val s = (100 of farads) + (40 of farads)  // 140 F
 (100 of farads) > (40 of farads)          // true
@@ -95,7 +95,7 @@ val s = (100 of farads) + (40 of farads)  // 140 F
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.capacitance.*
+import org.pcsoft.framework.kunit.electric.capacitance.*
 
 (470 of farads).toString()     // "470.0 F"(基本单位)
 ```

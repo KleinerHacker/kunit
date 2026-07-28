@@ -1,6 +1,6 @@
 # Kinematics — Overview
 
-Packages: `org.pcsoft.framework.kunit.distance`, `…time`, `…speed`, `…acceleration`, `…frequency`
+Packages: `org.pcsoft.framework.kunit.kinematic.distance`, `…time`, `…speed`, `…acceleration`, `…frequency`
 
 Kinematics is the description of **motion** — how far, how long, how fast, and how the rate of motion
 itself changes — without yet asking about the forces behind it (that is the [Mechanics](../mechanics/overview.md)
@@ -40,9 +40,9 @@ duration gives the distance travelled again:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = (120 of kilo.meters) / (1.5 of hours)   // KSpeedUnitInstance
 v into (kilo.meters / hours)                     // 80.0  (km/h)
@@ -59,10 +59,10 @@ A sprinter reaches **10 m/s** from standstill in **2 s**. The acceleration is `a
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.speed.*
-import org.pcsoft.framework.kunit.acceleration.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.*
+import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 val a = ((10 of meters) / (1 of seconds)) / (2 of seconds) // KAccelerationUnitInstance, 5 m/s²
 val reached = a * (2 of seconds)                            // KSpeedUnitInstance, 10 m/s
@@ -79,10 +79,10 @@ with `into` inside a string template and append the symbol yourself:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.speed.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.speed.*
 
 val v = (10 of meters) / (2 of seconds)   // KSpeedUnitInstance
 v.toString()                              // "5.0 m/s" (base unit)

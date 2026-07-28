@@ -1,6 +1,6 @@
 # Thermodynamics — Overview
 
-Packages: `org.pcsoft.framework.kunit.temperature`, `…energy`, `…power`
+Packages: `org.pcsoft.framework.kunit.thermo.temperature`, `…energy`, `…power`
 
 Thermodynamics is the physics of **heat and temperature**. In KUnit the field centres on temperature, which
 is modelled by **two related native groups** — because a temperature *reading* and a temperature *change* are
@@ -52,7 +52,7 @@ agree on the step size:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val start = 10 of celsius
 val end   = 30 of celsius
@@ -72,10 +72,10 @@ flow returns the heating time:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.time.minutes
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.kinematic.time.minutes
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val q = (2 of kilo.watts) * (10 of minutes)   // KEnergyUnitInstance
 q into kilo.joules                            // 1200.0
@@ -92,7 +92,7 @@ t into seconds                                // 600.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()                       // "298.15 K" (absolute, base unit)
 KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK" (interval)

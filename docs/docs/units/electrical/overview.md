@@ -1,6 +1,6 @@
 # Electrical Engineering — Overview
 
-Packages: `org.pcsoft.framework.kunit.ec`, `…voltage`, `…resistance`, `…charge`, `…conductance`,
+Packages: `org.pcsoft.framework.kunit.electric.ec`, `…voltage`, `…resistance`, `…charge`, `…conductance`,
 `…magneticfieldstrength`, `…capacitance`, `…inductance`, `…magneticflux`, `…magneticfluxdensity`,
 `…currentdensity`, `…chargedensity`, `…resistivity`, `…conductivity`, `…power`, `…energy`
 
@@ -152,9 +152,9 @@ with the current reproduces the voltage `U = R · I`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.resistance.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.electric.resistance.*
 
 val r = (230 of volts) / (2 of amperes)   // KResistanceUnitInstance, 115 Ω
 r into ohms                               // 115.0
@@ -175,11 +175,11 @@ A **230 V** socket feeding a **10 A** load delivers `P = U · I`; running it for
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.power.*
-import org.pcsoft.framework.kunit.energy.*
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
 
 val p = (230 of volts) * (10 of amperes)  // KPowerUnitInstance
 p into kilo.watts                         // 2.3
@@ -197,7 +197,7 @@ with `into` inside a string template and append the symbol yourself:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.voltage.*
+import org.pcsoft.framework.kunit.electric.voltage.*
 
 val u = 230 of volts
 u.toString()               // "230.0 V" (base unit)

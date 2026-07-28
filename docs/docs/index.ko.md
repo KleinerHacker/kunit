@@ -56,7 +56,7 @@ kunit은 두 개의 중심 타입을 중심으로 구축됩니다:
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // 임의의 Number 타입에서 `of`로 순수한 길이 값을 만들기
 val distance = 5 of meters
@@ -89,7 +89,7 @@ println(tank into usGallons)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 
 // `5 of kilo.meters` -> KLengthUnitInstance(== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -101,8 +101,8 @@ println(fiveKm.value) // 5000.0(미터로 정규화)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // 값 1 템플릿에서 단위 표현식을 조합하고 `of`로 스케일링
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²

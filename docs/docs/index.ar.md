@@ -58,7 +58,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // ابنِ قيم طول نقيّة بـ `of` من أي نوع Number
 val distance = 5 of meters
@@ -91,7 +91,7 @@ println(tank into usGallons)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 
 // `5 of kilo.meters` -> KLengthUnitInstance (== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -103,8 +103,8 @@ println(fiveKm.value) // 5000.0 (مُطبَّع إلى الأمتار)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // كوّن تعبير وحدة من قوالب قيمتها 1 وحجّمه بـ `of`
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance، m·s⁻²

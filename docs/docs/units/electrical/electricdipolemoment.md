@@ -1,6 +1,6 @@
 # Electric Dipole Moment
 
-Package: `org.pcsoft.framework.kunit.electricdipolemoment`
+Package: `org.pcsoft.framework.kunit.electric.electricdipolemoment`
 Base unit: **coulomb meter**
 (`KElectricDipoleMomentUnit.BASE == KElectricDipoleMomentUnit.COULOMB_METER`)
 
@@ -32,7 +32,7 @@ The debye dominates molecular physics and chemistry. Named units support the SI 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 val p = 1.85 of debyes        // the water molecule
 p into debyes                 // 1.85
@@ -66,11 +66,11 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.nano
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.charge.coulombs
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 // Real-world example - 1 pC separated by 1 nm gives 1e-21 C·m, about 3.0e8 debyes.
 val p = (1 of pico.coulombs) * (1 of nano.meters)   // KElectricDipoleMomentUnitInstance
@@ -88,7 +88,7 @@ raw.toElectricDipoleMoment() == (6 of coulombMeters) // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 val s = (2 of coulombMeters) + (3 of coulombMeters)  // 5 C·m
 (1 of coulombMeters) > (1 of debyes)                 // true
@@ -99,7 +99,7 @@ val s = (2 of coulombMeters) + (3 of coulombMeters)  // 5 C·m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.electricdipolemoment.*
+import org.pcsoft.framework.kunit.electric.dipolemoment.*
 
 (2 of coulombMeters).toString()   // "2.0 C·m" (base unit)
 ```

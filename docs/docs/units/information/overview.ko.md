@@ -1,6 +1,6 @@
 # 정보 기술 — 개요
 
-패키지: `org.pcsoft.framework.kunit.storage`, `…datarate`
+패키지: `org.pcsoft.framework.kunit.it.storage`, `…datarate`
 
 정보 기술은 **디지털 데이터 양**과 그것이 얼마나 빠르게 이동하는지를 다룹니다. KUnit은 저장된 양을
 **네이티브** 기본량(스토리지, 바이트 단위)으로, 처리량을 그것으로부터 **구성된** 양(데이터 전송률 =
@@ -35,9 +35,9 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val amount = 500 of mega.bytes
 val rate   = 10 of mega.bytes / seconds        // KDataRateUnitInstance, 10 MB/s
@@ -57,7 +57,7 @@ transferred into mega.bytes                     // 500.0 (MB)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
+import org.pcsoft.framework.kunit.it.storage.*
 
 val size = 4096 of bytes
 size into kilo.bytes    // 4.096 (kB, 10진 1000)
@@ -72,9 +72,9 @@ size into kibi.bytes    // 4.0   (KiB, 바이너리 1024)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = (10 of bytes) / (1 of seconds)   // KDataRateUnitInstance
 r.toString()                             // "10.0 B/s" (기준 단위)

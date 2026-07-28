@@ -5,7 +5,7 @@ kunit आज कई इकाई समूह शिप करता है ([�
 [चाल](units/kinematics/speed.md), [डेटा दर](units/information/datarate.md)), लेकिन समूचा इंजन
 (`KUnit`, `KMixedUnitInstance`, `of`/`into` क्रियाएँ, उपसर्ग बिल्डर) सामान्य और समूह-निरपेक्ष है। एक नई
 भौतिक राशि जोड़ने का अर्थ है वही पैटर्न अपनाना। यह पृष्ठ एक प्रदर्शनकारी **द्रव्यमान** समूह
-(`org.pcsoft.framework.kunit.mass`) जोड़ने से गुज़रता है — भंडारण समूह पर आधारित एक सादा, एक-विमीय समूह।
+(`org.pcsoft.framework.kunit.mechanic.mass`) जोड़ने से गुज़रता है — भंडारण समूह पर आधारित एक सादा, एक-विमीय समूह।
 
 ## 1. उप-पैकेज और `KUnit` enum बनाएँ
 
@@ -14,7 +14,7 @@ kunit आज कई इकाई समूह शिप करता है ([�
 रूपांतरण गुणक है — मूल इकाई का स्वयं `baseValue == 1.0` होता है।
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KUnit
 
@@ -47,7 +47,7 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 समूह-निरपेक्ष `into` क्रिया है। `KStorageUnitInstance` का आकार कॉपी करें।
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
@@ -93,7 +93,7 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 `KMassUnitBareValues.kt`:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 किलोग्राम ([KMassUnit.KILOGRAM])। */
 val kilograms: KMassUnitInstance = massUnitInstanceOf(KMassUnit.KILOGRAM.baseValue)
@@ -112,7 +112,7 @@ val ounces: KMassUnitInstance = massUnitInstanceOf(KMassUnit.OUNCE.baseValue)
 पर लटकते हैं):
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
@@ -138,7 +138,7 @@ val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUni
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val a = 500 of grams
 val b = 2 of pounds
@@ -155,7 +155,7 @@ val heavier = b > a          // true
 हेक्टेयर), तो उन्हें नामित मान-1 इंस्टेंस के रूप में जोड़ें — किसी अलग लक्ष्य प्रकार की आवश्यकता नहीं:
 
 ```kotlin
-package org.pcsoft.framework.kunit.mass
+package org.pcsoft.framework.kunit.mechanic.mass
 
 /** 1 मीट्रिक टन (1000 kg)। */
 val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
@@ -164,7 +164,7 @@ val tonnes: KMassUnitInstance = massUnitInstanceOf(1000.0)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 println((2500 of grams) into tonnes) // 0.0025
 ```
@@ -178,8 +178,8 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // घनत्व = द्रव्यमान / आयतन (सामान्य KMixedUnitInstance: [KILOGRAM^1, METER^-3])
 val density = (5 of kilograms) / (2 of liters)

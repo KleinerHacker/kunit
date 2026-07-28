@@ -1,6 +1,6 @@
 # 인덕턴스
 
-패키지: `org.pcsoft.framework.kunit.inductance`
+패키지: `org.pcsoft.framework.kunit.electric.inductance`
 기본 단위: **헨리**(`KInductanceUnit.BASE == KInductanceUnit.HENRY`)
 
 유형: **구성된 단위**
@@ -31,7 +31,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val l = 470 of micro.henries
 l into henries               // 0.00047
@@ -66,14 +66,14 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.frequency.hertz
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 // 실제 예 - 스위칭 전원의 초크 코일: 470 µH 코일에 2 A 가 흐르면 쇄교 자속은 0.00094 Wb 이고,
 // 각주파수 100 kHz 에서는 리액턴스가 47 Ω 이 됩니다.
@@ -101,8 +101,8 @@ raw.toInductance() == (2 of henries)   // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.inductance.*
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // Rm = 500 A/Wb 인 자기 회로의 퍼미언스는 2 mH 입니다.
 val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
@@ -116,7 +116,7 @@ permeance into milli.henries                    // 2.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val s = (100 of henries) + (40 of henries)  // 140 H
 (100 of henries) > (40 of henries)          // true
@@ -127,7 +127,7 @@ val s = (100 of henries) + (40 of henries)  // 140 H
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 (2 of henries).toString()     // "2.0 H"(기본 단위)
 ```

@@ -13,12 +13,12 @@
 package org.pcsoft.framework.kunit
 
 import org.pcsoft.framework.kunit.formatter.displaySymbol
-import org.pcsoft.framework.kunit.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.KTimeUnit
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs

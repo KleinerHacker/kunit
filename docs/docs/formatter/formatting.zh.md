@@ -12,9 +12,9 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.*
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val v = 3 of meters / seconds
 
@@ -69,8 +69,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 
 ```kotlin
 import org.pcsoft.framework.kunit.*
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 import java.util.Locale
 
 val distance = 10 of kilo.meters

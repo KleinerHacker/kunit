@@ -1,6 +1,6 @@
 # 电感
 
-包: `org.pcsoft.framework.kunit.inductance`
+包: `org.pcsoft.framework.kunit.electric.inductance`
 基本单位:**亨利**(`KInductanceUnit.BASE == KInductanceUnit.HENRY`)
 
 类型：**构造单位**
@@ -29,7 +29,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val l = 470 of micro.henries
 l into henries               // 0.00047
@@ -63,14 +63,14 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.frequency.hertz
-import org.pcsoft.framework.kunit.magneticflux.webers
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
+import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 // 实际例子 - 开关电源中的扼流圈:470 µH 的线圈通过 2 A 电流时磁链为 0.00094 Wb,
 // 在角频率 100 kHz 下呈现 47 Ω 的电抗。
@@ -97,8 +97,8 @@ raw.toInductance() == (2 of henries)   // true
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.inductance.*
-import org.pcsoft.framework.kunit.reluctance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
+import org.pcsoft.framework.kunit.electric.reluctance.*
 
 // 一个 Rm = 500 A/Wb 的磁路,其磁导为 2 mH。
 val permeance = 1 / (500 of amperesPerWeber)   // KInductanceUnitInstance
@@ -112,7 +112,7 @@ permeance into milli.henries                    // 2.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 val s = (100 of henries) + (40 of henries)  // 140 H
 (100 of henries) > (40 of henries)          // true
@@ -123,7 +123,7 @@ val s = (100 of henries) + (40 of henries)  // 140 H
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.inductance.*
+import org.pcsoft.framework.kunit.electric.inductance.*
 
 (2 of henries).toString()     // "2.0 H"(基本单位)
 ```

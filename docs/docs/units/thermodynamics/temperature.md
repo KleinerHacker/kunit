@@ -3,7 +3,7 @@
 > Part of the **Temperature** topic — see the [Overview](temperature-overview.md) and the linear
 > counterpart [Temperature Difference](temperature-difference.md).
 
-Package: `org.pcsoft.framework.kunit.temperature`
+Package: `org.pcsoft.framework.kunit.thermo.temperature`
 Base unit: **kelvin** (`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
 
 Type: **native unit**
@@ -38,7 +38,7 @@ Each `Token` is a value-1 `KTemperatureUnitInstance` used with `of` (build) and 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val t = 25 of celsius
 t.value             // 298.15 (normalized to absolute kelvin)
@@ -66,7 +66,7 @@ asymmetric — the physically correct behaviour (see also [Temperature Differenc
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 // absolute − absolute = temperature difference (in kelvin)
 val d = (30 of celsius) - (10 of celsius)          // KTemperatureDifferenceUnitInstance: 20 ΔK
@@ -97,7 +97,7 @@ absolute kelvin term:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 ```
@@ -109,8 +109,8 @@ standardized temperature combination), computed on the absolute kelvin value:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.thermo.temperature.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 val rate = (2 of kelvin) / (1 of seconds)   // KMixedUnitInstance: 2.0 K·s⁻¹
 ```
@@ -122,7 +122,7 @@ Only the base-unit `toString()` exists; format a specific unit via `into`:
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius).toString()               // "298.15 K" (base unit representation)
 "${(25 of celsius) into fahrenheit} °F"  // "77.0 °F"

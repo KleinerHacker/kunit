@@ -1,6 +1,6 @@
 # 抵抗率
 
-パッケージ: `org.pcsoft.framework.kunit.resistivity`
+パッケージ: `org.pcsoft.framework.kunit.electric.resistivity`
 基本単位: **オーム・メートル** (`KResistivityUnit.BASE == KResistivityUnit.OHM_METER`)
 
 種別: **構成単位（constructed unit）**
@@ -32,7 +32,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.resistivity.*
+import org.pcsoft.framework.kunit.electric.resistivity.*
 
 val rho = 17 of nano.ohmMeters     // 銅
 rho into nano.ohmMeters            // 17.0
@@ -68,12 +68,12 @@ import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.resistance.ohms
-import org.pcsoft.framework.kunit.resistivity.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.electric.resistivity.*
 
 // 実例 - 銅の配線: 17 nΩ·mの抵抗率が1 mmの幾何係数にわたると1.7 µΩになる。
 val r = (17 of nano.ohmMeters) / (1 of milli.meters)  // KResistanceUnitInstance, 1.7e-5 Ω
@@ -90,7 +90,7 @@ raw.toResistivity() == (2 of ohmMeters)               // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistivity.*
+import org.pcsoft.framework.kunit.electric.resistivity.*
 
 val s = (100 of ohmMeters) + (40 of ohmMeters)  // 140 Ω·m
 (100 of ohmMeters) > (40 of ohmMeters)          // true
@@ -101,7 +101,7 @@ val s = (100 of ohmMeters) + (40 of ohmMeters)  // 140 Ω·m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.resistivity.*
+import org.pcsoft.framework.kunit.electric.resistivity.*
 
 (1 of ohmCentimeters).toString()   // "0.01 Ω·m"（基本単位）
 ```

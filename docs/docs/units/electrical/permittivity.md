@@ -1,6 +1,6 @@
 # Permittivity
 
-Package: `org.pcsoft.framework.kunit.permittivity`
+Package: `org.pcsoft.framework.kunit.electric.permittivity`
 Base unit: **farad per meter** (`KPermittivityUnit.BASE == KPermittivityUnit.FARAD_PER_METER`)
 
 Type: **constructed unit**
@@ -36,7 +36,7 @@ The constant is also available as `KPermittivityUnit.VACUUM_PERMITTIVITY`.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 val eps = 1 of vacuumPermittivity     // ε₀
 eps into faradsPerMeter               // 8.8541878188e-12
@@ -74,14 +74,14 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.capacitance.farads
-import org.pcsoft.framework.kunit.electricfieldstrength.voltsPerMeter
-import org.pcsoft.framework.kunit.electricfluxdensity.coulombsPerSquareMeter
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.capacitance.farads
+import org.pcsoft.framework.kunit.electric.fieldstrength.voltsPerMeter
+import org.pcsoft.framework.kunit.electric.fluxdensity.coulombsPerSquareMeter
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 // Real-world example - in vacuum a field of 1 MV/m produces a flux density of 8.854 µC/m².
 val d = (1 of vacuumPermittivity) * (1_000_000 of voltsPerMeter)  // 8.8541878188e-6 C/m²
@@ -99,7 +99,7 @@ raw.toPermittivity() == (2 of faradsPerMeter)                     // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 val s = (1 of faradsPerMeter) + (1 of faradsPerCentimeter)  // 101 F/m
 (1 of faradsPerCentimeter) > (1 of faradsPerMeter)          // true
@@ -110,7 +110,7 @@ val s = (1 of faradsPerMeter) + (1 of faradsPerCentimeter)  // 101 F/m
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.permittivity.*
+import org.pcsoft.framework.kunit.electric.permittivity.*
 
 (1 of faradsPerCentimeter).toString()   // "100.0 F/m" (base unit)
 ```

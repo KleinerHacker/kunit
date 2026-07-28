@@ -1,6 +1,6 @@
 # 時間
 
-パッケージ: `org.pcsoft.framework.kunit.time`
+パッケージ: `org.pcsoft.framework.kunit.kinematic.time`
 基本単位: **秒**(`KTimeUnit.BASE == KTimeUnit.SECOND`)
 
 種別: **ネイティブ単位**
@@ -34,7 +34,7 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 2 of hours
 t.value          // 7200.0(秒に正規化)
@@ -46,7 +46,7 @@ t into minutes   // 120.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 // + / - : 同じグループ内、異なる時間単位間の自動変換(正確な Duration 演算)
 val a = (1 of hours) + (30 of minutes)   // KTimeUnitInstance、秒に正規化(5400.0)
@@ -76,7 +76,7 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 import java.time.Duration
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
 t.toDuration()                  // PT1H30M
@@ -103,7 +103,7 @@ t.dividedBy(30 of minutes) // 3
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 // 構築: "5 of milli.seconds" -> KTimeUnitInstance
 val fiveMillis = 5 of milli.seconds
@@ -128,7 +128,7 @@ t into milli.seconds  // 7 200 000.0(ms)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 (2 of hours).toString()          // "7200.0 s"(基本単位表現)
 "${(2 of hours) into hours} h"   // "2.0 h"
@@ -141,8 +141,8 @@ import org.pcsoft.framework.kunit.time.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 val speed = (10 of meters) / (1 of seconds)  // KSpeedUnitInstance
 speed into (kilo.meters / hours)             // 36.0(km/h)

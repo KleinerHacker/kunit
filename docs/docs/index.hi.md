@@ -63,7 +63,7 @@ kunit दो केंद्रीय प्रकारों के इर्�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // किसी भी Number प्रकार से `of` द्वारा शुद्ध लंबाई मान बनाएँ
 val distance = 5 of meters
@@ -96,7 +96,7 @@ println(tank into usGallons)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 
 // `5 of kilo.meters` -> KLengthUnitInstance (== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -108,8 +108,8 @@ println(fiveKm.value) // 5000.0 (मीटर में प्रसामान
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // मान-1 टेम्पलेटों से एक इकाई व्यंजक रचें और उसे `of` से मापें
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²

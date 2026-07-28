@@ -1,6 +1,6 @@
 # डेटा दर
 
-पैकेज: `org.pcsoft.framework.kunit.datarate`
+पैकेज: `org.pcsoft.framework.kunit.it.datarate`
 मूल इकाई: **बाइट प्रति सेकंड** (`KDataRateUnit.BASE == KDataRateUnit.BYTES_PER_SECOND`)
 
 प्रकार: **निर्मित इकाई**
@@ -24,9 +24,9 @@
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 val r = 100 of bytes / seconds
 r.value                  // 100.0 (B/s में प्रसामान्यीकृत)
@@ -49,9 +49,9 @@ r into (bits / seconds)  // 800.0 (bit/s में वापस पढ़ा)
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.*
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // --- मूल इकाइयाँ -> डेटा दर --------------------------------------
 val r = (100 of bytes) / (10 of seconds)   // KDataRateUnitInstance (.toDataRate() की आवश्यकता नहीं!)
@@ -82,9 +82,9 @@ time into minutes     // 1.0
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // + / - : समान समूह, बाइट- और बिट-आधारित दरों के बीच स्वचालित रूपांतरण
 val a = (1 of bytes / seconds) + (8 of bits / seconds)   // KDataRateUnitInstance, 2 B/s
@@ -109,9 +109,9 @@ val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInst
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.storage.*
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.*
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 // दशमलव बनाम द्विआधारी: 1000 (kilo) != 1024 (kibi)
 (1 of kilo.bytes / seconds).value // 1000.0
@@ -130,10 +130,10 @@ r into (kibi.bytes / seconds)  // 4.0   (KiB/s)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.storage.bytes
-import org.pcsoft.framework.kunit.storage.kibi
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.datarate.*
+import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.kibi
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.it.datarate.*
 
 (10 of bytes / seconds).toString()  // "10.0 B/s" (मूल इकाई)
 "${(4096 of bytes / seconds) into (kibi.bytes / seconds)} KiB/s" // "4.0 KiB/s"

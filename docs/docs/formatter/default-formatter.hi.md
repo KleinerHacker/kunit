@@ -48,8 +48,8 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.*
-import org.pcsoft.framework.kunit.distance.*
-import org.pcsoft.framework.kunit.time.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
 
 (1500 of meters).toString()                          // "1500.0 m"
 (3 of meters / seconds).format(kilo.meters / hours)  // "10.799999999999999 km/h"
@@ -66,9 +66,9 @@ import org.pcsoft.framework.kunit.time.*
 ```kotlin
 import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.hours
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.hours
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import java.util.Locale
 
 val v = 3 of meters / seconds

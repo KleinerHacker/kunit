@@ -1,6 +1,6 @@
 # 온도 차
 
-패키지: `org.pcsoft.framework.kunit.temperature`
+패키지: `org.pcsoft.framework.kunit.thermo.temperature`
 기본 단위: **켈빈**(`KTemperatureDifferenceUnit.BASE == KTemperatureDifferenceUnit.KELVIN`)
 
 유형: **네이티브 단위**
@@ -32,7 +32,7 @@
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val d1 = (30 of celsius) - (10 of celsius)   // KTemperatureDifferenceUnitInstance: 20 ΔK
 val d2 = KTemperatureDifference.ofKelvin(20) // 명시적, d1과 동일
@@ -44,7 +44,7 @@ d1.value                                      // 20.0(켈빈)
 `+`/`-`/비교는 일반적인 선형 동형 연산자입니다(차이 더하기 차이는 차이):
 
 ```kotlin
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 val sum  = KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10) // 30 ΔK
 val diff = KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin(10) // 10 ΔK
@@ -64,7 +64,7 @@ val doubled = KTemperatureDifference.ofKelvin(5) * 2 // KTemperatureDifferenceUn
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 (25 of celsius) + KTemperatureDifference.ofKelvin(5) // KTemperatureUnitInstance: 303.15 K
 ```
@@ -75,9 +75,9 @@ import org.pcsoft.framework.kunit.temperature.*
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.storage.bytes
+import org.pcsoft.framework.kunit.it.storage.bytes
 import org.pcsoft.framework.kunit.times
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 KTemperatureDifference.ofKelvin(2) * (3 of bytes) // KMixedUnitInstance
 ```
@@ -87,7 +87,7 @@ KTemperatureDifference.ofKelvin(2) * (3 of bytes) // KMixedUnitInstance
 기본 단위 `toString()`만 존재합니다(켈빈):
 
 ```kotlin
-import org.pcsoft.framework.kunit.temperature.*
+import org.pcsoft.framework.kunit.thermo.temperature.*
 
 KTemperatureDifference.ofKelvin(20).toString() // "20.0 ΔK"
 ```

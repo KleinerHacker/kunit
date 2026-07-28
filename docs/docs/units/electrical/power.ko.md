@@ -1,6 +1,6 @@
 # 전력 (Power, 전기)
 
-패키지: `org.pcsoft.framework.kunit.power`
+패키지: `org.pcsoft.framework.kunit.common.power`
 기본 단위: **와트(watt)** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 유형: **구성 단위(constructed unit)**
@@ -49,7 +49,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 // 25 kVA 정격 변압기가 역률 cos φ = 0.8 인 부하에 공급하는 경우:
 val s = 25 of kilo.voltAmperes
@@ -63,7 +63,7 @@ q into kilo.vars                      // 15.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val p = 2 of kilo.watts
 p into kilo.watts               // 2.0
@@ -98,12 +98,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.common.power.*
 
 // 실제 사례 - 전원 콘센트: 10 A에서 230 V는 2.3 kW를 공급합니다.
 val p = (230 of volts) * (10 of amperes)   // KPowerUnitInstance
@@ -121,7 +121,7 @@ raw.toPower() == (2.3 of kilo.watts)       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -133,7 +133,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (1 of kilo.watts).toString()     // "1000.0 W" (기본 단위)
 ```

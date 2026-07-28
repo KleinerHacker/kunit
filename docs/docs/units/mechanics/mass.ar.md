@@ -1,6 +1,6 @@
 # الكتلة
 
-الحزمة: `org.pcsoft.framework.kunit.mass`
+الحزمة: `org.pcsoft.framework.kunit.mechanic.mass`
 الوحدة الأساسية: **غرام** (`KMassUnit.BASE == KMassUnit.GRAM`)
 
 النوع: **وحدة أصلية**
@@ -48,7 +48,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val m = 2 of kilo.grams      // 2000 g (الكيلوغرام هو `kilo.grams`)
 m.value                      // 2000.0 (مُطبَّع إلى الغرامات)
@@ -61,7 +61,7 @@ m into pounds                // ≈ 4.409 (يُقرأ ثانيةً بالأرط�
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 // + / - : المجموعة نفسها، تحويل تلقائي بين الوحدات
 val a = (1 of kilo.grams) + (500 of grams)   // KMassUnitInstance: 1500.0 g
@@ -85,7 +85,7 @@ val b = (1 of kilo.grams) - (500 of grams)   // KMassUnitInstance: 500.0 g
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 val squared = (2 of grams) pow 2     // KMixedUnitInstance: 4.0 g²
 ```
@@ -100,7 +100,7 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).value    // 1000.0     (كيلوغرام)
 (1 of milli.grams).value   // 0.001      (ميلي غرام)
@@ -116,7 +116,7 @@ import org.pcsoft.framework.kunit.mass.*
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.*
+import org.pcsoft.framework.kunit.mechanic.mass.*
 
 (1 of kilo.grams).toString()             // "1000.0 g" (تمثيل الوحدة الأساسية)
 "${(2000 of grams) into kilo.grams} kg"  // "2.0 kg"

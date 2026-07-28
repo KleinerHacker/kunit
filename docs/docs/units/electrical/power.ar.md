@@ -1,6 +1,6 @@
 # القدرة (كهربائية)
 
-الحزمة: `org.pcsoft.framework.kunit.power`
+الحزمة: `org.pcsoft.framework.kunit.common.power`
 الوحدة الأساسية: **واط** (`KPowerUnit.BASE == KPowerUnit.WATT`)
 
 النوع: **وحدة مركّبة**
@@ -49,7 +49,7 @@
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 // محوّل بقدرة اسمية 25 kVA يغذّي حملًا بمعامل قدرة cos φ = 0.8:
 val s = 25 of kilo.voltAmperes
@@ -63,7 +63,7 @@ q into kilo.vars                      // 15.0
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val p = 2 of kilo.watts
 p into kilo.watts               // 2.0
@@ -98,12 +98,12 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.time.seconds
-import org.pcsoft.framework.kunit.ec.amperes
-import org.pcsoft.framework.kunit.voltage.volts
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.electric.current.amperes
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.common.power.*
 
 // مثال واقعي - مقبس كهربائي: 230 V عند 10 A يمنح 2.3 kW.
 val p = (230 of volts) * (10 of amperes)   // KPowerUnitInstance
@@ -121,7 +121,7 @@ raw.toPower() == (2.3 of kilo.watts)       // true
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 val s = (100 of watts) + (40 of watts)  // 140 W
 (100 of watts) > (40 of watts)          // true
@@ -133,7 +133,7 @@ val s = (100 of watts) + (40 of watts)  // 140 W
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.power.*
+import org.pcsoft.framework.kunit.common.power.*
 
 (1 of kilo.watts).toString()     // "1000.0 W" (الوحدة الأساسية)
 ```

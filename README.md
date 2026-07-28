@@ -135,7 +135,10 @@ classDiagram
 
 * Root package `org.pcsoft.framework.kunit` contains the base types `KUnit`, `KMixedUnitInstance`,
   `KUnitMeasurable` (with `of`/`into`/`scaledBy`), `KUnitPrefix` and the `KPrefixBuilder` hierarchy.
-* Every "pure" unit group gets its own sub-package (e.g. `org.pcsoft.framework.kunit.distance`) with its own
+* Unit packages are grouped by subject area: `org.pcsoft.framework.kunit.<field>.<unit>` with the fields
+  `common` (units belonging to several fields, e.g. energy and power), `kinematic`, `mechanic`, `electric`,
+  `thermo` and `it` (information technology). The fields mirror the documentation structure.
+* Every "pure" unit group gets its own sub-package (e.g. `org.pcsoft.framework.kunit.kinematic.distance`) with its own
   `KXxxUnit`, `KXxxUnitInstance`, its value-1 bare tokens (`K*UnitBareValues.kt`) and its prefix-builder
   property extensions (`K*UnitExtensions.kt`).
 
@@ -176,45 +179,45 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 
 | Group | Sub-package | Base unit |
 |---|---|---|
-| Distance | `org.pcsoft.framework.kunit.distance` | Meter (`KDistanceUnit.BASE`) |
-| Time | `org.pcsoft.framework.kunit.time` | Second (`KTimeUnit.BASE`) |
-| Frequency (inverse of time) | `org.pcsoft.framework.kunit.frequency` | Hertz (`KFrequencyUnit.BASE`) |
-| Mass | `org.pcsoft.framework.kunit.mass` | Gram (`KMassUnit.BASE`) |
-| Electric Current | `org.pcsoft.framework.kunit.ec` | Ampere (`KElectricCurrentUnit.BASE`) |
-| Storage | `org.pcsoft.framework.kunit.storage` | Byte (`KStorageUnit.BASE`) |
-| Temperature | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
-| Temperature Difference | `org.pcsoft.framework.kunit.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
-| Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.speed` | Meter per second (`KSpeedUnit.BASE`) |
-| Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.datarate` | Byte per second (`KDataRateUnit.BASE`) |
-| Storage Density (constructed: storage·length⁻²) | `org.pcsoft.framework.kunit.storagedensity` | Byte per square meter (`KStorageDensityUnit.BASE`) |
-| Acceleration (constructed: length·time⁻²) | `org.pcsoft.framework.kunit.acceleration` | Meter per second squared (`KAccelerationUnit.BASE`) |
-| Force (constructed: mass·length·time⁻²) | `org.pcsoft.framework.kunit.force` | Newton (`KForceUnit.BASE`) |
-| Pressure (constructed: mass·length⁻¹·time⁻²) | `org.pcsoft.framework.kunit.pressure` | Pascal (`KPressureUnit.BASE`) |
-| Density (constructed: mass·length⁻³) | `org.pcsoft.framework.kunit.density` | Kilogram per cubic meter (`KDensityUnit.BASE`) |
-| Area Density (constructed: mass·length⁻²) | `org.pcsoft.framework.kunit.areadensity` | Kilogram per square meter (`KAreaDensityUnit.BASE`) |
-| Voltage (constructed: mass·length²·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.voltage` | Volt (`KVoltageUnit.BASE`) |
-| Resistance (constructed: mass·length²·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.resistance` | Ohm (`KResistanceUnit.BASE`) |
-| Charge (constructed: current·time) | `org.pcsoft.framework.kunit.charge` | Coulomb (`KChargeUnit.BASE`) |
-| Conductance (constructed: mass⁻¹·length⁻²·time³·current²) | `org.pcsoft.framework.kunit.conductance` | Siemens (`KConductanceUnit.BASE`) |
-| Magnetic Field Strength (constructed: current·length⁻¹) | `org.pcsoft.framework.kunit.magneticfieldstrength` | Ampere per meter (`KMagneticFieldStrengthUnit.BASE`) |
-| Capacitance (constructed: mass⁻¹·length⁻²·time⁴·current²) | `org.pcsoft.framework.kunit.capacitance` | Farad (`KCapacitanceUnit.BASE`) |
-| Inductance (constructed: mass·length²·time⁻²·current⁻²) | `org.pcsoft.framework.kunit.inductance` | Henry (`KInductanceUnit.BASE`) |
-| Magnetic Flux (constructed: mass·length²·time⁻²·current⁻¹) | `org.pcsoft.framework.kunit.magneticflux` | Weber (`KMagneticFluxUnit.BASE`) |
-| Magnetic Flux Density (constructed: mass·time⁻²·current⁻¹) | `org.pcsoft.framework.kunit.magneticfluxdensity` | Tesla (`KMagneticFluxDensityUnit.BASE`) |
-| Current Density (constructed: current·length⁻²) | `org.pcsoft.framework.kunit.currentdensity` | Ampere per square meter (`KCurrentDensityUnit.BASE`) |
-| Charge Density (constructed: current·time·length⁻³) | `org.pcsoft.framework.kunit.chargedensity` | Coulomb per cubic meter (`KChargeDensityUnit.BASE`) |
-| Resistivity (constructed: mass·length³·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.resistivity` | Ohm meter (`KResistivityUnit.BASE`) |
-| Conductivity (constructed: mass⁻¹·length⁻³·time³·current²) | `org.pcsoft.framework.kunit.conductivity` | Siemens per meter (`KConductivityUnit.BASE`) |
-| Electric Field Strength (constructed: mass·length·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.electricfieldstrength` | Volt per meter (`KElectricFieldStrengthUnit.BASE`) |
-| Electric Flux Density (constructed: current·time·length⁻²) | `org.pcsoft.framework.kunit.electricfluxdensity` | Coulomb per square meter (`KElectricFluxDensityUnit.BASE`) |
-| Permittivity (constructed: mass⁻¹·length⁻³·time⁴·current²) | `org.pcsoft.framework.kunit.permittivity` | Farad per meter (`KPermittivityUnit.BASE`) |
-| Permeability (constructed: mass·length·time⁻²·current⁻²) | `org.pcsoft.framework.kunit.permeability` | Henry per meter (`KPermeabilityUnit.BASE`) |
-| Linear Charge Density (constructed: current·time·length⁻¹) | `org.pcsoft.framework.kunit.linearchargedensity` | Coulomb per meter (`KLinearChargeDensityUnit.BASE`) |
-| Magnetic Reluctance (constructed: mass⁻¹·length⁻²·time²·current²) | `org.pcsoft.framework.kunit.reluctance` | Ampere per weber (`KReluctanceUnit.BASE`) |
-| Electric Mobility (constructed: mass⁻¹·time²·current) | `org.pcsoft.framework.kunit.electricmobility` | Square meter per volt second (`KElectricMobilityUnit.BASE`) |
-| Electric Dipole Moment (constructed: current·time·length) | `org.pcsoft.framework.kunit.electricdipolemoment` | Coulomb meter (`KElectricDipoleMomentUnit.BASE`) |
-| Power (constructed: mass·length²·time⁻³) | `org.pcsoft.framework.kunit.power` | Watt (`KPowerUnit.BASE`) |
-| Energy (constructed: mass·length²·time⁻²) | `org.pcsoft.framework.kunit.energy` | Joule (`KEnergyUnit.BASE`) |
+| Distance | `org.pcsoft.framework.kunit.kinematic.distance` | Meter (`KDistanceUnit.BASE`) |
+| Time | `org.pcsoft.framework.kunit.kinematic.time` | Second (`KTimeUnit.BASE`) |
+| Frequency (inverse of time) | `org.pcsoft.framework.kunit.kinematic.frequency` | Hertz (`KFrequencyUnit.BASE`) |
+| Mass | `org.pcsoft.framework.kunit.mechanic.mass` | Gram (`KMassUnit.BASE`) |
+| Electric Current | `org.pcsoft.framework.kunit.electric.ec` | Ampere (`KElectricCurrentUnit.BASE`) |
+| Storage | `org.pcsoft.framework.kunit.it.storage` | Byte (`KStorageUnit.BASE`) |
+| Temperature | `org.pcsoft.framework.kunit.thermo.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
+| Temperature Difference | `org.pcsoft.framework.kunit.thermo.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
+| Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.kinematic.speed` | Meter per second (`KSpeedUnit.BASE`) |
+| Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.it.datarate` | Byte per second (`KDataRateUnit.BASE`) |
+| Storage Density (constructed: storage·length⁻²) | `org.pcsoft.framework.kunit.it.storagedensity` | Byte per square meter (`KStorageDensityUnit.BASE`) |
+| Acceleration (constructed: length·time⁻²) | `org.pcsoft.framework.kunit.kinematic.acceleration` | Meter per second squared (`KAccelerationUnit.BASE`) |
+| Force (constructed: mass·length·time⁻²) | `org.pcsoft.framework.kunit.mechanic.force` | Newton (`KForceUnit.BASE`) |
+| Pressure (constructed: mass·length⁻¹·time⁻²) | `org.pcsoft.framework.kunit.mechanic.pressure` | Pascal (`KPressureUnit.BASE`) |
+| Density (constructed: mass·length⁻³) | `org.pcsoft.framework.kunit.mechanic.density` | Kilogram per cubic meter (`KDensityUnit.BASE`) |
+| Area Density (constructed: mass·length⁻²) | `org.pcsoft.framework.kunit.mechanic.areadensity` | Kilogram per square meter (`KAreaDensityUnit.BASE`) |
+| Voltage (constructed: mass·length²·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.electric.voltage` | Volt (`KVoltageUnit.BASE`) |
+| Resistance (constructed: mass·length²·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.electric.resistance` | Ohm (`KResistanceUnit.BASE`) |
+| Charge (constructed: current·time) | `org.pcsoft.framework.kunit.electric.charge` | Coulomb (`KChargeUnit.BASE`) |
+| Conductance (constructed: mass⁻¹·length⁻²·time³·current²) | `org.pcsoft.framework.kunit.electric.conductance` | Siemens (`KConductanceUnit.BASE`) |
+| Magnetic Field Strength (constructed: current·length⁻¹) | `org.pcsoft.framework.kunit.electric.magneticfieldstrength` | Ampere per meter (`KMagneticFieldStrengthUnit.BASE`) |
+| Capacitance (constructed: mass⁻¹·length⁻²·time⁴·current²) | `org.pcsoft.framework.kunit.electric.capacitance` | Farad (`KCapacitanceUnit.BASE`) |
+| Inductance (constructed: mass·length²·time⁻²·current⁻²) | `org.pcsoft.framework.kunit.electric.inductance` | Henry (`KInductanceUnit.BASE`) |
+| Magnetic Flux (constructed: mass·length²·time⁻²·current⁻¹) | `org.pcsoft.framework.kunit.electric.magneticflux` | Weber (`KMagneticFluxUnit.BASE`) |
+| Magnetic Flux Density (constructed: mass·time⁻²·current⁻¹) | `org.pcsoft.framework.kunit.electric.magneticfluxdensity` | Tesla (`KMagneticFluxDensityUnit.BASE`) |
+| Current Density (constructed: current·length⁻²) | `org.pcsoft.framework.kunit.electric.currentdensity` | Ampere per square meter (`KCurrentDensityUnit.BASE`) |
+| Charge Density (constructed: current·time·length⁻³) | `org.pcsoft.framework.kunit.electric.chargedensity` | Coulomb per cubic meter (`KChargeDensityUnit.BASE`) |
+| Resistivity (constructed: mass·length³·time⁻³·current⁻²) | `org.pcsoft.framework.kunit.electric.resistivity` | Ohm meter (`KResistivityUnit.BASE`) |
+| Conductivity (constructed: mass⁻¹·length⁻³·time³·current²) | `org.pcsoft.framework.kunit.electric.conductivity` | Siemens per meter (`KConductivityUnit.BASE`) |
+| Electric Field Strength (constructed: mass·length·time⁻³·current⁻¹) | `org.pcsoft.framework.kunit.electric.electricfieldstrength` | Volt per meter (`KElectricFieldStrengthUnit.BASE`) |
+| Electric Flux Density (constructed: current·time·length⁻²) | `org.pcsoft.framework.kunit.electric.electricfluxdensity` | Coulomb per square meter (`KElectricFluxDensityUnit.BASE`) |
+| Permittivity (constructed: mass⁻¹·length⁻³·time⁴·current²) | `org.pcsoft.framework.kunit.electric.permittivity` | Farad per meter (`KPermittivityUnit.BASE`) |
+| Permeability (constructed: mass·length·time⁻²·current⁻²) | `org.pcsoft.framework.kunit.electric.permeability` | Henry per meter (`KPermeabilityUnit.BASE`) |
+| Linear Charge Density (constructed: current·time·length⁻¹) | `org.pcsoft.framework.kunit.electric.linearchargedensity` | Coulomb per meter (`KLinearChargeDensityUnit.BASE`) |
+| Magnetic Reluctance (constructed: mass⁻¹·length⁻²·time²·current²) | `org.pcsoft.framework.kunit.electric.reluctance` | Ampere per weber (`KReluctanceUnit.BASE`) |
+| Electric Mobility (constructed: mass⁻¹·time²·current) | `org.pcsoft.framework.kunit.electric.electricmobility` | Square meter per volt second (`KElectricMobilityUnit.BASE`) |
+| Electric Dipole Moment (constructed: current·time·length) | `org.pcsoft.framework.kunit.electric.electricdipolemoment` | Coulomb meter (`KElectricDipoleMomentUnit.BASE`) |
+| Power (constructed: mass·length²·time⁻³) | `org.pcsoft.framework.kunit.common.power` | Watt (`KPowerUnit.BASE`) |
+| Energy (constructed: mass·length²·time⁻²) | `org.pcsoft.framework.kunit.common.energy` | Joule (`KEnergyUnit.BASE`) |
 
 #### Distance (`KDistanceUnit`)
 
@@ -482,7 +485,7 @@ group you need.
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.*
+import org.pcsoft.framework.kunit.kinematic.distance.*
 
 // Build pure length values with `of` on a value-1 template
 val distance = 5 of meters           // KLengthUnitInstance (exponent 1)
@@ -520,7 +523,7 @@ println(tank into usGallons)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 
 // `5 of kilo.meters` -> KLengthUnitInstance (== 5000 m)
 val fiveKm = 5 of kilo.meters
@@ -532,9 +535,9 @@ println(fiveKm.value) // 5000.0 (normalized to meters)
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.time.seconds
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 
 // Compose a unit expression from value-1 templates and scale it with `of`
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²

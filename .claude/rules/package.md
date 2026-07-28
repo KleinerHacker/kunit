@@ -20,9 +20,33 @@ The root package is:
 
 It contains only framework-wide types that are shared by multiple units.
 
+### Field packages (Fachgebiete)
+
+Below the root package there is exactly one level of subject-area packages, mirroring the MkDocs
+field folders (`docs/docs/units/<field>/`):
+
+| Code package | MkDocs field |
+|---|---|
+| `org.pcsoft.framework.kunit.common` | units that belong to several fields |
+| `org.pcsoft.framework.kunit.kinematic` | `kinematics` |
+| `org.pcsoft.framework.kunit.mechanic` | `mechanics` |
+| `org.pcsoft.framework.kunit.electric` | `electrical` |
+| `org.pcsoft.framework.kunit.thermo` | `thermodynamics` |
+| `org.pcsoft.framework.kunit.it` | `information` |
+
+A unit belongs to `common` if and only if it is documented as its own page in MORE THAN ONE MkDocs
+field (currently `energy` and `power`). Otherwise it belongs to the field package of its single
+MkDocs field.
+
+If a new field is needed, Claude MUST ask the user first (same as for a new MkDocs field folder).
+
+The `formatter` package and the framework-wide root types are NOT field packages and stay untouched.
+
 ### Unit packages
 
-Each unit MUST have its own dedicated package.
+Each unit MUST have its own dedicated package inside its field package:
+
+`org.pcsoft.framework.kunit.<field>.<unit>`
 
 The package name MUST match the unit name.
 

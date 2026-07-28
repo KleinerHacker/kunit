@@ -1,6 +1,6 @@
 # क्षेत्रीय घनत्व
 
-पैकेज: `org.pcsoft.framework.kunit.areadensity`
+पैकेज: `org.pcsoft.framework.kunit.mechanic.areadensity`
 मूल इकाई: **किलोग्राम प्रति वर्ग मीटर** (`KAreaDensityUnit.BASE == KAreaDensityUnit.KILOGRAM_PER_SQUARE_METER`)
 
 प्रकार: **निर्मित इकाई**
@@ -21,10 +21,10 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.mass.grams
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 val q = (25 of kilo.grams) / ((5 of meters) * (1 of meters)) // KAreaDensityUnitInstance, 5 kg/m²
 q into (kilo.grams / (meters pow 2))       // 5.0
@@ -46,11 +46,11 @@ q into (grams / (milli.meters pow 2))      // 0.005 (= प्रति mm² व�
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.liters
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.liters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.density.*
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.mechanic.density.*
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 // 3 mm इस्पात प्लेट: घनत्व × मोटाई = सतही द्रव्यमान
 val density = (2 of kilo.grams) / (1 of liters)      // 2000 kg/m³
@@ -65,9 +65,9 @@ val back = q / (3 of meters)                         // KDensityUnitInstance, 20
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 val area = (5 of meters) * (1 of meters)
 val a = (15 of kilo.grams) / area   // 3 kg/m²
@@ -81,8 +81,8 @@ a > b                                       // true
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.distance.meters
-import org.pcsoft.framework.kunit.areadensity.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.mechanic.areadensity.*
 
 ((5 of kilo.grams) / ((5 of meters) * (1 of meters))).toString() // "1.0 kg/m²" (मूल इकाई)
 ```
