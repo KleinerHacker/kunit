@@ -2,6 +2,99 @@
 
 ## [UNRELEASED]
 
+### Added
+
+- **New native unit Amount of Substance.** `org.pcsoft.framework.kunit.thermo.amountofsubstance` with base
+  unit mole (`mol`, `KAmountOfSubstanceUnit.BASE`), the tokens `moles` and `poundMoles` (both
+  prefix-combinable, e.g. `milli.moles`), the constant `AVOGADRO_CONSTANT` and
+  `KAmountOfSubstanceUnitInstance.particleCount()`; `KMixedUnitInstance.toAmountOfSubstance()`.
+
+- **New standardized unit Volumetric Flow (`length³ · time⁻¹`).** `…kinematic.volumeflow` with base unit
+  cubic meter per second (`m³/s`) and the tokens `cubicMetersPerSecond`, `cubicMetersPerHour`,
+  `litersPerSecond`, `litersPerMinute`, `usGallonsPerMinute`. Typed operators `volume / time`,
+  `volumeFlow * time = volume` (and its commutative form) and `volume / volumeFlow = time`;
+  `KMixedUnitInstance.toVolumeFlow()`.
+
+- **New standardized unit Heat Capacity (`mass · length² · time⁻² · temperature⁻¹`).**
+  `…thermo.heatcapacity` with base unit joule per kelvin (`J/K`) and the tokens `joulesPerKelvin`,
+  `caloriesPerKelvin`, `btusPerFahrenheit`. Typed operators `energy / temperatureDifference`,
+  `heatCapacity * temperatureDifference = energy` (and its commutative form) and
+  `energy / heatCapacity = temperatureDifference`; `KMixedUnitInstance.toHeatCapacity()`. **Entropy** is
+  modelled by this same type.
+
+- **New standardized unit Specific Heat Capacity (`length² · time⁻² · temperature⁻¹`).**
+  `…thermo.specificheatcapacity` with base unit `J/(kg·K)` and the tokens `joulesPerKilogramKelvin`,
+  `caloriesPerGramKelvin`, `btusPerPoundFahrenheit`. Two typed decompositions — `heatCapacity / mass` and
+  `specificEnergy / temperatureDifference` — plus `specificHeatCapacity * mass = heatCapacity`,
+  `specificHeatCapacity * temperatureDifference = specificEnergy` (both with commutative forms) and their
+  inverses; `KMixedUnitInstance.toSpecificHeatCapacity()`.
+
+- **New standardized unit Molar Heat Capacity (`mass · length² · time⁻² · substance⁻¹ · temperature⁻¹`).**
+  `…thermo.molarheatcapacity` with base unit `J/(mol·K)`, the tokens `joulesPerMoleKelvin` and
+  `caloriesPerMoleKelvin` and the constant `GAS_CONSTANT`. Two typed decompositions —
+  `heatCapacity / amountOfSubstance` and `molarEnergy / temperatureDifference` — plus their inverses;
+  `KMixedUnitInstance.toMolarHeatCapacity()`.
+
+- **New standardized unit Specific Energy (`length² · time⁻²`).** `…thermo.specificenergy` with base unit
+  joule per kilogram (`J/kg`) and the tokens `joulesPerKilogram`, `caloriesPerGram`,
+  `wattHoursPerKilogram`, `btusPerPound`. Typed operators `energy / mass`,
+  `specificEnergy * mass = energy` (and its commutative form) and `energy / specificEnergy = mass`;
+  `KMixedUnitInstance.toSpecificEnergy()`.
+
+- **New standardized unit Molar Energy (`mass · length² · time⁻² · substance⁻¹`).** `…thermo.molarenergy`
+  with base unit joule per mole (`J/mol`) and the tokens `joulesPerMole`, `caloriesPerMole`,
+  `electronVoltsPerEntity`. Typed operators `energy / amountOfSubstance`,
+  `molarEnergy * amountOfSubstance = energy` (and its commutative form) and
+  `energy / molarEnergy = amountOfSubstance`; `KMixedUnitInstance.toMolarEnergy()`.
+
+- **New standardized unit Heat Flux Density (`mass · time⁻³`).** `…thermo.heatfluxdensity` with base unit
+  watt per square meter (`W/m²`), the tokens `wattsPerSquareMeter`, `btusPerHourSquareFoot`,
+  `caloriesPerSecondSquareCentimeter` and the constant `SOLAR_CONSTANT`. Typed operators `power / area`,
+  `heatFluxDensity * area = power` (and its commutative form) and `power / heatFluxDensity = area`;
+  `KMixedUnitInstance.toHeatFluxDensity()`.
+
+- **New standardized unit Thermal Conductivity (`mass · length · time⁻³ · temperature⁻¹`).**
+  `…thermo.conductivity` with base unit watt per meter-kelvin (`W/(m·K)`) and the tokens
+  `wattsPerMeterKelvin`, `btusPerHourFootFahrenheit`, `caloriesPerSecondCentimeterKelvin`. Fourier's law
+  as typed operators: `heatFluxDensity / temperatureGradient`,
+  `thermalConductivity * temperatureGradient = heatFluxDensity` (and its commutative form) and
+  `heatFluxDensity / thermalConductivity = temperatureGradient`;
+  `KMixedUnitInstance.toThermalConductivity()`.
+
+- **New standardized unit Heat Transfer Coefficient (`mass · time⁻³ · temperature⁻¹`).**
+  `…thermo.heattransfercoefficient` with base unit `W/(m²·K)` (the building-physics U-value) and the
+  tokens `wattsPerSquareMeterKelvin`, `btusPerHourSquareFootFahrenheit`,
+  `caloriesPerSecondSquareCentimeterKelvin`. Two typed decompositions —
+  `heatFluxDensity / temperatureDifference` and `thermalConductivity / length` — plus their inverses;
+  `KMixedUnitInstance.toHeatTransferCoefficient()`.
+
+- **New standardized unit Thermal Resistance (`mass⁻¹ · time³ · temperature`).** `…thermo.resistance` with
+  base unit square meter-kelvin per watt (`m²·K/W`, the R-value) and the tokens
+  `squareMeterKelvinPerWatt`, `hourSquareFootFahrenheitPerBtu`, `clo`, `tog`. Two typed decompositions —
+  `temperatureDifference / heatFluxDensity` and `length / thermalConductivity` — plus their inverses and
+  the typed reciprocal pair `1 / heatTransferCoefficient` and `1 / thermalResistance`;
+  `KMixedUnitInstance.toThermalResistance()`.
+
+- **New standardized unit Thermal Expansion (`temperature⁻¹`).** `…thermo.expansion` with base unit per
+  kelvin (`1/K`) and the tokens `perKelvin`, `perFahrenheit`, `ppmPerKelvin`. The typed reciprocal pair
+  `1 / temperatureDifference` and `1 / thermalExpansion`, the dimensionless product
+  `thermalExpansion * temperatureDifference` (a `Double`, with a commutative form) and the typed
+  `elongationOf(length, temperatureDifference)`; `KMixedUnitInstance.toThermalExpansion()`.
+
+- **New standardized unit Temperature Gradient (`temperature · length⁻¹`).** `…thermo.temperaturegradient`
+  with base unit kelvin per meter (`K/m`) and the tokens `kelvinPerMeter`, `kelvinPerKilometer`,
+  `fahrenheitPerFoot`. Typed operators `temperatureDifference / length`,
+  `temperatureGradient * length = temperatureDifference` (and its commutative form) and
+  `temperatureDifference / temperatureGradient = length`; `KMixedUnitInstance.toTemperatureGradient()`.
+
+- **New standardized unit Thermal Diffusivity (`length² · time⁻¹`).** `…thermo.diffusivity` with base unit
+  square meter per second (`m²/s`) and the tokens `squareMetersPerSecond`, `squareMillimetersPerSecond`,
+  `squareFeetPerHour`. The defining relation `α = λ / (ρ · c_p)` is ternary and is therefore exposed as
+  the typed functions `diffusivityWith`, `conductivityWith`, `densityWith` and `specificHeatCapacityWith`
+  rather than as a binary operator; `KMixedUnitInstance.toThermalDiffusivity()`.
+
+All new units accept the full range of SI prefixes on every named token.
+
 ## [0.7.0]
 
 ### Changed (breaking)

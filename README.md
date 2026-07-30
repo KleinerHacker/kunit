@@ -138,6 +138,10 @@ classDiagram
 * Unit packages are grouped by subject area: `org.pcsoft.framework.kunit.<field>.<unit>` with the fields
   `common` (units belonging to several fields, e.g. energy and power), `kinematic`, `mechanic`, `electric`,
   `thermo` and `it` (information technology). The fields mirror the documentation structure.
+* A multi-word unit package is written as one all-lowercase token and does **not** repeat its field
+  package's name (`thermo.conductivity`, not `thermo.thermalconductivity`); the class names keep the full
+  technical term (`KThermalConductivityUnitInstance`), which is what distinguishes them from
+  `electric.conductivity`.
 * Every "pure" unit group gets its own sub-package (e.g. `org.pcsoft.framework.kunit.kinematic.distance`) with its own
   `KXxxUnit`, `KXxxUnitInstance`, its value-1 bare tokens (`K*UnitBareValues.kt`) and its prefix-builder
   property extensions (`K*UnitExtensions.kt`).
@@ -187,6 +191,7 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Storage | `org.pcsoft.framework.kunit.it.storage` | Byte (`KStorageUnit.BASE`) |
 | Temperature | `org.pcsoft.framework.kunit.thermo.temperature` | Kelvin (`KTemperatureUnit.BASE`) |
 | Temperature Difference | `org.pcsoft.framework.kunit.thermo.temperature` | Kelvin (`KTemperatureDifferenceUnit.BASE`) |
+| Amount of Substance | `org.pcsoft.framework.kunit.thermo.amountofsubstance` | Mole (`KAmountOfSubstanceUnit.BASE`) |
 | Speed (constructed: length·time⁻¹) | `org.pcsoft.framework.kunit.kinematic.speed` | Meter per second (`KSpeedUnit.BASE`) |
 | Data Rate (constructed: storage·time⁻¹) | `org.pcsoft.framework.kunit.it.datarate` | Byte per second (`KDataRateUnit.BASE`) |
 | Storage Density (constructed: storage·length⁻²) | `org.pcsoft.framework.kunit.it.storagedensity` | Byte per square meter (`KStorageDensityUnit.BASE`) |
@@ -218,6 +223,23 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Electric Dipole Moment (constructed: current·time·length) | `org.pcsoft.framework.kunit.electric.electricdipolemoment` | Coulomb meter (`KElectricDipoleMomentUnit.BASE`) |
 | Power (constructed: mass·length²·time⁻³) | `org.pcsoft.framework.kunit.common.power` | Watt (`KPowerUnit.BASE`) |
 | Energy (constructed: mass·length²·time⁻²) | `org.pcsoft.framework.kunit.common.energy` | Joule (`KEnergyUnit.BASE`) |
+| Volumetric Flow (constructed: length³·time⁻¹) | `org.pcsoft.framework.kunit.kinematic.volumeflow` | Cubic meter per second (`KVolumeFlowUnit.BASE`) |
+| Heat Capacity (constructed: mass·length²·time⁻²·temperature⁻¹) | `org.pcsoft.framework.kunit.thermo.heatcapacity` | Joule per kelvin (`KHeatCapacityUnit.BASE`) |
+| Specific Heat Capacity (constructed: length²·time⁻²·temperature⁻¹) | `org.pcsoft.framework.kunit.thermo.specificheatcapacity` | Joule per kilogram-kelvin (`KSpecificHeatCapacityUnit.BASE`) |
+| Molar Heat Capacity (constructed: mass·length²·time⁻²·substance⁻¹·temperature⁻¹) | `org.pcsoft.framework.kunit.thermo.molarheatcapacity` | Joule per mole-kelvin (`KMolarHeatCapacityUnit.BASE`) |
+| Specific Energy (constructed: length²·time⁻²) | `org.pcsoft.framework.kunit.thermo.specificenergy` | Joule per kilogram (`KSpecificEnergyUnit.BASE`) |
+| Molar Energy (constructed: mass·length²·time⁻²·substance⁻¹) | `org.pcsoft.framework.kunit.thermo.molarenergy` | Joule per mole (`KMolarEnergyUnit.BASE`) |
+| Heat Flux Density (constructed: mass·time⁻³) | `org.pcsoft.framework.kunit.thermo.heatfluxdensity` | Watt per square meter (`KHeatFluxDensityUnit.BASE`) |
+| Thermal Conductivity (constructed: mass·length·time⁻³·temperature⁻¹) | `org.pcsoft.framework.kunit.thermo.conductivity` | Watt per meter-kelvin (`KThermalConductivityUnit.BASE`) |
+| Heat Transfer Coefficient (constructed: mass·time⁻³·temperature⁻¹) | `org.pcsoft.framework.kunit.thermo.heattransfercoefficient` | Watt per square meter-kelvin (`KHeatTransferCoefficientUnit.BASE`) |
+| Thermal Resistance (constructed: mass⁻¹·time³·temperature) | `org.pcsoft.framework.kunit.thermo.resistance` | Square meter-kelvin per watt (`KThermalResistanceUnit.BASE`) |
+| Thermal Expansion (constructed: temperature⁻¹) | `org.pcsoft.framework.kunit.thermo.expansion` | Per kelvin (`KThermalExpansionUnit.BASE`) |
+| Temperature Gradient (constructed: temperature·length⁻¹) | `org.pcsoft.framework.kunit.thermo.temperaturegradient` | Kelvin per meter (`KTemperatureGradientUnit.BASE`) |
+| Thermal Diffusivity (constructed: length²·time⁻¹) | `org.pcsoft.framework.kunit.thermo.diffusivity` | Square meter per second (`KThermalDiffusivityUnit.BASE`) |
+
+> **Entropy** shares `KHeatCapacityUnitInstance` and **heat flow** shares `KPowerUnitInstance` — a
+> canonical base-dimension normal form must map to exactly one type, so that the `toX()` form recognition
+> stays unambiguous. Both have their own documentation page.
 
 #### Distance (`KDistanceUnit`)
 

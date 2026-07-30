@@ -56,6 +56,30 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 (9.81 of meters / (seconds pow 2)).format(meters / (seconds pow 2), "%.2f") // "9.81 m/s^2"
 ```
 
+## 구성
+
+`KDefaultFormatConfig`(값 타입)는 레이아웃 규칙에는 영향을 주지 않고 렌더링 방식만 바꿉니다.
+
+| 옵션              | 값                                          | 기본값     |
+|-------------------|----------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)         | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)                 | `SLASH`   |
+| `functionSymbols` | `KDefaultFunctionSymbols` — `UNICODE`, `ASCII` (`√`/`sqrt`, …) | `UNICODE` |
+
+`functionSymbols` 테이블(근호 `√`/`∛`/`∜`, `±`, `∞`, `°`)은 함수 표현이 적용되는 곳을 위해 준비된
+구성입니다. 단순 정수 지수에서는 사용되지 않습니다. 프리셋: `DEFAULT`(기존 출력),
+`SUPERSCRIPT`(실제 위첨자 지수).
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
+import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
+
+(9.81 of meters / (seconds pow 2))
+    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+// "9.81 m/s²"
+```
+
 ## 명시적으로 사용하기
 
 기본 포매터는 자동으로 적용되므로 이름을 명시할 일은 거의 없습니다. 그래도 커스텀 포매터와의 대칭성을

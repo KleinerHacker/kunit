@@ -53,3 +53,21 @@ The package name MUST match the unit name.
 All unit-specific classes, interfaces, objects and extensions MUST be placed inside this package.
 
 Framework-wide types MUST NOT be placed inside unit packages.
+
+#### Naming
+
+A multi-word unit name is written in the package as a single all-lowercase token, without
+separators (`heattransfercoefficient`, `amountofsubstance`).
+
+The package name MUST NOT repeat the name of its enclosing field package. The field is already
+expressed by the parent package, so the unit part carries only the remaining qualifier:
+
+| Wrong | Correct |
+|---|---|
+| `electric.electricdensity` | `electric.density` |
+| `thermo.thermalconductivity` | `thermo.conductivity` |
+| `thermo.thermalresistance` | `thermo.resistance` |
+
+This applies to the PACKAGE NAME ONLY. Class, interface and file names keep the full technical
+term (`KThermalConductivityUnitInstance`), because the same short name may legitimately occur in
+several fields (`electric.resistance` vs. `thermo.resistance`).

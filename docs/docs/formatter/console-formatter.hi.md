@@ -70,6 +70,32 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))
 ```
 
+## कॉन्फ़िगरेशन (घातांक, चिह्न, फलन प्रतीक)
+
+रंगों से स्वतंत्र, दूसरा तर्क `KConsoleFormatConfig` नोटेशन को नियंत्रित करता है, ठीक
+[डिफ़ॉल्ट फ़ॉर्मैटर](default-formatter.md) की तरह:
+
+| विकल्प            | मान                                     | डिफ़ॉल्ट   |
+|-------------------|--------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)      | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)              | `SLASH`   |
+| `functionSymbols` | `KConsoleFunctionSymbols` — `UNICODE`, `ASCII` | `UNICODE` |
+
+दोनों कंस्ट्रक्टर तर्क डिफ़ॉल्ट होते हैं, इसलिए `KConsoleUnitFormatter()` क्लासिक पैलेट के साथ ऐतिहासिक
+नोटेशन देता है। कॉन्फ़िग को दूसरे तर्क के रूप में पास करें (`KConsoleUnitFormatter(palette, config)`):
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
+import org.pcsoft.framework.kunit.formatter.KConsoleFormatConfig
+import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
+
+val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleFormatConfig.SUPERSCRIPT)
+// "m²", "s⁻¹" को वास्तविक सुपरस्क्रिप्ट घातांकों के साथ रेंडर करता है, हमेशा की तरह रंगीन
+```
+
+वास्तविक भिन्न-रेखा वाले बहु-पंक्ति द्वि-आयामी भिन्न के लिए, [ग्राफ़िकल फ़ॉर्मैटर](graphical-formatter.md) देखें।
+
 ## अपना पैलेट परिभाषित करना
 
 `KConsoleColorPalette` एक सादा डेटा क्लास है, इसलिए आप अपने स्वयं के रंग अनुक्रम दे सकते हैं। प्रत्येक
@@ -92,12 +118,3 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 केवल रंग ही नहीं, बल्कि पूरी तरह भिन्न संकेतन उत्पन्न करने के लिए, इसके बजाय अपना स्वयं का
 [कस्टम फ़ॉर्मैटर](custom-formatters.md) कार्यान्वित करें।
-
-## कॉन्फ़िगरेशन (घातांक, चिह्न, फलन प्रतीक)
-
-रंगों से स्वतंत्र, दूसरा तर्क `KConsoleFormatConfig` नोटेशन को नियंत्रित करता है ([डिफ़ॉल्ट फ़ॉर्मैटर](default-formatter.md)
-के समान): `exponentStyle` (`CARET` = `m^2` / `SUPERSCRIPT` = `m²`), `multiplication` (`*` / `·` / `×`),
-`division` (`/` / `÷`), और `functionSymbols` (`UNICODE` / `ASCII`)। दोनों तर्कों में डिफ़ॉल्ट हैं, इसलिए
-`KConsoleUnitFormatter()` पहले जैसा ही है। इसे `KConsoleUnitFormatter(palette, config)` के रूप में पास करें।
-
-वास्तविक भिन्न-रेखा वाले बहु-पंक्ति द्वि-आयामी भिन्न के लिए, [ग्राफ़िकल फ़ॉर्मैटर](graphical-formatter.md) देखें।

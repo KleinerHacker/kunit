@@ -196,4 +196,3 @@ val density = (5 of kilograms) / (2 of liters)
 - إذا كانت المجموعة مقيّدة المقدار (مثل التخزين، الذي يرفض البادئات المتناقصة)، فعلّق خصائص وحداتها على
   `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` بدلًا من الأساس `KPrefixBuilder`، بحيث تصير
   البادئات غير المسموحة **خطأ تصريف**.
-```

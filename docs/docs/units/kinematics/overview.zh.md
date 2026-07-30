@@ -1,6 +1,7 @@
 # 运动学 — 概述
 
-包：`org.pcsoft.framework.kunit.kinematic.distance`、`…time`、`…speed`、`…acceleration`、`…frequency`
+包：`org.pcsoft.framework.kunit.kinematic.distance`、`…time`、`…speed`、`…acceleration`、
+`…frequency`、`…volumeflow`
 
 运动学是对**运动**的描述 —— 多远、多久、多快,以及运动的速率本身如何变化 —— 暂不追问背后的力
 (那是[力学](../mechanics/overview.md)的主题)。KUnit 用 2 个**原生**基本量和由它们**构造**的
@@ -15,6 +16,7 @@
 | 频率 | 原生 | 赫兹(`Hz`) | [频率](frequency.md) |
 | 速度 | 构造 | 米每秒(`m/s`) | [速度](speed.md) |
 | 加速度 | 构造 | 米每二次方秒(`m/s²`) | [加速度](acceleration.md) |
+| 体积流量 | 构造 | 立方米每秒(`m³/s`) | [体积流量](volume-flow.md) |
 
 ## 各量之间的关系
 
@@ -99,6 +101,8 @@ v.toString()                              // "5.0 m/s"(基准单位)
 | `a = Δv / t` | `((10 of meters) / (1 of seconds)) / (2 of seconds)` | 速度÷时间得加速度 |
 | `v = a · t` | `a * (2 of seconds)` | 加速度×时间得速度 |
 | `f = 1 / T` | `1 / (2 of hertz)` | 周期↔频率(时间的倒数) |
+| `q̇ = V / t` | `(600 of liters) / (2 of minutes)` | 由体积÷时间得到体积流量 |
+| `V = q̇ · t` | `q * (15 of minutes)` | 由流量×时间得到体积 |
 
 ## 后续阅读
 
@@ -106,3 +110,4 @@ v.toString()                              // "5.0 m/s"(基准单位)
 * [时间](time.md) —— 以 `Duration` 为基础的时长。
 * [速度](speed.md) 与 [加速度](acceleration.md) —— 构造出的运动速率。
 * [频率](frequency.md) —— 时间的倒数及其跨单位运算符。
+* [体积流量](volume-flow.md) —— 体积除以时间,`m³/s`、`l/min` 与 `gpm`。

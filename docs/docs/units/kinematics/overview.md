@@ -1,6 +1,7 @@
 # Kinematics — Overview
 
-Packages: `org.pcsoft.framework.kunit.kinematic.distance`, `…time`, `…speed`, `…acceleration`, `…frequency`
+Packages: `org.pcsoft.framework.kunit.kinematic.distance`, `…time`, `…speed`, `…acceleration`,
+`…frequency`, `…volumeflow`
 
 Kinematics is the description of **motion** — how far, how long, how fast, and how the rate of motion
 itself changes — without yet asking about the forces behind it (that is the [Mechanics](../mechanics/overview.md)
@@ -17,6 +18,7 @@ typed.
 | Frequency | native | hertz (`Hz`) | [Frequency](frequency.md) |
 | Speed | constructed | metre per second (`m/s`) | [Speed](speed.md) |
 | Acceleration | constructed | metre per second² (`m/s²`) | [Acceleration](acceleration.md) |
+| Volumetric Flow | constructed | cubic metre per second (`m³/s`) | [Volumetric Flow](volume-flow.md) |
 
 ## How the quantities relate
 
@@ -101,6 +103,8 @@ Unicode superscripts (`²`, `⁻¹`), `·` denotes multiplication and `/` a frac
 | `a = Δv / t` | `((10 of meters) / (1 of seconds)) / (2 of seconds)` | acceleration from speed ÷ time |
 | `v = a · t` | `a * (2 of seconds)` | speed from acceleration × time |
 | `f = 1 / T` | `1 / (2 of hertz)` | period ↔ frequency (reciprocal of time) |
+| `q̇ = V / t` | `(600 of liters) / (2 of minutes)` | volumetric flow from volume ÷ time |
+| `V = q̇ · t` | `q * (15 of minutes)` | volume from flow rate × time |
 
 ## Where to go next
 
@@ -108,3 +112,4 @@ Unicode superscripts (`²`, `⁻¹`), `·` denotes multiplication and `/` a frac
 * [Time](time.md) — durations backed by `Duration`.
 * [Speed](speed.md) and [Acceleration](acceleration.md) — the constructed motion rates.
 * [Frequency](frequency.md) — the inverse of time, and its cross-operators.
+* [Volumetric Flow](volume-flow.md) — volume per time, `m³/s`, `l/min` and `gpm`.

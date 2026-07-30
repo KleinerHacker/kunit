@@ -81,6 +81,31 @@ val mass = steel * (2 of liters)                          // KMassUnitInstance
 mass into kilo.grams                                      // 15.7(每 2 L 的 kg)
 ```
 
+## 实例 —— 绞盘的功与功率
+
+一台绞盘以 **100 N** 的力将物体拉动 **5 m**,耗时 **5 s**。功为 `W = F · s`,功率
+`P = W / t` —— 这与直接的力学形式 `P = F · v` 结果相同:
+
+```kotlin
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.common.power.*
+import org.pcsoft.framework.kunit.common.energy.*
+
+val w = (100 of newtons) * (5 of meters)                    // KEnergyUnitInstance
+w into joules                                                // 500.0
+
+val p = w / (5 of seconds)                                   // KPowerUnitInstance
+p into watts                                                 // 100.0
+
+val direct = (100 of newtons) * ((1 of meters) / (1 of seconds)) // P = F · v,100 W
+p == direct                                                  // true
+```
+
 ## 输出值(`toString`)
 
 `toString()` 以该组的**基准单位**(值 + 符号)输出值;对于其他单位,在字符串模板中用 `into` 读取并自行
@@ -109,6 +134,9 @@ f.toString()                 // "10.0 N"(基准单位)
 | `F = p · A` | `p * area` | 压强×面积得力 |
 | `ρ = m / V` | `(6 of kilo.grams) / (2 of liters)` | 质量÷体积得密度 |
 | `m = ρ · V` | `steel * (2 of liters)` | 密度×体积得质量 |
+| `W = F · s` | `(100 of newtons) * (5 of meters)` | 力×长度得功 |
+| `P = F · v` | `(100 of newtons) * ((1 of meters) / (1 of seconds))` | 力×速度得功率 |
+| `P = W / t` | `w / (5 of seconds)` | 功÷时间得功率 |
 
 ## 后续阅读
 

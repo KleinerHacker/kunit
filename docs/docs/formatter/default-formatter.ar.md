@@ -54,6 +54,30 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 (9.81 of meters / (seconds pow 2)).format(meters / (seconds pow 2), "%.2f") // "9.81 m/s^2"
 ```
 
+## الإعداد
+
+يغيّر `KDefaultFormatConfig` (وهو نوع قيمي) طريقة العرض دون التأثير على قواعد التخطيط:
+
+| الخيار             | القيم                                       | الافتراضي |
+|-------------------|--------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`)، `SUPERSCRIPT` (`m²`)      | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`)، `MIDDLE_DOT` (`·`)، `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`)، `OBELUS` (`÷`)              | `SLASH`   |
+| `functionSymbols` | `KDefaultFunctionSymbols` — `UNICODE`، `ASCII` (`√`/`sqrt`، …) | `UNICODE` |
+
+جدول `functionSymbols` (الجذور `√`/`∛`/`∜`، `±`، `∞`، `°`) هو إعداد مُجهَّز للحالات التي ينطبق فيها
+تمثيل دالّي؛ ومع الأُسّات الصحيحة البسيطة لا يُستخدم. الإعدادات الجاهزة: `DEFAULT` (الإخراج التاريخي)،
+`SUPERSCRIPT` (أُسّات فوقية حقيقية).
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
+import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
+
+(9.81 of meters / (seconds pow 2))
+    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+// "9.81 m/s²"
+```
+
 ## استخدامه صراحةً
 
 يُطبَّق المُنسِّق الافتراضي تلقائيًا، لذا نادرًا ما تحتاج إلى تسميته. ومع ذلك يمكنك تمريره صراحةً — من أجل

@@ -67,6 +67,32 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))
 ```
 
+## 配置（指数、符号、函数符号）
+
+与颜色无关，第二个参数 `KConsoleFormatConfig` 控制记法，与
+[默认格式化器](default-formatter.md) 完全相同：
+
+| 选项              | 取值                                        | 默认值    |
+|-------------------|---------------------------------------------|-----------|
+| `exponentStyle`   | `CARET`（`m^2`）、`SUPERSCRIPT`（`m²`）      | `CARET`   |
+| `multiplication`  | `ASTERISK`（`*`）、`MIDDLE_DOT`（`·`）、`CROSS`（`×`） | `ASTERISK` |
+| `division`        | `SLASH`（`/`）、`OBELUS`（`÷`）              | `SLASH`   |
+| `functionSymbols` | `KConsoleFunctionSymbols` —— `UNICODE`、`ASCII` | `UNICODE` |
+
+两个构造参数都有默认值，因此 `KConsoleUnitFormatter()` 就是经典调色板配合历史记法。将配置作为
+第二个参数传入（`KConsoleUnitFormatter(palette, config)`）：
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
+import org.pcsoft.framework.kunit.formatter.KConsoleFormatConfig
+import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
+
+val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleFormatConfig.SUPERSCRIPT)
+// 渲染出 "m²"、"s⁻¹" 等真正的上标指数，并照常着色
+```
+
+若需带真实分数线的多行二维分数，请参阅[图形格式化器](graphical-formatter.md)。
+
 ## 定义自己的调色板
 
 `KConsoleColorPalette` 是一个普通的数据类，因此你可以提供自己的颜色序列。每个字段保存 ANSI
@@ -89,12 +115,3 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 若需输出完全不同的记法（而不仅是颜色），请改为实现你自己的
 [自定义格式化器](custom-formatters.md)。
-
-## 配置（指数、符号、函数符号）
-
-与颜色无关，第二个参数 `KConsoleFormatConfig` 控制记法（与[默认格式化器](default-formatter.md)相同）：
-`exponentStyle`（`CARET` = `m^2` / `SUPERSCRIPT` = `m²`）、`multiplication`（`*` / `·` / `×`）、
-`division`（`/` / `÷`）以及 `functionSymbols`（`UNICODE` / `ASCII`）。两个参数都有默认值，因此
-`KConsoleUnitFormatter()` 与以往一致。按 `KConsoleUnitFormatter(palette, config)` 传入。
-
-若需带真实分数线的多行二维分数，请参阅[图形格式化器](graphical-formatter.md)。

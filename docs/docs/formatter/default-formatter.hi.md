@@ -57,6 +57,30 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 (9.81 of meters / (seconds pow 2)).format(meters / (seconds pow 2), "%.2f") // "9.81 m/s^2"
 ```
 
+## कॉन्फ़िगरेशन
+
+`KDefaultFormatConfig` (एक मान-प्रकार) लेआउट नियमों को प्रभावित किए बिना रेंडरिंग बदलता है:
+
+| विकल्प            | मान                                     | डिफ़ॉल्ट   |
+|-------------------|--------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)      | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)              | `SLASH`   |
+| `functionSymbols` | `KDefaultFunctionSymbols` — `UNICODE`, `ASCII` (`√`/`sqrt`, …) | `UNICODE` |
+
+`functionSymbols` तालिका (मूल `√`/`∛`/`∜`, `±`, `∞`, `°`) एक तैयार कॉन्फ़िगरेशन है जहाँ फलन प्रतिनिधित्व
+लागू होता है; सामान्य पूर्णांक घातांकों के साथ इसका उपयोग नहीं होता। प्रीसेट: `DEFAULT` (ऐतिहासिक आउटपुट),
+`SUPERSCRIPT` (वास्तविक सुपरस्क्रिप्ट घातांक)।
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
+import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
+
+(9.81 of meters / (seconds pow 2))
+    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+// "9.81 m/s²"
+```
+
 ## इसे स्पष्ट रूप से उपयोग करना
 
 डिफ़ॉल्ट फ़ॉर्मैटर स्वचालित रूप से लागू होता है, इसलिए आप शायद ही कभी इसका नाम देते हैं। फिर भी आप इसे

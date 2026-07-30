@@ -15,6 +15,10 @@ Energy is technically **one** quantity that appears in several subject areas. Th
 *thermodynamic* reading — **heat**, `Q = Φ · t`. The same Kotlin group is documented for the other areas in
 [Energy (Electrical)](../electrical/energy.md) and [Energy (Mechanics)](../mechanics/energy.md).
 
+Divided by a temperature difference an energy becomes a [heat capacity](heat-capacity.md) (or, read as
+`ΔS = Q / T`, an [entropy](entropy.md)); per kilogram it becomes a
+[specific energy](specific-energy.md), per mole a [molar energy](molar-energy.md).
+
 ## Building an energy
 
 Build an energy with a named token, or from a decomposition (see below). Named units survive as value-1 tokens

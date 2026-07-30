@@ -16,6 +16,10 @@ Power is technically **one** quantity that appears in several subject areas. Thi
 group is documented for the other areas in [Power (Electrical)](../electrical/power.md) and
 [Power (Mechanics)](../mechanics/power.md).
 
+Within thermodynamics the same type also carries the **heat flow** reading — see
+[Heat flow](heat-flow.md) for that perspective and for the chain down to
+[heat flux density](heat-flux-density.md).
+
 ## Building a power
 
 Build a power with a named token, or from a decomposition (see below). Named units survive as value-1 tokens

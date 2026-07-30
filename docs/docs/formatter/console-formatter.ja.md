@@ -70,6 +70,32 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))
 ```
 
+## 設定（指数・記号・関数記号）
+
+色とは独立に、2 番目の引数 `KConsoleFormatConfig` が記法を制御します。
+[デフォルトフォーマッター](default-formatter.md) とまったく同じです。
+
+| オプション         | 値                                          | 既定値     |
+|--------------------|---------------------------------------------|------------|
+| `exponentStyle`    | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)        | `CARET`    |
+| `multiplication`   | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`         | `SLASH` (`/`), `OBELUS` (`÷`)                | `SLASH`    |
+| `functionSymbols`  | `KConsoleFunctionSymbols` — `UNICODE`, `ASCII` | `UNICODE`  |
+
+両方のコンストラクタ引数には既定値があるため、`KConsoleUnitFormatter()` は従来のクラシックパレットと
+従来の記法になります。設定は第 2 引数として渡します（`KConsoleUnitFormatter(palette, config)`）。
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
+import org.pcsoft.framework.kunit.formatter.KConsoleFormatConfig
+import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
+
+val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleFormatConfig.SUPERSCRIPT)
+// "m²"、"s⁻¹" のように実際の上付き文字の指数で描画され、通常どおり色付けされます
+```
+
+本物の分数線を持つ複数行の 2 次元分数には [グラフィカルフォーマッター](graphical-formatter.md) を参照してください。
+
 ## 独自パレットの定義
 
 `KConsoleColorPalette` は素朴なデータクラスなので、独自のカラーシーケンスを指定できます。各フィールド
@@ -92,12 +118,3 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 色だけでなくまったく異なる記法を出力するには、独自の
 [カスタムフォーマッター](custom-formatters.md) を実装してください。
-
-## 設定（指数・記号・関数記号）
-
-色とは独立に、2 番目の引数 `KConsoleFormatConfig` が記法を制御します（[デフォルトフォーマッター](default-formatter.md)
-と同じ）: `exponentStyle`（`CARET` = `m^2` / `SUPERSCRIPT` = `m²`）、`multiplication`（`*` / `·` / `×`）、
-`division`（`/` / `÷`）、および `functionSymbols`（`UNICODE` / `ASCII`）。両引数とも既定値があるため
-`KConsoleUnitFormatter()` は従来どおりです。`KConsoleUnitFormatter(palette, config)` のように渡します。
-
-本物の分数線を持つ複数行の 2 次元分数には [グラフィカルフォーマッター](graphical-formatter.md) を参照してください。

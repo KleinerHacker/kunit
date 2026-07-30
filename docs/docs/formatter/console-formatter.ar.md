@@ -68,6 +68,33 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))
 ```
 
+## الإعداد (الأُسّ والعلامات والرموز الدالّية)
+
+بمعزل عن الألوان، تتحكم الوسيطة الثانية `KConsoleFormatConfig` في التدوين، تمامًا كما في
+[المُنسِّق الافتراضي](default-formatter.md):
+
+| الخيار             | القيم                                       | الافتراضي |
+|-------------------|--------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`)، `SUPERSCRIPT` (`m²`)      | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`)، `MIDDLE_DOT` (`·`)، `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`)، `OBELUS` (`÷`)              | `SLASH`   |
+| `functionSymbols` | `KConsoleFunctionSymbols` — `UNICODE`، `ASCII` | `UNICODE` |
+
+كلا وسيطَي الباني لهما قيم افتراضية، لذا فإن `KConsoleUnitFormatter()` هو اللوحة الكلاسيكية بالتدوين
+التاريخي. مرِّر الإعداد كوسيطة ثانية (`KConsoleUnitFormatter(palette, config)`):
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
+import org.pcsoft.framework.kunit.formatter.KConsoleFormatConfig
+import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
+
+val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleFormatConfig.SUPERSCRIPT)
+// يعرض "m²"، "s⁻¹" بأُسّات فوقية حقيقية، مُلوَّنة كالمعتاد
+```
+
+للكسر ثنائي الأبعاد متعدد الأسطر بخط كسر حقيقي، راجع
+[المُنسِّق الرسومي](graphical-formatter.md).
+
 ## تعريف لوحتك الخاصة
 
 `KConsoleColorPalette` صنف بيانات بسيط، فيمكنك تزويده بتسلسلات ألوانك الخاصة. يحمل كل حقل **تسلسل
@@ -90,13 +117,3 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 لإخراج ترميز مختلف تمامًا (وليس مجرد ألوان)، نفِّذ بدلًا من ذلك
 [مُنسِّقًا مخصصًا](custom-formatters.md) خاصًا بك.
-
-## الإعداد (الأُسّ والعلامات والرموز الدالّية)
-
-بمعزل عن الألوان، تتحكم الوسيطة الثانية `KConsoleFormatConfig` في التدوين (كما في
-[المُنسِّق الافتراضي](default-formatter.md)): `exponentStyle` (`CARET` = `m^2` / `SUPERSCRIPT` = `m²`)،
-و`multiplication` (`*` / `·` / `×`)، و`division` (`/` / `÷`)، و`functionSymbols` (`UNICODE` / `ASCII`).
-لكلتا الوسيطتين قيم افتراضية، لذا `KConsoleUnitFormatter()` كما كان. مرّرها بالشكل
-`KConsoleUnitFormatter(palette, config)`.
-
-للكسر ثنائي الأبعاد متعدد الأسطر بخط كسر حقيقي، راجع [المُنسِّق الرسومي](graphical-formatter.md).

@@ -197,4 +197,3 @@ val density = (5 of kilograms) / (2 of liters)
 - If the group is magnitude-restricted (like storage, which rejects diminishing prefixes), hang its unit
   properties on `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` instead of the base `KPrefixBuilder`,
   so the disallowed prefixes are a **compile error**.
-```

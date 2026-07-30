@@ -155,4 +155,6 @@ import org.pcsoft.framework.kunit.electric.current.*
 | `mA` | `milli.amperes` | मिलीऐम्पियर (ऐम्पियर पर लागू उपसर्ग) |
 | `kA` | `kilo.amperes` | किलोऐम्पियर |
 | `Bi` | `biot` | बायो / ऐब-ऐम्पियर (10 A) |
+| `At` | `ampereTurns` | ऐम्पियर टर्न, चुंबकवाहक बल `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | उपसर्ग-युक्त ऐम्पियर टर्न (किलोऐम्पियर टर्न) |
 | `A²` | `amperes pow 2` | ऐम्पियर वर्ग (सामान्य मिश्रित इकाई) |

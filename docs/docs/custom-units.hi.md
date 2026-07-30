@@ -198,4 +198,3 @@ val density = (5 of kilograms) / (2 of liters)
 - यदि समूह परिमाण-प्रतिबंधित है (जैसे भंडारण, जो ह्रासमान उपसर्ग अस्वीकार करता है), तो इसकी इकाई गुणों को
   आधार `KPrefixBuilder` के बजाय `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` पर लटकाएँ, ताकि
   अननुमत उपसर्ग एक **संकलन त्रुटि** बनें।
-```

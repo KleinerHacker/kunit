@@ -1,6 +1,7 @@
 # 運動学 — 概要
 
-パッケージ: `org.pcsoft.framework.kunit.kinematic.distance`、`…time`、`…speed`、`…acceleration`、`…frequency`
+パッケージ: `org.pcsoft.framework.kunit.kinematic.distance`、`…time`、`…speed`、`…acceleration`、
+`…frequency`、`…volumeflow`
 
 運動学は**運動**の記述です — どれだけ遠く、どれだけ長く、どれだけ速く、そして運動の割合そのものが
 どう変化するか — 背後にある力はまだ問いません(それは[力学](../mechanics/overview.md)の話題です)。
@@ -16,6 +17,7 @@ KUnit はこの分野を 2 つの**ネイティブ**基本量と、それらか�
 | 周波数 | ネイティブ | ヘルツ(`Hz`) | [周波数](frequency.md) |
 | 速度 | 構成 | メートル毎秒(`m/s`) | [速度](speed.md) |
 | 加速度 | 構成 | メートル毎秒毎秒(`m/s²`) | [加速度](acceleration.md) |
+| 体積流量 | 構成 | 立方メートル毎秒(`m³/s`) | [体積流量](volume-flow.md) |
 
 ## 量どうしの関係
 
@@ -100,6 +102,8 @@ v.toString()                              // "5.0 m/s"(基準単位)
 | `a = Δv / t` | `((10 of meters) / (1 of seconds)) / (2 of seconds)` | 速度÷時間から加速度 |
 | `v = a · t` | `a * (2 of seconds)` | 加速度×時間から速度 |
 | `f = 1 / T` | `1 / (2 of hertz)` | 周期↔周波数(時間の逆数) |
+| `q̇ = V / t` | `(600 of liters) / (2 of minutes)` | 体積÷時間から体積流量 |
+| `V = q̇ · t` | `q * (15 of minutes)` | 流量×時間から体積 |
 
 ## 次に読むもの
 
@@ -107,3 +111,4 @@ v.toString()                              // "5.0 m/s"(基準単位)
 * [時間](time.md) — `Duration` を基盤とする継続時間。
 * [速度](speed.md) と [加速度](acceleration.md) — 構成された運動の割合。
 * [周波数](frequency.md) — 時間の逆数と、その相互演算子。
+* [体積流量](volume-flow.md) — 体積÷時間、`m³/s`、`l/min`、`gpm`。

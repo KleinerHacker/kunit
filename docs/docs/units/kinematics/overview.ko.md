@@ -1,6 +1,7 @@
 # 운동학 — 개요
 
-패키지: `org.pcsoft.framework.kunit.kinematic.distance`, `…time`, `…speed`, `…acceleration`, `…frequency`
+패키지: `org.pcsoft.framework.kunit.kinematic.distance`, `…time`, `…speed`, `…acceleration`,
+`…frequency`, `…volumeflow`
 
 운동학은 **운동**에 대한 기술입니다 — 얼마나 멀리, 얼마나 오래, 얼마나 빠르게, 그리고 운동의 비율
 자체가 어떻게 변하는지 — 아직 그 배후의 힘은 묻지 않습니다(그것은 [역학](../mechanics/overview.md)
@@ -16,6 +17,7 @@
 | 주파수 | 네이티브 | 헤르츠(`Hz`) | [주파수](frequency.md) |
 | 속도 | 구성 | 미터 매 초(`m/s`) | [속도](speed.md) |
 | 가속도 | 구성 | 미터 매 초²(`m/s²`) | [가속도](acceleration.md) |
+| 부피 유량 | 구성 | 초당 세제곱미터(`m³/s`) | [부피 유량](volume-flow.md) |
 
 ## 양들의 관계
 
@@ -100,6 +102,8 @@ v.toString()                              // "5.0 m/s" (기준 단위)
 | `a = Δv / t` | `((10 of meters) / (1 of seconds)) / (2 of seconds)` | 속도÷시간에서 가속도 |
 | `v = a · t` | `a * (2 of seconds)` | 가속도×시간에서 속도 |
 | `f = 1 / T` | `1 / (2 of hertz)` | 주기↔주파수(시간의 역수) |
+| `q̇ = V / t` | `(600 of liters) / (2 of minutes)` | 부피÷시간에서 부피 유량 |
+| `V = q̇ · t` | `q * (15 of minutes)` | 유량×시간에서 부피 |
 
 ## 다음에 볼 것
 
@@ -107,3 +111,4 @@ v.toString()                              // "5.0 m/s" (기준 단위)
 * [시간](time.md) — `Duration`에 기반한 지속 시간.
 * [속도](speed.md) 및 [가속도](acceleration.md) — 구성된 운동 비율.
 * [주파수](frequency.md) — 시간의 역수와 그 상호 연산자.
+* [부피 유량](volume-flow.md) — 시간당 부피, `m³/s`, `l/min`, `gpm`.

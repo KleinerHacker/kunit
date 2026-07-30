@@ -430,6 +430,7 @@ nav:
       - Frequency: units/kinematics/frequency.md
       - Speed: units/kinematics/speed.md
       - Acceleration: units/kinematics/acceleration.md
+      - Volumetric Flow: units/kinematics/volume-flow.md
   - Mechanics:
       - Overview: units/mechanics/overview.md
       - Mass: units/mechanics/mass.md
@@ -471,8 +472,23 @@ nav:
         - Overview: units/thermodynamics/temperature-overview.md
         - Absolute Temperature: units/thermodynamics/temperature.md
         - Temperature Difference: units/thermodynamics/temperature-difference.md
+      - Amount of Substance: units/thermodynamics/amount-of-substance.md
       - Power (Thermodynamics): units/thermodynamics/power.md
       - Energy (Thermodynamics): units/thermodynamics/energy.md
+      - Heat Flow: units/thermodynamics/heat-flow.md
+      - Heat Capacity: units/thermodynamics/heat-capacity.md
+      - Entropy: units/thermodynamics/entropy.md
+      - Specific Heat Capacity: units/thermodynamics/specific-heat-capacity.md
+      - Molar Heat Capacity: units/thermodynamics/molar-heat-capacity.md
+      - Specific Energy: units/thermodynamics/specific-energy.md
+      - Molar Energy: units/thermodynamics/molar-energy.md
+      - Heat Flux Density: units/thermodynamics/heat-flux-density.md
+      - Thermal Conductivity: units/thermodynamics/thermal-conductivity.md
+      - Heat Transfer Coefficient: units/thermodynamics/heat-transfer-coefficient.md
+      - Thermal Resistance: units/thermodynamics/thermal-resistance.md
+      - Thermal Expansion: units/thermodynamics/thermal-expansion.md
+      - Temperature Gradient: units/thermodynamics/temperature-gradient.md
+      - Thermal Diffusivity: units/thermodynamics/thermal-diffusivity.md
   - Information Technology:
       - Overview: units/information/overview.md
       - Storage: units/information/storage.md

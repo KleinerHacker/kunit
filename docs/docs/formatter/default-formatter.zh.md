@@ -53,6 +53,29 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 (9.81 of meters / (seconds pow 2)).format(meters / (seconds pow 2), "%.2f") // "9.81 m/s^2"
 ```
 
+## 配置
+
+`KDefaultFormatConfig`（值类型）在不影响布局规则的前提下改变渲染方式：
+
+| 选项              | 取值                                        | 默认值    |
+|-------------------|---------------------------------------------|-----------|
+| `exponentStyle`   | `CARET`（`m^2`）、`SUPERSCRIPT`（`m²`）      | `CARET`   |
+| `multiplication`  | `ASTERISK`（`*`）、`MIDDLE_DOT`（`·`）、`CROSS`（`×`） | `ASTERISK` |
+| `division`        | `SLASH`（`/`）、`OBELUS`（`÷`）              | `SLASH`   |
+| `functionSymbols` | `KDefaultFunctionSymbols` —— `UNICODE`、`ASCII`（`√`/`sqrt`、……） | `UNICODE` |
+
+`functionSymbols` 表（根号 `√`/`∛`/`∜`、`±`、`∞`、`°`）是为函数式表示预留的配置；对于普通的整数指数
+并不会用到它。预设值：`DEFAULT`（历史输出）、`SUPERSCRIPT`（真正的上标指数）。
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
+import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
+
+(9.81 of meters / (seconds pow 2))
+    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+// "9.81 m/s²"
+```
+
 ## 显式使用
 
 默认格式化器会自动应用，因此你很少需要指定它。但你仍然可以显式传入它 —— 为了与自定义格式化器保持对称，

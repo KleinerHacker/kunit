@@ -70,6 +70,32 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))
 ```
 
+## 구성(지수, 기호, 함수 기호)
+
+색상과 독립적으로 두 번째 인수 `KConsoleFormatConfig` 가 표기를 제어하며, 이는
+[기본 포매터](default-formatter.md) 와 정확히 동일합니다.
+
+| 옵션              | 값                                          | 기본값     |
+|-------------------|----------------------------------------------|-----------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)         | `CARET`   |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)                 | `SLASH`   |
+| `functionSymbols` | `KConsoleFunctionSymbols` — `UNICODE`, `ASCII` | `UNICODE` |
+
+두 생성자 인수 모두 기본값이 있으므로 `KConsoleUnitFormatter()` 는 클래식 팔레트와 기존 표기법을
+사용합니다. 두 번째 인수로 구성을 전달하세요(`KConsoleUnitFormatter(palette, config)`).
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
+import org.pcsoft.framework.kunit.formatter.KConsoleFormatConfig
+import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
+
+val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleFormatConfig.SUPERSCRIPT)
+// 실제 위첨자 지수로 "m²", "s⁻¹" 를 렌더링하며, 색상은 평소처럼 적용됨
+```
+
+실제 분수선을 가진 여러 줄 2차원 분수는 [그래픽 포매터](graphical-formatter.md)를 참조하세요.
+
 ## 사용자 정의 팔레트 만들기
 
 `KConsoleColorPalette` 는 단순한 데이터 클래스이므로 자신만의 색상 시퀀스를 지정할 수 있습니다. 각
@@ -92,12 +118,3 @@ val formatter = KConsoleUnitFormatter(myPalette)
 
 색뿐 아니라 완전히 다른 표기법을 출력하려면 자신만의
 [사용자 정의 포매터](custom-formatters.md) 를 구현하세요.
-
-## 구성(지수, 기호, 함수 기호)
-
-색상과 독립적으로 두 번째 인수 `KConsoleFormatConfig` 가 표기를 제어합니다([기본 포매터](default-formatter.md)와
-동일): `exponentStyle`(`CARET` = `m^2` / `SUPERSCRIPT` = `m²`), `multiplication`(`*` / `·` / `×`),
-`division`(`/` / `÷`), 그리고 `functionSymbols`(`UNICODE` / `ASCII`). 두 인수 모두 기본값이 있으므로
-`KConsoleUnitFormatter()` 는 기존과 동일합니다. `KConsoleUnitFormatter(palette, config)` 로 전달하세요.
-
-실제 분수선을 가진 여러 줄 2차원 분수는 [그래픽 포매터](graphical-formatter.md)를 참조하세요.

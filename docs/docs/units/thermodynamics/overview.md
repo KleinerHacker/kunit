@@ -1,6 +1,7 @@
 # Thermodynamics — Overview
 
-Packages: `org.pcsoft.framework.kunit.thermo.temperature`, `…energy`, `…power`
+Packages: `org.pcsoft.framework.kunit.thermo.*`, plus `org.pcsoft.framework.kunit.common.energy`
+and `…common.power`
 
 Thermodynamics is the physics of **heat and temperature**. In KUnit the field centres on temperature, which
 is modelled by **two related native groups** — because a temperature *reading* and a temperature *change* are
@@ -14,8 +15,28 @@ which it flows (power).
 |---|---|---|---|---|
 | Absolute Temperature | native | affine **point** | kelvin (`K`) | [Absolute Temperature](temperature.md) |
 | Temperature Difference | native | linear **interval** | kelvin (`ΔK`) | [Temperature Difference](temperature-difference.md) |
+| Amount of Substance | native | linear quantity | mole (`mol`) | [Amount of Substance](amount-of-substance.md) |
 | Energy | constructed | linear quantity | joule (`J`) | [Energy (Thermodynamics)](energy.md) |
 | Power | constructed | linear quantity | watt (`W`) | [Power (Thermodynamics)](power.md) |
+| Heat Flow | constructed | shares the power type | watt (`W`) | [Heat Flow](heat-flow.md) |
+| Heat Capacity | constructed | linear quantity | `J/K` | [Heat Capacity](heat-capacity.md) |
+| Entropy | constructed | shares the heat capacity type | `J/K` | [Entropy](entropy.md) |
+| Specific Heat Capacity | constructed | linear quantity | `J/(kg·K)` | [Specific Heat Capacity](specific-heat-capacity.md) |
+| Molar Heat Capacity | constructed | linear quantity | `J/(mol·K)` | [Molar Heat Capacity](molar-heat-capacity.md) |
+| Specific Energy | constructed | linear quantity | `J/kg` | [Specific Energy](specific-energy.md) |
+| Molar Energy | constructed | linear quantity | `J/mol` | [Molar Energy](molar-energy.md) |
+| Heat Flux Density | constructed | linear quantity | `W/m²` | [Heat Flux Density](heat-flux-density.md) |
+| Thermal Conductivity | constructed | linear quantity | `W/(m·K)` | [Thermal Conductivity](thermal-conductivity.md) |
+| Heat Transfer Coefficient | constructed | linear quantity | `W/(m²·K)` | [Heat Transfer Coefficient](heat-transfer-coefficient.md) |
+| Thermal Resistance | constructed | linear quantity | `m²·K/W` | [Thermal Resistance](thermal-resistance.md) |
+| Thermal Expansion | constructed | linear quantity | `1/K` | [Thermal Expansion](thermal-expansion.md) |
+| Temperature Gradient | constructed | linear quantity | `K/m` | [Temperature Gradient](temperature-gradient.md) |
+| Thermal Diffusivity | constructed | linear quantity | `m²/s` | [Thermal Diffusivity](thermal-diffusivity.md) |
+
+Two entries deliberately **share** an existing type instead of getting one of their own: entropy is
+dimensionally identical to heat capacity, and heat flow is identical to power. A canonical base-dimension
+normal form must map to exactly one type, otherwise the `toX()` form recognition would be ambiguous — see
+the [Entropy](entropy.md) and [Heat Flow](heat-flow.md) pages for the reasoning.
 
 Energy (heat) and power (heat flow rate) are technically **one** quantity each, shared with other subject
 areas; they are documented per field and cross-reference each other
@@ -43,6 +64,29 @@ depth; this page is the entry point for the whole thermodynamics field.
 | `energy / time` | Power (heat flow) | `Φ = Q / t` |
 | `energy / power` | Time | `t = Q / Φ` |
 | `power / frequency` | Energy | `Q = Φ / f` |
+
+## The heat-transfer chain
+
+The derived groups form one connected chain from material property to total heat loss. Each step is a
+typed operator, so no raw `KMixedUnitInstance` ever appears:
+
+| Expression | Result | Formula |
+|---|---|---|
+| `temperatureDifference / length` | Temperature Gradient | `∇T = ΔT / d` |
+| `thermalConductivity * temperatureGradient` | Heat Flux Density | `q̇ = λ · ∇T` (Fourier) |
+| `thermalConductivity / length` | Heat Transfer Coefficient | `U = λ / d` |
+| `length / thermalConductivity` | Thermal Resistance | `R = d / λ` |
+| `1 / heatTransferCoefficient` | Thermal Resistance | `R = 1 / U` |
+| `heatFluxDensity * area` | Power (heat flow) | `Φ = q̇ · A` |
+| `energy / temperatureDifference` | Heat Capacity | `C = Q / ΔT` |
+| `heatCapacity / mass` | Specific Heat Capacity | `c = C / m` |
+| `heatCapacity / amountOfSubstance` | Molar Heat Capacity | `C_m = C / n` |
+| `energy / mass` | Specific Energy | `q = Q / m` |
+| `energy / amountOfSubstance` | Molar Energy | `ΔH_m = Q / n` |
+
+Thermal diffusivity is the one **ternary** relation (`α = λ / (ρ · c_p)`); it is exposed as the named
+functions `diffusivityWith` / `conductivityWith` rather than as a binary operator, because the
+intermediate volumetric heat capacity `ρ · c_p` is not a modelled unit.
 
 ## Worked example — a heating step
 
@@ -120,3 +164,27 @@ interval quantity, deliberately distinct from an absolute point.
 * [Temperature Difference](temperature-difference.md) — the linear kelvin interval group.
 * [Energy (Thermodynamics)](energy.md) — the joule as heat, plus the calorie and the BTU.
 * [Power (Thermodynamics)](power.md) — the watt as heat flow rate, `Q / t`.
+* [Amount of Substance](amount-of-substance.md) — the mole, the basis of every molar quantity.
+
+### Storing heat
+
+* [Heat Capacity](heat-capacity.md) — `J/K`, the energy an object absorbs per kelvin.
+* [Entropy](entropy.md) — the same `J/K` type, read as `ΔS = Q / T`.
+* [Specific Heat Capacity](specific-heat-capacity.md) — `J/(kg·K)`, the material property.
+* [Molar Heat Capacity](molar-heat-capacity.md) — `J/(mol·K)`, plus the gas constant `R`.
+* [Specific Energy](specific-energy.md) — `J/kg`, also latent heat and calorific value.
+* [Molar Energy](molar-energy.md) — `J/mol`, reaction and formation enthalpies.
+
+### Moving heat
+
+* [Heat Flow](heat-flow.md) — the watt read as thermal power.
+* [Heat Flux Density](heat-flux-density.md) — `W/m²`, also irradiance; includes the solar constant.
+* [Temperature Gradient](temperature-gradient.md) — `K/m`, the driver of conduction.
+* [Thermal Conductivity](thermal-conductivity.md) — `W/(m·K)`, Fourier's law.
+* [Heat Transfer Coefficient](heat-transfer-coefficient.md) — `W/(m²·K)`, the building-physics U-value.
+* [Thermal Resistance](thermal-resistance.md) — `m²·K/W`, the R-value; layers in series add up.
+* [Thermal Diffusivity](thermal-diffusivity.md) — `m²/s`, how fast a temperature change propagates.
+
+### Reacting to heat
+
+* [Thermal Expansion](thermal-expansion.md) — `1/K`, why bridges have expansion joints.
