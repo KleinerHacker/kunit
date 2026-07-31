@@ -74,6 +74,7 @@ plugins:
           nav_translations:
             Home: 홈
             Mixed Units: 혼합 단위
+            Cookbook: 예제 모음
             Adding Custom Units: 사용자 정의 단위 추가
             Formatter: 포매터
             Default Formatter: 기본 포매터
@@ -142,6 +143,7 @@ plugins:
           nav_translations:
             Home: 首页
             Mixed Units: 混合单位
+            Cookbook: 示例集
             Adding Custom Units: 添加自定义单位
             Formatter: 格式化器
             Default Formatter: 默认格式化器
@@ -210,6 +212,7 @@ plugins:
           nav_translations:
             Home: ホーム
             Mixed Units: 混合単位
+            Cookbook: 用例集
             Adding Custom Units: カスタム単位の追加
             Formatter: フォーマッター
             Default Formatter: デフォルトフォーマッター
@@ -278,6 +281,7 @@ plugins:
           nav_translations:
             Home: الرئيسية
             Mixed Units: الوحدات المركبة
+            Cookbook: دليل الأمثلة
             Adding Custom Units: إضافة وحدات مخصصة
             Formatter: المُنسِّق
             Default Formatter: المُنسِّق الافتراضي
@@ -346,6 +350,7 @@ plugins:
           nav_translations:
             Home: होम
             Mixed Units: मिश्रित इकाइयाँ
+            Cookbook: उदाहरण संग्रह
             Adding Custom Units: कस्टम इकाइयाँ जोड़ना
             Formatter: फ़ॉर्मैटर
             Default Formatter: डिफ़ॉल्ट फ़ॉर्मैटर
@@ -411,6 +416,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - Cookbook: cookbook.md
   - Mixed Units: mixed-units.md
   - Periodic Table: periodic-table.md
   - Adding Custom Units: custom-units.md

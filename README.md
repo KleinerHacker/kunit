@@ -39,7 +39,8 @@ A JDK capable of resolving toolchain 25 is required (the `foojay-resolver` plugi
 
 📖 **[Read the documentation on GitHub Pages](https://kleinerhacker.github.io/kunit/)**
 
-The full documentation (overview, quick start, mixed units, adding custom units, and the unit pages grouped by subject
+The full documentation (overview, quick start, the [cookbook](docs/docs/cookbook.md) with several hundred worked
+formulas in mathematical vs. Kotlin notation, mixed units, adding custom units, and the unit pages grouped by subject
 area — kinematics, mechanics, electrical engineering, thermodynamics, information technology, each with its own
 overview) is built with
 [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and available in English, Korean, Chinese, Japanese,
