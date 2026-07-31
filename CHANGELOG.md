@@ -1,6 +1,6 @@
 # kunit Changelog
 
-## [UNRELEASED]
+## [0.8.0]
 
 ### Added
 
