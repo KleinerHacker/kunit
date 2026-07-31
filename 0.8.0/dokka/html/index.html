@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>kunit</title>
+    <link href="images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="scripts/sourceset_dependencies.js" async="async"></script>
+<link href="styles/style.css" rel="Stylesheet">
+<link href="styles/main.css" rel="Stylesheet">
+<link href="styles/prism.css" rel="Stylesheet">
+<link href="styles/logo-styles.css" rel="Stylesheet">
+<link href="ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" id="content" pageIds="kunit::////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>kunit</span></span></h1>
+  </div>
+  <h2 class="">Packages</h2>
+  <div class="table"><a data-name="994211418%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit" id="994211418%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit/index.html">org.pcsoft.framework.kunit</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="994211418%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="646426931%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.common.diffusivity" id="646426931%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.common.diffusivity/index.html">org.pcsoft.framework.kunit.common.diffusivity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="646426931%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1922772119%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.common.energy" id="1922772119%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.common.energy/index.html">org.pcsoft.framework.kunit.common.energy</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1922772119%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="917217498%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.common.power" id="917217498%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.common.power/index.html">org.pcsoft.framework.kunit.common.power</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="917217498%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2063991307%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.capacitance" id="-2063991307%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.capacitance/index.html">org.pcsoft.framework.kunit.electric.capacitance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2063991307%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1705679279%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.charge" id="-1705679279%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.charge/index.html">org.pcsoft.framework.kunit.electric.charge</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1705679279%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="722494331%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.chargedensity" id="722494331%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.chargedensity/index.html">org.pcsoft.framework.kunit.electric.chargedensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="722494331%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1915132122%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.conductance" id="1915132122%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.conductance/index.html">org.pcsoft.framework.kunit.electric.conductance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1915132122%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1571427398%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.conductivity" id="-1571427398%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.conductivity/index.html">org.pcsoft.framework.kunit.electric.conductivity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1571427398%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="323163328%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.current" id="323163328%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.current/index.html">org.pcsoft.framework.kunit.electric.current</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="323163328%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1420126764%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.currentdensity" id="1420126764%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.currentdensity/index.html">org.pcsoft.framework.kunit.electric.currentdensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1420126764%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="208645146%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.dipolemoment" id="208645146%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.dipolemoment/index.html">org.pcsoft.framework.kunit.electric.dipolemoment</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="208645146%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2028269502%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.fieldstrength" id="-2028269502%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.fieldstrength/index.html">org.pcsoft.framework.kunit.electric.fieldstrength</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2028269502%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-735267802%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.fluxdensity" id="-735267802%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.fluxdensity/index.html">org.pcsoft.framework.kunit.electric.fluxdensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-735267802%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1288777517%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.inductance" id="-1288777517%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.inductance/index.html">org.pcsoft.framework.kunit.electric.inductance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1288777517%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="2114946294%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.linearchargedensity" id="2114946294%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.linearchargedensity/index.html">org.pcsoft.framework.kunit.electric.linearchargedensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2114946294%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="572810430%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.magneticfieldstrength" id="572810430%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.magneticfieldstrength/index.html">org.pcsoft.framework.kunit.electric.magneticfieldstrength</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="572810430%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1919672310%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.magneticflux" id="-1919672310%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.magneticflux/index.html">org.pcsoft.framework.kunit.electric.magneticflux</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1919672310%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2126973022%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.magneticfluxdensity" id="-2126973022%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.magneticfluxdensity/index.html">org.pcsoft.framework.kunit.electric.magneticfluxdensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2126973022%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-886835256%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.mobility" id="-886835256%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.mobility/index.html">org.pcsoft.framework.kunit.electric.mobility</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-886835256%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-708423630%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.permeability" id="-708423630%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.permeability/index.html">org.pcsoft.framework.kunit.electric.permeability</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-708423630%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1150581083%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.permittivity" id="-1150581083%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.permittivity/index.html">org.pcsoft.framework.kunit.electric.permittivity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1150581083%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="348598105%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.reluctance" id="348598105%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.reluctance/index.html">org.pcsoft.framework.kunit.electric.reluctance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="348598105%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1569503766%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.resistance" id="1569503766%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.resistance/index.html">org.pcsoft.framework.kunit.electric.resistance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1569503766%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="598995454%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.resistivity" id="598995454%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.resistivity/index.html">org.pcsoft.framework.kunit.electric.resistivity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="598995454%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="642936421%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.electric.voltage" id="642936421%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.electric.voltage/index.html">org.pcsoft.framework.kunit.electric.voltage</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="642936421%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1143469642%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.formatter" id="-1143469642%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.formatter/index.html">org.pcsoft.framework.kunit.formatter</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1143469642%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1725659751%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.it.datarate" id="-1725659751%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.it.datarate/index.html">org.pcsoft.framework.kunit.it.datarate</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1725659751%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="482291792%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.it.storage" id="482291792%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.it.storage/index.html">org.pcsoft.framework.kunit.it.storage</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="482291792%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="370027676%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.it.storagedensity" id="370027676%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.it.storagedensity/index.html">org.pcsoft.framework.kunit.it.storagedensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="370027676%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="373064481%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.kinematic.acceleration" id="373064481%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.kinematic.acceleration/index.html">org.pcsoft.framework.kunit.kinematic.acceleration</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="373064481%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="826890710%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.kinematic.distance" id="826890710%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.kinematic.distance/index.html">org.pcsoft.framework.kunit.kinematic.distance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="826890710%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="18718175%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.kinematic.frequency" id="18718175%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.kinematic.frequency/index.html">org.pcsoft.framework.kunit.kinematic.frequency</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="18718175%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-461803126%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.kinematic.speed" id="-461803126%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.kinematic.speed/index.html">org.pcsoft.framework.kunit.kinematic.speed</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-461803126%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="2063022638%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.kinematic.time" id="2063022638%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.kinematic.time/index.html">org.pcsoft.framework.kunit.kinematic.time</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2063022638%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="909570985%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.kinematic.volumeflow" id="909570985%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.kinematic.volumeflow/index.html">org.pcsoft.framework.kunit.kinematic.volumeflow</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="909570985%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-182511807%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.angle" id="-182511807%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.angle/index.html">org.pcsoft.framework.kunit.mechanic.angle</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-182511807%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1712970736%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.angularacceleration" id="-1712970736%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.angularacceleration/index.html">org.pcsoft.framework.kunit.mechanic.angularacceleration</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1712970736%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1465186600%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.angularmomentum" id="1465186600%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.angularmomentum/index.html">org.pcsoft.framework.kunit.mechanic.angularmomentum</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1465186600%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-854677203%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.angularvelocity" id="-854677203%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.angularvelocity/index.html">org.pcsoft.framework.kunit.mechanic.angularvelocity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-854677203%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="112992041%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.areadensity" id="112992041%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.areadensity/index.html">org.pcsoft.framework.kunit.mechanic.areadensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="112992041%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1034678294%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.density" id="1034678294%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.density/index.html">org.pcsoft.framework.kunit.mechanic.density</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1034678294%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1385350311%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.force" id="-1385350311%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.force/index.html">org.pcsoft.framework.kunit.mechanic.force</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1385350311%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-845999256%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.inertia" id="-845999256%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.inertia/index.html">org.pcsoft.framework.kunit.mechanic.inertia</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-845999256%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2065354607%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.lineardensity" id="-2065354607%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.lineardensity/index.html">org.pcsoft.framework.kunit.mechanic.lineardensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2065354607%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2023946523%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.lineforce" id="-2023946523%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.lineforce/index.html">org.pcsoft.framework.kunit.mechanic.lineforce</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2023946523%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-991377910%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.mass" id="-991377910%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.mass/index.html">org.pcsoft.framework.kunit.mechanic.mass</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-991377910%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="923776440%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.massflow" id="923776440%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.massflow/index.html">org.pcsoft.framework.kunit.mechanic.massflow</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="923776440%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="2057277614%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.momentum" id="2057277614%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.momentum/index.html">org.pcsoft.framework.kunit.mechanic.momentum</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2057277614%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="510830619%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.pressure" id="510830619%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.pressure/index.html">org.pcsoft.framework.kunit.mechanic.pressure</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="510830619%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="266640414%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.solidangle" id="266640414%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.solidangle/index.html">org.pcsoft.framework.kunit.mechanic.solidangle</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="266640414%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-820751646%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.specificvolume" id="-820751646%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.specificvolume/index.html">org.pcsoft.framework.kunit.mechanic.specificvolume</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-820751646%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1547760715%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.strain" id="1547760715%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.strain/index.html">org.pcsoft.framework.kunit.mechanic.strain</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1547760715%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1275843243%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.mechanic.viscosity" id="-1275843243%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.mechanic.viscosity/index.html">org.pcsoft.framework.kunit.mechanic.viscosity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1275843243%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1336376306%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.amountofsubstance" id="-1336376306%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.amountofsubstance/index.html">org.pcsoft.framework.kunit.thermo.amountofsubstance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1336376306%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1178197268%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.conductivity" id="1178197268%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.conductivity/index.html">org.pcsoft.framework.kunit.thermo.conductivity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1178197268%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1942568916%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.expansion" id="-1942568916%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.expansion/index.html">org.pcsoft.framework.kunit.thermo.expansion</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1942568916%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-774141983%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.heatcapacity" id="-774141983%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.heatcapacity/index.html">org.pcsoft.framework.kunit.thermo.heatcapacity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-774141983%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1431509532%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.heatfluxdensity" id="1431509532%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.heatfluxdensity/index.html">org.pcsoft.framework.kunit.thermo.heatfluxdensity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1431509532%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1852030183%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.heattransfercoefficient" id="1852030183%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.heattransfercoefficient/index.html">org.pcsoft.framework.kunit.thermo.heattransfercoefficient</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1852030183%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1105210704%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.molarenergy" id="-1105210704%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.molarenergy/index.html">org.pcsoft.framework.kunit.thermo.molarenergy</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1105210704%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1236975662%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.molarheatcapacity" id="-1236975662%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.molarheatcapacity/index.html">org.pcsoft.framework.kunit.thermo.molarheatcapacity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1236975662%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1938730596%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.molarmass" id="-1938730596%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.molarmass/index.html">org.pcsoft.framework.kunit.thermo.molarmass</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1938730596%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1988750142%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.molarvolume" id="-1988750142%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.molarvolume/index.html">org.pcsoft.framework.kunit.thermo.molarvolume</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1988750142%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1332659728%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.resistance" id="-1332659728%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.resistance/index.html">org.pcsoft.framework.kunit.thermo.resistance</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1332659728%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1478013391%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.specificenergy" id="-1478013391%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.specificenergy/index.html">org.pcsoft.framework.kunit.thermo.specificenergy</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1478013391%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="893933203%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.specificheatcapacity" id="893933203%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.specificheatcapacity/index.html">org.pcsoft.framework.kunit.thermo.specificheatcapacity</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="893933203%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-1806439967%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.temperature" id="-1806439967%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.temperature/index.html">org.pcsoft.framework.kunit.thermo.temperature</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1806439967%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-517810671%2FPackages%2F-251573632" anchor-label="org.pcsoft.framework.kunit.thermo.temperaturegradient" id="-517810671%2FPackages%2F-251573632" data-filterable-set=":/main"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":/main" data-filterable-set=":/main">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="kunit/org.pcsoft.framework.kunit.thermo.temperaturegradient/index.html">org.pcsoft.framework.kunit.thermo.temperaturegradient</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-517810671%2FPackages%2F-251573632"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">jvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

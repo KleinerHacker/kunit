@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.thermo.specificheatcapacity</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.thermo.specificheatcapacity////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.thermo.specificheatcapacity</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="667300420%2FClasslikes%2F-251573632" anchor-label="KSpecificHeatCapacityUnit" id="667300420%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-specific-heat-capacity-unit/index.html"><span>KSpecific</span><wbr></wbr><span>Heat</span><wbr></wbr><span>Capacity</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="667300420%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-specific-heat-capacity-unit/index.html">KSpecificHeatCapacityUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-specific-heat-capacity-unit/index.html">KSpecificHeatCapacityUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of specific heat capacity - heat capacity per unit of mass (a <i>constructed</i> quantity: distance² · time⁻² · temperature⁻¹). <span data-unresolved-link="org.pcsoft.framework.kunit.thermo.specificheatcapacity/KSpecificHeatCapacityUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-specific-heat-capacity-unit/-companion/-b-a-s-e.html">BASE</a>, joule per kilogram-kelvin): <code class="lang-kotlin">1 unit = baseValue * J/(kg·K)</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="226245679%2FClasslikes%2F-251573632" anchor-label="KSpecificHeatCapacityUnitInstance" id="226245679%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-specific-heat-capacity-unit-instance/index.html"><span>KSpecific</span><wbr></wbr><span>Heat</span><wbr></wbr><span>Capacity</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="226245679%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing a <strong>specific heat capacity</strong> (heat capacity per unit of mass), i.e. exactly three terms in the canonical normal form <code class="lang-kotlin">distance² · time⁻² · temperature⁻¹</code> (<code class="lang-kotlin">m²·s⁻²·K⁻¹</code> = <code class="lang-kotlin">J/(kg·K)</code>). The <span data-unresolved-link="org.pcsoft.framework.kunit.thermo.specificheatcapacity/KSpecificHeatCapacityUnitInstance/value/#/PointingToDeclaration/">value</span> is always normalized internally to J/(kg·K) (<a href="-k-specific-heat-capacity-unit/-companion/-b-a-s-e.html">KSpecificHeatCapacityUnit.BASE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1749638391%2FProperties%2F-251573632" anchor-label="btusPerPoundFahrenheit" id="1749638391%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="btus-per-pound-fahrenheit.html"><span>btus</span><wbr></wbr><span>Per</span><wbr></wbr><span>Pound</span><wbr></wbr><span><span>Fahrenheit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1749638391%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="btus-per-pound-fahrenheit.html">btusPerPoundFahrenheit</a><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">1 Btu per pound-degree Fahrenheit (<a href="-k-specific-heat-capacity-unit/-b-t-u_-p-e-r_-p-o-u-n-d_-f-a-h-r-e-n-h-e-i-t/index.html">KSpecificHeatCapacityUnit.BTU_PER_POUND_FAHRENHEIT</a>, 4186.8 J/(kg·K)).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1577871975%2FProperties%2F-251573632" anchor-label="btusPerPoundFahrenheit" id="-1577871975%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="btus-per-pound-fahrenheit.html"><span>btus</span><wbr></wbr><span>Per</span><wbr></wbr><span>Pound</span><wbr></wbr><span><span>Fahrenheit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1577871975%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="btus-per-pound-fahrenheit.html">btusPerPoundFahrenheit</a><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed Btu per pound-degree Fahrenheit, e.g. <code class="lang-kotlin">kilo.btusPerPoundFahrenheit</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1914625815%2FProperties%2F-251573632" anchor-label="caloriesPerGramKelvin" id="1914625815%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="calories-per-gram-kelvin.html"><span>calories</span><wbr></wbr><span>Per</span><wbr></wbr><span>Gram</span><wbr></wbr><span><span>Kelvin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1914625815%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="calories-per-gram-kelvin.html">caloriesPerGramKelvin</a><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">1 calorie per gram-kelvin (<a href="-k-specific-heat-capacity-unit/-c-a-l-o-r-i-e_-p-e-r_-g-r-a-m_-k-e-l-v-i-n/index.html">KSpecificHeatCapacityUnit.CALORIE_PER_GRAM_KELVIN</a>, 4184 J/(kg·K)).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1029633913%2FProperties%2F-251573632" anchor-label="caloriesPerGramKelvin" id="1029633913%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="calories-per-gram-kelvin.html"><span>calories</span><wbr></wbr><span>Per</span><wbr></wbr><span>Gram</span><wbr></wbr><span><span>Kelvin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1029633913%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="calories-per-gram-kelvin.html">caloriesPerGramKelvin</a><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed calories per gram-kelvin, e.g. <code class="lang-kotlin">kilo.caloriesPerGramKelvin</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1814165402%2FProperties%2F-251573632" anchor-label="joulesPerKilogramKelvin" id="1814165402%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="joules-per-kilogram-kelvin.html"><span>joules</span><wbr></wbr><span>Per</span><wbr></wbr><span>Kilogram</span><wbr></wbr><span><span>Kelvin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1814165402%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="joules-per-kilogram-kelvin.html">joulesPerKilogramKelvin</a><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">1 joule per kilogram-kelvin (<a href="-k-specific-heat-capacity-unit/-j-o-u-l-e_-p-e-r_-k-i-l-o-g-r-a-m_-k-e-l-v-i-n/index.html">KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN</a>), the base unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1753288278%2FProperties%2F-251573632" anchor-label="joulesPerKilogramKelvin" id="1753288278%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="joules-per-kilogram-kelvin.html"><span>joules</span><wbr></wbr><span>Per</span><wbr></wbr><span>Kilogram</span><wbr></wbr><span><span>Kelvin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1753288278%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="joules-per-kilogram-kelvin.html">joulesPerKilogramKelvin</a><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed joules per kilogram-kelvin, e.g. <code class="lang-kotlin">kilo.joulesPerKilogramKelvin</code> (kJ/(kg·K)).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1723085414%2FFunctions%2F-251573632" anchor-label="div" id="1723085414%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1723085414%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.heatcapacity/-k-heat-capacity-unit-instance/index.html">KHeatCapacityUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a heat capacity by a mass to obtain a <a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a> (<code class="lang-kotlin">heatCapacity / mass = specific heat capacity</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.heatcapacity/-k-heat-capacity-unit-instance/index.html">KHeatCapacityUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a heat capacity by a specific heat capacity to obtain the mass (<code class="lang-kotlin">heatCapacity / specific heat capacity = mass</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.specificenergy/-k-specific-energy-unit-instance/index.html">KSpecificEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.temperature/-k-temperature-difference-unit-instance/index.html">KTemperatureDifferenceUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a specific energy by a specific heat capacity to obtain the achievable temperature difference (<code class="lang-kotlin">specificEnergy / specific heat capacity = temperatureDifference</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.specificenergy/-k-specific-energy-unit-instance/index.html">KSpecificEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.temperature/-k-temperature-difference-unit-instance/index.html">KTemperatureDifferenceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a specific energy by a temperature difference to obtain a <a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a> (<code class="lang-kotlin">specificEnergy / temperatureDifference = specific heat capacity</code>). This is the second, equivalent decomposition; it yields the same typed, value-equal result as <code class="lang-kotlin">heatCapacity / mass</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="804441596%2FFunctions%2F-251573632" anchor-label="times" id="804441596%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="804441596%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.heatcapacity/-k-heat-capacity-unit-instance/index.html">KHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a mass by a specific heat capacity to obtain the heat capacity; the commutative counterpart of <a href="-k-specific-heat-capacity-unit-instance/times.html">KSpecificHeatCapacityUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.heatcapacity/-k-heat-capacity-unit-instance/index.html">KHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a specific heat capacity by a mass to obtain the object's heat capacity (<code class="lang-kotlin">specific heat capacity * mass = heatCapacity</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.temperature/-k-temperature-difference-unit-instance/index.html">KTemperatureDifferenceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.specificenergy/-k-specific-energy-unit-instance/index.html">KSpecificEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a specific heat capacity by a temperature difference to obtain the specific energy required (<code class="lang-kotlin">specific heat capacity * temperatureDifference = specificEnergy</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.temperature/-k-temperature-difference-unit-instance/index.html">KTemperatureDifferenceUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.specificenergy/-k-specific-energy-unit-instance/index.html">KSpecificEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a temperature difference by a specific heat capacity to obtain the specific energy; the commutative counterpart of <a href="-k-specific-heat-capacity-unit-instance/times.html">KSpecificHeatCapacityUnitInstance.times</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-512973370%2FFunctions%2F-251573632" anchor-label="toSpecificHeatCapacity" id="-512973370%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-specific-heat-capacity.html"><span>to</span><wbr></wbr><span>Specific</span><wbr></wbr><span>Heat</span><wbr></wbr><span><span>Capacity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-512973370%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-specific-heat-capacity.html"><span class="token function">toSpecificHeatCapacity</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-specific-heat-capacity-unit-instance/index.html">KSpecificHeatCapacityUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; specific heat capacity, as long as it matches the canonical normal form: exactly one <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+2</code>, one <a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit/index.html">KTimeUnit</a> term at <code class="lang-kotlin">-2</code> and one <a href="../org.pcsoft.framework.kunit.thermo.temperature/-k-temperature-difference-unit/index.html">KTemperatureDifferenceUnit</a> term at <code class="lang-kotlin">-1</code> (order independent).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

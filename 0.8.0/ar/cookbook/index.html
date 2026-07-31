@@ -1,0 +1,7084 @@
+
+<!doctype html>
+<html lang="ar" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Kotlin Unit Framework to calculate with different units in Kotlin (and Java)">
+      
+      
+      
+        <link rel="canonical" href="https://kleinerhacker.github.io/kunit/latest/0.8.0/ar/cookbook/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../mixed-units/">
+      
+      
+        
+          <link rel="alternate" href="../../cookbook/" hreflang="en">
+        
+          <link rel="alternate" href="../../ko/cookbook/" hreflang="ko">
+        
+          <link rel="alternate" href="../../zh/cookbook/" hreflang="zh">
+        
+          <link rel="alternate" href="../../ja/cookbook/" hreflang="ja">
+        
+          <link rel="alternate" href="./" hreflang="ar">
+        
+          <link rel="alternate" href="../../hi/cookbook/" hreflang="hi">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>دليل الأمثلة - KUnit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          انتقل إلى المحتوى
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="عنوان العارضة">
+    <a href="../" title="KUnit" class="md-header__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KUnit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              دليل الأمثلة
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="إختر اللغة">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../cookbook/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../ko/cookbook/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../zh/cookbook/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../ja/cookbook/" hreflang="ja" class="md-select__link">
+              日本語
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="ar" class="md-select__link">
+              العربية
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../hi/cookbook/" hreflang="hi" class="md-select__link">
+              हिन्दी
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="بحث" placeholder="بحث" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="إبحث">
+        
+        <button type="reset" class="md-search__icon md-icon" title="مسح كلي" aria-label="مسح كلي" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            بدء البحث
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KleinerHacker/kunit" title="اذهب إلى المصدر" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="تصفح" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../" title="KUnit" class="md-nav__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    KUnit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KleinerHacker/kunit" title="اذهب إلى المصدر" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الرئيسية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دليل الأمثلة
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دليل الأمثلة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="جدول المحتويات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      جدول المحتويات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        كيف تُقرأ الجداول
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. علم الحركة — الحركة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. علم الحركة — الحركة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 المسافة والزمن والسرعة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 التسارع
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 التردّد والدور
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 التدفّق الحجمي
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. الميكانيكا — القوى والطاقة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. الميكانيكا — القوى والطاقة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 قانون نيوتن
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 الشغل والطاقة والقدرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 كمّية الحركة والدفع
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 الضغط والإجهاد
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 الدوران
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 الكثافات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 الجريان واللزوجة والتوتّر السطحي
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. الهندسة الكهربائية
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. الهندسة الكهربائية">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 قانون أوم والقدرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 الشحنة والسعة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 المجال وكثافة التيار وخواصّ المواد
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 المغناطيسية
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. الديناميكا الحرارية
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. الديناميكا الحرارية">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 درجة الحرارة — نقطة مقابل فرق
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 الحرارة والسعة الحرارية والتدفّق الحراري
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 انتقال الحرارة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 كمّية المادة والكمّيات المولية
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. تقنية المعلومات
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. البادئات والقراءات والقوى
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. ثوابت الجدول الدوري
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. أمثلة محلولة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. أمثلة محلولة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 ارتفاع درجة الحرارة نتيجة ارتفاع الضغط (ثبات الحجم، غاي-لوساك)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 كم من الطاقة يلزم لتسخين حوض استحمام؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 فقد الحرارة عبر جدار
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 هبوط الجهد على كابل نحاسي
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 الطاقة الحركية ومسافة الكبح
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 زمن التنزيل
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 محرّك: عزم الدوران والسرعة والقدرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.8 سبيكة ذهب
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إلى أين بعد ذلك
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mixed-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الوحدات المركبة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../periodic-table/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periodic Table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    إضافة وحدات مخصصة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المُنسِّق
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    المُنسِّق
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/default-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المُنسِّق الافتراضي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/console-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مُنسِّق الطرفية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/graphical-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المُنسِّق الرسومي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/latex-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مُنسِّق LaTeX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/mathml-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مُنسِّق MathML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/asciimath-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مُنسِّق AsciiMath
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/typst-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مُنسِّق Typst
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatter/custom-formatters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مُنسِّق مخصص
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    علم الحركة
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    علم الحركة
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المسافة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الزمن
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/frequency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    التردد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/speed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    السرعة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/acceleration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    التسارع
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/kinematics/volume-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volumetric Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الميكانيكا
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    الميكانيكا
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/mass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الكتلة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/force/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    القوة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/pressure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الضغط
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الكثافة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/areadensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الكثافة السطحية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/linear-density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/specific-volume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Volume
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/mass-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mass Flow Rate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/momentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/impulse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impulse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/angle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/solid-angle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solid Angle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/angular-velocity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular Velocity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/angular-acceleration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular Acceleration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/moment-of-inertia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moment of Inertia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/angular-momentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/torque/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Torque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/viscosity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dynamic Viscosity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/kinematic-viscosity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kinematic Viscosity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/surface-tension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface Tension
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/stiffness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stiffness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/strain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stress & Elastic Modulus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    القدرة (الميكانيكية)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/mechanics/energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الطاقة (الميكانيكية)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الهندسة الكهربائية
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    الهندسة الكهربائية
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/ec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    التيار الكهربائي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/voltage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الجهد الكهربائي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/resistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المقاومة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/charge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الشحنة الكهربائية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/conductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المواصَلة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/magneticfieldstrength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شدّة المجال المغناطيسي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/capacitance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    السعة الكهربائية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/inductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المحاثة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/magneticflux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    التدفق المغناطيسي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/magneticfluxdensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    كثافة التدفق المغناطيسي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/currentdensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    كثافة التيار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/chargedensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    كثافة الشحنة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/resistivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    المقاومة النوعية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/conductivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الموصلية الكهربائية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/electricfieldstrength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شدة المجال الكهربائي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/electricfluxdensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    كثافة التدفق الكهربائي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/permittivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    السماحية الكهربائية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/permeability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    النفاذية المغناطيسية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/linearchargedensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    كثافة الشحنة الخطية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/reluctance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الممانعة المغناطيسية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/electricmobility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الحركية الكهربائية
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/electricdipolemoment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    عزم ثنائي القطب الكهربائي
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    القدرة (الكهربائية)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/electrical/energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الطاقة (الكهربائية)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الديناميكا الحرارية
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    الديناميكا الحرارية
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    درجة الحرارة
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    درجة الحرارة
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    درجة الحرارة المطلقة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature-difference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    فرق درجة الحرارة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/amount-of-substance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Amount of Substance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معدل التدفق الحراري (الديناميكا الحرارية)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    الطاقة الحرارية (الديناميكا الحرارية)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/heat-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entropy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/specific-heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/molar-heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/specific-energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/molar-energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/molar-mass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Mass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/molar-volume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Volume
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/heat-flux-density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Flux Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/thermal-conductivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Conductivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/heat-transfer-coefficient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Transfer Coefficient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/thermal-resistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Resistance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/thermal-expansion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Expansion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/temperature-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature Gradient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/thermodynamics/thermal-diffusivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Diffusivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تقنية المعلومات
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    تقنية المعلومات
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نظرة عامة
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    التخزين
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/datarate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معدل البيانات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/information/storage-density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    كثافة التخزين
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dokka/html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    وثائق API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../licences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    التراخيص
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="جدول المحتويات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      جدول المحتويات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        كيف تُقرأ الجداول
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. علم الحركة — الحركة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. علم الحركة — الحركة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 المسافة والزمن والسرعة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 التسارع
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 التردّد والدور
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 التدفّق الحجمي
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. الميكانيكا — القوى والطاقة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. الميكانيكا — القوى والطاقة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 قانون نيوتن
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 الشغل والطاقة والقدرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 كمّية الحركة والدفع
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 الضغط والإجهاد
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 الدوران
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 الكثافات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 الجريان واللزوجة والتوتّر السطحي
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. الهندسة الكهربائية
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. الهندسة الكهربائية">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 قانون أوم والقدرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 الشحنة والسعة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 المجال وكثافة التيار وخواصّ المواد
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 المغناطيسية
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. الديناميكا الحرارية
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. الديناميكا الحرارية">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 درجة الحرارة — نقطة مقابل فرق
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 الحرارة والسعة الحرارية والتدفّق الحراري
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 انتقال الحرارة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 كمّية المادة والكمّيات المولية
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. تقنية المعلومات
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. البادئات والقراءات والقوى
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. ثوابت الجدول الدوري
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. أمثلة محلولة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. أمثلة محلولة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 ارتفاع درجة الحرارة نتيجة ارتفاع الضغط (ثبات الحجم، غاي-لوساك)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 كم من الطاقة يلزم لتسخين حوض استحمام؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 فقد الحرارة عبر جدار
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 هبوط الجهد على كابل نحاسي
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 الطاقة الحركية ومسافة الكبح
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 زمن التنزيل
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 محرّك: عزم الدوران والسرعة والقدرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.8 سبيكة ذهب
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إلى أين بعد ذلك
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">كتاب الوصفات — صِيَغ بالأمثلة<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>هذه الصفحة هي <strong>صفحة التوجيه</strong> في KUnit: عدّة مئات من الحسابات الفيزيائية، كلٌّ منها معروض مرّتين — على اليسار الصيغة
+كما تُكتب في الفيزياء أو الهندسة، وعلى اليمين كما تُكتب في Kotlin مع KUnit.</p>
+<p>الغاية من العمودين أنّهما <em>الصيغة نفسها</em>. لا يطلب منك KUnit أبدًا ترجمة صيغة إلى تمرين في مناورة الأرقام: <code>v = s / t</code> هي
+فعلًا <code>distance / time</code>، والناتج هو <code>KSpeedUnitInstance</code> لا مجرّد <code>Double</code>.</p>
+<h2 id="_2">كيف تُقرأ الجداول<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>العمود <strong>الرياضيات</strong> — الصيغة الكتابية المدرسية. <code>·</code> ضرب، و<code>/</code> كسر، وتُكتب الأُسّس بالأحرف الفوقية اليونيكودية
+  (<code>²</code>، <code>⁻¹</code>).</li>
+<li>العمود <strong>Kotlin</strong> — تعبير كامل وقابل للتنفيذ يستخدم الفعلين <code>of</code> (البناء) و<code>into</code> (القراءة).</li>
+<li>العمود <strong>النتيجة</strong> — النوع الذي يعيده KUnit. كل نتيجة محكومة بالنوع هي نسخة وحدة حقيقية، فيمكن تمريرها مباشرةً إلى
+  الصيغة التالية.</li>
+</ul>
+<p>تفترض كل الأمثلة أنّ مفردات المجموعات المعنيّة قد استُوردت:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.pow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span><span class="w">          </span><span class="c1">// and the other prefix builders</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.distance.*</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.time.*</span>
+<span class="c1">// … one import per unit group used</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">أين تُوثَّق الوحدات نفسها</p>
+</div>
+<p>تعرض هذه الصفحة <strong>كيف تتركّب الكمّيات</strong>. أمّا الرموز والعلامات والبادئات المتاحة لكل مجموعة فمذكورة في صفحتها الخاصّة،
+ويمكن الوصول إليها من نظرات الفروع العامّة:
+<a href="../units/kinematics/overview/">علم الحركة</a>، <a href="../units/mechanics/overview/">الميكانيكا</a>،
+<a href="../units/electrical/overview/">الهندسة الكهربائية</a>، <a href="../units/thermodynamics/overview/">الديناميكا الحرارية</a>،
+<a href="../units/information/overview/">تقنية المعلومات</a>.</p>
+<hr />
+<h2 id="1">1. علم الحركة — الحركة<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 المسافة والزمن والسرعة<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v = s / t</code></td>
+<td><code>(120 of kilo.meters) / (1.5 of hours)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>s = v · t</code></td>
+<td><code>v * (3 of hours)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>s = t · v</code></td>
+<td><code>(3 of hours) * v</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = s / v</code></td>
+<td><code>(240 of kilo.meters) / v</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = s · f</code></td>
+<td><code>(2.5 of meters) * (80 of rpm)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v بوحدة km/h</code></td>
+<td><code>v into (kilo.meters / hours)</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>v بالعُقد</code></td>
+<td><code>v into knots</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>v كعدد ماخ</code></td>
+<td><code>v into mach</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>v / c</code></td>
+<td><code>v into speedOfLight</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>s = s₁ + s₂</code></td>
+<td><code>(5 of kilo.meters) + (3 of miles)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>s = s₁ − s₂</code></td>
+<td><code>(5 of kilo.meters) - (800 of meters)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>s̄ = s / n</code></td>
+<td><code>(120 of kilo.meters) / 4</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = t₁ + t₂</code></td>
+<td><code>(90 of minutes) + (45 of seconds)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v̄ = Σs / Σt</code></td>
+<td><code>((120 of kilo.meters) + (30 of kilo.meters)) / ((1.5 of hours) + (0.5 of hours))</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 التسارع<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a = Δv / t</code></td>
+<td><code>((10 of meters) / (1 of seconds)) / (2 of seconds)</code></td>
+<td><code>KAccelerationUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>a = Δv / t</code></td>
+<td><code>(100 of kilo.meters / hours) / (4.6 of seconds)</code></td>
+<td><code>KAccelerationUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = a · t</code></td>
+<td><code>a * (2 of seconds)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = t · a</code></td>
+<td><code>(2 of seconds) * a</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = Δv / a</code></td>
+<td><code>(30 of meters / seconds) / (3 of meters / (seconds pow 2)).toAcceleration()</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>a / g</code></td>
+<td><code>a into standardGravities</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>a بوحدة Gal</code></td>
+<td><code>a into gals</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>a = g</code> (سقوط حرّ)</td>
+<td><code>1 of standardGravities</code></td>
+<td><code>KAccelerationUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = g · t</code></td>
+<td><code>(1 of standardGravities) * (3 of seconds)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>s = ½ · g · t²</code></td>
+<td><code>((1 of standardGravities) * (3 of seconds)) * (3 of seconds) / 2</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="13">1.3 التردّد والدور<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f = 1 / T</code></td>
+<td><code>1 / (0.02 of seconds)</code></td>
+<td><code>KFrequencyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>T = 1 / f</code></td>
+<td><code>1 / (50 of hertz)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>f بوحدة kHz</code></td>
+<td><code>(50_000 of hertz) into kilo.hertz</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>n بوحدة rpm</code></td>
+<td><code>(50 of hertz) into rpm</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>n بوحدة bpm</code></td>
+<td><code>(1.2 of hertz) into bpm</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>f_frame</code></td>
+<td><code>(60 of fps) into hertz</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>v = π · d · f</code></td>
+<td><code>(Math.PI * 0.7 of meters) * (900 of rpm)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="14">1.4 التدفّق الحجمي<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q̇ = V / t</code></td>
+<td><code>(600 of liters) / (2 of minutes)</code></td>
+<td><code>KVolumeFlowUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = q̇ · t</code></td>
+<td><code>q * (15 of minutes)</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = t · q̇</code></td>
+<td><code>(15 of minutes) * q</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = V / q̇</code></td>
+<td><code>(1000 of liters) / q</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q̇ بوحدة l/min</code></td>
+<td><code>q into litersPerMinute</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>q̇ بوحدة m³/h</code></td>
+<td><code>q into cubicMetersPerHour</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>q̇ بوحدة gpm</code></td>
+<td><code>q into usGallonsPerMinute</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ṁ = ρ · q̇</code></td>
+<td><code>(1000 of kilo.grams) / (1000 of liters) * q</code></td>
+<td><code>KMassFlowUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. الميكانيكا — القوى والطاقة<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 قانون نيوتن<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F = m · a</code></td>
+<td><code>(1200 of kilo.grams) * (2.5 of meters / (seconds pow 2)).toAcceleration()</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = a · m</code></td>
+<td><code>(2.5 of meters / (seconds pow 2)).toAcceleration() * (1200 of kilo.grams)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>a = F / m</code></td>
+<td><code>(3000 of newtons) / (1200 of kilo.grams)</code></td>
+<td><code>KAccelerationUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = F / a</code></td>
+<td><code>(3000 of newtons) / (2.5 of meters / (seconds pow 2)).toAcceleration()</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F_g = m · g</code></td>
+<td><code>(75 of kilo.grams) * (1 of standardGravities)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F بوحدة kN</code></td>
+<td><code>f into kilo.newtons</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>F بوحدة lbf</code></td>
+<td><code>f into poundsForce</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>F بوحدة dyn</code></td>
+<td><code>f into dynes</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>F بوحدة kp</code></td>
+<td><code>f into ponds</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ΣF</code></td>
+<td><code>(300 of newtons) + (2 of kilo.newtons)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="22">2.2 الشغل والطاقة والقدرة<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>W = F · s</code></td>
+<td><code>(500 of newtons) * (12 of meters)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>W = s · F</code></td>
+<td><code>(12 of meters) * (500 of newtons)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E_pot = m · g · h</code></td>
+<td><code>((80 of kilo.grams) * (1 of standardGravities)) * (10 of meters)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>P = W / t</code></td>
+<td><code>(6000 of joules) / (12 of seconds)</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>W = P · t</code></td>
+<td><code>(2 of kilo.watts) * (3 of hours)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = W / P</code></td>
+<td><code>(21.6 of mega.joules) / (2 of kilo.watts)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>P = F · v</code></td>
+<td><code>(400 of newtons) * (25 of meters / seconds)</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = P / v</code></td>
+<td><code>(10 of kilo.watts) / (25 of meters / seconds)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = P / F</code></td>
+<td><code>(10 of kilo.watts) / (400 of newtons)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>W = P / f</code></td>
+<td><code>(60 of watts) / (50 of hertz)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E بوحدة kWh</code></td>
+<td><code>e into (kilo.watts * hours)</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>E بوحدة kcal</code></td>
+<td><code>e into kilo.calories</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>E بوحدة eV</code></td>
+<td><code>e into electronVolts</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>E بوحدة Btu</code></td>
+<td><code>e into britishThermalUnits</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>P بوحدة hp</code></td>
+<td><code>p into metricHorsePowers</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>P بوحدة bhp</code></td>
+<td><code>p into mechanicalHorsePowers</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="23">2.3 كمّية الحركة والدفع<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p = m · v</code></td>
+<td><code>(1200 of kilo.grams) * (25 of meters / seconds)</code></td>
+<td><code>KMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>p = v · m</code></td>
+<td><code>(25 of meters / seconds) * (1200 of kilo.grams)</code></td>
+<td><code>KMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = p / m</code></td>
+<td><code>(30_000 of kilogramMetersPerSecond) / (1200 of kilo.grams)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = p / v</code></td>
+<td><code>(30_000 of kilogramMetersPerSecond) / (25 of meters / seconds)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>J = F · t</code></td>
+<td><code>(2 of kilo.newtons) * (0.15 of seconds)</code></td>
+<td><code>KMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>J = t · F</code></td>
+<td><code>(0.15 of seconds) * (2 of kilo.newtons)</code></td>
+<td><code>KMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = p / t</code></td>
+<td><code>(300 of newtonSeconds) / (0.15 of seconds)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = p / F</code></td>
+<td><code>(300 of newtonSeconds) / (2 of kilo.newtons)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة N·s</code></td>
+<td><code>p into newtonSeconds</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة lb·ft/s</code></td>
+<td><code>p into poundFeetPerSecond</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="24">2.4 الضغط والإجهاد<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p = F / A</code></td>
+<td><code>(2000 of newtons) / ((0.1 of meters) * (0.05 of meters))</code></td>
+<td><code>KPressureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = p · A</code></td>
+<td><code>(3 of bars) * ((0.2 of meters) * (0.1 of meters))</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = F / p</code></td>
+<td><code>(6000 of newtons) / (3 of bars)</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة bar</code></td>
+<td><code>p into bars</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة psi</code></td>
+<td><code>p into psis</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة atm</code></td>
+<td><code>p into atmospheres</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة Torr</code></td>
+<td><code>p into torrs</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>σ = F / A</code></td>
+<td><code>(50 of kilo.newtons) / ((0.05 of meters) * (0.01 of meters))</code></td>
+<td><code>KPressureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ε = ΔL / L</code></td>
+<td><code>((0.6 of milli.meters) / (2 of meters)).toStrain()</code></td>
+<td><code>KStrainUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E = σ / ε</code></td>
+<td><code>(100 of mega.pascals) / (0.0005 of ratio)</code></td>
+<td><code>KPressureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>σ = E · ε</code></td>
+<td><code>(210 of giga.pascals) * (0.0005 of ratio)</code></td>
+<td><code>KPressureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ε بوحدة %</code></td>
+<td><code>strain into percent</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ε بوحدة ‰</code></td>
+<td><code>strain into perMille</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ε بوحدة µε</code></td>
+<td><code>strain into microstrain</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>p_hyd = F / A</code></td>
+<td><code>((10_000 of kilo.grams) * (1 of standardGravities)) / ((1 of meters) * (1 of meters))</code></td>
+<td><code>KPressureUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="25">2.5 الدوران<a class="headerlink" href="#25" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ω = φ / t</code></td>
+<td><code>(1 of turns) / (1 of seconds)</code></td>
+<td><code>KAngularVelocityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>φ = ω · t</code></td>
+<td><code>(3000 of revolutionsPerMinute) * (2 of seconds)</code></td>
+<td><code>KAngleUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = φ / ω</code></td>
+<td><code>(10 of turns) / (3000 of revolutionsPerMinute)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>α = Δω / t</code></td>
+<td><code>(3000 of revolutionsPerMinute) / (5 of seconds)</code></td>
+<td><code>KAngularAccelerationUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ω = α · t</code></td>
+<td><code>(2 of radiansPerSecondSquared) * (5 of seconds)</code></td>
+<td><code>KAngularVelocityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = ω / α</code></td>
+<td><code>(10 of (radians / seconds)) / (2 of radiansPerSecondSquared)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ω بوحدة rpm</code></td>
+<td><code>w into revolutionsPerMinute</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ω بوحدة rad/s</code></td>
+<td><code>w into (radians / seconds)</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>J = m · r²</code></td>
+<td><code>(2 of kilo.grams) * ((0.3 of meters) * (0.3 of meters))</code></td>
+<td><code>KInertiaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = J / r²</code></td>
+<td><code>(0.18 of kilogramMetersSquared) / ((0.3 of meters) * (0.3 of meters))</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>L = J · ω</code></td>
+<td><code>(0.18 of kilogramMetersSquared) * (50 of revolutionsPerSecond)</code></td>
+<td><code>KAngularMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>J = L / ω</code></td>
+<td><code>(56 of kilogramMetersSquaredPerSecond) / (50 of revolutionsPerSecond)</code></td>
+<td><code>KInertiaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ω = L / J</code></td>
+<td><code>(56 of kilogramMetersSquaredPerSecond) / (0.18 of kilogramMetersSquared)</code></td>
+<td><code>KAngularVelocityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>L = p · r</code></td>
+<td><code>(300 of newtonSeconds) * (0.4 of meters)</code></td>
+<td><code>KAngularMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>p = L / r</code></td>
+<td><code>(120 of jouleSeconds) / (0.4 of meters)</code></td>
+<td><code>KMomentumUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>M = F · r</code></td>
+<td><code>(100 of newtons) * (2 of meters)</code></td>
+<td><code>KEnergyUnitInstance</code> (N·m)</td>
+</tr>
+<tr>
+<td><code>M = J · α</code></td>
+<td><code>(0.18 of kilogramMetersSquared) * (2 of radiansPerSecondSquared)</code></td>
+<td><code>KEnergyUnitInstance</code> (N·m)</td>
+</tr>
+<tr>
+<td><code>M = P / ω</code></td>
+<td><code>(15 of kilo.watts) / (3000 of revolutionsPerMinute)</code></td>
+<td><code>KEnergyUnitInstance</code> (N·m)</td>
+</tr>
+<tr>
+<td><code>P = M · ω</code></td>
+<td><code>(48 of joules) * (3000 of revolutionsPerMinute)</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ω = P / M</code></td>
+<td><code>(15 of kilo.watts) / (48 of joules)</code></td>
+<td><code>KAngularVelocityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>α = M / J</code></td>
+<td><code>(48 of joules) / (0.18 of kilogramMetersSquared)</code></td>
+<td><code>KAngularAccelerationUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>J = M / α</code></td>
+<td><code>(48 of joules) / (2 of radiansPerSecondSquared)</code></td>
+<td><code>KInertiaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Ω = φ · φ</code></td>
+<td><code>(0.5 of radians) * (0.5 of radians)</code></td>
+<td><code>KSolidAngleUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>φ = Ω / φ</code></td>
+<td><code>(0.25 of steradians) / (0.5 of radians)</code></td>
+<td><code>KAngleUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>φ بوحدة °</code></td>
+<td><code>angle into degrees</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>φ بوحدة gon</code></td>
+<td><code>angle into gradians</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Ω بوحدة deg²</code></td>
+<td><code>omega into squareDegrees</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="26">2.6 الكثافات<a class="headerlink" href="#26" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ρ = m / V</code></td>
+<td><code>(7850 of kilo.grams) / (1000 of liters)</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = ρ · V</code></td>
+<td><code>steel * (250 of liters)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = V · ρ</code></td>
+<td><code>(250 of liters) * steel</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = m / ρ</code></td>
+<td><code>(1962.5 of kilo.grams) / steel</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ بوحدة g/cm³</code></td>
+<td><code>steel into (grams / (centi.meters * centi.meters * centi.meters))</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ρ_A = m / A</code></td>
+<td><code>(25 of kilo.grams) / ((5 of meters) * (1 of meters))</code></td>
+<td><code>KAreaDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = ρ_A · A</code></td>
+<td><code>areaDensity * ((4 of meters) * (3 of meters))</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = m / ρ_A</code></td>
+<td><code>(60 of kilo.grams) / areaDensity</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ_A = ρ · d</code></td>
+<td><code>steel * (2 of milli.meters)</code></td>
+<td><code>KAreaDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = ρ_A / d</code></td>
+<td><code>areaDensity / (2 of milli.meters)</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ_l = m / l</code></td>
+<td><code>(90 of grams) / (1000 of meters)</code></td>
+<td><code>KLinearDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = ρ_l · l</code></td>
+<td><code>(0.09 of gramsPerMeter) * (2500 of meters)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = m / ρ_l</code></td>
+<td><code>(225 of grams) / (0.09 of gramsPerMeter)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ_l بوحدة tex</code></td>
+<td><code>linearDensity into tex</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ρ_l بوحدة den</code></td>
+<td><code>linearDensity into denier</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>v = V / m</code></td>
+<td><code>(1000 of liters) / (1000 of kilo.grams)</code></td>
+<td><code>KSpecificVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = 1 / ρ</code></td>
+<td><code>1 / steel</code></td>
+<td><code>KSpecificVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = 1 / v</code></td>
+<td><code>1 / specificVolume</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = v · m</code></td>
+<td><code>(0.001 of cubicMetersPerKilogram) * (500 of kilo.grams)</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = V / v</code></td>
+<td><code>(500 of liters) / (0.001 of cubicMetersPerKilogram)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="27">2.7 الجريان واللزوجة والتوتّر السطحي<a class="headerlink" href="#27" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ṁ = m / t</code></td>
+<td><code>(180 of kilo.grams) / (1 of hours)</code></td>
+<td><code>KMassFlowUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = ṁ · t</code></td>
+<td><code>(0.05 of kilogramsPerSecond) * (2 of hours)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = m / ṁ</code></td>
+<td><code>(360 of kilo.grams) / (0.05 of kilogramsPerSecond)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ṁ = ρ · q̇</code></td>
+<td><code>water * (2 of litersPerSecond)</code></td>
+<td><code>KMassFlowUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q̇ = ṁ / ρ</code></td>
+<td><code>(2 of kilogramsPerSecond) / water</code></td>
+<td><code>KVolumeFlowUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = ṁ / q̇</code></td>
+<td><code>(2 of kilogramsPerSecond) / (2 of litersPerSecond)</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ṁ بوحدة t/h</code></td>
+<td><code>massFlow into tonnesPerHour</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>η = p · t</code></td>
+<td><code>(1 of pascals) * (0.001 of seconds)</code></td>
+<td><code>KViscosityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ν = η / ρ</code></td>
+<td><code>(0.001 of pascalSeconds) / water</code></td>
+<td><code>KDiffusivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>η = ν · ρ</code></td>
+<td><code>(1e-6 of squareMetersPerSecond) * water</code></td>
+<td><code>KViscosityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = η / ν</code></td>
+<td><code>(0.001 of pascalSeconds) / (1e-6 of squareMetersPerSecond)</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>η بوحدة cP</code></td>
+<td><code>viscosity into centi.poises</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ν بوحدة cSt</code></td>
+<td><code>kinematicViscosity into centistokes</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>σ = F / l</code></td>
+<td><code>(0.0728 of newtons) / (1 of meters)</code></td>
+<td><code>KLineForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = σ · l</code></td>
+<td><code>(72.8 of (milli.newtons / meters)) * (0.05 of meters)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = F / σ</code></td>
+<td><code>(0.00364 of newtons) / (72.8 of (milli.newtons / meters))</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>W = σ · A</code></td>
+<td><code>(0.0728 of newtonsPerMeter) * ((1 of meters) * (0.5 of meters))</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = W / σ</code></td>
+<td><code>(0.0364 of joules) / (0.0728 of newtonsPerMeter)</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>k = F / s</code></td>
+<td><code>(500 of newtons) / (0.01 of meters)</code></td>
+<td><code>KLineForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = k · s</code></td>
+<td><code>(50 of newtonsPerMillimeter) * (0.004 of meters)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3">3. الهندسة الكهربائية<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 قانون أوم والقدرة<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>U = R · I</code></td>
+<td><code>(220 of ohms) * (0.05 of amperes)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = I · R</code></td>
+<td><code>(0.05 of amperes) * (220 of ohms)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = U / R</code></td>
+<td><code>(230 of volts) / (46 of ohms)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R = U / I</code></td>
+<td><code>(230 of volts) / (5 of amperes)</code></td>
+<td><code>KResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>G = 1 / R</code></td>
+<td><code>1 / (46 of ohms)</code></td>
+<td><code>KConductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R = 1 / G</code></td>
+<td><code>1 / (0.02 of siemens)</code></td>
+<td><code>KResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = G · U</code></td>
+<td><code>(0.02 of siemens) * (230 of volts)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>G = I / U</code></td>
+<td><code>(5 of amperes) / (230 of volts)</code></td>
+<td><code>KConductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = I / G</code></td>
+<td><code>(5 of amperes) / (0.02 of siemens)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>P = U · I</code></td>
+<td><code>(230 of volts) * (5 of amperes)</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = P / U</code></td>
+<td><code>(1150 of watts) / (230 of volts)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = P / I</code></td>
+<td><code>(1150 of watts) / (5 of amperes)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>W = P · t</code></td>
+<td><code>(1150 of watts) * (2 of hours)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U بوحدة kV</code></td>
+<td><code>u into kilo.volts</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>U بوحدة mV</code></td>
+<td><code>u into milli.volts</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>R بوحدة kΩ</code></td>
+<td><code>r into kilo.ohms</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>S بوحدة kVA</code></td>
+<td><code>s into kilo.voltAmperes</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Q بوحدة var</code></td>
+<td><code>q into vars</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 الشحنة والسعة<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Q = I · t</code></td>
+<td><code>(2 of amperes) * (30 of minutes)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = t · I</code></td>
+<td><code>(30 of minutes) * (2 of amperes)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = Q / t</code></td>
+<td><code>(3600 of coulombs) / (30 of minutes)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = Q / I</code></td>
+<td><code>(3600 of coulombs) / (2 of amperes)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = Q · f</code></td>
+<td><code>(1 of milli.coulombs) * (50 of hertz)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = I / f</code></td>
+<td><code>(0.05 of amperes) / (50 of hertz)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q بوحدة Ah</code></td>
+<td><code>charge into ampereHours</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Q بوحدة mAh</code></td>
+<td><code>charge into milli.ampereHours</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Q / e</code></td>
+<td><code>charge into elementaryCharges</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>W = Q · U</code></td>
+<td><code>(3600 of coulombs) * (12 of volts)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = W / Q</code></td>
+<td><code>(43_200 of joules) / (3600 of coulombs)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C = Q / U</code></td>
+<td><code>(0.01 of coulombs) / (10 of volts)</code></td>
+<td><code>KCapacitanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = C · U</code></td>
+<td><code>(1000 of micro.farads) * (10 of volts)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = Q / C</code></td>
+<td><code>(0.01 of coulombs) / (1000 of micro.farads)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C بوحدة µF</code></td>
+<td><code>c into micro.farads</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>τ = R · C</code></td>
+<td><code>(10 of kilo.ohms) * (100 of micro.farads)</code></td>
+<td><code>KMixedUnitInstance</code> (s)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 المجال وكثافة التيار وخواصّ المواد<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E = U / d</code></td>
+<td><code>(230 of volts) / (2 of milli.meters)</code></td>
+<td><code>KElectricFieldStrengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = E · d</code></td>
+<td><code>(115 of kilo.voltsPerMeter) * (2 of milli.meters)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>d = U / E</code></td>
+<td><code>(230 of volts) / (115 of kilo.voltsPerMeter)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>F = E · Q</code></td>
+<td><code>(1000 of voltsPerMeter) * (1 of micro.coulombs)</code></td>
+<td><code>KForceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E = F / Q</code></td>
+<td><code>(0.001 of newtons) / (1 of micro.coulombs)</code></td>
+<td><code>KElectricFieldStrengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = F / E</code></td>
+<td><code>(0.001 of newtons) / (1000 of voltsPerMeter)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>J = I / A</code></td>
+<td><code>(16 of amperes) / ((1.5 of milli.meters) * (1 of milli.meters))</code></td>
+<td><code>KCurrentDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = J · A</code></td>
+<td><code>currentDensity * ((2.5 of milli.meters) * (1 of milli.meters))</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = I / J</code></td>
+<td><code>(16 of amperes) / currentDensity</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ_Q = Q / V</code></td>
+<td><code>(12 of milli.coulombs) / (4 of liters)</code></td>
+<td><code>KChargeDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = ρ_Q · V</code></td>
+<td><code>chargeDensity * (2 of liters)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = Q / ρ_Q</code></td>
+<td><code>(12 of milli.coulombs) / chargeDensity</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>λ = Q / l</code></td>
+<td><code>(1 of micro.coulombs) / (2 of meters)</code></td>
+<td><code>KLinearChargeDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = λ · l</code></td>
+<td><code>linearChargeDensity * (5 of meters)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = Q / λ</code></td>
+<td><code>(1 of micro.coulombs) / linearChargeDensity</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>D = Q / A</code></td>
+<td><code>(1 of micro.coulombs) / ((1 of meters) * (0.5 of meters))</code></td>
+<td><code>KElectricFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = D · A</code></td>
+<td><code>(2 of micro.coulombsPerSquareMeter) * ((1 of meters) * (0.5 of meters))</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = Q / D</code></td>
+<td><code>(1 of micro.coulombs) / (2 of micro.coulombsPerSquareMeter)</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>D = ε · E</code></td>
+<td><code>(1 of vacuumPermittivity) * (1000 of voltsPerMeter)</code></td>
+<td><code>KElectricFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ε = D / E</code></td>
+<td><code>electricFluxDensity / (1000 of voltsPerMeter)</code></td>
+<td><code>KPermittivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E = D / ε</code></td>
+<td><code>electricFluxDensity / (1 of vacuumPermittivity)</code></td>
+<td><code>KElectricFieldStrengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C = ε · l</code></td>
+<td><code>(1 of vacuumPermittivity) * (0.05 of meters)</code></td>
+<td><code>KCapacitanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ε = C / l</code></td>
+<td><code>(1000 of micro.farads) / (0.05 of meters)</code></td>
+<td><code>KPermittivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = C / ε</code></td>
+<td><code>(1000 of micro.farads) / (1 of vacuumPermittivity)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = R · l</code></td>
+<td><code>(0.017 of ohms) * (1 of meters)</code></td>
+<td><code>KResistivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R = ρ / l</code></td>
+<td><code>(17 of nano.ohmMeters) / (0.001 of meters)</code></td>
+<td><code>KResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = ρ / R</code></td>
+<td><code>(17 of nano.ohmMeters) / (0.017 of ohms)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>σ = 1 / ρ</code></td>
+<td><code>1 / (17 of nano.ohmMeters)</code></td>
+<td><code>KConductivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = 1 / σ</code></td>
+<td><code>1 / (58 of megasiemensPerMeter)</code></td>
+<td><code>KResistivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>G = σ · l</code></td>
+<td><code>(58 of megasiemensPerMeter) * (0.001 of meters)</code></td>
+<td><code>KConductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>σ = G / l</code></td>
+<td><code>(0.02 of siemens) / (0.001 of meters)</code></td>
+<td><code>KConductivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = G / σ</code></td>
+<td><code>(0.02 of siemens) / (58 of megasiemensPerMeter)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>σ بوحدة µS/cm</code></td>
+<td><code>conductivity into microsiemensPerCentimeter</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>µ = v / E</code></td>
+<td><code>(0.01 of meters / seconds) / (1000 of voltsPerMeter)</code></td>
+<td><code>KElectricMobilityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>v = µ · E</code></td>
+<td><code>(1e-5 of squareMetersPerVoltSecond) * (1000 of voltsPerMeter)</code></td>
+<td><code>KSpeedUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E = v / µ</code></td>
+<td><code>(0.01 of meters / seconds) / (1e-5 of squareMetersPerVoltSecond)</code></td>
+<td><code>KElectricFieldStrengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>p = Q · l</code></td>
+<td><code>(1 of nano.coulombs) * (1 of milli.meters)</code></td>
+<td><code>KElectricDipoleMomentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = p / l</code></td>
+<td><code>(1e-12 of coulombMeters) / (1 of milli.meters)</code></td>
+<td><code>KChargeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = p / Q</code></td>
+<td><code>(1e-12 of coulombMeters) / (1 of nano.coulombs)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>p بوحدة D</code></td>
+<td><code>dipoleMoment into debyes</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="34">3.4 المغناطيسية<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Φ = B · A</code></td>
+<td><code>(1.2 of teslas) * ((0.1 of meters) * (0.1 of meters))</code></td>
+<td><code>KMagneticFluxUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>B = Φ / A</code></td>
+<td><code>(12 of milli.webers) / ((0.1 of meters) * (0.1 of meters))</code></td>
+<td><code>KMagneticFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = Φ / B</code></td>
+<td><code>(12 of milli.webers) / (1.2 of teslas)</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Φ = U · t</code></td>
+<td><code>(230 of volts) * (1 of milli.seconds)</code></td>
+<td><code>KMagneticFluxUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = Φ / t</code></td>
+<td><code>(0.23 of webers) / (1 of milli.seconds)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = Φ · f</code></td>
+<td><code>(12 of milli.webers) * (50 of hertz)</code></td>
+<td><code>KVoltageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Φ = U / f</code></td>
+<td><code>(230 of volts) / (50 of hertz)</code></td>
+<td><code>KMagneticFluxUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = Φ / U</code></td>
+<td><code>(0.23 of webers) / (230 of volts)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>L = Φ / I</code></td>
+<td><code>(12 of milli.webers) / (2 of amperes)</code></td>
+<td><code>KInductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Φ = L · I</code></td>
+<td><code>(6 of milli.henries) * (2 of amperes)</code></td>
+<td><code>KMagneticFluxUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = Φ / L</code></td>
+<td><code>(12 of milli.webers) / (6 of milli.henries)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>X_L = ω · L</code></td>
+<td><code>(6 of milli.henries) * (50 of hertz)</code></td>
+<td><code>KResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>L = X_L / f</code></td>
+<td><code>(0.3 of ohms) / (50 of hertz)</code></td>
+<td><code>KInductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>H = I / l</code></td>
+<td><code>(2 of amperes) / (0.1 of meters)</code></td>
+<td><code>KMagneticFieldStrengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = H · l</code></td>
+<td><code>(20 of amperesPerMeter) * (0.1 of meters)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>I = l · H</code></td>
+<td><code>(0.1 of meters) * (20 of amperesPerMeter)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>B = µ · H</code></td>
+<td><code>(1 of vacuumPermeability) * (20 of amperesPerMeter)</code></td>
+<td><code>KMagneticFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>µ = B / H</code></td>
+<td><code>(1.2 of teslas) / (20 of amperesPerMeter)</code></td>
+<td><code>KPermeabilityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>H = B / µ</code></td>
+<td><code>(1.2 of teslas) / (1 of vacuumPermeability)</code></td>
+<td><code>KMagneticFieldStrengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>L = µ · l</code></td>
+<td><code>(1 of vacuumPermeability) * (0.1 of meters)</code></td>
+<td><code>KInductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>µ = L / l</code></td>
+<td><code>(6 of milli.henries) / (0.1 of meters)</code></td>
+<td><code>KPermeabilityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = L / µ</code></td>
+<td><code>(6 of milli.henries) / (1 of vacuumPermeability)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R_m = 1 / L</code></td>
+<td><code>1 / (6 of milli.henries)</code></td>
+<td><code>KReluctanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>L = 1 / R_m</code></td>
+<td><code>1 / (166 of inverseHenries)</code></td>
+<td><code>KInductanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R_m = I / Φ</code></td>
+<td><code>(2 of amperes) / (12 of milli.webers)</code></td>
+<td><code>KReluctanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Θ = R_m · Φ</code></td>
+<td><code>(166 of ampereTurnsPerWeber) * (12 of milli.webers)</code></td>
+<td><code>KElectricCurrentUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Φ = I / R_m</code></td>
+<td><code>(2 of amperes) / (166 of ampereTurnsPerWeber)</code></td>
+<td><code>KMagneticFluxUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>B بوحدة G</code></td>
+<td><code>b into gauss</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Φ بوحدة Mx</code></td>
+<td><code>flux into maxwells</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>H بوحدة Oe</code></td>
+<td><code>h into oersteds</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4. الديناميكا الحرارية<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 درجة الحرارة — نقطة مقابل فرق<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>T = 20 °C</code></td>
+<td><code>20 of celsius</code></td>
+<td><code>KTemperatureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>T بوحدة K</code></td>
+<td><code>(20 of celsius) into kelvin</code></td>
+<td><code>Double</code> (293.15)</td>
+</tr>
+<tr>
+<td><code>T بوحدة °F</code></td>
+<td><code>(20 of celsius) into fahrenheit</code></td>
+<td><code>Double</code> (68.0)</td>
+</tr>
+<tr>
+<td><code>T بوحدة °R</code></td>
+<td><code>(20 of celsius) into rankine</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>ΔT = T₂ − T₁</code></td>
+<td><code>(40 of celsius) - (12 of celsius)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = 20 K</code></td>
+<td><code>KTemperatureDifference.ofKelvin(20)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>T₂ = T₁ + ΔT</code></td>
+<td><code>(20 of celsius) + KTemperatureDifference.ofKelvin(5)</code></td>
+<td><code>KTemperatureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>T₂ = T₁ − ΔT</code></td>
+<td><code>(20 of celsius) - KTemperatureDifference.ofKelvin(5)</code></td>
+<td><code>KTemperatureUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT₁ + ΔT₂</code></td>
+<td><code>KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>2 · ΔT</code></td>
+<td><code>KTemperatureDifference.ofKelvin(20) * 2</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>T₁ + T₂</code></td>
+<td><em>مرفوض عند التصريف</em> (جمع نقطة إلى نقطة بلا معنى)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>∇T = ΔT / d</code></td>
+<td><code>KTemperatureDifference.ofKelvin(21) / (0.3 of meters)</code></td>
+<td><code>KTemperatureGradientUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = ∇T · d</code></td>
+<td><code>(70 of kelvinPerMeter) * (0.3 of meters)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>d = ΔT / ∇T</code></td>
+<td><code>KTemperatureDifference.ofKelvin(21) / (70 of kelvinPerMeter)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>∇T بوحدة K/km</code></td>
+<td><code>gradient into kelvinPerKilometer</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>α = 1 / ΔT</code></td>
+<td><code>1 / KTemperatureDifference.ofKelvin(1)</code></td>
+<td><code>KThermalExpansionUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = 1 / α</code></td>
+<td><code>1 / (12e-6 of perKelvin)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔL = α · L · ΔT</code></td>
+<td><code>(12e-6 of perKelvin).elongationOf(10 of meters, KTemperatureDifference.ofKelvin(30))</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>α بوحدة ppm/K</code></td>
+<td><code>expansion into ppmPerKelvin</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42">4.2 الحرارة والسعة الحرارية والتدفّق الحراري<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C = Q / ΔT</code></td>
+<td><code>(627_600 of joules) / KTemperatureDifference.ofKelvin(1)</code></td>
+<td><code>KHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = C · ΔT</code></td>
+<td><code>(627_600 of joulesPerKelvin) * KTemperatureDifference.ofKelvin(28)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = ΔT · C</code></td>
+<td><code>KTemperatureDifference.ofKelvin(28) * (627_600 of joulesPerKelvin)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = Q / C</code></td>
+<td><code>(17.57 of mega.joules) / (627_600 of joulesPerKelvin)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>c = C / m</code></td>
+<td><code>(627_600 of joulesPerKelvin) / (150 of kilo.grams)</code></td>
+<td><code>KSpecificHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C = c · m</code></td>
+<td><code>(4184 of joulesPerKilogramKelvin) * (150 of kilo.grams)</code></td>
+<td><code>KHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C = m · c</code></td>
+<td><code>(150 of kilo.grams) * (4184 of joulesPerKilogramKelvin)</code></td>
+<td><code>KHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = C / c</code></td>
+<td><code>(627_600 of joulesPerKelvin) / (4184 of joulesPerKilogramKelvin)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q = c · ΔT</code></td>
+<td><code>(4184 of joulesPerKilogramKelvin) * KTemperatureDifference.ofKelvin(28)</code></td>
+<td><code>KSpecificEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = q · m</code></td>
+<td><code>(117_152 of joulesPerKilogram) * (150 of kilo.grams)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q = Q / m</code></td>
+<td><code>(17.57 of mega.joules) / (150 of kilo.grams)</code></td>
+<td><code>KSpecificEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = Q / q</code></td>
+<td><code>(17.57 of mega.joules) / (117_152 of joulesPerKilogram)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = q / c</code></td>
+<td><code>(117_152 of joulesPerKilogram) / (4184 of joulesPerKilogramKelvin)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>c = q / ΔT</code></td>
+<td><code>(117_152 of joulesPerKilogram) / KTemperatureDifference.ofKelvin(28)</code></td>
+<td><code>KSpecificHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>c بوحدة cal/(g·K)</code></td>
+<td><code>heatCapacity into caloriesPerGramKelvin</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>q بوحدة Wh/kg</code></td>
+<td><code>specificEnergy into wattHoursPerKilogram</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Φ = Q / t</code></td>
+<td><code>(17.57 of mega.joules) / (30 of minutes)</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Q = Φ · t</code></td>
+<td><code>(9.76 of kilo.watts) * (30 of minutes)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = Q / Φ</code></td>
+<td><code>(17.57 of mega.joules) / (9.76 of kilo.watts)</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S = Q / T</code></td>
+<td><code>(1000 of joules) / KTemperatureDifference.ofKelvin(300)</code></td>
+<td><code>KHeatCapacityUnitInstance</code> (J/K)</td>
+</tr>
+<tr>
+<td><code>S بوحدة J/K</code></td>
+<td><code>entropy into joulesPerKelvin</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 انتقال الحرارة<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q̇ = Φ / A</code></td>
+<td><code>(1200 of watts) / ((5 of meters) * (3 of meters))</code></td>
+<td><code>KHeatFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Φ = q̇ · A</code></td>
+<td><code>(80 of wattsPerSquareMeter) * ((5 of meters) * (3 of meters))</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = Φ / q̇</code></td>
+<td><code>(1200 of watts) / (80 of wattsPerSquareMeter)</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q̇ = λ · ∇T</code></td>
+<td><code>(0.035 of wattsPerMeterKelvin) * (70 of kelvinPerMeter)</code></td>
+<td><code>KHeatFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>∇T = q̇ / λ</code></td>
+<td><code>(2.45 of wattsPerSquareMeter) / (0.035 of wattsPerMeterKelvin)</code></td>
+<td><code>KTemperatureGradientUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>λ = q̇ / ∇T</code></td>
+<td><code>(2.45 of wattsPerSquareMeter) / (70 of kelvinPerMeter)</code></td>
+<td><code>KThermalConductivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = λ / d</code></td>
+<td><code>(0.035 of wattsPerMeterKelvin) / (0.2 of meters)</code></td>
+<td><code>KHeatTransferCoefficientUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>λ = U · d</code></td>
+<td><code>(0.175 of wattsPerSquareMeterKelvin) * (0.2 of meters)</code></td>
+<td><code>KThermalConductivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>d = λ / U</code></td>
+<td><code>(0.035 of wattsPerMeterKelvin) / (0.175 of wattsPerSquareMeterKelvin)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q̇ = U · ΔT</code></td>
+<td><code>(0.175 of wattsPerSquareMeterKelvin) * KTemperatureDifference.ofKelvin(21)</code></td>
+<td><code>KHeatFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = q̇ / ΔT</code></td>
+<td><code>(3.675 of wattsPerSquareMeter) / KTemperatureDifference.ofKelvin(21)</code></td>
+<td><code>KHeatTransferCoefficientUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = q̇ / U</code></td>
+<td><code>(3.675 of wattsPerSquareMeter) / (0.175 of wattsPerSquareMeterKelvin)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R = d / λ</code></td>
+<td><code>(0.2 of meters) / (0.035 of wattsPerMeterKelvin)</code></td>
+<td><code>KThermalResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R = 1 / U</code></td>
+<td><code>1 / (0.175 of wattsPerSquareMeterKelvin)</code></td>
+<td><code>KThermalResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>U = 1 / R</code></td>
+<td><code>1 / (5.71 of squareMeterKelvinPerWatt)</code></td>
+<td><code>KHeatTransferCoefficientUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>d = R · λ</code></td>
+<td><code>(5.71 of squareMeterKelvinPerWatt) * (0.035 of wattsPerMeterKelvin)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>λ = d / R</code></td>
+<td><code>(0.2 of meters) / (5.71 of squareMeterKelvinPerWatt)</code></td>
+<td><code>KThermalConductivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = R · q̇</code></td>
+<td><code>(5.71 of squareMeterKelvinPerWatt) * (3.675 of wattsPerSquareMeter)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R = ΔT / q̇</code></td>
+<td><code>KTemperatureDifference.ofKelvin(21) / (3.675 of wattsPerSquareMeter)</code></td>
+<td><code>KThermalResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q̇ = ΔT / R</code></td>
+<td><code>KTemperatureDifference.ofKelvin(21) / (5.71 of squareMeterKelvinPerWatt)</code></td>
+<td><code>KHeatFluxDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>R بوحدة tog</code></td>
+<td><code>thermalResistance into tog</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>R بوحدة clo</code></td>
+<td><code>thermalResistance into clo</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>a = λ / (ρ · c)</code></td>
+<td><code>(0.6 of wattsPerMeterKelvin).diffusivityWith(water, (4184 of joulesPerKilogramKelvin))</code></td>
+<td><code>KDiffusivityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = λ / (a · c)</code></td>
+<td><code>diffusivity.densityWith(conductivity, specificHeatCapacity)</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>c = λ / (a · ρ)</code></td>
+<td><code>diffusivity.specificHeatCapacityWith(conductivity, density)</code></td>
+<td><code>KSpecificHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>q̇ بوحدة Btu/(h·ft²)</code></td>
+<td><code>heatFluxDensity into btusPerHourSquareFoot</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>λ بوحدة Btu/(h·ft·°F)</code></td>
+<td><code>conductivity into btusPerHourFootFahrenheit</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="44">4.4 كمّية المادة والكمّيات المولية<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>M = m / n</code></td>
+<td><code>(18 of grams) / (1 of moles)</code></td>
+<td><code>KMolarMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = M · n</code></td>
+<td><code>(18 of gramsPerMole) * (2.5 of moles)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>m = n · M</code></td>
+<td><code>(2.5 of moles) * (18 of gramsPerMole)</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>n = m / M</code></td>
+<td><code>(45 of grams) / (18 of gramsPerMole)</code></td>
+<td><code>KAmountOfSubstanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>M بوحدة kg/mol</code></td>
+<td><code>molarMass into kilogramsPerMole</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>V_m = V / n</code></td>
+<td><code>(22.4 of liters) / (1 of moles)</code></td>
+<td><code>KMolarVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = V_m · n</code></td>
+<td><code>(22.4 of litersPerMole) * (3 of moles)</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>n = V / V_m</code></td>
+<td><code>(67.2 of liters) / (22.4 of litersPerMole)</code></td>
+<td><code>KAmountOfSubstanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V_m = M / ρ</code></td>
+<td><code>(18 of gramsPerMole) / water</code></td>
+<td><code>KMolarVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>M = V_m · ρ</code></td>
+<td><code>(18 of cubicCentimetersPerMole) * water</code></td>
+<td><code>KMolarMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ = M / V_m</code></td>
+<td><code>(18 of gramsPerMole) / (18 of cubicCentimetersPerMole)</code></td>
+<td><code>KDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E_m = E / n</code></td>
+<td><code>(286 of kilo.joules) / (1 of moles)</code></td>
+<td><code>KMolarEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E = E_m · n</code></td>
+<td><code>(286 of kilo.joulesPerMole) * (2 of moles)</code></td>
+<td><code>KEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>n = E / E_m</code></td>
+<td><code>(572 of kilo.joules) / (286 of kilo.joulesPerMole)</code></td>
+<td><code>KAmountOfSubstanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C_m = C / n</code></td>
+<td><code>(75.3 of joulesPerKelvin) / (1 of moles)</code></td>
+<td><code>KMolarHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C = C_m · n</code></td>
+<td><code>(75.3 of joulesPerMoleKelvin) * (4 of moles)</code></td>
+<td><code>KHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>n = C / C_m</code></td>
+<td><code>(301.2 of joulesPerKelvin) / (75.3 of joulesPerMoleKelvin)</code></td>
+<td><code>KAmountOfSubstanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E_m = C_m · ΔT</code></td>
+<td><code>(75.3 of joulesPerMoleKelvin) * KTemperatureDifference.ofKelvin(20)</code></td>
+<td><code>KMolarEnergyUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>C_m = E_m / ΔT</code></td>
+<td><code>(1506 of joulesPerMole) / KTemperatureDifference.ofKelvin(20)</code></td>
+<td><code>KMolarHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ΔT = E_m / C_m</code></td>
+<td><code>(1506 of joulesPerMole) / (75.3 of joulesPerMoleKelvin)</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>n بوحدة mmol</code></td>
+<td><code>amount into milli.moles</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>n بوحدة lbmol</code></td>
+<td><code>amount into poundMoles</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>E_m بوحدة eV</code></td>
+<td><code>molarEnergy into electronVoltsPerEntity</code></td>
+<td><code>Double</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">5. تقنية المعلومات<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1 B = 8 bit</code></td>
+<td><code>(1 of bytes) == (8 of bits)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>S بوحدة MiB</code></td>
+<td><code>(1_048_576 of bytes) into mebi.bytes</code></td>
+<td><code>Double</code> (1.0)</td>
+</tr>
+<tr>
+<td><code>S بوحدة MB</code></td>
+<td><code>(1_048_576 of bytes) into mega.bytes</code></td>
+<td><code>Double</code> (≈ 1.049)</td>
+</tr>
+<tr>
+<td><code>S بوحدة GiB</code></td>
+<td><code>(8 of giga.bytes) into gibi.bytes</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Ṡ = S / t</code></td>
+<td><code>(100 of mega.bytes) / (10 of seconds)</code></td>
+<td><code>KDataRateUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S = Ṡ · t</code></td>
+<td><code>(10 of (mega.bytes / seconds)) * (30 of seconds)</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S = t · Ṡ</code></td>
+<td><code>(30 of seconds) * (10 of (mega.bytes / seconds))</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>t = S / Ṡ</code></td>
+<td><code>(4.7 of giga.bytes) / (10 of (mega.bytes / seconds))</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>Ṡ بوحدة Mbit/s</code></td>
+<td><code>rate into (mega.bits / seconds)</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>Ṡ بوحدة MB/s</code></td>
+<td><code>rate into (mega.bytes / seconds)</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>D = S / A</code></td>
+<td><code>(1 of tera.bytes) / ((10 of centi.meters) * (10 of centi.meters))</code></td>
+<td><code>KStorageDensityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S = D · A</code></td>
+<td><code>density * ((10 of centi.meters) * (5 of centi.meters))</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = S / D</code></td>
+<td><code>(1 of tera.bytes) / density</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S₁ + S₂</code></td>
+<td><code>(700 of mega.bytes) + (1.4 of giga.bytes)</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S₁ − S₂</code></td>
+<td><code>(2 of tera.bytes) - (350 of giga.bytes)</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>S / n</code></td>
+<td><code>(1 of tera.bytes) / 4</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6">6. البادئات والقراءات والقوى<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1 km</code></td>
+<td><code>1 of kilo.meters</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 mm</code></td>
+<td><code>1 of milli.meters</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 µs</code></td>
+<td><code>1 of micro.seconds</code></td>
+<td><code>KTimeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 nF</code></td>
+<td><code>1 of nano.farads</code></td>
+<td><code>KCapacitanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 MW</code></td>
+<td><code>1 of mega.watts</code></td>
+<td><code>KPowerUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 GΩ</code></td>
+<td><code>1 of giga.ohms</code></td>
+<td><code>KResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 Qm</code></td>
+<td><code>1 of quetta.meters</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 qm</code></td>
+<td><code>1 of quecto.meters</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 KiB</code></td>
+<td><code>1 of kibi.bytes</code></td>
+<td><code>KStorageUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>1 m بوحدة mm</code></td>
+<td><code>(1 of meters) into milli.meters</code></td>
+<td><code>Double</code> (1000.0)</td>
+</tr>
+<tr>
+<td><code>1 mi بوحدة km</code></td>
+<td><code>(1 of miles) into kilo.meters</code></td>
+<td><code>Double</code> (≈ 1.609)</td>
+</tr>
+<tr>
+<td><code>1 lb بوحدة kg</code></td>
+<td><code>(1 of pounds) into kilo.grams</code></td>
+<td><code>Double</code> (≈ 0.454)</td>
+</tr>
+<tr>
+<td><code>A = a²</code></td>
+<td><code>(2 of kilo.meters) pow 2</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = a³</code></td>
+<td><code>(2 of meters) pow 3</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A = l · w</code></td>
+<td><code>(5 of meters) * (3 of meters)</code></td>
+<td><code>KAreaUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V = A · h</code></td>
+<td><code>((5 of meters) * (3 of meters)) * (2 of meters)</code></td>
+<td><code>KVolumeUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>l = A / w</code></td>
+<td><code>((5 of meters) * (3 of meters)) / (3 of meters)</code></td>
+<td><code>KLengthUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>A بوحدة ha</code></td>
+<td><code>area into hectares</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>A بوحدة ac</code></td>
+<td><code>area into acres</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>V بوحدة l</code></td>
+<td><code>volume into liters</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>V بوحدة gal</code></td>
+<td><code>volume into usGallons</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>x^-1</code></td>
+<td><code>(1 of seconds) pow -1</code></td>
+<td><code>KMixedUnitInstance</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title"><code>pow</code> كمُعامَل</p>
+</div>
+<p>تم تعريف <code>pow</code> على النوع المفتوح <code>KDistanceUnitInstance</code>، لذلك فإن <code>(2 of meters) pow 2</code> هو <strong>مساحة أثناء التشغيل</strong>
+لكنه ثابتًا مجرد مسافة. هذا يكفي <em>لقراءة</em> قيمة (<code>into (meters pow 2)</code>) — لكن مُعاملًا ذا نوع محدد مثل
+<code>pressure * area</code> يحتاج إلى مساحة ذات نوع ثابت. أنشئها بدلًا من ذلك عبر مُعاملات الطول ذات النوع المحدد:
+<code>(0.2 of meters) * (0.1 of meters)</code> هو <code>KAreaUnitInstance</code>، و<code>liters</code> هو <code>KVolumeUnitInstance</code> جاهز.
+| <code>طباعة</code>           | <code>(5 of kilo.meters).toString()</code>           | <code>"5000.0 m"</code> (الوحدة الأساسية) |
+| <code>طباعة (مخصّصة)</code>   | <code>"${v into (kilo.meters / hours)} km/h"</code>  | <code>"80.0 km/h"</code>             |</p>
+<hr />
+<h2 id="7">7. ثوابت الجدول الدوري<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>كل ثابت في <a href="../periodic-table/"><code>KChemicalElement</code></a> هو نسخة وحدة محكومة بالنوع، ويمكن إدراجه مباشرةً في أي صيغة من
+الصيغ السابقة.</p>
+<table>
+<thead>
+<tr>
+<th>الرياضيات</th>
+<th>Kotlin</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>M(Au)</code></td>
+<td><code>KChemicalElement.GOLD.molarMass</code></td>
+<td><code>KMolarMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ(Au)</code></td>
+<td><code>KChemicalElement.GOLD.density</code></td>
+<td><code>KDensityUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>m = ρ · V</code></td>
+<td><code>KChemicalElement.GOLD.density!! * ((7 of centi.meters) * (4 of centi.meters) * (2 of centi.meters))</code></td>
+<td><code>KMassUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>n = m / M</code></td>
+<td><code>(1081 of grams) / KChemicalElement.GOLD.molarMass</code></td>
+<td><code>KAmountOfSubstanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>V_m(Fe)</code></td>
+<td><code>KChemicalElement.IRON.molarVolume</code></td>
+<td><code>KMolarVolumeUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>T_melt(Fe)</code></td>
+<td><code>KChemicalElement.IRON.meltingPoint</code></td>
+<td><code>KTemperatureUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>T_boil(Fe)</code></td>
+<td><code>KChemicalElement.IRON.boilingPoint</code></td>
+<td><code>KTemperatureUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>ΔT = T_b − T_m</code></td>
+<td><code>KChemicalElement.IRON.boilingPoint!! - KChemicalElement.IRON.meltingPoint!!</code></td>
+<td><code>KTemperatureDifferenceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>c(Cu)</code></td>
+<td><code>KChemicalElement.COPPER.specificHeatCapacity</code></td>
+<td><code>KSpecificHeatCapacityUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>C = c · m</code></td>
+<td><code>KChemicalElement.COPPER.specificHeatCapacity!! * (5 of kilo.grams)</code></td>
+<td><code>KHeatCapacityUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>λ(Cu)</code></td>
+<td><code>KChemicalElement.COPPER.thermalConductivity</code></td>
+<td><code>KThermalConductivityUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>R = d / λ</code></td>
+<td><code>(2 of milli.meters) / KChemicalElement.COPPER.thermalConductivity!!</code></td>
+<td><code>KThermalResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>ρ_el(Cu)</code></td>
+<td><code>KChemicalElement.COPPER.electricalResistivity</code></td>
+<td><code>KResistivityUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>R = ρ_el / l</code></td>
+<td><code>KChemicalElement.COPPER.electricalResistivity!! / (1 of milli.meters)</code></td>
+<td><code>KResistanceUnitInstance</code></td>
+</tr>
+<tr>
+<td><code>E_ion(H)</code></td>
+<td><code>KChemicalElement.HYDROGEN.ionizationEnergy</code></td>
+<td><code>KEnergyUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>r_at(C)</code></td>
+<td><code>KChemicalElement.CARBON.atomicRadius</code></td>
+<td><code>KLengthUnitInstance?</code></td>
+</tr>
+<tr>
+<td><code>Z</code></td>
+<td><code>KChemicalElement.LEAD.ordinalNumber</code></td>
+<td><code>Int</code> (82)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8">8. أمثلة محلولة<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="81-">8.1 ارتفاع درجة الحرارة نتيجة ارتفاع الضغط (ثبات الحجم، غاي-لوساك)<a class="headerlink" href="#81-" title="Permanent link">&para;</a></h3>
+<p>تحتوي قنّينة فولاذية محكمة الإغلاق هواءً عند <strong>20 °C</strong> و<strong>8 bar</strong> (مطلق). يرفع ضوء الشمس الضغط إلى <strong>9.2 bar</strong>.
+عند ثبات الحجم يكون <code>p / T = const</code>، ومن ثمّ <code>T₂ = T₁ · p₂ / p₁</code> و<code>ΔT = T₂ − T₁</code>.</p>
+<p>لاحظ الكمّيتين المختلفتين العاملتين هنا: <strong>نسبة</strong> الضغط عديمة البُعد (تُقرأ عبر <code>into</code>)، بينما تبقى حسابات درجة الحرارة
+محكومة بالنوع — فطرح درجتَي حرارة مطلقتين يعطي <em>فرق درجة حرارة</em>، لا درجة حرارة مطلقة أخرى أبدًا.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mechanic.pressure.*</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.thermo.temperature.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8.0</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bars</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9.2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bars</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">celsius</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p2</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">bars</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">bars</span><span class="p">)</span><span class="w">        </span><span class="c1">// 1.15 (dimensionless)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">t1</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kelvin</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ratio</span><span class="p">)</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kelvin</span><span class="w">      </span><span class="c1">// KTemperatureUnitInstance</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">deltaT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t1</span><span class="w">                               </span><span class="c1">// KTemperatureDifferenceUnitInstance</span>
+
+<span class="n">t2</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">celsius</span><span class="w">        </span><span class="c1">// ≈ 63.9 °C</span>
+<span class="n">deltaT</span><span class="p">.</span><span class="na">value</span><span class="w">           </span><span class="c1">// ≈ 43.97 (ΔK)</span>
+</code></pre></div>
+<h3 id="82">8.2 كم من الطاقة يلزم لتسخين حوض استحمام؟<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p><code>Q = c · m · ΔT</code> — ‏150 لترًا من الماء من 12 °C إلى 40 °C.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mega</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.energy.joules</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.power.watts</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.time.hours</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mechanic.mass.grams</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.thermo.specificheatcapacity.joulesPerKilogramKelvin</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.thermo.temperature.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4184</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">joulesPerKilogramKelvin</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">heat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">water</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">150</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">grams</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">((</span><span class="m">40</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">celsius</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="m">12</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">celsius</span><span class="p">))</span>
+
+<span class="n">heat</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">mega</span><span class="p">.</span><span class="na">joules</span><span class="w">            </span><span class="c1">// ≈ 17.57 MJ</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">boiler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">watts</span>
+<span class="p">(</span><span class="n">heat</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">boiler</span><span class="p">)</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">hours</span><span class="w">       </span><span class="c1">// ≈ 0.54 h — how long the boiler needs</span>
+</code></pre></div>
+<h3 id="83">8.3 فقد الحرارة عبر جدار<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<p><code>Φ = U · A · ΔT</code>، مع <code>U = λ / d</code> لطبقة عزل سماكتها 20 cm (<code>λ = 0.035 W/(m·K)</code>)، وجدار مساحته 15 m²، وفرق 21 K.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.pow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.centi</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.distance.meters</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.power.watts</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0.035</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">wattsPerMeterKelvin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">20</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">centi</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span><span class="w">   </span><span class="c1">// W/(m²·K)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">flux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">KTemperatureDifference</span><span class="p">.</span><span class="na">ofKelvin</span><span class="p">(</span><span class="m">21</span><span class="p">)</span><span class="w">              </span><span class="c1">// W/m²</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flux</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">((</span><span class="m">5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">3</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span><span class="p">))</span><span class="w">               </span><span class="c1">// KPowerUnitInstance</span>
+
+<span class="n">loss</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">watts</span><span class="w">    </span><span class="c1">// ≈ 55 W</span>
+</code></pre></div>
+<h3 id="84">8.4 هبوط الجهد على كابل نحاسي<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<p><code>R = ρ · l / A</code>، ثم <code>U = R · I</code> — ‏10 m من نحاس مقطعه 1.5 mm² يحمل 16 A.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.pow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.milli</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.nano</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.distance.meters</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.current.amperes</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.resistivity.ohmMeters</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.voltage.volts</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.distance.toLength</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">17</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">nano</span><span class="p">.</span><span class="na">ohmMeters</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">1.5</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">milli</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">milli</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span>
+
+<span class="c1">// A / l is reduced explicitly - `area / length` has no typed operator</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">equivalent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">area</span><span class="p">.</span><span class="na">toUnit</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">length</span><span class="p">.</span><span class="na">toUnit</span><span class="p">()).</span><span class="na">toLength</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rho</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">equivalent</span><span class="w">               </span><span class="c1">// KResistanceUnitInstance, ≈ 0.113 Ω</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">drop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">16</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">amperes</span><span class="p">)</span><span class="w">         </span><span class="c1">// KVoltageUnitInstance</span>
+
+<span class="n">drop</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">volts</span><span class="w">                        </span><span class="c1">// ≈ 1.8 V</span>
+</code></pre></div>
+<h3 id="85">8.5 الطاقة الحركية ومسافة الكبح<a class="headerlink" href="#85" title="Permanent link">&para;</a></h3>
+<p><code>E = ½ · m · v²</code> و<code>s = E / F</code> لسيارة كتلتها 1200 kg تسير بسرعة 100 km/h وتكبح بقوّة 8 kN.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.distance.meters</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.time.hours</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mechanic.force.newtons</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mechanic.mass.grams</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.energy.joules</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.energy.toEnergy</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">meters</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">hours</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1200</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">grams</span>
+<span class="c1">// neither `momentum * speed` nor `energy / force` is a typed operator:</span>
+<span class="c1">// the first is typed by the form-recognition hook, the second is read out and rebuilt</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">energy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(((</span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">).</span><span class="na">toUnit</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="na">toUnit</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="p">).</span><span class="na">toEnergy</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">energy</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">joules</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">((</span><span class="m">8</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">newtons</span><span class="p">)</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">newtons</span><span class="p">))</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">meters</span>
+
+<span class="n">distance</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">meters</span><span class="w">                    </span><span class="c1">// ≈ 58 m</span>
+</code></pre></div>
+<h3 id="86">8.6 زمن التنزيل<a class="headerlink" href="#86" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.giga</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mega</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.it.storage.*</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.it.datarate.*</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.time.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4.7</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">giga</span><span class="p">.</span><span class="na">bytes</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">50</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">mega</span><span class="p">.</span><span class="na">bits</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">seconds</span><span class="p">)</span><span class="w">   </span><span class="c1">// 50 Mbit/s</span>
+
+<span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">minutes</span><span class="w">                       </span><span class="c1">// ≈ 12.5 min</span>
+</code></pre></div>
+<h3 id="87">8.7 محرّك: عزم الدوران والسرعة والقدرة<a class="headerlink" href="#87" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.energy.joules</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.power.watts</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mechanic.angularvelocity.revolutionsPerMinute</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">revolutionsPerMinute</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">torque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">15</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">watts</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">speed</span><span class="w">      </span><span class="c1">// KEnergyUnitInstance, read as N·m</span>
+<span class="n">torque</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">joules</span><span class="w">                            </span><span class="c1">// ≈ 47.7 N·m</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">torque</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span><span class="w">                    </span><span class="c1">// back to KPowerUnitInstance</span>
+<span class="n">power</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">watts</span><span class="w">                         </span><span class="c1">// 15.0</span>
+</code></pre></div>
+<h3 id="88">8.8 سبيكة ذهب<a class="headerlink" href="#88" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.KChemicalElement</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.centi</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.distance.meters</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.mechanic.mass.grams</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.thermo.amountofsubstance.moles</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">7</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">centi</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">4</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">centi</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">centi</span><span class="p">.</span><span class="na">meters</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KChemicalElement</span><span class="p">.</span><span class="na">GOLD</span><span class="p">.</span><span class="na">density</span><span class="o">!!</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">volume</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mass</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">KChemicalElement</span><span class="p">.</span><span class="na">GOLD</span><span class="p">.</span><span class="na">molarMass</span>
+
+<span class="n">mass</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">grams</span><span class="w">   </span><span class="c1">// ≈ 10.8 kg</span>
+<span class="n">amount</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">moles</span><span class="w">      </span><span class="c1">// ≈ 55 mol</span>
+</code></pre></div>
+<hr />
+<h2 id="_3">إلى أين بعد ذلك<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../mixed-units/">الوحدات المركبة</a> — ماذا يحدث حين لا يكون للتركيب نوع مقنّن.</li>
+<li><a href="../custom-units/">إضافة وحدات مخصصة</a> — أضِف كمّيتك الخاصّة واحصل على كل ما سبق لها.</li>
+<li><a href="../formatter/formatting/">المنسّق</a> — اعرض أيًّا من هذه النتائج كنصّ أو LaTeX أو MathML أو Typst.</li>
+<li><a href="../periodic-table/">الجدول الدوري</a> — ثوابت العناصر المستخدمة في §7 و§8.8.
+</content>
+</invoke></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u062a\u0645 \u0627\u0644\u0646\u0633\u062e \u0627\u0644\u0649 \u0627\u0644\u062d\u0627\u0641\u0638\u0629", "clipboard.copy": "\u0646\u0633\u062e \u0625\u0644\u0649 \u0627\u0644\u062d\u0627\u0641\u0638\u0629", "search.result.more.one": "\u0623\u0643\u062b\u0631 \u0645\u0646 1 \u0641\u064a \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629", "search.result.more.other": "\u0623\u0643\u062b\u0631 \u0645\u0646 # \u0641\u064a \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629", "search.result.none": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0646\u062a\u0627\u0626\u062c", "search.result.one": "\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0628\u062d\u062b \u0645\u0633\u062a\u0646\u062f \u0648\u0627\u062d\u062f", "search.result.other": "\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0628\u062d\u062b # \u0645\u0633\u062a\u0646\u062f\u0627\u062a", "search.result.placeholder": "\u0627\u0643\u062a\u0628 \u0644\u0628\u062f\u0621 \u0627\u0644\u0628\u062d\u062b", "search.result.term.missing": "\u0645\u0641\u0642\u0648\u062f", "select.version": "\u0625\u062e\u062a\u0631 \u0627\u0644\u0625\u0635\u062f\u0627\u0631"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
