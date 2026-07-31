@@ -61,10 +61,10 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | الرياضيات            | Kotlin                                                | النتيجة                     |
 |----------------------|-------------------------------------------------------|-----------------------------|
 | `a = Δv / t`         | `((10 of meters) / (1 of seconds)) / (2 of seconds)`  | `KAccelerationUnitInstance` |
-| `a = Δv / t`         | `(100 of kilometersPerHour) / (4.6 of seconds)`       | `KAccelerationUnitInstance` |
+| `a = Δv / t`         | `(100 of kilo.meters / hours) / (4.6 of seconds)`       | `KAccelerationUnitInstance` |
 | `v = a · t`          | `a * (2 of seconds)`                                  | `KSpeedUnitInstance`        |
 | `v = t · a`          | `(2 of seconds) * a`                                  | `KSpeedUnitInstance`        |
-| `t = Δv / a`         | `(30 of metersPerSecond) / (3 of metersPerSecondSquared)` | `KTimeUnitInstance`     |
+| `t = Δv / a`         | `(30 of meters / seconds) / (3 of meters / (seconds pow 2)).toAcceleration()` | `KTimeUnitInstance`     |
 | `a / g`              | `a into standardGravities`                            | `Double`                    |
 | `a بوحدة Gal`        | `a into gals`                                         | `Double`                    |
 | `a = g` (سقوط حرّ)    | `1 of standardGravities`                              | `KAccelerationUnitInstance` |
@@ -90,11 +90,11 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `q̇ = V / t`    | `(600 of liters) / (2 of minutes)`                 | `KVolumeFlowUnitInstance`   |
 | `V = q̇ · t`    | `q * (15 of minutes)`                              | `KVolumeUnitInstance`       |
 | `V = t · q̇`    | `(15 of minutes) * q`                              | `KVolumeUnitInstance`       |
-| `t = V / q̇`    | `(1 of (meters pow 3)) / q`                        | `KTimeUnitInstance`         |
+| `t = V / q̇`    | `(1000 of liters) / q`                        | `KTimeUnitInstance`         |
 | `q̇ بوحدة l/min`| `q into litersPerMinute`                           | `Double`                    |
 | `q̇ بوحدة m³/h` | `q into cubicMetersPerHour`                        | `Double`                    |
 | `q̇ بوحدة gpm`  | `q into usGallonsPerMinute`                        | `Double`                    |
-| `ṁ = ρ · q̇`    | `(1000 of kilo.grams) / (1 of (meters pow 3)) * q` | `KMassFlowUnitInstance`     |
+| `ṁ = ρ · q̇`    | `(1000 of kilo.grams) / (1000 of liters) * q` | `KMassFlowUnitInstance`     |
 
 ---
 
@@ -104,10 +104,10 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 
 | الرياضيات      | Kotlin                                                        | النتيجة                     |
 |----------------|---------------------------------------------------------------|-----------------------------|
-| `F = m · a`    | `(1200 of kilo.grams) * (2.5 of metersPerSecondSquared)`      | `KForceUnitInstance`        |
-| `F = a · m`    | `(2.5 of metersPerSecondSquared) * (1200 of kilo.grams)`      | `KForceUnitInstance`        |
+| `F = m · a`    | `(1200 of kilo.grams) * (2.5 of meters / (seconds pow 2)).toAcceleration()`      | `KForceUnitInstance`        |
+| `F = a · m`    | `(2.5 of meters / (seconds pow 2)).toAcceleration() * (1200 of kilo.grams)`      | `KForceUnitInstance`        |
 | `a = F / m`    | `(3000 of newtons) / (1200 of kilo.grams)`                    | `KAccelerationUnitInstance` |
-| `m = F / a`    | `(3000 of newtons) / (2.5 of metersPerSecondSquared)`         | `KMassUnitInstance`         |
+| `m = F / a`    | `(3000 of newtons) / (2.5 of meters / (seconds pow 2)).toAcceleration()`         | `KMassUnitInstance`         |
 | `F_g = m · g`  | `(75 of kilo.grams) * (1 of standardGravities)`               | `KForceUnitInstance`        |
 | `F بوحدة kN`   | `f into kilo.newtons`                                         | `Double`                    |
 | `F بوحدة lbf`  | `f into poundsForce`                                          | `Double`                    |
@@ -125,8 +125,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `P = W / t`       | `(6000 of joules) / (12 of seconds)`                | `KPowerUnitInstance`   |
 | `W = P · t`       | `(2 of kilo.watts) * (3 of hours)`                  | `KEnergyUnitInstance`  |
 | `t = W / P`       | `(21.6 of mega.joules) / (2 of kilo.watts)`         | `KTimeUnitInstance`    |
-| `P = F · v`       | `(400 of newtons) * (25 of metersPerSecond)`        | `KPowerUnitInstance`   |
-| `F = P / v`       | `(10 of kilo.watts) / (25 of metersPerSecond)`      | `KForceUnitInstance`   |
+| `P = F · v`       | `(400 of newtons) * (25 of meters / seconds)`        | `KPowerUnitInstance`   |
+| `F = P / v`       | `(10 of kilo.watts) / (25 of meters / seconds)`      | `KForceUnitInstance`   |
 | `v = P / F`       | `(10 of kilo.watts) / (400 of newtons)`             | `KSpeedUnitInstance`   |
 | `W = P / f`       | `(60 of watts) / (50 of hertz)`                     | `KEnergyUnitInstance`  |
 | `E بوحدة kWh`     | `e into (kilo.watts * hours)`                       | `Double`               |
@@ -140,10 +140,10 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 
 | الرياضيات       | Kotlin                                                | النتيجة                 |
 |-----------------|-------------------------------------------------------|-------------------------|
-| `p = m · v`     | `(1200 of kilo.grams) * (25 of metersPerSecond)`      | `KMomentumUnitInstance` |
-| `p = v · m`     | `(25 of metersPerSecond) * (1200 of kilo.grams)`      | `KMomentumUnitInstance` |
+| `p = m · v`     | `(1200 of kilo.grams) * (25 of meters / seconds)`      | `KMomentumUnitInstance` |
+| `p = v · m`     | `(25 of meters / seconds) * (1200 of kilo.grams)`      | `KMomentumUnitInstance` |
 | `v = p / m`     | `(30_000 of kilogramMetersPerSecond) / (1200 of kilo.grams)` | `KSpeedUnitInstance` |
-| `m = p / v`     | `(30_000 of kilogramMetersPerSecond) / (25 of metersPerSecond)` | `KMassUnitInstance` |
+| `m = p / v`     | `(30_000 of kilogramMetersPerSecond) / (25 of meters / seconds)` | `KMassUnitInstance` |
 | `J = F · t`     | `(2 of kilo.newtons) * (0.15 of seconds)`             | `KMomentumUnitInstance` |
 | `J = t · F`     | `(0.15 of seconds) * (2 of kilo.newtons)`             | `KMomentumUnitInstance` |
 | `F = p / t`     | `(300 of newtonSeconds) / (0.15 of seconds)`          | `KForceUnitInstance`    |
@@ -156,20 +156,20 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | الرياضيات        | Kotlin                                                     | النتيجة                  |
 |------------------|------------------------------------------------------------|--------------------------|
 | `p = F / A`      | `(2000 of newtons) / ((0.1 of meters) * (0.05 of meters))` | `KPressureUnitInstance`  |
-| `F = p · A`      | `(3 of bars) * (0.02 of (meters pow 2))`                   | `KForceUnitInstance`     |
+| `F = p · A`      | `(3 of bars) * ((0.2 of meters) * (0.1 of meters))`                   | `KForceUnitInstance`     |
 | `A = F / p`      | `(6000 of newtons) / (3 of bars)`                          | `KAreaUnitInstance`      |
 | `p بوحدة bar`    | `p into bars`                                              | `Double`                 |
 | `p بوحدة psi`    | `p into psis`                                              | `Double`                 |
 | `p بوحدة atm`    | `p into atmospheres`                                       | `Double`                 |
 | `p بوحدة Torr`   | `p into torrs`                                             | `Double`                 |
-| `σ = F / A`      | `(50 of kilo.newtons) / (0.0005 of (meters pow 2))`        | `KPressureUnitInstance`  |
+| `σ = F / A`      | `(50 of kilo.newtons) / ((0.05 of meters) * (0.01 of meters))`        | `KPressureUnitInstance`  |
 | `ε = ΔL / L`     | `((0.6 of milli.meters) / (2 of meters)).toStrain()`       | `KStrainUnitInstance`    |
 | `E = σ / ε`      | `(100 of mega.pascals) / (0.0005 of ratio)`                | `KPressureUnitInstance`  |
 | `σ = E · ε`      | `(210 of giga.pascals) * (0.0005 of ratio)`                | `KPressureUnitInstance`  |
 | `ε بوحدة %`      | `strain into percent`                                      | `Double`                 |
 | `ε بوحدة ‰`      | `strain into perMille`                                     | `Double`                 |
 | `ε بوحدة µε`     | `strain into microstrain`                                  | `Double`                 |
-| `p_hyd = ρ · g · h` | `((1000 of kilo.grams) / (1 of (meters pow 3))) * (1 of standardGravities) * (10 of meters)` | `KPressureUnitInstance` |
+| `p_hyd = F / A`  | `((10_000 of kilo.grams) * (1 of standardGravities)) / ((1 of meters) * (1 of meters))` | `KPressureUnitInstance` |
 
 ### 2.5 الدوران
 
@@ -183,8 +183,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `t = ω / α`    | `(10 of (radians / seconds)) / (2 of radiansPerSecondSquared)` | `KTimeUnitInstance`                |
 | `ω بوحدة rpm`  | `w into revolutionsPerMinute`                                  | `Double`                           |
 | `ω بوحدة rad/s`| `w into (radians / seconds)`                                   | `Double`                           |
-| `J = m · r²`   | `(2 of kilo.grams) * ((0.3 of meters) pow 2)`                  | `KInertiaUnitInstance`             |
-| `m = J / r²`   | `(0.18 of kilogramMetersSquared) / ((0.3 of meters) pow 2)`    | `KMassUnitInstance`                |
+| `J = m · r²`   | `(2 of kilo.grams) * ((0.3 of meters) * (0.3 of meters))`                  | `KInertiaUnitInstance`             |
+| `m = J / r²`   | `(0.18 of kilogramMetersSquared) / ((0.3 of meters) * (0.3 of meters))`    | `KMassUnitInstance`                |
 | `L = J · ω`    | `(0.18 of kilogramMetersSquared) * (50 of revolutionsPerSecond)` | `KAngularMomentumUnitInstance`   |
 | `J = L / ω`    | `(56 of kilogramMetersSquaredPerSecond) / (50 of revolutionsPerSecond)` | `KInertiaUnitInstance`     |
 | `ω = L / J`    | `(56 of kilogramMetersSquaredPerSecond) / (0.18 of kilogramMetersSquared)` | `KAngularVelocityUnitInstance` |
@@ -207,13 +207,13 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 
 | الرياضيات         | Kotlin                                                    | النتيجة                       |
 |-------------------|-----------------------------------------------------------|-------------------------------|
-| `ρ = m / V`       | `(7850 of kilo.grams) / (1 of (meters pow 3))`            | `KDensityUnitInstance`        |
-| `m = ρ · V`       | `steel * (0.25 of (meters pow 3))`                        | `KMassUnitInstance`           |
-| `m = V · ρ`       | `(0.25 of (meters pow 3)) * steel`                        | `KMassUnitInstance`           |
+| `ρ = m / V`       | `(7850 of kilo.grams) / (1000 of liters)`            | `KDensityUnitInstance`        |
+| `m = ρ · V`       | `steel * (250 of liters)`                        | `KMassUnitInstance`           |
+| `m = V · ρ`       | `(250 of liters) * steel`                        | `KMassUnitInstance`           |
 | `V = m / ρ`       | `(1962.5 of kilo.grams) / steel`                          | `KVolumeUnitInstance`         |
-| `ρ بوحدة g/cm³`   | `steel into (grams / (centi.meters pow 3))`               | `Double`                      |
+| `ρ بوحدة g/cm³`   | `steel into (grams / (centi.meters * centi.meters * centi.meters))`               | `Double`                      |
 | `ρ_A = m / A`     | `(25 of kilo.grams) / ((5 of meters) * (1 of meters))`    | `KAreaDensityUnitInstance`    |
-| `m = ρ_A · A`     | `areaDensity * (12 of (meters pow 2))`                    | `KMassUnitInstance`           |
+| `m = ρ_A · A`     | `areaDensity * ((4 of meters) * (3 of meters))`                    | `KMassUnitInstance`           |
 | `A = m / ρ_A`     | `(60 of kilo.grams) / areaDensity`                        | `KAreaUnitInstance`           |
 | `ρ_A = ρ · d`     | `steel * (2 of milli.meters)`                             | `KAreaDensityUnitInstance`    |
 | `ρ = ρ_A / d`     | `areaDensity / (2 of milli.meters)`                       | `KDensityUnitInstance`        |
@@ -222,11 +222,11 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `l = m / ρ_l`     | `(225 of grams) / (0.09 of gramsPerMeter)`                | `KLengthUnitInstance`         |
 | `ρ_l بوحدة tex`   | `linearDensity into tex`                                  | `Double`                      |
 | `ρ_l بوحدة den`   | `linearDensity into denier`                               | `Double`                      |
-| `v = V / m`       | `(1 of (meters pow 3)) / (1000 of kilo.grams)`            | `KSpecificVolumeUnitInstance` |
+| `v = V / m`       | `(1000 of liters) / (1000 of kilo.grams)`            | `KSpecificVolumeUnitInstance` |
 | `v = 1 / ρ`       | `1 / steel`                                               | `KSpecificVolumeUnitInstance` |
 | `ρ = 1 / v`       | `1 / specificVolume`                                      | `KDensityUnitInstance`        |
 | `V = v · m`       | `(0.001 of cubicMetersPerKilogram) * (500 of kilo.grams)` | `KVolumeUnitInstance`         |
-| `m = V / v`       | `(0.5 of (meters pow 3)) / (0.001 of cubicMetersPerKilogram)` | `KMassUnitInstance`       |
+| `m = V / v`       | `(500 of liters) / (0.001 of cubicMetersPerKilogram)` | `KMassUnitInstance`       |
 
 ### 2.7 الجريان واللزوجة والتوتّر السطحي
 
@@ -243,12 +243,12 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `ν = η / ρ`    | `(0.001 of pascalSeconds) / water`                           | `KDiffusivityUnitInstance`  |
 | `η = ν · ρ`    | `(1e-6 of squareMetersPerSecond) * water`                    | `KViscosityUnitInstance`    |
 | `ρ = η / ν`    | `(0.001 of pascalSeconds) / (1e-6 of squareMetersPerSecond)` | `KDensityUnitInstance`      |
-| `η بوحدة cP`   | `viscosity into centipoises`                                 | `Double`                    |
+| `η بوحدة cP`   | `viscosity into centi.poises`                                 | `Double`                    |
 | `ν بوحدة cSt`  | `kinematicViscosity into centistokes`                        | `Double`                    |
 | `σ = F / l`    | `(0.0728 of newtons) / (1 of meters)`                        | `KLineForceUnitInstance`    |
 | `F = σ · l`    | `(72.8 of (milli.newtons / meters)) * (0.05 of meters)`      | `KForceUnitInstance`        |
 | `l = F / σ`    | `(0.00364 of newtons) / (72.8 of (milli.newtons / meters))`  | `KLengthUnitInstance`       |
-| `W = σ · A`    | `(0.0728 of newtonsPerMeter) * (0.5 of (meters pow 2))`      | `KEnergyUnitInstance`       |
+| `W = σ · A`    | `(0.0728 of newtonsPerMeter) * ((1 of meters) * (0.5 of meters))`      | `KEnergyUnitInstance`       |
 | `A = W / σ`    | `(0.0364 of joules) / (0.0728 of newtonsPerMeter)`           | `KAreaUnitInstance`         |
 | `k = F / s`    | `(500 of newtons) / (0.01 of meters)`                        | `KLineForceUnitInstance`    |
 | `F = k · s`    | `(50 of newtonsPerMillimeter) * (0.004 of meters)`           | `KForceUnitInstance`        |
@@ -311,8 +311,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `F = E · Q`    | `(1000 of voltsPerMeter) * (1 of micro.coulombs)`          | `KForceUnitInstance`                  |
 | `E = F / Q`    | `(0.001 of newtons) / (1 of micro.coulombs)`               | `KElectricFieldStrengthUnitInstance`  |
 | `Q = F / E`    | `(0.001 of newtons) / (1000 of voltsPerMeter)`             | `KChargeUnitInstance`                 |
-| `J = I / A`    | `(16 of amperes) / (1.5 of (milli.meters pow 2))`          | `KCurrentDensityUnitInstance`         |
-| `I = J · A`    | `currentDensity * (2.5 of (milli.meters pow 2))`           | `KElectricCurrentUnitInstance`        |
+| `J = I / A`    | `(16 of amperes) / ((1.5 of milli.meters) * (1 of milli.meters))`          | `KCurrentDensityUnitInstance`         |
+| `I = J · A`    | `currentDensity * ((2.5 of milli.meters) * (1 of milli.meters))`           | `KElectricCurrentUnitInstance`        |
 | `A = I / J`    | `(16 of amperes) / currentDensity`                         | `KAreaUnitInstance`                   |
 | `ρ_Q = Q / V`  | `(12 of milli.coulombs) / (4 of liters)`                   | `KChargeDensityUnitInstance`          |
 | `Q = ρ_Q · V`  | `chargeDensity * (2 of liters)`                            | `KChargeUnitInstance`                 |
@@ -320,8 +320,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `λ = Q / l`    | `(1 of micro.coulombs) / (2 of meters)`                    | `KLinearChargeDensityUnitInstance`    |
 | `Q = λ · l`    | `linearChargeDensity * (5 of meters)`                      | `KChargeUnitInstance`                 |
 | `l = Q / λ`    | `(1 of micro.coulombs) / linearChargeDensity`              | `KLengthUnitInstance`                 |
-| `D = Q / A`    | `(1 of micro.coulombs) / (0.5 of (meters pow 2))`          | `KElectricFluxDensityUnitInstance`    |
-| `Q = D · A`    | `(2 of micro.coulombsPerSquareMeter) * (0.5 of (meters pow 2))` | `KChargeUnitInstance`            |
+| `D = Q / A`    | `(1 of micro.coulombs) / ((1 of meters) * (0.5 of meters))`          | `KElectricFluxDensityUnitInstance`    |
+| `Q = D · A`    | `(2 of micro.coulombsPerSquareMeter) * ((1 of meters) * (0.5 of meters))` | `KChargeUnitInstance`            |
 | `A = Q / D`    | `(1 of micro.coulombs) / (2 of micro.coulombsPerSquareMeter)` | `KAreaUnitInstance`                |
 | `D = ε · E`    | `(1 of vacuumPermittivity) * (1000 of voltsPerMeter)`      | `KElectricFluxDensityUnitInstance`    |
 | `ε = D / E`    | `electricFluxDensity / (1000 of voltsPerMeter)`            | `KPermittivityUnitInstance`           |
@@ -338,9 +338,9 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `σ = G / l`    | `(0.02 of siemens) / (0.001 of meters)`                    | `KConductivityUnitInstance`           |
 | `l = G / σ`    | `(0.02 of siemens) / (58 of megasiemensPerMeter)`          | `KLengthUnitInstance`                 |
 | `σ بوحدة µS/cm`| `conductivity into microsiemensPerCentimeter`              | `Double`                              |
-| `µ = v / E`    | `(0.01 of metersPerSecond) / (1000 of voltsPerMeter)`      | `KElectricMobilityUnitInstance`       |
+| `µ = v / E`    | `(0.01 of meters / seconds) / (1000 of voltsPerMeter)`      | `KElectricMobilityUnitInstance`       |
 | `v = µ · E`    | `(1e-5 of squareMetersPerVoltSecond) * (1000 of voltsPerMeter)` | `KSpeedUnitInstance`             |
-| `E = v / µ`    | `(0.01 of metersPerSecond) / (1e-5 of squareMetersPerVoltSecond)` | `KElectricFieldStrengthUnitInstance` |
+| `E = v / µ`    | `(0.01 of meters / seconds) / (1e-5 of squareMetersPerVoltSecond)` | `KElectricFieldStrengthUnitInstance` |
 | `p = Q · l`    | `(1 of nano.coulombs) * (1 of milli.meters)`               | `KElectricDipoleMomentUnitInstance`   |
 | `Q = p / l`    | `(1e-12 of coulombMeters) / (1 of milli.meters)`           | `KChargeUnitInstance`                 |
 | `l = p / Q`    | `(1e-12 of coulombMeters) / (1 of nano.coulombs)`          | `KLengthUnitInstance`                 |
@@ -350,8 +350,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 
 | الرياضيات      | Kotlin                                                        | النتيجة                               |
 |----------------|---------------------------------------------------------------|---------------------------------------|
-| `Φ = B · A`    | `(1.2 of teslas) * (0.01 of (meters pow 2))`                  | `KMagneticFluxUnitInstance`           |
-| `B = Φ / A`    | `(12 of milli.webers) / (0.01 of (meters pow 2))`             | `KMagneticFluxDensityUnitInstance`    |
+| `Φ = B · A`    | `(1.2 of teslas) * ((0.1 of meters) * (0.1 of meters))`                  | `KMagneticFluxUnitInstance`           |
+| `B = Φ / A`    | `(12 of milli.webers) / ((0.1 of meters) * (0.1 of meters))`             | `KMagneticFluxDensityUnitInstance`    |
 | `A = Φ / B`    | `(12 of milli.webers) / (1.2 of teslas)`                      | `KAreaUnitInstance`                   |
 | `Φ = U · t`    | `(230 of volts) * (1 of milli.seconds)`                       | `KMagneticFluxUnitInstance`           |
 | `U = Φ / t`    | `(0.23 of webers) / (1 of milli.seconds)`                     | `KVoltageUnitInstance`                |
@@ -439,8 +439,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 
 | الرياضيات         | Kotlin                                                            | النتيجة                                 |
 |-------------------|-------------------------------------------------------------------|-----------------------------------------|
-| `q̇ = Φ / A`       | `(1200 of watts) / (15 of (meters pow 2))`                        | `KHeatFluxDensityUnitInstance`          |
-| `Φ = q̇ · A`       | `(80 of wattsPerSquareMeter) * (15 of (meters pow 2))`            | `KPowerUnitInstance`                    |
+| `q̇ = Φ / A`       | `(1200 of watts) / ((5 of meters) * (3 of meters))`                        | `KHeatFluxDensityUnitInstance`          |
+| `Φ = q̇ · A`       | `(80 of wattsPerSquareMeter) * ((5 of meters) * (3 of meters))`            | `KPowerUnitInstance`                    |
 | `A = Φ / q̇`       | `(1200 of watts) / (80 of wattsPerSquareMeter)`                   | `KAreaUnitInstance`                     |
 | `q̇ = λ · ∇T`      | `(0.035 of wattsPerMeterKelvin) * (70 of kelvinPerMeter)`         | `KHeatFluxDensityUnitInstance`          |
 | `∇T = q̇ / λ`      | `(2.45 of wattsPerSquareMeter) / (0.035 of wattsPerMeterKelvin)`  | `KTemperatureGradientUnitInstance`      |
@@ -511,8 +511,8 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `t = S / Ṡ`       | `(4.7 of giga.bytes) / (10 of (mega.bytes / seconds))` | `KTimeUnitInstance`          |
 | `Ṡ بوحدة Mbit/s`  | `rate into (mega.bits / seconds)`                   | `Double`                        |
 | `Ṡ بوحدة MB/s`    | `rate into (mega.bytes / seconds)`                  | `Double`                        |
-| `D = S / A`       | `(1 of tera.bytes) / (100 of (centi.meters pow 2))` | `KStorageDensityUnitInstance`   |
-| `S = D · A`       | `density * (50 of (centi.meters pow 2))`            | `KStorageUnitInstance`          |
+| `D = S / A`       | `(1 of tera.bytes) / ((10 of centi.meters) * (10 of centi.meters))` | `KStorageDensityUnitInstance`   |
+| `S = D · A`       | `density * ((10 of centi.meters) * (5 of centi.meters))`            | `KStorageUnitInstance`          |
 | `A = S / D`       | `(1 of tera.bytes) / density`                       | `KAreaUnitInstance`             |
 | `S₁ + S₂`         | `(700 of mega.bytes) + (1.4 of giga.bytes)`         | `KStorageUnitInstance`          |
 | `S₁ − S₂`         | `(2 of tera.bytes) - (350 of giga.bytes)`           | `KStorageUnitInstance`          |
@@ -540,12 +540,18 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 | `V = a³`          | `(2 of meters) pow 3`                     | `KVolumeUnitInstance`     |
 | `A = l · w`       | `(5 of meters) * (3 of meters)`           | `KAreaUnitInstance`       |
 | `V = A · h`       | `((5 of meters) * (3 of meters)) * (2 of meters)` | `KVolumeUnitInstance` |
-| `l = A / w`       | `((15 of (meters pow 2))) / (3 of meters)`| `KLengthUnitInstance`     |
+| `l = A / w`       | `((5 of meters) * (3 of meters)) / (3 of meters)`| `KLengthUnitInstance`     |
 | `A بوحدة ha`      | `area into hectares`                      | `Double`                  |
 | `A بوحدة ac`      | `area into acres`                         | `Double`                  |
 | `V بوحدة l`       | `volume into liters`                      | `Double`                  |
 | `V بوحدة gal`     | `volume into usGallons`                   | `Double`                  |
 | `x^-1`            | `(1 of seconds) pow -1`                   | `KMixedUnitInstance`      |
+
+!!! warning "`pow` كمُعامَل"
+تم تعريف `pow` على النوع المفتوح `KDistanceUnitInstance`، لذلك فإن `(2 of meters) pow 2` هو **مساحة أثناء التشغيل**
+لكنه ثابتًا مجرد مسافة. هذا يكفي *لقراءة* قيمة (`into (meters pow 2)`) — لكن مُعاملًا ذا نوع محدد مثل
+`pressure * area` يحتاج إلى مساحة ذات نوع ثابت. أنشئها بدلًا من ذلك عبر مُعاملات الطول ذات النوع المحدد:
+`(0.2 of meters) * (0.1 of meters)` هو `KAreaUnitInstance`، و`liters` هو `KVolumeUnitInstance` جاهز.
 | `طباعة`           | `(5 of kilo.meters).toString()`           | `"5000.0 m"` (الوحدة الأساسية) |
 | `طباعة (مخصّصة)`   | `"${v into (kilo.meters / hours)} km/h"`  | `"80.0 km/h"`             |
 
@@ -560,7 +566,7 @@ import org.pcsoft.framework.kunit.kinematic.time.*
 |-------------------------|------------------------------------------------------------------------|-------------------------------------|
 | `M(Au)`                 | `KChemicalElement.GOLD.molarMass`                                      | `KMolarMassUnitInstance`            |
 | `ρ(Au)`                 | `KChemicalElement.GOLD.density`                                        | `KDensityUnitInstance?`             |
-| `m = ρ · V`             | `KChemicalElement.GOLD.density!! * (56 of (centi.meters pow 3))`       | `KMassUnitInstance`                 |
+| `m = ρ · V`             | `KChemicalElement.GOLD.density!! * ((7 of centi.meters) * (4 of centi.meters) * (2 of centi.meters))`       | `KMassUnitInstance`                 |
 | `n = m / M`             | `(1081 of grams) / KChemicalElement.GOLD.molarMass`                    | `KAmountOfSubstanceUnitInstance`    |
 | `V_m(Fe)`               | `KChemicalElement.IRON.molarVolume`                                    | `KMolarVolumeUnitInstance?`         |
 | `T_melt(Fe)`            | `KChemicalElement.IRON.meltingPoint`                                   | `KTemperatureUnitInstance?`         |
@@ -616,7 +622,6 @@ import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mega
 import org.pcsoft.framework.kunit.common.energy.joules
-import org.pcsoft.framework.kunit.common.power.kilo
 import org.pcsoft.framework.kunit.common.power.watts
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.mechanic.mass.grams
@@ -647,7 +652,7 @@ import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val u = (0.035 of wattsPerMeterKelvin) / (20 of centi.meters)   // W/(m²·K)
 val flux = u * KTemperatureDifference.ofKelvin(21)              // W/m²
-val loss = flux * (15 of (meters pow 2))                        // KPowerUnitInstance
+val loss = flux * ((5 of meters) * (3 of meters))               // KPowerUnitInstance
 
 loss into watts    // ≈ 55 W
 ```
@@ -663,15 +668,18 @@ import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.nano
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.electric.ec.amperes
+import org.pcsoft.framework.kunit.electric.current.amperes
 import org.pcsoft.framework.kunit.electric.resistivity.ohmMeters
 import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.kinematic.distance.toLength
 
 val rho = 17 of nano.ohmMeters
 val length = 10 of meters
-val area = 1.5 of (milli.meters pow 2)
+val area = (1.5 of milli.meters) * (1 of milli.meters)
 
-val r = (rho / area) * length          // KResistanceUnitInstance, ≈ 0.113 Ω
+// A / l is reduced explicitly - `area / length` has no typed operator
+val equivalent = (area.toUnit() / length.toUnit()).toLength()
+val r = rho / equivalent               // KResistanceUnitInstance, ≈ 0.113 Ω
 val drop = r * (16 of amperes)         // KVoltageUnitInstance
 
 drop into volts                        // ≈ 1.8 V
@@ -686,14 +694,18 @@ import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.kinematic.speed.kilometersPerHour
+import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.mechanic.force.newtons
 import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.common.energy.joules
+import org.pcsoft.framework.kunit.common.energy.toEnergy
 
-val v = 100 of kilometersPerHour
+val v = 100 of kilo.meters / hours
 val m = 1200 of kilo.grams
-val energy = ((m * v) * v) / 2          // momentum * speed = energy
-val distance = energy / (8 of kilo.newtons)
+// neither `momentum * speed` nor `energy / force` is a typed operator:
+// the first is typed by the form-recognition hook, the second is read out and rebuilt
+val energy = (((m * v).toUnit() * v.toUnit()) / 2).toEnergy()
+val distance = ((energy into joules) / ((8 of kilo.newtons) into newtons)) of meters
 
 distance into meters                    // ≈ 58 m
 ```
