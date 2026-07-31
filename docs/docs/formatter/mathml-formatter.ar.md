@@ -1,26 +1,26 @@
 # مُنسِّق MathML
 
-يعرض `KMathMlUnitFormatter` القيمة بصيغة **MathML التقديمية**، التي تعرضها المتصفحات و MathJax أصلًا. مع
-الإعداد الافتراضي تصبح `3 of meters / seconds` المقروءة كـ `km/h` عنصر `<math>` سطري يحتوي على `<mfrac>`
+يعرض `KMathMlUnitFormatter` القيمة بصيغة **MathML التقديمية**، التي تعرضها المتصفحات و MathJax أصلًا. مع الإعداد
+الافتراضي تصبح `3 of meters / seconds` المقروءة كـ `km/h` عنصر `<math>` سطري يحتوي على `<mfrac>`
 لـ `<mi>km</mi>` على `<mi>h</mi>`.
 
 يوجد في الحزمة `org.pcsoft.framework.kunit.formatter` وهو `class` غير قابل للتغيير وآمن للخيوط.
 
 ## ما يُنتجه
 
-نمط `MFRAC` يرصّ الشكل النظيف ذا المقام الواحد في `<mfrac>`؛ وكل شكل آخر — وكامل نمط `EXPONENT` — هو جداء
-مسطّح مربوط بـ `<mo>` للضرب مع أُسٍّ `<msup>` ذات إشارة. القيمة عديمة الأبعاد تُعرض كـ `<mn>` فقط.
+نمط `MFRAC` يرصّ الشكل النظيف ذا المقام الواحد في `<mfrac>`؛ وكل شكل آخر — وكامل نمط `EXPONENT` — هو جداء مسطّح مربوط بـ
+`<mo>` للضرب مع أُسٍّ `<msup>` ذات إشارة. القيمة عديمة الأبعاد تُعرض كـ `<mn>` فقط.
 
 ## الإعداد
 
 `KMathMlFormatConfig` نوع قيمة؛ اختر إعدادًا مسبقًا أو أنشئ إعدادك:
 
-| الخيار           | القيم                                     | الافتراضي      |
-|------------------|------------------------------------------|----------------|
-| `fractionStyle`  | `MFRAC`, `EXPONENT`                      | `MFRAC`        |
-| `unitTag`        | `MI`, `MTEXT`                            | `MI`           |
+| الخيار           | القيم                                                | الافتراضي         |
+|------------------|------------------------------------------------------|-------------------|
+| `fractionStyle`  | `MFRAC`, `EXPONENT`                                  | `MFRAC`           |
+| `unitTag`        | `MI`, `MTEXT`                                        | `MI`              |
 | `multiplication` | `MIDDLE_DOT` (`·`), `TIMES` (`×`), `INVISIBLE_TIMES` | `INVISIBLE_TIMES` |
-| `wrapper`        | `MATH_INLINE`, `MATH_BLOCK`, `FRAGMENT`  | `MATH_INLINE`  |
+| `wrapper`        | `MATH_INLINE`, `MATH_BLOCK`, `FRAGMENT`              | `MATH_INLINE`     |
 
 الإعدادات المسبقة: `DEFAULT`، `INLINE` (أُسّ `<msup>` سطري)، `FRAGMENT` (بدون جذر `<math>`).
 

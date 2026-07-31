@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.conductance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **electrical conductance**, i.e. exactly four terms in the
@@ -59,10 +55,12 @@ class KConductanceUnitInstance internal constructor(internal val instance: KMixe
      * ((1 of kilo.siemens) + (500 of siemens)).value // 1500.0
      * ```
      */
-    override operator fun plus(other: KConductanceUnitInstance): KConductanceUnitInstance = conductanceInstanceOf(value + other.value)
+    override operator fun plus(other: KConductanceUnitInstance): KConductanceUnitInstance =
+        conductanceInstanceOf(value + other.value)
 
     /** Subtracts two conductances. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KConductanceUnitInstance): KConductanceUnitInstance = conductanceInstanceOf(value - other.value)
+    override operator fun minus(other: KConductanceUnitInstance): KConductanceUnitInstance =
+        conductanceInstanceOf(value - other.value)
 
     /**
      * Multiplies two conductances, producing a new [KMixedUnitInstance] (no longer a "pure" conductance).
@@ -146,9 +144,9 @@ fun KMixedUnitInstance.toConductance(): KConductanceUnitInstance {
         "KMixedUnitInstance $this does not represent a pure conductance (expected KMassUnit^-1, KDistanceUnit^-2, KTimeUnit^3 and KElectricCurrentUnit^2)"
     }
     val gramBaseProduct = value *
-        Math.pow(massTerm.unit.baseValue, -1.0) *
-        Math.pow(distanceTerm.unit.baseValue, -2.0) *
-        Math.pow(timeTerm.unit.baseValue, 3.0) *
-        Math.pow(currentTerm.unit.baseValue, 2.0)
+            Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(distanceTerm.unit.baseValue, -2.0) *
+            Math.pow(timeTerm.unit.baseValue, 3.0) *
+            Math.pow(currentTerm.unit.baseValue, 2.0)
     return conductanceInstanceOf(gramBaseProduct / Math.pow(SIEMENS_MASS_REFERENCE, -1.0))
 }

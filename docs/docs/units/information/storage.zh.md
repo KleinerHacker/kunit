@@ -3,25 +3,25 @@
 包: `org.pcsoft.framework.kunit.it.storage`
 基本单位: **字节**(`KStorageUnit.BASE == KStorageUnit.BYTE`)
 
-类型：**原生单位**
+类型： **原生单位**
 
-存储组建模数字数据量。它是一个**简单的一维**组(没有像距离组那样的指数特化子类型,也没有像时间组那样的
+存储组建模数字数据量。它是一个 **简单的一维**组 (没有像距离组那样的指数特化子类型,也没有像时间组那样的
 `Duration` 支撑): `KStorageUnitInstance` 封装单个 `KStorageUnit.BASE`(字节)项,始终归一化为字节后存储。
 
 有两点让这个组与众不同:
 
-* **无缩小前缀。** 比特的分数不是有意义的数据量,因此缩小 SI 前缀(`deci`、`centi`、`milli` 等 —— 系数 `< 1`)
-  对 `bytes`/`bits` **不可用**。写 `milli.bytes` 是**编译错误**而非运行时失败: `bytes`/`bits` 属性只挂在增大
-  SI 构建器(`KAugmentingPrefixBuilder`)和二进制构建器上,从不挂在缩小构建器上。
-* **二进制(IEC)前缀。** 除了十进制 SI 构建器(`kilo` = 1000)之外,还有第二套二进制构建器体系(`kibi` = 1024、
+* **无缩小前缀。** 比特的分数不是有意义的数据量,因此缩小 SI 前缀 (`deci`、`centi`、`milli` 等 —— 系数 `< 1`)
+  对 `bytes`/`bits` **不可用**。写 `milli.bytes` 是 **编译错误**而非运行时失败: `bytes`/`bits` 属性只挂在增大 SI 构建器
+  (`KAugmentingPrefixBuilder`)和二进制构建器上,从不挂在缩小构建器上。
+* **二进制 (IEC)前缀。** 除了十进制 SI 构建器 (`kilo` = 1000)之外,还有第二套二进制构建器体系 (`kibi` = 1024、
   `mebi` = 1024² 等),使得值可以区分十进制步长 1000 和二进制步长 1024。
 
 ## 单位
 
-| 单位 | Enum 值 | 符号 | 令牌 | 1 单位对应字节 |
-|---|---|---|---:|---:|
-| 字节 | `KStorageUnit.BYTE` | `B` | `bytes` | 1.0 |
-| 比特 | `KStorageUnit.BIT` | `bit` | `bits` | 0.125 |
+| 单位 | Enum 值             | 符号  |    令牌 | 1 单位对应字节 |
+|------|---------------------|-------|--------:|---------------:|
+| 字节 | `KStorageUnit.BYTE` | `B`   | `bytes` |            1.0 |
+| 比特 | `KStorageUnit.BIT`  | `bit` |  `bits` |          0.125 |
 
 一字节等于八比特。每个 `令牌` 都是值为 1 的 `KStorageUnitInstance`,用于 `of`(构建)和 `into`(读取)。
 
@@ -58,12 +58,12 @@ val rate = (1000 of bytes) / (2 of seconds)  // KDataRateUnitInstance: 500 B/s
 
 ### 比较与相等性
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个 `KStorageUnitInstance` 值的归一化 `value`(字节)。`equals` 按归一化
-后的量比较,因此 `(1 of bytes) == (8 of bits)`。
+`==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个 `KStorageUnitInstance` 值的归一化 `value`(字节)。`equals` 按归一化 后的量比较,因此
+`(1 of bytes) == (8 of bits)`。
 
 ## 用 `pow` 求幂
 
-用中缀 `pow` 运算符将值提升到整数次幂(Kotlin 没有可重载的 `^`)。对于存储组,`pow` 返回通用的
+用中缀 `pow` 运算符将值提升到整数次幂 (Kotlin 没有可重载的 `^`)。对于存储组,`pow` 返回通用的
 `KMixedUnitInstance`(存储没有带维度的幂类型):
 
 ```kotlin
@@ -76,8 +76,8 @@ val squared = (2 of bytes) pow 2     // KMixedUnitInstance: 4.0 B²
 
 ## 十进制 SI 前缀
 
-任何存储单位都可以通过属性访问与**增大**(大于 1)SI 前缀构建器(`deca`、`hecto`、`kilo`、`mega`、`giga`、
-`tera`、`peta`、`exa`、`zetta`、`yotta`、`ronna`、`quetta`)组合。缩小构建器(`deci` 及以下)**没有**
+任何存储单位都可以通过属性访问与 **增大**(大于 1)SI 前缀构建器 (`deca`、`hecto`、`kilo`、`mega`、`giga`、
+`tera`、`peta`、`exa`、`zetta`、`yotta`、`ronna`、`quetta`)组合。缩小构建器 (`deci` 及以下)**没有**
 `bytes`/`bits` 属性,因此 `milli.bytes` 无法编译。
 
 ```kotlin
@@ -94,9 +94,9 @@ fiveKb.value                         // 5000.0
 // 5 of milli.bytes                  // 无法编译: 缩小构建器上没有 `bytes`
 ```
 
-## 二进制(IEC)前缀
+## 二进制 (IEC)前缀
 
-二进制前缀构建器是 1024 的幂,让值可以区分 1000(`kilo`)和 1024(`kibi`): `kibi`、`mebi`、`gibi`、`tebi`、
+二进制前缀构建器是 1024 的幂,让值可以区分 1000 (`kilo`)和 1024 (`kibi`): `kibi`、`mebi`、`gibi`、`tebi`、
 `pebi`、`exbi`、`zebi`、`yobi`。
 
 ```kotlin
@@ -116,19 +116,19 @@ file into kibi.bytes      // 4096.0(KiB)
 ```
 
 | 二进制构建器 | 符号 | 1 单位(字节) |
-|---|---|---:|
-| `kibi` | `Ki` | 1024 |
-| `mebi` | `Mi` | 1024² |
-| `gibi` | `Gi` | 1024³ |
-| `tebi` | `Ti` | 1024⁴ |
-| `pebi` | `Pi` | 1024⁵ |
-| `exbi` | `Ei` | 1024⁶ |
-| `zebi` | `Zi` | 1024⁷ |
-| `yobi` | `Yi` | 1024⁸ |
+|--------------|------|-------------:|
+| `kibi`       | `Ki` |         1024 |
+| `mebi`       | `Mi` |        1024² |
+| `gibi`       | `Gi` |        1024³ |
+| `tebi`       | `Ti` |        1024⁴ |
+| `pebi`       | `Pi` |        1024⁵ |
+| `exbi`       | `Ei` |        1024⁶ |
+| `zebi`       | `Zi` |        1024⁷ |
+| `yobi`       | `Yi` |        1024⁸ |
 
 ## 与其他单位混合
 
-存储值与时间结合形成数据传输率(`byte·second⁻¹`),并可以再分解回来:
+存储值与时间结合形成数据传输率 (`byte·second⁻¹`),并可以再分解回来:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -157,11 +157,12 @@ import org.pcsoft.framework.kunit.it.storage.*
 
 ## 记法
 
-下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/`
+表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
 
-| 数学 | Kotlin | 含义 |
-|---|---|---|
-| `B` | `bytes` | 数据量，基本单位（字节） |
-| `bit` | `bits` | 位（`1 B = 8 bit`） |
-| `kB` | `kilo.bytes` | 十进制前缀字节（1000 B） |
+| 数学  | Kotlin       | 含义                     |
+|-------|--------------|--------------------------|
+| `B`   | `bytes`      | 数据量，基本单位（字节） |
+| `bit` | `bits`       | 位（`1 B = 8 bit`）      |
+| `kB`  | `kilo.bytes` | 十进制前缀字节（1000 B） |
 | `KiB` | `kibi.bytes` | 二进制前缀字节（1024 B） |

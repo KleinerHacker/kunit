@@ -1,17 +1,17 @@
 # Adding Custom Units
 
 kunit ships several unit groups today ([Distance](units/kinematics/distance.md), [Time](units/kinematics/time.md),
-[Storage](units/information/storage.md), [Speed](units/kinematics/speed.md), [Data Rate](units/information/datarate.md)), but the whole engine
-(`KUnit`, `KMixedUnitInstance`, the `of`/`into` verbs, prefix builders) is generic and group-independent.
-Adding a new physical quantity means following the same pattern. This page walks through adding a
+[Storage](units/information/storage.md), [Speed](units/kinematics/speed.md), [Data Rate](units/information/datarate.md)),
+but the whole engine (`KUnit`, `KMixedUnitInstance`, the `of`/`into` verbs, prefix builders) is generic and
+group-independent. Adding a new physical quantity means following the same pattern. This page walks through adding a
 demonstrative **Mass** group (`org.pcsoft.framework.kunit.mechanic.mass`) — a plain, one-dimensional group modeled on
 the storage group.
 
 ## 1. Create the sub-package and the `KUnit` enum
 
-Every unit group gets its own sub-package under `org.pcsoft.framework.kunit`, and its units are declared as
-an `enum class` implementing `KUnit`. `baseValue` is the conversion factor to the group's base unit -
-the base unit itself has `baseValue == 1.0`.
+Every unit group gets its own sub-package under `org.pcsoft.framework.kunit`, and its units are declared as an
+`enum class` implementing `KUnit`. `baseValue` is the conversion factor to the group's base unit - the base unit itself
+has `baseValue == 1.0`.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mechanic.mass
@@ -41,8 +41,8 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 ## 2. Create the wrapper class
 
 The wrapper (`KMassUnitInstance`) encapsulates a `KMixedUnitInstance` by **delegation** (`KUnitMeasurable by
-instance`) and implements `KUnitInstance<KMassUnitInstance>`. It hand-writes only the `KUnitInstance`-only
-members (`plus`/`minus`/`compareTo`) plus the `scaledBy` override (which backs `of`) and
+instance`) and implements `KUnitInstance<KMassUnitInstance>`. It hand-writes only the `KUnitInstance`-only members
+(`plus`/`minus`/`compareTo`) plus the `scaledBy` override (which backs `of`) and
 `equals`/`hashCode`/`toString`. There is **no** `valueAs`/`toString(target)` - reading is the group-agnostic
 `into` verb. Copy the shape of `KStorageUnitInstance`.
 
@@ -87,8 +87,8 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 ## 3. Add value-1 bare tokens and prefix-builder properties
 
 Split the DSL vocabulary into two files, per the project convention: the value-1 bare tokens go into
-`K...UnitBareValues.kt`, and the prefix-builder property extensions go into `K...UnitExtensions.kt`. Together
-they let callers write `5 of kilograms` or `5 of kilo.grams` and read back with `into`.
+`K...UnitBareValues.kt`, and the prefix-builder property extensions go into `K...UnitExtensions.kt`. Together they let
+callers write `5 of kilograms` or `5 of kilo.grams` and read back with `into`.
 
 `KMassUnitBareValues.kt`:
 
@@ -132,8 +132,8 @@ val KPrefixBuilder.pounds: KMassUnitInstance get() = prefixedMass(this, KMassUni
 val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUnit.OUNCE)
 ```
 
-That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, the SI prefix builders
-(`5 of milli.grams`), and `toUnit()`/`toMass()` round-tripping for free.
+That's it - this already gives you full `+`, `-`, `*`, `/`, comparisons, the SI prefix builders (`5 of milli.grams`),
+and `toUnit()`/`toMass()` round-tripping for free.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -151,8 +151,8 @@ val heavier = b > a          // true
 
 ## 4. (Optional) Add special/derived units
 
-If your group has commonly used named units bound to a specific scaling (like hectare for area), add them as
-named value-1 instances — no separate target type is needed:
+If your group has commonly used named units bound to a specific scaling (like hectare for area), add them as named
+value-1 instances — no separate target type is needed:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mechanic.mass
@@ -171,9 +171,9 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ## 5. Combine with other groups
 
-Because everything ultimately funnels through the generic `KMixedUnitInstance` engine, your new group
-immediately composes with any other group via `*`/`/` - see [Mixed Units](mixed-units.md) for the rules. For
-a strongly-typed cross-group result (like `mass / volume = density`), add typed operator extensions in a
+Because everything ultimately funnels through the generic `KMixedUnitInstance` engine, your new group immediately
+composes with any other group via `*`/`/` - see [Mixed Units](mixed-units.md) for the rules. For a strongly-typed
+cross-group result (like `mass / volume = density`), add typed operator extensions in a
 `K...UnitOperators.kt`, mirroring `KSpeedUnitOperators.kt`.
 
 ```kotlin
@@ -189,11 +189,11 @@ val density = (5 of kilograms) / (2 of liters)
 
 - All public types start with `K` (`KMassUnit`, `KMassUnitInstance`, ...); the value-1 bare tokens and the
   prefix-builder property extensions (`kilograms`, `grams`, ...) are exempt and stay language-natural.
-- Cover the group with the parameterized cross-matrix test procedure, built through `of`/`into` (never the
-  raw enum): unit → unit conversion, one method per operator and per comparison over every unit pair, the
-  prefix-builder matrix, `of` type-preservation, and `into` error cases — see the "Parameterized
-  cross-matrix test procedure" section in `../../.claude/CLAUDE.md`.
+- Cover the group with the parameterized cross-matrix test procedure, built through `of`/`into` (never the raw enum):
+  unit → unit conversion, one method per operator and per comparison over every unit pair, the prefix-builder matrix,
+  `of` type-preservation, and `into` error cases — see the "Parameterized cross-matrix test procedure" section in
+  `../../.claude/CLAUDE.md`.
 - Document every public member in English, in Markdown, with examples where useful - especially operators.
-- If the group is magnitude-restricted (like storage, which rejects diminishing prefixes), hang its unit
-  properties on `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` instead of the base `KPrefixBuilder`,
-  so the disallowed prefixes are a **compile error**.
+- If the group is magnitude-restricted (like storage, which rejects diminishing prefixes), hang its unit properties on
+  `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` instead of the base `KPrefixBuilder`, so the disallowed
+  prefixes are a **compile error**.

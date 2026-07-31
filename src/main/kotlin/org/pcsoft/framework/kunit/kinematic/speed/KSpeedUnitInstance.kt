@@ -62,10 +62,12 @@ class KSpeedUnitInstance internal constructor(internal val instance: KMixedUnitI
      * (36.kilometersPerHour + 10.metersPerSecond).valueAs(KSpeedUnit.METERS_PER_SECOND) // 20.0
      * ```
      */
-    override operator fun plus(other: KSpeedUnitInstance): KSpeedUnitInstance = KSpeedUnitInstance(instance + other.instance)
+    override operator fun plus(other: KSpeedUnitInstance): KSpeedUnitInstance =
+        KSpeedUnitInstance(instance + other.instance)
 
     /** Subtracts two speeds. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KSpeedUnitInstance): KSpeedUnitInstance = KSpeedUnitInstance(instance - other.instance)
+    override operator fun minus(other: KSpeedUnitInstance): KSpeedUnitInstance =
+        KSpeedUnitInstance(instance - other.instance)
 
     /**
      * Multiplies two speeds, producing a new [KMixedUnitInstance] (`m²·s⁻²`, no longer a "pure" speed).
@@ -118,4 +120,9 @@ fun KMixedUnitInstance.toSpeed(): KSpeedUnitInstance {
 
 /** Builds a [KSpeedUnitInstance] from a value already expressed in meters per second ([KSpeedUnit.BASE]). */
 internal fun speedUnitInstanceOf(metersPerSecond: Double): KSpeedUnitInstance =
-    KSpeedUnitInstance(KMixedUnitInstance(metersPerSecond, listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))))
+    KSpeedUnitInstance(
+        KMixedUnitInstance(
+            metersPerSecond,
+            listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))
+        )
+    )

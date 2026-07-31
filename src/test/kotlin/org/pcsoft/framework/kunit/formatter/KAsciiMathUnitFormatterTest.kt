@@ -12,18 +12,14 @@
 
 package org.pcsoft.framework.kunit.formatter
 
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -95,7 +91,11 @@ class KAsciiMathUnitFormatterTest {
     fun `exponent style`() {
         assertEquals(
             "10.8 \"m\" \"s\"^(-1)",
-            render(10.8, listOf(meter, perSecond), KAsciiMathFormatConfig(fractionStyle = KAsciiMathFractionStyle.EXPONENT)),
+            render(
+                10.8,
+                listOf(meter, perSecond),
+                KAsciiMathFormatConfig(fractionStyle = KAsciiMathFractionStyle.EXPONENT)
+            ),
         )
     }
 
@@ -103,7 +103,10 @@ class KAsciiMathUnitFormatterTest {
     @Test
     fun `plain preset`() {
         assertEquals("5.0 m", render(5.0, listOf(meter), KAsciiMathFormatConfig.PLAIN))
-        assertEquals("1.0 m*s^(-1)*s^(-2)", render(1.0, listOf(meter, perSecond, perSecond2), KAsciiMathFormatConfig.PLAIN))
+        assertEquals(
+            "1.0 m*s^(-1)*s^(-2)",
+            render(1.0, listOf(meter, perSecond, perSecond2), KAsciiMathFormatConfig.PLAIN)
+        )
     }
 
     /** The `xx` multiplication marker is used when configured. */

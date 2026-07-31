@@ -14,10 +14,10 @@ package org.pcsoft.framework.kunit.electric.chargedensity
 
 import org.pcsoft.framework.kunit.electric.charge.KChargeUnitInstance
 import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.distance.KVolumeUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.liters
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
 import kotlin.test.Test

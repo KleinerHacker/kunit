@@ -12,17 +12,24 @@
 
 package org.pcsoft.framework.kunit.common.energy
 
-import org.pcsoft.framework.kunit.electric.charge.KChargeUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.mechanic.force.KForceUnitInstance
-import org.pcsoft.framework.kunit.mechanic.force.N_IN_BASE
-import org.pcsoft.framework.kunit.kinematic.frequency.KFrequencyUnitInstance
 import org.pcsoft.framework.kunit.common.power.KPowerUnitInstance
 import org.pcsoft.framework.kunit.common.power.powerInstanceOf
-import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
-import org.pcsoft.framework.kunit.kinematic.time.timeUnitInstanceOf
+import org.pcsoft.framework.kunit.electric.charge.KChargeUnitInstance
 import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
 import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.frequency.KFrequencyUnitInstance
+import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
+import org.pcsoft.framework.kunit.kinematic.time.timeUnitInstanceOf
+import org.pcsoft.framework.kunit.mechanic.angularacceleration.KAngularAccelerationUnitInstance
+import org.pcsoft.framework.kunit.mechanic.angularacceleration.angularAccelerationInstanceOf
+import org.pcsoft.framework.kunit.mechanic.angularvelocity.KAngularVelocityUnitInstance
+import org.pcsoft.framework.kunit.mechanic.angularvelocity.angularVelocityInstanceOf
+import org.pcsoft.framework.kunit.mechanic.force.KForceUnitInstance
+import org.pcsoft.framework.kunit.mechanic.force.N_IN_BASE
+import org.pcsoft.framework.kunit.mechanic.inertia.KGM2_IN_BASE
+import org.pcsoft.framework.kunit.mechanic.inertia.KInertiaUnitInstance
+import org.pcsoft.framework.kunit.mechanic.inertia.inertiaInstanceOf
 
 // Cross-unit operators of the energy group - the power-over-time form (`W = P · t`), the mechanical work
 // form (`W = F · s`) and the electrical form (`W = Q · U`). They live in the energy package because energy
@@ -123,3 +130,85 @@ operator fun KVoltageUnitInstance.times(charge: KChargeUnitInstance): KEnergyUni
  */
 operator fun KEnergyUnitInstance.div(charge: KChargeUnitInstance): KVoltageUnitInstance =
     voltageInstanceOf(value / charge.value)
+
+// --- Decomposition D: torque (M = F · r, P = M · ω) ----------------------------------------------
+
+// The torque (`N·m`) has exactly the dimension of an energy, so it is *this* group - see the `torque`
+// documentation page. Its lever-arm decomposition `force * length` is already decomposition B above; the
+// two operators below add the rotational-power reading `P = M · ω`.
+
+/**
+ * Decomposition D - rotational power: `torque · angularvelocity = power` (`P = M · ω`). The receiver is read
+ * as a torque in N·m, the result is a mechanical power in watts.
+ *
+ * Example:
+ * ```kotlin
+ * val p = (200 of joules) * (3000 of revolutionsPerMinute) // ≈ 62.8 kW (200 N·m at 3000 rpm)
+ * ```
+ *
+ * @return the typed [KPowerUnitInstance] (`this.value * angularVelocity.value` watts).
+ */
+operator fun KEnergyUnitInstance.times(angularVelocity: KAngularVelocityUnitInstance): KPowerUnitInstance =
+    powerInstanceOf(value * angularVelocity.value)
+
+/**
+ * Commutative form of [KEnergyUnitInstance.times] - `angularvelocity · torque = power`.
+ *
+ * @return the typed [KPowerUnitInstance] (`torque.value * this.value` watts).
+ */
+operator fun KAngularVelocityUnitInstance.times(torque: KEnergyUnitInstance): KPowerUnitInstance =
+    powerInstanceOf(torque.value * value)
+
+/**
+ * Solved for the torque - `power / angularvelocity = torque` (`M = P / ω`), the everyday drivetrain formula.
+ *
+ * @return the typed [KEnergyUnitInstance], to be read as a torque in N·m.
+ */
+operator fun KPowerUnitInstance.div(angularVelocity: KAngularVelocityUnitInstance): KEnergyUnitInstance =
+    energyInstanceOf(value / angularVelocity.value)
+
+/**
+ * Solved for the angular velocity - `power / torque = angularvelocity` (`ω = P / M`).
+ *
+ * @return the typed [KAngularVelocityUnitInstance] in rad/s.
+ */
+operator fun KPowerUnitInstance.div(torque: KEnergyUnitInstance): KAngularVelocityUnitInstance =
+    angularVelocityInstanceOf(value / torque.value)
+
+/**
+ * Rotational Newton's second law - `inertia * angularacceleration = torque` (`M = J · α`). The moment of
+ * inertia stores its raw component in `g·m²`, so the bridge to kg·m² is [KGM2_IN_BASE].
+ *
+ * Example:
+ * ```kotlin
+ * val m = (1.8 of kilogramMetersSquared) * (100 of radiansPerSecondSquared) // 180 N·m
+ * ```
+ *
+ * @return the typed [KEnergyUnitInstance], to be read as a torque in N·m.
+ */
+operator fun KInertiaUnitInstance.times(angularAcceleration: KAngularAccelerationUnitInstance): KEnergyUnitInstance =
+    energyInstanceOf(value / KGM2_IN_BASE * angularAcceleration.value)
+
+/**
+ * Commutative form of [KInertiaUnitInstance.times] - `angularacceleration · inertia = torque`.
+ *
+ * @return the typed [KEnergyUnitInstance], to be read as a torque in N·m.
+ */
+operator fun KAngularAccelerationUnitInstance.times(inertia: KInertiaUnitInstance): KEnergyUnitInstance =
+    energyInstanceOf(inertia.value / KGM2_IN_BASE * value)
+
+/**
+ * Solved for the angular acceleration - `torque / inertia = angularacceleration` (`α = M / J`).
+ *
+ * @return the typed [KAngularAccelerationUnitInstance] in rad/s².
+ */
+operator fun KEnergyUnitInstance.div(inertia: KInertiaUnitInstance): KAngularAccelerationUnitInstance =
+    angularAccelerationInstanceOf(value / (inertia.value / KGM2_IN_BASE))
+
+/**
+ * Solved for the moment of inertia - `torque / angularacceleration = inertia` (`J = M / α`).
+ *
+ * @return the typed [KInertiaUnitInstance].
+ */
+operator fun KEnergyUnitInstance.div(angularAcceleration: KAngularAccelerationUnitInstance): KInertiaUnitInstance =
+    inertiaInstanceOf(value / angularAcceleration.value * KGM2_IN_BASE)

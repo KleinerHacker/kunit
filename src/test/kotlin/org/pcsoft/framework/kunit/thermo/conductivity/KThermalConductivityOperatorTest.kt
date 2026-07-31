@@ -17,7 +17,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.KHeatFluxDensityUnitInstance
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
@@ -68,11 +67,11 @@ class KThermalConductivityOperatorTest {
     fun `all decompositions agree`() {
         val typed = (1 of wattsPerSquareMeter) / (1 of kelvinPerMeter)
         val native = (
-            (1000 of grams).toUnit() *
-                (1 of meters).toUnit() /
-                ((1 of seconds).toUnit() pow 3) /
-                KTemperatureDifference.ofKelvin(1).toUnit()
-            ).toThermalConductivity()
+                (1000 of grams).toUnit() *
+                        (1 of meters).toUnit() /
+                        ((1 of seconds).toUnit() pow 3) /
+                        KTemperatureDifference.ofKelvin(1).toUnit()
+                ).toThermalConductivity()
         assertIs<KThermalConductivityUnitInstance>(typed)
         assertIs<KThermalConductivityUnitInstance>(native)
         assertEquals(typed, native)

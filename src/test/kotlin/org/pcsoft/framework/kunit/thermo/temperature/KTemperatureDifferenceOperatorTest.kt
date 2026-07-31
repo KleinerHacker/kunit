@@ -13,8 +13,8 @@
 package org.pcsoft.framework.kunit.thermo.temperature
 
 import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.it.storage.bytes
+import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -29,8 +29,14 @@ class KTemperatureDifferenceOperatorTest {
     /** Differences add and subtract linearly, staying differences. */
     @Test
     fun `add and subtract`() {
-        assertEquals(KTemperatureDifference.ofKelvin(30), KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10))
-        assertEquals(KTemperatureDifference.ofKelvin(10), KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin(10))
+        assertEquals(
+            KTemperatureDifference.ofKelvin(30),
+            KTemperatureDifference.ofKelvin(20) + KTemperatureDifference.ofKelvin(10)
+        )
+        assertEquals(
+            KTemperatureDifference.ofKelvin(10),
+            KTemperatureDifference.ofKelvin(20) - KTemperatureDifference.ofKelvin(10)
+        )
     }
 
     /** Comparison uses the normalized kelvin value. */

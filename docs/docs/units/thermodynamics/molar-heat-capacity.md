@@ -5,27 +5,27 @@ Base unit: **joule per mole-kelvin** (`KMolarHeatCapacityUnit.BASE == KMolarHeat
 
 Type: **constructed unit**
 
-Molar heat capacity is the [heat capacity](heat-capacity.md) of a substance *per mole*: `J/(mol·K)`. It is
-the natural form for gases and for chemical thermodynamics, where amounts are counted in moles rather
-than kilograms (that is [specific heat capacity](specific-heat-capacity.md)).
+Molar heat capacity is the [heat capacity](heat-capacity.md) of a substance *per mole*: `J/(mol·K)`. It is the natural
+form for gases and for chemical thermodynamics, where amounts are counted in moles rather than kilograms (that
+is [specific heat capacity](specific-heat-capacity.md)).
 
-`KMolarHeatCapacityUnitInstance` wraps a `KMixedUnitInstance` of exactly five terms in the canonical
-normal form `mass¹ · distance² · time⁻² · substance⁻¹ · temperature⁻¹` (`kg·m²·s⁻²·mol⁻¹·K⁻¹`). The
-temperature dimension is the **difference** group, never the affine absolute temperature.
+`KMolarHeatCapacityUnitInstance` wraps a `KMixedUnitInstance` of exactly five terms in the canonical normal form
+`mass¹ · distance² · time⁻² · substance⁻¹ · temperature⁻¹` (`kg·m²·s⁻²·mol⁻¹·K⁻¹`). The temperature dimension is the
+**difference** group, never the affine absolute temperature.
 
 ## Named units
 
-| Unit | Symbol | Token | 1 unit in J/(mol·K) |
-|---|---|---:|---:|
-| Joule per mole-kelvin | `J/(mol·K)` | `joulesPerMoleKelvin` | 1.0 |
-| Calorie per mole-kelvin | `cal/(mol·K)` | `caloriesPerMoleKelvin` | 4.184 |
+| Unit                    | Symbol        |                   Token | 1 unit in J/(mol·K) |
+|-------------------------|---------------|------------------------:|--------------------:|
+| Joule per mole-kelvin   | `J/(mol·K)`   |   `joulesPerMoleKelvin` |                 1.0 |
+| Calorie per mole-kelvin | `cal/(mol·K)` | `caloriesPerMoleKelvin` |               4.184 |
 
 Both accept the full SI prefix range (`kilo.joulesPerMoleKelvin`, `milli.joulesPerMoleKelvin`, …).
 
 ## The gas constant
 
 The group exposes the exact SI value of the molar gas constant as `GAS_CONSTANT`
-(8.31446261815324 J/(mol·K)) — a plain `Double`, so it can serve both as a factor and as a reading.
+(8.31446261815324 J/ (mol·K)) — a plain `Double`, so it can serve both as a factor and as a reading.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -39,8 +39,8 @@ r into caloriesPerMoleKelvin // ≈ 1.987
 
 ## Real-world example: heating nitrogen (Dulong-Petit sanity check)
 
-Diatomic nitrogen has `c_p ≈ 29.1 J/(mol·K)`. How much energy does heating 3 moles by 50 K take, and
-what is that per mole?
+Diatomic nitrogen has `c_p ≈ 29.1 J/(mol·K)`. How much energy does heating 3 moles by 50 K take, and what is that per
+mole?
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -72,25 +72,25 @@ sameEnergy into joules                     // 4365.0 J - identical
 
 ## Computing with the neighbouring units
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `heatCapacity / amountOfSubstance` | `KMolarHeatCapacityUnitInstance` | substance property from a sample |
-| `molarEnergy / temperatureDifference` | `KMolarHeatCapacityUnitInstance` | same, via molar energy |
-| `molarHeatCapacity * amountOfSubstance` | `KHeatCapacityUnitInstance` | the sample's heat capacity |
-| `amountOfSubstance * molarHeatCapacity` | `KHeatCapacityUnitInstance` | same (commutative) |
-| `heatCapacity / molarHeatCapacity` | `KAmountOfSubstanceUnitInstance` | amount of substance |
-| `molarHeatCapacity * temperatureDifference` | `KMolarEnergyUnitInstance` | energy per mole |
-| `temperatureDifference * molarHeatCapacity` | `KMolarEnergyUnitInstance` | same (commutative) |
-| `molarEnergy / molarHeatCapacity` | `KTemperatureDifferenceUnitInstance` | achievable rise |
+| Expression                                  | Result type                          | Meaning                          |
+|---------------------------------------------|--------------------------------------|----------------------------------|
+| `heatCapacity / amountOfSubstance`          | `KMolarHeatCapacityUnitInstance`     | substance property from a sample |
+| `molarEnergy / temperatureDifference`       | `KMolarHeatCapacityUnitInstance`     | same, via molar energy           |
+| `molarHeatCapacity * amountOfSubstance`     | `KHeatCapacityUnitInstance`          | the sample's heat capacity       |
+| `amountOfSubstance * molarHeatCapacity`     | `KHeatCapacityUnitInstance`          | same (commutative)               |
+| `heatCapacity / molarHeatCapacity`          | `KAmountOfSubstanceUnitInstance`     | amount of substance              |
+| `molarHeatCapacity * temperatureDifference` | `KMolarEnergyUnitInstance`           | energy per mole                  |
+| `temperatureDifference * molarHeatCapacity` | `KMolarEnergyUnitInstance`           | same (commutative)               |
+| `molarEnergy / molarHeatCapacity`           | `KTemperatureDifferenceUnitInstance` | achievable rise                  |
 
 ## Decompositions
 
 All three decompositions produce the same typed, value-equal instance.
 
-| Decomposition | Form | Result |
-|---|---|---|
-| `heatCapacity / amountOfSubstance` | typed operator | `KMolarHeatCapacityUnitInstance` |
-| `molarEnergy / temperatureDifference` | typed operator | `KMolarHeatCapacityUnitInstance` |
+| Decomposition                                             | Form                             | Result                           |
+|-----------------------------------------------------------|----------------------------------|----------------------------------|
+| `heatCapacity / amountOfSubstance`                        | typed operator                   | `KMolarHeatCapacityUnitInstance` |
+| `molarEnergy / temperatureDifference`                     | typed operator                   | `KMolarHeatCapacityUnitInstance` |
 | `mass · distance² · time⁻² · substance⁻¹ · temperature⁻¹` | native + `toMolarHeatCapacity()` | `KMolarHeatCapacityUnitInstance` |
 
 ```kotlin
@@ -144,14 +144,16 @@ import org.pcsoft.framework.kunit.thermo.molarheatcapacity.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `J/(mol·K)` | `joulesPerMoleKelvin` | molar heat capacity, base unit |
-| `kg·m²·s⁻²·mol⁻¹·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles / ΔK` | base dimensions |
-| `cal/(mol·K)` | `caloriesPerMoleKelvin` | calorie per mole-kelvin |
-| `R` | `GAS_CONSTANT of joulesPerMoleKelvin` | molar gas constant, 8.3145 J/(mol·K) |
-| `C_m = C / n` | `(58.2 of joulesPerKelvin) / (2 of moles)` | from heat capacity ÷ amount |
-| `C_m = ΔH_m / ΔT` | `(58.2 of joulesPerMole) / rise` | from molar energy ÷ temperature rise |
-| `Q = C_m · n · ΔT` | `nitrogen * sample * rise` | total energy |
+| Mathematics           | Kotlin                                                  | Meaning                              |
+|-----------------------|---------------------------------------------------------|--------------------------------------|
+| `J/(mol·K)`           | `joulesPerMoleKelvin`                                   | molar heat capacity, base unit       |
+| `kg·m²·s⁻²·mol⁻¹·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles / ΔK` | base dimensions                      |
+| `cal/(mol·K)`         | `caloriesPerMoleKelvin`                                 | calorie per mole-kelvin              |
+| `R`                   | `GAS_CONSTANT of joulesPerMoleKelvin`                   | molar gas constant, 8.3145 J/(mol·K) |
+| `C_m = C / n`         | `(58.2 of joulesPerKelvin) / (2 of moles)`              | from heat capacity ÷ amount          |
+| `C_m = ΔH_m / ΔT`     | `(58.2 of joulesPerMole) / rise`                        | from molar energy ÷ temperature rise |
+| `Q = C_m · n · ΔT`    | `nitrogen * sample * rise`                              | total energy                         |

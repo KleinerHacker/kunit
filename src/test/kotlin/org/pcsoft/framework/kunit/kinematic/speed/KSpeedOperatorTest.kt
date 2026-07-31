@@ -12,30 +12,17 @@
 
 package org.pcsoft.framework.kunit.kinematic.speed
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.feet
-import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.kinematic.distance.miles
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
-import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
-import org.pcsoft.framework.kunit.kinematic.time.hours
-import org.pcsoft.framework.kunit.kinematic.time.minutes
-import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.kinematic.distance.*
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.of
 import kotlin.math.abs
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * The typed cross-group speed operators: core→composed (`length / time = speed`) across a length×time

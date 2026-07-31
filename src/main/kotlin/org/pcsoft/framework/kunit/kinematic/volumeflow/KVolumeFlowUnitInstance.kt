@@ -131,7 +131,7 @@ fun KMixedUnitInstance.toVolumeFlow(): KVolumeFlowUnitInstance {
         "KMixedUnitInstance $this does not represent a pure volumetric flow (expected KDistanceUnit^3 and KTimeUnit^-1)"
     }
     val normalized = value *
-        Math.pow(distanceTerm.unit.baseValue, 3.0) *
-        Math.pow(timeTerm.unit.baseValue, -1.0)
+            Math.pow(distanceTerm.unit.baseValue, 3.0) *
+            Math.pow(timeTerm.unit.baseValue, -1.0)
     return volumeFlowInstanceOf(normalized)
 }

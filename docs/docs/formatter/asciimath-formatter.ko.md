@@ -7,25 +7,24 @@
 
 ## 생성 결과
 
-`FRACTION` 스타일은 깔끔한 단일 분모 형태를 `a/b` 분수 형식으로 표시합니다(필요 시 분자나 거듭제곱된 분모를
-괄호로 묶음). 그 외의 형태(및 `EXPONENT` 스타일 전체)는 곱셈 기호로 연결한 평면 곱을 부호 있는 지수로
-표시합니다. 무차원 값은 숫자만 렌더링합니다.
+`FRACTION` 스타일은 깔끔한 단일 분모 형태를 `a/b` 분수 형식으로 표시합니다 (필요 시 분자나 거듭제곱된 분모를 괄호로 묶음). 그 외의 형태 (및 `EXPONENT` 스타일 전체)는 곱셈 기호로 연결한
+평면 곱을 부호 있는 지수로 표시합니다. 무차원 값은 숫자만 렌더링합니다.
 
 ## 구성
 
 `KAsciiMathFormatConfig` 는 값 타입입니다. 프리셋을 선택하거나 직접 구성하세요.
 
-| 옵션             | 값                                        | 기본값     |
-|------------------|------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `EXPONENT`                   | `FRACTION`|
-| `quoting`        | `QUOTED` (`"km"`), `BARE` (`km`)         | `QUOTED`  |
-| `multiplication` | `ASTERISK` (`*`), `TIMES` (`xx`), `SPACE` (공백) | `SPACE` |
+| 옵션             | 값                                               | 기본값     |
+|------------------|--------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `EXPONENT`                           | `FRACTION` |
+| `quoting`        | `QUOTED` (`"km"`), `BARE` (`km`)                 | `QUOTED`   |
+| `multiplication` | `ASTERISK` (`*`), `TIMES` (`xx`), `SPACE` (공백) | `SPACE`    |
 
 프리셋: `DEFAULT`, `PLAIN`(`*` 로 연결한 따옴표 없는 기호).
 
 ## 실제 예제
 
-거리와 시간으로부터 속도(`v = s / t`):
+거리와 시간으로부터 속도 (`v = s / t`):
 
 ```kotlin
 import org.pcsoft.framework.kunit.*
@@ -42,7 +41,7 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KAsciiMathUnitFormatter())
 // 90.0 "km"/"h"
 ```
 
-가속도(`a = m/s²`)는 거듭제곱된 분모를 괄호로 묶습니다:
+가속도 (`a = m/s²`)는 거듭제곱된 분모를 괄호로 묶습니다:
 
 ```kotlin
 (9.81 of meters / (seconds pow 2))

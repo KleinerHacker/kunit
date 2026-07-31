@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.permittivity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **permittivity**, i.e. exactly four terms in the canonical
@@ -146,9 +142,9 @@ fun KMixedUnitInstance.toPermittivity(): KPermittivityUnitInstance {
         "KMixedUnitInstance $this does not represent a pure permittivity (expected KMassUnit^-1, KDistanceUnit^-3, KTimeUnit^4 and KElectricCurrentUnit^2)"
     }
     val gramBaseProduct = value *
-        Math.pow(massTerm.unit.baseValue, -1.0) *
-        Math.pow(distanceTerm.unit.baseValue, -3.0) *
-        Math.pow(timeTerm.unit.baseValue, 4.0) *
-        Math.pow(currentTerm.unit.baseValue, 2.0)
+            Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(distanceTerm.unit.baseValue, -3.0) *
+            Math.pow(timeTerm.unit.baseValue, 4.0) *
+            Math.pow(currentTerm.unit.baseValue, 2.0)
     return permittivityInstanceOf(gramBaseProduct * FARAD_PER_METER_MASS_REFERENCE)
 }

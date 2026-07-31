@@ -12,14 +12,10 @@
 
 package org.pcsoft.framework.kunit.common.power
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **power**, i.e. exactly three terms in the canonical normal
@@ -137,8 +133,8 @@ fun KMixedUnitInstance.toPower(): KPowerUnitInstance {
         "KMixedUnitInstance $this does not represent a pure power (expected KMassUnit^1, KDistanceUnit^2 and KTimeUnit^-3)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -3.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -3.0)
     return powerInstanceOf(gramBaseProduct / WATT_MASS_REFERENCE)
 }

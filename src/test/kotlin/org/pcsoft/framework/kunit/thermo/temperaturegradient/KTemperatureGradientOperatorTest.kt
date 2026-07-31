@@ -64,8 +64,8 @@ class KTemperatureGradientOperatorTest {
     fun `all decompositions agree`() {
         val typed = KTemperatureDifference.ofKelvin(1) / (1 of meters)
         val native = (
-            KTemperatureDifference.ofKelvin(1).toUnit() / (1 of meters).toUnit()
-            ).toTemperatureGradient()
+                KTemperatureDifference.ofKelvin(1).toUnit() / (1 of meters).toUnit()
+                ).toTemperatureGradient()
         assertIs<KTemperatureGradientUnitInstance>(typed)
         assertIs<KTemperatureGradientUnitInstance>(native)
         assertEquals(typed, native)

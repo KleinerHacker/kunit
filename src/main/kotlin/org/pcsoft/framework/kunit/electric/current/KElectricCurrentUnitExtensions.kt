@@ -26,7 +26,11 @@ private fun prefixedElectricCurrent(builder: KPrefixBuilder, unit: KElectricCurr
 // --- SI ------------------------------------------------------------------------------------------
 
 /** Prefixed amperes, e.g. `milli.amperes` = 0.001 A, `kilo.amperes` = 1000 A. */
-val KPrefixBuilder.amperes: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.AMPERE)
+val KPrefixBuilder.amperes: KElectricCurrentUnitInstance
+    get() = prefixedElectricCurrent(
+        this,
+        KElectricCurrentUnit.AMPERE
+    )
 
 // --- CGS -----------------------------------------------------------------------------------------
 
@@ -34,12 +38,24 @@ val KPrefixBuilder.amperes: KElectricCurrentUnitInstance get() = prefixedElectri
 val KPrefixBuilder.biot: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.BIOT)
 
 /** Prefixed abamperes (alias spelling of the biot), e.g. `milli.abamperes`. */
-val KPrefixBuilder.abamperes: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.BIOT)
+val KPrefixBuilder.abamperes: KElectricCurrentUnitInstance
+    get() = prefixedElectricCurrent(
+        this,
+        KElectricCurrentUnit.BIOT
+    )
 
 /** Prefixed statamperes, e.g. `kilo.statamperes`. */
-val KPrefixBuilder.statamperes: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.STATAMPERE)
+val KPrefixBuilder.statamperes: KElectricCurrentUnitInstance
+    get() = prefixedElectricCurrent(
+        this,
+        KElectricCurrentUnit.STATAMPERE
+    )
 
 // --- Magnetic circuit ----------------------------------------------------------------------------
 
 /** Prefixed ampere turns, e.g. `kilo.ampereTurns` = 1000 At. */
-val KPrefixBuilder.ampereTurns: KElectricCurrentUnitInstance get() = prefixedElectricCurrent(this, KElectricCurrentUnit.AMPERE_TURN)
+val KPrefixBuilder.ampereTurns: KElectricCurrentUnitInstance
+    get() = prefixedElectricCurrent(
+        this,
+        KElectricCurrentUnit.AMPERE_TURN
+    )

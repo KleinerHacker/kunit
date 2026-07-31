@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.heatfluxdensity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
@@ -116,7 +112,7 @@ fun KMixedUnitInstance.toHeatFluxDensity(): KHeatFluxDensityUnitInstance {
         "KMixedUnitInstance $this does not represent a pure heat flux density (expected KMassUnit^1 and KTimeUnit^-3)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(timeTerm.unit.baseValue, -3.0)
+            massTerm.unit.baseValue *
+            Math.pow(timeTerm.unit.baseValue, -3.0)
     return heatFluxDensityInstanceOf(gramBaseProduct / HEAT_FLUX_DENSITY_MASS_REFERENCE)
 }

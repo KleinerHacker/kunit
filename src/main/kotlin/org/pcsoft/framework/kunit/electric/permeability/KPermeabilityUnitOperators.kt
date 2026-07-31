@@ -12,14 +12,14 @@
 
 package org.pcsoft.framework.kunit.electric.permeability
 
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 import org.pcsoft.framework.kunit.electric.inductance.KInductanceUnitInstance
 import org.pcsoft.framework.kunit.electric.inductance.inductanceInstanceOf
 import org.pcsoft.framework.kunit.electric.magneticfieldstrength.KMagneticFieldStrengthUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticfieldstrength.magneticFieldStrengthInstanceOf
 import org.pcsoft.framework.kunit.electric.magneticfluxdensity.KMagneticFluxDensityUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticfluxdensity.magneticFluxDensityInstanceOf
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 
 // Cross-unit operators around the permeability: the inductance decomposition (`μ = L · l / (N² · A)`, where
 // the geometry factor is a length) and the field decomposition (`μ = B / H`). They live in the permeability

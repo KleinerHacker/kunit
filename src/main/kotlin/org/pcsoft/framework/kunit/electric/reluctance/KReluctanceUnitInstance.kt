@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.reluctance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **magnetic reluctance**, i.e. exactly four terms in the
@@ -145,9 +141,9 @@ fun KMixedUnitInstance.toReluctance(): KReluctanceUnitInstance {
         "KMixedUnitInstance $this does not represent a pure reluctance (expected KMassUnit^-1, KDistanceUnit^-2, KTimeUnit^2 and KElectricCurrentUnit^2)"
     }
     val gramBaseProduct = value *
-        Math.pow(massTerm.unit.baseValue, -1.0) *
-        Math.pow(distanceTerm.unit.baseValue, -2.0) *
-        Math.pow(timeTerm.unit.baseValue, 2.0) *
-        Math.pow(currentTerm.unit.baseValue, 2.0)
+            Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(distanceTerm.unit.baseValue, -2.0) *
+            Math.pow(timeTerm.unit.baseValue, 2.0) *
+            Math.pow(currentTerm.unit.baseValue, 2.0)
     return reluctanceInstanceOf(gramBaseProduct * AMPERE_PER_WEBER_MASS_REFERENCE)
 }

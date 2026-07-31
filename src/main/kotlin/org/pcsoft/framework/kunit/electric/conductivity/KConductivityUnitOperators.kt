@@ -14,10 +14,10 @@ package org.pcsoft.framework.kunit.electric.conductivity
 
 import org.pcsoft.framework.kunit.electric.conductance.KConductanceUnitInstance
 import org.pcsoft.framework.kunit.electric.conductance.conductanceInstanceOf
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 import org.pcsoft.framework.kunit.electric.resistivity.KResistivityUnitInstance
 import org.pcsoft.framework.kunit.electric.resistivity.resistivityInstanceOf
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 
 // Cross-unit operators of the conductivity group - the reciprocal pair with resistivity (`σ = 1 / ρ`) and
 // the conductance-over-geometry form (`σ = G · l / A`, where the geometry factor `l / A` is a reciprocal

@@ -17,11 +17,7 @@ import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.of
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KAmountOfSubstanceUnitInstance` surface: round-trip, equality, `toString`, operators, conversion. */
 class KAmountOfSubstanceUnitSystemTest {

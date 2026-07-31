@@ -12,14 +12,10 @@
 
 package org.pcsoft.framework.kunit.common.energy
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **energy** (work, heat), i.e. exactly three terms in the
@@ -137,8 +133,8 @@ fun KMixedUnitInstance.toEnergy(): KEnergyUnitInstance {
         "KMixedUnitInstance $this does not represent a pure energy (expected KMassUnit^1, KDistanceUnit^2 and KTimeUnit^-2)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -2.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -2.0)
     return energyInstanceOf(gramBaseProduct / JOULE_MASS_REFERENCE)
 }

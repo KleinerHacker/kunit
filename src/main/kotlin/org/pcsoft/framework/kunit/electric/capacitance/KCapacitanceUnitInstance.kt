@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.capacitance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **electrical capacitance**, i.e. exactly four terms in the
@@ -146,9 +142,9 @@ fun KMixedUnitInstance.toCapacitance(): KCapacitanceUnitInstance {
         "KMixedUnitInstance $this does not represent a pure capacitance (expected KMassUnit^-1, KDistanceUnit^-2, KTimeUnit^4 and KElectricCurrentUnit^2)"
     }
     val gramBaseProduct = value *
-        Math.pow(massTerm.unit.baseValue, -1.0) *
-        Math.pow(distanceTerm.unit.baseValue, -2.0) *
-        Math.pow(timeTerm.unit.baseValue, 4.0) *
-        Math.pow(currentTerm.unit.baseValue, 2.0)
+            Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(distanceTerm.unit.baseValue, -2.0) *
+            Math.pow(timeTerm.unit.baseValue, 4.0) *
+            Math.pow(currentTerm.unit.baseValue, 2.0)
     return capacitanceInstanceOf(gramBaseProduct * FARAD_MASS_REFERENCE)
 }

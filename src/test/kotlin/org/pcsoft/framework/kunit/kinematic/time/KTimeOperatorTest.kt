@@ -12,17 +12,13 @@
 
 package org.pcsoft.framework.kunit.kinematic.time
 
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.pow
 import kotlin.math.abs
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** All time operators: `+`/`-` (Duration-exact), comparison, and `pow` escaping to a mixed unit. */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

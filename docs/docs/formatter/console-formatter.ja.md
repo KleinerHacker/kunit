@@ -2,8 +2,7 @@
 
 `KConsoleUnitFormatter` は **ANSI 対応ターミナル** 向けに値を描画します。出力の記法は
 [デフォルトフォーマッター](default-formatter.md) とまったく同じ（`"10.8 km/h"`、`"m^2"`、
-`"m*s^-3*A^-2"`）ですが、各視覚要素——数値、単位記号、演算子、指数——を ANSI カラーシーケンスで
-囲むため、コンソール上で各部分が際立ちます。
+`"m*s^-3*A^-2"`）ですが、各視覚要素——数値、単位記号、演算子、指数——を ANSI カラーシーケンスで 囲むため、コンソール上で各部分が際立ちます。
 
 `org.pcsoft.framework.kunit.formatter` パッケージにあります。デフォルトフォーマッターと異なり、
 カラーパレットを保持するため通常の（不変・スレッドセーフな）`class` です。
@@ -12,19 +11,19 @@
 
 レイアウトは [デフォルトフォーマッター](default-formatter.md) と **同一** です。`"<数値> <単位>"`
 形式で、単一分数形式 `a/b` は分子がちょうど 1 つ・分母がちょうど 1 つのときのみ、それ以外は符号付き
-指数のフラットな積、無次元値は数値のみです。唯一の違いは、各部分が ANSI SGR カラーで囲まれ、リセット
-シーケンス `ESC[0m` で閉じられる点です。
+指数のフラットな積、無次元値は数値のみです。唯一の違いは、各部分が ANSI SGR カラーで囲まれ、リセット シーケンス `ESC[0m`
+で閉じられる点です。
 
 ### 色分けされる要素
 
 4 つの視覚要素は [`KConsoleColorPalette`](#パレット) を通じて独立に色付けされます。
 
-| 要素     | パレットのフィールド | 例                |
-|----------|----------------------|-------------------|
-| 数値     | `numberColor`        | `10.8`            |
-| 単位記号 | `symbolColor`        | `km`, `h`, `m`    |
-| 演算子   | `operatorColor`      | `*`, `/`          |
-| 指数     | `exponentColor`      | `^2`, `^-3`       |
+| 要素     | パレットのフィールド | 例             |
+|----------|----------------------|----------------|
+| 数値     | `numberColor`        | `10.8`         |
+| 単位記号 | `symbolColor`        | `km`, `h`, `m` |
+| 演算子   | `operatorColor`      | `*`, `/`       |
+| 指数     | `exponentColor`      | `^2`, `^-3`    |
 
 色が **空文字列** の要素は、エスケープシーケンスなしで出力されます（その部分は色付けされません）。
 `MONOCHROME` が指数を色付けしないのはこの仕組みによります。
@@ -33,13 +32,13 @@
 
 色は値型 `KConsoleColorPalette` です。3 つのパレットが定義済みです。
 
-| パレット     | 数値                          | 記号                  | 演算子          | 指数                    |
-|--------------|-------------------------------|-----------------------|-----------------|-------------------------|
-| `CLASSIC`    | シアン `ESC[36m`              | 黄 `ESC[33m`          | 灰 `ESC[90m`    | マゼンタ `ESC[35m`      |
-| `VIVID`      | 明るい緑・太字 `ESC[92;1m`    | 明るい青 `ESC[94m`    | 白 `ESC[97m`    | 明るいマゼンタ `ESC[95m`|
-| `MONOCHROME` | 太字 `ESC[1m`                 | 淡色 `ESC[2m`         | 淡色 `ESC[2m`   | 色なし（空）            |
+| パレット     | 数値                       | 記号               | 演算子        | 指数                     |
+|--------------|----------------------------|--------------------|---------------|--------------------------|
+| `CLASSIC`    | シアン `ESC[36m`           | 黄 `ESC[33m`       | 灰 `ESC[90m`  | マゼンタ `ESC[35m`       |
+| `VIVID`      | 明るい緑・太字 `ESC[92;1m` | 明るい青 `ESC[94m` | 白 `ESC[97m`  | 明るいマゼンタ `ESC[95m` |
+| `MONOCHROME` | 太字 `ESC[1m`              | 淡色 `ESC[2m`      | 淡色 `ESC[2m` | 色なし（空）             |
 
-- `CLASSIC` は暗いターミナルで落ち着いて読みやすく、**デフォルト** です。
+- `CLASSIC` は暗いターミナルで落ち着いて読みやすく、 **デフォルト** です。
 - `VIVID` は高コントラストで目を引きます。
 - `MONOCHROME` は色を使わず明度のみで、色数の少ないターミナル向けです。
 
@@ -75,15 +74,15 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleC
 色とは独立に、2 番目の引数 `KConsoleFormatConfig` が記法を制御します。
 [デフォルトフォーマッター](default-formatter.md) とまったく同じです。
 
-| オプション         | 値                                          | 既定値     |
-|--------------------|---------------------------------------------|------------|
-| `exponentStyle`    | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)        | `CARET`    |
-| `multiplication`   | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
-| `division`         | `SLASH` (`/`), `OBELUS` (`÷`)                | `SLASH`    |
-| `functionSymbols`  | `KConsoleFunctionSymbols` — `UNICODE`, `ASCII` | `UNICODE`  |
+| オプション        | 値                                                  | 既定値     |
+|-------------------|-----------------------------------------------------|------------|
+| `exponentStyle`   | `CARET` (`m^2`), `SUPERSCRIPT` (`m²`)               | `CARET`    |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `ASTERISK` |
+| `division`        | `SLASH` (`/`), `OBELUS` (`÷`)                       | `SLASH`    |
+| `functionSymbols` | `KConsoleFunctionSymbols` — `UNICODE`, `ASCII`      | `UNICODE`  |
 
-両方のコンストラクタ引数には既定値があるため、`KConsoleUnitFormatter()` は従来のクラシックパレットと
-従来の記法になります。設定は第 2 引数として渡します（`KConsoleUnitFormatter(palette, config)`）。
+両方のコンストラクタ引数には既定値があるため、`KConsoleUnitFormatter()` は従来のクラシックパレットと 従来の記法になります。設定は第
+2 引数として渡します（`KConsoleUnitFormatter(palette, config)`）。
 
 ```kotlin
 import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette
@@ -98,9 +97,9 @@ val formatter = KConsoleUnitFormatter(KConsoleColorPalette.CLASSIC, KConsoleForm
 
 ## 独自パレットの定義
 
-`KConsoleColorPalette` は素朴なデータクラスなので、独自のカラーシーケンスを指定できます。各フィールド
-には ANSI の **導入シーケンス**（例: 赤の `ESC[31m`。`ESC` はコード 27 のエスケープ文字）を保持し、
-共有の `reset`（既定は `ESC[0m`）が各色付き部分の後に付加されます。
+`KConsoleColorPalette` は素朴なデータクラスなので、独自のカラーシーケンスを指定できます。各フィールド には ANSI の
+**導入シーケンス**（例: 赤の `ESC[31m`。`ESC` はコード 27 のエスケープ文字）を保持し、 共有の `reset`（既定は `ESC[0m`
+）が各色付き部分の後に付加されます。
 
 ```kotlin
 import org.pcsoft.framework.kunit.formatter.KConsoleColorPalette

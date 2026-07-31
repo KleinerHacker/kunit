@@ -7,26 +7,25 @@
 
 ऊष्मा क्षमता वह ऊर्जा है जो कोई वस्तु प्रति इकाई तापमान वृद्धि पर अवशोषित करती है: `energy / temperature`
 (`J/K`)। `KHeatCapacityUnitInstance` विहित सामान्य रूप `mass¹ · distance² · time⁻² · temperature⁻¹`
-(`kg·m²·s⁻²·K⁻¹`) में ठीक चार पदों वाले `KMixedUnitInstance` को लपेटता है, जो हमेशा J/K में
-सामान्यीकृत रहता है।
+(`kg·m²·s⁻²·K⁻¹`) में ठीक चार पदों वाले `KMixedUnitInstance` को लपेटता है, जो हमेशा J/K में सामान्यीकृत रहता है।
 
 !!! note "तापमान *अंतर*, कभी भी परम तापमान नहीं"
-    तापमान आयाम **अंतर** समूह है (`KTemperatureDifferenceUnit`, संकेत `ΔK`), कभी भी ऐफ़ाइन परम
-    `KTemperatureUnit` नहीं। ऊष्मा क्षमता ऊर्जा को एक तापमान *अंतराल* से जोड़ती है; एक ऑफ़सेट-युक्त
-    परम पैमाना (°C, °F) भागफल में भौतिक रूप से गलत होगा।
+तापमान आयाम **अंतर** समूह है (`KTemperatureDifferenceUnit`, संकेत `ΔK`), कभी भी ऐफ़ाइन परम
+`KTemperatureUnit` नहीं। ऊष्मा क्षमता ऊर्जा को एक तापमान *अंतराल* से जोड़ती है; एक ऑफ़सेट-युक्त परम पैमाना (°C, °F)
+भागफल में भौतिक रूप से गलत होगा।
 
-वही आयाम `J/K` **एन्ट्रॉपी** का भी वर्णन करता है — देखें [एन्ट्रॉपी](entropy.md) कि वह राशि अपना
-प्रकार न बनाकर इसी को क्यों साझा करती है। प्रति इकाई द्रव्यमान यह
+वही आयाम `J/K` **एन्ट्रॉपी** का भी वर्णन करता है — देखें [एन्ट्रॉपी](entropy.md) कि वह राशि अपना प्रकार न बनाकर इसी को
+क्यों साझा करती है। प्रति इकाई द्रव्यमान यह
 [विशिष्ट ऊष्मा क्षमता](specific-heat-capacity.md) बन जाती है, प्रति मोल
 [मोलर ऊष्मा क्षमता](molar-heat-capacity.md)।
 
 ## नामित इकाइयाँ
 
-| इकाई | संकेत | टोकन | 1 इकाई = ? J/K |
-|---|---|---:|---:|
-| जूल प्रति केल्विन | `J/K` | `joulesPerKelvin` | 1.0 |
-| कैलोरी प्रति केल्विन | `cal/K` | `caloriesPerKelvin` | 4.184 |
-| Btu प्रति डिग्री फ़ारेनहाइट | `Btu/°F` | `btusPerFahrenheit` | ≈ 1899.1005 |
+| इकाई              | संकेत      |                 टोकन | 1 इकाई = ? J/K |
+|------------------|----------|--------------------:|--------------:|
+| जूल प्रति केल्विन        | `J/K`    |   `joulesPerKelvin` |           1.0 |
+| कैलोरी प्रति केल्विन       | `cal/K`  | `caloriesPerKelvin` |         4.184 |
+| Btu प्रति डिग्री फ़ारेनहाइट | `Btu/°F` | `btusPerFahrenheit` |   ≈ 1899.1005 |
 
 सभी में पूर्ण SI उपसर्ग सीमा समर्थित है (`kilo.joulesPerKelvin`, `kilo.caloriesPerKelvin`, …)।
 
@@ -67,21 +66,21 @@ reachable into KTemperatureDifference.ofKelvin(1) // ≈ 23.9 K
 
 ## मूल इकाइयों (ऊर्जा और तापमान अंतर) से गणना
 
-| व्यंजक | परिणाम प्रकार | अर्थ |
-|---|---|---|
-| `energy / temperatureDifference` | `KHeatCapacityUnitInstance` | ऊष्मा क्षमता |
-| `heatCapacity * temperatureDifference` | `KEnergyUnitInstance` | आवश्यक ऊर्जा |
-| `temperatureDifference * heatCapacity` | `KEnergyUnitInstance` | ऊर्जा (क्रमविनिमेय) |
-| `energy / heatCapacity` | `KTemperatureDifferenceUnitInstance` | प्राप्य तापमान वृद्धि |
+| व्यंजक                                    | परिणाम प्रकार                             | अर्थ          |
+|----------------------------------------|--------------------------------------|-------------|
+| `energy / temperatureDifference`       | `KHeatCapacityUnitInstance`          | ऊष्मा क्षमता      |
+| `heatCapacity * temperatureDifference` | `KEnergyUnitInstance`                | आवश्यक ऊर्जा     |
+| `temperatureDifference * heatCapacity` | `KEnergyUnitInstance`                | ऊर्जा (क्रमविनिमेय) |
+| `energy / heatCapacity`                | `KTemperatureDifferenceUnitInstance` | प्राप्य तापमान वृद्धि  |
 
 ## अपघटन
 
 दोनों अपघटन समान टाइप, मान-समान इंस्टेंस उत्पन्न करते हैं।
 
-| अपघटन | रूप | परिणाम |
-|---|---|---|
-| `energy / temperatureDifference` | टाइप किया गया संकारक | सीधे `KHeatCapacityUnitInstance` |
-| `mass · distance² · time⁻² · temperature⁻¹` | मूल व्यंजक + `toHeatCapacity()` | `KHeatCapacityUnitInstance` |
+| अपघटन                                       | रूप                          | परिणाम                           |
+|---------------------------------------------|-----------------------------|--------------------------------|
+| `energy / temperatureDifference`            | टाइप किया गया संकारक              | सीधे `KHeatCapacityUnitInstance` |
+| `mass · distance² · time⁻² · temperature⁻¹` | मूल व्यंजक + `toHeatCapacity()` | `KHeatCapacityUnitInstance`    |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -107,8 +106,8 @@ val native = (
 typed == native // true - दोनों 1.0 J/K हैं
 ```
 
-`toHeatCapacity()` **केवल** विहित सामान्य रूप को पहचानता है; कोई भी समतुल्य व्यंजक स्वतः इस पर सिकुड़
-जाता है, और एक गलत रूप `IllegalStateException` फेंकता है।
+`toHeatCapacity()` **केवल** विहित सामान्य रूप को पहचानता है; कोई भी समतुल्य व्यंजक स्वतः इस पर सिकुड़ जाता है, और एक गलत
+रूप `IllegalStateException` फेंकता है।
 
 ## ऑपरेटर
 
@@ -142,14 +141,16 @@ import org.pcsoft.framework.kunit.thermo.heatcapacity.*
 
 ## संकेतन
 
-नीचे दी गई तालिका दिखाती है कि यह इकाई और इसके घटक गणितीय रूप से कैसे लिखे जाते हैं बनाम KUnit के साथ Kotlin में कैसे। घातांक यूनिकोड सुपरस्क्रिप्ट (`²`, `³`, `⁻¹`) से लिखे जाते हैं, `·` गुणन और `/` भिन्न दर्शाता है। जहाँ किसी राशि को भिन्न और ऋणात्मक घातांक वाले गुणनफल दोनों रूपों में लिखा जा सकता है, वहाँ दोनों समतुल्य Kotlin रूप सूचीबद्ध हैं।
+नीचे दी गई तालिका दिखाती है कि यह इकाई और इसके घटक गणितीय रूप से कैसे लिखे जाते हैं बनाम KUnit के साथ Kotlin में कैसे।
+घातांक यूनिकोड सुपरस्क्रिप्ट (`²`, `³`, `⁻¹`) से लिखे जाते हैं, `·` गुणन और `/` भिन्न दर्शाता है। जहाँ किसी राशि को
+भिन्न और ऋणात्मक घातांक वाले गुणनफल दोनों रूपों में लिखा जा सकता है, वहाँ दोनों समतुल्य Kotlin रूप सूचीबद्ध हैं।
 
-| गणित | Kotlin | अर्थ |
-|---|---|---|
-| `J/K` | `joulesPerKelvin` | ऊष्मा क्षमता, मूल इकाई — नामित टोकन |
-| `kg·m²·s⁻²·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / ΔK` | वही राशि आधार आयामों में |
-| `kJ/K` | `kilo.joulesPerKelvin` | किलोजूल प्रति केल्विन |
-| `cal/K` | `caloriesPerKelvin` | कैलोरी प्रति केल्विन |
-| `C = Q / ΔT` | `(4184 of joules) / rise` | ऊर्जा ÷ तापमान वृद्धि से ऊष्मा क्षमता |
-| `Q = C · ΔT` | `kettle * rise` | ऊष्मा क्षमता × तापमान वृद्धि से ऊर्जा |
-| `ΔT = Q / C` | `(100 of kilo.joules) / kettle` | ऊर्जा ÷ ऊष्मा क्षमता से तापमान वृद्धि |
+| गणित             | Kotlin                                          | अर्थ                       |
+|-----------------|-------------------------------------------------|--------------------------|
+| `J/K`           | `joulesPerKelvin`                               | ऊष्मा क्षमता, मूल इकाई — नामित टोकन |
+| `kg·m²·s⁻²·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / ΔK` | वही राशि आधार आयामों में          |
+| `kJ/K`          | `kilo.joulesPerKelvin`                          | किलोजूल प्रति केल्विन              |
+| `cal/K`         | `caloriesPerKelvin`                             | कैलोरी प्रति केल्विन               |
+| `C = Q / ΔT`    | `(4184 of joules) / rise`                       | ऊर्जा ÷ तापमान वृद्धि से ऊष्मा क्षमता    |
+| `Q = C · ΔT`    | `kettle * rise`                                 | ऊष्मा क्षमता × तापमान वृद्धि से ऊर्जा    |
+| `ΔT = Q / C`    | `(100 of kilo.joules) / kettle`                 | ऊर्जा ÷ ऊष्मा क्षमता से तापमान वृद्धि    |

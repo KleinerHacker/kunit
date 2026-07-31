@@ -12,17 +12,13 @@
 
 package org.pcsoft.framework.kunit.formatter
 
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -63,7 +59,7 @@ class KMathMlUnitFormatterTest {
         val v = 3 of meters / seconds
         assertEquals(
             "<math display=\"inline\"><mn>10.8</mn><mo>$it</mo>" +
-                "<mfrac><mrow><mi>km</mi></mrow><mrow><mi>h</mi></mrow></mfrac></math>",
+                    "<mfrac><mrow><mi>km</mi></mrow><mrow><mi>h</mi></mrow></mfrac></math>",
             v.format(kilo.meters / hours, "%.1f", Locale.US, KMathMlUnitFormatter()),
         )
     }
@@ -73,7 +69,7 @@ class KMathMlUnitFormatterTest {
     fun `fraction with powered denominator`() {
         assertEquals(
             "<math display=\"inline\"><mn>9.8</mn><mo>$it</mo>" +
-                "<mfrac><mrow><mi>m</mi></mrow><mrow><msup><mi>s</mi><mn>2</mn></msup></mrow></mfrac></math>",
+                    "<mfrac><mrow><mi>m</mi></mrow><mrow><msup><mi>s</mi><mn>2</mn></msup></mrow></mfrac></math>",
             render(9.8, listOf(meter, perSecond2)),
         )
     }
@@ -83,7 +79,7 @@ class KMathMlUnitFormatterTest {
     fun `exponent style`() {
         assertEquals(
             "<math display=\"inline\"><mn>10.8</mn><mo>$it</mo>" +
-                "<mi>m</mi><mo>$it</mo><msup><mi>s</mi><mn>-1</mn></msup></math>",
+                    "<mi>m</mi><mo>$it</mo><msup><mi>s</mi><mn>-1</mn></msup></math>",
             render(10.8, listOf(meter, perSecond), KMathMlFormatConfig.INLINE),
         )
     }
@@ -93,8 +89,8 @@ class KMathMlUnitFormatterTest {
     fun `product form for multiple negatives`() {
         assertEquals(
             "<math display=\"inline\"><mn>1.0</mn><mo>$it</mo>" +
-                "<mi>m</mi><mo>$it</mo><msup><mi>s</mi><mn>-1</mn></msup>" +
-                "<mo>$it</mo><msup><mi>s</mi><mn>-2</mn></msup></math>",
+                    "<mi>m</mi><mo>$it</mo><msup><mi>s</mi><mn>-1</mn></msup>" +
+                    "<mo>$it</mo><msup><mi>s</mi><mn>-2</mn></msup></math>",
             render(1.0, listOf(meter, perSecond, perSecond2)),
         )
     }

@@ -15,32 +15,7 @@ package org.pcsoft.framework.kunit.electric.conductance
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.pcsoft.framework.kunit.KPrefixBuilder
-import org.pcsoft.framework.kunit.atto
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.deca
-import org.pcsoft.framework.kunit.deci
-import org.pcsoft.framework.kunit.exa
-import org.pcsoft.framework.kunit.femto
-import org.pcsoft.framework.kunit.giga
-import org.pcsoft.framework.kunit.hecto
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.peta
-import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.quecto
-import org.pcsoft.framework.kunit.quetta
-import org.pcsoft.framework.kunit.ronna
-import org.pcsoft.framework.kunit.ronto
-import org.pcsoft.framework.kunit.tera
-import org.pcsoft.framework.kunit.yocto
-import org.pcsoft.framework.kunit.yotta
-import org.pcsoft.framework.kunit.zepto
-import org.pcsoft.framework.kunit.zetta
+import org.pcsoft.framework.kunit.*
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -75,8 +50,20 @@ class KConductanceUnitPrefixTest {
     fun `every conductance unit has a prefixed property`() {
         val f = kilo.prefix.factor
         assertEquals(f * KConductanceUnit.SIEMENS.baseValue, (1 of kilo.siemens).value, rel(f))
-        assertEquals(f * KConductanceUnit.MHO.baseValue, (1 of kilo.mhos).value, rel(f * KConductanceUnit.MHO.baseValue))
-        assertEquals(f * KConductanceUnit.ABMHO.baseValue, (1 of kilo.abmhos).value, rel(f * KConductanceUnit.ABMHO.baseValue))
-        assertEquals(f * KConductanceUnit.STATMHO.baseValue, (1 of kilo.statmhos).value, rel(f * KConductanceUnit.STATMHO.baseValue))
+        assertEquals(
+            f * KConductanceUnit.MHO.baseValue,
+            (1 of kilo.mhos).value,
+            rel(f * KConductanceUnit.MHO.baseValue)
+        )
+        assertEquals(
+            f * KConductanceUnit.ABMHO.baseValue,
+            (1 of kilo.abmhos).value,
+            rel(f * KConductanceUnit.ABMHO.baseValue)
+        )
+        assertEquals(
+            f * KConductanceUnit.STATMHO.baseValue,
+            (1 of kilo.statmhos).value,
+            rel(f * KConductanceUnit.STATMHO.baseValue)
+        )
     }
 }

@@ -14,8 +14,6 @@ package org.pcsoft.framework.kunit.kinematic.frequency
 
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.meters
@@ -23,6 +21,8 @@ import org.pcsoft.framework.kunit.kinematic.speed.KSpeedUnitInstance
 import org.pcsoft.framework.kunit.kinematic.speed.div
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.of
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs

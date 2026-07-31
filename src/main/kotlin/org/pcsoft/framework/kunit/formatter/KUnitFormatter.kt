@@ -13,7 +13,7 @@
 package org.pcsoft.framework.kunit.formatter
 
 import org.pcsoft.framework.kunit.KUnitTerm
-import java.util.Locale
+import java.util.*
 
 /**
  * Everything a [KUnitFormatter] needs to render one measured value as text: the numeric [value] **already

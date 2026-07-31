@@ -6,25 +6,25 @@
 النوع: **وحدة مركّبة**
 
 السعة الحرارية هي الطاقة التي يمتصّها جسم لكل وحدة ارتفاع درجة حرارة: `energy / temperature`
-(`J/K`). يغلّف `KHeatCapacityUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود بالضبط
-بالصيغة القياسية `mass¹ · distance² · time⁻² · temperature⁻¹` (`kg·m²·s⁻²·K⁻¹`)، مطبَّعًا دائمًا إلى J/K.
+(`J/K`). يغلّف `KHeatCapacityUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود بالضبط بالصيغة القياسية
+`mass¹ · distance² · time⁻² · temperature⁻¹` (`kg·m²·s⁻²·K⁻¹`)، مطبَّعًا دائمًا إلى J/K.
 
 !!! note "فرق درجة الحرارة، وليس درجة الحرارة المطلقة أبدًا"
-    بُعد درجة الحرارة هو مجموعة **الفرق** (`KTemperatureDifferenceUnit`، بالرمز `ΔK`)، وليس أبدًا
-    الدرجة المطلقة الأفينية `KTemperatureUnit`. تربط السعة الحرارية الطاقة بـ*فترة* درجة حرارة؛ فمقياس
-    مطلق يحمل إزاحة (°C، °F) سيكون خاطئًا فيزيائيًا في حاصل قسمة.
+بُعد درجة الحرارة هو مجموعة **الفرق** (`KTemperatureDifferenceUnit`، بالرمز `ΔK`)، وليس أبدًا الدرجة المطلقة الأفينية
+`KTemperatureUnit`. تربط السعة الحرارية الطاقة بـ *فترة* درجة حرارة؛ فمقياس مطلق يحمل إزاحة (°C، °F) سيكون خاطئًا
+فيزيائيًا في حاصل قسمة.
 
-يصف نفس البُعد `J/K` أيضًا **الإنتروبيا** — انظر [الإنتروبيا](entropy.md) لمعرفة لماذا تشارك تلك
-الكمّية هذا النوع بدل أن تحصل على نوع خاص بها. ولكل وحدة كتلة تصبح
+يصف نفس البُعد `J/K` أيضًا **الإنتروبيا** — انظر [الإنتروبيا](entropy.md) لمعرفة لماذا تشارك تلك الكمّية هذا النوع بدل
+أن تحصل على نوع خاص بها. ولكل وحدة كتلة تصبح
 [السعة الحرارية النوعية](specific-heat-capacity.md)، ولكل مول [السعة الحرارية المولية](molar-heat-capacity.md).
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ J/K |
-|---|---|---:|---:|
-| جول لكل كلفن | `J/K` | `joulesPerKelvin` | 1.0 |
-| سعرة لكل كلفن | `cal/K` | `caloriesPerKelvin` | 4.184 |
-| وحدة حرارية بريطانية لكل درجة فهرنهايت | `Btu/°F` | `btusPerFahrenheit` | ≈ 1899.1005 |
+| الوحدة                                 | الرمز    |       الرمز البرمجي | 1 وحدة بـ J/K |
+|----------------------------------------|----------|--------------------:|--------------:|
+| جول لكل كلفن                           | `J/K`    |   `joulesPerKelvin` |           1.0 |
+| سعرة لكل كلفن                          | `cal/K`  | `caloriesPerKelvin` |         4.184 |
+| وحدة حرارية بريطانية لكل درجة فهرنهايت | `Btu/°F` | `btusPerFahrenheit` |   ≈ 1899.1005 |
 
 جميعها تدعم نطاق بادئات النظام الدولي الكامل (`kilo.joulesPerKelvin`، `kilo.caloriesPerKelvin`، …).
 
@@ -65,21 +65,21 @@ reachable into KTemperatureDifference.ofKelvin(1) // ≈ 23.9 K
 
 ## الحساب باستخدام الوحدات الأساسية (الطاقة وفرق درجة الحرارة)
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `energy / temperatureDifference` | `KHeatCapacityUnitInstance` | السعة الحرارية |
-| `heatCapacity * temperatureDifference` | `KEnergyUnitInstance` | الطاقة المطلوبة |
-| `temperatureDifference * heatCapacity` | `KEnergyUnitInstance` | الطاقة (تبادلي) |
-| `energy / heatCapacity` | `KTemperatureDifferenceUnitInstance` | ارتفاع درجة الحرارة الممكن |
+| التعبير                                | نوع النتيجة                          | المعنى                     |
+|----------------------------------------|--------------------------------------|----------------------------|
+| `energy / temperatureDifference`       | `KHeatCapacityUnitInstance`          | السعة الحرارية             |
+| `heatCapacity * temperatureDifference` | `KEnergyUnitInstance`                | الطاقة المطلوبة            |
+| `temperatureDifference * heatCapacity` | `KEnergyUnitInstance`                | الطاقة (تبادلي)            |
+| `energy / heatCapacity`                | `KTemperatureDifferenceUnitInstance` | ارتفاع درجة الحرارة الممكن |
 
 ## التفكيكات
 
 كلا التفكيكين يُنتجان نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `energy / temperatureDifference` | معامل مكتوب بنوع صريح | `KHeatCapacityUnitInstance` مباشرة |
-| `mass · distance² · time⁻² · temperature⁻¹` | تعبير أصلي + `toHeatCapacity()` | `KHeatCapacityUnitInstance` |
+| التفكيك                                     | الصيغة                          | النتيجة                            |
+|---------------------------------------------|---------------------------------|------------------------------------|
+| `energy / temperatureDifference`            | معامل مكتوب بنوع صريح           | `KHeatCapacityUnitInstance` مباشرة |
+| `mass · distance² · time⁻² · temperature⁻¹` | تعبير أصلي + `toHeatCapacity()` | `KHeatCapacityUnitInstance`        |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -105,8 +105,8 @@ val native = (
 typed == native // true - both are 1.0 J/K
 ```
 
-تتعرّف `toHeatCapacity()` على **الصيغة القياسية فقط**؛ وأي تعبير مكافئ يُختزَل إليها تلقائيًا، أما
-الشكل الخاطئ فيرمي `IllegalStateException`.
+تتعرّف `toHeatCapacity()` على **الصيغة القياسية فقط**؛ وأي تعبير مكافئ يُختزَل إليها تلقائيًا، أما الشكل الخاطئ فيرمي
+`IllegalStateException`.
 
 ## العمليات
 
@@ -140,16 +140,16 @@ import org.pcsoft.framework.kunit.thermo.heatcapacity.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `J/K` | `joulesPerKelvin` | السعة الحرارية، الوحدة الأساسية — رمز مسمّى |
-| `kg·m²·s⁻²·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / ΔK` | نفس الكمّية بالأبعاد الأساسية |
-| `kJ/K` | `kilo.joulesPerKelvin` | كيلوجول لكل كلفن |
-| `cal/K` | `caloriesPerKelvin` | سعرة لكل كلفن |
-| `C = Q / ΔT` | `(4184 of joules) / rise` | السعة الحرارية من الطاقة ÷ ارتفاع درجة الحرارة |
-| `Q = C · ΔT` | `kettle * rise` | الطاقة من السعة الحرارية × ارتفاع درجة الحرارة |
-| `ΔT = Q / C` | `(100 of kilo.joules) / kettle` | ارتفاع درجة الحرارة من الطاقة ÷ السعة الحرارية |
+| الرياضيات       | Kotlin                                          | المعنى                                         |
+|-----------------|-------------------------------------------------|------------------------------------------------|
+| `J/K`           | `joulesPerKelvin`                               | السعة الحرارية، الوحدة الأساسية — رمز مسمّى     |
+| `kg·m²·s⁻²·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / ΔK` | نفس الكمّية بالأبعاد الأساسية                   |
+| `kJ/K`          | `kilo.joulesPerKelvin`                          | كيلوجول لكل كلفن                               |
+| `cal/K`         | `caloriesPerKelvin`                             | سعرة لكل كلفن                                  |
+| `C = Q / ΔT`    | `(4184 of joules) / rise`                       | السعة الحرارية من الطاقة ÷ ارتفاع درجة الحرارة |
+| `Q = C · ΔT`    | `kettle * rise`                                 | الطاقة من السعة الحرارية × ارتفاع درجة الحرارة |
+| `ΔT = Q / C`    | `(100 of kilo.joules) / kettle`                 | ارتفاع درجة الحرارة من الطاقة ÷ السعة الحرارية |

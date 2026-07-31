@@ -15,11 +15,11 @@ package org.pcsoft.framework.kunit.kinematic.distance
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.of
 import kotlin.math.abs
 import kotlin.test.*
 
@@ -116,7 +116,10 @@ class KDistanceUnitSystemTest {
         assertNotEquals<KDistanceUnitInstance>(5 of meters, (5 of meters) * (1 of meters)) // length != area
         assertNotEquals(5 of meters, 6 of meters)
         assertFalse((5 of meters).equals(1.0)) // not a KDistanceUnitInstance
-        assertNotEquals<KDistanceUnitInstance>((2 of meters) pow 4, (2 of meters) pow 5) // same class, different exponent
+        assertNotEquals<KDistanceUnitInstance>(
+            (2 of meters) pow 4,
+            (2 of meters) pow 5
+        ) // same class, different exponent
     }
 
     /** Converting a single-term mixed unit back to the pure distance type, with the exponent-specific

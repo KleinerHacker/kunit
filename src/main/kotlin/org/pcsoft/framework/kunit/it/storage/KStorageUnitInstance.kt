@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.it.storage
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitDisplay
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 
 /**
  * A **storage** value (data amount): the "pure" wrapper of the storage group, a single

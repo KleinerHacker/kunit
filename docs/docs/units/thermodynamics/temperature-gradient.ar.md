@@ -9,28 +9,27 @@
 (`K/m`). وهو الكمّية الدافعة للتوصيل الحراري — وضربه في [موصلية حرارية](thermal-conductivity.md)
 يعطي [كثافة تدفّق حراري](heat-flux-density.md).
 
-يغلّف `KTemperatureGradientUnitInstance` كائن `KMixedUnitInstance` مكوّن من حدّين بالضبط بالصيغة
-القياسية `temperature¹ · distance⁻¹` (`K·m⁻¹`)، مطبَّعًا دائمًا إلى K/m.
+يغلّف `KTemperatureGradientUnitInstance` كائن `KMixedUnitInstance` مكوّن من حدّين بالضبط بالصيغة القياسية
+`temperature¹ · distance⁻¹` (`K·m⁻¹`)، مطبَّعًا دائمًا إلى K/m.
 
 !!! note "التدرّج هو *تغيّر* لكل طول"
-    بُعد درجة الحرارة هو مجموعة **الفرق** (`KTemperatureDifferenceUnit`). لا معنى لمقياس مطلق يحمل
-    إزاحة (°C، °F) في تدرّج — إذ الفترات وحدها ذات معنى. لهذا أيضًا تُحوَّل `°F/ft` بعامل فترة
-    فهرنهايت 5/9، وليس بإزاحة −32.
+بُعد درجة الحرارة هو مجموعة **الفرق** (`KTemperatureDifferenceUnit`). لا معنى لمقياس مطلق يحمل إزاحة (°C، °F) في تدرّج —
+إذ الفترات وحدها ذات معنى. لهذا أيضًا تُحوَّل `°F/ft` بعامل فترة فهرنهايت 5/9، وليس بإزاحة −32.
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ K/m |
-|---|---|---:|---:|
-| كلفن لكل متر | `K/m` | `kelvinPerMeter` | 1.0 |
-| كلفن لكل كيلومتر | `K/km` | `kelvinPerKilometer` | 0.001 |
-| درجة فهرنهايت لكل قدم | `°F/ft` | `fahrenheitPerFoot` | ≈ 1.822689 |
+| الوحدة                | الرمز   |        الرمز البرمجي | 1 وحدة بـ K/m |
+|-----------------------|---------|---------------------:|--------------:|
+| كلفن لكل متر          | `K/m`   |     `kelvinPerMeter` |           1.0 |
+| كلفن لكل كيلومتر      | `K/km`  | `kelvinPerKilometer` |         0.001 |
+| درجة فهرنهايت لكل قدم | `°F/ft` |  `fahrenheitPerFoot` |    ≈ 1.822689 |
 
 جميعها تدعم نطاق بادئات النظام الدولي الكامل (`milli.kelvinPerMeter`، …).
 
 ## مثال واقعي: التدرّج الجيوحراري
 
-تسخن القشرة الأرضية بمقدار 25 K تقريبًا لكل كيلومتر من العمق. يصل بئر حفر إلى 3.5 km. كم أكثر سخونة
-تكون الصخور في القاع، وما العمق اللازم للوصول إلى ارتفاع 100 K؟
+تسخن القشرة الأرضية بمقدار 25 K تقريبًا لكل كيلومتر من العمق. يصل بئر حفر إلى 3.5 km. كم أكثر سخونة تكون الصخور في
+القاع، وما العمق اللازم للوصول إلى ارتفاع 100 K؟
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -53,21 +52,21 @@ depthFor100K into meters                    // 4000.0 m
 
 ## الحساب باستخدام الوحدات الأساسية (فرق درجة الحرارة والطول)
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `temperatureDifference / length` | `KTemperatureGradientUnitInstance` | التدرّج |
-| `temperatureGradient * length` | `KTemperatureDifferenceUnitInstance` | الارتفاع عبر الطول |
-| `length * temperatureGradient` | `KTemperatureDifferenceUnitInstance` | الارتفاع (تبادلي) |
-| `temperatureDifference / temperatureGradient` | `KLengthUnitInstance` | الطول الممتدّ |
+| التعبير                                       | نوع النتيجة                          | المعنى             |
+|-----------------------------------------------|--------------------------------------|--------------------|
+| `temperatureDifference / length`              | `KTemperatureGradientUnitInstance`   | التدرّج             |
+| `temperatureGradient * length`                | `KTemperatureDifferenceUnitInstance` | الارتفاع عبر الطول |
+| `length * temperatureGradient`                | `KTemperatureDifferenceUnitInstance` | الارتفاع (تبادلي)  |
+| `temperatureDifference / temperatureGradient` | `KLengthUnitInstance`                | الطول الممتدّ       |
 
 ## التفكيكات
 
 كلا التفكيكين يُنتجان نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `temperatureDifference / length` | معامل مكتوب بنوع صريح | `KTemperatureGradientUnitInstance` |
-| `temperature · distance⁻¹` | تعبير أصلي + `toTemperatureGradient()` | `KTemperatureGradientUnitInstance` |
+| التفكيك                          | الصيغة                                 | النتيجة                            |
+|----------------------------------|----------------------------------------|------------------------------------|
+| `temperatureDifference / length` | معامل مكتوب بنوع صريح                  | `KTemperatureGradientUnitInstance` |
+| `temperature · distance⁻¹`       | تعبير أصلي + `toTemperatureGradient()` | `KTemperatureGradientUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -105,16 +104,16 @@ import org.pcsoft.framework.kunit.thermo.temperaturegradient.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `K/m` | `kelvinPerMeter` | تدرّج درجة الحرارة، الوحدة الأساسية |
-| `K·m⁻¹` | `ΔK / meters` | نفس الكمّية بالأبعاد الأساسية |
-| `K/km` | `kelvinPerKilometer` | كلفن لكل كيلومتر (التدرّج الجيوحراري) |
-| `°F/ft` | `fahrenheitPerFoot` | درجة فهرنهايت لكل قدم |
-| `∇T = ΔT / L` | `KTemperatureDifference.ofKelvin(25) / (1 of kilo.meters)` | التدرّج من الارتفاع ÷ الطول |
-| `ΔT = ∇T · L` | `geothermal * borehole` | الارتفاع من التدرّج × الطول |
-| `L = ΔT / ∇T` | `KTemperatureDifference.ofKelvin(100) / geothermal` | الطول من الارتفاع ÷ التدرّج |
+| الرياضيات     | Kotlin                                                     | المعنى                               |
+|---------------|------------------------------------------------------------|--------------------------------------|
+| `K/m`         | `kelvinPerMeter`                                           | تدرّج درجة الحرارة، الوحدة الأساسية   |
+| `K·m⁻¹`       | `ΔK / meters`                                              | نفس الكمّية بالأبعاد الأساسية         |
+| `K/km`        | `kelvinPerKilometer`                                       | كلفن لكل كيلومتر (التدرّج الجيوحراري) |
+| `°F/ft`       | `fahrenheitPerFoot`                                        | درجة فهرنهايت لكل قدم                |
+| `∇T = ΔT / L` | `KTemperatureDifference.ofKelvin(25) / (1 of kilo.meters)` | التدرّج من الارتفاع ÷ الطول           |
+| `ΔT = ∇T · L` | `geothermal * borehole`                                    | الارتفاع من التدرّج × الطول           |
+| `L = ΔT / ∇T` | `KTemperatureDifference.ofKelvin(100) / geothermal`        | الطول من الارتفاع ÷ التدرّج           |

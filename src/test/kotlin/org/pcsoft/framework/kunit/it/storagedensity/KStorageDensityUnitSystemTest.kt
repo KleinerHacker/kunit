@@ -12,20 +12,12 @@
 
 package org.pcsoft.framework.kunit.it.storagedensity
 
-import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.it.storage.bits
 import org.pcsoft.framework.kunit.it.storage.bytes
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertNotEquals
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import kotlin.test.*
 
 /**
  * `KStorageDensityUnitInstance` surface: a storage density is built as an expression

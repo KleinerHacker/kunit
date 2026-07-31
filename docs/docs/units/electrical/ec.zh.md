@@ -3,30 +3,29 @@
 包: `org.pcsoft.framework.kunit.electric.ec`
 基准单位: **安培** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`)
 
-类型：**原生单位**
+类型： **原生单位**
 
 电流组用于建模电流。它是一个 **简单的一维** 原生组（没有指数特化的子类型，也没有跨单位的类型化结果）:
 `KElectricCurrentUnitInstance` 包装单个 `KElectricCurrentUnit.AMPERE` 项，始终归一化为安培存储。
 
-除了 SI 安培之外，该组还提供两个经典的 CGS 电流单位: 电磁单位制（EMU）的 **毕奥**（abampere，`1 Bi = 10 A`）
-和静电单位制（ESU）的 **静安培**（`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`）。
+除了 SI 安培之外，该组还提供两个经典的 CGS 电流单位: 电磁单位制（EMU）的 **毕奥**（abampere，`1 Bi = 10 A`） 和静电单位制（ESU）的
+**静安培**（`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`）。
 
 ## 单位
 
-| 系统 | 单位 | 枚举值 | 符号 | 令牌 | 1 单位对应安培值 |
-|---|---|---|---|---:|---:|
-| SI | 安培 | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
-| CGS | 毕奥 / abampere | `KElectricCurrentUnit.BIOT` | `Bi`（`abA`） | `biot` / `abamperes` | 10 |
-| CGS | 静安培 | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
-| 磁路 | 安匝 | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
+| 系统 | 单位            | 枚举值                             | 符号          |                 令牌 | 1 单位对应安培值 |
+|------|-----------------|------------------------------------|---------------|---------------------:|-----------------:|
+| SI   | 安培            | `KElectricCurrentUnit.AMPERE`      | `A`           |            `amperes` |              1.0 |
+| CGS  | 毕奥 / abampere | `KElectricCurrentUnit.BIOT`        | `Bi`（`abA`） | `biot` / `abamperes` |               10 |
+| CGS  | 静安培          | `KElectricCurrentUnit.STATAMPERE`  | `statA`       |        `statamperes` |     3.335641e-10 |
+| 磁路 | 安匝            | `KElectricCurrentUnit.AMPERE_TURN` | `At`          |        `ampereTurns` |              1.0 |
 
 每个 `令牌` 都是值为 1 的 `KElectricCurrentUnitInstance`，配合 `of`（构建）和 `into`（读取）使用。
 
 ### 磁动势（安匝）
 
-**磁动势** `Θ = N · I` —— 磁路的驱动力 —— 与电流在量纲上是相同的，因为匝数 `N` 是一个纯计数。
-因此它不需要拥有自己的组：它使用该组内的安匝（`At`）。这个独立的符号表明该值描述的是线圈的
-总驱动力，而不是单根导体的电流。`1 At = 1 A`，前缀照常适用（`kilo.ampereTurns`）。
+**磁动势** `Θ = N · I` —— 磁路的驱动力 —— 与电流在量纲上是相同的，因为匝数 `N` 是一个纯计数。 因此它不需要拥有自己的组：它使用该组内的安匝（
+`At`）。这个独立的符号表明该值描述的是线圈的 总驱动力，而不是单根导体的电流。`1 At = 1 A`，前缀照常适用（`kilo.ampereTurns`）。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -104,8 +103,8 @@ val squared = (2 of amperes) pow 2     // KMixedUnitInstance: 4.0 A²
 
 ## SI 前缀
 
-电流接受 **任意** 数量级，因此每个 SI 前缀构建器（`quetta` … `quecto`）都可通过属性访问与每个电流单位组合。
-毫安是 `milli.amperes`，千安是 `kilo.amperes`。
+电流接受 **任意** 数量级，因此每个 SI 前缀构建器（`quetta` … `quecto`）都可通过属性访问与每个电流单位组合。 毫安是
+`milli.amperes`，千安是 `kilo.amperes`。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -136,15 +135,15 @@ import org.pcsoft.framework.kunit.electric.current.*
 
 ## 记法
 
-下表显示该单位及其组成部分在数学表示与 KUnit 的 Kotlin 表示中的写法。指数使用 Unicode 上标
-（`²`、`³`、`⁻¹`），`·` 表示乘法，`/` 表示分数。
+下表显示该单位及其组成部分在数学表示与 KUnit 的 Kotlin 表示中的写法。指数使用 Unicode 上标 （`²`、`³`、`⁻¹`），`·` 表示乘法，
+`/` 表示分数。
 
-| 数学 | Kotlin | 含义 |
-|---|---|---|
-| `A` | `amperes` | 电流，基准单位（安培） |
-| `mA` | `milli.amperes` | 毫安（前缀应用于安培） |
-| `kA` | `kilo.amperes` | 千安 |
-| `Bi` | `biot` | 毕奥 / abampere（10 A） |
-| `At` | `ampereTurns` | 安匝，磁动势 `Θ = N · I` |
-| `kAt` | `kilo.ampereTurns` | 带前缀的安匝（千安匝） |
-| `A²` | `amperes pow 2` | 安培平方（通用混合单位） |
+| 数学  | Kotlin             | 含义                     |
+|-------|--------------------|--------------------------|
+| `A`   | `amperes`          | 电流，基准单位（安培）   |
+| `mA`  | `milli.amperes`    | 毫安（前缀应用于安培）   |
+| `kA`  | `kilo.amperes`     | 千安                     |
+| `Bi`  | `biot`             | 毕奥 / abampere（10 A）  |
+| `At`  | `ampereTurns`      | 安匝，磁动势 `Θ = N · I` |
+| `kAt` | `kilo.ampereTurns` | 带前缀的安匝（千安匝）   |
+| `A²`  | `amperes pow 2`    | 安培平方（通用混合单位） |

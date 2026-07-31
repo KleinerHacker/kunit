@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.amountofsubstance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitDisplay
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 
 /**
  * An **amount of substance** value: the "pure" wrapper of the amount-of-substance group, a single

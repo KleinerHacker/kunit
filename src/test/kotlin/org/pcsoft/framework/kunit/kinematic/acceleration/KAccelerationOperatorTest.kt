@@ -12,13 +12,13 @@
 
 package org.pcsoft.framework.kunit.kinematic.acceleration
 
-import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.speed.KSpeedUnitInstance
 import org.pcsoft.framework.kunit.kinematic.speed.div
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.of
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs

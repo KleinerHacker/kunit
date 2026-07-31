@@ -14,13 +14,13 @@ package org.pcsoft.framework.kunit.common.power
 
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnitInstance
 import org.pcsoft.framework.kunit.electric.current.electricCurrentOf
+import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
+import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
+import org.pcsoft.framework.kunit.kinematic.speed.KSpeedUnitInstance
+import org.pcsoft.framework.kunit.kinematic.speed.speedUnitInstanceOf
 import org.pcsoft.framework.kunit.mechanic.force.KForceUnitInstance
 import org.pcsoft.framework.kunit.mechanic.force.N_IN_BASE
 import org.pcsoft.framework.kunit.mechanic.force.forceUnitInstanceOf
-import org.pcsoft.framework.kunit.kinematic.speed.KSpeedUnitInstance
-import org.pcsoft.framework.kunit.kinematic.speed.speedUnitInstanceOf
-import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
-import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
 
 // Cross-unit operators of the power group - the electrical form (`P = U · I`) and the mechanical form
 // (`P = F · v`). They live in the power package because power depends on voltage, current, force and speed

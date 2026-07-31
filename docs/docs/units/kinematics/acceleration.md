@@ -7,19 +7,19 @@ Type: **constructed unit**
 
 Acceleration is a **constructed** unit: the composition `length · time⁻²` (`m/s²`). `KAccelerationUnitInstance`
 wraps a `KMixedUnitInstance` of exactly two terms — one `KDistanceUnit.BASE` (meter) at exponent `+1` and one
-`KTimeUnit.BASE` (second) at exponent `-2`. The value is always stored normalized to m/s². Because the base
-unit coincides with the component base units (meter, second), there is no extra scale factor.
+`KTimeUnit.BASE` (second) at exponent `-2`. The value is always stored normalized to m/s². Because the base unit
+coincides with the component base units (meter, second), there is no extra scale factor.
 
 ## Building an acceleration
 
 An acceleration is normally built from `speed / time`, or with a named token. There is deliberately **no**
-`metersPerSecondSquared` token (that is exactly `meters / (seconds pow 2)`). Only genuinely named units survive
-as value-1 tokens (used with `of`/`into`):
+`metersPerSecondSquared` token (that is exactly `meters / (seconds pow 2)`). Only genuinely named units survive as
+value-1 tokens (used with `of`/`into`):
 
-| Acceleration | Symbol | Token | 1 unit in m/s² |
-|---|---|---:|---:|
-| Gal (Galileo) | `Gal` | `gals` | 0.01 (1 cm/s²) |
-| Standard gravity | `g₀` | `standardGravities` | 9.80665 |
+| Acceleration     | Symbol |               Token | 1 unit in m/s² |
+|------------------|--------|--------------------:|---------------:|
+| Gal (Galileo)    | `Gal`  |              `gals` | 0.01 (1 cm/s²) |
+| Standard gravity | `g₀`   | `standardGravities` |        9.80665 |
 
 Both tokens support the full SI prefix table (e.g. `milli.gals` = 1 mGal, the everyday gravimetry unit).
 
@@ -37,12 +37,12 @@ a into standardGravities        // ≈ 0.0051
 
 ## Computing with the core units (speed & time)
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `speed / time` | `KAccelerationUnitInstance` | acceleration = Δspeed / duration |
-| `acceleration * time` | `KSpeedUnitInstance` | speed = acceleration × duration |
-| `time * acceleration` | `KSpeedUnitInstance` | speed (commutative) |
-| `speed / acceleration` | `KTimeUnitInstance` | duration = speed / acceleration |
+| Expression             | Result type                 | Meaning                          |
+|------------------------|-----------------------------|----------------------------------|
+| `speed / time`         | `KAccelerationUnitInstance` | acceleration = Δspeed / duration |
+| `acceleration * time`  | `KSpeedUnitInstance`        | speed = acceleration × duration  |
+| `time * acceleration`  | `KSpeedUnitInstance`        | speed (commutative)              |
+| `speed / acceleration` | `KTimeUnitInstance`         | duration = speed / acceleration  |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -86,11 +86,13 @@ import org.pcsoft.framework.kunit.kinematic.acceleration.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `m/s²` | `meters / (seconds pow 2)` | acceleration, base unit (metre per second squared) — fraction form |
-| `m·s⁻²` | `meters * (seconds pow -2)` | same acceleration as a product with a negative exponent |
-| `Gal` | `gals` | named unit (1 cm/s²) |
-| `v / t` | `speed / time` | build from speed ÷ time |
+| Mathematics | Kotlin                      | Meaning                                                            |
+|-------------|-----------------------------|--------------------------------------------------------------------|
+| `m/s²`      | `meters / (seconds pow 2)`  | acceleration, base unit (metre per second squared) — fraction form |
+| `m·s⁻²`     | `meters * (seconds pow -2)` | same acceleration as a product with a negative exponent            |
+| `Gal`       | `gals`                      | named unit (1 cm/s²)                                               |
+| `v / t`     | `speed / time`              | build from speed ÷ time                                            |

@@ -1,25 +1,25 @@
 # 比热容
 
 包：`org.pcsoft.framework.kunit.thermo.specificheatcapacity`
-基本单位：**焦耳每千克-开尔文**（`KSpecificHeatCapacityUnit.BASE == KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN`）
+基本单位： **焦耳每千克-开尔文**（`KSpecificHeatCapacityUnit.BASE == KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN`）
 
-类型：**构造单位**
+类型： **构造单位**
 
-比热容是材料*每单位质量*的[热容](heat-capacity.md)：`J/(kg·K)`。它是每一个
+比热容是材料 *每单位质量*的[热容](heat-capacity.md)：`J/(kg·K)`。它是每一个
 "加热到某温度需要多少能量"计算背后的材料属性。
 
 `KSpecificHeatCapacityUnitInstance` 包装了一个恰好由三项组成的
 `KMixedUnitInstance`，处于规范正规形式 `distance² · time⁻² · temperature⁻¹`
-（`m²·s⁻²·K⁻¹`）—— 质量维度会相互抵消，这与[比能](specific-energy.md)完全一致。
-温度维度是**差**组（`KTemperatureDifferenceUnit`），永远不是仿射的绝对温度。
+（`m²·s⁻²·K⁻¹`）—— 质量维度会相互抵消，这与[比能](specific-energy.md)完全一致。 温度维度是 **差**组（
+`KTemperatureDifferenceUnit`），永远不是仿射的绝对温度。
 
 ## 命名单位
 
-| 单位 | 符号 | 令牌 | 1 单位相当于多少 J/(kg·K) |
-|---|---|---:|---:|
-| 焦耳每千克-开尔文 | `J/(kg·K)` | `joulesPerKilogramKelvin` | 1.0 |
-| 卡路里每克-开尔文 | `cal/(g·K)` | `caloriesPerGramKelvin` | 4184.0 |
-| 英热单位每磅-华氏度 | `Btu/(lb·°F)` | `btusPerPoundFahrenheit` | 4186.8 |
+| 单位                | 符号          |                      令牌 | 1 单位相当于多少 J/(kg·K) |
+|---------------------|---------------|--------------------------:|--------------------------:|
+| 焦耳每千克-开尔文   | `J/(kg·K)`    | `joulesPerKilogramKelvin` |                       1.0 |
+| 卡路里每克-开尔文   | `cal/(g·K)`   |   `caloriesPerGramKelvin` |                    4184.0 |
+| 英热单位每磅-华氏度 | `Btu/(lb·°F)` |  `btusPerPoundFahrenheit` |                    4186.8 |
 
 以上单位均支持完整的 SI 前缀范围（`kilo.joulesPerKilogramKelvin` 等）。
 
@@ -34,7 +34,7 @@ water into caloriesPerGramKelvin   // 1.0（根据卡路里的定义，水恰好
 
 ## 现实示例：给浴缸加热
 
-150 升水（150 kg）从 12 °C 加热到 40 °C。水的比热容是 4184 J/(kg·K)。
+150 升水（150 kg）从 12 °C 加热到 40 °C。水的比热容是 4184 J/ (kg·K)。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -65,26 +65,26 @@ sameEnergy into mega.joules                   // ≈ 17.57 MJ —— 结果一�
 
 ## 用相邻单位计算
 
-| 表达式 | 结果类型 | 含义 |
-|---|---|---|
-| `heatCapacity / mass` | `KSpecificHeatCapacityUnitInstance` | 由物体得到材料属性 |
-| `specificEnergy / temperatureDifference` | `KSpecificHeatCapacityUnitInstance` | 相同，经由比能 |
-| `specificHeatCapacity * mass` | `KHeatCapacityUnitInstance` | 该物体的热容 |
-| `mass * specificHeatCapacity` | `KHeatCapacityUnitInstance` | 相同（可交换） |
-| `heatCapacity / specificHeatCapacity` | `KMassUnitInstance` | 该物体的质量 |
-| `specificHeatCapacity * temperatureDifference` | `KSpecificEnergyUnitInstance` | 每千克的能量 |
-| `temperatureDifference * specificHeatCapacity` | `KSpecificEnergyUnitInstance` | 相同（可交换） |
-| `specificEnergy / specificHeatCapacity` | `KTemperatureDifferenceUnitInstance` | 可达到的温升 |
+| 表达式                                         | 结果类型                             | 含义               |
+|------------------------------------------------|--------------------------------------|--------------------|
+| `heatCapacity / mass`                          | `KSpecificHeatCapacityUnitInstance`  | 由物体得到材料属性 |
+| `specificEnergy / temperatureDifference`       | `KSpecificHeatCapacityUnitInstance`  | 相同，经由比能     |
+| `specificHeatCapacity * mass`                  | `KHeatCapacityUnitInstance`          | 该物体的热容       |
+| `mass * specificHeatCapacity`                  | `KHeatCapacityUnitInstance`          | 相同（可交换）     |
+| `heatCapacity / specificHeatCapacity`          | `KMassUnitInstance`                  | 该物体的质量       |
+| `specificHeatCapacity * temperatureDifference` | `KSpecificEnergyUnitInstance`        | 每千克的能量       |
+| `temperatureDifference * specificHeatCapacity` | `KSpecificEnergyUnitInstance`        | 相同（可交换）     |
+| `specificEnergy / specificHeatCapacity`        | `KTemperatureDifferenceUnitInstance` | 可达到的温升       |
 
 ## 分解方式
 
 全部三种分解方式都产生相同的类型化、值相等的实例。
 
-| 分解方式 | 形式 | 结果 |
-|---|---|---|
-| `heatCapacity / mass` | 类型化操作符 | `KSpecificHeatCapacityUnitInstance` |
-| `specificEnergy / temperatureDifference` | 类型化操作符 | `KSpecificHeatCapacityUnitInstance` |
-| `distance² · time⁻² · temperature⁻¹` | 原生表达式 + `toSpecificHeatCapacity()` | `KSpecificHeatCapacityUnitInstance` |
+| 分解方式                                 | 形式                                    | 结果                                |
+|------------------------------------------|-----------------------------------------|-------------------------------------|
+| `heatCapacity / mass`                    | 类型化操作符                            | `KSpecificHeatCapacityUnitInstance` |
+| `specificEnergy / temperatureDifference` | 类型化操作符                            | `KSpecificHeatCapacityUnitInstance` |
+| `distance² · time⁻² · temperature⁻¹`     | 原生表达式 + `toSpecificHeatCapacity()` | `KSpecificHeatCapacityUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -135,14 +135,15 @@ import org.pcsoft.framework.kunit.thermo.specificheatcapacity.*
 
 ## 记法
 
-下表展示了该单位及其组成部分在数学表示与 Kotlin（配合 KUnit）表示之间的对应关系。指数使用 Unicode 上标（`²`、`³`、`⁻¹`），`·` 表示乘法，`/` 表示分数。若某个量既可写成分数形式，也可写成带负指数的乘积形式，则两种等价的 Kotlin 形式都会列出。
+下表展示了该单位及其组成部分在数学表示与 Kotlin（配合 KUnit）表示之间的对应关系。指数使用 Unicode 上标（`²`、`³`、`⁻¹`），`·`
+表示乘法，`/` 表示分数。若某个量既可写成分数形式，也可写成带负指数的乘积形式，则两种等价的 Kotlin 形式都会列出。
 
-| 数学表示 | Kotlin | 含义 |
-|---|---|---|
-| `J/(kg·K)` | `joulesPerKilogramKelvin` | 比热容，基本单位 |
-| `m²·s⁻²·K⁻¹` | `(meters pow 2) / (seconds pow 2) / ΔK` | 相同的量以基础维度表示 |
-| `cal/(g·K)` | `caloriesPerGramKelvin` | 卡路里每克-开尔文 |
-| `c = C / m` | `(4184 of joulesPerKelvin) / (1 of kilo.grams)` | 由热容 ÷ 质量得到 |
-| `c = q / ΔT` | `(8368 of joulesPerKilogram) / rise` | 由比能 ÷ 温升得到 |
-| `C = c · m` | `water * bath` | 由材料 × 质量得到物体热容 |
-| `Q = c · m · ΔT` | `water * bath * rise` | 总能量 |
+| 数学表示         | Kotlin                                          | 含义                      |
+|------------------|-------------------------------------------------|---------------------------|
+| `J/(kg·K)`       | `joulesPerKilogramKelvin`                       | 比热容，基本单位          |
+| `m²·s⁻²·K⁻¹`     | `(meters pow 2) / (seconds pow 2) / ΔK`         | 相同的量以基础维度表示    |
+| `cal/(g·K)`      | `caloriesPerGramKelvin`                         | 卡路里每克-开尔文         |
+| `c = C / m`      | `(4184 of joulesPerKelvin) / (1 of kilo.grams)` | 由热容 ÷ 质量得到         |
+| `c = q / ΔT`     | `(8368 of joulesPerKilogram) / rise`            | 由比能 ÷ 温升得到         |
+| `C = c · m`      | `water * bath`                                  | 由材料 × 质量得到物体热容 |
+| `Q = c · m · ΔT` | `water * bath * rise`                           | 总能量                    |

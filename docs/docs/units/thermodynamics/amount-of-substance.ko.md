@@ -9,17 +9,17 @@
 `KAmountOfSubstanceUnitInstance`는 단일하고 1차원적인 래퍼 형태입니다: 지수 1의 단일한
 `KAmountOfSubstanceUnit.BASE`(몰) 항이며, 항상 몰로 정규화됩니다.
 
-이는 열역학 분야의 모든 *몰* 양의 기초입니다([몰 에너지](molar-energy.md),
+이는 열역학 분야의 모든 *몰* 양의 기초입니다 ([몰 에너지](molar-energy.md),
 [몰 열용량](molar-heat-capacity.md)).
 
 ## 이름이 붙은 단위
 
-| 단위 | 기호 | 토큰 | mol로 1 |
-|---|---|---:|---:|
-| 몰 | `mol` | `moles` | 1.0 |
+| 단위     | 기호    |         토큰 |   mol로 1 |
+|----------|---------|-------------:|----------:|
+| 몰       | `mol`   |      `moles` |       1.0 |
 | 파운드몰 | `lbmol` | `poundMoles` | 453.59237 |
 
-둘 다 전체 SI 접두사 범위를 지원합니다(`milli.moles`, `micro.moles`, `kilo.moles` 등).
+둘 다 전체 SI 접두사 범위를 지원합니다 (`milli.moles`, `micro.moles`, `kilo.moles` 등).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -37,9 +37,8 @@ n into milli.moles      // 2000.0
 
 ## 아보가드로 상수
 
-이 그룹은 아보가드로 상수의 정확한 SI 값을 `AVOGADRO_CONSTANT`(6.02214076e23 mol⁻¹)로, 그리고 인스턴스의
-편의 함수 `particleCount()`로 노출합니다. 둘 다 순수한 `Double`을 반환합니다. 입자 수는 차원이 없기
-때문입니다.
+이 그룹은 아보가드로 상수의 정확한 SI 값을 `AVOGADRO_CONSTANT`(6.02214076e23 mol⁻¹)로, 그리고 인스턴스의 편의 함수 `particleCount()`로 노출합니다. 둘 다 순수한
+`Double`을 반환합니다. 입자 수는 차원이 없기 때문입니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -51,8 +50,7 @@ AVOGADRO_CONSTANT             // 6.02214076e23
 
 ## 실전 예제: 식탁용 소금 녹이기
 
-25 g의 소금(염화나트륨, 몰질량 58.44 g/mol)에는 몇 몰이 들어 있으며, 이는 몇 개의 화학식 단위에
-해당하나요?
+25 g의 소금 (염화나트륨, 몰질량 58.44 g/mol)에는 몇 몰이 들어 있으며, 이는 몇 개의 화학식 단위에 해당하나요?
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -86,8 +84,8 @@ val rest  = (1 of moles) - (250 of milli.moles)   // 0.75 mol
 (1 of moles) == (1000 of milli.moles) // true
 ```
 
-물질량을 다른 양과 곱하거나 나누면, 타입이 지정된 결과가 없는 한 일반적인 혼합 단위 엔진으로 탈출합니다
-— 예를 들어 `energy / amountOfSubstance`는 타입이 지정된 [몰 에너지](molar-energy.md)입니다.
+물질량을 다른 양과 곱하거나 나누면, 타입이 지정된 결과가 없는 한 일반적인 혼합 단위 엔진으로 탈출합니다 — 예를 들어 `energy / amountOfSubstance`는 타입이
+지정된 [몰 에너지](molar-energy.md)입니다.
 
 ## toString 형식화
 
@@ -103,14 +101,14 @@ import org.pcsoft.framework.kunit.thermo.amountofsubstance.*
 
 ## 표기법
 
-아래 표는 이 단위가 수학적으로 어떻게 표기되는지와 Kotlin/KUnit에서 어떻게 표기되는지를 보여줍니다.
-지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)를 사용하며, `·`는 곱셈을, `/`는 분수를 나타냅니다.
+아래 표는 이 단위가 수학적으로 어떻게 표기되는지와 Kotlin/KUnit에서 어떻게 표기되는지를 보여줍니다. 지수는 유니코드 위 첨자 (`²`, `³`, `⁻¹`)를 사용하며, `·`는 곱셈을, `/`는 분수를
+나타냅니다.
 
-| 수학 | Kotlin | 의미 |
-|---|---|---|
-| `mol` | `moles` | 물질량, 기본 단위 |
-| `mmol` | `milli.moles` | 밀리몰 |
-| `kmol` | `kilo.moles` | 킬로몰 |
-| `lbmol` | `poundMoles` | 파운드몰(영국식 공학 단위) |
-| `n = m / M` | `(sample.value / molarMass) of moles` | 질량 ÷ 몰질량에서 물질량 |
-| `N = n · N_A` | `n.particleCount()` | 물질량 × 아보가드로 상수에서 입자 수 |
+| 수학          | Kotlin                                | 의미                                 |
+|---------------|---------------------------------------|--------------------------------------|
+| `mol`         | `moles`                               | 물질량, 기본 단위                    |
+| `mmol`        | `milli.moles`                         | 밀리몰                               |
+| `kmol`        | `kilo.moles`                          | 킬로몰                               |
+| `lbmol`       | `poundMoles`                          | 파운드몰(영국식 공학 단위)           |
+| `n = m / M`   | `(sample.value / molarMass) of moles` | 질량 ÷ 몰질량에서 물질량             |
+| `N = n · N_A` | `n.particleCount()`                   | 물질량 × 아보가드로 상수에서 입자 수 |

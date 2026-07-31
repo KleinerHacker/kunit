@@ -5,8 +5,8 @@
 
 種別: **構成単位（constructed unit）**
 
-モルエネルギーは物質量あたりのエネルギーです: `energy / amountOfSubstance`(`J/mol`)。文脈によって
-同じ量は*モルエンタルピー*、*反応エンタルピー*、*結合エネルギー*とも呼ばれます。
+モルエネルギーは物質量あたりのエネルギーです: `energy / amountOfSubstance`(`J/mol`)。文脈によって 同じ量は
+*モルエンタルピー*、 *反応エンタルピー*、 *結合エネルギー*とも呼ばれます。
 
 `KMolarEnergyUnitInstance` は正準の正規形 `mass¹ · distance² · time⁻² · substance⁻¹`
 (`kg·m²·s⁻²·mol⁻¹`)にちょうど4つの項からなる `KMixedUnitInstance` をラップし、常に J/mol に正規化されます。
@@ -16,15 +16,15 @@
 
 ## 名前付き単位
 
-| 単位 | 記号 | トークン | J/molでの1単位 |
-|---|---|---:|---:|
-| ジュール毎モル | `J/mol` | `joulesPerMole` | 1.0 |
-| カロリー毎モル | `cal/mol` | `caloriesPerMole` | 4.184 |
-| エンティティあたりの電子ボルト | `eV/entity` | `electronVoltsPerEntity` | 96485.33212 |
+| 単位                           | 記号        |                 トークン | J/molでの1単位 |
+|--------------------------------|-------------|-------------------------:|---------------:|
+| ジュール毎モル                 | `J/mol`     |          `joulesPerMole` |            1.0 |
+| カロリー毎モル                 | `cal/mol`   |        `caloriesPerMole` |          4.184 |
+| エンティティあたりの電子ボルト | `eV/entity` | `electronVoltsPerEntity` |    96485.33212 |
 
-エンティティあたりの電子ボルトトークンは*粒子あたり*のエネルギーを*モルあたり*のエネルギーに変換します —
-その係数はファラデー定数です。すべての単位はSI接頭辞の全範囲をサポートします
-(`kilo.joulesPerMole`、`kilo.caloriesPerMole`、`milli.electronVoltsPerEntity` など)。
+エンティティあたりの電子ボルトトークンは *粒子あたり*のエネルギーを *モルあたり*のエネルギーに変換します —
+その係数はファラデー定数です。すべての単位はSI接頭辞の全範囲をサポートします (`kilo.joulesPerMole`、
+`kilo.caloriesPerMole`、`milli.electronVoltsPerEntity` など)。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -40,8 +40,7 @@ dH into electronVoltsPerEntity   // ≈ 2.964 eV(1分子あたり)
 
 ## 実例 — 水素の燃焼
 
-液体の水の生成エンタルピーは −286 kJ/mol です。4モルの水素が燃焼するとどれだけのエネルギーが
-放出され、1分子あたりではどれだけになるでしょうか?
+液体の水の生成エンタルピーは −286 kJ/mol です。4モルの水素が燃焼するとどれだけのエネルギーが 放出され、1分子あたりではどれだけになるでしょうか?
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -67,23 +66,23 @@ val n = (1 of mega.joules) / formation // KAmountOfSubstanceUnitInstance
 n into moles                           // ≈ -3.497 mol
 ```
 
-## 中核単位(エネルギーと物質量)での計算
+## 中核単位 (エネルギーと物質量)での計算
 
-| 式 | 結果の型 | 意味 |
-|---|---|---|
-| `energy / amountOfSubstance` | `KMolarEnergyUnitInstance` | モルエネルギー |
-| `molarEnergy * amountOfSubstance` | `KEnergyUnitInstance` | 総エネルギー |
-| `amountOfSubstance * molarEnergy` | `KEnergyUnitInstance` | 総エネルギー(可換) |
-| `energy / molarEnergy` | `KAmountOfSubstanceUnitInstance` | 関与する物質量 |
+| 式                                | 結果の型                         | 意味               |
+|-----------------------------------|----------------------------------|--------------------|
+| `energy / amountOfSubstance`      | `KMolarEnergyUnitInstance`       | モルエネルギー     |
+| `molarEnergy * amountOfSubstance` | `KEnergyUnitInstance`            | 総エネルギー       |
+| `amountOfSubstance * molarEnergy` | `KEnergyUnitInstance`            | 総エネルギー(可換) |
+| `energy / molarEnergy`            | `KAmountOfSubstanceUnitInstance` | 関与する物質量     |
 
 ## 分解表現
 
 どちらの分解表現も同じ値として等しい型付きインスタンスを生成します。
 
-| 分解表現 | 形式 | 結果 |
-|---|---|---|
-| `energy / amountOfSubstance` | 型付き演算子 | `KMolarEnergyUnitInstance` 直接 |
-| `mass · distance² · time⁻² · substance⁻¹` | ネイティブ表現 + `toMolarEnergy()` | `KMolarEnergyUnitInstance` |
+| 分解表現                                  | 形式                               | 結果                            |
+|-------------------------------------------|------------------------------------|---------------------------------|
+| `energy / amountOfSubstance`              | 型付き演算子                       | `KMolarEnergyUnitInstance` 直接 |
+| `mass · distance² · time⁻² · substance⁻¹` | ネイティブ表現 + `toMolarEnergy()` | `KMolarEnergyUnitInstance`      |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -109,7 +108,7 @@ val native = (
 typed == native // true - どちらも 1.0 J/mol
 ```
 
-`toMolarEnergy()` は**唯一**の正準の正規形のみを認識します。誤った形は
+`toMolarEnergy()` は **唯一**の正準の正規形のみを認識します。誤った形は
 `IllegalStateException` を投げます。
 
 ## 演算子
@@ -140,14 +139,15 @@ import org.pcsoft.framework.kunit.thermo.molarenergy.*
 
 ## 記法
 
-以下の表は、この単位およびその構成要素が数学的にどう書かれ、KUnitを使ったKotlinでどう書かれるかを示します。指数はUnicodeの上付き文字（`²`、`³`、`⁻¹`）を使用し、`·` は乗算、`/` は分数を表します。分数と負の指数を用いた積の両方で表記可能な量については、両方の等価なKotlin表現を記載しています。
+以下の表は、この単位およびその構成要素が数学的にどう書かれ、KUnitを使ったKotlinでどう書かれるかを示します。指数はUnicodeの上付き文字（
+`²`、`³`、`⁻¹`）を使用し、`·` は乗算、`/` は分数を表します。分数と負の指数を用いた積の両方で表記可能な量については、両方の等価なKotlin表現を記載しています。
 
-| 数学 | Kotlin | 意味 |
-|---|---|---|
-| `J/mol` | `joulesPerMole` | モルエネルギー、基本単位 — 名前付きトークン |
-| `kg·m²·s⁻²·mol⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles` | 同じ量を基本次元で |
-| `kJ/mol` | `kilo.joulesPerMole` | キロジュール毎モル |
-| `eV`(粒子あたり) | `electronVoltsPerEntity` | 基本エンティティあたりの電子ボルト |
-| `ΔH_m = Q / n` | `(572 of kilo.joules) / (2 of moles)` | エネルギー÷物質量からモルエネルギー |
-| `Q = ΔH_m · n` | `formation * hydrogen` | モルエネルギー×物質量からエネルギー |
-| `n = Q / ΔH_m` | `(1 of mega.joules) / formation` | エネルギー÷モルエネルギーから物質量 |
+| 数学              | Kotlin                                             | 意味                                        |
+|-------------------|----------------------------------------------------|---------------------------------------------|
+| `J/mol`           | `joulesPerMole`                                    | モルエネルギー、基本単位 — 名前付きトークン |
+| `kg·m²·s⁻²·mol⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles` | 同じ量を基本次元で                          |
+| `kJ/mol`          | `kilo.joulesPerMole`                               | キロジュール毎モル                          |
+| `eV`(粒子あたり)  | `electronVoltsPerEntity`                           | 基本エンティティあたりの電子ボルト          |
+| `ΔH_m = Q / n`    | `(572 of kilo.joules) / (2 of moles)`              | エネルギー÷物質量からモルエネルギー         |
+| `Q = ΔH_m · n`    | `formation * hydrogen`                             | モルエネルギー×物質量からエネルギー         |
+| `n = Q / ΔH_m`    | `(1 of mega.joules) / formation`                   | エネルギー÷モルエネルギーから物質量         |

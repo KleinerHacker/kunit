@@ -16,8 +16,8 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 
 /**
@@ -123,9 +123,9 @@ fun KMixedUnitInstance.toChargeDensity(): KChargeDensityUnitInstance {
     val distanceTerm = units.singleOrNull { it.unit is KDistanceUnit && it.exponent == -3 }
     check(units.size == 3 && currentTerm != null && timeTerm != null && distanceTerm != null) {
         "KMixedUnitInstance $this does not represent a pure charge density " +
-            "(expected KElectricCurrentUnit^1, KTimeUnit^1 and KDistanceUnit^-3)"
+                "(expected KElectricCurrentUnit^1, KTimeUnit^1 and KDistanceUnit^-3)"
     }
     val normalized = value * currentTerm.unit.baseValue * timeTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, -3.0)
+            Math.pow(distanceTerm.unit.baseValue, -3.0)
     return chargeDensityInstanceOf(normalized)
 }

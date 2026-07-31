@@ -1,27 +1,26 @@
 # مُنسِّق LaTeX
 
-يعرض `KLatexUnitFormatter` القيمة بصيغة **LaTeX** الرياضية، جاهزة لـ MathJax أو KaTeX أو مستند LaTeX. مع
-الإعداد الافتراضي تصبح `3 of meters / seconds` المقروءة كـ `km/h` هي `1.5\,\frac{\mathrm{km}}{\mathrm{h}}`.
+يعرض `KLatexUnitFormatter` القيمة بصيغة **LaTeX** الرياضية، جاهزة لـ MathJax أو KaTeX أو مستند LaTeX. مع الإعداد
+الافتراضي تصبح `3 of meters / seconds` المقروءة كـ `km/h` هي `1.5\,\frac{\mathrm{km}}{\mathrm{h}}`.
 
 يوجد في الحزمة `org.pcsoft.framework.kunit.formatter` وهو `class` غير قابل للتغيير وآمن للخيوط.
 
 ## ما يُنتجه
 
-يتبع التخطيط القواعد المشتركة: مع نمط `FRACTION` يُرصّ الشكل النظيف ذو المقام الواحد على هيئة `\frac{…}{…}`؛
-وكل شكل آخر — وكامل نمط `INLINE` — هو جداء مسطّح مربوط بعلامة الضرب مع أُسٍّ ذات إشارة. القيمة عديمة الأبعاد
-تُعرض كرقم فقط.
+يتبع التخطيط القواعد المشتركة: مع نمط `FRACTION` يُرصّ الشكل النظيف ذو المقام الواحد على هيئة `\frac{…}{…}`؛ وكل شكل
+آخر — وكامل نمط `INLINE` — هو جداء مسطّح مربوط بعلامة الضرب مع أُسٍّ ذات إشارة. القيمة عديمة الأبعاد تُعرض كرقم فقط.
 
 ## الإعداد
 
 `KLatexFormatConfig` نوع قيمة؛ اختر إعدادًا مسبقًا أو أنشئ إعدادك:
 
-| الخيار           | القيم                                     | الافتراضي |
-|------------------|------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `INLINE`                     | `FRACTION`|
-| `unitWrapper`    | `MATHRM`, `TEXT`, `NONE`                 | `MATHRM`  |
-| `multiplication` | `CDOT` (`\cdot`), `TIMES` (`\times`), `THIN_SPACE` (`\,`) | `CDOT` |
-| `delimiter`      | `DOLLAR` (`$…$`), `PARENTHESES` (`\(…\)`), `NONE` | `NONE` |
-| `spacing`        | `THIN` (`\,`), `NORMAL` (مسافة)          | `THIN`    |
+| الخيار           | القيم                                                     | الافتراضي  |
+|------------------|-----------------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `INLINE`                                      | `FRACTION` |
+| `unitWrapper`    | `MATHRM`, `TEXT`, `NONE`                                  | `MATHRM`   |
+| `multiplication` | `CDOT` (`\cdot`), `TIMES` (`\times`), `THIN_SPACE` (`\,`) | `CDOT`     |
+| `delimiter`      | `DOLLAR` (`$…$`), `PARENTHESES` (`\(…\)`), `NONE`         | `NONE`     |
+| `spacing`        | `THIN` (`\,`), `NORMAL` (مسافة)                           | `THIN`     |
 
 الإعدادات المسبقة: `DEFAULT`، `INLINE` (جداء سطري)، `PLAIN` (بدون تغليف ومسافة عادية).
 

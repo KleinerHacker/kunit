@@ -12,21 +12,11 @@
 
 package org.pcsoft.framework.kunit.thermo.heattransfercoefficient
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KHeatTransferCoefficientUnitInstance` surface: round-trip, equality, `toString`, operators, conversion. */
 class KHeatTransferCoefficientUnitSystemTest {

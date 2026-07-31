@@ -1,7 +1,8 @@
 # विशिष्ट ऊष्मा क्षमता
 
 पैकेज: `org.pcsoft.framework.kunit.thermo.specificheatcapacity`
-मूल इकाई: **जूल प्रति किलोग्राम-केल्विन** (`KSpecificHeatCapacityUnit.BASE == KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN`)
+मूल इकाई: **जूल प्रति किलोग्राम-केल्विन**
+(`KSpecificHeatCapacityUnit.BASE == KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN`)
 
 प्रकार: **संघटित इकाई**
 
@@ -9,17 +10,17 @@
 `J/(kg·K)`। यह हर "इसे गर्म करने में कितनी ऊर्जा लगती है" गणना के पीछे की सामग्री-गुणधर्म है।
 
 `KSpecificHeatCapacityUnitInstance` एक `KMixedUnitInstance` को लपेटता है जिसमें विहित सामान्य रूप
-`distance² · time⁻² · temperature⁻¹` (`m²·s⁻²·K⁻¹`) में ठीक तीन पद होते हैं — द्रव्यमान आयाम रद्द हो
-जाता है, ठीक वैसे ही जैसे [विशिष्ट ऊर्जा](specific-energy.md) में होता है। तापमान आयाम **अंतर** समूह
-(`KTemperatureDifferenceUnit`) है, कभी भी एफाइन निरपेक्ष तापमान नहीं।
+`distance² · time⁻² · temperature⁻¹` (`m²·s⁻²·K⁻¹`) में ठीक तीन पद होते हैं — द्रव्यमान आयाम रद्द हो जाता है, ठीक वैसे
+ही जैसे [विशिष्ट ऊर्जा](specific-energy.md) में होता है। तापमान आयाम **अंतर** समूह (`KTemperatureDifferenceUnit`) है,
+कभी भी एफाइन निरपेक्ष तापमान नहीं।
 
 ## नामित इकाइयाँ
 
-| इकाई | संकेत | टोकन | J/(kg·K) में 1 इकाई |
-|---|---|---:|---:|
-| जूल प्रति किलोग्राम-केल्विन | `J/(kg·K)` | `joulesPerKilogramKelvin` | 1.0 |
-| कैलोरी प्रति ग्राम-केल्विन | `cal/(g·K)` | `caloriesPerGramKelvin` | 4184.0 |
-| Btu प्रति पाउंड-°F | `Btu/(lb·°F)` | `btusPerPoundFahrenheit` | 4186.8 |
+| इकाई            | संकेत           |                       टोकन | J/(kg·K) में 1 इकाई |
+|----------------|---------------|--------------------------:|-----------------:|
+| जूल प्रति किलोग्राम-केल्विन | `J/(kg·K)`    | `joulesPerKilogramKelvin` |              1.0 |
+| कैलोरी प्रति ग्राम-केल्विन  | `cal/(g·K)`   |   `caloriesPerGramKelvin` |           4184.0 |
+| Btu प्रति पाउंड-°F  | `Btu/(lb·°F)` |  `btusPerPoundFahrenheit` |           4186.8 |
 
 सभी में पूर्ण SI उपसर्ग सीमा समर्थित है (`kilo.joulesPerKilogramKelvin`, …)।
 
@@ -34,8 +35,7 @@ water into caloriesPerGramKelvin   // 1.0 (पानी परिभाषा �
 
 ## वास्तविक उदाहरण: बाथटब गर्म करना
 
-150 लीटर पानी (150 kg) को 12 °C से 40 °C तक गर्म किया जाता है। पानी की विशिष्ट ऊष्मा क्षमता
-4184 J/(kg·K) है।
+150 लीटर पानी (150 kg) को 12 °C से 40 °C तक गर्म किया जाता है। पानी की विशिष्ट ऊष्मा क्षमता 4184 J/ (kg·K) है।
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -66,26 +66,26 @@ sameEnergy into mega.joules                   // ≈ 17.57 MJ - समान
 
 ## पड़ोसी इकाइयों के साथ गणना
 
-| व्यंजक | परिणाम प्रकार | अर्थ |
-|---|---|---|
-| `heatCapacity / mass` | `KSpecificHeatCapacityUnitInstance` | किसी वस्तु से सामग्री-गुणधर्म |
-| `specificEnergy / temperatureDifference` | `KSpecificHeatCapacityUnitInstance` | वही, विशिष्ट ऊर्जा के जरिए |
-| `specificHeatCapacity * mass` | `KHeatCapacityUnitInstance` | वस्तु की ऊष्मा क्षमता |
-| `mass * specificHeatCapacity` | `KHeatCapacityUnitInstance` | वही (क्रमविनिमेय) |
-| `heatCapacity / specificHeatCapacity` | `KMassUnitInstance` | वस्तु का द्रव्यमान |
-| `specificHeatCapacity * temperatureDifference` | `KSpecificEnergyUnitInstance` | प्रति किलोग्राम ऊर्जा |
-| `temperatureDifference * specificHeatCapacity` | `KSpecificEnergyUnitInstance` | वही (क्रमविनिमेय) |
-| `specificEnergy / specificHeatCapacity` | `KTemperatureDifferenceUnitInstance` | प्राप्य वृद्धि |
+| व्यंजक                                            | परिणाम प्रकार                             | अर्थ               |
+|------------------------------------------------|--------------------------------------|------------------|
+| `heatCapacity / mass`                          | `KSpecificHeatCapacityUnitInstance`  | किसी वस्तु से सामग्री-गुणधर्म |
+| `specificEnergy / temperatureDifference`       | `KSpecificHeatCapacityUnitInstance`  | वही, विशिष्ट ऊर्जा के जरिए |
+| `specificHeatCapacity * mass`                  | `KHeatCapacityUnitInstance`          | वस्तु की ऊष्मा क्षमता      |
+| `mass * specificHeatCapacity`                  | `KHeatCapacityUnitInstance`          | वही (क्रमविनिमेय)      |
+| `heatCapacity / specificHeatCapacity`          | `KMassUnitInstance`                  | वस्तु का द्रव्यमान        |
+| `specificHeatCapacity * temperatureDifference` | `KSpecificEnergyUnitInstance`        | प्रति किलोग्राम ऊर्जा       |
+| `temperatureDifference * specificHeatCapacity` | `KSpecificEnergyUnitInstance`        | वही (क्रमविनिमेय)      |
+| `specificEnergy / specificHeatCapacity`        | `KTemperatureDifferenceUnitInstance` | प्राप्य वृद्धि            |
 
 ## अपघटन
 
 सभी तीनों अपघटन समान टाइप, मान-समान इंस्टेंस उत्पन्न करते हैं।
 
-| अपघटन | रूप | परिणाम |
-|---|---|---|
-| `heatCapacity / mass` | टाइप किया गया संकारक | `KSpecificHeatCapacityUnitInstance` |
-| `specificEnergy / temperatureDifference` | टाइप किया गया संकारक | `KSpecificHeatCapacityUnitInstance` |
-| `distance² · time⁻² · temperature⁻¹` | मूल व्यंजक + `toSpecificHeatCapacity()` | `KSpecificHeatCapacityUnitInstance` |
+| अपघटन                                    | रूप                                  | परिणाम                                |
+|------------------------------------------|-------------------------------------|-------------------------------------|
+| `heatCapacity / mass`                    | टाइप किया गया संकारक                      | `KSpecificHeatCapacityUnitInstance` |
+| `specificEnergy / temperatureDifference` | टाइप किया गया संकारक                      | `KSpecificHeatCapacityUnitInstance` |
+| `distance² · time⁻² · temperature⁻¹`     | मूल व्यंजक + `toSpecificHeatCapacity()` | `KSpecificHeatCapacityUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -136,14 +136,16 @@ import org.pcsoft.framework.kunit.thermo.specificheatcapacity.*
 
 ## संकेतन
 
-नीचे दी गई तालिका दिखाती है कि यह इकाई और इसके घटक गणितीय रूप से कैसे लिखे जाते हैं बनाम KUnit के साथ Kotlin में कैसे। घातांक यूनिकोड सुपरस्क्रिप्ट (`²`, `³`, `⁻¹`) से लिखे जाते हैं, `·` गुणन और `/` भिन्न दर्शाता है। जहाँ किसी राशि को भिन्न और ऋणात्मक घातांक वाले गुणनफल दोनों रूपों में लिखा जा सकता है, वहाँ दोनों समतुल्य Kotlin रूप सूचीबद्ध हैं।
+नीचे दी गई तालिका दिखाती है कि यह इकाई और इसके घटक गणितीय रूप से कैसे लिखे जाते हैं बनाम KUnit के साथ Kotlin में कैसे।
+घातांक यूनिकोड सुपरस्क्रिप्ट (`²`, `³`, `⁻¹`) से लिखे जाते हैं, `·` गुणन और `/` भिन्न दर्शाता है। जहाँ किसी राशि को
+भिन्न और ऋणात्मक घातांक वाले गुणनफल दोनों रूपों में लिखा जा सकता है, वहाँ दोनों समतुल्य Kotlin रूप सूचीबद्ध हैं।
 
-| गणित | Kotlin | अर्थ |
-|---|---|---|
-| `J/(kg·K)` | `joulesPerKilogramKelvin` | विशिष्ट ऊष्मा क्षमता, मूल इकाई |
-| `m²·s⁻²·K⁻¹` | `(meters pow 2) / (seconds pow 2) / ΔK` | वही राशि आधार आयामों में |
-| `cal/(g·K)` | `caloriesPerGramKelvin` | कैलोरी प्रति ग्राम-केल्विन |
-| `c = C / m` | `(4184 of joulesPerKelvin) / (1 of kilo.grams)` | ऊष्मा क्षमता ÷ द्रव्यमान से |
-| `c = q / ΔT` | `(8368 of joulesPerKilogram) / rise` | विशिष्ट ऊर्जा ÷ तापमान वृद्धि से |
-| `C = c · m` | `water * bath` | सामग्री × द्रव्यमान से वस्तु की ऊष्मा क्षमता |
-| `Q = c · m · ΔT` | `water * bath * rise` | कुल ऊर्जा |
+| गणित              | Kotlin                                          | अर्थ                       |
+|------------------|-------------------------------------------------|--------------------------|
+| `J/(kg·K)`       | `joulesPerKilogramKelvin`                       | विशिष्ट ऊष्मा क्षमता, मूल इकाई       |
+| `m²·s⁻²·K⁻¹`     | `(meters pow 2) / (seconds pow 2) / ΔK`         | वही राशि आधार आयामों में          |
+| `cal/(g·K)`      | `caloriesPerGramKelvin`                         | कैलोरी प्रति ग्राम-केल्विन            |
+| `c = C / m`      | `(4184 of joulesPerKelvin) / (1 of kilo.grams)` | ऊष्मा क्षमता ÷ द्रव्यमान से          |
+| `c = q / ΔT`     | `(8368 of joulesPerKilogram) / rise`            | विशिष्ट ऊर्जा ÷ तापमान वृद्धि से       |
+| `C = c · m`      | `water * bath`                                  | सामग्री × द्रव्यमान से वस्तु की ऊष्मा क्षमता |
+| `Q = c · m · ΔT` | `water * bath * rise`                           | कुल ऊर्जा                    |

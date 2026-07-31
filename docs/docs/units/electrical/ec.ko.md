@@ -5,30 +5,28 @@
 
 유형: **네이티브 단위**
 
-전류 그룹은 전류를 모델링합니다. 이는 **단순한 1차원** 네이티브 그룹이며(지수 특화 하위 타입도, 교차 단위
-타입 결과도 없음), `KElectricCurrentUnitInstance` 는 단일 `KElectricCurrentUnit.AMPERE` 항을 감싸고 항상
-암페어로 정규화하여 저장합니다.
+전류 그룹은 전류를 모델링합니다. 이는 **단순한 1차원** 네이티브 그룹이며 (지수 특화 하위 타입도, 교차 단위 타입 결과도 없음), `KElectricCurrentUnitInstance` 는 단일
+`KElectricCurrentUnit.AMPERE` 항을 감싸고 항상 암페어로 정규화하여 저장합니다.
 
-SI 암페어 외에도 이 그룹은 두 가지 고전적인 CGS 전류 단위를 제공합니다: 전자기 단위계(EMU)의
-**비오**(abampere, `1 Bi = 10 A`)와 정전기 단위계(ESU)의 **스탯암페어**(`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`)입니다.
+SI 암페어 외에도 이 그룹은 두 가지 고전적인 CGS 전류 단위를 제공합니다: 전자기 단위계 (EMU)의 **비오**(abampere, `1 Bi = 10 A`)와 정전기 단위계 (ESU)의 **스탯암페어**
+(`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`)입니다.
 
 ## 단위
 
-| 계열 | 단위 | 열거값 | 기호 | 토큰 | 1 단위의 암페어 값 |
-|---|---|---|---|---:|---:|
-| SI | 암페어 | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
-| CGS | 비오 / abampere | `KElectricCurrentUnit.BIOT` | `Bi`(`abA`) | `biot` / `abamperes` | 10 |
-| CGS | 스탯암페어 | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
-| 자기 회로 | 암페어 턴 | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
+| 계열      | 단위            | 열거값                             | 기호        |                 토큰 | 1 단위의 암페어 값 |
+|-----------|-----------------|------------------------------------|-------------|---------------------:|-------------------:|
+| SI        | 암페어          | `KElectricCurrentUnit.AMPERE`      | `A`         |            `amperes` |                1.0 |
+| CGS       | 비오 / abampere | `KElectricCurrentUnit.BIOT`        | `Bi`(`abA`) | `biot` / `abamperes` |                 10 |
+| CGS       | 스탯암페어      | `KElectricCurrentUnit.STATAMPERE`  | `statA`     |        `statamperes` |       3.335641e-10 |
+| 자기 회로 | 암페어 턴       | `KElectricCurrentUnit.AMPERE_TURN` | `At`        |        `ampereTurns` |                1.0 |
 
 각 `토큰` 은 `of`(생성)와 `into`(읽기)에 사용하는 값 1 의 `KElectricCurrentUnitInstance` 입니다.
 
 ### 기자력 (암페어 턴)
 
-**기자력**(magnetomotive force) `Θ = N · I` — 자기 회로를 구동하는 힘 — 은 권선 수 `N` 이 순수한
-개수이므로 전류와 차원적으로 동일합니다. 따라서 별도의 그룹을 갖지 않고, 이 그룹 안의 암페어 턴(`At`)을
-사용합니다. 별도의 기호는 그 값이 단일 도체의 전류가 아니라 코일 전체의 구동력을 나타낸다는 것을
-문서화합니다. `1 At = 1 A` 이며, 접두사도 평소처럼 동작합니다(`kilo.ampereTurns`).
+**기자력**(magnetomotive force) `Θ = N · I` — 자기 회로를 구동하는 힘 — 은 권선 수 `N` 이 순수한 개수이므로 전류와 차원적으로 동일합니다. 따라서 별도의 그룹을 갖지 않고, 이
+그룹 안의 암페어 턴 (`At`)을 사용합니다. 별도의 기호는 그 값이 단일 도체의 전류가 아니라 코일 전체의 구동력을 나타낸다는 것을 문서화합니다. `1 At = 1 A` 이며, 접두사도 평소처럼 동작합니다
+(`kilo.ampereTurns`).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -89,13 +87,13 @@ val b = (1 of biot) - (1 of amperes)   // KElectricCurrentUnitInstance: 9.0 A
 
 ### 비교와 동등성
 
-`==`, `!=`, `<`, `<=`, `>`, `>=` 는 두 `KElectricCurrentUnitInstance` 의 정규화된 `value`(암페어)를
-비교합니다. `equals` 는 정규화된 양 기준이므로 `(1 of biot) == (10 of amperes)` 입니다.
+`==`, `!=`, `<`, `<=`, `>`, `>=` 는 두 `KElectricCurrentUnitInstance` 의 정규화된 `value`(암페어)를 비교합니다. `equals` 는 정규화된 양 기준이므로
+`(1 of biot) == (10 of amperes)` 입니다.
 
 ## `pow` 를 이용한 거듭제곱
 
-중위 연산자 `pow` 로 정수 거듭제곱을 계산합니다(Kotlin 에는 오버로드 가능한 `^` 가 없습니다). 전류
-그룹에서 `pow` 는 일반 `KMixedUnitInstance` 를 반환합니다(전류에는 차원이 있는 거듭제곱 타입이 없음):
+중위 연산자 `pow` 로 정수 거듭제곱을 계산합니다 (Kotlin 에는 오버로드 가능한 `^` 가 없습니다). 전류 그룹에서 `pow` 는 일반 `KMixedUnitInstance` 를 반환합니다 (전류에는 차원이
+있는 거듭제곱 타입이 없음):
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -107,8 +105,8 @@ val squared = (2 of amperes) pow 2     // KMixedUnitInstance: 4.0 A²
 
 ## SI 접두사
 
-전류는 **임의의** 크기를 허용하므로, 모든 SI 접두사 빌더(`quetta` … `quecto`)를 프로퍼티 접근으로 각 전류
-단위와 조합할 수 있습니다. 밀리암페어는 `milli.amperes`, 킬로암페어는 `kilo.amperes` 입니다.
+전류는 **임의의** 크기를 허용하므로, 모든 SI 접두사 빌더 (`quetta` … `quecto`)를 프로퍼티 접근으로 각 전류 단위와 조합할 수 있습니다. 밀리암페어는 `milli.amperes`, 킬로암페어는
+`kilo.amperes` 입니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -139,15 +137,15 @@ import org.pcsoft.framework.kunit.electric.current.*
 
 ## 표기법
 
-아래 표는 이 단위와 그 구성 요소를 수학 표기와 KUnit 의 Kotlin 표기로 어떻게 쓰는지 보여줍니다. 지수는
-유니코드 위첨자(`²`, `³`, `⁻¹`)를 사용하며, `·` 는 곱셈, `/` 는 분수를 나타냅니다.
+아래 표는 이 단위와 그 구성 요소를 수학 표기와 KUnit 의 Kotlin 표기로 어떻게 쓰는지 보여줍니다. 지수는 유니코드 위첨자 (`²`, `³`, `⁻¹`)를 사용하며, `·` 는 곱셈, `/` 는 분수를
+나타냅니다.
 
-| 수학 | Kotlin | 의미 |
-|---|---|---|
-| `A` | `amperes` | 전류, 기준 단위(암페어) |
-| `mA` | `milli.amperes` | 밀리암페어(암페어에 접두사 적용) |
-| `kA` | `kilo.amperes` | 킬로암페어 |
-| `Bi` | `biot` | 비오 / abampere(10 A) |
-| `At` | `ampereTurns` | 암페어 턴, 기자력 `Θ = N · I` |
+| 수학  | Kotlin             | 의미                                   |
+|-------|--------------------|----------------------------------------|
+| `A`   | `amperes`          | 전류, 기준 단위(암페어)                |
+| `mA`  | `milli.amperes`    | 밀리암페어(암페어에 접두사 적용)       |
+| `kA`  | `kilo.amperes`     | 킬로암페어                             |
+| `Bi`  | `biot`             | 비오 / abampere(10 A)                  |
+| `At`  | `ampereTurns`      | 암페어 턴, 기자력 `Θ = N · I`          |
 | `kAt` | `kilo.ampereTurns` | 접두사가 붙은 암페어 턴(킬로암페어 턴) |
-| `A²` | `amperes pow 2` | 암페어 제곱(일반 혼합 단위) |
+| `A²`  | `amperes pow 2`    | 암페어 제곱(일반 혼합 단위)            |

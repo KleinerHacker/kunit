@@ -13,22 +13,18 @@
 package org.pcsoft.framework.kunit.electric.permeability
 
 import org.junit.jupiter.api.TestInstance
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.amperes
 import org.pcsoft.framework.kunit.electric.inductance.KInductanceUnitInstance
 import org.pcsoft.framework.kunit.electric.inductance.henries
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.electric.magneticfieldstrength.KMagneticFieldStrengthUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticfieldstrength.amperesPerMeter
 import org.pcsoft.framework.kunit.electric.magneticfluxdensity.KMagneticFluxDensityUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticfluxdensity.teslas
-import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.mechanic.mass.grams
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

@@ -1,28 +1,28 @@
 # MathML Formatter
 
-`KMathMlUnitFormatter` renders a value as **Presentation MathML**, rendered natively by browsers and by
-MathJax. With the default configuration `3 of meters / seconds` read into `km/h` becomes an inline `<math>`
+`KMathMlUnitFormatter` renders a value as **Presentation MathML**, rendered natively by browsers and by MathJax. With
+the default configuration `3 of meters / seconds` read into `km/h` becomes an inline `<math>`
 with an `<mfrac>` of `<mi>km</mi>` over `<mi>h</mi>`.
 
 It lives in the `org.pcsoft.framework.kunit.formatter` package and is an immutable, thread-safe `class`.
 
 ## What it produces
 
-The layout follows the shared formatter rules: with the `MFRAC` style a clean single-denominator shape is
-stacked in an `<mfrac>`; every other shape — and the whole of the `EXPONENT` style — is a flat product joined
-by the multiplication `<mo>` with signed `<msup>` exponents. A dimensionless value renders as just the
+The layout follows the shared formatter rules: with the `MFRAC` style a clean single-denominator shape is stacked in an
+`<mfrac>`; every other shape — and the whole of the `EXPONENT` style — is a flat product joined by the multiplication
+`<mo>` with signed `<msup>` exponents. A dimensionless value renders as just the
 `<mn>`.
 
 ## Configuration
 
 `KMathMlFormatConfig` is a value type; pick a preset or build your own:
 
-| Option           | Values                                   | Default        |
-|------------------|------------------------------------------|----------------|
-| `fractionStyle`  | `MFRAC`, `EXPONENT`                      | `MFRAC`        |
-| `unitTag`        | `MI`, `MTEXT`                            | `MI`           |
+| Option           | Values                                               | Default           |
+|------------------|------------------------------------------------------|-------------------|
+| `fractionStyle`  | `MFRAC`, `EXPONENT`                                  | `MFRAC`           |
+| `unitTag`        | `MI`, `MTEXT`                                        | `MI`              |
 | `multiplication` | `MIDDLE_DOT` (`·`), `TIMES` (`×`), `INVISIBLE_TIMES` | `INVISIBLE_TIMES` |
-| `wrapper`        | `MATH_INLINE`, `MATH_BLOCK`, `FRAGMENT`  | `MATH_INLINE`  |
+| `wrapper`        | `MATH_INLINE`, `MATH_BLOCK`, `FRAGMENT`              | `MATH_INLINE`     |
 
 Presets: `DEFAULT`, `INLINE` (inline `<msup>` exponents), `FRAGMENT` (no `<math>` root).
 

@@ -21,7 +21,6 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnitInstance
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs

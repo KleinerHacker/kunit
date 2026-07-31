@@ -14,11 +14,11 @@ package org.pcsoft.framework.kunit.electric.inductance
 
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnitInstance
 import org.pcsoft.framework.kunit.electric.current.electricCurrentOf
-import org.pcsoft.framework.kunit.kinematic.frequency.KFrequencyUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticflux.KMagneticFluxUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticflux.magneticFluxInstanceOf
 import org.pcsoft.framework.kunit.electric.resistance.KResistanceUnitInstance
 import org.pcsoft.framework.kunit.electric.resistance.resistanceInstanceOf
+import org.pcsoft.framework.kunit.kinematic.frequency.KFrequencyUnitInstance
 
 // Cross-unit operators between magnetic flux, electric current, resistance, frequency and inductance
 // (`L = Φ / I`, reactance form `L = X / ω`). They live in the inductance package because inductance depends

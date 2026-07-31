@@ -1,25 +1,26 @@
 # السعة الحرارية النوعية
 
 الحزمة: `org.pcsoft.framework.kunit.thermo.specificheatcapacity`
-الوحدة الأساسية: **جول لكل كيلوغرام-كلفن** (`KSpecificHeatCapacityUnit.BASE == KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN`)
+الوحدة الأساسية: **جول لكل كيلوغرام-كلفن**
+(`KSpecificHeatCapacityUnit.BASE == KSpecificHeatCapacityUnit.JOULE_PER_KILOGRAM_KELVIN`)
 
 النوع: **وحدة مركّبة**
 
-السعة الحرارية النوعية هي [السعة الحرارية](heat-capacity.md) لمادّة *لكل وحدة كتلة*: `J/(kg·K)`.
-وهي الخاصّية المادّية وراء كل حساب "كم من الطاقة لتسخين هذا".
+السعة الحرارية النوعية هي [السعة الحرارية](heat-capacity.md) لمادّة *لكل وحدة كتلة*: `J/(kg·K)`. وهي الخاصّية المادّية
+وراء كل حساب "كم من الطاقة لتسخين هذا".
 
-يغلّف `KSpecificHeatCapacityUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط
-بالصيغة القياسية `distance² · time⁻² · temperature⁻¹` (`m²·s⁻²·K⁻¹`) — يُلغى بُعد الكتلة تمامًا كما في
+يغلّف `KSpecificHeatCapacityUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط بالصيغة القياسية
+`distance² · time⁻² · temperature⁻¹` (`m²·s⁻²·K⁻¹`) — يُلغى بُعد الكتلة تمامًا كما في
 [الطاقة النوعية](specific-energy.md). بُعد درجة الحرارة هو مجموعة **الفرق**
 (`KTemperatureDifferenceUnit`)، وليس درجة الحرارة المطلقة الأفينية أبدًا.
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ J/(kg·K) |
-|---|---|---:|---:|
-| جول لكل كيلوغرام-كلفن | `J/(kg·K)` | `joulesPerKilogramKelvin` | 1.0 |
-| سعرة لكل غرام-كلفن | `cal/(g·K)` | `caloriesPerGramKelvin` | 4184.0 |
-| وحدة حرارية بريطانية لكل رطل-°F | `Btu/(lb·°F)` | `btusPerPoundFahrenheit` | 4186.8 |
+| الوحدة                          | الرمز         |             الرمز البرمجي | 1 وحدة بـ J/(kg·K) |
+|---------------------------------|---------------|--------------------------:|-------------------:|
+| جول لكل كيلوغرام-كلفن           | `J/(kg·K)`    | `joulesPerKilogramKelvin` |                1.0 |
+| سعرة لكل غرام-كلفن              | `cal/(g·K)`   |   `caloriesPerGramKelvin` |             4184.0 |
+| وحدة حرارية بريطانية لكل رطل-°F | `Btu/(lb·°F)` |  `btusPerPoundFahrenheit` |             4186.8 |
 
 جميعها تدعم نطاق بادئات النظام الدولي الكامل (`kilo.joulesPerKilogramKelvin`، …).
 
@@ -34,8 +35,7 @@ water into caloriesPerGramKelvin   // 1.0 (water is 1 cal/(g·K) by definition o
 
 ## مثال واقعي: تسخين حوض استحمام
 
-يُسخَّن 150 لترًا من الماء (150 kg) من 12 °C إلى 40 °C. للماء سعة حرارية نوعية قدرها
-4184 J/(kg·K).
+يُسخَّن 150 لترًا من الماء (150 kg) من 12 °C إلى 40 °C. للماء سعة حرارية نوعية قدرها 4184 J/ (kg·K).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -66,26 +66,26 @@ sameEnergy into mega.joules                   // ≈ 17.57 MJ - identical
 
 ## الحساب باستخدام الوحدات المجاورة
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `heatCapacity / mass` | `KSpecificHeatCapacityUnitInstance` | خاصّية المادّة من جسم |
-| `specificEnergy / temperatureDifference` | `KSpecificHeatCapacityUnitInstance` | نفسه، عبر الطاقة النوعية |
-| `specificHeatCapacity * mass` | `KHeatCapacityUnitInstance` | السعة الحرارية للجسم |
-| `mass * specificHeatCapacity` | `KHeatCapacityUnitInstance` | نفسه (تبادلي) |
-| `heatCapacity / specificHeatCapacity` | `KMassUnitInstance` | كتلة الجسم |
-| `specificHeatCapacity * temperatureDifference` | `KSpecificEnergyUnitInstance` | الطاقة لكل كيلوغرام |
-| `temperatureDifference * specificHeatCapacity` | `KSpecificEnergyUnitInstance` | نفسه (تبادلي) |
-| `specificEnergy / specificHeatCapacity` | `KTemperatureDifferenceUnitInstance` | الارتفاع الممكن |
+| التعبير                                        | نوع النتيجة                          | المعنى                   |
+|------------------------------------------------|--------------------------------------|--------------------------|
+| `heatCapacity / mass`                          | `KSpecificHeatCapacityUnitInstance`  | خاصّية المادّة من جسم      |
+| `specificEnergy / temperatureDifference`       | `KSpecificHeatCapacityUnitInstance`  | نفسه، عبر الطاقة النوعية |
+| `specificHeatCapacity * mass`                  | `KHeatCapacityUnitInstance`          | السعة الحرارية للجسم     |
+| `mass * specificHeatCapacity`                  | `KHeatCapacityUnitInstance`          | نفسه (تبادلي)            |
+| `heatCapacity / specificHeatCapacity`          | `KMassUnitInstance`                  | كتلة الجسم               |
+| `specificHeatCapacity * temperatureDifference` | `KSpecificEnergyUnitInstance`        | الطاقة لكل كيلوغرام      |
+| `temperatureDifference * specificHeatCapacity` | `KSpecificEnergyUnitInstance`        | نفسه (تبادلي)            |
+| `specificEnergy / specificHeatCapacity`        | `KTemperatureDifferenceUnitInstance` | الارتفاع الممكن          |
 
 ## التفكيكات
 
 جميع التفكيكات الثلاثة تُنتج نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `heatCapacity / mass` | معامل مكتوب بنوع صريح | `KSpecificHeatCapacityUnitInstance` |
-| `specificEnergy / temperatureDifference` | معامل مكتوب بنوع صريح | `KSpecificHeatCapacityUnitInstance` |
-| `distance² · time⁻² · temperature⁻¹` | تعبير أصلي + `toSpecificHeatCapacity()` | `KSpecificHeatCapacityUnitInstance` |
+| التفكيك                                  | الصيغة                                  | النتيجة                             |
+|------------------------------------------|-----------------------------------------|-------------------------------------|
+| `heatCapacity / mass`                    | معامل مكتوب بنوع صريح                   | `KSpecificHeatCapacityUnitInstance` |
+| `specificEnergy / temperatureDifference` | معامل مكتوب بنوع صريح                   | `KSpecificHeatCapacityUnitInstance` |
+| `distance² · time⁻² · temperature⁻¹`     | تعبير أصلي + `toSpecificHeatCapacity()` | `KSpecificHeatCapacityUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -136,16 +136,16 @@ import org.pcsoft.framework.kunit.thermo.specificheatcapacity.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `J/(kg·K)` | `joulesPerKilogramKelvin` | السعة الحرارية النوعية، الوحدة الأساسية |
-| `m²·s⁻²·K⁻¹` | `(meters pow 2) / (seconds pow 2) / ΔK` | نفس الكمّية بالأبعاد الأساسية |
-| `cal/(g·K)` | `caloriesPerGramKelvin` | سعرة لكل غرام-كلفن |
-| `c = C / m` | `(4184 of joulesPerKelvin) / (1 of kilo.grams)` | من السعة الحرارية ÷ الكتلة |
-| `c = q / ΔT` | `(8368 of joulesPerKilogram) / rise` | من الطاقة النوعية ÷ ارتفاع درجة الحرارة |
-| `C = c · m` | `water * bath` | السعة الحرارية للجسم من المادّة × الكتلة |
-| `Q = c · m · ΔT` | `water * bath * rise` | إجمالي الطاقة |
+| الرياضيات        | Kotlin                                          | المعنى                                  |
+|------------------|-------------------------------------------------|-----------------------------------------|
+| `J/(kg·K)`       | `joulesPerKilogramKelvin`                       | السعة الحرارية النوعية، الوحدة الأساسية |
+| `m²·s⁻²·K⁻¹`     | `(meters pow 2) / (seconds pow 2) / ΔK`         | نفس الكمّية بالأبعاد الأساسية            |
+| `cal/(g·K)`      | `caloriesPerGramKelvin`                         | سعرة لكل غرام-كلفن                      |
+| `c = C / m`      | `(4184 of joulesPerKelvin) / (1 of kilo.grams)` | من السعة الحرارية ÷ الكتلة              |
+| `c = q / ΔT`     | `(8368 of joulesPerKilogram) / rise`            | من الطاقة النوعية ÷ ارتفاع درجة الحرارة |
+| `C = c · m`      | `water * bath`                                  | السعة الحرارية للجسم من المادّة × الكتلة |
+| `Q = c · m · ΔT` | `water * bath * rise`                           | إجمالي الطاقة                           |

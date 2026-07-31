@@ -7,21 +7,21 @@ It lives in the `org.pcsoft.framework.kunit.formatter` package and is an immutab
 
 ## What it produces
 
-The layout follows the shared formatter rules: with the `FRACTION` style a clean single-denominator shape
-uses the `a/b` fraction form (grouping the numerator or a powered denominator in parentheses where needed);
-every other shape — and the whole of the `EXPONENT` style — is a flat product joined by the multiplication
-marker with signed exponents. A dimensionless value renders as just the number.
+The layout follows the shared formatter rules: with the `FRACTION` style a clean single-denominator shape uses the `a/b`
+fraction form (grouping the numerator or a powered denominator in parentheses where needed); every other shape — and the
+whole of the `EXPONENT` style — is a flat product joined by the multiplication marker with signed exponents. A
+dimensionless value renders as just the number.
 
 ## Configuration
 
 `KTypstFormatConfig` is a value type; pick a preset or build your own:
 
-| Option           | Values                                    | Default   |
-|------------------|-------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `EXPONENT`                    | `FRACTION`|
-| `unitStyle`      | `UPRIGHT` (`upright("km")`), `TEXT` (`"km"`) | `UPRIGHT` |
-| `multiplication` | `SPACE` (space), `DOT` (`dot`), `TIMES` (`times`) | `SPACE` |
-| `delimiter`      | `MATH` (`$…$`), `FRAGMENT`                | `MATH`    |
+| Option           | Values                                            | Default    |
+|------------------|---------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `EXPONENT`                            | `FRACTION` |
+| `unitStyle`      | `UPRIGHT` (`upright("km")`), `TEXT` (`"km"`)      | `UPRIGHT`  |
+| `multiplication` | `SPACE` (space), `DOT` (`dot`), `TIMES` (`times`) | `SPACE`    |
+| `delimiter`      | `MATH` (`$…$`), `FRAGMENT`                        | `MATH`     |
 
 Presets: `DEFAULT`, `FRAGMENT` (no `$…$` delimiters).
 

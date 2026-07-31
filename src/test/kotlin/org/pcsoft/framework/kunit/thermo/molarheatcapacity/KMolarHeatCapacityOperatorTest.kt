@@ -17,7 +17,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.amountofsubstance.KAmountOfSubstanceUnitInstance
 import org.pcsoft.framework.kunit.thermo.amountofsubstance.moles
 import org.pcsoft.framework.kunit.thermo.heatcapacity.KHeatCapacityUnitInstance
@@ -97,12 +96,12 @@ class KMolarHeatCapacityOperatorTest {
         val viaHeatCapacity = (1 of joulesPerKelvin) / (1 of moles)
         val viaMolarEnergy = (1 of joulesPerMole) / KTemperatureDifference.ofKelvin(1)
         val native = (
-            (1000 of grams).toUnit() *
-                ((1 of meters).toUnit() pow 2) /
-                ((1 of seconds).toUnit() pow 2) /
-                (1 of moles).toUnit() /
-                KTemperatureDifference.ofKelvin(1).toUnit()
-            ).toMolarHeatCapacity()
+                (1000 of grams).toUnit() *
+                        ((1 of meters).toUnit() pow 2) /
+                        ((1 of seconds).toUnit() pow 2) /
+                        (1 of moles).toUnit() /
+                        KTemperatureDifference.ofKelvin(1).toUnit()
+                ).toMolarHeatCapacity()
 
         assertIs<KMolarHeatCapacityUnitInstance>(viaHeatCapacity)
         assertIs<KMolarHeatCapacityUnitInstance>(viaMolarEnergy)

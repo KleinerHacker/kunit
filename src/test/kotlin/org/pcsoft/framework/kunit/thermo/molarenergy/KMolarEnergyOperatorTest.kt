@@ -20,7 +20,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.amountofsubstance.KAmountOfSubstanceUnitInstance
 import org.pcsoft.framework.kunit.thermo.amountofsubstance.moles
 import kotlin.test.Test
@@ -68,11 +67,11 @@ class KMolarEnergyOperatorTest {
     fun `all decompositions agree`() {
         val typed = (1 of joules) / (1 of moles)
         val native = (
-            (1000 of grams).toUnit() *
-                ((1 of meters).toUnit() pow 2) /
-                ((1 of seconds).toUnit() pow 2) /
-                (1 of moles).toUnit()
-            ).toMolarEnergy()
+                (1000 of grams).toUnit() *
+                        ((1 of meters).toUnit() pow 2) /
+                        ((1 of seconds).toUnit() pow 2) /
+                        (1 of moles).toUnit()
+                ).toMolarEnergy()
         assertIs<KMolarEnergyUnitInstance>(typed)
         assertIs<KMolarEnergyUnitInstance>(native)
         assertEquals(typed, native)

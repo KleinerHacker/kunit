@@ -2,16 +2,16 @@
 
 يشحن kunit اليوم عدّة مجموعات وحدات ([المسافة](units/kinematics/distance.md)،
 [الزمن](units/kinematics/time.md)، [التخزين](units/information/storage.md)،
-[السرعة](units/kinematics/speed.md)، [معدّل البيانات](units/information/datarate.md))، لكنّ المحرّك
-بأكمله (`KUnit`، `KMixedUnitInstance`، فِعلا `of`/`into`، بانيات البادئات) عامّ ومستقلّ عن المجموعة.
-إضافة كمّية فيزيائية جديدة تعني اتّباع النمط نفسه. تشرح هذه الصفحة إضافة مجموعة **الكتلة** التوضيحية
-(`org.pcsoft.framework.kunit.mechanic.mass`) — مجموعة بسيطة أحادية البُعد مبنية على غرار مجموعة التخزين.
+[السرعة](units/kinematics/speed.md)، [معدّل البيانات](units/information/datarate.md))، لكنّ المحرّك بأكمله (`KUnit`،
+`KMixedUnitInstance`، فِعلا `of`/`into`، بانيات البادئات) عامّ ومستقلّ عن المجموعة. إضافة كمّية فيزيائية جديدة تعني
+اتّباع النمط نفسه. تشرح هذه الصفحة إضافة مجموعة **الكتلة** التوضيحية (`org.pcsoft.framework.kunit.mechanic.mass`) —
+مجموعة بسيطة أحادية البُعد مبنية على غرار مجموعة التخزين.
 
 ## 1. أنشئ الحزمة الفرعية وتعداد `KUnit`
 
 تحصل كل مجموعة وحدات على حزمتها الفرعية الخاصّة تحت `org.pcsoft.framework.kunit`، وتُصرَّح وحداتها كـ
-`enum class` يُنفّذ `KUnit`. `baseValue` هو معامل التحويل إلى الوحدة الأساسية للمجموعة — والوحدة الأساسية
-نفسها لها `baseValue == 1.0`.
+`enum class` يُنفّذ `KUnit`. `baseValue` هو معامل التحويل إلى الوحدة الأساسية للمجموعة — والوحدة الأساسية نفسها لها
+`baseValue == 1.0`.
 
 ```kotlin
 package org.pcsoft.framework.kunit.mechanic.mass
@@ -40,10 +40,10 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. أنشئ صنف الغلاف
 
-يغلّف الغلاف (`KMassUnitInstance`) نسخةَ `KMixedUnitInstance` بـ**التفويض** (`KUnitMeasurable by
+يغلّف الغلاف (`KMassUnitInstance`) نسخةَ `KMixedUnitInstance` بـ **التفويض** (`KUnitMeasurable by
 instance`) ويُنفّذ `KUnitInstance<KMassUnitInstance>`. يكتب يدويًا فقط الأعضاء الخاصّة بـ `KUnitInstance`
-(`plus`/`minus`/`compareTo`) إضافةً إلى تجاوز `scaledBy` (الذي يدعم `of`) و`equals`/`hashCode`/`toString`.
-لا يوجد `valueAs`/`toString(target)` — فالقراءة هي فِعل `into` المستقلّ عن المجموعة. انسخ شكل
+(`plus`/`minus`/`compareTo`) إضافةً إلى تجاوز `scaledBy` (الذي يدعم `of`) و`equals`/`hashCode`/`toString`. لا يوجد
+`valueAs`/`toString(target)` — فالقراءة هي فِعل `into` المستقلّ عن المجموعة. انسخ شكل
 `KStorageUnitInstance`.
 
 ```kotlin
@@ -87,8 +87,8 @@ fun KMixedUnitInstance.toMass(): KMassUnitInstance {
 ## 3. أضِف رموز القيمة-1 المجرّدة وخصائص باني البادئات
 
 قسّم مفردات الـ DSL إلى ملفّين وفق اصطلاح المشروع: تذهب رموز القيمة-1 المجرّدة إلى
-`K...UnitBareValues.kt`، وتذهب امتدادات خصائص باني البادئات إلى `K...UnitExtensions.kt`. معًا يتيحان
-للمستدعي كتابة `5 of kilograms` أو `5 of kilo.grams` والقراءة بـ `into`.
+`K...UnitBareValues.kt`، وتذهب امتدادات خصائص باني البادئات إلى `K...UnitExtensions.kt`. معًا يتيحان للمستدعي كتابة
+`5 of kilograms` أو `5 of kilo.grams` والقراءة بـ `into`.
 
 `KMassUnitBareValues.kt`:
 
@@ -150,8 +150,8 @@ val heavier = b > a          // true
 
 ## 4. (اختياري) أضِف وحدات خاصّة/مشتقّة
 
-إذا كانت مجموعتك تحوي وحدات مسمّاة شائعة الاستخدام مرتبطة بتحجيم محدّد (مثل الهكتار للمساحة)، فأضِفها
-كنُسخ قيمتها 1 مسمّاة — دون الحاجة إلى نوع هدف منفصل:
+إذا كانت مجموعتك تحوي وحدات مسمّاة شائعة الاستخدام مرتبطة بتحجيم محدّد (مثل الهكتار للمساحة)، فأضِفها كنُسخ قيمتها 1
+مسمّاة — دون الحاجة إلى نوع هدف منفصل:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mechanic.mass
@@ -170,9 +170,9 @@ println((2500 of grams) into tonnes) // 0.0025
 
 ## 5. ادمج مع مجموعات أخرى
 
-لأنّ كل شيء ينتهي في النهاية عبر محرّك `KMixedUnitInstance` العامّ، تتركّب مجموعتك الجديدة فورًا مع أي
-مجموعة أخرى عبر `*`/`/` — راجع [الوحدات المركبة](mixed-units.md) للقواعد. للحصول على نتيجة عبر-المجموعات
-محكومة بالنوع (مثل `mass / volume = density`)، أضِف امتدادات معاملات محكومة بالنوع في
+لأنّ كل شيء ينتهي في النهاية عبر محرّك `KMixedUnitInstance` العامّ، تتركّب مجموعتك الجديدة فورًا مع أي مجموعة أخرى عبر
+`*`/`/` — راجع [الوحدات المركبة](mixed-units.md) للقواعد. للحصول على نتيجة عبر-المجموعات محكومة بالنوع (مثل
+`mass / volume = density`)، أضِف امتدادات معاملات محكومة بالنوع في
 `K...UnitOperators.kt`، على غرار `KSpeedUnitOperators.kt`.
 
 ```kotlin
@@ -186,13 +186,13 @@ val density = (5 of kilograms) / (2 of liters)
 
 ## 6. قائمة تحقّق التسمية والاختبار
 
-- تبدأ كل الأنواع العامّة بحرف `K` (`KMassUnit`، `KMassUnitInstance`، ...)؛ رموز القيمة-1 المجرّدة
-  وامتدادات خصائص باني البادئات (`kilograms`، `grams`، ...) مُستثناة وتبقى طبيعية لغويًا.
-- غطِّ المجموعة بإجراء اختبار المصفوفة المتقاطعة المُعامَل، المبني عبر `of`/`into` (لا عبر التعداد الخام
-  أبدًا): تحويل وحدة → وحدة، طريقة واحدة لكل معامِل ولكل مقارنة على كل زوج وحدات، مصفوفة باني البادئات،
-  الحفاظ على النوع في `of`، وحالات خطأ `into` — راجع قسم «إجراء اختبار المصفوفة المتقاطعة المُعامَل» في
+- تبدأ كل الأنواع العامّة بحرف `K` (`KMassUnit`، `KMassUnitInstance`، ...)؛ رموز القيمة-1 المجرّدة وامتدادات خصائص باني
+  البادئات (`kilograms`، `grams`، ...) مُستثناة وتبقى طبيعية لغويًا.
+- غطِّ المجموعة بإجراء اختبار المصفوفة المتقاطعة المُعامَل، المبني عبر `of`/`into` (لا عبر التعداد الخام أبدًا): تحويل
+  وحدة → وحدة، طريقة واحدة لكل معامِل ولكل مقارنة على كل زوج وحدات، مصفوفة باني البادئات، الحفاظ على النوع في `of`،
+  وحالات خطأ `into` — راجع قسم «إجراء اختبار المصفوفة المتقاطعة المُعامَل» في
   `../../.claude/CLAUDE.md`.
 - وثّق كل عضو عامّ بالإنجليزية، بصيغة Markdown، مع أمثلة حيث يكون مفيدًا — خاصّةً المعاملات.
 - إذا كانت المجموعة مقيّدة المقدار (مثل التخزين، الذي يرفض البادئات المتناقصة)، فعلّق خصائص وحداتها على
-  `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` بدلًا من الأساس `KPrefixBuilder`، بحيث تصير
-  البادئات غير المسموحة **خطأ تصريف**.
+  `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` بدلًا من الأساس `KPrefixBuilder`، بحيث تصير البادئات غير
+  المسموحة **خطأ تصريف**.

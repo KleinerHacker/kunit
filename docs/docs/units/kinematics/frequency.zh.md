@@ -1,9 +1,9 @@
 # 频率
 
 包：`org.pcsoft.framework.kunit.kinematic.frequency`
-基准单位：**赫兹** (`KFrequencyUnit.BASE == KFrequencyUnit.HERTZ`)
+基准单位： **赫兹** (`KFrequencyUnit.BASE == KFrequencyUnit.HERTZ`)
 
-类型：**原生单位**
+类型： **原生单位**
 
 频率组用于建模某事在单位时间内发生的次数。它是一个 **原生的一维** 组，并且是 **时间的倒数** (`1 Hz = 1/s`)：
 `KFrequencyUnitInstance` 包装单个 `KFrequencyUnit.HERTZ` 项，始终以赫兹归一化存储。
@@ -12,13 +12,13 @@
 
 ## 单位
 
-| 单位 | 枚举值 | 符号 | 令牌 | 1 单位对应的赫兹值 |
-|---|---|---|---:|---:|
-| 赫兹 | `KFrequencyUnit.HERTZ` | `Hz` | `hertz` | 1.0 |
-| 每秒转数 | `KFrequencyUnit.RPS` | `rps` | `rps` | 1.0 |
-| 每秒帧数 | `KFrequencyUnit.FPS` | `fps` | `fps` | 1.0 |
-| 每分钟转数 | `KFrequencyUnit.RPM` | `rpm` | `rpm` | 1/60 |
-| 每分钟拍数 | `KFrequencyUnit.BPM` | `bpm` | `bpm` | 1/60 |
+| 单位       | 枚举值                 | 符号  |    令牌 | 1 单位对应的赫兹值 |
+|------------|------------------------|-------|--------:|-------------------:|
+| 赫兹       | `KFrequencyUnit.HERTZ` | `Hz`  | `hertz` |                1.0 |
+| 每秒转数   | `KFrequencyUnit.RPS`   | `rps` |   `rps` |                1.0 |
+| 每秒帧数   | `KFrequencyUnit.FPS`   | `fps` |   `fps` |                1.0 |
+| 每分钟转数 | `KFrequencyUnit.RPM`   | `rpm` |   `rpm` |               1/60 |
+| 每分钟拍数 | `KFrequencyUnit.BPM`   | `bpm` |   `bpm` |               1/60 |
 
 每个 `令牌` 都是值为 1 的 `KFrequencyUnitInstance`，配合 `of`（构建）和 `into`（读取）使用。
 
@@ -131,11 +131,12 @@ import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 ## 记法
 
-下表展示该单位及其组成部分的数学写法与 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`），`·` 表示乘法，`/` 表示分数。当一个量既可写成分数又可写成带负指数的乘积时，两种等价的 Kotlin 形式都会列出。
+下表展示该单位及其组成部分的数学写法与 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`），`·` 表示乘法，`/`
+表示分数。当一个量既可写成分数又可写成带负指数的乘积时，两种等价的 Kotlin 形式都会列出。
 
-| 数学 | Kotlin | 含义 |
-|---|---|---|
-| `Hz` | `hertz` | 频率，基准单位（赫兹） |
-| `kHz` | `kilo.hertz` | 千赫兹（对赫兹应用前缀） |
+| 数学          | Kotlin               | 含义                           |
+|---------------|----------------------|--------------------------------|
+| `Hz`          | `hertz`              | 频率，基准单位（赫兹）         |
+| `kHz`         | `kilo.hertz`         | 千赫兹（对赫兹应用前缀）       |
 | `1/s` = `s⁻¹` | `1 / (1 of seconds)` | 由周期得到的频率（类型化赫兹） |
-| `Hz²` | `hertz pow 2` | 赫兹平方（通用混合单位） |
+| `Hz²`         | `hertz pow 2`        | 赫兹平方（通用混合单位）       |

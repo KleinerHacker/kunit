@@ -130,6 +130,7 @@ tasks {
             }.standardOutput.asText.get().trim().ifEmpty { null }
         }.getOrNull()
     }
+
     fun Exec.withMikePath() {
         pythonScriptsDir?.let { dir ->
             environment("PATH", dir + File.pathSeparator + System.getenv("PATH"))
@@ -192,7 +193,8 @@ tasks {
 
     register<Exec>("buildDocs") {
         group = "MKDocs"
-        description = "Build the mkdocs site into build/docs (per mkdocs.yml site_dir; no serve, no deploy) — usable as a generation test"
+        description =
+            "Build the mkdocs site into build/docs (per mkdocs.yml site_dir; no serve, no deploy) — usable as a generation test"
         workingDir = file("docs")
         // --strict fails the build on warnings (broken links, missing pages …) so it acts as a test;
         // --clean wipes the previous output first.
@@ -203,7 +205,8 @@ tasks {
 
     register<Exec>("deployDocs") {
         group = "MKDocs"
-        description = "Deploy a versioned docs snapshot via mike. Pass -PdocsVersion=<tag>; falls back to \"snapshot\" if no tag is given. Requires a pre-configured git push target."
+        description =
+            "Deploy a versioned docs snapshot via mike. Pass -PdocsVersion=<tag>; falls back to \"snapshot\" if no tag is given. Requires a pre-configured git push target."
         workingDir = file("docs")
         // Use -PdocsVersion=<tag> for a real release; otherwise deploy under the "snapshot" alias.
         // A "snapshot" deploy is never promoted to "latest".
@@ -212,7 +215,9 @@ tasks {
         val setLatest = ver != "snapshot" && (project.findProperty("setLatest") as String?) != "false"
         val args = buildList {
             add("python"); add("-c"); add("from mike.driver import main; main()"); add("deploy"); add("--push")
-            if (setLatest) { add("--update-aliases"); add(ver); add("latest") } else add(ver)
+            if (setLatest) {
+                add("--update-aliases"); add(ver); add("latest")
+            } else add(ver)
         }
         commandLine(args)
         withMikePath()
@@ -222,7 +227,8 @@ tasks {
 
     register<Exec>("setDefaultDocs") {
         group = "MKDocs"
-        description = "Set the default docs version shown at the root URL via mike (run once after the first release deploy)."
+        description =
+            "Set the default docs version shown at the root URL via mike (run once after the first release deploy)."
         workingDir = file("docs")
         commandLine("python", "-c", "from mike.driver import main; main()", "set-default", "--push", "latest")
         withMikePath()

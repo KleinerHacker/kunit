@@ -12,10 +12,10 @@
 
 package org.pcsoft.framework.kunit.electric.magneticfluxdensity
 
-import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.areaOf
 import org.pcsoft.framework.kunit.electric.magneticflux.KMagneticFluxUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticflux.magneticFluxInstanceOf
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.areaOf
 
 // Cross-unit operators between magnetic flux, area and magnetic flux density (`B = Φ / A`). They live in
 // the magneticfluxdensity package because flux density depends on magnetic flux and distance/area (never

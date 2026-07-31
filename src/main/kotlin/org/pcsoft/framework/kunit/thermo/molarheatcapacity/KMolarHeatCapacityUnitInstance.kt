@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.molarheatcapacity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
@@ -130,17 +126,17 @@ fun KMixedUnitInstance.toMolarHeatCapacity(): KMolarHeatCapacityUnitInstance {
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == -1 }
     check(
         units.size == 5 && massTerm != null && distanceTerm != null && timeTerm != null &&
-            substanceTerm != null && temperatureTerm != null,
+                substanceTerm != null && temperatureTerm != null,
     ) {
         "KMixedUnitInstance $this does not represent a pure molar heat capacity " +
-            "(expected KMassUnit^1, KDistanceUnit^2, KTimeUnit^-2, KAmountOfSubstanceUnit^-1 and " +
-            "KTemperatureDifferenceUnit^-1)"
+                "(expected KMassUnit^1, KDistanceUnit^2, KTimeUnit^-2, KAmountOfSubstanceUnit^-1 and " +
+                "KTemperatureDifferenceUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -2.0) *
-        Math.pow(substanceTerm.unit.baseValue, -1.0) *
-        Math.pow(temperatureTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -2.0) *
+            Math.pow(substanceTerm.unit.baseValue, -1.0) *
+            Math.pow(temperatureTerm.unit.baseValue, -1.0)
     return molarHeatCapacityInstanceOf(gramBaseProduct / MOLAR_HEAT_CAPACITY_MASS_REFERENCE)
 }

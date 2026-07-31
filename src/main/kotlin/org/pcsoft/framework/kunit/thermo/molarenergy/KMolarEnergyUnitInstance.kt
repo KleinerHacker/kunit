@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.molarenergy
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
@@ -133,12 +129,12 @@ fun KMixedUnitInstance.toMolarEnergy(): KMolarEnergyUnitInstance {
     val substanceTerm = units.singleOrNull { it.unit is KAmountOfSubstanceUnit && it.exponent == -1 }
     check(units.size == 4 && massTerm != null && distanceTerm != null && timeTerm != null && substanceTerm != null) {
         "KMixedUnitInstance $this does not represent a pure molar energy " +
-            "(expected KMassUnit^1, KDistanceUnit^2, KTimeUnit^-2 and KAmountOfSubstanceUnit^-1)"
+                "(expected KMassUnit^1, KDistanceUnit^2, KTimeUnit^-2 and KAmountOfSubstanceUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -2.0) *
-        Math.pow(substanceTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -2.0) *
+            Math.pow(substanceTerm.unit.baseValue, -1.0)
     return molarEnergyInstanceOf(gramBaseProduct / MOLAR_ENERGY_MASS_REFERENCE)
 }

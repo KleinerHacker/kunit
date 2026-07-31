@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.kinematic.time
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitDisplay
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import java.time.Duration
 import java.time.temporal.TemporalUnit
 import kotlin.math.floor
@@ -66,10 +62,12 @@ class KTimeUnitInstance internal constructor(
      * (1.hours + 30.minutes).value // 5400.0
      * ```
      */
-    override operator fun plus(other: KTimeUnitInstance): KTimeUnitInstance = KTimeUnitInstance(duration + other.duration)
+    override operator fun plus(other: KTimeUnitInstance): KTimeUnitInstance =
+        KTimeUnitInstance(duration + other.duration)
 
     /** Subtracts two durations. See [plus] for the automatic unit conversion; implemented as exact [Duration] subtraction. */
-    override operator fun minus(other: KTimeUnitInstance): KTimeUnitInstance = KTimeUnitInstance(duration - other.duration)
+    override operator fun minus(other: KTimeUnitInstance): KTimeUnitInstance =
+        KTimeUnitInstance(duration - other.duration)
 
     /**
      * Multiplies two time values, producing a new [KMixedUnitInstance] whose exponent is the sum of both
@@ -148,7 +146,8 @@ class KTimeUnitInstance internal constructor(
     fun plus(amount: Duration): KTimeUnitInstance = KTimeUnitInstance(duration.plus(amount))
 
     /** A copy with the given amount of the given [unit] added ([Duration.plus]). */
-    fun plus(amountToAdd: Long, unit: TemporalUnit): KTimeUnitInstance = KTimeUnitInstance(duration.plus(amountToAdd, unit))
+    fun plus(amountToAdd: Long, unit: TemporalUnit): KTimeUnitInstance =
+        KTimeUnitInstance(duration.plus(amountToAdd, unit))
 
     /** A copy with the given number of days added ([Duration.plusDays]). */
     fun plusDays(days: Long): KTimeUnitInstance = KTimeUnitInstance(duration.plusDays(days))
@@ -172,7 +171,8 @@ class KTimeUnitInstance internal constructor(
     fun minus(amount: Duration): KTimeUnitInstance = KTimeUnitInstance(duration.minus(amount))
 
     /** A copy with the given amount of the given [unit] subtracted ([Duration.minus]). */
-    fun minus(amountToSubtract: Long, unit: TemporalUnit): KTimeUnitInstance = KTimeUnitInstance(duration.minus(amountToSubtract, unit))
+    fun minus(amountToSubtract: Long, unit: TemporalUnit): KTimeUnitInstance =
+        KTimeUnitInstance(duration.minus(amountToSubtract, unit))
 
     /** A copy with the given number of days subtracted ([Duration.minusDays]). */
     fun minusDays(days: Long): KTimeUnitInstance = KTimeUnitInstance(duration.minusDays(days))

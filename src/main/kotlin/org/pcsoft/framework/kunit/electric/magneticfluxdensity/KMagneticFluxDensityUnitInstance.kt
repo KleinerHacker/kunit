@@ -12,14 +12,10 @@
 
 package org.pcsoft.framework.kunit.electric.magneticfluxdensity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **magnetic flux density**, i.e. exactly three terms in the
@@ -147,8 +143,8 @@ fun KMixedUnitInstance.toMagneticFluxDensity(): KMagneticFluxDensityUnitInstance
         "KMixedUnitInstance $this does not represent a pure magnetic flux density (expected KMassUnit^1, KTimeUnit^-2 and KElectricCurrentUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(timeTerm.unit.baseValue, -2.0) *
-        Math.pow(currentTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            Math.pow(timeTerm.unit.baseValue, -2.0) *
+            Math.pow(currentTerm.unit.baseValue, -1.0)
     return magneticFluxDensityInstanceOf(gramBaseProduct / TESLA_MASS_REFERENCE)
 }

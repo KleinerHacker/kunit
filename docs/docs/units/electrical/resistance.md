@@ -8,22 +8,22 @@ Type: **constructed unit**
 Electrical resistance is a **constructed** unit: the composition `mass · length² · time⁻³ · current⁻²`
 (`kg·m²·s⁻³·A⁻²`). `KResistanceUnitInstance` wraps a `KMixedUnitInstance` of four terms — `KMassUnit.BASE`
 (gram) at `+1`, `KDistanceUnit.BASE` (meter) at `+2`, `KTimeUnit.BASE` (second) at `-3` and
-`KElectricCurrentUnit.BASE` (ampere) at `-2`. Because the mass component of the library is normalized to
-**grams** (not kilograms), the ohm is 1000× the raw component base; the stored value is normalized to ohms.
+`KElectricCurrentUnit.BASE` (ampere) at `-2`. Because the mass component of the library is normalized to **grams** (not
+kilograms), the ohm is 1000× the raw component base; the stored value is normalized to ohms.
 
 ## Building a resistance
 
-Build a resistance with a named token, or from a decomposition (see below). Named units survive as
-value-1 tokens (used with `of`/`into`):
+Build a resistance with a named token, or from a decomposition (see below). Named units survive as value-1 tokens (used
+with `of`/`into`):
 
-| Resistance | Symbol | Token | 1 unit in Ω |
-|---|---|---:|---:|
-| Ohm | `Ω` | `ohms` | 1.0 |
-| Statohm (CGS-ESU) | `statΩ` | `statohms` | 8.98755179e11 |
-| Abohm (CGS-EMU) | `abΩ` | `abohms` | 1.0e-9 |
-| International ohm | `Ω_int` | `internationalOhms` | 1.000049 |
-| Legal ohm (1884) | `Ω_leg` | `legalOhms` | 0.9972 |
-| Siemens mercury unit | `Ω_S` | `siemensUnits` | 0.9534 |
+| Resistance           | Symbol  |               Token |   1 unit in Ω |
+|----------------------|---------|--------------------:|--------------:|
+| Ohm                  | `Ω`     |              `ohms` |           1.0 |
+| Statohm (CGS-ESU)    | `statΩ` |          `statohms` | 8.98755179e11 |
+| Abohm (CGS-EMU)      | `abΩ`   |            `abohms` |        1.0e-9 |
+| International ohm    | `Ω_int` | `internationalOhms` |      1.000049 |
+| Legal ohm (1884)     | `Ω_leg` |         `legalOhms` |        0.9972 |
+| Siemens mercury unit | `Ω_S`   |      `siemensUnits` |        0.9534 |
 
 Named units support the SI prefixes via `KPrefixBuilder` (`kilo.ohms`, `mega.ohms`, `milli.ohms`, …).
 
@@ -41,24 +41,23 @@ r into kilo.ohms             // 0.47
 
 ## Multiple decompositions
 
-Resistance can be reached through several **equivalent decompositions**, all producing the same
-value-equal resistance:
+Resistance can be reached through several **equivalent decompositions**, all producing the same value-equal resistance:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `voltage / current` | `KResistanceUnitInstance` | Ohm's law `R = U / I` |
-| `mass·length²/(time³·current²)` | via `.toResistance()` | native canonical `kg·m²·s⁻³·A⁻²` expression |
+| Expression                      | Result type               | Meaning                                     |
+|---------------------------------|---------------------------|---------------------------------------------|
+| `voltage / current`             | `KResistanceUnitInstance` | Ohm's law `R = U / I`                       |
+| `mass·length²/(time³·current²)` | via `.toResistance()`     | native canonical `kg·m²·s⁻³·A⁻²` expression |
 
 The typed operator form returns a resistance directly. The fully native expression stays a generic
-`KMixedUnitInstance` and is narrowed with `toResistance()` (which recognises only the canonical normal
-form and throws `IllegalStateException` otherwise). Both routes are value-equal.
+`KMixedUnitInstance` and is narrowed with `toResistance()` (which recognises only the canonical normal form and throws
+`IllegalStateException` otherwise). Both routes are value-equal.
 
 The inverse Ohm's-law operators tie voltage, resistance and current together:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `resistance * current` | `KVoltageUnitInstance` | `U = R · I` (commutative) |
-| `voltage / resistance` | `KElectricCurrentUnitInstance` | `I = U / R` |
+| Expression             | Result type                    | Meaning                   |
+|------------------------|--------------------------------|---------------------------|
+| `resistance * current` | `KVoltageUnitInstance`         | `U = R · I` (commutative) |
+| `voltage / resistance` | `KElectricCurrentUnitInstance` | `I = U / R`               |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -81,16 +80,15 @@ raw.toResistance() == (115 of ohms)      // true
 
 ## Impedance and reactance
 
-In alternating current systems the opposition of a circuit is split into three quantities that are all
-**dimensionally identical** to the resistance and all measured in ohms:
+In alternating current systems the opposition of a circuit is split into three quantities that are all **dimensionally
+identical** to the resistance and all measured in ohms:
 
 * **resistance** `R` — the real, energy-dissipating part,
 * **reactance** `X = ωL − 1/(ωC)` — the part caused by inductance and capacitance,
 * **impedance** `Z = √(R² + X²)` — the magnitude of the complex opposition.
 
-Because they differ only in interpretation, KUnit models all three with this one group and the single
-symbol `Ω`; there is no separate token and no separate type. Build a reactance or an impedance exactly
-like a resistance:
+Because they differ only in interpretation, KUnit models all three with this one group and the single symbol `Ω`; there
+is no separate token and no separate type. Build a reactance or an impedance exactly like a resistance:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -106,8 +104,8 @@ val z = sqrt(30.0 * 30.0 + x.value * x.value) of ohms  // impedance Z ≈ 30.16 
 z into ohms                                     // ≈ 30.164
 ```
 
-The reactive part is driven by [inductance](inductance.md) and [capacitance](capacitance.md); the power
-it carries is expressed in `var`, see [Power (Electrical)](power.md).
+The reactive part is driven by [inductance](inductance.md) and [capacitance](capacitance.md); the power it carries is
+expressed in `var`, see [Power (Electrical)](power.md).
 
 ## Operators
 
@@ -131,11 +129,13 @@ import org.pcsoft.framework.kunit.electric.resistance.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `Ω` | `ohms` | resistance, base unit (named token, ohm) |
+| Mathematics     | Kotlin                                                              | Meaning                                                       |
+|-----------------|---------------------------------------------------------------------|---------------------------------------------------------------|
+| `Ω`             | `ohms`                                                              | resistance, base unit (named token, ohm)                      |
 | `kg·m²/(s³·A²)` | `kilo.grams * (meters pow 2) / ((amperes pow 2) * (seconds pow 3))` | resistance as mass·length² / (time³·current²) (fraction form) |
-| `kg·m²·s⁻³·A⁻²` | `kilo.grams * (meters pow 2) * (seconds pow -3) * (amperes pow -2)` | same resistance as a pure product |
-| `kΩ` | `kilo.ohms` | prefixed resistance (kiloohm) |
+| `kg·m²·s⁻³·A⁻²` | `kilo.grams * (meters pow 2) * (seconds pow -3) * (amperes pow -2)` | same resistance as a pure product                             |
+| `kΩ`            | `kilo.ohms`                                                         | prefixed resistance (kiloohm)                                 |

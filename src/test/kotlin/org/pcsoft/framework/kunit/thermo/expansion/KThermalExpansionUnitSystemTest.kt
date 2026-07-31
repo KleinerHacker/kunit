@@ -16,14 +16,8 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.micro
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KThermalExpansionUnitInstance` surface: round-trip, equality, `toString`, operators, conversion. */
 class KThermalExpansionUnitSystemTest {

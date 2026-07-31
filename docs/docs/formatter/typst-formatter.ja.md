@@ -1,7 +1,7 @@
 # Typst フォーマッター
 
-`KTypstUnitFormatter` は値を **Typst** の数式として描画します。既定設定では `3 of meters / seconds` を `km/h` に
-読み替えると `$1.5 upright("km")/upright("h")$` になります。
+`KTypstUnitFormatter` は値を **Typst** の数式として描画します。既定設定では `3 of meters / seconds` を `km/h` に 読み替えると
+`$1.5 upright("km")/upright("h")$` になります。
 
 `org.pcsoft.framework.kunit.formatter` パッケージにあり、不変でスレッドセーフな `class` です。
 
@@ -15,12 +15,12 @@
 
 `KTypstFormatConfig` は値型です。プリセットを選ぶか独自に構築します。
 
-| オプション        | 値                                        | 既定       |
-|------------------|------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `EXPONENT`                   | `FRACTION`|
-| `unitStyle`      | `UPRIGHT` (`upright("km")`), `TEXT` (`"km"`) | `UPRIGHT` |
-| `multiplication` | `SPACE` (空白), `DOT` (`dot`), `TIMES` (`times`) | `SPACE` |
-| `delimiter`      | `MATH` (`$…$`), `FRAGMENT`               | `MATH`    |
+| オプション       | 値                                               | 既定       |
+|------------------|--------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `EXPONENT`                           | `FRACTION` |
+| `unitStyle`      | `UPRIGHT` (`upright("km")`), `TEXT` (`"km"`)     | `UPRIGHT`  |
+| `multiplication` | `SPACE` (空白), `DOT` (`dot`), `TIMES` (`times`) | `SPACE`    |
+| `delimiter`      | `MATH` (`$…$`), `FRAGMENT`                       | `MATH`     |
 
 プリセット: `DEFAULT`, `FRAGMENT`（`$…$` 区切りなし）。
 

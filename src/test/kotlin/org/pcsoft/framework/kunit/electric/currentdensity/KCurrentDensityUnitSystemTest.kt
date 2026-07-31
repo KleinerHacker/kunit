@@ -12,19 +12,10 @@
 
 package org.pcsoft.framework.kunit.electric.currentdensity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.amperes
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import kotlin.test.*
 
 /**
  * `KCurrentDensityUnitInstance` surface: construction via expressions, `into`, equality, `toString`,

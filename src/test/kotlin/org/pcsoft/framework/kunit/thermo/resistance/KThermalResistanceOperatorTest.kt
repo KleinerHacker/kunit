@@ -18,7 +18,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.conductivity.KThermalConductivityUnitInstance
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.KHeatFluxDensityUnitInstance
@@ -111,10 +110,10 @@ class KThermalResistanceOperatorTest {
         val viaFlux = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
         val viaThickness = (1 of meters) / (1 of wattsPerMeterKelvin)
         val native = (
-            ((1 of seconds).toUnit() pow 3) *
-                KTemperatureDifference.ofKelvin(1).toUnit() /
-                (1000 of grams).toUnit()
-            ).toThermalResistance()
+                ((1 of seconds).toUnit() pow 3) *
+                        KTemperatureDifference.ofKelvin(1).toUnit() /
+                        (1000 of grams).toUnit()
+                ).toThermalResistance()
 
         assertIs<KThermalResistanceUnitInstance>(viaFlux)
         assertIs<KThermalResistanceUnitInstance>(viaThickness)

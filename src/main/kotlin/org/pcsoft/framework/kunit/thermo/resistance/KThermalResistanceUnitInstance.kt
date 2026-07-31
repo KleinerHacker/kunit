@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.resistance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnit
@@ -120,11 +116,11 @@ fun KMixedUnitInstance.toThermalResistance(): KThermalResistanceUnitInstance {
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == 1 }
     check(units.size == 3 && massTerm != null && timeTerm != null && temperatureTerm != null) {
         "KMixedUnitInstance $this does not represent a pure thermal resistance " +
-            "(expected KMassUnit^-1, KTimeUnit^3 and KTemperatureDifferenceUnit^1)"
+                "(expected KMassUnit^-1, KTimeUnit^3 and KTemperatureDifferenceUnit^1)"
     }
     val gramBaseProduct = value *
-        Math.pow(massTerm.unit.baseValue, -1.0) *
-        Math.pow(timeTerm.unit.baseValue, 3.0) *
-        temperatureTerm.unit.baseValue
+            Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(timeTerm.unit.baseValue, 3.0) *
+            temperatureTerm.unit.baseValue
     return thermalResistanceInstanceOf(gramBaseProduct * THERMAL_RESISTANCE_MASS_REFERENCE)
 }

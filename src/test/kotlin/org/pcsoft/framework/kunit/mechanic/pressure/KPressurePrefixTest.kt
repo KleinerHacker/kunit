@@ -12,12 +12,9 @@
 
 package org.pcsoft.framework.kunit.mechanic.pressure
 
-import org.pcsoft.framework.kunit.hecto
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.mechanic.force.newtons
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -34,5 +31,22 @@ class KPressurePrefixTest {
     @Test
     fun `prefixed bars`() {
         assertEquals(100.0, (1 of milli.bars) into pascals, 1e-9) // 1 mbar = 100 Pa
+    }
+
+    /**
+     * The mechanical-stress and elastic-modulus spellings are prefix aliases of the pascal, not units of
+     * their own: N/mm² = MPa and the GPa of the elastic modulus (see the `stress` documentation page).
+     */
+    @Test
+    fun `stress and modulus aliases`() {
+        assertEquals(1.0e6, (1 of mega.pascals) into pascals, 1e-3)
+        assertEquals(1.0e9, (1 of giga.pascals) into pascals, 1.0)
+        assertEquals(1000.0, (1 of giga.pascals) into mega.pascals, 1e-6)
+        // N/mm² is exactly the megapascal
+        assertEquals(
+            1.0,
+            ((1 of newtons) / ((1 of milli.meters) * (1 of milli.meters))) into mega.pascals,
+            1e-9,
+        )
     }
 }

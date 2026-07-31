@@ -21,20 +21,25 @@ import org.pcsoft.framework.kunit.KUnitDisplay
 // --- SI ------------------------------------------------------------------------------------------
 
 /** 1 ampere ([KElectricCurrentUnit.AMPERE]). */
-val amperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.AMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.AMPERE))
+val amperes: KElectricCurrentUnitInstance =
+    electricCurrentOf(KElectricCurrentUnit.AMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.AMPERE))
 
 // --- CGS -----------------------------------------------------------------------------------------
 
 /** 1 biot / abampere ([KElectricCurrentUnit.BIOT]). */
-val biot: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue, KUnitDisplay(KElectricCurrentUnit.BIOT))
+val biot: KElectricCurrentUnitInstance =
+    electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue, KUnitDisplay(KElectricCurrentUnit.BIOT))
 
 /** 1 abampere, the alias spelling of the biot ([KElectricCurrentUnit.BIOT]). */
-val abamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue, KUnitDisplay(KElectricCurrentUnit.BIOT))
+val abamperes: KElectricCurrentUnitInstance =
+    electricCurrentOf(KElectricCurrentUnit.BIOT.baseValue, KUnitDisplay(KElectricCurrentUnit.BIOT))
 
 /** 1 statampere ([KElectricCurrentUnit.STATAMPERE]). */
-val statamperes: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.STATAMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.STATAMPERE))
+val statamperes: KElectricCurrentUnitInstance =
+    electricCurrentOf(KElectricCurrentUnit.STATAMPERE.baseValue, KUnitDisplay(KElectricCurrentUnit.STATAMPERE))
 
 // --- Magnetic circuit ----------------------------------------------------------------------------
 
 /** 1 ampere turn ([KElectricCurrentUnit.AMPERE_TURN]), the magnetomotive force `Θ = N · I`. */
-val ampereTurns: KElectricCurrentUnitInstance = electricCurrentOf(KElectricCurrentUnit.AMPERE_TURN.baseValue, KUnitDisplay(KElectricCurrentUnit.AMPERE_TURN))
+val ampereTurns: KElectricCurrentUnitInstance =
+    electricCurrentOf(KElectricCurrentUnit.AMPERE_TURN.baseValue, KUnitDisplay(KElectricCurrentUnit.AMPERE_TURN))

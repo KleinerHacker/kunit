@@ -6,23 +6,22 @@ Base unit: **cubic meter per second** (`KVolumeFlowUnit.BASE == KVolumeFlowUnit.
 Type: **constructed unit**
 
 Volumetric flow (volume flow rate) describes how much volume passes a cross-section per unit of time:
-`distance³ · time⁻¹` (`m³/s`). `KVolumeFlowUnitInstance` wraps a `KMixedUnitInstance` of exactly two terms
-— one `KDistanceUnit.BASE` (meter) at exponent `+3` and one `KTimeUnit.BASE` (second) at exponent `-1`. The
-value is always stored normalized to cubic meters per second, regardless of which unit or volume/time
-combination it was created from.
+`distance³ · time⁻¹` (`m³/s`). `KVolumeFlowUnitInstance` wraps a `KMixedUnitInstance` of exactly two terms — one
+`KDistanceUnit.BASE` (meter) at exponent `+3` and one `KTimeUnit.BASE` (second) at exponent `-1`. The value is always
+stored normalized to cubic meters per second, regardless of which unit or volume/time combination it was created from.
 
 Unlike energy or power, volumetric flow has **no** mass dimension, so its stored value *is* the reading in
 `m³/s` — no gram/kilogram bridge is involved.
 
 ## Named units
 
-| Unit | Symbol | Token | 1 unit in m³/s |
-|---|---|---:|---:|
-| Cubic meter per second | `m³/s` | `cubicMetersPerSecond` | 1.0 |
-| Cubic meter per hour | `m³/h` | `cubicMetersPerHour` | 1/3600 ≈ 2.778e-4 |
-| Liter per second | `l/s` | `litersPerSecond` | 0.001 |
-| Liter per minute | `l/min` | `litersPerMinute` | 0.001/60 ≈ 1.667e-5 |
-| US gallon per minute | `gpm` | `usGallonsPerMinute` | ≈ 6.309e-5 |
+| Unit                   | Symbol  |                  Token |      1 unit in m³/s |
+|------------------------|---------|-----------------------:|--------------------:|
+| Cubic meter per second | `m³/s`  | `cubicMetersPerSecond` |                 1.0 |
+| Cubic meter per hour   | `m³/h`  |   `cubicMetersPerHour` |   1/3600 ≈ 2.778e-4 |
+| Liter per second       | `l/s`   |      `litersPerSecond` |               0.001 |
+| Liter per minute       | `l/min` |      `litersPerMinute` | 0.001/60 ≈ 1.667e-5 |
+| US gallon per minute   | `gpm`   |   `usGallonsPerMinute` |          ≈ 6.309e-5 |
 
 All of them accept the full SI prefix range as well (`milli.litersPerSecond`, `kilo.cubicMetersPerHour`, …).
 
@@ -42,8 +41,8 @@ q into usGallonsPerMinute     // ≈ 79.25
 
 ## Real-world example: filling a rainwater tank
 
-A garden pump delivers 300 l/min into a 5 m³ tank. How long does the tank take to fill, and what is the
-flow rate expressed in the units a pump datasheet uses?
+A garden pump delivers 300 l/min into a 5 m³ tank. How long does the tank take to fill, and what is the flow rate
+expressed in the units a pump datasheet uses?
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -69,12 +68,12 @@ volume into liters                  // 4500.0
 
 ## Computing with the core units (volume & time)
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `volume / time` | `KVolumeFlowUnitInstance` | flow rate = volume / duration |
-| `volumeFlow * time` | `KVolumeUnitInstance` | volume = flow rate × duration |
-| `time * volumeFlow` | `KVolumeUnitInstance` | volume (commutative) |
-| `volume / volumeFlow` | `KTimeUnitInstance` | duration = volume / flow rate |
+| Expression            | Result type               | Meaning                       |
+|-----------------------|---------------------------|-------------------------------|
+| `volume / time`       | `KVolumeFlowUnitInstance` | flow rate = volume / duration |
+| `volumeFlow * time`   | `KVolumeUnitInstance`     | volume = flow rate × duration |
+| `time * volumeFlow`   | `KVolumeUnitInstance`     | volume (commutative)          |
+| `volume / volumeFlow` | `KTimeUnitInstance`       | duration = volume / flow rate |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -98,10 +97,10 @@ t into minutes                            // 2.0
 
 Volumetric flow can be reached two ways; both produce the same typed, value-equal instance.
 
-| Decomposition | Form | Result |
-|---|---|---|
-| `volume / time` | typed operator | `KVolumeFlowUnitInstance` directly |
-| `distance³ · time⁻¹` | native expression + `toVolumeFlow()` | `KVolumeFlowUnitInstance` |
+| Decomposition        | Form                                 | Result                             |
+|----------------------|--------------------------------------|------------------------------------|
+| `volume / time`      | typed operator                       | `KVolumeFlowUnitInstance` directly |
+| `distance³ · time⁻¹` | native expression + `toVolumeFlow()` | `KVolumeFlowUnitInstance`          |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -121,8 +120,8 @@ typed == native // true - both are 2.0 m³/s
 ```
 
 `toVolumeFlow()` recognises **only** the canonical normal form (one `KDistanceUnit` term at exponent `+3`
-and one `KTimeUnit` term at exponent `-1`); any equivalent expression reduces onto it automatically. A
-wrong shape throws `IllegalStateException` rather than silently returning a wrong value.
+and one `KTimeUnit` term at exponent `-1`); any equivalent expression reduces onto it automatically. A wrong shape
+throws `IllegalStateException` rather than silently returning a wrong value.
 
 ## Operators
 
@@ -157,15 +156,17 @@ import org.pcsoft.framework.kunit.kinematic.volumeflow.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `m³/s` | `cubicMetersPerSecond` | volumetric flow, base unit — named token |
-| `m³·s⁻¹` | `(meters pow 3) / seconds` | same flow as a base-dimension expression |
-| `l/s` | `litersPerSecond` | liter per second |
-| `l/min` | `litersPerMinute` | liter per minute |
-| `m³/h` | `cubicMetersPerHour` | cubic meter per hour |
-| `V / t` | `(600 of liters) / (2 of minutes)` | build from volume ÷ time |
-| `V = q̇ · t` | `q * (60 of seconds)` | volume from flow rate × duration |
-| `t = V / q̇` | `(600 of liters) / q` | duration from volume ÷ flow rate |
+| Mathematics | Kotlin                             | Meaning                                  |
+|-------------|------------------------------------|------------------------------------------|
+| `m³/s`      | `cubicMetersPerSecond`             | volumetric flow, base unit — named token |
+| `m³·s⁻¹`    | `(meters pow 3) / seconds`         | same flow as a base-dimension expression |
+| `l/s`       | `litersPerSecond`                  | liter per second                         |
+| `l/min`     | `litersPerMinute`                  | liter per minute                         |
+| `m³/h`      | `cubicMetersPerHour`               | cubic meter per hour                     |
+| `V / t`     | `(600 of liters) / (2 of minutes)` | build from volume ÷ time                 |
+| `V = q̇ · t` | `q * (60 of seconds)`              | volume from flow rate × duration         |
+| `t = V / q̇` | `(600 of liters) / q`              | duration from volume ÷ flow rate         |

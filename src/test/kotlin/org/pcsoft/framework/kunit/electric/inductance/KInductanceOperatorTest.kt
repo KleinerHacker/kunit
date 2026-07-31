@@ -13,26 +13,18 @@
 package org.pcsoft.framework.kunit.electric.inductance
 
 import org.junit.jupiter.api.TestInstance
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnitInstance
 import org.pcsoft.framework.kunit.electric.current.amperes
-import org.pcsoft.framework.kunit.kinematic.frequency.hertz
-import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.electric.magneticflux.KMagneticFluxUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticflux.webers
-import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.electric.resistance.KResistanceUnitInstance
 import org.pcsoft.framework.kunit.electric.resistance.ohms
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import kotlin.test.*
 
 /**
  * The inductance operators: same-type arithmetic/comparison, the escape of `inductance*inductance`/

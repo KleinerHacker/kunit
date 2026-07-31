@@ -17,8 +17,8 @@ import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * The fixed factor between the group's named base unit (newton) and the raw component storage
@@ -58,10 +58,12 @@ class KForceUnitInstance internal constructor(internal val instance: KMixedUnitI
      * Adds two forces, automatically converting between different [KForceUnit]s since both operands are
      * always normalized to the same component base internally.
      */
-    override operator fun plus(other: KForceUnitInstance): KForceUnitInstance = KForceUnitInstance(instance + other.instance)
+    override operator fun plus(other: KForceUnitInstance): KForceUnitInstance =
+        KForceUnitInstance(instance + other.instance)
 
     /** Subtracts two forces. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KForceUnitInstance): KForceUnitInstance = KForceUnitInstance(instance - other.instance)
+    override operator fun minus(other: KForceUnitInstance): KForceUnitInstance =
+        KForceUnitInstance(instance - other.instance)
 
     /** Multiplies two forces, producing a new [KMixedUnitInstance] (no longer a "pure" force). */
     operator fun times(other: KForceUnitInstance): KMixedUnitInstance = instance * other.instance
@@ -95,7 +97,8 @@ fun KMixedUnitInstance.toForce(): KForceUnitInstance {
     check(units.size == 3 && massTerm != null && lengthTerm != null && timeTerm != null) {
         "KMixedUnitInstance $this does not represent a pure force (expected one KMassUnit^1, one KDistanceUnit^1 and one KTimeUnit^-2 term)"
     }
-    val component = value * massTerm.unit.baseValue * lengthTerm.unit.baseValue * Math.pow(timeTerm.unit.baseValue, -2.0)
+    val component =
+        value * massTerm.unit.baseValue * lengthTerm.unit.baseValue * Math.pow(timeTerm.unit.baseValue, -2.0)
     return forceUnitInstanceOf(component)
 }
 

@@ -5,25 +5,25 @@
 
 النوع: **وحدة مركّبة**
 
-الطاقة المولية هي الطاقة لكل كمّية مادة: `energy / amountOfSubstance` (`J/mol`). وحسب السياق تُسمّى
-نفس الكمّية *الإنثالبي المولي* أو *إنثالبي التفاعل* أو *طاقة الرابطة*.
+الطاقة المولية هي الطاقة لكل كمّية مادة: `energy / amountOfSubstance` (`J/mol`). وحسب السياق تُسمّى نفس الكمّية
+*الإنثالبي المولي* أو *إنثالبي التفاعل* أو *طاقة الرابطة*.
 
 يغلّف `KMolarEnergyUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود بالضبط بالصيغة القياسية
 `mass¹ · distance² · time⁻² · substance⁻¹` (`kg·m²·s⁻²·mol⁻¹`)، مطبَّعًا دائمًا إلى J/mol.
 
-ولكل وحدة درجة حرارة تصبح [السعة الحرارية المولية](molar-heat-capacity.md)؛ ولكل كيلوغرام بدلًا من
-مول تصبح [الطاقة النوعية](specific-energy.md).
+ولكل وحدة درجة حرارة تصبح [السعة الحرارية المولية](molar-heat-capacity.md)؛ ولكل كيلوغرام بدلًا من مول
+تصبح [الطاقة النوعية](specific-energy.md).
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ J/mol |
-|---|---|---:|---:|
-| جول لكل مول | `J/mol` | `joulesPerMole` | 1.0 |
-| سعرة لكل مول | `cal/mol` | `caloriesPerMole` | 4.184 |
-| إلكترون فولت لكل وحدة | `eV/entity` | `electronVoltsPerEntity` | 96485.33212 |
+| الوحدة                | الرمز       |            الرمز البرمجي | 1 وحدة بـ J/mol |
+|-----------------------|-------------|-------------------------:|----------------:|
+| جول لكل مول           | `J/mol`     |          `joulesPerMole` |             1.0 |
+| سعرة لكل مول          | `cal/mol`   |        `caloriesPerMole` |           4.184 |
+| إلكترون فولت لكل وحدة | `eV/entity` | `electronVoltsPerEntity` |     96485.33212 |
 
-يحوّل رمز الإلكترون فولت لكل وحدة طاقة *لكل جسيم* إلى طاقة *لكل مول* — عامله هو ثابت فارادي. جميع
-الوحدات تدعم نطاق بادئات النظام الدولي الكامل (`kilo.joulesPerMole`، `kilo.caloriesPerMole`،
+يحوّل رمز الإلكترون فولت لكل وحدة طاقة *لكل جسيم* إلى طاقة *لكل مول* — عامله هو ثابت فارادي. جميع الوحدات تدعم نطاق
+بادئات النظام الدولي الكامل (`kilo.joulesPerMole`، `kilo.caloriesPerMole`،
 `milli.electronVoltsPerEntity`، …).
 
 ```kotlin
@@ -40,8 +40,7 @@ dH into electronVoltsPerEntity   // ≈ 2.964 eV per molecule
 
 ## مثال واقعي: احتراق الهيدروجين
 
-إنثالبي تكوين الماء السائل هو −286 kJ/mol. كم من الطاقة تُطلَق عند احتراق 4 مولات من الهيدروجين، وكم
-ذلك لكل جزيء؟
+إنثالبي تكوين الماء السائل هو −286 kJ/mol. كم من الطاقة تُطلَق عند احتراق 4 مولات من الهيدروجين، وكم ذلك لكل جزيء؟
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -69,21 +68,21 @@ n into moles                           // ≈ -3.497 mol
 
 ## الحساب باستخدام الوحدات الأساسية (الطاقة وكمّية المادة)
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `energy / amountOfSubstance` | `KMolarEnergyUnitInstance` | الطاقة المولية |
-| `molarEnergy * amountOfSubstance` | `KEnergyUnitInstance` | الطاقة الكلّية |
-| `amountOfSubstance * molarEnergy` | `KEnergyUnitInstance` | الطاقة الكلّية (تبادلي) |
-| `energy / molarEnergy` | `KAmountOfSubstanceUnitInstance` | كمّية المادة المعنيّة |
+| التعبير                           | نوع النتيجة                      | المعنى                 |
+|-----------------------------------|----------------------------------|------------------------|
+| `energy / amountOfSubstance`      | `KMolarEnergyUnitInstance`       | الطاقة المولية         |
+| `molarEnergy * amountOfSubstance` | `KEnergyUnitInstance`            | الطاقة الكلّية          |
+| `amountOfSubstance * molarEnergy` | `KEnergyUnitInstance`            | الطاقة الكلّية (تبادلي) |
+| `energy / molarEnergy`            | `KAmountOfSubstanceUnitInstance` | كمّية المادة المعنيّة    |
 
 ## التفكيكات
 
 كلا التفكيكين يُنتجان نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `energy / amountOfSubstance` | معامل مكتوب بنوع صريح | `KMolarEnergyUnitInstance` مباشرة |
-| `mass · distance² · time⁻² · substance⁻¹` | تعبير أصلي + `toMolarEnergy()` | `KMolarEnergyUnitInstance` |
+| التفكيك                                   | الصيغة                         | النتيجة                           |
+|-------------------------------------------|--------------------------------|-----------------------------------|
+| `energy / amountOfSubstance`              | معامل مكتوب بنوع صريح          | `KMolarEnergyUnitInstance` مباشرة |
+| `mass · distance² · time⁻² · substance⁻¹` | تعبير أصلي + `toMolarEnergy()` | `KMolarEnergyUnitInstance`        |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -140,16 +139,16 @@ import org.pcsoft.framework.kunit.thermo.molarenergy.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `J/mol` | `joulesPerMole` | الطاقة المولية، الوحدة الأساسية — رمز مسمّى |
-| `kg·m²·s⁻²·mol⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles` | نفس الكمّية بالأبعاد الأساسية |
-| `kJ/mol` | `kilo.joulesPerMole` | كيلوجول لكل مول |
-| `eV` (لكل جسيم) | `electronVoltsPerEntity` | إلكترون فولت لكل وحدة أولية |
-| `ΔH_m = Q / n` | `(572 of kilo.joules) / (2 of moles)` | الطاقة المولية من الطاقة ÷ الكمّية |
-| `Q = ΔH_m · n` | `formation * hydrogen` | الطاقة من الطاقة المولية × الكمّية |
-| `n = Q / ΔH_m` | `(1 of mega.joules) / formation` | الكمّية من الطاقة ÷ الطاقة المولية |
+| الرياضيات         | Kotlin                                             | المعنى                                     |
+|-------------------|----------------------------------------------------|--------------------------------------------|
+| `J/mol`           | `joulesPerMole`                                    | الطاقة المولية، الوحدة الأساسية — رمز مسمّى |
+| `kg·m²·s⁻²·mol⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles` | نفس الكمّية بالأبعاد الأساسية               |
+| `kJ/mol`          | `kilo.joulesPerMole`                               | كيلوجول لكل مول                            |
+| `eV` (لكل جسيم)   | `electronVoltsPerEntity`                           | إلكترون فولت لكل وحدة أولية                |
+| `ΔH_m = Q / n`    | `(572 of kilo.joules) / (2 of moles)`              | الطاقة المولية من الطاقة ÷ الكمّية          |
+| `Q = ΔH_m · n`    | `formation * hydrogen`                             | الطاقة من الطاقة المولية × الكمّية          |
+| `n = Q / ΔH_m`    | `(1 of mega.joules) / formation`                   | الكمّية من الطاقة ÷ الطاقة المولية          |

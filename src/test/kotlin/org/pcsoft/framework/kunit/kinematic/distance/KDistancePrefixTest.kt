@@ -12,21 +12,10 @@
 
 package org.pcsoft.framework.kunit.kinematic.distance
 
-import org.pcsoft.framework.kunit.KPrefixBuilder
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.deca
-import org.pcsoft.framework.kunit.deci
-import org.pcsoft.framework.kunit.giga
-import org.pcsoft.framework.kunit.hecto
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.of
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.*
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals

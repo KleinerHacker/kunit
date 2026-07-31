@@ -3,44 +3,44 @@
 パッケージ: `org.pcsoft.framework.kunit.mechanic.mass`、`…force`、`…pressure`、`…density`、`…areadensity`、`…power`、
 `…energy`
 
-力学(動力学)は、物体が**なぜ**動くのか、そして物質がどう分布するのかを問います — 質量、それに働く力、
+力学 (動力学)は、物体が **なぜ**動くのか、そして物質がどう分布するのかを問います — 質量、それに働く力、
 力が面積に及ぼす圧力、そして体積や表面にどれだけの質量が詰まっているか、の相互作用です。
-[運動学](../kinematics/overview.md)の割合の上に、この話題は 1 つの**ネイティブ**基本量(質量)と、
-質量・長さ・時間から**構成された** 4 つの量を加えます。
+[運動学](../kinematics/overview.md)の割合の上に、この話題は 1 つの **ネイティブ**基本量 (質量)と、 質量・長さ・時間から
+**構成された** 4 つの量を加えます。
 
 ## この話題の単位
 
-| 単位 | 種別 | 基準単位 | ページ |
-|---|---|---|---|
-| 質量 | ネイティブ | グラム(`g`) | [質量](mass.md) |
-| 力 | 構成 | ニュートン(`N`) | [力](force.md) |
-| 圧力 | 構成 | パスカル(`Pa`) | [圧力](pressure.md) |
-| 密度 | 構成 | キログラム毎立方メートル(`kg/m³`) | [密度](density.md) |
-| 面密度 | 構成 | キログラム毎平方メートル(`kg/m²`) | [面密度](areadensity.md) |
-| 電力 | 構成 | ワット(`W`) | [電力(力学)](power.md) |
-| エネルギー | 構成 | ジュール(`J`) | [エネルギー(力学)](energy.md) |
+| 単位       | 種別       | 基準単位                          | ページ                        |
+|------------|------------|-----------------------------------|-------------------------------|
+| 質量       | ネイティブ | グラム(`g`)                       | [質量](mass.md)               |
+| 力         | 構成       | ニュートン(`N`)                   | [力](force.md)                |
+| 圧力       | 構成       | パスカル(`Pa`)                    | [圧力](pressure.md)           |
+| 密度       | 構成       | キログラム毎立方メートル(`kg/m³`) | [密度](density.md)            |
+| 面密度     | 構成       | キログラム毎平方メートル(`kg/m²`) | [面密度](areadensity.md)      |
+| 電力       | 構成       | ワット(`W`)                       | [電力(力学)](power.md)        |
+| エネルギー | 構成       | ジュール(`J`)                     | [エネルギー(力学)](energy.md) |
 
-電力とエネルギーは技術的にはそれぞれ**単一の**量であり、他の分野とも共有されています。それらは分野ごとに
-文書化され、互いに相互参照します([電力(電気)](../electrical/power.md)、
-[電力(熱力学)](../thermodynamics/power.md)、[エネルギー(電気)](../electrical/energy.md)、
-[エネルギー(熱力学)](../thermodynamics/energy.md))。
+電力とエネルギーは技術的にはそれぞれ **単一の**量であり、他の分野とも共有されています。それらは分野ごとに 文書化され、互いに相互参照します
+([電力 (電気)](../electrical/power.md)、
+[電力 (熱力学)](../thermodynamics/power.md)、[エネルギー (電気)](../electrical/energy.md)、
+[エネルギー (熱力学)](../thermodynamics/energy.md))。
 
 ## 量どうしの関係
 
-| 式 | 結果 | 公式 |
-|---|---|---|
-| `mass * acceleration` | 力 | `F = m · a` |
-| `force / area` | 圧力 | `p = F / A` |
-| `pressure * area` | 力 | `F = p · A` |
-| `mass / volume` | 密度 | `ρ = m / V` |
-| `density * length` | 面密度 | `ρ_A = ρ · d` |
-| `force * speed` | 電力 | `P = F · v` |
-| `power / speed` | 力 | `F = P / v` |
-| `power / force` | 速さ | `v = P / F` |
-| `force * length` | エネルギー(仕事) | `W = F · s` |
-| `power * time` | エネルギー | `W = P · t` |
-| `energy / time` | 電力 | `P = W / t` |
-| `energy / power` | 時間 | `t = W / P` |
+| 式                    | 結果             | 公式          |
+|-----------------------|------------------|---------------|
+| `mass * acceleration` | 力               | `F = m · a`   |
+| `force / area`        | 圧力             | `p = F / A`   |
+| `pressure * area`     | 力               | `F = p · A`   |
+| `mass / volume`       | 密度             | `ρ = m / V`   |
+| `density * length`    | 面密度           | `ρ_A = ρ · d` |
+| `force * speed`       | 電力             | `P = F · v`   |
+| `power / speed`       | 力               | `F = P / v`   |
+| `power / force`       | 速さ             | `v = P / F`   |
+| `force * length`      | エネルギー(仕事) | `W = F · s`   |
+| `power * time`        | エネルギー       | `W = P · t`   |
+| `energy / time`       | 電力             | `P = W / t`   |
+| `energy / power`      | 時間             | `t = W / P`   |
 
 ## 実例 — ニュートンの運動第 2 法則と接地圧
 
@@ -67,7 +67,7 @@ p into pascals                                         // ≈ 39.23(Pa)
 
 ## 実例 — 密度から鋼部品の質量
 
-鋼の密度は **7850 kg/m³** です。**2 L** の部品の質量は `m = ρ · V` です:
+鋼の密度は **7850 kg/m³** です。 **2 L** の部品の質量は `m = ρ · V` です:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -85,8 +85,8 @@ mass into kilo.grams                                      // 15.7(2 L あたり�
 
 ## 実例 — ウインチの仕事と動力
 
-ウインチが **100 N** の力で **5 m** を **5 s** で引きます。仕事は `W = F · s`、動力は `P = W / t` —
-これは直接的な力学的形式 `P = F · v` と等しくなります:
+ウインチが **100 N** の力で **5 m** を **5 s** で引きます。仕事は `W = F · s`、動力は `P = W / t` — これは直接的な力学的形式
+`P = F · v` と等しくなります:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -108,9 +108,9 @@ val direct = (100 of newtons) * ((1 of meters) / (1 of seconds)) // P = F · v�
 p == direct                                                  // true
 ```
 
-## 値の出力(`toString`)
+## 値の出力 (`toString`)
 
-`toString()` は値をそのグループの**基準単位**(値 + 記号)で出力します。他の単位には `into` を文字列
+`toString()` は値をそのグループの **基準単位**(値 + 記号)で出力します。他の単位には `into` を文字列
 テンプレート内で使い、記号を自分で付け足します:
 
 ```kotlin
@@ -126,24 +126,24 @@ f.toString()                 // "10.0 N"(基準単位)
 
 ## 記法
 
-下表は、この分野の中核的な関係を数学表記と KUnit の Kotlin 表記で対比します。指数は Unicode 上付き文字
-(`²`、`³`、`⁻¹`)、`·` は乗算、`/` は分数を表します。
+下表は、この分野の中核的な関係を数学表記と KUnit の Kotlin 表記で対比します。指数は Unicode 上付き文字 (`²`、`³`、`⁻¹`)、`·`
+は乗算、`/` は分数を表します。
 
-| 数学 | Kotlin | 意味 |
-|---|---|---|
-| `F = m · a` | `(2 of kilo.grams) * (1 of standardGravities)` | 質量×加速度から力 |
-| `p = F / A` | `f / area` | 力÷面積から圧力 |
-| `F = p · A` | `p * area` | 圧力×面積から力 |
-| `ρ = m / V` | `(6 of kilo.grams) / (2 of liters)` | 質量÷体積から密度 |
-| `m = ρ · V` | `steel * (2 of liters)` | 密度×体積から質量 |
-| `W = F · s` | `(100 of newtons) * (5 of meters)` | 長さ×力から仕事 |
-| `P = F · v` | `(100 of newtons) * ((1 of meters) / (1 of seconds))` | 力×速さから動力 |
-| `P = W / t` | `w / (5 of seconds)` | 仕事÷時間から動力 |
+| 数学        | Kotlin                                                | 意味              |
+|-------------|-------------------------------------------------------|-------------------|
+| `F = m · a` | `(2 of kilo.grams) * (1 of standardGravities)`        | 質量×加速度から力 |
+| `p = F / A` | `f / area`                                            | 力÷面積から圧力   |
+| `F = p · A` | `p * area`                                            | 圧力×面積から力   |
+| `ρ = m / V` | `(6 of kilo.grams) / (2 of liters)`                   | 質量÷体積から密度 |
+| `m = ρ · V` | `steel * (2 of liters)`                               | 密度×体積から質量 |
+| `W = F · s` | `(100 of newtons) * (5 of meters)`                    | 長さ×力から仕事   |
+| `P = F · v` | `(100 of newtons) * ((1 of meters) / (1 of seconds))` | 力×速さから動力   |
+| `P = W / t` | `w / (5 of seconds)`                                  | 仕事÷時間から動力 |
 
 ## 次に読むもの
 
-* [質量](mass.md) — ネイティブな基本量(グラム正規化)。
+* [質量](mass.md) — ネイティブな基本量 (グラム正規化)。
 * [力](force.md) と [圧力](pressure.md) — ニュートンの法則と、面積あたりの力。
 * [密度](density.md) と [面密度](areadensity.md) — 体積あたり・表面あたりの質量。
-* [電力(力学)](power.md) — ワット、`F · v`、およびホースパワー単位。
-* [エネルギー(力学)](energy.md) — 力学的仕事 `F · s` としてのジュール。
+* [電力 (力学)](power.md) — ワット、`F · v`、およびホースパワー単位。
+* [エネルギー (力学)](energy.md) — 力学的仕事 `F · s` としてのジュール。

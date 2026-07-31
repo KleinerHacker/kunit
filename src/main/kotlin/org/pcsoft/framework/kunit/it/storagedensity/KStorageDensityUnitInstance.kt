@@ -16,8 +16,8 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.it.storage.KStorageUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a storage density, i.e. exactly two terms - one
@@ -102,13 +102,16 @@ fun KMixedUnitInstance.toStorageDensity(): KStorageDensityUnitInstance {
         "KMixedUnitInstance $this does not represent a pure storage density (expected one KStorageUnit^1 and one KDistanceUnit^-2 term)"
     }
     val bytesPerSquareMeter = value *
-        Math.pow(storageTerm.unit.baseValue, storageTerm.exponent.toDouble()) *
-        Math.pow(areaTerm.unit.baseValue, areaTerm.exponent.toDouble())
+            Math.pow(storageTerm.unit.baseValue, storageTerm.exponent.toDouble()) *
+            Math.pow(areaTerm.unit.baseValue, areaTerm.exponent.toDouble())
     return storageDensityUnitInstanceOf(bytesPerSquareMeter)
 }
 
 /** Builds a [KStorageDensityUnitInstance] from a value already expressed in bytes per square meter ([KStorageDensityUnit.BASE]). */
 internal fun storageDensityUnitInstanceOf(bytesPerSquareMeter: Double): KStorageDensityUnitInstance =
     KStorageDensityUnitInstance(
-        KMixedUnitInstance(bytesPerSquareMeter, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, -2))),
+        KMixedUnitInstance(
+            bytesPerSquareMeter,
+            listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, -2))
+        ),
     )

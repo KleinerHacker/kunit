@@ -26,7 +26,11 @@ private fun prefixedInductance(builder: KPrefixBuilder, unit: KInductanceUnit): 
 val KPrefixBuilder.henries: KInductanceUnitInstance get() = prefixedInductance(this, KInductanceUnit.HENRY)
 
 /** Prefixed webers per ampere, e.g. `milli.webersPerAmpere`. */
-val KPrefixBuilder.webersPerAmpere: KInductanceUnitInstance get() = prefixedInductance(this, KInductanceUnit.WEBER_PER_AMPERE)
+val KPrefixBuilder.webersPerAmpere: KInductanceUnitInstance
+    get() = prefixedInductance(
+        this,
+        KInductanceUnit.WEBER_PER_AMPERE
+    )
 
 /** Prefixed abhenries, e.g. `kilo.abhenries`. */
 val KPrefixBuilder.abhenries: KInductanceUnitInstance get() = prefixedInductance(this, KInductanceUnit.ABHENRY)

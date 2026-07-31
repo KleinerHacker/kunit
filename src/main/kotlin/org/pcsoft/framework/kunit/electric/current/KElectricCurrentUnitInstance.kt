@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.electric.current
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitDisplay
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 
 /**
  * An **electric current** value: the "pure" wrapper of the electric current group, a single

@@ -12,11 +12,11 @@
 
 package org.pcsoft.framework.kunit.mechanic.pressure
 
+import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.mechanic.force.KForceUnitInstance
 import org.pcsoft.framework.kunit.mechanic.force.newtons
-import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.of
 import kotlin.test.Test
 import kotlin.test.assertEquals

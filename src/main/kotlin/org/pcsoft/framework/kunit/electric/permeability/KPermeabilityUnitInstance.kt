@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.permeability
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **permeability**, i.e. exactly four terms in the canonical
@@ -146,9 +142,9 @@ fun KMixedUnitInstance.toPermeability(): KPermeabilityUnitInstance {
         "KMixedUnitInstance $this does not represent a pure permeability (expected KMassUnit^1, KDistanceUnit^1, KTimeUnit^-2 and KElectricCurrentUnit^-2)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        distanceTerm.unit.baseValue *
-        Math.pow(timeTerm.unit.baseValue, -2.0) *
-        Math.pow(currentTerm.unit.baseValue, -2.0)
+            massTerm.unit.baseValue *
+            distanceTerm.unit.baseValue *
+            Math.pow(timeTerm.unit.baseValue, -2.0) *
+            Math.pow(currentTerm.unit.baseValue, -2.0)
     return permeabilityInstanceOf(gramBaseProduct / HENRY_PER_METER_MASS_REFERENCE)
 }

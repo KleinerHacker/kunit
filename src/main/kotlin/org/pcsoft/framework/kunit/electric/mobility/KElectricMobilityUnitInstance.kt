@@ -12,14 +12,10 @@
 
 package org.pcsoft.framework.kunit.electric.mobility
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **electric mobility**, i.e. exactly three terms in the
@@ -147,8 +143,8 @@ fun KMixedUnitInstance.toElectricMobility(): KElectricMobilityUnitInstance {
         "KMixedUnitInstance $this does not represent a pure electric mobility (expected KMassUnit^-1, KTimeUnit^2 and KElectricCurrentUnit^1)"
     }
     val gramBaseProduct = value *
-        Math.pow(massTerm.unit.baseValue, -1.0) *
-        Math.pow(timeTerm.unit.baseValue, 2.0) *
-        currentTerm.unit.baseValue
+            Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(timeTerm.unit.baseValue, 2.0) *
+            currentTerm.unit.baseValue
     return electricMobilityInstanceOf(gramBaseProduct * SQUARE_METER_PER_VOLT_SECOND_MASS_REFERENCE)
 }

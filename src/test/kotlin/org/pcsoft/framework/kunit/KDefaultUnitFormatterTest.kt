@@ -12,16 +12,12 @@
 
 package org.pcsoft.framework.kunit
 
-import org.pcsoft.framework.kunit.formatter.KDefaultDivision
-import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
-import org.pcsoft.framework.kunit.formatter.KDefaultMultiplication
-import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
-import org.pcsoft.framework.kunit.formatter.KUnitFormatContext
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.formatter.*
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
-import java.util.Locale
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

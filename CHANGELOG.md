@@ -4,13 +4,38 @@
 
 ### Added
 
-- **New native unit Amount of Substance.** `org.pcsoft.framework.kunit.thermo.amountofsubstance` with base
-  unit mole (`mol`, `KAmountOfSubstanceUnit.BASE`), the tokens `moles` and `poundMoles` (both
-  prefix-combinable, e.g. `milli.moles`), the constant `AVOGADRO_CONSTANT` and
+- **New periodic table `KChemicalElement`.** The chemical elements of the classic school periodic table (main and sub
+  groups of periods 1-6 without the f-block, 71 entries) as an enum in the root package
+  `org.pcsoft.framework.kunit`, together with `KChemicalElementCategory`. Every entry carries its positional data
+  (`ordinalNumber`, `symbol`, `fullName`, `period`, `mainGroup`/`subGroup`, `category`)
+  and its physical constants as **typed unit instances**: `molarMass`, `molarVolume`, `atomicRadius`,
+  `covalentRadius`, `density`, `meltingPoint`, `boilingPoint`, `specificHeatCapacity`,
+  `thermalConductivity`, `ionizationEnergy`, `electricalResistivity` and the dimensionless
+  `electronegativity`. Constants that are undefined for an element are `null` and have a matching
+  `has...` flag. Lookups: `ofSymbol`, `ofFullName`, `ofOrdinalNumber`, `ofMainGroup`, `ofSubGroup`,
+  `ofPeriod`, `ofCategory`.
+
+- **New standardized unit Molar Mass (`mass · substance⁻¹`).** `…thermo.molarmass` with base unit gram per mole
+  (`g/mol`) and the tokens `gramsPerMole`, `kilogramsPerMole`, `poundsPerPoundMole`,
+  `daltonsPerEntity` (all prefix-combinable). Typed operators `mass / amountOfSubstance`,
+  `molarMass * amountOfSubstance = mass` (and its commutative form) and
+  `mass / molarMass = amountOfSubstance`; `KMixedUnitInstance.toMolarMass()`.
+
+- **New standardized unit Molar Volume (`length³ · substance⁻¹`).** `…thermo.molarvolume` with base unit cubic meter per
+  mole (`m³/mol`), the tokens `cubicMetersPerMole`, `litersPerMole`,
+  `cubicCentimetersPerMole` (all prefix-combinable) and the constant `MOLAR_VOLUME_IDEAL_GAS_STP`. **Two typed
+  decompositions** — `volume / amountOfSubstance` and `molarMass / density` — plus
+  `molarVolume * amountOfSubstance = volume`, `molarVolume * density = molarMass` (both with commutative forms),
+  `volume / molarVolume = amountOfSubstance` and `molarMass / molarVolume = density`;
+  `KMixedUnitInstance.toMolarVolume()`.
+
+- **New native unit Amount of Substance.** `org.pcsoft.framework.kunit.thermo.amountofsubstance` with base unit mole
+  (`mol`, `KAmountOfSubstanceUnit.BASE`), the tokens `moles` and `poundMoles` (both prefix-combinable, e.g.
+  `milli.moles`), the constant `AVOGADRO_CONSTANT` and
   `KAmountOfSubstanceUnitInstance.particleCount()`; `KMixedUnitInstance.toAmountOfSubstance()`.
 
-- **New standardized unit Volumetric Flow (`length³ · time⁻¹`).** `…kinematic.volumeflow` with base unit
-  cubic meter per second (`m³/s`) and the tokens `cubicMetersPerSecond`, `cubicMetersPerHour`,
+- **New standardized unit Volumetric Flow (`length³ · time⁻¹`).** `…kinematic.volumeflow` with base unit cubic meter per
+  second (`m³/s`) and the tokens `cubicMetersPerSecond`, `cubicMetersPerHour`,
   `litersPerSecond`, `litersPerMinute`, `usGallonsPerMinute`. Typed operators `volume / time`,
   `volumeFlow * time = volume` (and its commutative form) and `volume / volumeFlow = time`;
   `KMixedUnitInstance.toVolumeFlow()`.
@@ -19,15 +44,15 @@
   `…thermo.heatcapacity` with base unit joule per kelvin (`J/K`) and the tokens `joulesPerKelvin`,
   `caloriesPerKelvin`, `btusPerFahrenheit`. Typed operators `energy / temperatureDifference`,
   `heatCapacity * temperatureDifference = energy` (and its commutative form) and
-  `energy / heatCapacity = temperatureDifference`; `KMixedUnitInstance.toHeatCapacity()`. **Entropy** is
-  modelled by this same type.
+  `energy / heatCapacity = temperatureDifference`; `KMixedUnitInstance.toHeatCapacity()`. **Entropy** is modelled by
+  this same type.
 
 - **New standardized unit Specific Heat Capacity (`length² · time⁻² · temperature⁻¹`).**
   `…thermo.specificheatcapacity` with base unit `J/(kg·K)` and the tokens `joulesPerKilogramKelvin`,
   `caloriesPerGramKelvin`, `btusPerPoundFahrenheit`. Two typed decompositions — `heatCapacity / mass` and
   `specificEnergy / temperatureDifference` — plus `specificHeatCapacity * mass = heatCapacity`,
-  `specificHeatCapacity * temperatureDifference = specificEnergy` (both with commutative forms) and their
-  inverses; `KMixedUnitInstance.toSpecificHeatCapacity()`.
+  `specificHeatCapacity * temperatureDifference = specificEnergy` (both with commutative forms) and their inverses;
+  `KMixedUnitInstance.toSpecificHeatCapacity()`.
 
 - **New standardized unit Molar Heat Capacity (`mass · length² · time⁻² · substance⁻¹ · temperature⁻¹`).**
   `…thermo.molarheatcapacity` with base unit `J/(mol·K)`, the tokens `joulesPerMoleKelvin` and
@@ -35,8 +60,8 @@
   `heatCapacity / amountOfSubstance` and `molarEnergy / temperatureDifference` — plus their inverses;
   `KMixedUnitInstance.toMolarHeatCapacity()`.
 
-- **New standardized unit Specific Energy (`length² · time⁻²`).** `…thermo.specificenergy` with base unit
-  joule per kilogram (`J/kg`) and the tokens `joulesPerKilogram`, `caloriesPerGram`,
+- **New standardized unit Specific Energy (`length² · time⁻²`).** `…thermo.specificenergy` with base unit joule per
+  kilogram (`J/kg`) and the tokens `joulesPerKilogram`, `caloriesPerGram`,
   `wattHoursPerKilogram`, `btusPerPound`. Typed operators `energy / mass`,
   `specificEnergy * mass = energy` (and its commutative form) and `energy / specificEnergy = mass`;
   `KMixedUnitInstance.toSpecificEnergy()`.
@@ -47,36 +72,36 @@
   `molarEnergy * amountOfSubstance = energy` (and its commutative form) and
   `energy / molarEnergy = amountOfSubstance`; `KMixedUnitInstance.toMolarEnergy()`.
 
-- **New standardized unit Heat Flux Density (`mass · time⁻³`).** `…thermo.heatfluxdensity` with base unit
-  watt per square meter (`W/m²`), the tokens `wattsPerSquareMeter`, `btusPerHourSquareFoot`,
+- **New standardized unit Heat Flux Density (`mass · time⁻³`).** `…thermo.heatfluxdensity` with base unit watt per
+  square meter (`W/m²`), the tokens `wattsPerSquareMeter`, `btusPerHourSquareFoot`,
   `caloriesPerSecondSquareCentimeter` and the constant `SOLAR_CONSTANT`. Typed operators `power / area`,
   `heatFluxDensity * area = power` (and its commutative form) and `power / heatFluxDensity = area`;
   `KMixedUnitInstance.toHeatFluxDensity()`.
 
 - **New standardized unit Thermal Conductivity (`mass · length · time⁻³ · temperature⁻¹`).**
   `…thermo.conductivity` with base unit watt per meter-kelvin (`W/(m·K)`) and the tokens
-  `wattsPerMeterKelvin`, `btusPerHourFootFahrenheit`, `caloriesPerSecondCentimeterKelvin`. Fourier's law
-  as typed operators: `heatFluxDensity / temperatureGradient`,
+  `wattsPerMeterKelvin`, `btusPerHourFootFahrenheit`, `caloriesPerSecondCentimeterKelvin`. Fourier's law as typed
+  operators: `heatFluxDensity / temperatureGradient`,
   `thermalConductivity * temperatureGradient = heatFluxDensity` (and its commutative form) and
   `heatFluxDensity / thermalConductivity = temperatureGradient`;
   `KMixedUnitInstance.toThermalConductivity()`.
 
 - **New standardized unit Heat Transfer Coefficient (`mass · time⁻³ · temperature⁻¹`).**
-  `…thermo.heattransfercoefficient` with base unit `W/(m²·K)` (the building-physics U-value) and the
-  tokens `wattsPerSquareMeterKelvin`, `btusPerHourSquareFootFahrenheit`,
+  `…thermo.heattransfercoefficient` with base unit `W/(m²·K)` (the building-physics U-value) and the tokens
+  `wattsPerSquareMeterKelvin`, `btusPerHourSquareFootFahrenheit`,
   `caloriesPerSecondSquareCentimeterKelvin`. Two typed decompositions —
   `heatFluxDensity / temperatureDifference` and `thermalConductivity / length` — plus their inverses;
   `KMixedUnitInstance.toHeatTransferCoefficient()`.
 
-- **New standardized unit Thermal Resistance (`mass⁻¹ · time³ · temperature`).** `…thermo.resistance` with
-  base unit square meter-kelvin per watt (`m²·K/W`, the R-value) and the tokens
+- **New standardized unit Thermal Resistance (`mass⁻¹ · time³ · temperature`).** `…thermo.resistance` with base unit
+  square meter-kelvin per watt (`m²·K/W`, the R-value) and the tokens
   `squareMeterKelvinPerWatt`, `hourSquareFootFahrenheitPerBtu`, `clo`, `tog`. Two typed decompositions —
-  `temperatureDifference / heatFluxDensity` and `length / thermalConductivity` — plus their inverses and
-  the typed reciprocal pair `1 / heatTransferCoefficient` and `1 / thermalResistance`;
+  `temperatureDifference / heatFluxDensity` and `length / thermalConductivity` — plus their inverses and the typed
+  reciprocal pair `1 / heatTransferCoefficient` and `1 / thermalResistance`;
   `KMixedUnitInstance.toThermalResistance()`.
 
-- **New standardized unit Thermal Expansion (`temperature⁻¹`).** `…thermo.expansion` with base unit per
-  kelvin (`1/K`) and the tokens `perKelvin`, `perFahrenheit`, `ppmPerKelvin`. The typed reciprocal pair
+- **New standardized unit Thermal Expansion (`temperature⁻¹`).** `…thermo.expansion` with base unit per kelvin (`1/K`)
+  and the tokens `perKelvin`, `perFahrenheit`, `ppmPerKelvin`. The typed reciprocal pair
   `1 / temperatureDifference` and `1 / thermalExpansion`, the dimensionless product
   `thermalExpansion * temperatureDifference` (a `Double`, with a commutative form) and the typed
   `elongationOf(length, temperatureDifference)`; `KMixedUnitInstance.toThermalExpansion()`.
@@ -87,13 +112,109 @@
   `temperatureGradient * length = temperatureDifference` (and its commutative form) and
   `temperatureDifference / temperatureGradient = length`; `KMixedUnitInstance.toTemperatureGradient()`.
 
-- **New standardized unit Thermal Diffusivity (`length² · time⁻¹`).** `…thermo.diffusivity` with base unit
-  square meter per second (`m²/s`) and the tokens `squareMetersPerSecond`, `squareMillimetersPerSecond`,
-  `squareFeetPerHour`. The defining relation `α = λ / (ρ · c_p)` is ternary and is therefore exposed as
-  the typed functions `diffusivityWith`, `conductivityWith`, `densityWith` and `specificHeatCapacityWith`
-  rather than as a binary operator; `KMixedUnitInstance.toThermalDiffusivity()`.
+- **New standardized unit Diffusivity (`length² · time⁻¹`).** `…common.diffusivity` with base unit square meter per
+  second (`m²/s`) and the tokens `squareMetersPerSecond`, `squareMillimetersPerSecond`,
+  `squareFeetPerHour`, `stokes` and `centistokes`. It carries two field-specific readings: the **thermal diffusivity**
+  `α = λ / (ρ · c_p)` — ternary, therefore exposed as the typed functions `diffusivityWith`,
+  `conductivityWith`, `densityWith` and `specificHeatCapacityWith` rather than as an operator — and the **kinematic
+  viscosity** `ν = η / ρ` with the typed operators `viscosity / density`,
+  `diffusivity * density` (and its commutative form) and `viscosity / diffusivity`;
+  `KMixedUnitInstance.toDiffusivity()`.
 
-All new units accept the full range of SI prefixes on every named token.
+- **New native unit Angle.** `…mechanic.angle` with base unit radian (`rad`, `KAngleUnit.BASE`) and the tokens
+  `radians`, `degrees`, `arcminutes`, `arcseconds`, `gradians`, `turns` (all prefix-combinable), the helpers `sin()`,
+  `cos()`, `tan()` and `KMixedUnitInstance.toAngle()`.
+
+- **New standardized unit Solid Angle (`angle²`).** `…mechanic.solidangle` with base unit steradian (`sr`)
+  and the tokens `steradians`, `squareDegrees`, `spats`. Typed operators `angle * angle` and
+  `solidAngle / angle = angle`; `KMixedUnitInstance.toSolidAngle()` (also accepts the native `rad²` form).
+
+- **New standardized unit Angular Velocity (`angle · time⁻¹`).** `…mechanic.angularvelocity` with base unit radian per
+  second (`rad/s`) and the tokens `revolutionsPerMinute`, `revolutionsPerSecond`. Typed operators
+  `angle / time`, `angularVelocity * time = angle` (and its commutative form) and
+  `angle / angularVelocity = time`; `KMixedUnitInstance.toAngularVelocity()`.
+
+- **New standardized unit Angular Acceleration (`angle · time⁻²`).** `…mechanic.angularacceleration` with base unit
+  radian per second squared (`rad/s²`) and the tokens `radiansPerSecondSquared`,
+  `degreesPerSecondSquared`, `revolutionsPerSecondSquared`, `revolutionsPerMinutePerSecond`. Typed operators
+  `angularVelocity / time`, `angularAcceleration * time = angularVelocity` (and its commutative form) and
+  `angularVelocity / angularAcceleration = time`; `KMixedUnitInstance.toAngularAcceleration()` (also accepts the native
+  `angle / time²` form).
+
+- **New standardized unit Momentum (`mass · length · time⁻¹`).** `…mechanic.momentum` with base unit kilogram meter per
+  second (`kg·m/s`) and the tokens `kilogramMetersPerSecond`, `newtonSeconds`,
+  `gramCentimetersPerSecond`, `poundFeetPerSecond`. Two typed decompositions — `mass * speed` and
+  `force * time` (the **impulse**, which is modelled by this same type) — both with commutative forms, plus
+  `momentum / mass = speed`, `momentum / speed = mass`, `momentum / time = force` and
+  `momentum / force = time`; `KMixedUnitInstance.toMomentum()`.
+
+- **New standardized unit Moment of Inertia (`mass · length²`).** `…mechanic.inertia` with base unit kilogram meter
+  squared (`kg·m²`) and the tokens `kilogramMetersSquared`, `gramCentimetersSquared`,
+  `poundFeetSquared`. Typed operators `mass * area` (and its commutative form), `inertia / mass = area` and
+  `inertia / area = mass`; `KMixedUnitInstance.toInertia()`.
+
+- **New standardized unit Angular Momentum (`mass · length² · time⁻¹`).** `…mechanic.angularmomentum` with base unit
+  kilogram meter squared per second (`kg·m²/s`) and the tokens
+  `kilogramMetersSquaredPerSecond`, `newtonMeterSeconds`, `jouleSeconds`,
+  `gramCentimetersSquaredPerSecond`. Two typed decompositions — `inertia * angularVelocity` and
+  `momentum * length` — both with commutative forms, plus their inverses;
+  `KMixedUnitInstance.toAngularMomentum()`. The **action** (`J·s`) is modelled by this same type.
+
+- **New standardized unit Mass Flow Rate (`mass · time⁻¹`).** `…mechanic.massflow` with base unit kilogram per second
+  (`kg/s`) and the tokens `kilogramsPerSecond`, `gramsPerSecond`, `kilogramsPerHour`,
+  `tonnesPerHour`, `poundsPerSecond`, `poundsPerHour`. Two typed decompositions — `mass / time` and
+  `density * volumeFlow` — plus `massFlow * time = mass` (and its commutative form),
+  `mass / massFlow = time`, `massFlow / density = volumeFlow` and `massFlow / volumeFlow = density`;
+  `KMixedUnitInstance.toMassFlow()`.
+
+- **New standardized unit Linear Density (`mass · length⁻¹`).** `…mechanic.lineardensity` with base unit kilogram per
+  meter (`kg/m`) and the tokens `kilogramsPerMeter`, `gramsPerMeter`, `gramsPerCentimeter`,
+  `tex`, `denier`, `poundsPerFoot`. Typed operators `mass / length`, `linearDensity * length = mass` (and its
+  commutative form) and `mass / linearDensity = length`; `KMixedUnitInstance.toLinearDensity()`.
+
+- **New standardized unit Specific Volume (`length³ · mass⁻¹`).** `…mechanic.specificvolume` with base unit cubic meter
+  per kilogram (`m³/kg`) and the tokens `cubicMetersPerKilogram`, `litersPerKilogram`,
+  `cubicCentimetersPerGram`, `cubicFeetPerPound`. Typed operators `volume / mass`,
+  `specificVolume * mass = volume` (and its commutative form), `volume / specificVolume = mass` and the typed
+  reciprocals `1 / density` and `1 / specificVolume`; `KMixedUnitInstance.toSpecificVolume()`.
+
+- **New standardized unit Dynamic Viscosity (`mass · length⁻¹ · time⁻¹`).** `…mechanic.viscosity` with base unit pascal
+  second (`Pa·s`) and the tokens `pascalSeconds`, `poises`,
+  `poundForceSecondsPerSquareFoot`, `reyns` (the centipoise is `centi.poises`). Typed operators
+  `pressure * time` (and its commutative form), `viscosity / pressure = time` and
+  `viscosity / time = pressure`; `KMixedUnitInstance.toViscosity()`.
+
+- **New standardized unit Force per Length (`mass · time⁻²`).** `…mechanic.lineforce` with base unit newton per meter
+  (`N/m`) and the tokens `newtonsPerMeter`, `newtonsPerMillimeter`, `dynesPerCentimeter`,
+  `poundsForcePerInch`, `kilopondsPerMeter`. It carries two readings — **surface tension** and **stiffness / spring
+  rate** — with two typed decompositions, `force / length` and `energy / area`, plus
+  `lineForce * length = force`, `lineForce * area = energy` (both with commutative forms) and their inverses;
+  `KMixedUnitInstance.toLineForce()`.
+
+- **New standardized unit Strain (dimensionless).** `…mechanic.strain` with base unit the plain ratio (`1`)
+  and the tokens `ratio`, `percent`, `perMille`, `microstrain`. `KMixedUnitInstance.toStrain()` converts the native
+  `length / length` form; the elastic law is available as `stress / strain = elastic modulus` and
+  `pressure * strain = stress` (with its commutative form), both on `KPressureUnitInstance`.
+
+- **New torque operators on the energy group.** The **torque** (`N·m`) is modelled by
+  `KEnergyUnitInstance`: in addition to the existing `force * length`, the decompositions
+  `inertia * angularAcceleration` and `power / angularVelocity` are now available, plus
+  `torque * angularVelocity = power` (with its commutative form), `power / torque = angularVelocity`,
+  `torque / inertia = angularAcceleration` and `torque / angularAcceleration = inertia`.
+
+All new units accept the full range of SI prefixes on every named token, except the composed rotational groups (angular
+velocity, angular acceleration), which are prefixed through their components — as speed and data rate already are.
+
+### Changed (breaking)
+
+- **Thermal diffusivity moved and renamed.** The group is no longer thermodynamics-only: it moved from
+  `org.pcsoft.framework.kunit.thermo.diffusivity` to `org.pcsoft.framework.kunit.common.diffusivity` and its types lost
+  the `Thermal` qualifier — `KThermalDiffusivityUnit` → `KDiffusivityUnit`,
+  `KThermalDiffusivityUnitInstance` → `KDiffusivityUnitInstance`,
+  `KMixedUnitInstance.toThermalDiffusivity()` → `KMixedUnitInstance.toDiffusivity()`. The old API was removed without
+  replacement shims. Reason: the very same quantity is the **kinematic viscosity** of mechanics, so per the package
+  rules it belongs to `common`. Values, tokens, factors and the
+  `diffusivityWith`/`conductivityWith`/`densityWith`/`specificHeatCapacityWith` functions are unchanged.
 
 ## [0.7.0]
 
@@ -108,32 +229,32 @@ All new units accept the full range of SI prefixes on every named token.
   `chargedensity`, `linearchargedensity`, `resistivity`, `conductivity`, `fieldstrength`,
   `fluxdensity`, `permittivity`, `permeability`, `reluctance`, `mobility`,
   `dipolemoment`), `thermo` (`temperature`) and `it` (`storage`, `datarate`,
-  `storagedensity`). The framework-wide root types and the `formatter` package are unchanged. No
-  type, member or behavior changed - only the imports have to be adjusted.
+  `storagedensity`). The framework-wide root types and the `formatter` package are unchanged. No type, member or
+  behavior changed - only the imports have to be adjusted.
 
 ### Added
 
-- **New standardized unit Electric Field Strength (`mass · length · time⁻³ · current⁻¹`).** A constructed
-  unit group in `org.pcsoft.framework.kunit.electricfieldstrength` with base unit volt per meter (`V/m`,
+- **New standardized unit Electric Field Strength (`mass · length · time⁻³ · current⁻¹`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.electricfieldstrength` with base unit volt per meter (`V/m`,
   `KElectricFieldStrengthUnit.BASE`) and the tokens `voltsPerMeter`, `voltsPerCentimeter`,
   `statvoltsPerCentimeter` (all prefix-combinable, e.g. `kilo.voltsPerMeter`). Typed cross-group operators
   `voltage / length`, `electricFieldStrength * length = voltage` (and its commutative form),
   `voltage / electricFieldStrength = length`, `force / charge`, `electricFieldStrength * charge = force`
   (and its commutative form) and `force / electricFieldStrength = charge`;
-  `KMixedUnitInstance.toElectricFieldStrength()` recognizes the canonical `kg·m·s⁻³·A⁻¹` normal form. Full
-  docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `KMixedUnitInstance.toElectricFieldStrength()` recognizes the canonical `kg·m·s⁻³·A⁻¹` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Electric Flux Density (`current · time · length⁻²`).** A constructed unit group in
   `org.pcsoft.framework.kunit.electricfluxdensity` with base unit coulomb per square meter (`C/m²`,
   `KElectricFluxDensityUnit.BASE`) and the tokens `coulombsPerSquareMeter`, `coulombsPerSquareCentimeter`
-  (all prefix-combinable, e.g. `micro.coulombsPerSquareMeter`). The group also carries the dimensionally
-  identical surface charge density `σ`. Typed cross-group operators `charge / area`,
+  (all prefix-combinable, e.g. `micro.coulombsPerSquareMeter`). The group also carries the dimensionally identical
+  surface charge density `σ`. Typed cross-group operators `charge / area`,
   `electricFluxDensity * area = charge` (and its commutative form) and `charge / electricFluxDensity = area`;
   `KMixedUnitInstance.toElectricFluxDensity()` recognizes the canonical `A·s·m⁻²` normal form. Full docs
   (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
-- **New standardized unit Permittivity (`mass⁻¹ · length⁻³ · time⁴ · current²`).** A constructed unit group
-  in `org.pcsoft.framework.kunit.permittivity` with base unit farad per meter (`F/m`,
+- **New standardized unit Permittivity (`mass⁻¹ · length⁻³ · time⁴ · current²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.permittivity` with base unit farad per meter (`F/m`,
   `KPermittivityUnit.BASE`), the tokens `faradsPerMeter`, `faradsPerCentimeter` (prefix-combinable, e.g.
   `pico.faradsPerMeter`) and the constant token `vacuumPermittivity`
   (`KPermittivityUnit.VACUUM_PERMITTIVITY`, 8.854 187 8188e-12 F/m). Typed cross-group operators
@@ -141,8 +262,7 @@ All new units accept the full range of SI prefixes on every named token.
   `capacitance / permittivity = length`, `electricFluxDensity / electricFieldStrength`,
   `permittivity * electricFieldStrength = electricFluxDensity` (and its commutative form) and
   `electricFluxDensity / permittivity = electricFieldStrength`; `KMixedUnitInstance.toPermittivity()`
-  recognizes the canonical `kg⁻¹·m⁻³·s⁴·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test
-  coverage included.
+  recognizes the canonical `kg⁻¹·m⁻³·s⁴·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Permeability (`mass · length · time⁻² · current⁻²`).** A constructed unit group in
   `org.pcsoft.framework.kunit.permeability` with base unit henry per meter (`H/m`,
@@ -153,32 +273,31 @@ All new units accept the full range of SI prefixes on every named token.
   `inductance / permeability = length`, `magneticFluxDensity / magneticFieldStrength`,
   `permeability * magneticFieldStrength = magneticFluxDensity` (and its commutative form) and
   `magneticFluxDensity / permeability = magneticFieldStrength`; `KMixedUnitInstance.toPermeability()`
-  recognizes the canonical `kg·m·s⁻²·A⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test
-  coverage included.
+  recognizes the canonical `kg·m·s⁻²·A⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Linear Charge Density (`current · time · length⁻¹`).** A constructed unit group in
   `org.pcsoft.framework.kunit.linearchargedensity` with base unit coulomb per meter (`C/m`,
-  `KLinearChargeDensityUnit.BASE`). The quantity has no named unit, so the group intentionally offers no
-  bare tokens and no prefix builders - values are built as `charge / length`. Typed cross-group operators
+  `KLinearChargeDensityUnit.BASE`). The quantity has no named unit, so the group intentionally offers no bare tokens and
+  no prefix builders - values are built as `charge / length`. Typed cross-group operators
   `charge / length`, `linearChargeDensity * length = charge` (and its commutative form) and
-  `charge / linearChargeDensity = length`; `KMixedUnitInstance.toLinearChargeDensity()` recognizes the
-  canonical `A·s·m⁻¹` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `charge / linearChargeDensity = length`; `KMixedUnitInstance.toLinearChargeDensity()` recognizes the canonical
+  `A·s·m⁻¹` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
-- **New standardized unit Magnetic Reluctance (`mass⁻¹ · length⁻² · time² · current²`).** A constructed unit
-  group in `org.pcsoft.framework.kunit.reluctance` with base unit ampere per weber (`A/Wb`,
+- **New standardized unit Magnetic Reluctance (`mass⁻¹ · length⁻² · time² · current²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.reluctance` with base unit ampere per weber (`A/Wb`,
   `KReluctanceUnit.BASE`) and the tokens `amperesPerWeber`, `inverseHenries`, `ampereTurnsPerWeber` (all
   prefix-combinable, e.g. `mega.amperesPerWeber`). Typed cross-group operators for Hopkinson's law
   `current / magneticFlux`, `reluctance * magneticFlux = current` (and its commutative form),
   `current / reluctance = magneticFlux`, plus the reciprocal pair with the permeance `1 / inductance` and
-  `1 / reluctance`; `KMixedUnitInstance.toReluctance()` recognizes the canonical `kg⁻¹·m⁻²·s²·A²` normal
-  form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `1 / reluctance`; `KMixedUnitInstance.toReluctance()` recognizes the canonical `kg⁻¹·m⁻²·s²·A²` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Electric Mobility (`mass⁻¹ · time² · current`).** A constructed unit group in
   `org.pcsoft.framework.kunit.electricmobility` with base unit square meter per volt second (`m²/(V·s)`,
   `KElectricMobilityUnit.BASE`) and the tokens `squareMetersPerVoltSecond`,
   `squareCentimetersPerVoltSecond` (all prefix-combinable). Typed cross-group operators
-  `speed / electricFieldStrength`, `electricMobility * electricFieldStrength = speed` (and its commutative
-  form) and `speed / electricMobility = electricFieldStrength`;
+  `speed / electricFieldStrength`, `electricMobility * electricFieldStrength = speed` (and its commutative form) and
+  `speed / electricMobility = electricFieldStrength`;
   `KMixedUnitInstance.toElectricMobility()` recognizes the canonical `kg⁻¹·s²·A` normal form. Full docs
   (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
@@ -191,46 +310,46 @@ All new units accept the full range of SI prefixes on every named token.
   (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New power units for alternating current.** `KPowerUnit` gained `VOLT_AMPERE` (`VA`, apparent power) and
-  `VAR` (`var`, reactive power), each with a bare token (`voltAmperes`, `vars`) and a prefix builder, so
-  nameplate ratings such as `630 of kilo.voltAmperes` and `120 of kilo.vars` are expressible. Both are
-  dimensionally identical to the watt; the distinct symbols document the AC reading.
+  `VAR` (`var`, reactive power), each with a bare token (`voltAmperes`, `vars`) and a prefix builder, so nameplate
+  ratings such as `630 of kilo.voltAmperes` and `120 of kilo.vars` are expressible. Both are dimensionally identical to
+  the watt; the distinct symbols document the AC reading.
 
 - **New electric current unit for the magnetic circuit.** `KElectricCurrentUnit` gained `AMPERE_TURN`
-  (`At`), with the bare token `ampereTurns` and a prefix builder, for the magnetomotive force `Θ = N · I`.
-  It is dimensionally identical to the ampere - the number of turns is a pure count.
+  (`At`), with the bare token `ampereTurns` and a prefix builder, for the magnetomotive force `Θ = N · I`. It is
+  dimensionally identical to the ampere - the number of turns is a pure count.
 
 - **New standardized unit Power (`mass · length² · time⁻³`).** A constructed unit group in
   `org.pcsoft.framework.kunit.power` with base unit watt (`W`, `KPowerUnit.BASE`) and the tokens `watts`,
-  `metricHorsePowers`, `mechanicalHorsePowers`, `ergsPerSecond` (all prefix-combinable, e.g. `kilo.watts`).
-  Typed cross-group operators for both readings of the quantity: electrical `voltage * current` (and its
-  commutative form), `power / current = voltage`, `power / voltage = current`, and mechanical
+  `metricHorsePowers`, `mechanicalHorsePowers`, `ergsPerSecond` (all prefix-combinable, e.g. `kilo.watts`). Typed
+  cross-group operators for both readings of the quantity: electrical `voltage * current` (and its commutative form),
+  `power / current = voltage`, `power / voltage = current`, and mechanical
   `force * speed` (and its commutative form), `power / force = speed`, `power / speed = force`;
-  `KMixedUnitInstance.toPower()` recognizes the canonical `kg·m²·s⁻³` normal form. Documented per subject
-  area (electrical, mechanics, thermodynamics) with cross-references, full docs (EN/JA/ZH/KO/AR/HI) and
-  100 % test coverage included.
+  `KMixedUnitInstance.toPower()` recognizes the canonical `kg·m²·s⁻³` normal form. Documented per subject area
+  (electrical, mechanics, thermodynamics) with cross-references, full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage
+  included.
 
 - **New standardized unit Energy (`mass · length² · time⁻²`).** A constructed unit group in
   `org.pcsoft.framework.kunit.energy` with base unit joule (`J`, `KEnergyUnit.BASE`) and the tokens
   `joules`, `ergs`, `calories`, `electronVolts`, `britishThermalUnits` (all prefix-combinable, e.g.
   `kilo.joules`, `mega.electronVolts`). The kilowatt hour deliberately has no token and is built as
   `kilo.watts * hours`. Typed cross-group operators `power * time` (and its commutative form),
-  `power / frequency`, `force * length` (work, and its commutative form), `charge * voltage` (and its
-  commutative form), `energy / time = power`, `energy / power = time`, `energy / charge = voltage`;
-  `KMixedUnitInstance.toEnergy()` recognizes the canonical `kg·m²·s⁻²` normal form. Documented per subject
-  area (electrical, mechanics, thermodynamics) with cross-references, full docs (EN/JA/ZH/KO/AR/HI) and
-  100 % test coverage included.
+  `power / frequency`, `force * length` (work, and its commutative form), `charge * voltage` (and its commutative form),
+  `energy / time = power`, `energy / power = time`, `energy / charge = voltage`;
+  `KMixedUnitInstance.toEnergy()` recognizes the canonical `kg·m²·s⁻²` normal form. Documented per subject area
+  (electrical, mechanics, thermodynamics) with cross-references, full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage
+  included.
 
-- **New standardized unit Capacitance (`mass⁻¹ · length⁻² · time⁴ · current²`).** A constructed unit group
-  in `org.pcsoft.framework.kunit.capacitance` with base unit farad (`F`, `KCapacitanceUnit.BASE`) and the
-  tokens `farads`, `abfarads`, `statfarads`, `jars` (all prefix-combinable, e.g. `micro.farads`). Typed
-  cross-group operators `charge / voltage`, `capacitance * voltage = charge` (and its commutative form) and
+- **New standardized unit Capacitance (`mass⁻¹ · length⁻² · time⁴ · current²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.capacitance` with base unit farad (`F`, `KCapacitanceUnit.BASE`) and the tokens `farads`,
+  `abfarads`, `statfarads`, `jars` (all prefix-combinable, e.g. `micro.farads`). Typed cross-group operators
+  `charge / voltage`, `capacitance * voltage = charge` (and its commutative form) and
   `charge / capacitance = voltage`; `KMixedUnitInstance.toCapacitance()` recognizes the canonical
   `kg⁻¹·m⁻²·s⁴·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
-- **New standardized unit Magnetic Flux (`mass · length² · time⁻² · current⁻¹`).** A constructed unit group
-  in `org.pcsoft.framework.kunit.magneticflux` with base unit weber (`Wb`, `KMagneticFluxUnit.BASE`) and the
-  tokens `webers`, `maxwells`, `unitPoles` (all prefix-combinable, e.g. `milli.webers`). Typed cross-group
-  operators `voltage * time` (Faraday's induction law, and its commutative form), `voltage / frequency`,
+- **New standardized unit Magnetic Flux (`mass · length² · time⁻² · current⁻¹`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.magneticflux` with base unit weber (`Wb`, `KMagneticFluxUnit.BASE`) and the tokens
+  `webers`, `maxwells`, `unitPoles` (all prefix-combinable, e.g. `milli.webers`). Typed cross-group operators
+  `voltage * time` (Faraday's induction law, and its commutative form), `voltage / frequency`,
   `flux / time = voltage`, `flux * frequency = voltage` and `flux / voltage = time`;
   `KMixedUnitInstance.toMagneticFlux()` recognizes the canonical `kg·m²·s⁻²·A⁻¹` normal form. Full docs
   (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
@@ -238,46 +357,46 @@ All new units accept the full range of SI prefixes on every named token.
 - **New standardized unit Magnetic Flux Density (`mass · time⁻² · current⁻¹`).** A constructed unit group in
   `org.pcsoft.framework.kunit.magneticfluxdensity` with base unit tesla (`T`,
   `KMagneticFluxDensityUnit.BASE`) and the tokens `teslas`, `gauss`, `gammas` (all prefix-combinable, e.g.
-  `milli.teslas`). Typed cross-group operators `flux / area`, `fluxDensity * area = flux` (and its
-  commutative form) and `flux / fluxDensity = area`; `KMixedUnitInstance.toMagneticFluxDensity()` recognizes
-  the canonical `kg·s⁻²·A⁻¹` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `milli.teslas`). Typed cross-group operators `flux / area`, `fluxDensity * area = flux` (and its commutative form) and
+  `flux / fluxDensity = area`; `KMixedUnitInstance.toMagneticFluxDensity()` recognizes the canonical `kg·s⁻²·A⁻¹` normal
+  form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Inductance (`mass · length² · time⁻² · current⁻²`).** A constructed unit group in
   `org.pcsoft.framework.kunit.inductance` with base unit henry (`H`, `KInductanceUnit.BASE`) and the tokens
-  `henries`, `abhenries`, `stathenries` (all prefix-combinable, e.g. `milli.henries`). Typed cross-group
-  operators `flux / current`, the reactance form `resistance / frequency`, `inductance * current = flux`
+  `henries`, `abhenries`, `stathenries` (all prefix-combinable, e.g. `milli.henries`). Typed cross-group operators
+  `flux / current`, the reactance form `resistance / frequency`, `inductance * current = flux`
   (and its commutative form), `flux / inductance = current` and `inductance * frequency = resistance`;
   `KMixedUnitInstance.toInductance()` recognizes the canonical `kg·m²·s⁻²·A⁻²` normal form. Full docs
   (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Current Density (`current · length⁻²`).** A constructed unit group in
   `org.pcsoft.framework.kunit.currentdensity` with base unit ampere per square meter (`A/m²`,
-  `KCurrentDensityUnit.BASE`). Built as a current-per-area expression (`amperes / (milli.meters pow 2)`);
-  the typed cross-group operators `current / area = current density`, `current density * area = current`
-  (and its commutative form) and `current / current density = area` move between the core units without a
-  raw mixed unit. `KMixedUnitInstance.toCurrentDensity()` recognizes the canonical `A·m⁻²` normal form.
-  Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `KCurrentDensityUnit.BASE`). Built as a current-per-area expression (`amperes / (milli.meters pow 2)`); the typed
+  cross-group operators `current / area = current density`, `current density * area = current`
+  (and its commutative form) and `current / current density = area` move between the core units without a raw mixed
+  unit. `KMixedUnitInstance.toCurrentDensity()` recognizes the canonical `A·m⁻²` normal form. Full docs
+  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Charge Density (`current · time · length⁻³`).** A constructed unit group in
   `org.pcsoft.framework.kunit.chargedensity` with base unit coulomb per cubic meter (`C/m³`,
-  `KChargeDensityUnit.BASE`). Built as a charge-per-volume expression (`coulombs / (meters pow 3)`); the
-  typed cross-group operators `charge / volume = charge density`, `charge density * volume = charge` (and its
-  commutative form) and `charge / charge density = volume`. `KMixedUnitInstance.toChargeDensity()` recognizes
-  the canonical `A·s·m⁻³` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `KChargeDensityUnit.BASE`). Built as a charge-per-volume expression (`coulombs / (meters pow 3)`); the typed
+  cross-group operators `charge / volume = charge density`, `charge density * volume = charge` (and its commutative
+  form) and `charge / charge density = volume`. `KMixedUnitInstance.toChargeDensity()` recognizes the canonical
+  `A·s·m⁻³` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Resistivity (`mass · length³ · time⁻³ · current⁻²`).** A constructed unit group in
-  `org.pcsoft.framework.kunit.resistivity` with base unit ohm meter (`Ω·m`, `KResistivityUnit.BASE`) and the
-  tokens `ohmMeters`, `ohmCentimeters`, `statohmCentimeters` (all prefix-combinable, e.g.
+  `org.pcsoft.framework.kunit.resistivity` with base unit ohm meter (`Ω·m`, `KResistivityUnit.BASE`) and the tokens
+  `ohmMeters`, `ohmCentimeters`, `statohmCentimeters` (all prefix-combinable, e.g.
   `nano.ohmMeters`). Typed cross-group operators `resistance * length` (the conductor geometry factor
   `A / l`, and its commutative form), `resistivity / length = resistance` and
   `resistivity / resistance = length`; `KMixedUnitInstance.toResistivity()` recognizes the canonical
   `kg·m³·s⁻³·A⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
-- **New standardized unit Conductivity (`mass⁻¹ · length⁻³ · time³ · current²`).** A constructed unit group
-  in `org.pcsoft.framework.kunit.conductivity` with base unit siemens per meter (`S/m`,
+- **New standardized unit Conductivity (`mass⁻¹ · length⁻³ · time³ · current²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.conductivity` with base unit siemens per meter (`S/m`,
   `KConductivityUnit.BASE`) and the tokens `siemensPerMeter`, `siemensPerCentimeter`,
-  `microsiemensPerCentimeter`, `megasiemensPerMeter` (all prefix-combinable, e.g. `mega.siemensPerMeter`).
-  Typed cross-group operators: the reciprocal pair `1 / resistivity = conductivity` and
+  `microsiemensPerCentimeter`, `megasiemensPerMeter` (all prefix-combinable, e.g. `mega.siemensPerMeter`). Typed
+  cross-group operators: the reciprocal pair `1 / resistivity = conductivity` and
   `1 / conductivity = resistivity`, plus `conductance / length = conductivity` (the geometry factor
   `l / A`), `conductivity * length = conductance` (and its commutative form) and
   `conductance / conductivity = length`; `KMixedUnitInstance.toConductivity()` recognizes the canonical
@@ -286,15 +405,15 @@ All new units accept the full range of SI prefixes on every named token.
 - **New standardized unit Charge (`current · time`).** A constructed unit group in
   `org.pcsoft.framework.kunit.charge` with base unit coulomb (`C`, `KChargeUnit.BASE`) and the tokens
   `coulombs`, `ampereSeconds`, `ampereHours`, `abcoulombs`, `statcoulombs`, `faradays`,
-  `elementaryCharges` (all combinable with every prefix, e.g. `milli.ampereHours`). Typed cross-group
-  operators `current * time` (and its commutative form), `current / frequency`, `charge / time = current`,
-  `charge / current = time` and `charge * frequency = current`; `KMixedUnitInstance.toCharge()` recognizes
-  the canonical `A·s` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  `elementaryCharges` (all combinable with every prefix, e.g. `milli.ampereHours`). Typed cross-group operators
+  `current * time` (and its commutative form), `current / frequency`, `charge / time = current`,
+  `charge / current = time` and `charge * frequency = current`; `KMixedUnitInstance.toCharge()` recognizes the canonical
+  `A·s` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
-- **New standardized unit Conductance (`mass⁻¹ · length⁻² · time³ · current²`).** A constructed unit group
-  in `org.pcsoft.framework.kunit.conductance` with base unit siemens (`S`, `KConductanceUnit.BASE`) and the
-  tokens `siemens`, `mhos`, `abmhos`, `statmhos` (all prefix-combinable, e.g. `milli.siemens`). Typed
-  cross-group operators `current / voltage`, the reciprocal `1 / resistance = conductance` and
+- **New standardized unit Conductance (`mass⁻¹ · length⁻² · time³ · current²`).** A constructed unit group in
+  `org.pcsoft.framework.kunit.conductance` with base unit siemens (`S`, `KConductanceUnit.BASE`) and the tokens
+  `siemens`, `mhos`, `abmhos`, `statmhos` (all prefix-combinable, e.g. `milli.siemens`). Typed cross-group operators
+  `current / voltage`, the reciprocal `1 / resistance = conductance` and
   `1 / conductance = resistance`, plus `conductance * voltage = current` (and its commutative form) and
   `current / conductance = voltage`; `KMixedUnitInstance.toConductance()` recognizes the canonical
   `kg⁻¹·m⁻²·s³·A²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
@@ -303,8 +422,8 @@ All new units accept the full range of SI prefixes on every named token.
   `org.pcsoft.framework.kunit.magneticfieldstrength` with base unit ampere per meter (`A/m`,
   `KMagneticFieldStrengthUnit.BASE`) and the tokens `amperesPerMeter`, `oersteds`, `gilbertsPerCentimeter`,
   `ampereTurnsPerInch` (all prefix-combinable, e.g. `kilo.amperesPerMeter`). Typed cross-group operators
-  `current / length = field strength` and `field strength * length = current` (magnetomotive force, plus
-  its commutative form); `KMixedUnitInstance.toMagneticFieldStrength()` recognizes the canonical `A·m⁻¹`
+  `current / length = field strength` and `field strength * length = current` (magnetomotive force, plus its commutative
+  form); `KMixedUnitInstance.toMagneticFieldStrength()` recognizes the canonical `A·m⁻¹`
   normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New standardized unit Storage Density (`storage · length⁻²`).** A constructed unit group in
@@ -312,118 +431,115 @@ All new units accept the full range of SI prefixes on every named token.
   `KStorageDensityUnit.BASE`). Built as a storage-per-area expression (`(100 of bytes) / area`,
   `5 of mega.bytes / area`); the typed cross-group operators `storage / area = storage density`,
   `storage density * area = storage` (and its commutative form), and `storage / storage density = area`
-  move between the core units without a raw mixed unit. `KMixedUnitInstance.toStorageDensity()` recognizes
-  the canonical `B·m⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  move between the core units without a raw mixed unit. `KMixedUnitInstance.toStorageDensity()` recognizes the canonical
+  `B·m⁻²` normal form. Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
-- **New math-formula formatters (LaTeX, MathML, AsciiMath, Typst).** Four shipped `KUnitFormatter`s that
-  translate a rendered value into the input syntax of the common formula renderers (MathJax, KaTeX,
-  browser MathML, Typst): `KLatexUnitFormatter` (`1.5\,\frac{\mathrm{km}}{\mathrm{h}}`),
+- **New math-formula formatters (LaTeX, MathML, AsciiMath, Typst).** Four shipped `KUnitFormatter`s that translate a
+  rendered value into the input syntax of the common formula renderers (MathJax, KaTeX, browser MathML, Typst):
+  `KLatexUnitFormatter` (`1.5\,\frac{\mathrm{km}}{\mathrm{h}}`),
   `KMathMlUnitFormatter` (an inline `<math>` with `<mfrac>`), `KAsciiMathUnitFormatter` (`10.8 "km"/"h"`)
-  and `KTypstUnitFormatter` (`$1.5 upright("km")/upright("h")$`). Each is a configurable, immutable class
-  with a parameterless default and a matching config value type plus presets
-  (`KLatexFormatConfig`/`KMathMlFormatConfig`/`KAsciiMathFormatConfig`/`KTypstFormatConfig`): fraction vs.
-  inline/exponent layout, unit wrapping/quoting, multiplication marker and delimiter/root wrapper. Pass
-  them like any other formatter (`v.format(target, "%.1f", Locale.US, KLatexUnitFormatter())`). Full docs
-  (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+  and `KTypstUnitFormatter` (`$1.5 upright("km")/upright("h")$`). Each is a configurable, immutable class with a
+  parameterless default and a matching config value type plus presets (`KLatexFormatConfig`/`KMathMlFormatConfig`/
+  `KAsciiMathFormatConfig`/`KTypstFormatConfig`): fraction vs. inline/exponent layout, unit wrapping/quoting,
+  multiplication marker and delimiter/root wrapper. Pass them like any other formatter
+  (`v.format(target, "%.1f", Locale.US, KLatexUnitFormatter())`). Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage
+  included.
 
-- **New `KGraphicalConsoleUnitFormatter` for multi-line graphical console output.** Renders a fraction as a
-  real two-dimensional stack (numerator, horizontal bar, denominator) with the value on the bar line, using
-  real Unicode superscript exponents and ANSI colours for all five roles (number, symbol, operator,
-  exponent, bar) via the new `KGraphicalConsoleColorPalette` (`CLASSIC`/`VIVID`/`MONOCHROME`). Configurable
-  through `KGraphicalConsoleFormatConfig` (palette, fraction-bar character, multiplication sign, function
-  symbols). Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+- **New `KGraphicalConsoleUnitFormatter` for multi-line graphical console output.** Renders a fraction as a real
+  two-dimensional stack (numerator, horizontal bar, denominator) with the value on the bar line, using real Unicode
+  superscript exponents and ANSI colours for all five roles (number, symbol, operator, exponent, bar) via the new
+  `KGraphicalConsoleColorPalette` (`CLASSIC`/`VIVID`/`MONOCHROME`). Configurable through `KGraphicalConsoleFormatConfig`
+  (palette, fraction-bar character, multiplication sign, function symbols). Full docs (EN/JA/ZH/KO/AR/HI) and 100 % test
+  coverage included.
 
 - **Configurable exponent style, arithmetic signs and function symbols for the console-based formatters.**
   `KDefaultUnitFormatter` and `KConsoleUnitFormatter` now take a config value type (`KDefaultFormatConfig`
-  / `KConsoleFormatConfig`) offering real Unicode superscript exponents (`m²`, `s⁻¹`) instead of `^n`, a
-  choice of multiplication (`*`, `·`, `×`) and division (`/`, `÷`) sign, and a user-overridable function-symbol
-  table (`√`, `∛`, `∜`, `±`, `∞`, `°` with an `ASCII` fallback). The parameterless constructors keep the
-  historical `m^2`/`*`/`/` output. The graphical formatter always uses superscript exponents.
+  / `KConsoleFormatConfig`) offering real Unicode superscript exponents (`m²`, `s⁻¹`) instead of `^n`, a choice of
+  multiplication (`*`, `·`, `×`) and division (`/`, `÷`) sign, and a user-overridable function-symbol table (`√`, `∛`,
+  `∜`, `±`, `∞`, `°` with an `ASCII` fallback). The parameterless constructors keep the historical `m^2`/`*`/`/` output.
+  The graphical formatter always uses superscript exponents.
 
-- **New `KConsoleUnitFormatter` for coloured console output.** A shipped `KUnitFormatter` that produces the
-  same notation as `KDefaultUnitFormatter` (`"10.8 km/h"`, `"m^2"`, `"m*s^-3*A^-2"`) but wraps each visual
-  role – number, unit symbol, operators (`*`, `/`) and exponents (`^n`) – in ANSI SGR colours. Colours are a
-  value type `KConsoleColorPalette` with three predefined palettes (`CLASSIC` – the default, `VIVID`,
-  `MONOCHROME`) and a fully custom option; the parameterless `KConsoleUnitFormatter()` uses `CLASSIC`. Pass
-  it like any other formatter (`v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter())`).
-  Full docs (Console Formatter, EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
+- **New `KConsoleUnitFormatter` for coloured console output.** A shipped `KUnitFormatter` that produces the same
+  notation as `KDefaultUnitFormatter` (`"10.8 km/h"`, `"m^2"`, `"m*s^-3*A^-2"`) but wraps each visual role – number,
+  unit symbol, operators (`*`, `/`) and exponents (`^n`) – in ANSI SGR colours. Colours are a value type
+  `KConsoleColorPalette` with three predefined palettes (`CLASSIC` – the default, `VIVID`,
+  `MONOCHROME`) and a fully custom option; the parameterless `KConsoleUnitFormatter()` uses `CLASSIC`. Pass it like any
+  other formatter (`v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter())`). Full docs (Console
+  Formatter, EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 ### Changed
 
-- **Breaking: `KDefaultUnitFormatter` is now a class instead of an `object`.** To make its rendering
-  configurable it became `class KDefaultUnitFormatter(config = KDefaultFormatConfig.DEFAULT)`. Replace the
-  object reference `KDefaultUnitFormatter` with an instance `KDefaultUnitFormatter()`; the default output is
-  unchanged.
+- **Breaking: `KDefaultUnitFormatter` is now a class instead of an `object`.** To make its rendering configurable it
+  became `class KDefaultUnitFormatter(config = KDefaultFormatConfig.DEFAULT)`. Replace the object reference
+  `KDefaultUnitFormatter` with an instance `KDefaultUnitFormatter()`; the default output is unchanged.
 
 ## [0.6.0]
 
 ### Added
 
-- **New `format` verb and pluggable formatting.** The display counterpart of `into`: `format` reads a value
-  into a target unit and returns value **and** unit symbol as a `String` (`(3 of meters / seconds) format
-  kilo.meters / hours` → `"10.799999999999999 km/h"`). An overload accepts a `java.util.Formatter` number
-  pattern and `Locale` (`v.format(kilo.meters / hours, "%.1f", Locale.US)` → `"10.8 km/h"`). The unit part
-  now renders the **written-down** symbol of prefixed/alternate units (`km`, `h`, `mi`, `KiB`) via new
-  cosmetic display metadata on the terms, and uses fraction notation (`km/h`, `m/s^2`) for a single
-  denominator. Rendering goes through a new public **`KUnitFormatter`** interface with a
-  `KUnitFormatContext`; the shipped `KDefaultUnitFormatter` produces plain text, and a custom formatter
-  (e.g. LaTeX/MathML) can be supplied via the `formatter` parameter. A new `KUnitMeasurable.toString`
+- **New `format` verb and pluggable formatting.** The display counterpart of `into`: `format` reads a value into a
+  target unit and returns value **and** unit symbol as a `String` (`(3 of meters / seconds) format
+  kilo.meters / hours` → `"10.799999999999999 km/h"`). An overload accepts a `java.util.Formatter` number pattern and
+  `Locale` (`v.format(kilo.meters / hours, "%.1f", Locale.US)` → `"10.8 km/h"`). The unit part now renders the
+  **written-down** symbol of prefixed/alternate units (`km`, `h`, `mi`, `KiB`) via new cosmetic display metadata on the
+  terms, and uses fraction notation (`km/h`, `m/s^2`) for a single denominator. Rendering goes through a new public **
+  `KUnitFormatter`** interface with a
+  `KUnitFormatContext`; the shipped `KDefaultUnitFormatter` produces plain text, and a custom formatter (e.g.
+  LaTeX/MathML) can be supplied via the `formatter` parameter. A new `KUnitMeasurable.toString`
   overload applies the same pattern/locale/formatter to the base-unit output; the no-argument `toString`
-  is unchanged. Full docs (Formatting Output + Custom Formatters, EN/JA/ZH/KO/AR/HI) and 100 % test
-  coverage included.
+  is unchanged. Full docs (Formatting Output + Custom Formatters, EN/JA/ZH/KO/AR/HI) and 100 % test coverage included.
 
 - **New `Voltage` unit group** (`org.pcsoft.framework.kunit.voltage`): a *constructed* quantity
   (`mass¹ · distance² · time⁻³ · current⁻¹`, i.e. `kg·m²·s⁻³·A⁻¹`) with base unit **volt**
   (`KVoltageUnit.BASE == KVoltageUnit.VOLT`). Bare tokens `volts`, `statvolts` (CGS-ESU), `abvolts`
-  (CGS-EMU), `westonCells` (Weston standard cell) and `daniells` (Daniell cell); full SI prefix support on
-  every unit (`milli.volts` = mV, `kilo.volts` = kV). `+`/`-`/comparison and `equals`/`hashCode` operate on
-  the normalized volt value (`(1 of kilo.volts) == (1000 of volts)`). It has **multiple equivalent
-  decompositions**: the typed Ohm's-law form `resistance * current = voltage` (see Resistance) and the
-  native canonical expression `mass·distance²/(time³·current)`, which is narrowed to a typed voltage via
+  (CGS-EMU), `westonCells` (Weston standard cell) and `daniells` (Daniell cell); full SI prefix support on every unit
+  (`milli.volts` = mV, `kilo.volts` = kV). `+`/`-`/comparison and `equals`/`hashCode` operate on the normalized volt
+  value (`(1 of kilo.volts) == (1000 of volts)`). It has **multiple equivalent decompositions**: the typed Ohm's-law
+  form `resistance * current = voltage` (see Resistance) and the native canonical expression
+  `mass·distance²/(time³·current)`, which is narrowed to a typed voltage via
   `KMixedUnitInstance.toVoltage()`. Both yield the same value-equal result. 100 % test coverage included.
 
 - **New `Resistance` unit group** (`org.pcsoft.framework.kunit.resistance`): a *constructed* quantity
   (`mass¹ · distance² · time⁻³ · current⁻²`, i.e. `kg·m²·s⁻³·A⁻²`) with base unit **ohm**
   (`KResistanceUnit.BASE == KResistanceUnit.OHM`). Bare tokens `ohms`, `statohms` (CGS-ESU), `abohms`
-  (CGS-EMU), `internationalOhms`, `legalOhms` and `siemensUnits`; full SI prefix support on every unit
-  (`milli.ohms` = mΩ, `kilo.ohms` = kΩ). `+`/`-`/comparison and `equals`/`hashCode` operate on the
-  normalized ohm value (`(1 of kilo.ohms) == (1000 of ohms)`). Ohm's-law cross operators tie voltage,
-  resistance and current together: `voltage / current = resistance` (typed), `resistance * current = voltage`
-  and its commutative `current * resistance = voltage`, and `voltage / resistance = current` (typed).
-  Like voltage it has **multiple equivalent decompositions**: the typed `voltage / current` and the native
-  canonical expression `mass·distance²/(time³·current²)`, narrowed via `KMixedUnitInstance.toResistance()`;
-  both yield the same value-equal result. 100 % test coverage included.
+  (CGS-EMU), `internationalOhms`, `legalOhms` and `siemensUnits`; full SI prefix support on every unit (`milli.ohms` =
+  mΩ, `kilo.ohms` = kΩ). `+`/`-`/comparison and `equals`/`hashCode` operate on the normalized ohm value
+  (`(1 of kilo.ohms) == (1000 of ohms)`). Ohm's-law cross operators tie voltage, resistance and current together:
+  `voltage / current = resistance` (typed), `resistance * current = voltage`
+  and its commutative `current * resistance = voltage`, and `voltage / resistance = current` (typed). Like voltage it
+  has **multiple equivalent decompositions**: the typed `voltage / current` and the native canonical expression
+  `mass·distance²/(time³·current²)`, narrowed via `KMixedUnitInstance.toResistance()`; both yield the same value-equal
+  result. 100 % test coverage included.
 
-- **New `Electric Current` unit group** (`org.pcsoft.framework.kunit.ec`): a plain, one-dimensional native
-  group with base unit **ampere** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`). Besides the
-  SI ampere it offers the two classic CGS current units, the **biot / abampere** (EMU, `1 Bi = 10 A`, tokens
-  `biot` / `abamperes`) and the **statampere** (ESU, `1 statA ≈ 3.335 641 × 10⁻¹⁰ A`, token `statamperes`).
-  Build and read with `of`/`into` through the bare tokens (`amperes`, `biot`, `statamperes`); full SI prefix
-  support on every unit (`milli.amperes` = mA, `kilo.amperes` = kA). The group defines **no** cross-unit
-  typed results (any `*`/`/` with a foreign group yields a generic mixed unit); `+`/`-`/comparison operate on
-  the normalized ampere value, and `equals`/`hashCode` are by current quantity (`(1 of biot) == (10 of amperes)`);
+- **New `Electric Current` unit group** (`org.pcsoft.framework.kunit.ec`): a plain, one-dimensional native group with
+  base unit **ampere** (`KElectricCurrentUnit.BASE == KElectricCurrentUnit.AMPERE`). Besides the SI ampere it offers the
+  two classic CGS current units, the **biot / abampere** (EMU, `1 Bi = 10 A`, tokens
+  `biot` / `abamperes`) and the **statampere** (ESU, `1 statA ≈ 3.335 641 × 10⁻¹⁰ A`, token `statamperes`). Build and
+  read with `of`/`into` through the bare tokens (`amperes`, `biot`, `statamperes`); full SI prefix support on every unit
+  (`milli.amperes` = mA, `kilo.amperes` = kA). The group defines **no** cross-unit typed results (any `*`/`/` with a
+  foreign group yields a generic mixed unit); `+`/`-`/comparison operate on the normalized ampere value, and `equals`/
+  `hashCode` are by current quantity (`(1 of biot) == (10 of amperes)`);
   `KMixedUnitInstance.toElectricCurrent()` converts a single current term back to the pure wrapper. Full docs
   (EN/JA/ZH/KO) and 100 % test coverage included.
 
-- **New `Frequency` unit group** (`org.pcsoft.framework.kunit.frequency`): a native, one-dimensional group
-  and the **inverse of time** (`1 Hz = 1/s`) with base unit **hertz** (`KFrequencyUnit.BASE`). Bare tokens
+- **New `Frequency` unit group** (`org.pcsoft.framework.kunit.frequency`): a native, one-dimensional group and the
+  **inverse of time** (`1 Hz = 1/s`) with base unit **hertz** (`KFrequencyUnit.BASE`). Bare tokens
   `hertz`, `rps` (revolutions/s), `fps` (frames/s), `rpm` (revolutions/min, 1/60 Hz) and `bpm`
   (beats/min, 1/60 Hz); full SI prefix support on every unit (`kilo.hertz` = kHz, `mega.hertz` = MHz,
   `giga.hertz` = GHz). `+`/`-`/comparison and `equals`/`hashCode` operate on the normalized hertz value
-  (`(1 of kilo.hertz) == (1000 of hertz)`). Its cross-group operators are defined to be **exactly inverse
-  to time**: `count / time = frequency` (typed, e.g. `1 / (2 of seconds)` = 0.5 Hz), `count / frequency =
+  (`(1 of kilo.hertz) == (1000 of hertz)`). Its cross-group operators are defined to be **exactly inverse to time**:
+  `count / time = frequency` (typed, e.g. `1 / (2 of seconds)` = 0.5 Hz), `count / frequency =
   time`, `frequency * time = count` (dimensionless, commutative), `length * frequency = speed`
-  (commutative), and `speed / frequency = distance`. `KMixedUnitInstance.toFrequency()` narrows a matching
-  mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+  (commutative), and `speed / frequency = distance`. `KMixedUnitInstance.toFrequency()` narrows a matching mixed unit.
+  Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
 
 - **Scalar multiplication and division of units with plain numbers**: every unit can now be scaled by a
-  `Number` while keeping its type and dimension — `unit * n`, `n * unit` and `unit / n` all return the
-  same typed unit (e.g. `(12 of meters) * 3` stays a length, `Math.PI * (r * r)` stays an area, enabling
-  circle-area style formulas directly through the unit system). `n / unit` inverts the dimension and
-  yields a generic mixed unit (e.g. `1 / (2 of meters)` = m⁻¹, an inverse length). Scalar `+`/`-` remains
-  unsupported. The affine **absolute temperature** (`KTemperatureUnitInstance`) deliberately rejects
-  scalar `*`/`/` at compile time (scaling an affine point is meaningless); a linear **temperature
-  difference** (`KTemperatureDifferenceUnitInstance`) scales normally.
+  `Number` while keeping its type and dimension — `unit * n`, `n * unit` and `unit / n` all return the same typed unit
+  (e.g. `(12 of meters) * 3` stays a length, `Math.PI * (r * r)` stays an area, enabling circle-area style formulas
+  directly through the unit system). `n / unit` inverts the dimension and yields a generic mixed unit (e.g.
+  `1 / (2 of meters)` = m⁻¹, an inverse length). Scalar `+`/`-` remains unsupported. The affine **absolute temperature**
+  (`KTemperatureUnitInstance`) deliberately rejects scalar `*`/`/` at compile time (scaling an affine point is
+  meaningless); a linear **temperature difference** (`KTemperatureDifferenceUnitInstance`) scales normally.
 
 - **New `Acceleration` unit group** (`org.pcsoft.framework.kunit.acceleration`): a *constructed*
   quantity (length · time⁻²) with base unit **m/s²** (`KAccelerationUnit.BASE`). Named tokens `gals`
@@ -432,228 +548,224 @@ All new units accept the full range of SI prefixes on every named token.
   `acceleration * time = speed` (commutative), `speed / acceleration = time`. `KMixedUnitInstance.toAcceleration()`
   narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
 
-- **New `Force` unit group** (`org.pcsoft.framework.kunit.force`): a *constructed* quantity
-  (mass · length · time⁻²) with base unit **newton** (`KForceUnit.BASE`). Named tokens `newtons`,
-  `dynes`, `poundsForce` and `ponds` (gram-force); the **kilopond / kilogram-force (kgf) is deliberately
-  not a dedicated unit** — it is simply `kilo.ponds`, just as the kilonewton is `kilo.newtons`. Typed
-  operator `mass * acceleration = force` (Newton's second law, commutative), plus `force / mass =
-  acceleration` and `force / acceleration = mass`. `KMixedUnitInstance.toForce()` narrows a matching
-  mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
-
-- **New `Pressure` unit group** (`org.pcsoft.framework.kunit.pressure`): a *constructed* quantity
-  (mass · length⁻¹ · time⁻²) with base unit **pascal** (`KPressureUnit.BASE`). Named tokens `pascals`,
-  `bars`, `atmospheres`, `psis`, `torrs`; hPa/kPa/**MPa (= N/mm²)** are reached via the prefixes
-  (`hecto.pascals`, `kilo.pascals`, `mega.pascals`) rather than as own tokens. Typed operators
-  `force / area = pressure`, `pressure * area = force` (commutative) and `force / pressure = area`.
-  `KMixedUnitInstance.toPressure()` narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 %
-  test coverage included.
-
-- **New `Density` unit group** (`org.pcsoft.framework.kunit.density`): a *constructed* quantity
-  (mass · length⁻³) with base unit **kg/m³** (`KDensityUnit.BASE`). Density has no bare tokens (every
-  spelling is a ratio) — it is built as an expression (`kilo.grams / (meters pow 3)`) or produced by the
-  typed operator `mass / volume = density`, with the inverses `density * volume = mass` (commutative)
-  and `mass / density = volume`. `KMixedUnitInstance.toDensity()` narrows a matching mixed unit. Full
+- **New `Force` unit group** (`org.pcsoft.framework.kunit.force`): a *constructed* quantity (mass · length · time⁻²)
+  with base unit **newton** (`KForceUnit.BASE`). Named tokens `newtons`,
+  `dynes`, `poundsForce` and `ponds` (gram-force); the **kilopond / kilogram-force (kgf) is deliberately not a dedicated
+  unit** — it is simply `kilo.ponds`, just as the kilonewton is `kilo.newtons`. Typed operator
+  `mass * acceleration = force` (Newton's second law, commutative), plus `force / mass =
+  acceleration` and `force / acceleration = mass`. `KMixedUnitInstance.toForce()` narrows a matching mixed unit. Full
   docs (EN/JA/ZH/KO) and 100 % test coverage included.
 
-- **New `Area Density` unit group** (`org.pcsoft.framework.kunit.areadensity`): a *constructed* quantity
-  (mass · length⁻²), the surface mass / areal load used e.g. in construction statics, with base unit
-  **kg/m²** (`KAreaDensityUnit.BASE`). Like density it has no bare tokens; built as an expression
-  (`kilo.grams / (meters pow 2)`) or produced by `mass / area = area density`, with `area density *
+- **New `Pressure` unit group** (`org.pcsoft.framework.kunit.pressure`): a *constructed* quantity (mass · length⁻¹ ·
+  time⁻²) with base unit **pascal** (`KPressureUnit.BASE`). Named tokens `pascals`,
+  `bars`, `atmospheres`, `psis`, `torrs`; hPa/kPa/ **MPa (= N/mm²)** are reached via the prefixes (`hecto.pascals`,
+  `kilo.pascals`, `mega.pascals`) rather than as own tokens. Typed operators
+  `force / area = pressure`, `pressure * area = force` (commutative) and `force / pressure = area`.
+  `KMixedUnitInstance.toPressure()` narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage
+  included.
+
+- **New `Density` unit group** (`org.pcsoft.framework.kunit.density`): a *constructed* quantity (mass · length⁻³) with
+  base unit **kg/m³** (`KDensityUnit.BASE`). Density has no bare tokens (every spelling is a ratio) — it is built as an
+  expression (`kilo.grams / (meters pow 3)`) or produced by the typed operator `mass / volume = density`, with the
+  inverses `density * volume = mass` (commutative)
+  and `mass / density = volume`. `KMixedUnitInstance.toDensity()` narrows a matching mixed unit. Full docs (EN/JA/ZH/KO)
+  and 100 % test coverage included.
+
+- **New `Area Density` unit group** (`org.pcsoft.framework.kunit.areadensity`): a *constructed* quantity (mass ·
+  length⁻²), the surface mass / areal load used e.g. in construction statics, with base unit **kg/m²**
+  (`KAreaDensityUnit.BASE`). Like density it has no bare tokens; built as an expression (`kilo.grams / (meters pow 2)`)
+  or produced by `mass / area = area density`, with `area density *
   area = mass` (commutative), `mass / area density = area`, and the density bridge
   `density * length = area density` / `area density / length = density`. `KMixedUnitInstance.toAreaDensity()`
   narrows a matching mixed unit. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
 
-- **New `Mass` unit group** (`org.pcsoft.framework.kunit.mass`): a plain, one-dimensional native group
-  with base unit **gram** (`KMassUnit.BASE == KMassUnit.GRAM`). The **kilogram is deliberately not a
-  dedicated unit** — it is simply `kilo.grams` (the SI prefix `kilo` on the gram), like every other
-  decimal magnitude. Units span metric (gram, tonne, metric carat), avoirdupois (grain, dram, ounce,
-  pound, stone, US/UK hundredweight, short/long ton, slug), troy/apothecary (pennyweight, troy ounce,
-  troy pound), historical/regional (German pound, Zentner, Lot, jin/catty, liang/tael, momme, kan) and
-  scientific (dalton/u). Build and read with `of`/`into` through the bare tokens (`grams`, `pounds`,
-  `troyOunces`, `jin`, `daltons`, …); full SI prefix support on every unit; `+`/`-`/comparison operate
-  on the normalized gram value, and `equals`/`hashCode` are by mass quantity
-  (`(1 of kilo.grams) == (1000 of grams)`); `KMixedUnitInstance.toMass()` converts a single mass term
-  back to the pure wrapper. Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+- **New `Mass` unit group** (`org.pcsoft.framework.kunit.mass`): a plain, one-dimensional native group with base unit
+  **gram** (`KMassUnit.BASE == KMassUnit.GRAM`). The **kilogram is deliberately not a dedicated unit** — it is simply
+  `kilo.grams` (the SI prefix `kilo` on the gram), like every other decimal magnitude. Units span metric (gram, tonne,
+  metric carat), avoirdupois (grain, dram, ounce, pound, stone, US/UK hundredweight, short/long ton, slug),
+  troy/apothecary (pennyweight, troy ounce, troy pound), historical/regional (German pound, Zentner, Lot, jin/catty,
+  liang/tael, momme, kan) and scientific (dalton/u). Build and read with `of`/`into` through the bare tokens (`grams`,
+  `pounds`,
+  `troyOunces`, `jin`, `daltons`, …); full SI prefix support on every unit; `+`/`-`/comparison operate on the normalized
+  gram value, and `equals`/`hashCode` are by mass quantity (`(1 of kilo.grams) == (1000 of grams)`);
+  `KMixedUnitInstance.toMass()` converts a single mass term back to the pure wrapper. Full docs (EN/JA/ZH/KO) and 100 %
+  test coverage included.
 
 - **New `Temperature Difference` group** (`org.pcsoft.framework.kunit.temperature`): a **linear**
-  (offset-free) counterpart to the affine temperature group, modelling a temperature *interval* rather
-  than an absolute point. Kelvin only, no prefixes. Built explicitly via `KTemperatureDifference.ofKelvin(…)`
+  (offset-free) counterpart to the affine temperature group, modelling a temperature *interval* rather than an absolute
+  point. Kelvin only, no prefixes. Built explicitly via `KTemperatureDifference.ofKelvin(…)`
   or as the result of subtracting two absolute temperatures. Its symbol is rendered as **`ΔK`** (not `K`)
-  so a difference is visually distinguishable from an absolute kelvin in mixed units and `toString`.
-  Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+  so a difference is visually distinguishable from an absolute kelvin in mixed units and `toString`. Full docs
+  (EN/JA/ZH/KO) and 100 % test coverage included.
 
-- **Rankine (`°R`) added to the `Temperature` group**: absolute scale with Fahrenheit-sized degrees
-  (`K = °R·5/9`), built/read via `of`/`into` through the `rankine` token.
+- **Rankine (`°R`) added to the `Temperature` group**: absolute scale with Fahrenheit-sized degrees (`K = °R·5/9`),
+  built/read via `of`/`into` through the `rankine` token.
 
 ### Changed
 
-- **Breaking: absolute-temperature arithmetic corrected to be physically consistent.** Subtracting two
-  absolute temperatures now yields a `KTemperatureDifferenceUnitInstance` in **kelvin** (e.g.
-  `30 °C − 10 °C = 20 ΔK`), instead of the previous incorrect result that reinterpreted the kelvin
-  difference as an absolute temperature (`≈ −253 °C`). An absolute temperature is now modelled as an
-  affine point: `AbsTemp ± TemperatureDifference` yields an absolute temperature, while `AbsTemp + AbsTemp`
-  is now a **compile error** (adding two absolute temperatures is physically meaningless). `*`/`/` and
-  comparison are unchanged.
+- **Breaking: absolute-temperature arithmetic corrected to be physically consistent.** Subtracting two absolute
+  temperatures now yields a `KTemperatureDifferenceUnitInstance` in **kelvin** (e.g.
+  `30 °C − 10 °C = 20 ΔK`), instead of the previous incorrect result that reinterpreted the kelvin difference as an
+  absolute temperature (`≈ −253 °C`). An absolute temperature is now modelled as an affine point:
+  `AbsTemp ± TemperatureDifference` yields an absolute temperature, while `AbsTemp + AbsTemp`
+  is now a **compile error** (adding two absolute temperatures is physically meaningless). `*`/`/` and comparison are
+  unchanged.
 
 ## [0.5.0]
 
 ### Added
 
 - **New prefix-free `light` group for light-travel distances** (`org.pcsoft.framework.kunit.distance`):
-  the light-second … light-year units are now grouped behind the `light` builder object and read almost
-  like prose — `5 of light.seconds`, `3 of light.years` — via the properties `light.seconds`,
-  `light.minutes`, `light.hours`, `light.days`, `light.weeks`, `light.years`. They deliberately accept
-  **no** SI prefixes (a `kilo.lightYears` is physically meaningless). Full docs (EN/JA/ZH/KO) and 100 %
-  test coverage included. **Breaking:** the previous bare tokens `lightSeconds` … `lightYears` and their
-  prefixed forms (`kilo.lightYears`, …) were **removed**; migrate `n of lightYears` → `n of light.years`
+  the light-second … light-year units are now grouped behind the `light` builder object and read almost like prose —
+  `5 of light.seconds`, `3 of light.years` — via the properties `light.seconds`,
+  `light.minutes`, `light.hours`, `light.days`, `light.weeks`, `light.years`. They deliberately accept **no** SI
+  prefixes (a `kilo.lightYears` is physically meaningless). Full docs (EN/JA/ZH/KO) and 100 % test coverage included.
+  **Breaking:** the previous bare tokens `lightSeconds` … `lightYears` and their prefixed forms (`kilo.lightYears`, …)
+  were **removed**; migrate `n of lightYears` → `n of light.years`
   (analogously for second/minute/hour/day/week).
 
 - **Historical volume units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
-  **imperial bushel** (`imperialBushels`, 0.03636872 m³), **imperial hogshead** (`hogsheads`,
-  0.32731785 m³), **imperial pint** (`imperialPints`, 0.00056826125 m³) and **imperial quart**
-  (`imperialQuarts`, 0.0011365225 m³). All build/read via `of`/`into`, come with full SI prefix support
-  and are covered by tests; docs (EN/JA/ZH/KO) and READMEs updated. (Imperial gallon, US liquid gallon
-  and oil barrel already existed and are unchanged.)
+  **imperial bushel** (`imperialBushels`, 0.03636872 m³), **imperial hogshead** (`hogsheads`, 0.32731785 m³), **imperial
+  pint** (`imperialPints`, 0.00056826125 m³) and **imperial quart**
+  (`imperialQuarts`, 0.0011365225 m³). All build/read via `of`/`into`, come with full SI prefix support and are covered
+  by tests; docs (EN/JA/ZH/KO) and READMEs updated. (Imperial gallon, US liquid gallon and oil barrel already existed
+  and are unchanged.)
 
 - **Historical area units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
-  **rood** (`roods`, 1011.7141056 m²), **square perch / square rod** (`squarePerches`, 25.29285264 m²),
-  **Morgen (Prussian)** (`morgens`, 2553.22 m²), **Joch (Austrian)** (`jochs`, 5754.642 m²) and
-  **Tagwerk (Bavarian)** (`tagwerks`, 3407.27 m²). All build/read via `of`/`into`, come with full SI
-  prefix support and are covered by tests; docs (EN/JA/ZH/KO) and READMEs updated. (The international
-  **acre** already existed and is unchanged.)
+  **rood** (`roods`, 1011.7141056 m²), **square perch / square rod** (`squarePerches`, 25.29285264 m²), **Morgen (
+  Prussian)** (`morgens`, 2553.22 m²), **Joch (Austrian)** (`jochs`, 5754.642 m²) and **Tagwerk (Bavarian)**
+  (`tagwerks`, 3407.27 m²). All build/read via `of`/`into`, come with full SI prefix support and are covered by tests;
+  docs (EN/JA/ZH/KO) and READMEs updated. (The international **acre** already existed and is unchanged.)
 
 - **Historical length units added to the `Distance` group** (`org.pcsoft.framework.kunit.distance`):
   **cubit** (`cubits`, 0.4572 m), **Roman foot / pes** (`romanFeet`, 0.2957 m), **Roman pace / passus**
-  (`romanPaces`, 1.4787 m), **stadium** (`stadia`, 185.0 m), **Roman mile / mille passus** (`romanMiles`,
-  1481.5 m), **rod / perch** (`rods`, 5.0292 m), **league** (`leagues`, 4828.032 m), **cable length**
-  (`cableLengths`, 185.2 m), **verst** (`versts`, 1066.8 m) and **Prussian mile** (`prussianMiles`,
-  7532.5 m). All build/read via `of`/`into`, come with full SI prefix support and are covered by tests;
-  docs (EN/JA/ZH/KO) and READMEs updated. (Nautical mile, statute mile, fathom, furlong and inch already
-  existed and are unchanged.)
+  (`romanPaces`, 1.4787 m), **stadium** (`stadia`, 185.0 m), **Roman mile / mille passus** (`romanMiles`, 1481.5 m),
+  **rod / perch** (`rods`, 5.0292 m), **league** (`leagues`, 4828.032 m), **cable length**
+  (`cableLengths`, 185.2 m), **verst** (`versts`, 1066.8 m) and **Prussian mile** (`prussianMiles`, 7532.5 m). All
+  build/read via `of`/`into`, come with full SI prefix support and are covered by tests; docs (EN/JA/ZH/KO) and READMEs
+  updated. (Nautical mile, statute mile, fathom, furlong and inch already existed and are unchanged.)
 
-- **New `Temperature` unit group** (`org.pcsoft.framework.kunit.temperature`) with **Kelvin** (base),
-  **Celsius** and **Fahrenheit**. It is the framework's first **affine** group: conversions are
-  offset-and-scale (`°C = K − 273.15`, `°F = (K − 273.15)·9/5 + 32`), not a single factor. Build and read
-  with the usual verbs — `25 of celsius`, `t into fahrenheit` — through the bare tokens `kelvin`,
-  `celsius`, `fahrenheit`. Values are stored as absolute kelvin, so `*`/`/`/`pow` run through the generic
-  engine unchanged; the group has **no prefixes**. `+`/`-`/comparison operate on absolute kelvin, and
-  `equals`/`hashCode` are by absolute temperature (`(0 of celsius) == (273.15 of kelvin)`). Full docs
-  (EN/JA/ZH/KO) and 100 % test coverage included.
+- **New `Temperature` unit group** (`org.pcsoft.framework.kunit.temperature`) with **Kelvin** (base), **Celsius** and
+  **Fahrenheit**. It is the framework's first **affine** group: conversions are offset-and-scale (`°C = K − 273.15`,
+  `°F = (K − 273.15)·9/5 + 32`), not a single factor. Build and read with the usual verbs — `25 of celsius`,
+  `t into fahrenheit` — through the bare tokens `kelvin`,
+  `celsius`, `fahrenheit`. Values are stored as absolute kelvin, so `*`/`/`/`pow` run through the generic engine
+  unchanged; the group has **no prefixes**. `+`/`-`/comparison operate on absolute kelvin, and
+  `equals`/`hashCode` are by absolute temperature (`(0 of celsius) == (273.15 of kelvin)`). Full docs (EN/JA/ZH/KO) and
+  100 % test coverage included.
 
 ### Changed
 
 - **`KUnitMeasurable` gains a `readBaseValue(baseValue)` hook** behind `into` (mirroring `scaledBy`
   behind `of`). The default linear behaviour (`baseValue / value`) is implemented on
-  `KMixedUnitInstance` and inherited by every "pure" wrapper via delegation, so `into` is unchanged for
-  all existing groups; only non-linear groups (the new affine temperature group) override it. This keeps
-  reading correct for every group without shadow-prone `into` overloads. Not a breaking change for
-  existing units.
+  `KMixedUnitInstance` and inherited by every "pure" wrapper via delegation, so `into` is unchanged for all existing
+  groups; only non-linear groups (the new affine temperature group) override it. This keeps reading correct for every
+  group without shadow-prone `into` overloads. Not a breaking change for existing units.
 
-- **README architecture diagram reconciled with the current code.** The class diagram in all four READMEs
-  (`README.md` + ko/zh/ja) no longer references the removed `KDerivedUnit`/`KDistanceDerivedUnit` types;
-  it now shows the real `KPrefixBuilder` → `KUnitPrefix` relationship instead.
-- **Breaking — construction/reading DSL fully replaced by `of` / `into`.** Number and unit are now
-  strictly separated: build with `number of <unit-expression>` and read with `value into <unit>`.
-  - **Construction:** `10.5 of kilo.meters`, `10.5 of kilo.meters / milli.seconds`, `2 of hectares`,
-    `10 of meters * (milli.seconds pow 2)`. `Number.of` is a single group-agnostic infix that scales a
-    **value-1 unit template** (backed by a new `KUnitMeasurable.scaledBy`), preserving the strong result
-    type (`KLengthUnitInstance`, `KSpeedUnitInstance`, …).
-  - **Reading:** `v into kilo.meters`, `area into hectares` (returns `Double`). `into` replaces **all**
-    `valueAs(...)` overloads, which were removed everywhere.
-  - **Prefix builders.** Prefixes are now builder values (`kilo`, `milli`, …) exposing value-1 unit
-    templates via property access (`kilo.meters`, `milli.seconds`). A compile-time hierarchy
-    (`KPrefixBuilder` → `KDiminishingPrefixBuilder` / `KAugmentingPrefixBuilder`) enforces which units
-    accept which prefixes: `bytes`/`bits` hang only on the augmenting (and binary IEC) builder, so
-    `milli.bytes` is a **compile error** while `kilo.bytes`/`kibi.bytes` are valid. Binary IEC prefixes
-    are the builder values `kibi`, `mebi`, … (`KStorageBinaryPrefixBuilder`).
-  - **Bare tokens are now value-1 instances.** `meters`, `seconds`, `bytes`, `hectares`, `liters`, … are
-    `K…UnitInstance` values (1 unit), used as the template for both `of` and `into`. Special/derived units
-    (`hectares`, `ares`, `acres`, `liters`, gallons, …) are now named value-1 instances instead of
-    `KDerivedUnit` targets. Constructed groups (speed, data rate) drop their spelled-out composite tokens
-    entirely - a speed/rate is written as an expression (`meters / seconds`, `bytes / seconds`); only
-    genuinely single-named speeds (`knots`, `mach`, `speedOfLight`) remain as tokens.
-- **Tests reorganized per aspect.** Each group's single aggregate test class was split into the
-  group-named per-aspect classes mandated by the test rules — `K<Group>UnitSystemTest` (the
-  `K<Group>UnitInstance` surface), `K<Group>OperatorTest` (all operators), `K<Group>UnitTest` (the
-  concrete units / bare values), `K<Group>PrefixTest` (the prefixes) — with a class omitted where the
-  group has no such logic (e.g. no `PrefixTest` for the composed speed/data-rate groups, and only
+- **README architecture diagram reconciled with the current code.** The class diagram in all four READMEs (`README.md` +
+  ko/zh/ja) no longer references the removed `KDerivedUnit`/`KDistanceDerivedUnit` types; it now shows the real
+  `KPrefixBuilder` → `KUnitPrefix` relationship instead.
+- **Breaking — construction/reading DSL fully replaced by `of` / `into`.** Number and unit are now strictly separated:
+  build with `number of <unit-expression>` and read with `value into <unit>`.
+    - **Construction:** `10.5 of kilo.meters`, `10.5 of kilo.meters / milli.seconds`, `2 of hectares`,
+      `10 of meters * (milli.seconds pow 2)`. `Number.of` is a single group-agnostic infix that scales a **value-1 unit
+      template** (backed by a new `KUnitMeasurable.scaledBy`), preserving the strong result type (`KLengthUnitInstance`,
+      `KSpeedUnitInstance`, …).
+    - **Reading:** `v into kilo.meters`, `area into hectares` (returns `Double`). `into` replaces **all**
+      `valueAs(...)` overloads, which were removed everywhere.
+    - **Prefix builders.** Prefixes are now builder values (`kilo`, `milli`, …) exposing value-1 unit templates via
+      property access (`kilo.meters`, `milli.seconds`). A compile-time hierarchy (`KPrefixBuilder` →
+      `KDiminishingPrefixBuilder` / `KAugmentingPrefixBuilder`) enforces which units accept which prefixes: `bytes`/
+      `bits` hang only on the augmenting (and binary IEC) builder, so
+      `milli.bytes` is a **compile error** while `kilo.bytes`/`kibi.bytes` are valid. Binary IEC prefixes are the
+      builder values `kibi`, `mebi`, … (`KStorageBinaryPrefixBuilder`).
+    - **Bare tokens are now value-1 instances.** `meters`, `seconds`, `bytes`, `hectares`, `liters`, … are
+      `K…UnitInstance` values (1 unit), used as the template for both `of` and `into`. Special/derived units
+      (`hectares`, `ares`, `acres`, `liters`, gallons, …) are now named value-1 instances instead of
+      `KDerivedUnit` targets. Constructed groups (speed, data rate) drop their spelled-out composite tokens entirely - a
+      speed/rate is written as an expression (`meters / seconds`, `bytes / seconds`); only genuinely single-named speeds
+      (`knots`, `mach`, `speedOfLight`) remain as tokens.
+- **Tests reorganized per aspect.** Each group's single aggregate test class was split into the group-named per-aspect
+  classes mandated by the test rules — `K<Group>UnitSystemTest` (the
+  `K<Group>UnitInstance` surface), `K<Group>OperatorTest` (all operators), `K<Group>UnitTest` (the concrete units / bare
+  values), `K<Group>PrefixTest` (the prefixes) — with a class omitted where the group has no such logic (e.g. no
+  `PrefixTest` for the composed speed/data-rate groups, and only
   `System`/`Operator` for the root mixed unit). No behavioural change; coverage is unchanged.
-- **Internal simplification (no behavioural change).** Removed unreachable defensive fallbacks so the
-  code carries no dead branches: the in-hierarchy `KDistanceUnitInstance.toLength`/`toArea`/`toVolume`
+- **Internal simplification (no behavioural change).** Removed unreachable defensive fallbacks so the code carries no
+  dead branches: the in-hierarchy `KDistanceUnitInstance.toLength`/`toArea`/`toVolume`
   now use a direct cast (the exponent check already guarantees the concrete leaf type), and
-  `combineUnits` inserts the first operand's terms directly (a single mixed unit never repeats a unit).
-  Test coverage is now 100 % across line, branch, method and class.
+  `combineUnits` inserts the first operand's terms directly (a single mixed unit never repeats a unit). Test coverage is
+  now 100 % across line, branch, method and class.
 
 ### Removed
 
-- **Breaking.** All previous construction/reading surface: the `Number.xxx` creator properties
-  (`5.meters`, `2.hours`, …); every `valueAs(...)` and the custom-unit `toString(target)` overloads (on
-  the wrappers **and** `KMixedUnitInstance`); the per-group prefix `infix` functions (`5 kilo meters`,
-  `5 milli seconds`, `5 kibi bytes`, …) and their files (`K*UnitPrefix.kt`); the composite bare-value
-  tokens `metersPerSecond`/`kilometersPerHour`/`bytesPerSecond`/… — removed entirely (build a speed/rate
-  as an expression, `meters / seconds`); the entire `KUnitTarget` system — `KUnitTarget`, `KScaledUnit`,
+- **Breaking.** All previous construction/reading surface: the `Number.xxx` creator properties (`5.meters`,
+  `2.hours`, …); every `valueAs(...)` and the custom-unit `toString(target)` overloads (on the wrappers **and**
+  `KMixedUnitInstance`); the per-group prefix `infix` functions (`5 kilo meters`,
+  `5 milli seconds`, `5 kibi bytes`, …) and their files (`K*UnitPrefix.kt`); the composite bare-value tokens
+  `metersPerSecond`/`kilometersPerHour`/`bytesPerSecond`/… — removed entirely (build a speed/rate as an expression,
+  `meters / seconds`); the entire `KUnitTarget` system — `KUnitTarget`, `KScaledUnit`,
   `KDerivedUnit`, `KScaledDerivedUnit`, `KBinaryScaledUnit` and every `with` infix — plus
-  `KDistanceDerivedUnit`. Reading in a specific unit is now `into` with a value-1 template; there is no
-  custom-unit `toString` (format via `"${v into kilo.meters} km"`).
+  `KDistanceDerivedUnit`. Reading in a specific unit is now `into` with a value-1 template; there is no custom-unit
+  `toString` (format via `"${v into kilo.meters} km"`).
 
 ### Added
 
 - `Number.of` / `KUnitMeasurable.into` (root, `KUnitMeasurable.kt`), `KUnitMeasurable.scaledBy`, and the
   `KPrefixBuilder` hierarchy with all 24 SI builder values plus the binary `KStorageBinaryPrefixBuilder`
-  values. Per-group value-1 bare tokens and prefix builder properties
-  (`val KPrefixBuilder.meters`, `val KAugmentingPrefixBuilder.bytes`, …).
+  values. Per-group value-1 bare tokens and prefix builder properties (`val KPrefixBuilder.meters`,
+  `val KAugmentingPrefixBuilder.bytes`, …).
 
 <details><summary>Earlier [UNRELEASED] entries (storage / data-rate groups, pre-DSL-overhaul)</summary>
 
 ### Added
 
-- **Data-rate unit group** (`org.pcsoft.framework.kunit.datarate`): a new *constructed* group for data
-  transfer rates, `storage · time⁻¹`, base unit **byte per second** (`KDataRateUnit.BYTES_PER_SECOND`),
-  with **bit per second** (`KDataRateUnit.BITS_PER_SECOND`, 0.125 B/s). Creator properties
+- **Data-rate unit group** (`org.pcsoft.framework.kunit.datarate`): a new *constructed* group for data transfer rates,
+  `storage · time⁻¹`, base unit **byte per second** (`KDataRateUnit.BYTES_PER_SECOND`), with **bit per second**
+  (`KDataRateUnit.BITS_PER_SECOND`, 0.125 B/s). Creator properties
   `Number.bytesPerSecond`/`Number.bitsPerSecond`, bare aliases `bytesPerSecond`/`bitsPerSecond`, and the
   `KMixedUnitInstance.toDataRate()` conversion. `KDataRateUnitInstance` wraps a two-term
   `[KStorageUnit.BASE¹, KTimeUnit.BASE⁻¹]` instance, always normalized to B/s.
-  - **Cross-group operators**: `storage / time = data rate`, `data rate * time = storage`,
-    `time * data rate = storage`, `storage / data rate = time`, each strongly typed (e.g.
-    `100.bytes / 10.seconds` is a `KDataRateUnitInstance`, no `toUnit()` needed).
-  - **Prefix policy mirrors storage** (the numerator): only the non-diminishing SI prefixes (`deca`
-    upward) are offered - `5 milli bytesPerSecond` is a **compile error** - plus the binary IEC prefixes
-    (`kibi`, `mebi`, …, reused from `KStorageBinaryPrefix`), so a rate can distinguish 1000 (`kilo`) from
-    1024 (`kibi`). Whole-rate `valueAs`/`toString` targets accept a bare `KDataRateUnit`, an SI-scaled
-    (`KUnitPrefix.KILO with bytesPerSecond` → `kB/s`) or a binary-scaled one
-    (`KStorageBinaryPrefix.KIBI with bytesPerSecond` → `KiB/s`); no root `resolve()` change was needed
-    (the storage `KBinaryScaledUnit` branch already covers it).
-  - Full parameterized test suite (conversion, operator and comparison matrices, decimal + binary
-    prefix × unit matrices, `toString`, and the bidirectional cross-group storage × time decomposition)
-    and a dedicated MkDocs page (`docs/docs/units/datarate.md` + ko/zh/ja).
-- **Storage unit group** (`org.pcsoft.framework.kunit.storage`): a new predefined group for digital data
-  amounts, base unit **byte** (`KStorageUnit.BYTE`), with **bit** (`KStorageUnit.BIT`, 0.125 B). Creator
-  properties `Number.bytes`/`Number.bits`, bare aliases `bytes`/`bits`, and the
-  `KMixedUnitInstance.toStorage()` conversion. It is the first *plain, one-dimensional*, `Double`-backed
-  wrapper shape (`KStorageUnitInstance`).
-  - **No diminishing prefixes.** Only the non-diminishing SI prefixes (`deca` upward) are offered;
-    `deci`/`centi`/`milli`/… do not exist for storage, so e.g. `5 milli bytes` is a **compile error**.
-  - **Binary (IEC) prefixes.** A second prefix system `KStorageBinaryPrefix` (`kibi`, `mebi`, `gibi`, …,
-    powers of 1024) with matching `infix` constructors and a `KBinaryScaledUnit` `valueAs`/`toString`
-    target (`KStorageBinaryPrefix.KIBI with bytes`), so a value can distinguish 1000 (`kilo`) from 1024
-    (`kibi`).
-  - Full parameterized test suite (conversion, operator and comparison matrices, decimal + binary
-    prefix × unit matrices, `toString`, and the cross-group storage × time decomposition) and a dedicated
-    MkDocs page (`docs/docs/units/storage.md` + ko/zh/ja).
+    - **Cross-group operators**: `storage / time = data rate`, `data rate * time = storage`,
+      `time * data rate = storage`, `storage / data rate = time`, each strongly typed (e.g.
+      `100.bytes / 10.seconds` is a `KDataRateUnitInstance`, no `toUnit()` needed).
+    - **Prefix policy mirrors storage** (the numerator): only the non-diminishing SI prefixes (`deca`
+      upward) are offered - `5 milli bytesPerSecond` is a **compile error** - plus the binary IEC prefixes (`kibi`,
+      `mebi`, …, reused from `KStorageBinaryPrefix`), so a rate can distinguish 1000 (`kilo`) from 1024 (`kibi`).
+      Whole-rate `valueAs`/`toString` targets accept a bare `KDataRateUnit`, an SI-scaled
+      (`KUnitPrefix.KILO with bytesPerSecond` → `kB/s`) or a binary-scaled one
+      (`KStorageBinaryPrefix.KIBI with bytesPerSecond` → `KiB/s`); no root `resolve()` change was needed (the storage
+      `KBinaryScaledUnit` branch already covers it).
+    - Full parameterized test suite (conversion, operator and comparison matrices, decimal + binary prefix × unit
+      matrices, `toString`, and the bidirectional cross-group storage × time decomposition)
+      and a dedicated MkDocs page (`docs/docs/units/datarate.md` + ko/zh/ja).
+- **Storage unit group** (`org.pcsoft.framework.kunit.storage`): a new predefined group for digital data amounts, base
+  unit **byte** (`KStorageUnit.BYTE`), with **bit** (`KStorageUnit.BIT`, 0.125 B). Creator properties `Number.bytes`/
+  `Number.bits`, bare aliases `bytes`/`bits`, and the
+  `KMixedUnitInstance.toStorage()` conversion. It is the first *plain, one-dimensional*, `Double`-backed wrapper shape
+  (`KStorageUnitInstance`).
+    - **No diminishing prefixes.** Only the non-diminishing SI prefixes (`deca` upward) are offered;
+      `deci`/`centi`/`milli`/… do not exist for storage, so e.g. `5 milli bytes` is a **compile error**.
+    - **Binary (IEC) prefixes.** A second prefix system `KStorageBinaryPrefix` (`kibi`, `mebi`, `gibi`, …, powers of
+      1024) with matching `infix` constructors and a `KBinaryScaledUnit` `valueAs`/`toString`
+      target (`KStorageBinaryPrefix.KIBI with bytes`), so a value can distinguish 1000 (`kilo`) from 1024 (`kibi`).
+    - Full parameterized test suite (conversion, operator and comparison matrices, decimal + binary prefix × unit
+      matrices, `toString`, and the cross-group storage × time decomposition) and a dedicated MkDocs page
+      (`docs/docs/units/storage.md` + ko/zh/ja).
 - `KMixedUnitInstance.resolve()` now also resolves the storage group's `KBinaryScaledUnit` target.
-- **General cross-group `*`/`/` operators.** Any two "pure" units can now be multiplied/divided directly
-  across group boundaries (e.g. `20.bytes / 20.seconds`) without first calling `toUnit()`, yielding a
+- **General cross-group `*`/`/` operators.** Any two "pure" units can now be multiplied/divided directly across group
+  boundaries (e.g. `20.bytes / 20.seconds`) without first calling `toUnit()`, yielding a
   `KMixedUnitInstance`. Provided by one group-agnostic pair of extension operators
-  `KUnitInstance<*>.times/div(KUnitInstance<*>)` in `KUnitMeasurable.kt`; statically-typed cross-group
-  results (e.g. `length / time = speed`, `length * length = area`) are preserved via overload resolution.
+  `KUnitInstance<*>.times/div(KUnitInstance<*>)` in `KUnitMeasurable.kt`; statically-typed cross-group results (e.g.
+  `length / time = speed`, `length * length = area`) are preserved via overload resolution.
 
 ### Changed
 
 - **`.claude/CLAUDE.md` reconciled with the actual code**: documented `KUnitTarget`, `KUnitTerm`, `KScaledUnit`/
-  `KScaledDerivedUnit` + `with`, the `KDerivedUnit` fields and per-group `object`, the real root-package
-  file layout (no `KUnitInstance.kt`/`KDerivedUnit.kt`), the "unit-enum = group name / wrapper = dimension
-  name" rule, the three wrapper shapes (dimensioned / `Duration`-backed / plain one-dimensional), and that
-  a group may offer a prefix subset and/or an alternative prefix system.
+  `KScaledDerivedUnit` + `with`, the `KDerivedUnit` fields and per-group `object`, the real root-package file layout (no
+  `KUnitInstance.kt`/`KDerivedUnit.kt`), the "unit-enum = group name / wrapper = dimension name" rule, the three wrapper
+  shapes (dimensioned / `Duration`-backed / plain one-dimensional), and that a group may offer a prefix subset and/or an
+  alternative prefix system.
 
 </details>
 
@@ -661,139 +773,134 @@ All new units accept the full range of SI prefixes on every named token.
 
 ### Added
 
-- **Dimensioned distance subtypes.** The distance group now models exponents as their own types under an
-  open base `KDistanceUnitInstance` (any exponent): `KLengthUnitInstance` (exponent 1),
-  `KAreaUnitInstance` (2) and `KVolumeUnitInstance` (3). Results whose exponent leaves `{1,2,3}` fall back
-  to `KDistanceUnitInstance`; a dimensionless result (exponent 0) is a `KMixedUnitInstance`.
-  - Same-group `*`/`/` are now **strongly typed**: `length * length = area`, `area / length = length`,
-    `volume / area = length`, etc., instead of always returning a raw `KMixedUnitInstance`.
-  - Cross-dimension `+`/`-`/comparison (`length + area`, `length < volume`, …) are now a **compile
-    error** — no such operator exists — rather than a runtime `IllegalStateException`.
-- **Exponentiation via `pow`.** A group-agnostic infix power operation raises any unit to an integer
-  power: `2.meters pow 2` (= `(2 m)² = 4 m²`, a `KAreaUnitInstance`), `2 kilo meters pow 2`
-  (= 4 000 000 m²), `2.meters pow 3` (a volume), `2.hours pow 2` (a generic `KMixedUnitInstance`), and it
-  chains (`x pow 2 pow 2`). The value is powered and every term's exponent multiplied by `n`; `pow 0` is
-  dimensionless. This is the single power syntax across all groups (Kotlin has no overloadable `^`). For
-  distance the result is dimensioned (`KDistanceUnitInstance.pow`); for other groups it is a
+- **Dimensioned distance subtypes.** The distance group now models exponents as their own types under an open base
+  `KDistanceUnitInstance` (any exponent): `KLengthUnitInstance` (exponent 1),
+  `KAreaUnitInstance` (2) and `KVolumeUnitInstance` (3). Results whose exponent leaves `{1,2,3}` fall back to
+  `KDistanceUnitInstance`; a dimensionless result (exponent 0) is a `KMixedUnitInstance`.
+    - Same-group `*`/`/` are now **strongly typed**: `length * length = area`, `area / length = length`,
+      `volume / area = length`, etc., instead of always returning a raw `KMixedUnitInstance`.
+    - Cross-dimension `+`/`-`/comparison (`length + area`, `length < volume`, …) are now a **compile error** — no such
+      operator exists — rather than a runtime `IllegalStateException`.
+- **Exponentiation via `pow`.** A group-agnostic infix power operation raises any unit to an integer power:
+  `2.meters pow 2` (= `(2 m)² = 4 m²`, a `KAreaUnitInstance`), `2 kilo meters pow 2`
+  (= 4 000 000 m²), `2.meters pow 3` (a volume), `2.hours pow 2` (a generic `KMixedUnitInstance`), and it chains
+  (`x pow 2 pow 2`). The value is powered and every term's exponent multiplied by `n`; `pow 0` is dimensionless. This is
+  the single power syntax across all groups (Kotlin has no overloadable `^`). For distance the result is dimensioned
+  (`KDistanceUnitInstance.pow`); for other groups it is a
   `KMixedUnitInstance`.
 - The named derived units (`ares`/`hectares`/`acres`, `liters`/… ) return
   `KAreaUnitInstance`/`KVolumeUnitInstance`.
 - New conversions `KMixedUnitInstance.toDistance()`/`toLength()`/`toArea()`/`toVolume()`.
-- **In-hierarchy narrowing** `KDistanceUnitInstance.toLength()`/`toArea()`/`toVolume()`: a general distance
-  value (or any leaf) can now be narrowed to a specific dimension directly, mirroring the
-  `KMixedUnitInstance` extensions (exponent-checked, throws `IllegalStateException` on mismatch). Previously
-  only `toDistance()` existed on the wrapper and the narrowing conversions lived solely on
+- **In-hierarchy narrowing** `KDistanceUnitInstance.toLength()`/`toArea()`/`toVolume()`: a general distance value (or
+  any leaf) can now be narrowed to a specific dimension directly, mirroring the
+  `KMixedUnitInstance` extensions (exponent-checked, throws `IllegalStateException` on mismatch). Previously only
+  `toDistance()` existed on the wrapper and the narrowing conversions lived solely on
   `KMixedUnitInstance`.
 
 ### Changed
 
-- **Tests: prefix × unit matrices now construct through the bare-value DSL.** The prefix cross-matrices
-  for every group build their instances via the bare-value aliases (`5 kilo meters`, `5 milli seconds`,
-  `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the `K*UnitBareValues.kt` aliases
-  are now fully covered and every unit × every prefix runs through the real DSL. The distance area/volume
-  matrices now raise a prefixed length via `pow` (`(5 kilo meters) pow 2`). Test-construction policy
-  documented in `.claude/CLAUDE.md`.
+- **Tests: prefix × unit matrices now construct through the bare-value DSL.** The prefix cross-matrices for every group
+  build their instances via the bare-value aliases (`5 kilo meters`, `5 milli seconds`,
+  `5 kilo metersPerHour`, …) instead of the raw enum/wrapper values, so the `K*UnitBareValues.kt` aliases are now fully
+  covered and every unit × every prefix runs through the real DSL. The distance area/volume matrices now raise a
+  prefixed length via `pow` (`(5 kilo meters) pow 2`). Test-construction policy documented in `.claude/CLAUDE.md`.
 - **Breaking:** the length group was renamed to **distance** — package
   `org.pcsoft.framework.kunit.length` → `…kunit.distance`, `KLengthUnit` → `KDistanceUnit`,
-  `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the
-  exponent-1 leaf (a length); the general "any exponent" wrapper is the new `KDistanceUnitInstance`.
+  `KLengthDerivedUnit` → `KDistanceDerivedUnit`. `KLengthUnitInstance` is retained but now denotes the exponent-1 leaf
+  (a length); the general "any exponent" wrapper is the new `KDistanceUnitInstance`.
 - **Breaking:** conversion accessors dropped their hard class names for a natural DSL:
   `toKMixedUnitInstance()` → `toUnit()`, `toKTimeUnit()` → `toTime()`, `toKSpeedUnit()` → `toSpeed()`,
   `toKLengthUnit()` → `toDistance()` (plus the new exponent-checked `toLength()`/`toArea()`/`toVolume()`).
-- **Breaking:** `KUnitInstance<SELF>` no longer declares `times(SELF)`/`div(SELF)`. Same-group
-  multiplication/division comes from `KUnitMeasurable` (against a `KMixedUnitInstance`) plus the
-  group-specific typed overloads; this split is what lets the distance leaves narrow their `*`/`/` return
-  types without a signature clash.
+- **Breaking:** `KUnitInstance<SELF>` no longer declares `times(SELF)`/`div(SELF)`. Same-group multiplication/division
+  comes from `KUnitMeasurable` (against a `KMixedUnitInstance`) plus the group-specific typed overloads; this split is
+  what lets the distance leaves narrow their `*`/`/` return types without a signature clash.
 - The general `KDistanceUnitInstance` is intentionally **not additive** (no `plus`/`minus`/`compareTo`):
-  cross-dimension addition lives only on the leaf types, which is what makes `length + area` a compile
-  error. Add two `m⁴` values through the mixed engine instead.
-- **DSL file reorganization** (internal, no API change): creator/bare-value declarations are now
-  co-located per dimension. The catch-all `KDistanceUnitExtensions.kt` was split into per-dimension
+  cross-dimension addition lives only on the leaf types, which is what makes `length + area` a compile error. Add two
+  `m⁴` values through the mixed engine instead.
+- **DSL file reorganization** (internal, no API change): creator/bare-value declarations are now co-located per
+  dimension. The catch-all `KDistanceUnitExtensions.kt` was split into per-dimension
   `KLengthUnitExtensions.kt`/`KAreaUnitExtensions.kt`/`KVolumeUnitExtensions.kt` (creators) and
-  `KLengthUnitBareValues.kt`/`KAreaUnitBareValues.kt`/`KVolumeUnitBareValues.kt` (bare unit
-  references/tokens). Speed and time likewise split their bare references into
+  `KLengthUnitBareValues.kt`/`KAreaUnitBareValues.kt`/`KVolumeUnitBareValues.kt` (bare unit references/tokens). Speed
+  and time likewise split their bare references into
   `KSpeedUnitBareValues.kt`/`KTimeUnitBareValues.kt`. The bare area/volume prefix tokens moved out of
-  `KDistanceUnitPrefix.kt` into the new `*BareValues.kt` files. The distance tests follow the same
-  per-dimension layout: the length instance tests moved into `KLengthUnitInstanceTest` (alongside the
-  existing `KAreaUnitInstanceTest`/`KVolumeUnitInstanceTest`), and the shared cross-dimension generator
-  matrices/helpers were extracted into `KDistanceTestFixtures.kt`.
+  `KDistanceUnitPrefix.kt` into the new `*BareValues.kt` files. The distance tests follow the same per-dimension layout:
+  the length instance tests moved into `KLengthUnitInstanceTest` (alongside the existing `KAreaUnitInstanceTest`/
+  `KVolumeUnitInstanceTest`), and the shared cross-dimension generator matrices/helpers were extracted into
+  `KDistanceTestFixtures.kt`.
 
 ### Removed
 
-- **Named `squareXxx`/`cubicXxx` area and volume constructors** and the prefixed area/volume DSL —
-  superseded by `pow`. Removed: the `Number.squareMeters`/`squareMiles`/… and
+- **Named `squareXxx`/`cubicXxx` area and volume constructors** and the prefixed area/volume DSL — superseded by `pow`.
+  Removed: the `Number.squareMeters`/`squareMiles`/… and
   `Number.cubicMeters`/`cubicMiles`/… creator properties, the `n kilo squareMeters` / `n kilo cubicMeters`
   prefix `infix` overloads, and the supporting token types/aliases (`KDistanceAreaUnit`,
   `KDistanceVolumeUnit`, `KAreaUnitBareValues.kt`, `KVolumeUnitBareValues.kt`). Write `2.meters pow 2`
-  instead of `2.squareMeters`, and `(2 kilo meters) pow 2` instead of `2 kilo squareMeters`. The named
-  derived special units (`hectares`, `ares`, `acres`, `liters`, `usGallons`, …) are unaffected.
+  instead of `2.squareMeters`, and `(2 kilo meters) pow 2` instead of `2 kilo squareMeters`. The named derived special
+  units (`hectares`, `ares`, `acres`, `liters`, `usGallons`, …) are unaffected.
 
 ## [0.2.0]
 
 ### Added
 
-- New **constructed** unit group **Speed** (`org.pcsoft.framework.kunit.speed`) — the first composed
-  quantity (length·time⁻¹):
-  - Units: meter per second (base), kilometer per hour, mile per hour, knot, foot per second, Mach
-    (ISA sea-level speed of sound, `Ma = 340.29 m/s`) and the speed of light (`c = 299 792 458 m/s`),
-    with matching `Number.metersPerSecond` … `Number.speedOfLight` creators, bare `val` aliases and
-    the 24 SI-prefix `infix` constructors (`5 kilo metersPerSecond`).
-  - `KSpeedUnitInstance` stores a two-term `[m¹, s⁻¹]` mixed instance normalized to m/s and offers the
-    standard "pure" unit surface (`value`, `valueAs`, `+`/`-`/`*`/`/`, comparisons, `toString`,
-    `toKMixedUnitInstance`), reading back either as a whole speed unit or as a length-per-time pair,
-    plus `KMixedUnitInstance.toKSpeedUnit()`.
-  - **Direct cross-group operators** so the core units combine straight into a typed speed and back,
-    without touching a raw `KMixedUnitInstance`: `length / time → speed`, `speed * time → length`,
-    `time * speed → length`, `length / speed → time`. Non-speed shapes (e.g. `area / time`) fail with
-    `IllegalStateException` rather than producing a misleading value.
-  - Dedicated MkDocs page (`docs/docs/units/speed.md`) with Korean, Chinese and Japanese translations,
-    under a new "Constructed Units" navigation section, including a thorough "computing with the core
-    units" section.
-- Comprehensive **parameterized cross-matrix tests** for every unit group and the mixed unit, built on
-  JUnit Jupiter `@ParameterizedTest`/`@MethodSource` (new `junit-jupiter-params` test dependency): a full
-  prefix × unit matrix plus one standalone test per SI prefix, a unit → every-other-unit conversion
-  matrix, one method per operator (`+`/`-`/`*`/`/`) and per comparison (`==`/`!=`/`<`/`<=`/`>`/`>=`) over
-  every unit pair, per-unit `toString`/`toString(target)`, and a length × time cross-group matrix for the
-  mixed unit. The procedure is documented in `.claude/CLAUDE.md` as mandatory for future groups.
+- New **constructed** unit group **Speed** (`org.pcsoft.framework.kunit.speed`) — the first composed quantity
+  (length·time⁻¹):
+    - Units: meter per second (base), kilometer per hour, mile per hour, knot, foot per second, Mach (ISA sea-level
+      speed of sound, `Ma = 340.29 m/s`) and the speed of light (`c = 299 792 458 m/s`), with matching
+      `Number.metersPerSecond` … `Number.speedOfLight` creators, bare `val` aliases and the 24 SI-prefix `infix`
+      constructors (`5 kilo metersPerSecond`).
+    - `KSpeedUnitInstance` stores a two-term `[m¹, s⁻¹]` mixed instance normalized to m/s and offers the standard "pure"
+      unit surface (`value`, `valueAs`, `+`/`-`/`*`/`/`, comparisons, `toString`,
+      `toKMixedUnitInstance`), reading back either as a whole speed unit or as a length-per-time pair, plus
+      `KMixedUnitInstance.toKSpeedUnit()`.
+    - **Direct cross-group operators** so the core units combine straight into a typed speed and back, without touching
+      a raw `KMixedUnitInstance`: `length / time → speed`, `speed * time → length`,
+      `time * speed → length`, `length / speed → time`. Non-speed shapes (e.g. `area / time`) fail with
+      `IllegalStateException` rather than producing a misleading value.
+    - Dedicated MkDocs page (`docs/docs/units/speed.md`) with Korean, Chinese and Japanese translations, under a new
+      "Constructed Units" navigation section, including a thorough "computing with the core units" section.
+- Comprehensive **parameterized cross-matrix tests** for every unit group and the mixed unit, built on JUnit Jupiter
+  `@ParameterizedTest`/`@MethodSource` (new `junit-jupiter-params` test dependency): a full prefix × unit matrix plus
+  one standalone test per SI prefix, a unit → every-other-unit conversion matrix, one method per operator (`+`/`-`/`*`/
+  `/`) and per comparison (`==`/`!=`/`<`/`<=`/`>`/`>=`) over every unit pair, per-unit `toString`/`toString(target)`,
+  and a length × time cross-group matrix for the mixed unit. The procedure is documented in `.claude/CLAUDE.md` as
+  mandatory for future groups.
 - Per-group SI-prefix `infix` constructors (`KLengthUnitPrefix.kt`, `KTimeUnitPrefix.kt`): `5 kilo meters`
   now returns a `KLengthUnitInstance` directly (and `5 milli seconds` a `KTimeUnitInstance`), rather than an
-  intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters` and is the preferred
-  construction form.
-- Test coverage in `KMixedUnitInstanceTest` verifying that `KMixedUnitInstance` term exponents are
-  added on `*` and subtracted on `/` — including crossings of the 0-point (negative→positive and
-  positive→negative) and the removal of a term whose exponent cancels to exactly `0` — both for pure
-  terms and when combining with other mixed units.
+  intermediate builder. `5 kilo meters` is exactly equivalent to `5000.meters` and is the preferred construction form.
+- Test coverage in `KMixedUnitInstanceTest` verifying that `KMixedUnitInstance` term exponents are added on `*` and
+  subtracted on `/` — including crossings of the 0-point (negative→positive and positive→negative) and the removal of a
+  term whose exponent cancels to exactly `0` — both for pure terms and when combining with other mixed units.
 
-- New light-distance units in the **Length** group: light-second (`ls`), light-minute (`lmin`),
-  light-hour (`lh`), light-day (`ld`) and light-week (`lw`), complementing the existing light-year.
-  Defined via the speed of light (`c = 299 792 458 m/s`) and the Julian time base, with matching
+- New light-distance units in the **Length** group: light-second (`ls`), light-minute (`lmin`), light-hour (`lh`),
+  light-day (`ld`) and light-week (`lw`), complementing the existing light-year. Defined via the speed of light
+  (`c = 299 792 458 m/s`) and the Julian time base, with matching
   `Number.lightSeconds` … `Number.lightWeeks` creators and bare `val` aliases.
 - New unit group **Time** (`org.pcsoft.framework.kunit.time`):
-  - Units: second (base), minute, hour, day. Calendar-based units (week, year) are intentionally
-    excluded, since they are defined by calendars rather than by a fixed physical quantity.
-  - `KTimeUnitInstance` is a 100 % wrapper around `java.time.Duration` (the `Duration` is the source of
-    truth and the full `Duration` API is forwarded), additionally offering the standard "pure" unit surface
-    (`value`, `valueAs`, `+`/`-`/`*`/`/`, comparisons, `toString`, `toKMixedUnitInstance`) plus `toDuration()`,
-    `Duration.toKTimeUnit()` and `KMixedUnitInstance.toKTimeUnit()`.
-  - Sub-second scales are reached via the SI prefixes on `second`; time is always exponent 1 (no derived
-    units). Values outside roughly `[1 ns, Long.MAX seconds]` are not representable by the Duration backing.
-  - Dedicated MkDocs page (`docs/docs/units/time.md`) with Korean, Chinese and Japanese translations.
+    - Units: second (base), minute, hour, day. Calendar-based units (week, year) are intentionally excluded, since they
+      are defined by calendars rather than by a fixed physical quantity.
+    - `KTimeUnitInstance` is a 100 % wrapper around `java.time.Duration` (the `Duration` is the source of truth and the
+      full `Duration` API is forwarded), additionally offering the standard "pure" unit surface (`value`, `valueAs`,
+      `+`/`-`/`*`/`/`, comparisons, `toString`, `toKMixedUnitInstance`) plus `toDuration()`,
+      `Duration.toKTimeUnit()` and `KMixedUnitInstance.toKTimeUnit()`.
+    - Sub-second scales are reached via the SI prefixes on `second`; time is always exponent 1 (no derived units).
+      Values outside roughly `[1 ns, Long.MAX seconds]` are not representable by the Duration backing.
+    - Dedicated MkDocs page (`docs/docs/units/time.md`) with Korean, Chinese and Japanese translations.
 - Common interface hierarchy for all unit-value types:
-  - `KUnitMeasurable` — the group-agnostic surface shared by every value (`value`,
-    `toKMixedUnitInstance()`, `*`/`/` against a `KMixedUnitInstance`). The "pure" wrappers implement it
-    via Kotlin `by` delegation to their internal `KMixedUnitInstance`.
-  - `KUnitInstance<SELF>` — the self-typed (F-bounded) interface of the "pure" wrappers, adding
-    same-type `+`/`-`/comparison, same-group `*`/`/`, and single-target `valueAs`/`toString`.
+    - `KUnitMeasurable` — the group-agnostic surface shared by every value (`value`,
+      `toKMixedUnitInstance()`, `*`/`/` against a `KMixedUnitInstance`). The "pure" wrappers implement it via Kotlin
+      `by` delegation to their internal `KMixedUnitInstance`.
+    - `KUnitInstance<SELF>` — the self-typed (F-bounded) interface of the "pure" wrappers, adding same-type `+`/`-`
+      /comparison, same-group `*`/`/`, and single-target `valueAs`/`toString`.
 
 ### Changed
 
-- **Breaking:** the number-extension creators are now extension **properties** instead of functions —
-  construct pure units with `5.meters`, `2.hours`, `5.hectares` (previously `5.meters()`, `2.hours()`,
+- **Breaking:** the number-extension creators are now extension **properties** instead of functions — construct pure
+  units with `5.meters`, `2.hours`, `5.hectares` (previously `5.meters()`, `2.hours()`,
   `5.hectares()`). The `toXxx()` conversions (`toKMixedUnitInstance()`, `toKLengthUnit()`,
   `toKTimeUnit()`, `toDuration()`) remain functions.
-- **Breaking:** the prefix `infix` functions are now declared **per group** (over the group's own unit
-  type) and return the concrete "pure" unit directly, replacing the single set of generic root-package
-  functions that returned a `KPrefixBuilder`. `(5 kilo meters).toKMixedUnitInstance().toKLengthUnit()`
+- **Breaking:** the prefix `infix` functions are now declared **per group** (over the group's own unit type) and return
+  the concrete "pure" unit directly, replacing the single set of generic root-package functions that returned a
+  `KPrefixBuilder`. `(5 kilo meters).toKMixedUnitInstance().toKLengthUnit()`
   becomes simply `5 kilo meters`.
 - Migrated the throwaway private `TimeUnit` test enums to the official `KTimeUnit`.
 - **Breaking:** renamed the mixed-unit class `KUnitInstance` → `KMixedUnitInstance` (the name
@@ -802,32 +909,31 @@ All new units accept the full range of SI prefixes on every named token.
 - **Breaking:** renamed the "pure" wrapper accessor `valueIn(target)` → `valueAs(target)`, matching
   `KMixedUnitInstance.valueAs`.
 - **Breaking:** the `KMixedUnitInstance` primary constructor is now `internal`, matching the "pure"
-  wrapper classes (`KLengthUnitInstance`, `KTimeUnitInstance`). Externally, mixed units may only be
-  obtained via `toKMixedUnitInstance()`, operator results, or the number-extension creators — never by
-  constructing `KMixedUnitInstance(...)` directly.
+  wrapper classes (`KLengthUnitInstance`, `KTimeUnitInstance`). Externally, mixed units may only be obtained via
+  `toKMixedUnitInstance()`, operator results, or the number-extension creators — never by constructing
+  `KMixedUnitInstance(...)` directly.
 
 ### Removed
 
-- **Breaking:** the `KPrefixBuilder` class and the generic, root-package prefix `infix` functions that
-  returned it. Prefix construction now goes through the per-group functions that return the concrete unit
-  directly (see _Changed_).
+- **Breaking:** the `KPrefixBuilder` class and the generic, root-package prefix `infix` functions that returned it.
+  Prefix construction now goes through the per-group functions that return the concrete unit directly (see _Changed_).
 
 ## [0.1.0]
 
 ### Added
 
-- Core mixed-unit engine (`KUnitInstance`, `KUnitTerm`) supporting arbitrary combinations of units and
-  exponents, with `+`, `-`, `*`, `/` operators and a `hasSameUnits` check for unit/exponent equality.
+- Core mixed-unit engine (`KUnitInstance`, `KUnitTerm`) supporting arbitrary combinations of units and exponents, with
+  `+`, `-`, `*`, `/` operators and a `hasSameUnits` check for unit/exponent equality.
 - Full SI prefix support (`KUnitPrefix`, Quetta/Q to Quecto/q) usable with any unit via generic `infix`
   construction, e.g. `5 kilo meters`.
-- Support for special/derived units per unit group and exponent (`KDerivedUnit`, `KScaledDerivedUnit`), e.g.
-  hectare for area or liter for volume.
+- Support for special/derived units per unit group and exponent (`KDerivedUnit`, `KScaledDerivedUnit`), e.g. hectare for
+  area or liter for volume.
 - New unit group **Length** (`org.pcsoft.framework.kunit.length`):
-  - Units: meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit,
-    light-year, parsec.
-  - Multi-dimensional support for area (exponent 2) and volume (exponent 3), including the special units
-    are, hectare, acre (area) and liter, US gallon, imperial gallon, US fluid ounce, oil barrel (volume).
-  - Full operator (`+`, `-`, `*`, `/`) and comparison (`==`, `!=`, `<`, `<=`, `>`, `>=`) support, with
-    automatic conversion between length units and `toString`/`valueAs` output in any target unit.
-- Creation of units and mixed units from any `Number` type (`Int`, `Long`, `Float`, `Double`, ...), always
-  normalized to `Double` internally.
+    - Units: meter, mile, nautical mile, yard, foot, inch, fathom, chain, furlong, astronomical unit, light-year,
+      parsec.
+    - Multi-dimensional support for area (exponent 2) and volume (exponent 3), including the special units are, hectare,
+      acre (area) and liter, US gallon, imperial gallon, US fluid ounce, oil barrel (volume).
+    - Full operator (`+`, `-`, `*`, `/`) and comparison (`==`, `!=`, `<`, `<=`, `>`, `>=`) support, with automatic
+      conversion between length units and `toString`/`valueAs` output in any target unit.
+- Creation of units and mixed units from any `Number` type (`Int`, `Long`, `Float`, `Double`, ...), always normalized to
+  `Double` internally.

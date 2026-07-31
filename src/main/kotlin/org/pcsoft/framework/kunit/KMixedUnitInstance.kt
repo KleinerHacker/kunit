@@ -232,7 +232,8 @@ class KMixedUnitInstance internal constructor(value: Number, val units: List<KUn
             "Cannot combine KMixedUnitInstance with different dimensions: $units vs ${other.units}"
         }
         return units.fold(other.units to 1.0) { (remaining, factor), term ->
-            val index = remaining.indexOfFirst { it.unit.javaClass == term.unit.javaClass && it.exponent == term.exponent }
+            val index =
+                remaining.indexOfFirst { it.unit.javaClass == term.unit.javaClass && it.exponent == term.exponent }
             check(index >= 0) {
                 "Cannot combine KMixedUnitInstance with different dimensions: $units vs ${other.units}"
             }

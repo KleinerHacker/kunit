@@ -14,14 +14,10 @@ package org.pcsoft.framework.kunit.thermo.temperature
 
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.format
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertNotEquals
+import kotlin.test.*
 
 /**
  * `KTemperatureDifferenceUnitInstance` surface: explicit construction, the internal kelvin storage,

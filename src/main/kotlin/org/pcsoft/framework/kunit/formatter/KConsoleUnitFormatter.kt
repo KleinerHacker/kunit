@@ -60,7 +60,7 @@ class KConsoleUnitFormatter(
     /** Renders a single term as a coloured symbol plus its (coloured) exponent marker, if any. */
     private fun signedTerm(term: KUnitTerm): String =
         wrap(palette.symbolColor, term.displaySymbol) +
-            if (term.exponent != 1) wrap(palette.exponentColor, exponent(term.exponent)) else ""
+                if (term.exponent != 1) wrap(palette.exponentColor, exponent(term.exponent)) else ""
 
     private fun renderUnits(units: List<KUnitTerm>): String {
         if (units.isEmpty()) return ""
@@ -74,7 +74,7 @@ class KConsoleUnitFormatter(
             val denom = negatives.single()
             val magnitude = -denom.exponent
             val denominator = wrap(palette.symbolColor, denom.displaySymbol) +
-                if (magnitude != 1) wrap(palette.exponentColor, exponent(magnitude)) else ""
+                    if (magnitude != 1) wrap(palette.exponentColor, exponent(magnitude)) else ""
             return numerator + wrap(palette.operatorColor, config.division.symbol) + denominator
         }
 

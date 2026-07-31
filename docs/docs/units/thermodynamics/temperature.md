@@ -8,30 +8,29 @@ Base unit: **kelvin** (`KTemperatureUnit.BASE == KTemperatureUnit.KELVIN`)
 
 Type: **native unit**
 
-The temperature group models a thermodynamic temperature. It is the framework's **first (and, by
-design, permanent) affine exception**: unlike every other group, converting between temperature units is
-not a single multiplicative factor but an **offset-and-scale** (affine) transform — `25 °C` is *not*
-`25 × 1 °C`. Values are stored normalized to **absolute kelvin**, so `*`/`/`/`pow` keep running through
-the generic engine unchanged.
+The temperature group models a thermodynamic temperature. It is the framework's **first (and, by design, permanent)
+affine exception**: unlike every other group, converting between temperature units is not a single multiplicative factor
+but an **offset-and-scale** (affine) transform — `25 °C` is *not*
+`25 × 1 °C`. Values are stored normalized to **absolute kelvin**, so `*`/`/`/`pow` keep running through the generic
+engine unchanged.
 
 Two things make this group special:
 
-* **Affine conversions via hooks, not overloads.** The shared engine stays purely multiplicative. The
-  affine transform is injected through the two measurable hooks `scaledBy` (construction, behind `of`)
-  and `readBaseValue` (reading, behind `into`), so `25 of celsius` and `t into fahrenheit` work through
-  the normal verbs — no group-specific `of`/`into` overload (which an explicitly imported generic verb
-  would shadow).
+* **Affine conversions via hooks, not overloads.** The shared engine stays purely multiplicative. The affine transform
+  is injected through the two measurable hooks `scaledBy` (construction, behind `of`)
+  and `readBaseValue` (reading, behind `into`), so `25 of celsius` and `t into fahrenheit` work through the normal
+  verbs — no group-specific `of`/`into` overload (which an explicitly imported generic verb would shadow).
 * **No prefixes.** The temperature group deliberately offers **no** prefix builders (a `milli.celsius`
   is not modeled). There is no `KTemperatureUnitExtensions.kt`.
 
 ## Units
 
-| Unit | Enum value | Symbol | Token | To/from kelvin |
-|---|---|---|---:|---|
-| Kelvin | `KTemperatureUnit.KELVIN` | `K` | `kelvin` | identity |
-| Degree Celsius | `KTemperatureUnit.CELSIUS` | `°C` | `celsius` | `K = °C + 273.15` |
-| Degree Fahrenheit | `KTemperatureUnit.FAHRENHEIT` | `°F` | `fahrenheit` | `K = (°F − 32)·5/9 + 273.15` |
-| Degree Rankine | `KTemperatureUnit.RANKINE` | `°R` | `rankine` | `K = °R·5/9` |
+| Unit              | Enum value                    | Symbol |        Token | To/from kelvin               |
+|-------------------|-------------------------------|--------|-------------:|------------------------------|
+| Kelvin            | `KTemperatureUnit.KELVIN`     | `K`    |     `kelvin` | identity                     |
+| Degree Celsius    | `KTemperatureUnit.CELSIUS`    | `°C`   |    `celsius` | `K = °C + 273.15`            |
+| Degree Fahrenheit | `KTemperatureUnit.FAHRENHEIT` | `°F`   | `fahrenheit` | `K = (°F − 32)·5/9 + 273.15` |
+| Degree Rankine    | `KTemperatureUnit.RANKINE`    | `°R`   |    `rankine` | `K = °R·5/9`                 |
 
 Each `Token` is a value-1 `KTemperatureUnitInstance` used with `of` (build) and `into` (read).
 
@@ -53,15 +52,15 @@ t into kelvin       // 298.15
 
 ## Operators
 
-An absolute temperature is an affine **point**, not a vector. Its arithmetic is therefore deliberately
-asymmetric — the physically correct behaviour (see also [Temperature Difference](temperature-difference.md)):
+An absolute temperature is an affine **point**, not a vector. Its arithmetic is therefore deliberately asymmetric — the
+physically correct behaviour (see also [Temperature Difference](temperature-difference.md)):
 
-* `AbsTemp − AbsTemp` → a **`KTemperatureDifferenceUnitInstance`** (the kelvin *interval* between them,
-  e.g. `30 °C − 10 °C = 20 ΔK`, **not** `20 °C`).
+* `AbsTemp − AbsTemp` → a **`KTemperatureDifferenceUnitInstance`** (the kelvin *interval* between them, e.g.
+  `30 °C − 10 °C = 20 ΔK`, **not** `20 °C`).
 * `AbsTemp ± difference` → an absolute temperature again.
 * `AbsTemp + AbsTemp` → **compile error** (adding two absolute temperatures is physically meaningless).
-* `AbsTemp * number` / `AbsTemp / number` → **compile error**: scaling an affine point by a plain number is
-  meaningless (its kelvin value carries the −273.15 offset). Scale a
+* `AbsTemp * number` / `AbsTemp / number` → **compile error**: scaling an affine point by a plain number is meaningless
+  (its kelvin value carries the −273.15 offset). Scale a
   [temperature difference](temperature-difference.md) instead, which is linear.
 
 ```kotlin
@@ -85,14 +84,13 @@ val b = (25 of celsius) - KTemperatureDifference.ofKelvin(5)   // KTemperatureUn
 
 ### Comparisons and equality
 
-`==`, `!=`, `<`, `<=`, `>`, `>=` compare the normalized absolute kelvin `value`. `equals` is by absolute
-temperature, independent of the construction unit, so `(0 of celsius) == (273.15 of kelvin)`.
+`==`, `!=`, `<`, `<=`, `>`, `>=` compare the normalized absolute kelvin `value`. `equals` is by absolute temperature,
+independent of the construction unit, so `(0 of celsius) == (273.15 of kelvin)`.
 
 ## Powers with `pow`
 
-Raise a value to an integer power with the infix `pow` operator. For the temperature group `pow` returns
-a generic `KMixedUnitInstance` (temperature has no dimensioned power type), operating linearly on the
-absolute kelvin term:
+Raise a value to an integer power with the infix `pow` operator. For the temperature group `pow` returns a generic
+`KMixedUnitInstance` (temperature has no dimensioned power type), operating linearly on the absolute kelvin term:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -104,8 +102,8 @@ val squared = (2 of kelvin) pow 2   // KMixedUnitInstance: 4.0 K²
 
 ## Mixing with other units
 
-Multiplying or dividing a temperature by another group yields a generic `KMixedUnitInstance` (there is no
-standardized temperature combination), computed on the absolute kelvin value:
+Multiplying or dividing a temperature by another group yields a generic `KMixedUnitInstance` (there is no standardized
+temperature combination), computed on the absolute kelvin value:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -130,11 +128,14 @@ import org.pcsoft.framework.kunit.thermo.temperature.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed. Temperature is affine, so there is no `·`/exponent product form — only named units and the offset transform.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+Temperature is affine, so there is no `·`/exponent product form — only named units and the offset transform.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `K` | `kelvin` | absolute temperature, base unit (kelvin) |
-| `°C` | `celsius` | degree Celsius (`K = °C + 273.15`) |
-| `°F` | `fahrenheit` | degree Fahrenheit |
-| `25 °C` | `25 of celsius` | build an absolute temperature |
+| Mathematics | Kotlin          | Meaning                                  |
+|-------------|-----------------|------------------------------------------|
+| `K`         | `kelvin`        | absolute temperature, base unit (kelvin) |
+| `°C`        | `celsius`       | degree Celsius (`K = °C + 273.15`)       |
+| `°F`        | `fahrenheit`    | degree Fahrenheit                        |
+| `25 °C`     | `25 of celsius` | build an absolute temperature            |

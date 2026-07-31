@@ -8,9 +8,9 @@ Type: **constructed unit**
 Permeability is a **constructed** unit: the composition `mass · length · time⁻² · current⁻²`
 (`kg·m·s⁻²·A⁻²` = `H/m`). `KPermeabilityUnitInstance` wraps a `KMixedUnitInstance` of four terms —
 `KMassUnit.BASE` (gram) at `+1`, `KDistanceUnit.BASE` (meter) at `+1`, `KTimeUnit.BASE` (second) at `-2` and
-`KElectricCurrentUnit.BASE` (ampere) at `-2`. Because the mass component of the library is normalized to
-**grams** (not kilograms), the canonical product is divided by 1000 to reach henries per meter; the stored
-value is always normalized to henries per meter.
+`KElectricCurrentUnit.BASE` (ampere) at `-2`. Because the mass component of the library is normalized to **grams** (not
+kilograms), the canonical product is divided by 1000 to reach henries per meter; the stored value is always normalized
+to henries per meter.
 
 The permeability `μ` is the magnetic constant of a material: it links the
 [Magnetic Flux Density](magneticfluxdensity.md) to the
@@ -20,17 +20,17 @@ The permeability `μ` is the magnetic constant of a material: it links the
 
 ## Building a permeability
 
-Build a permeability with a named token, or from a decomposition (see below). Named units survive as value-1
-tokens (used with `of`/`into`):
+Build a permeability with a named token, or from a decomposition (see below). Named units survive as value-1 tokens
+(used with `of`/`into`):
 
-| Permeability | Symbol | Token | 1 unit in H/m |
-|---|---|---:|---:|
-| Henry per meter | `H/m` | `henriesPerMeter` | 1.0 |
-| Henry per centimeter | `H/cm` | `henriesPerCentimeter` | 100.0 |
-| Vacuum permeability `μ₀` | `H/m` | `vacuumPermeability` | 1.25663706127e-6 |
+| Permeability             | Symbol |                  Token |    1 unit in H/m |
+|--------------------------|--------|-----------------------:|-----------------:|
+| Henry per meter          | `H/m`  |      `henriesPerMeter` |              1.0 |
+| Henry per centimeter     | `H/cm` | `henriesPerCentimeter` |            100.0 |
+| Vacuum permeability `μ₀` | `H/m`  |   `vacuumPermeability` | 1.25663706127e-6 |
 
-Named units support the SI prefixes via `KPrefixBuilder` (`micro.henriesPerMeter`, `milli.henriesPerMeter`,
-…). The constant is also available as `KPermeabilityUnit.VACUUM_PERMEABILITY`.
+Named units support the SI prefixes via `KPrefixBuilder` (`micro.henriesPerMeter`, `milli.henriesPerMeter`, …). The
+constant is also available as `KPermeabilityUnit.VACUUM_PERMEABILITY`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -49,24 +49,24 @@ mu into micro.henriesPerMeter         // 1.25663706127
 Permeability can be reached through several **equivalent decompositions**, all producing the same value-equal
 permeability:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `inductance / length` | `KPermeabilityUnitInstance` | `μ = L · l / (N² · A)`, the geometry factor is a length |
-| `magneticFluxDensity / magneticFieldStrength` | `KPermeabilityUnitInstance` | `μ = B / H` |
-| `mass·length/(time²·current²)` | via `.toPermeability()` | native canonical `kg·m·s⁻²·A⁻²` expression |
+| Expression                                    | Result type                 | Meaning                                                 |
+|-----------------------------------------------|-----------------------------|---------------------------------------------------------|
+| `inductance / length`                         | `KPermeabilityUnitInstance` | `μ = L · l / (N² · A)`, the geometry factor is a length |
+| `magneticFluxDensity / magneticFieldStrength` | `KPermeabilityUnitInstance` | `μ = B / H`                                             |
+| `mass·length/(time²·current²)`                | via `.toPermeability()`     | native canonical `kg·m·s⁻²·A⁻²` expression              |
 
 The typed operator forms return a permeability directly. The fully native expression stays a generic
-`KMixedUnitInstance` and is narrowed with `toPermeability()` (which recognises only the canonical normal form
-and throws `IllegalStateException` otherwise). All routes are value-equal.
+`KMixedUnitInstance` and is narrowed with `toPermeability()` (which recognises only the canonical normal form and throws
+`IllegalStateException` otherwise). All routes are value-equal.
 
 The inverse operators tie inductance, length and the two magnetic field quantities together:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `permeability * length` | `KInductanceUnitInstance` | `L = μ · N² · A / l` (commutative) |
-| `inductance / permeability` | `KLengthUnitInstance` | the geometry factor `N² · A / l = L / μ` |
-| `permeability * magneticFieldStrength` | `KMagneticFluxDensityUnitInstance` | `B = μ · H` (commutative) |
-| `magneticFluxDensity / permeability` | `KMagneticFieldStrengthUnitInstance` | `H = B / μ` |
+| Expression                             | Result type                          | Meaning                                  |
+|----------------------------------------|--------------------------------------|------------------------------------------|
+| `permeability * length`                | `KInductanceUnitInstance`            | `L = μ · N² · A / l` (commutative)       |
+| `inductance / permeability`            | `KLengthUnitInstance`                | the geometry factor `N² · A / l = L / μ` |
+| `permeability * magneticFieldStrength` | `KMagneticFluxDensityUnitInstance`   | `B = μ · H` (commutative)                |
+| `magneticFluxDensity / permeability`   | `KMagneticFieldStrengthUnitInstance` | `H = B / μ`                              |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -117,14 +117,16 @@ import org.pcsoft.framework.kunit.electric.permeability.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `⁻²`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `⁻²`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written
+both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `H/m` | `henriesPerMeter` | permeability, base unit (named token, henry per meter) |
-| `μ₀` | `vacuumPermeability` | the vacuum permeability constant, 1.257 µH/m |
-| `B / H` | `(6 of teslas) / (3 of amperesPerMeter)` | permeability as flux density over field strength |
-| `L · l / (N²·A)` | `(10 of henries) / (5 of meters)` | permeability from inductance and coil geometry |
-| `kg·m/(s²·A²)` | `(kilo.grams * (meters pow 1)) / ((seconds pow 2) * (amperes pow 2))` | permeability as mass·length / (time²·current²) (fraction form) |
-| `kg·m·s⁻²·A⁻²` | `kilo.grams * (meters pow 1) * (seconds pow -2) * (amperes pow -2)` | same permeability as a pure product |
-| `µH/m` | `micro.henriesPerMeter` | prefixed permeability (microhenry per meter) |
+| Mathematics      | Kotlin                                                                | Meaning                                                        |
+|------------------|-----------------------------------------------------------------------|----------------------------------------------------------------|
+| `H/m`            | `henriesPerMeter`                                                     | permeability, base unit (named token, henry per meter)         |
+| `μ₀`             | `vacuumPermeability`                                                  | the vacuum permeability constant, 1.257 µH/m                   |
+| `B / H`          | `(6 of teslas) / (3 of amperesPerMeter)`                              | permeability as flux density over field strength               |
+| `L · l / (N²·A)` | `(10 of henries) / (5 of meters)`                                     | permeability from inductance and coil geometry                 |
+| `kg·m/(s²·A²)`   | `(kilo.grams * (meters pow 1)) / ((seconds pow 2) * (amperes pow 2))` | permeability as mass·length / (time²·current²) (fraction form) |
+| `kg·m·s⁻²·A⁻²`   | `kilo.grams * (meters pow 1) * (seconds pow -2) * (amperes pow -2)`   | same permeability as a pure product                            |
+| `µH/m`           | `micro.henriesPerMeter`                                               | prefixed permeability (microhenry per meter)                   |

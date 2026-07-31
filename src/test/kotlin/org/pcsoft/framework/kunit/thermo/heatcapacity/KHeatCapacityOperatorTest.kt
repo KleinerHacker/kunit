@@ -19,7 +19,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnitInstance
 import kotlin.test.Test
@@ -67,11 +66,11 @@ class KHeatCapacityOperatorTest {
     fun `all decompositions agree`() {
         val typed = (1 of joules) / KTemperatureDifference.ofKelvin(1)
         val native = (
-            (1000 of grams).toUnit() *
-                ((1 of meters).toUnit() pow 2) /
-                ((1 of seconds).toUnit() pow 2) /
-                KTemperatureDifference.ofKelvin(1).toUnit()
-            ).toHeatCapacity()
+                (1000 of grams).toUnit() *
+                        ((1 of meters).toUnit() pow 2) /
+                        ((1 of seconds).toUnit() pow 2) /
+                        KTemperatureDifference.ofKelvin(1).toUnit()
+                ).toHeatCapacity()
         assertIs<KHeatCapacityUnitInstance>(typed)
         assertIs<KHeatCapacityUnitInstance>(native)
         assertEquals(typed, native)

@@ -12,9 +12,9 @@
 
 package org.pcsoft.framework.kunit.electric.magneticfieldstrength
 
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnitInstance
 import org.pcsoft.framework.kunit.electric.current.electricCurrentOf
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 
 // Cross-unit operators between electric current, length and magnetic field strength (`H = I / l`). They
 // live in the magnetic field strength package because it may depend on electric current and distance (the

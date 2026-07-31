@@ -8,15 +8,15 @@ Type: **constructed unit**
 Data rate is a **constructed** unit (the second one, after [Speed](../kinematics/speed.md)): it is not a single "real"
 quantity but a composition, `storage · time⁻¹` (`B/s`). `KDataRateUnitInstance` therefore wraps a
 `KMixedUnitInstance` of exactly two terms - one `KStorageUnit.BASE` (byte) at exponent `+1` and one
-`KTimeUnit.BASE` (second) at exponent `-1`. The value is always stored normalized to bytes per second,
-regardless of which unit or storage/time combination it was created from.
+`KTimeUnit.BASE` (second) at exponent `-1`. The value is always stored normalized to bytes per second, regardless of
+which unit or storage/time combination it was created from.
 
 ## Building a data rate
 
 A data rate is built as a **storage-per-time expression**, e.g. `100 of bytes / seconds`,
-`5 of mega.bytes / seconds` or `10 of kibi.bytes / seconds` — each yields a `KDataRateUnitInstance`. Read it
-back in any storage-per-time template (`r into (bits / seconds)`). There are deliberately **no** spelled-out
-composite tokens like `bytesPerSecond` (they are exactly `bytes / seconds`).
+`5 of mega.bytes / seconds` or `10 of kibi.bytes / seconds` — each yields a `KDataRateUnitInstance`. Read it back in any
+storage-per-time template (`r into (bits / seconds)`). There are deliberately **no** spelled-out composite tokens like
+`bytesPerSecond` (they are exactly `bytes / seconds`).
 
 Base unit: a *byte* per second, consistent with the storage group. The networking-native bit/s (`bps`) is
 `0.125 B/s`; a "megabit per second" is `1 of mega.bits / seconds`.
@@ -35,15 +35,15 @@ r into (bits / seconds)  // 800.0 (read back in bit/s)
 
 ## Computing with the core units (storage & time)
 
-A data rate *is* a storage amount divided by a time. Move between the three quantities - storage, time and
-data rate - with plain `*` and `/`; each result is **strongly typed**.
+A data rate *is* a storage amount divided by a time. Move between the three quantities - storage, time and data rate -
+with plain `*` and `/`; each result is **strongly typed**.
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `storage / time` | `KDataRateUnitInstance` | rate = amount / duration |
-| `data rate * time` | `KStorageUnitInstance` | amount = rate × duration |
-| `time * data rate` | `KStorageUnitInstance` | amount (commutative) |
-| `storage / data rate` | `KTimeUnitInstance` | duration = amount / rate |
+| Expression            | Result type             | Meaning                  |
+|-----------------------|-------------------------|--------------------------|
+| `storage / time`      | `KDataRateUnitInstance` | rate = amount / duration |
+| `data rate * time`    | `KStorageUnitInstance`  | amount = rate × duration |
+| `time * data rate`    | `KStorageUnitInstance`  | amount (commutative)     |
+| `storage / data rate` | `KTimeUnitInstance`     | duration = amount / rate |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -73,10 +73,9 @@ time into minutes     // 1.0
 ```
 
 !!! warning "Only a *pure* storage / time shape is a data rate"
-    `KMixedUnitInstance.toDataRate()` requires exactly one storage term at exponent `+1` and one time term
-    at exponent `-1`. A `B²` (storage squared), a `B·s⁻²`, or a `B·s` shape is not a data rate - the
-    conversion throws `IllegalStateException`. Likewise, `storage + data rate` (different dimensions) is a
-    compile error.
+`KMixedUnitInstance.toDataRate()` requires exactly one storage term at exponent `+1` and one time term at exponent `-1`.
+A `B²` (storage squared), a `B·s⁻²`, or a `B·s` shape is not a data rate - the conversion throws
+`IllegalStateException`. Likewise, `storage + data rate` (different dimensions) is a compile error.
 
 ## Operators
 
@@ -100,9 +99,9 @@ val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInst
 
 ## SI and binary (IEC) prefixes
 
-The data-rate group mirrors the [Storage](storage.md) group's prefix policy (its numerator is a storage
-amount): the numerator uses the **augmenting** SI builders (`kilo`, `mega`, …) or the **binary** builders
-(`kibi`, `mebi`, …); the diminishing builders have no `bytes`/`bits` property, so `milli.bytes / seconds`
+The data-rate group mirrors the [Storage](storage.md) group's prefix policy (its numerator is a storage amount): the
+numerator uses the **augmenting** SI builders (`kilo`, `mega`, …) or the **binary** builders (`kibi`, `mebi`, …); the
+diminishing builders have no `bytes`/`bits` property, so `milli.bytes / seconds`
 does not compile.
 
 ```kotlin
@@ -141,12 +140,14 @@ import org.pcsoft.framework.kunit.it.datarate.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `B/s` | `bytes / seconds` | data rate, base unit (byte per second) — fraction form |
-| `B·s⁻¹` | `bytes * (seconds pow -1)` | same rate as a product with a negative exponent |
-| `bit/s` | `bits / seconds` | bit per second |
-| `MB/s` | `mega.bytes / seconds` | megabyte per second |
-| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | build from storage ÷ time |
+| Mathematics    | Kotlin                             | Meaning                                                |
+|----------------|------------------------------------|--------------------------------------------------------|
+| `B/s`          | `bytes / seconds`                  | data rate, base unit (byte per second) — fraction form |
+| `B·s⁻¹`        | `bytes * (seconds pow -1)`         | same rate as a product with a negative exponent        |
+| `bit/s`        | `bits / seconds`                   | bit per second                                         |
+| `MB/s`         | `mega.bytes / seconds`             | megabyte per second                                    |
+| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | build from storage ÷ time                              |

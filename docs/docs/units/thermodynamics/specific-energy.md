@@ -5,29 +5,27 @@ Base unit: **joule per kilogram** (`KSpecificEnergyUnit.BASE == KSpecificEnergyU
 
 Type: **constructed unit**
 
-Specific energy is energy per unit of mass: `energy / mass` (`J/kg`). The same quantity is called
-*specific enthalpy*, *specific latent heat* or *calorific value* depending on context — they all share
-this unit group.
+Specific energy is energy per unit of mass: `energy / mass` (`J/kg`). The same quantity is called *specific enthalpy*,
+*specific latent heat* or *calorific value* depending on context — they all share this unit group.
 
-`KSpecificEnergyUnitInstance` wraps a `KMixedUnitInstance` of exactly two terms in the canonical normal
-form `distance² · time⁻²` (`m²·s⁻²`), always normalized to J/kg.
+`KSpecificEnergyUnitInstance` wraps a `KMixedUnitInstance` of exactly two terms in the canonical normal form
+`distance² · time⁻²` (`m²·s⁻²`), always normalized to J/kg.
 
 !!! note "The mass dimension cancels out"
-    `J/kg = kg·m²·s⁻²/kg = m²·s⁻²`. The canonical normal form therefore carries **no** mass term at all.
-    Only the operators against a `KMassUnitInstance` bridge the mass group's gram base to this group's
-    per-kilogram definition.
+`J/kg = kg·m²·s⁻²/kg = m²·s⁻²`. The canonical normal form therefore carries **no** mass term at all. Only the operators
+against a `KMassUnitInstance` bridge the mass group's gram base to this group's per-kilogram definition.
 
-Per unit of temperature this becomes [specific heat capacity](specific-heat-capacity.md); per mole
-instead of per kilogram it becomes [molar energy](molar-energy.md).
+Per unit of temperature this becomes [specific heat capacity](specific-heat-capacity.md); per mole instead of per
+kilogram it becomes [molar energy](molar-energy.md).
 
 ## Named units
 
-| Unit | Symbol | Token | 1 unit in J/kg |
-|---|---|---:|---:|
-| Joule per kilogram | `J/kg` | `joulesPerKilogram` | 1.0 |
-| Calorie per gram | `cal/g` | `caloriesPerGram` | 4184.0 |
-| Watt-hour per kilogram | `Wh/kg` | `wattHoursPerKilogram` | 3600.0 |
-| Btu per pound | `Btu/lb` | `btusPerPound` | 2326.0 |
+| Unit                   | Symbol   |                  Token | 1 unit in J/kg |
+|------------------------|----------|-----------------------:|---------------:|
+| Joule per kilogram     | `J/kg`   |    `joulesPerKilogram` |            1.0 |
+| Calorie per gram       | `cal/g`  |      `caloriesPerGram` |         4184.0 |
+| Watt-hour per kilogram | `Wh/kg`  | `wattHoursPerKilogram` |         3600.0 |
+| Btu per pound          | `Btu/lb` |         `btusPerPound` |         2326.0 |
 
 All accept the full SI prefix range (`kilo.joulesPerKilogram`, `mega.joulesPerKilogram`,
 `kilo.wattHoursPerKilogram`, …).
@@ -70,21 +68,21 @@ melted into kilo.grams              // ≈ 2.994 kg
 
 ## Computing with the core units (energy & mass)
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `energy / mass` | `KSpecificEnergyUnitInstance` | specific energy |
-| `specificEnergy * mass` | `KEnergyUnitInstance` | total energy |
-| `mass * specificEnergy` | `KEnergyUnitInstance` | total energy (commutative) |
-| `energy / specificEnergy` | `KMassUnitInstance` | mass involved |
+| Expression                | Result type                   | Meaning                    |
+|---------------------------|-------------------------------|----------------------------|
+| `energy / mass`           | `KSpecificEnergyUnitInstance` | specific energy            |
+| `specificEnergy * mass`   | `KEnergyUnitInstance`         | total energy               |
+| `mass * specificEnergy`   | `KEnergyUnitInstance`         | total energy (commutative) |
+| `energy / specificEnergy` | `KMassUnitInstance`           | mass involved              |
 
 ## Decompositions
 
 Both decompositions produce the same typed, value-equal instance.
 
-| Decomposition | Form | Result |
-|---|---|---|
-| `energy / mass` | typed operator | `KSpecificEnergyUnitInstance` directly |
-| `distance² · time⁻²` | native expression + `toSpecificEnergy()` | `KSpecificEnergyUnitInstance` |
+| Decomposition        | Form                                     | Result                                 |
+|----------------------|------------------------------------------|----------------------------------------|
+| `energy / mass`      | typed operator                           | `KSpecificEnergyUnitInstance` directly |
+| `distance² · time⁻²` | native expression + `toSpecificEnergy()` | `KSpecificEnergyUnitInstance`          |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -133,14 +131,16 @@ import org.pcsoft.framework.kunit.thermo.specificenergy.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `J/kg` | `joulesPerKilogram` | specific energy, base unit — named token |
-| `m²·s⁻²` | `(meters pow 2) / (seconds pow 2)` | same quantity in base dimensions |
-| `kJ/kg` | `kilo.joulesPerKilogram` | kilojoule per kilogram |
-| `Wh/kg` | `wattHoursPerKilogram` | watt-hour per kilogram (battery energy density) |
-| `q = Q / m` | `(334 of kilo.joules) / (1 of kilo.grams)` | specific energy from energy ÷ mass |
-| `Q = q · m` | `latentHeat * block` | energy from specific energy × mass |
-| `m = Q / q` | `(1000 of kilo.joules) / latentHeat` | mass from energy ÷ specific energy |
+| Mathematics | Kotlin                                     | Meaning                                         |
+|-------------|--------------------------------------------|-------------------------------------------------|
+| `J/kg`      | `joulesPerKilogram`                        | specific energy, base unit — named token        |
+| `m²·s⁻²`    | `(meters pow 2) / (seconds pow 2)`         | same quantity in base dimensions                |
+| `kJ/kg`     | `kilo.joulesPerKilogram`                   | kilojoule per kilogram                          |
+| `Wh/kg`     | `wattHoursPerKilogram`                     | watt-hour per kilogram (battery energy density) |
+| `q = Q / m` | `(334 of kilo.joules) / (1 of kilo.grams)` | specific energy from energy ÷ mass              |
+| `Q = q · m` | `latentHeat * block`                       | energy from specific energy × mass              |
+| `m = Q / q` | `(1000 of kilo.joules) / latentHeat`       | mass from energy ÷ specific energy              |

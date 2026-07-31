@@ -12,10 +12,10 @@
 
 package org.pcsoft.framework.kunit.it.storagedensity
 
-import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.toArea
 import org.pcsoft.framework.kunit.it.storage.KStorageUnitInstance
 import org.pcsoft.framework.kunit.it.storage.toStorage
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.toArea
 
 // Cross-group operators that let the core units (storage, area) combine *directly* into a strongly typed
 // storage density, and back, without the caller ever handling a raw KMixedUnitInstance. They live in the

@@ -5,16 +5,16 @@ Base unit: **ampere per square meter** (`KCurrentDensityUnit.BASE == KCurrentDen
 
 Type: **constructed unit**
 
-Current density is a **constructed** unit: the composition `current · length⁻²` (`A/m²`) — the electric
-current per conductor cross-section. `KCurrentDensityUnitInstance` wraps a `KMixedUnitInstance` of two terms —
-`KElectricCurrentUnit.BASE` (ampere) at `+1` and `KDistanceUnit.BASE` (meter) at `-2`. Both components are
-stored in their group base units, so the value is directly the reading in A/m².
+Current density is a **constructed** unit: the composition `current · length⁻²` (`A/m²`) — the electric current per
+conductor cross-section. `KCurrentDensityUnitInstance` wraps a `KMixedUnitInstance` of two terms —
+`KElectricCurrentUnit.BASE` (ampere) at `+1` and `KDistanceUnit.BASE` (meter) at `-2`. Both components are stored in
+their group base units, so the value is directly the reading in A/m².
 
 ## Building a current density
 
-Current density has **no named tokens** and no prefix builders of its own: every spelling is a ratio
-(`A/m²`, `A/mm²`, …). Build it as an expression or with the typed `current / area` operator, and read it back
-with `into` against such an expression:
+Current density has **no named tokens** and no prefix builders of its own: every spelling is a ratio (`A/m²`,
+`A/mm²`, …). Build it as an expression or with the typed `current / area` operator, and read it back with `into` against
+such an expression:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -34,21 +34,21 @@ j into (amperes / (milli.meters pow 2)) // 6.4
 
 ## Multiple decompositions
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `current / area` | `KCurrentDensityUnitInstance` | definition `J = I / A` |
-| `current/length²` | via `.toCurrentDensity()` | native canonical `A·m⁻²` expression |
+| Expression        | Result type                   | Meaning                             |
+|-------------------|-------------------------------|-------------------------------------|
+| `current / area`  | `KCurrentDensityUnitInstance` | definition `J = I / A`              |
+| `current/length²` | via `.toCurrentDensity()`     | native canonical `A·m⁻²` expression |
 
 The typed operator form returns a current density directly. The fully native expression stays a generic
-`KMixedUnitInstance` and is narrowed with `toCurrentDensity()` (which recognises only the canonical normal
-form and throws `IllegalStateException` otherwise). Both routes are value-equal.
+`KMixedUnitInstance` and is narrowed with `toCurrentDensity()` (which recognises only the canonical normal form and
+throws `IllegalStateException` otherwise). Both routes are value-equal.
 
 The inverse operators tie current, area and current density together:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `currentDensity * area` | `KElectricCurrentUnitInstance` | `I = J · A` (commutative) |
-| `current / currentDensity` | `KAreaUnitInstance` | `A = I / J` |
+| Expression                 | Result type                    | Meaning                   |
+|----------------------------|--------------------------------|---------------------------|
+| `currentDensity * area`    | `KElectricCurrentUnitInstance` | `I = J · A` (commutative) |
+| `current / currentDensity` | `KAreaUnitInstance`            | `A = I / J`               |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -101,11 +101,13 @@ import org.pcsoft.framework.kunit.electric.currentdensity.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `⁻²`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `⁻²`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written
+both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `A/m²` | `amperes / (meters pow 2)` | current density, base unit (fraction form) |
-| `A·m⁻²` | `amperes * (meters pow -2)` | same current density as a pure product |
-| `I / A` | `(16 of amperes) / crossSection` | current density from current and area |
-| `A/mm²` | `amperes / (milli.meters pow 2)` | current density in the common wiring unit |
+| Mathematics | Kotlin                           | Meaning                                    |
+|-------------|----------------------------------|--------------------------------------------|
+| `A/m²`      | `amperes / (meters pow 2)`       | current density, base unit (fraction form) |
+| `A·m⁻²`     | `amperes * (meters pow -2)`      | same current density as a pure product     |
+| `I / A`     | `(16 of amperes) / crossSection` | current density from current and area      |
+| `A/mm²`     | `amperes / (milli.meters pow 2)` | current density in the common wiring unit  |

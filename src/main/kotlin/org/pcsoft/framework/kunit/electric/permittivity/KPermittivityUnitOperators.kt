@@ -14,12 +14,12 @@ package org.pcsoft.framework.kunit.electric.permittivity
 
 import org.pcsoft.framework.kunit.electric.capacitance.KCapacitanceUnitInstance
 import org.pcsoft.framework.kunit.electric.capacitance.capacitanceInstanceOf
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 import org.pcsoft.framework.kunit.electric.fieldstrength.KElectricFieldStrengthUnitInstance
 import org.pcsoft.framework.kunit.electric.fieldstrength.electricFieldStrengthInstanceOf
 import org.pcsoft.framework.kunit.electric.fluxdensity.KElectricFluxDensityUnitInstance
 import org.pcsoft.framework.kunit.electric.fluxdensity.electricFluxDensityInstanceOf
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 
 // Cross-unit operators around the permittivity: the capacitance decomposition (`ε = C · d / A`, where the
 // geometry factor `d / A` is a length) and the field decomposition (`ε = D / E`). They live in the

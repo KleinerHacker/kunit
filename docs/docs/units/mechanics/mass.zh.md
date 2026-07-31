@@ -3,7 +3,7 @@
 包: `org.pcsoft.framework.kunit.mechanic.mass`
 基准单位: **克** (`KMassUnit.BASE == KMassUnit.GRAM`)
 
-类型：**原生单位**
+类型： **原生单位**
 
 质量组用于建模质量的量。它是一个 **简单的一维** 组（没有像距离组那样的指数特化子类型，也没有像时间组那样的
 `Duration` 支撑）：`KMassUnitInstance` 包装单个 `KMassUnit.GRAM` 项，始终以克归一化存储。
@@ -13,32 +13,32 @@
 
 ## 单位
 
-| 体系 | 单位 | 枚举值 | 符号 | 令牌 | 1 单位对应的克 |
-|---|---|---|---|---:|---:|
-| 公制 | 克 | `KMassUnit.GRAM` | `g` | `grams` | 1.0 |
-| 公制 | 吨（公吨） | `KMassUnit.TONNE` | `t` | `tonnes` | 1 000 000 |
-| 公制 | 克拉（公制） | `KMassUnit.CARAT` | `ct` | `carats` | 0.2 |
-| 常衡 | 格令 | `KMassUnit.GRAIN` | `gr` | `grains` | 0.06479891 |
-| 常衡 | 打兰 | `KMassUnit.DRAM` | `dr` | `drams` | 1.7718451953125 |
-| 常衡 | 盎司 | `KMassUnit.OUNCE` | `oz` | `ounces` | 28.349523125 |
-| 常衡 | 磅 | `KMassUnit.POUND` | `lb` | `pounds` | 453.59237 |
-| 常衡 | 英石 | `KMassUnit.STONE` | `st` | `stones` | 6350.29318 |
-| 常衡 | 英担 US（短） | `KMassUnit.HUNDREDWEIGHT_US` | `cwt(US)` | `hundredweightsUS` | 45 359.237 |
-| 常衡 | 英担 UK（长） | `KMassUnit.HUNDREDWEIGHT_UK` | `cwt(UK)` | `hundredweightsUK` | 50 802.34544 |
-| 常衡 | 短吨（US） | `KMassUnit.SHORT_TON` | `ton(US)` | `shortTons` | 907 184.74 |
-| 常衡 | 长吨（UK） | `KMassUnit.LONG_TON` | `ton(UK)` | `longTons` | 1 016 046.9088 |
-| 常衡 | 斯勒格 | `KMassUnit.SLUG` | `slug` | `slugs` | 14 593.90294 |
-| 金衡 | 本尼威特 | `KMassUnit.PENNYWEIGHT` | `dwt` | `pennyweights` | 1.55517384 |
-| 金衡 | 金衡盎司 | `KMassUnit.TROY_OUNCE` | `oz t` | `troyOunces` | 31.1034768 |
-| 金衡 | 金衡磅 | `KMassUnit.TROY_POUND` | `lb t` | `troyPounds` | 373.2417216 |
-| 历史 | 德国磅 | `KMassUnit.GERMAN_POUND` | `Pfd` | `germanPounds` | 500 |
-| 历史 | 岑特纳 | `KMassUnit.ZENTNER` | `Ztr` | `zentners` | 50 000 |
-| 历史 | 罗特 | `KMassUnit.LOT` | `Lot` | `lots` | 16.6666667 |
-| 地区 | 斤 | `KMassUnit.JIN` | `斤` | `jin` | 500 |
-| 地区 | 两 | `KMassUnit.LIANG` | `两` | `liang` | 50 |
-| 地区 | 匁 | `KMassUnit.MOMME` | `匁` | `momme` | 3.75 |
-| 地区 | 贯 | `KMassUnit.KAN` | `貫` | `kan` | 3750 |
-| 科学 | 道尔顿（u） | `KMassUnit.DALTON` | `Da` | `daltons` | 1.6605390666e-24 |
+| 体系 | 单位          | 枚举值                       | 符号      |               令牌 |   1 单位对应的克 |
+|------|---------------|------------------------------|-----------|-------------------:|-----------------:|
+| 公制 | 克            | `KMassUnit.GRAM`             | `g`       |            `grams` |              1.0 |
+| 公制 | 吨（公吨）    | `KMassUnit.TONNE`            | `t`       |           `tonnes` |        1 000 000 |
+| 公制 | 克拉（公制）  | `KMassUnit.CARAT`            | `ct`      |           `carats` |              0.2 |
+| 常衡 | 格令          | `KMassUnit.GRAIN`            | `gr`      |           `grains` |       0.06479891 |
+| 常衡 | 打兰          | `KMassUnit.DRAM`             | `dr`      |            `drams` |  1.7718451953125 |
+| 常衡 | 盎司          | `KMassUnit.OUNCE`            | `oz`      |           `ounces` |     28.349523125 |
+| 常衡 | 磅            | `KMassUnit.POUND`            | `lb`      |           `pounds` |        453.59237 |
+| 常衡 | 英石          | `KMassUnit.STONE`            | `st`      |           `stones` |       6350.29318 |
+| 常衡 | 英担 US（短） | `KMassUnit.HUNDREDWEIGHT_US` | `cwt(US)` | `hundredweightsUS` |       45 359.237 |
+| 常衡 | 英担 UK（长） | `KMassUnit.HUNDREDWEIGHT_UK` | `cwt(UK)` | `hundredweightsUK` |     50 802.34544 |
+| 常衡 | 短吨（US）    | `KMassUnit.SHORT_TON`        | `ton(US)` |        `shortTons` |       907 184.74 |
+| 常衡 | 长吨（UK）    | `KMassUnit.LONG_TON`         | `ton(UK)` |         `longTons` |   1 016 046.9088 |
+| 常衡 | 斯勒格        | `KMassUnit.SLUG`             | `slug`    |            `slugs` |     14 593.90294 |
+| 金衡 | 本尼威特      | `KMassUnit.PENNYWEIGHT`      | `dwt`     |     `pennyweights` |       1.55517384 |
+| 金衡 | 金衡盎司      | `KMassUnit.TROY_OUNCE`       | `oz t`    |       `troyOunces` |       31.1034768 |
+| 金衡 | 金衡磅        | `KMassUnit.TROY_POUND`       | `lb t`    |       `troyPounds` |      373.2417216 |
+| 历史 | 德国磅        | `KMassUnit.GERMAN_POUND`     | `Pfd`     |     `germanPounds` |              500 |
+| 历史 | 岑特纳        | `KMassUnit.ZENTNER`          | `Ztr`     |         `zentners` |           50 000 |
+| 历史 | 罗特          | `KMassUnit.LOT`              | `Lot`     |             `lots` |       16.6666667 |
+| 地区 | 斤            | `KMassUnit.JIN`              | `斤`      |              `jin` |              500 |
+| 地区 | 两            | `KMassUnit.LIANG`            | `两`      |            `liang` |               50 |
+| 地区 | 匁            | `KMassUnit.MOMME`            | `匁`      |            `momme` |             3.75 |
+| 地区 | 贯            | `KMassUnit.KAN`              | `貫`      |              `kan` |             3750 |
+| 科学 | 道尔顿（u）   | `KMassUnit.DALTON`           | `Da`      |          `daltons` | 1.6605390666e-24 |
 
 每个 `令牌` 都是一个值为 1 的 `KMassUnitInstance`，用于 `of`（构建）和 `into`（读取）。
 
@@ -72,8 +72,8 @@ val b = (1 of kilo.grams) - (500 of grams)   // KMassUnitInstance: 500.0 g
 
 ### 比较与相等
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个 `KMassUnitInstance` 的归一化 `value`（克）。`equals` 按归一化量比较，
-因此 `(1 of kilo.grams) == (1000 of grams)`。
+`==`、`!=`、`<`、`<=`、`>`、`>=` 比较两个 `KMassUnitInstance` 的归一化 `value`（克）。`equals` 按归一化量比较， 因此
+`(1 of kilo.grams) == (1000 of grams)`。
 
 ## 使用 `pow` 求幂
 
@@ -90,8 +90,8 @@ val squared = (2 of grams) pow 2     // KMixedUnitInstance: 4.0 g²
 
 ## SI 前缀
 
-质量接受 **任意** 量级，因此可以通过属性访问将每个 SI 前缀构建器（`quetta` … `quecto`）与任意质量单位组合。
-千克即 `kilo.grams`，毫克即 `milli.grams`。
+质量接受 **任意** 量级，因此可以通过属性访问将每个 SI 前缀构建器（`quetta` … `quecto`）与任意质量单位组合。 千克即
+`kilo.grams`，毫克即 `milli.grams`。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -122,11 +122,12 @@ import org.pcsoft.framework.kunit.mechanic.mass.*
 
 ## 记法
 
-下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/` 表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
+下表对比该单位及其组成部分的数学写法与使用 KUnit 的 Kotlin 写法。指数使用 Unicode 上标（`²`、`³`、`⁻¹`）表示，`·` 表示乘法，`/`
+表示分数。当一个量既可写成分数、也可写成带负指数的乘积时，会同时列出两种等价的 Kotlin 写法。
 
-| 数学 | Kotlin | 含义 |
-|---|---|---|
-| `g` | `grams` | 质量，基本单位（克） |
-| `kg` | `kilo.grams` | 千克（对克应用前缀） |
-| `mg` | `milli.grams` | 毫克 |
+| 数学 | Kotlin        | 含义                     |
+|------|---------------|--------------------------|
+| `g`  | `grams`       | 质量，基本单位（克）     |
+| `kg` | `kilo.grams`  | 千克（对克应用前缀）     |
+| `mg` | `milli.grams` | 毫克                     |
 | `g²` | `grams pow 2` | 克的平方（通用混合单位） |

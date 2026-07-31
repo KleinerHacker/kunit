@@ -23,12 +23,12 @@
 
 `KGraphicalConsoleFormatConfig` एक मान-प्रकार है; `DEFAULT` प्रीसेट चुनें या स्वयं बनाएं:
 
-| विकल्प             | मान / प्रकार                                     | डिफ़ॉल्ट    |
-|-------------------|-------------------------------------------------|------------|
-| `palette`         | `KGraphicalConsoleColorPalette` — `CLASSIC`, `VIVID`, `MONOCHROME` | `CLASSIC` |
-| `fractionBar`     | `LINE` (`─`), `HEAVY` (`━`), `ASCII` (`-`)      | `LINE`     |
-| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`) | `MIDDLE_DOT` |
-| `functionSymbols` | `KGraphicalFunctionSymbols` — `UNICODE`, `ASCII` | `UNICODE`  |
+| विकल्प               | मान / प्रकार                                                           | डिफ़ॉल्ट          |
+|-------------------|--------------------------------------------------------------------|--------------|
+| `palette`         | `KGraphicalConsoleColorPalette` — `CLASSIC`, `VIVID`, `MONOCHROME` | `CLASSIC`    |
+| `fractionBar`     | `LINE` (`─`), `HEAVY` (`━`), `ASCII` (`-`)                         | `LINE`       |
+| `multiplication`  | `ASTERISK` (`*`), `MIDDLE_DOT` (`·`), `CROSS` (`×`)                | `MIDDLE_DOT` |
+| `functionSymbols` | `KGraphicalFunctionSymbols` — `UNICODE`, `ASCII`                   | `UNICODE`    |
 
 पैलेट पाँच भूमिकाओं (संख्या, प्रतीक, संकारक, घातांक और रेखा) को रंगता है। जिस भूमिका का रंग खाली स्ट्रिंग है वह बिना रंग
 रहती है (इसी तरह `MONOCHROME` घातांक को बिना रंग छोड़ता है)।

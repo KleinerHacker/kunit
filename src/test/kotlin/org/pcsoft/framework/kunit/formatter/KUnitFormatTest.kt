@@ -12,19 +12,14 @@
 
 package org.pcsoft.framework.kunit.formatter
 
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.hectares
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.thermo.temperature.celsius
-import org.pcsoft.framework.kunit.thermo.temperature.fahrenheit
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import org.pcsoft.framework.kunit.toString
-import java.util.IllegalFormatException
-import java.util.Locale
+import org.pcsoft.framework.kunit.thermo.temperature.celsius
+import org.pcsoft.framework.kunit.thermo.temperature.fahrenheit
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

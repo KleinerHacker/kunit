@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.kinematic.frequency
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitDisplay
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 
 /**
@@ -64,7 +60,8 @@ class KFrequencyUnitInstance internal constructor(internal val instance: KMixedU
     override operator fun plus(other: KFrequencyUnitInstance): KFrequencyUnitInstance = frequencyOf(value + other.value)
 
     /** Subtracts two frequency values. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KFrequencyUnitInstance): KFrequencyUnitInstance = frequencyOf(value - other.value)
+    override operator fun minus(other: KFrequencyUnitInstance): KFrequencyUnitInstance =
+        frequencyOf(value - other.value)
 
     /**
      * Multiplies two frequency values, producing a new [KMixedUnitInstance] (`Hz²`, no longer a "pure"

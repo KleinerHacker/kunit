@@ -18,10 +18,10 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.electric.current.amperes
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.kinematic.time.seconds
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals

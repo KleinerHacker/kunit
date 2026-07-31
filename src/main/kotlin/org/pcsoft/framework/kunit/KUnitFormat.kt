@@ -15,7 +15,7 @@ package org.pcsoft.framework.kunit
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.formatter.KUnitFormatContext
 import org.pcsoft.framework.kunit.formatter.KUnitFormatter
-import java.util.Locale
+import java.util.*
 
 /**
  * Reads this value in the unit described by [target] and renders it - value **and** unit symbol - as a

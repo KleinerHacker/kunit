@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.fieldstrength
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **electric field strength**, i.e. exactly four terms in the
@@ -153,9 +149,9 @@ fun KMixedUnitInstance.toElectricFieldStrength(): KElectricFieldStrengthUnitInst
         "KMixedUnitInstance $this does not represent a pure electric field strength (expected KMassUnit^1, KDistanceUnit^1, KTimeUnit^-3 and KElectricCurrentUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        distanceTerm.unit.baseValue *
-        Math.pow(timeTerm.unit.baseValue, -3.0) *
-        Math.pow(currentTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            distanceTerm.unit.baseValue *
+            Math.pow(timeTerm.unit.baseValue, -3.0) *
+            Math.pow(currentTerm.unit.baseValue, -1.0)
     return electricFieldStrengthInstanceOf(gramBaseProduct / VOLT_PER_METER_MASS_REFERENCE)
 }

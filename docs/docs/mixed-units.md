@@ -1,13 +1,13 @@
 # Mixed Units
 
-A **mixed unit** is a value composed of several `KUnit`s, each raised to its own
-exponent, e.g. `m^1 * s^-1` for a speed, or `m^1 * kg^1 * s^-2` for a force. In kunit this is represented by
-the generic `KMixedUnitInstance` class.
+A **mixed unit** is a value composed of several `KUnit`s, each raised to its own exponent, e.g. `m^1 * s^-1` for a
+speed, or `m^1 * kg^1 * s^-2` for a force. In kunit this is represented by the generic `KMixedUnitInstance` class.
 
-While the group-specific wrapper classes (like `KLengthUnitInstance`, see [Predefined Units](units/kinematics/distance.md))
-are convenient for working with a single physical dimension, `KMixedUnitInstance` is what you reach for once you
-need to combine units from **different** groups, or when you don't want the automatic same-group conversion
-that the wrapper classes provide.
+While the group-specific wrapper classes (like `KLengthUnitInstance`,
+see [Predefined Units](units/kinematics/distance.md))
+are convenient for working with a single physical dimension, `KMixedUnitInstance` is what you reach for once you need to
+combine units from **different** groups, or when you don't want the automatic same-group conversion that the wrapper
+classes provide.
 
 ## Anatomy
 
@@ -36,8 +36,8 @@ val mixed = d.toUnit() // KMixedUnitInstance: value=5.0, units=[METER^1]
 multiplying/dividing units is always physically meaningful.
 
 - `*` adds up exponents of matching units, and simply carries over any unit that only exists on one side.
-- `/` subtracts the right-hand side's exponents from matching units (and negates the exponent for units that
-  only exist on the right-hand side).
+- `/` subtracts the right-hand side's exponents from matching units (and negates the exponent for units that only exist
+  on the right-hand side).
 - A resulting exponent of `0` removes that unit from the result entirely.
 
 ```kotlin
@@ -50,8 +50,8 @@ val area = distance * width                     // value=40.0, units=[METER^2]
 val backToLength = area / width                 // value=10.0, units=[METER^1]
 ```
 
-Mixing two different unit groups (e.g. length and, once available, time) works exactly the same way and
-produces a genuinely mixed unit:
+Mixing two different unit groups (e.g. length and, once available, time) works exactly the same way and produces a
+genuinely mixed unit:
 
 ```kotlin
 import org.pcsoft.framework.kunit.kinematic.time.seconds
@@ -64,15 +64,14 @@ val speed = distance / time // value=10.0, units=[METER^1, SECOND^-1]
 
 ## Scaling by a plain number
 
-Any unit value can be scaled by a plain `Number`. This is a **magnitude-only** operation: it changes the
-value but leaves the unit terms and exponents untouched, so the result keeps its type and dimension.
+Any unit value can be scaled by a plain `Number`. This is a **magnitude-only** operation: it changes the value but
+leaves the unit terms and exponents untouched, so the result keeps its type and dimension.
 
-- `unit * n`, `n * unit` and `unit / n` all return the **same typed unit** (a length stays a length, an
-  area stays an area).
+- `unit * n`, `n * unit` and `unit / n` all return the **same typed unit** (a length stays a length, an area stays an
+  area).
 - `n / unit` **inverts** the dimension (every exponent is negated) and therefore yields a generic
   `KMixedUnitInstance` — the idiomatic way to build a reciprocal such as a frequency from a period.
-- There is deliberately **no** scalar `+`/`-`: adding a dimensionless number to a dimensioned value is
-  meaningless.
+- There is deliberately **no** scalar `+`/`-`: adding a dimensionless number to a dimensioned value is meaningless.
 
 A real-world example — the area of a circle, `A = π · r²`, computed entirely through the unit system:
 
@@ -103,19 +102,19 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 val frequency = 1 / (2 of seconds) // KMixedUnitInstance: value=0.5, units=[SECOND^-1]  (0.5 Hz)
 ```
 
-The affine **absolute temperature** group is the one exception: scaling an absolute temperature by a number
-is physically meaningless (its kelvin value carries the −273.15 offset), so `(20 of celsius) * 2` is a
-**compile error**. Scale a linear **temperature difference** instead (see
+The affine **absolute temperature** group is the one exception: scaling an absolute temperature by a number is
+physically meaningless (its kelvin value carries the −273.15 offset), so `(20 of celsius) * 2` is a **compile error**.
+Scale a linear **temperature difference** instead (see
 [Temperature Difference](units/thermodynamics/temperature-difference.md)).
 
 ## Addition and subtraction
 
 Unlike `*`/`/`, `+` and `-` are only allowed between two `KMixedUnitInstance`s that describe the **same physical
-dimension**: for every term on one side there must be exactly one term on the other side belonging to the
-same unit group (e.g. all `KDistanceUnit` values) with the same exponent (order-independent). The `KUnit`s
-themselves do **not** need to be identical - matching terms are automatically converted via normalization,
-the same way the group-specific wrapper classes (`KLengthUnitInstance`, etc.) do it for "pure" units. The
-result is expressed in the left-hand operand's `units`.
+dimension**: for every term on one side there must be exactly one term on the other side belonging to the same unit
+group (e.g. all `KDistanceUnit` values) with the same exponent (order-independent). The `KUnit`s themselves do **not**
+need to be identical - matching terms are automatically converted via normalization, the same way the group-specific
+wrapper classes (`KLengthUnitInstance`, etc.) do it for "pure" units. The result is expressed in the left-hand operand's
+`units`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -149,9 +148,9 @@ x.hasSameUnits(y) // compares the (unit -> exponent) signature, order-independen
 
 ## Reading values
 
-`into` reads the value in a target unit template (a bare token, a prefixed builder template, or a special
-value-1 instance), returning a plain `Double`. Both sides must describe the same physical dimension. There is
-no `valueAs` and no custom-unit `toString`; format a specific unit as `"${v into kilo.meters} km"`.
+`into` reads the value in a target unit template (a bare token, a prefixed builder template, or a special value-1
+instance), returning a plain `Double`. Both sides must describe the same physical dimension. There is no `valueAs` and
+no custom-unit `toString`; format a specific unit as `"${v into kilo.meters} km"`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -189,8 +188,8 @@ val combined = distance * mixed              // KMixedUnitInstance: METER^2
 
 ## Converting back to a pure unit
 
-Once a `KMixedUnitInstance` again represents exactly one term of a single unit group, it can be converted back
-into that group's wrapper class via the group-specific `toXxxUnit()` extension (e.g. `toDistance()`):
+Once a `KMixedUnitInstance` again represents exactly one term of a single unit group, it can be converted back into that
+group's wrapper class via the group-specific `toXxxUnit()` extension (e.g. `toDistance()`):
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -205,11 +204,11 @@ val area = (200 of meters) * (50 of meters)    // KAreaUnitInstance
 area.toUnit().toDistance().value               // 10000.0 (an area, exponent 2)
 ```
 
-If the `KMixedUnitInstance` does **not** consist of exactly one term of that group (e.g. it's still a mixed
-length/time value), the conversion throws `IllegalStateException`.
+If the `KMixedUnitInstance` does **not** consist of exactly one term of that group (e.g. it's still a mixed length/time
+value), the conversion throws `IllegalStateException`.
 
-The same narrowing is available **directly on a distance value** (not only on `KMixedUnitInstance`): a
-general `KDistanceUnitInstance` — or any leaf — can be narrowed to a specific dimension with `toLength()`,
+The same narrowing is available **directly on a distance value** (not only on `KMixedUnitInstance`): a general
+`KDistanceUnitInstance` — or any leaf — can be narrowed to a specific dimension with `toLength()`,
 `toArea()` or `toVolume()`, which are exponent-checked and throw `IllegalStateException` on a mismatch:
 
 ```kotlin

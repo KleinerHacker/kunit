@@ -123,7 +123,10 @@ class KTemperatureUnitInstance internal constructor(
      * scale a temperature *interval*, use [KTemperatureDifferenceUnitInstance] (linear).
      */
     @Suppress("UNUSED_PARAMETER")
-    @Deprecated("Scalar multiplication is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+    @Deprecated(
+        "Scalar multiplication is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.",
+        level = DeprecationLevel.ERROR
+    )
     operator fun times(factor: Number): Nothing =
         throw UnsupportedOperationException("Scalar multiplication is undefined for an affine absolute temperature")
 
@@ -132,7 +135,10 @@ class KTemperatureUnitInstance internal constructor(
      * reasoning; use [KTemperatureDifferenceUnitInstance] to scale a temperature interval.
      */
     @Suppress("UNUSED_PARAMETER")
-    @Deprecated("Scalar division is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+    @Deprecated(
+        "Scalar division is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.",
+        level = DeprecationLevel.ERROR
+    )
     operator fun div(factor: Number): Nothing =
         throw UnsupportedOperationException("Scalar division is undefined for an affine absolute temperature")
 
@@ -172,7 +178,10 @@ operator fun KUnitInstance<*>.div(other: KTemperatureUnitInstance): KMixedUnitIn
  * `Number.times(T)` extension for a temperature argument, turning the call into a **compile error**.
  */
 @Suppress("UNUSED_PARAMETER")
-@Deprecated("Scalar multiplication is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+@Deprecated(
+    "Scalar multiplication is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.",
+    level = DeprecationLevel.ERROR
+)
 operator fun Number.times(unit: KTemperatureUnitInstance): Nothing =
     throw UnsupportedOperationException("Scalar multiplication is undefined for an affine absolute temperature")
 
@@ -183,7 +192,10 @@ operator fun Number.times(unit: KTemperatureUnitInstance): Nothing =
  * error**.
  */
 @Suppress("UNUSED_PARAMETER")
-@Deprecated("Scalar division is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.", level = DeprecationLevel.ERROR)
+@Deprecated(
+    "Scalar division is undefined for an affine absolute temperature; scale a KTemperatureDifferenceUnitInstance instead.",
+    level = DeprecationLevel.ERROR
+)
 operator fun Number.div(unit: KTemperatureUnitInstance): Nothing =
     throw UnsupportedOperationException("Scalar division is undefined for an affine absolute temperature")
 

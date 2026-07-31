@@ -9,24 +9,24 @@
 كثافة التدفق الكهربائي وحدة **مركّبة**: التركيب `current · time · length⁻²`
 (`A·s·m⁻²` = `C/m²`). يغلّف `KElectricFluxDensityUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود —
 `KElectricCurrentUnit.BASE` (أمبير) بالأس `+1`، و`KTimeUnit.BASE` (ثانية) بالأس `+1`، و`KDistanceUnit.BASE`
-(متر) بالأس `-2`. لا تحمل هذه المجموعة أي بُعد كتلة، لذا لا حاجة إلى جسر غرام/كيلوغرام؛ وتُطبَّع القيمة
-المخزّنة دائمًا إلى كولوم لكل متر مربع.
+(متر) بالأس `-2`. لا تحمل هذه المجموعة أي بُعد كتلة، لذا لا حاجة إلى جسر غرام/كيلوغرام؛ وتُطبَّع القيمة المخزّنة دائمًا
+إلى كولوم لكل متر مربع.
 
 كثافة التدفق `D` (وتُسمّى أيضًا الإزاحة الكهربائية) هي الشحنة لكل وحدة مساحة. **كثافة الشحنة السطحية**
 `σ` هي نفس الكمية من حيث الأبعاد، ولذلك تُمثَّل بهذه المجموعة نفسها بدلًا من مجموعة منفصلة. وترتبط `D`
 بـ[شدة المجال الكهربائي](electricfieldstrength.ar.md) عبر [السماحية](permittivity.ar.md)
-(`D = ε · E`). النظير أحادي البُعد هو [كثافة الشحنة الخطية](linearchargedensity.ar.md)، والنظير
-ثلاثي الأبعاد هو [كثافة الشحنة](chargedensity.ar.md).
+(`D = ε · E`). النظير أحادي البُعد هو [كثافة الشحنة الخطية](linearchargedensity.ar.md)، والنظير ثلاثي الأبعاد
+هو [كثافة الشحنة](chargedensity.ar.md).
 
 ## إنشاء كثافة تدفق كهربائي
 
 تُنشأ كثافة التدفق برمز مسمّى أو من تفكيك (انظر أدناه). تبقى الوحدات المسمّاة كرموز بقيمة 1 (تُستخدم مع
 `of`/`into`):
 
-| كثافة التدفق | الرمز | الرمز البرمجي | 1 وحدة بـ C/m² |
-|---|---|---:|---:|
-| كولوم لكل متر مربع | `C/m²` | `coulombsPerSquareMeter` | 1.0 |
-| كولوم لكل سنتيمتر مربع | `C/cm²` | `coulombsPerSquareCentimeter` | 1.0e4 |
+| كثافة التدفق           | الرمز   |                 الرمز البرمجي | 1 وحدة بـ C/m² |
+|------------------------|---------|------------------------------:|---------------:|
+| كولوم لكل متر مربع     | `C/m²`  |      `coulombsPerSquareMeter` |            1.0 |
+| كولوم لكل سنتيمتر مربع | `C/cm²` | `coulombsPerSquareCentimeter` |          1.0e4 |
 
 تدعم الوحدات المسمّاة بادئات النظام الدولي عبر `KPrefixBuilder` (`micro.coulombsPerSquareMeter`،
 `milli.coulombsPerSquareMeter`، …).
@@ -47,11 +47,11 @@ d into coulombsPerSquareMeter               // 5.0e-6
 
 يمكن الوصول إلى كثافة التدفق الكهربائي عبر عدة **تفكيكات مكافئة**، وجميعها تُنتج كثافة متساوية القيمة:
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `charge / area` | `KElectricFluxDensityUnitInstance` | `D = Q / A`، الشحنة موزّعة على مساحة |
+| التعبير                                | نوع النتيجة                        | المعنى                                                    |
+|----------------------------------------|------------------------------------|-----------------------------------------------------------|
+| `charge / area`                        | `KElectricFluxDensityUnitInstance` | `D = Q / A`، الشحنة موزّعة على مساحة                       |
 | `permittivity * electricFieldStrength` | `KElectricFluxDensityUnitInstance` | `D = ε · E` (تبادلي، انظر [السماحية](permittivity.ar.md)) |
-| `current·time/length²` | عبر `.toElectricFluxDensity()` | التعبير الأصلي القياسي `A·s·m⁻²` |
+| `current·time/length²`                 | عبر `.toElectricFluxDensity()`     | التعبير الأصلي القياسي `A·s·m⁻²`                          |
 
 تُعيد الصيغ المكتوبة بأنواع صريحة كثافة تدفق مباشرة. أما التعبير الأصلي بالكامل فيبقى `KMixedUnitInstance`
 عامًّا ويُضيَّق عبر `toElectricFluxDensity()` (الذي يتعرّف فقط على الصيغة القياسية ويرمي
@@ -59,11 +59,11 @@ d into coulombsPerSquareMeter               // 5.0e-6
 
 تربط العمليات العكسية بين الشحنة والمساحة وكثافة التدفق:
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `electricFluxDensity * area` | `KChargeUnitInstance` | `Q = D · A` (تبادلي) |
-| `charge / electricFluxDensity` | `KAreaUnitInstance` | `A = Q / D` |
-| `electricFluxDensity / electricFieldStrength` | `KPermittivityUnitInstance` | `ε = D / E` |
+| التعبير                                       | نوع النتيجة                 | المعنى               |
+|-----------------------------------------------|-----------------------------|----------------------|
+| `electricFluxDensity * area`                  | `KChargeUnitInstance`       | `Q = D · A` (تبادلي) |
+| `charge / electricFluxDensity`                | `KAreaUnitInstance`         | `A = Q / D`          |
+| `electricFluxDensity / electricFieldStrength` | `KPermittivityUnitInstance` | `ε = D / E`          |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -109,13 +109,15 @@ import org.pcsoft.framework.kunit.electric.fluxdensity.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف يونيكود العلوية (`²`، `⁻²`)، ويرمز `·` للضرب و `/` للكسر. وحيثما أمكن كتابة الكمية ككسر وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `⁻²`)، ويرمز `·` للضرب و `/` للكسر. وحيثما أمكن كتابة الكمية ككسر وكحاصل ضرب بأسس سالبة، تُذكر
+الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `C/m²` | `coulombsPerSquareMeter` | كثافة التدفق الكهربائي، الوحدة الأساسية (رمز مسمّى) |
-| `Q / A` | `(20 of micro.coulombs) / plate` | كثافة التدفق من الشحنة على مساحة |
-| `ε · E` | `(1 of vacuumPermittivity) * (1 of voltsPerMeter)` | كثافة التدفق من السماحية وشدة المجال |
-| `A·s/m²` | `((amperes pow 1) * (seconds pow 1)) / (meters pow 2)` | كثافة التدفق كتيار·زمن / طول² (صيغة الكسر) |
-| `A·s·m⁻²` | `(amperes pow 1) * (seconds pow 1) * (meters pow -2)` | نفس كثافة التدفق كحاصل ضرب خالص |
-| `µC/m²` | `micro.coulombsPerSquareMeter` | كثافة تدفق ببادئة (ميكروكولوم لكل متر مربع) |
+| الرياضيات | Kotlin                                                 | المعنى                                             |
+|-----------|--------------------------------------------------------|----------------------------------------------------|
+| `C/m²`    | `coulombsPerSquareMeter`                               | كثافة التدفق الكهربائي، الوحدة الأساسية (رمز مسمّى) |
+| `Q / A`   | `(20 of micro.coulombs) / plate`                       | كثافة التدفق من الشحنة على مساحة                   |
+| `ε · E`   | `(1 of vacuumPermittivity) * (1 of voltsPerMeter)`     | كثافة التدفق من السماحية وشدة المجال               |
+| `A·s/m²`  | `((amperes pow 1) * (seconds pow 1)) / (meters pow 2)` | كثافة التدفق كتيار·زمن / طول² (صيغة الكسر)         |
+| `A·s·m⁻²` | `(amperes pow 1) * (seconds pow 1) * (meters pow -2)`  | نفس كثافة التدفق كحاصل ضرب خالص                    |
+| `µC/m²`   | `micro.coulombsPerSquareMeter`                         | كثافة تدفق ببادئة (ميكروكولوم لكل متر مربع)        |

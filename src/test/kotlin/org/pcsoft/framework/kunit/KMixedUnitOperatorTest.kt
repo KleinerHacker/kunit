@@ -12,30 +12,24 @@
 
 package org.pcsoft.framework.kunit
 
+import org.pcsoft.framework.kunit.it.storage.KStorageUnit
+import org.pcsoft.framework.kunit.it.storage.bytes
 import org.pcsoft.framework.kunit.kinematic.acceleration.standardGravities
-import org.pcsoft.framework.kunit.mechanic.areadensity.KAreaDensityUnitInstance
-import org.pcsoft.framework.kunit.mechanic.areadensity.div
 import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.speed.KSpeedUnitInstance
+import org.pcsoft.framework.kunit.kinematic.speed.div
+import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.mechanic.areadensity.KAreaDensityUnitInstance
+import org.pcsoft.framework.kunit.mechanic.areadensity.div
 import org.pcsoft.framework.kunit.mechanic.force.KForceUnitInstance
 import org.pcsoft.framework.kunit.mechanic.force.newtons
 import org.pcsoft.framework.kunit.mechanic.force.times
 import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.kinematic.speed.KSpeedUnitInstance
-import org.pcsoft.framework.kunit.kinematic.speed.div
-import org.pcsoft.framework.kunit.it.storage.KStorageUnit
-import org.pcsoft.framework.kunit.it.storage.bytes
-import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
-import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** The cross-group `*`/`/` operators (generic vs typed) and mixed `+` dimension checks. */
 class KMixedUnitOperatorTest {
@@ -46,7 +40,14 @@ class KMixedUnitOperatorTest {
         val mixed = (20 of bytes) / (20 of meters)
         assertIs<KMixedUnitInstance>(mixed)
         assertEquals(1.0, mixed.value, 1e-9)
-        assertTrue(mixed.hasSameUnits(KMixedUnitInstance(1.0, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, -1)))))
+        assertTrue(
+            mixed.hasSameUnits(
+                KMixedUnitInstance(
+                    1.0,
+                    listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, -1))
+                )
+            )
+        )
     }
 
     /** The typed speed extension still wins over the generic operator (`length / time = speed`). */
@@ -95,7 +96,14 @@ class KMixedUnitOperatorTest {
         val mixed = (20 of bytes) * (20 of meters)
         assertIs<KMixedUnitInstance>(mixed)
         assertEquals(400.0, mixed.value, 1e-9)
-        assertTrue(mixed.hasSameUnits(KMixedUnitInstance(1.0, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, 1)))))
+        assertTrue(
+            mixed.hasSameUnits(
+                KMixedUnitInstance(
+                    1.0,
+                    listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KDistanceUnit.BASE, 1))
+                )
+            )
+        )
     }
 
     /** Mixed `-` and `pow 0` (dimensionless). */

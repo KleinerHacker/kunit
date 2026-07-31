@@ -1,15 +1,15 @@
 # Formatting Output
 
-This page is the overview of the **Formatter** group. It explains the `format` verb — the entry point for
-all formatting. Two dedicated pages go deeper:
+This page is the overview of the **Formatter** group. It explains the `format` verb — the entry point for all
+formatting. Two dedicated pages go deeper:
 
-- [Default Formatter](default-formatter.md) — how the shipped `KDefaultUnitFormatter` renders the unit part
-  (the notation you get out of the box), with example outputs.
+- [Default Formatter](default-formatter.md) — how the shipped `KDefaultUnitFormatter` renders the unit part (the
+  notation you get out of the box), with example outputs.
 - [Custom Formatter](custom-formatters.md) — how to plug in your own rendering (LaTeX, MathML, HTML, …).
 
-Every value knows how to print itself in its **base unit** via `toString()`, and it can be **read** into a
-specific unit with [`into`](../mixed-units.md) — but `into` returns only a bare `Double`, without a unit
-symbol. The `format` verb closes that gap: it is the display counterpart of `into`, returning value **and**
+Every value knows how to print itself in its **base unit** via `toString()`, and it can be **read** into a specific unit
+with [`into`](../mixed-units.md) — but `into` returns only a bare `Double`, without a unit symbol. The `format` verb
+closes that gap: it is the display counterpart of `into`, returning value **and**
 unit symbol as a `String`.
 
 ```kotlin
@@ -23,9 +23,9 @@ val v = 3 of meters / seconds
 v format kilo.meters / hours       // "10.799999999999999 km/h"
 ```
 
-Just like `into`, `format` first reads the value into the target unit (running the same dimension check and
-the same affine-aware conversion), and then appends the target's unit symbol. Because the target carries the
-unit it was written down as, prefixed and alternate units render under their **own** symbol (`km`, `h`,
+Just like `into`, `format` first reads the value into the target unit (running the same dimension check and the same
+affine-aware conversion), and then appends the target's unit symbol. Because the target carries the unit it was written
+down as, prefixed and alternate units render under their **own** symbol (`km`, `h`,
 `mi`) rather than the group base symbol (`m`, `s`).
 
 ## Number formatting: pattern and locale
@@ -49,18 +49,18 @@ The pattern affects **only** the number; the unit part is unchanged. An invalid 
 
 The built-in formatter renders the unit part like this:
 
-| Terms                                   | Rendered  |
-|-----------------------------------------|-----------|
-| single unit, exponent 1                 | `km`      |
-| exponent ≠ 1                            | `m^2`     |
-| one numerator + exactly one denominator | `km/h`, `m/s^2` |
+| Terms                                   | Rendered              |
+|-----------------------------------------|-----------------------|
+| single unit, exponent 1                 | `km`                  |
+| exponent ≠ 1                            | `m^2`                 |
+| one numerator + exactly one denominator | `km/h`, `m/s^2`       |
 | anything else                           | `m*s^-3*A^-2`, `s^-1` |
-| no unit (dimensionless)                 | just the number |
+| no unit (dimensionless)                 | just the number       |
 
 ## `toString` with a pattern
 
-The no-argument `toString()` is unchanged (base-unit rendering). An additional overload adds the same
-number pattern/locale to the base-unit output — the `format` verb without a target:
+The no-argument `toString()` is unchanged (base-unit rendering). An additional overload adds the same number
+pattern/locale to the base-unit output — the `format` verb without a target:
 
 ```kotlin
 (3 of meters / seconds).toString("%.2f", Locale.US) // "3.00 m/s"
@@ -89,6 +89,6 @@ println(speed.format(meters / seconds, "%.2f", Locale.US))    // "3.33 m/s"
 
 The unit part is produced by a pluggable [`KUnitFormatter`](custom-formatters.md); the shipped
 `KDefaultUnitFormatter` produces the plain text shown above — see [Default Formatter](default-formatter.md)
-for its exact rules and example outputs. To emit a completely different notation — LaTeX or MathML for a
-graphical formula renderer, HTML, ... — implement your own formatter and pass it explicitly. See
+for its exact rules and example outputs. To emit a completely different notation — LaTeX or MathML for a graphical
+formula renderer, HTML, ... — implement your own formatter and pass it explicitly. See
 [Custom Formatter](custom-formatters.md).

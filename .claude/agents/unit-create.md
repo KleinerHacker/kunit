@@ -30,6 +30,7 @@ If no existing rule or skill applies, ask the user before introducing a new patt
 ## Important Hints
 
 ONLY if the user prompt is not clear, ask the user for clarification:
+
 * Package Name (Unit Name)
 * Operator Support
 * Test

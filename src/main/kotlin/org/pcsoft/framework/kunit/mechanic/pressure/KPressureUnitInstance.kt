@@ -17,8 +17,8 @@ import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * The fixed factor between the group's named base unit (pascal) and the raw component storage
@@ -58,10 +58,12 @@ class KPressureUnitInstance internal constructor(internal val instance: KMixedUn
      * Adds two pressures, automatically converting between different [KPressureUnit]s since both operands
      * are always normalized to the same component base internally.
      */
-    override operator fun plus(other: KPressureUnitInstance): KPressureUnitInstance = KPressureUnitInstance(instance + other.instance)
+    override operator fun plus(other: KPressureUnitInstance): KPressureUnitInstance =
+        KPressureUnitInstance(instance + other.instance)
 
     /** Subtracts two pressures. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KPressureUnitInstance): KPressureUnitInstance = KPressureUnitInstance(instance - other.instance)
+    override operator fun minus(other: KPressureUnitInstance): KPressureUnitInstance =
+        KPressureUnitInstance(instance - other.instance)
 
     /** Multiplies two pressures, producing a new [KMixedUnitInstance] (no longer a "pure" pressure). */
     operator fun times(other: KPressureUnitInstance): KMixedUnitInstance = instance * other.instance
@@ -95,7 +97,10 @@ fun KMixedUnitInstance.toPressure(): KPressureUnitInstance {
     check(units.size == 3 && massTerm != null && lengthTerm != null && timeTerm != null) {
         "KMixedUnitInstance $this does not represent a pure pressure (expected one KMassUnit^1, one KDistanceUnit^-1 and one KTimeUnit^-2 term)"
     }
-    val component = value * massTerm.unit.baseValue * Math.pow(lengthTerm.unit.baseValue, -1.0) * Math.pow(timeTerm.unit.baseValue, -2.0)
+    val component = value * massTerm.unit.baseValue * Math.pow(lengthTerm.unit.baseValue, -1.0) * Math.pow(
+        timeTerm.unit.baseValue,
+        -2.0
+    )
     return pressureUnitInstanceOf(component)
 }
 
@@ -112,4 +117,5 @@ internal fun pressureUnitInstanceOf(componentValue: Double): KPressureUnitInstan
     )
 
 /** Builds a value-1 [KPressureUnitInstance] for the given [unit] (its [KPressureUnit.baseValue] pascals). */
-internal fun pressureOfUnit(unit: KPressureUnit): KPressureUnitInstance = pressureUnitInstanceOf(unit.baseValue * PA_IN_BASE)
+internal fun pressureOfUnit(unit: KPressureUnit): KPressureUnitInstance =
+    pressureUnitInstanceOf(unit.baseValue * PA_IN_BASE)

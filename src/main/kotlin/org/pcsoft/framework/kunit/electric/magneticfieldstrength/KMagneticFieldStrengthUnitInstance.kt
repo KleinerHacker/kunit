@@ -16,8 +16,8 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **magnetic field strength**, i.e. exactly two terms in the
@@ -135,7 +135,7 @@ fun KMixedUnitInstance.toMagneticFieldStrength(): KMagneticFieldStrengthUnitInst
         "KMixedUnitInstance $this does not represent a pure magnetic field strength (expected KElectricCurrentUnit^1 and KDistanceUnit^-1)"
     }
     val normalizedValue = value *
-        currentTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, -1.0)
+            currentTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, -1.0)
     return magneticFieldStrengthInstanceOf(normalizedValue)
 }

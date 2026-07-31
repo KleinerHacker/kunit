@@ -6,24 +6,24 @@ Base unit: **ampere per meter** (`KMagneticFieldStrengthUnit.BASE == KMagneticFi
 Type: **constructed unit**
 
 Magnetic field strength (the magnetizing field `H`) is a **constructed** unit: the composition
-`current · length⁻¹` (`A/m`). `KMagneticFieldStrengthUnitInstance` wraps a `KMixedUnitInstance` of two
-terms — `KElectricCurrentUnit.BASE` (ampere) at `+1` and `KDistanceUnit.BASE` (meter) at `-1`. The stored
-value is always normalized to amperes per meter.
+`current · length⁻¹` (`A/m`). `KMagneticFieldStrengthUnitInstance` wraps a `KMixedUnitInstance` of two terms —
+`KElectricCurrentUnit.BASE` (ampere) at `+1` and `KDistanceUnit.BASE` (meter) at `-1`. The stored value is always
+normalized to amperes per meter.
 
-Related pages: [Electric Current](ec.md) and [Length](../kinematics/distance.md) are the two component
-groups of this unit.
+Related pages: [Electric Current](ec.md) and [Length](../kinematics/distance.md) are the two component groups of this
+unit.
 
 ## Building a magnetic field strength
 
-Build a field strength with a named token, or from a decomposition (see below). Named units survive as
-value-1 tokens (used with `of`/`into`):
+Build a field strength with a named token, or from a decomposition (see below). Named units survive as value-1 tokens
+(used with `of`/`into`):
 
-| Magnetic field strength | Symbol | Token | 1 unit in A/m |
-|---|---|---:|---:|
-| Ampere per meter | `A/m` | `amperesPerMeter` | 1.0 |
-| Oersted (CGS-EMU) | `Oe` | `oersteds` | 79.57747154594767 |
-| Gilbert per centimeter | `Gb/cm` | `gilbertsPerCentimeter` | 79.57747154594767 |
-| Ampere-turn per inch | `At/in` | `ampereTurnsPerInch` | 39.37007874015748 |
+| Magnetic field strength | Symbol  |                   Token |     1 unit in A/m |
+|-------------------------|---------|------------------------:|------------------:|
+| Ampere per meter        | `A/m`   |       `amperesPerMeter` |               1.0 |
+| Oersted (CGS-EMU)       | `Oe`    |              `oersteds` | 79.57747154594767 |
+| Gilbert per centimeter  | `Gb/cm` | `gilbertsPerCentimeter` | 79.57747154594767 |
+| Ampere-turn per inch    | `At/in` |    `ampereTurnsPerInch` | 39.37007874015748 |
 
 Named units support the SI prefixes via `KPrefixBuilder` (`kilo.amperesPerMeter`, `milli.oersteds`, …).
 
@@ -41,23 +41,23 @@ h into kilo.amperesPerMeter             // 0.47
 
 ## Multiple decompositions
 
-Magnetic field strength can be reached through several **equivalent decompositions**, all producing the
-same value-equal field strength:
+Magnetic field strength can be reached through several **equivalent decompositions**, all producing the same value-equal
+field strength:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `current / length` | `KMagneticFieldStrengthUnitInstance` | defining relation `H = I / l` |
-| `current·length⁻¹` | via `.toMagneticFieldStrength()` | native canonical `A·m⁻¹` expression |
+| Expression         | Result type                          | Meaning                             |
+|--------------------|--------------------------------------|-------------------------------------|
+| `current / length` | `KMagneticFieldStrengthUnitInstance` | defining relation `H = I / l`       |
+| `current·length⁻¹` | via `.toMagneticFieldStrength()`     | native canonical `A·m⁻¹` expression |
 
 The typed operator form returns a field strength directly. The fully native expression stays a generic
-`KMixedUnitInstance` and is narrowed with `toMagneticFieldStrength()` (which recognises only the canonical
-normal form and throws `IllegalStateException` otherwise). Both routes are value-equal.
+`KMixedUnitInstance` and is narrowed with `toMagneticFieldStrength()` (which recognises only the canonical normal form
+and throws `IllegalStateException` otherwise). Both routes are value-equal.
 
 The inverse operators tie current, length and field strength together:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `fieldStrength * length` | `KElectricCurrentUnitInstance` | `I = H · l` |
+| Expression               | Result type                    | Meaning          |
+|--------------------------|--------------------------------|------------------|
+| `fieldStrength * length` | `KElectricCurrentUnitInstance` | `I = H · l`      |
 | `length * fieldStrength` | `KElectricCurrentUnitInstance` | commutative form |
 
 ```kotlin
@@ -98,11 +98,13 @@ import org.pcsoft.framework.kunit.electric.magneticfieldstrength.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `A/m` | `amperesPerMeter` | magnetic field strength, base unit (named token) |
-| `A/m` | `(amperes pow 1) / (meters pow 1)` | field strength as current / length (fraction form) |
-| `A·m⁻¹` | `(amperes pow 1) * (meters pow -1)` | same field strength as a pure product |
-| `kA/m` | `kilo.amperesPerMeter` | prefixed field strength (kiloampere per meter) |
+| Mathematics | Kotlin                              | Meaning                                            |
+|-------------|-------------------------------------|----------------------------------------------------|
+| `A/m`       | `amperesPerMeter`                   | magnetic field strength, base unit (named token)   |
+| `A/m`       | `(amperes pow 1) / (meters pow 1)`  | field strength as current / length (fraction form) |
+| `A·m⁻¹`     | `(amperes pow 1) * (meters pow -1)` | same field strength as a pure product              |
+| `kA/m`      | `kilo.amperesPerMeter`              | prefixed field strength (kiloampere per meter)     |

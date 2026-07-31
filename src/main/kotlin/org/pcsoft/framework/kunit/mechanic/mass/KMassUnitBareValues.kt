@@ -47,10 +47,12 @@ val pounds: KMassUnitInstance = massOf(KMassUnit.POUND.baseValue, KUnitDisplay(K
 val stones: KMassUnitInstance = massOf(KMassUnit.STONE.baseValue, KUnitDisplay(KMassUnit.STONE))
 
 /** 1 hundredweight, US / short ([KMassUnit.HUNDREDWEIGHT_US]). */
-val hundredweightsUS: KMassUnitInstance = massOf(KMassUnit.HUNDREDWEIGHT_US.baseValue, KUnitDisplay(KMassUnit.HUNDREDWEIGHT_US))
+val hundredweightsUS: KMassUnitInstance =
+    massOf(KMassUnit.HUNDREDWEIGHT_US.baseValue, KUnitDisplay(KMassUnit.HUNDREDWEIGHT_US))
 
 /** 1 hundredweight, UK / long ([KMassUnit.HUNDREDWEIGHT_UK]). */
-val hundredweightsUK: KMassUnitInstance = massOf(KMassUnit.HUNDREDWEIGHT_UK.baseValue, KUnitDisplay(KMassUnit.HUNDREDWEIGHT_UK))
+val hundredweightsUK: KMassUnitInstance =
+    massOf(KMassUnit.HUNDREDWEIGHT_UK.baseValue, KUnitDisplay(KMassUnit.HUNDREDWEIGHT_UK))
 
 /** 1 short ton, US ([KMassUnit.SHORT_TON]). */
 val shortTons: KMassUnitInstance = massOf(KMassUnit.SHORT_TON.baseValue, KUnitDisplay(KMassUnit.SHORT_TON))

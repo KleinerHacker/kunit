@@ -5,22 +5,20 @@
 
 유형: **네이티브 단위**
 
-주파수 그룹은 단위 시간당 어떤 일이 몇 번 일어나는지를 모델링합니다. 이는 **네이티브한 일차원** 그룹이며
-**시간의 역수** (`1 Hz = 1/s`) 입니다. `KFrequencyUnitInstance` 는 단일 `KFrequencyUnit.HERTZ` 항을 감싸며
-항상 헤르츠로 정규화하여 저장합니다.
+주파수 그룹은 단위 시간당 어떤 일이 몇 번 일어나는지를 모델링합니다. 이는 **네이티브한 일차원** 그룹이며 **시간의 역수** (`1 Hz = 1/s`) 입니다. `KFrequencyUnitInstance` 는
+단일 `KFrequencyUnit.HERTZ` 항을 감싸며 항상 헤르츠로 정규화하여 저장합니다.
 
-주파수는 시간의 역수이므로 그룹 간 동작이 **시간과 정확히 반대** 로 정의됩니다. 주파수를 곱하는 것은 시간으로 나누는 것과 같고,
-주파수로 나누는 것은 시간을 곱하는 것과 같습니다.
+주파수는 시간의 역수이므로 그룹 간 동작이 **시간과 정확히 반대** 로 정의됩니다. 주파수를 곱하는 것은 시간으로 나누는 것과 같고, 주파수로 나누는 것은 시간을 곱하는 것과 같습니다.
 
 ## 단위
 
-| 단위 | 열거값 | 기호 | 토큰 | 1 단위의 헤르츠 값 |
-|---|---|---|---:|---:|
-| 헤르츠 | `KFrequencyUnit.HERTZ` | `Hz` | `hertz` | 1.0 |
-| 초당 회전수 | `KFrequencyUnit.RPS` | `rps` | `rps` | 1.0 |
-| 초당 프레임수 | `KFrequencyUnit.FPS` | `fps` | `fps` | 1.0 |
-| 분당 회전수 | `KFrequencyUnit.RPM` | `rpm` | `rpm` | 1/60 |
-| 분당 박자수 | `KFrequencyUnit.BPM` | `bpm` | `bpm` | 1/60 |
+| 단위          | 열거값                 | 기호  |    토큰 | 1 단위의 헤르츠 값 |
+|---------------|------------------------|-------|--------:|-------------------:|
+| 헤르츠        | `KFrequencyUnit.HERTZ` | `Hz`  | `hertz` |                1.0 |
+| 초당 회전수   | `KFrequencyUnit.RPS`   | `rps` |   `rps` |                1.0 |
+| 초당 프레임수 | `KFrequencyUnit.FPS`   | `fps` |   `fps` |                1.0 |
+| 분당 회전수   | `KFrequencyUnit.RPM`   | `rpm` |   `rpm` |               1/60 |
+| 분당 박자수   | `KFrequencyUnit.BPM`   | `bpm` |   `bpm` |               1/60 |
 
 각 `토큰` 은 `of`(구축)와 `into`(읽기)에 사용하는 값 1 의 `KFrequencyUnitInstance` 입니다.
 
@@ -73,8 +71,8 @@ val v = (2 of meters) * (5 of hertz) // KSpeedUnitInstance, 10 m/s (길이 * 주
 
 ## 실제 예제: 회전하는 바퀴의 표면 속도
 
-둘레가 **2 m** 인 바퀴가 **초당 5 회전** 합니다. 둘레에 회전 주파수를 곱하면 표면(접지) 속도가 됩니다.
-이는 `length * frequency = speed` 이며, 익숙한 `length / time = speed` 의 역연산입니다.
+둘레가 **2 m** 인 바퀴가 **초당 5 회전** 합니다. 둘레에 회전 주파수를 곱하면 표면 (접지) 속도가 됩니다. 이는 `length * frequency = speed` 이며, 익숙한
+`length / time = speed` 의 역연산입니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -90,8 +88,8 @@ surfaceSpeed.value                       // 10.0 m/s
 
 ## `pow` 를 사용한 거듭제곱
 
-중위 연산자 `pow` 로 정수 거듭제곱을 계산합니다(Kotlin 에는 오버로드 가능한 `^` 가 없습니다). 주파수 그룹에서
-`pow` 는 범용 `KMixedUnitInstance` 를 반환합니다(주파수에는 차원이 있는 거듭제곱 타입이 없습니다).
+중위 연산자 `pow` 로 정수 거듭제곱을 계산합니다 (Kotlin 에는 오버로드 가능한 `^` 가 없습니다). 주파수 그룹에서
+`pow` 는 범용 `KMixedUnitInstance` 를 반환합니다 (주파수에는 차원이 있는 거듭제곱 타입이 없습니다).
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -103,8 +101,8 @@ val squared = (2 of hertz) pow 2     // KMixedUnitInstance: 4.0 Hz²
 
 ## SI 접두사
 
-주파수는 **모든** 크기를 허용하므로 모든 SI 접두사 빌더(`quetta` … `quecto`)를 속성 접근으로 모든 주파수 단위와
-결합할 수 있습니다. `kilo.hertz` 는 kHz, `mega.hertz` 는 MHz, `giga.hertz` 는 GHz 입니다.
+주파수는 **모든** 크기를 허용하므로 모든 SI 접두사 빌더 (`quetta` … `quecto`)를 속성 접근으로 모든 주파수 단위와 결합할 수 있습니다. `kilo.hertz` 는 kHz,
+`mega.hertz` 는 MHz, `giga.hertz` 는 GHz 입니다.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -133,11 +131,12 @@ import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 ## 표기법
 
-아래 표는 이 단위와 그 구성 요소를 수학적 표기와 KUnit 의 Kotlin 표기로 보여줍니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)를 사용하고, `·` 는 곱셈, `/` 는 분수를 나타냅니다. 한 양을 분수와 음의 지수를 가진 곱 두 가지로 쓸 수 있는 경우 두 등가 Kotlin 형식을 모두 표시합니다.
+아래 표는 이 단위와 그 구성 요소를 수학적 표기와 KUnit 의 Kotlin 표기로 보여줍니다. 지수는 유니코드 위 첨자 (`²`, `³`, `⁻¹`)를 사용하고, `·` 는 곱셈, `/` 는 분수를 나타냅니다.
+한 양을 분수와 음의 지수를 가진 곱 두 가지로 쓸 수 있는 경우 두 등가 Kotlin 형식을 모두 표시합니다.
 
-| 수학 | Kotlin | 의미 |
-|---|---|---|
-| `Hz` | `hertz` | 주파수, 기준 단위(헤르츠) |
-| `kHz` | `kilo.hertz` | 킬로헤르츠(헤르츠에 접두사 적용) |
+| 수학          | Kotlin               | 의미                                 |
+|---------------|----------------------|--------------------------------------|
+| `Hz`          | `hertz`              | 주파수, 기준 단위(헤르츠)            |
+| `kHz`         | `kilo.hertz`         | 킬로헤르츠(헤르츠에 접두사 적용)     |
 | `1/s` = `s⁻¹` | `1 / (1 of seconds)` | 주기로부터의 주파수(타입화된 헤르츠) |
-| `Hz²` | `hertz pow 2` | 헤르츠 제곱(범용 혼합 단위) |
+| `Hz²`         | `hertz pow 2`        | 헤르츠 제곱(범용 혼합 단위)          |

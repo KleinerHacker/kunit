@@ -5,20 +5,20 @@
 
 النوع: **وحدة مركّبة**
 
-السعة الحرارية المولية هي [السعة الحرارية](heat-capacity.md) لمادّة ما *لكل مول*: `J/(mol·K)`. وهي
-الصيغة الطبيعية للغازات وللديناميكا الحرارية الكيميائية، حيث تُحسب الكمّيات بالمولات لا بالكيلوغرامات
-(تلك هي [السعة الحرارية النوعية](specific-heat-capacity.md)).
+السعة الحرارية المولية هي [السعة الحرارية](heat-capacity.md) لمادّة ما *لكل مول*: `J/(mol·K)`. وهي الصيغة الطبيعية
+للغازات وللديناميكا الحرارية الكيميائية، حيث تُحسب الكمّيات بالمولات لا بالكيلوغرامات (تلك
+هي [السعة الحرارية النوعية](specific-heat-capacity.md)).
 
-يغلّف `KMolarHeatCapacityUnitInstance` كائن `KMixedUnitInstance` مكوّن من خمسة حدود بالضبط بالصيغة
-القياسية `mass¹ · distance² · time⁻² · substance⁻¹ · temperature⁻¹` (`kg·m²·s⁻²·mol⁻¹·K⁻¹`). بُعد
-درجة الحرارة هو مجموعة **الفرق**، وليس درجة الحرارة المطلقة الأفينية أبدًا.
+يغلّف `KMolarHeatCapacityUnitInstance` كائن `KMixedUnitInstance` مكوّن من خمسة حدود بالضبط بالصيغة القياسية
+`mass¹ · distance² · time⁻² · substance⁻¹ · temperature⁻¹` (`kg·m²·s⁻²·mol⁻¹·K⁻¹`). بُعد درجة الحرارة هو مجموعة
+**الفرق**، وليس درجة الحرارة المطلقة الأفينية أبدًا.
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ J/(mol·K) |
-|---|---|---:|---:|
-| جول لكل مول-كلفن | `J/(mol·K)` | `joulesPerMoleKelvin` | 1.0 |
-| سعرة لكل مول-كلفن | `cal/(mol·K)` | `caloriesPerMoleKelvin` | 4.184 |
+| الوحدة            | الرمز         |           الرمز البرمجي | 1 وحدة بـ J/(mol·K) |
+|-------------------|---------------|------------------------:|--------------------:|
+| جول لكل مول-كلفن  | `J/(mol·K)`   |   `joulesPerMoleKelvin` |                 1.0 |
+| سعرة لكل مول-كلفن | `cal/(mol·K)` | `caloriesPerMoleKelvin` |               4.184 |
 
 كلاهما يدعمان نطاق بادئات النظام الدولي الكامل (`kilo.joulesPerMoleKelvin`،
 `milli.joulesPerMoleKelvin`، …).
@@ -26,7 +26,7 @@
 ## ثابت الغاز
 
 تعرض المجموعة القيمة الدقيقة لثابت الغاز المولي في النظام الدولي كـ`GAS_CONSTANT`
-(8.31446261815324 J/(mol·K)) — وهو `Double` عادي، لذا يمكن أن يخدم كعامل وكقراءة في آنٍ واحد.
+(8.31446261815324 J/ (mol·K)) — وهو `Double` عادي، لذا يمكن أن يخدم كعامل وكقراءة في آنٍ واحد.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -40,8 +40,7 @@ r into caloriesPerMoleKelvin // ≈ 1.987
 
 ## مثال واقعي: تسخين النيتروجين (فحص منطقي لدولونغ-بوتي)
 
-النيتروجين ثنائي الذرّة له `c_p ≈ 29.1 J/(mol·K)`. كم من الطاقة يستغرق تسخين 3 مولات بمقدار 50 K، وكم
-ذلك لكل مول؟
+النيتروجين ثنائي الذرّة له `c_p ≈ 29.1 J/(mol·K)`. كم من الطاقة يستغرق تسخين 3 مولات بمقدار 50 K، وكم ذلك لكل مول؟
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -73,25 +72,25 @@ sameEnergy into joules                     // 4365.0 J - identical
 
 ## الحساب باستخدام الوحدات المجاورة
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `heatCapacity / amountOfSubstance` | `KMolarHeatCapacityUnitInstance` | خاصّية المادّة من عيّنة |
-| `molarEnergy / temperatureDifference` | `KMolarHeatCapacityUnitInstance` | نفسه، عبر الطاقة المولية |
-| `molarHeatCapacity * amountOfSubstance` | `KHeatCapacityUnitInstance` | السعة الحرارية للعيّنة |
-| `amountOfSubstance * molarHeatCapacity` | `KHeatCapacityUnitInstance` | نفسه (تبادلي) |
-| `heatCapacity / molarHeatCapacity` | `KAmountOfSubstanceUnitInstance` | كمّية المادة |
-| `molarHeatCapacity * temperatureDifference` | `KMolarEnergyUnitInstance` | الطاقة لكل مول |
-| `temperatureDifference * molarHeatCapacity` | `KMolarEnergyUnitInstance` | نفسه (تبادلي) |
-| `molarEnergy / molarHeatCapacity` | `KTemperatureDifferenceUnitInstance` | الارتفاع الممكن |
+| التعبير                                     | نوع النتيجة                          | المعنى                   |
+|---------------------------------------------|--------------------------------------|--------------------------|
+| `heatCapacity / amountOfSubstance`          | `KMolarHeatCapacityUnitInstance`     | خاصّية المادّة من عيّنة     |
+| `molarEnergy / temperatureDifference`       | `KMolarHeatCapacityUnitInstance`     | نفسه، عبر الطاقة المولية |
+| `molarHeatCapacity * amountOfSubstance`     | `KHeatCapacityUnitInstance`          | السعة الحرارية للعيّنة    |
+| `amountOfSubstance * molarHeatCapacity`     | `KHeatCapacityUnitInstance`          | نفسه (تبادلي)            |
+| `heatCapacity / molarHeatCapacity`          | `KAmountOfSubstanceUnitInstance`     | كمّية المادة              |
+| `molarHeatCapacity * temperatureDifference` | `KMolarEnergyUnitInstance`           | الطاقة لكل مول           |
+| `temperatureDifference * molarHeatCapacity` | `KMolarEnergyUnitInstance`           | نفسه (تبادلي)            |
+| `molarEnergy / molarHeatCapacity`           | `KTemperatureDifferenceUnitInstance` | الارتفاع الممكن          |
 
 ## التفكيكات
 
 جميع التفكيكات الثلاثة تُنتج نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `heatCapacity / amountOfSubstance` | معامل مكتوب بنوع صريح | `KMolarHeatCapacityUnitInstance` |
-| `molarEnergy / temperatureDifference` | معامل مكتوب بنوع صريح | `KMolarHeatCapacityUnitInstance` |
+| التفكيك                                                   | الصيغة                               | النتيجة                          |
+|-----------------------------------------------------------|--------------------------------------|----------------------------------|
+| `heatCapacity / amountOfSubstance`                        | معامل مكتوب بنوع صريح                | `KMolarHeatCapacityUnitInstance` |
+| `molarEnergy / temperatureDifference`                     | معامل مكتوب بنوع صريح                | `KMolarHeatCapacityUnitInstance` |
 | `mass · distance² · time⁻² · substance⁻¹ · temperature⁻¹` | تعبير أصلي + `toMolarHeatCapacity()` | `KMolarHeatCapacityUnitInstance` |
 
 ```kotlin
@@ -145,16 +144,16 @@ import org.pcsoft.framework.kunit.thermo.molarheatcapacity.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `J/(mol·K)` | `joulesPerMoleKelvin` | السعة الحرارية المولية، الوحدة الأساسية |
-| `kg·m²·s⁻²·mol⁻¹·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles / ΔK` | الأبعاد الأساسية |
-| `cal/(mol·K)` | `caloriesPerMoleKelvin` | سعرة لكل مول-كلفن |
-| `R` | `GAS_CONSTANT of joulesPerMoleKelvin` | ثابت الغاز المولي، 8.3145 J/(mol·K) |
-| `C_m = C / n` | `(58.2 of joulesPerKelvin) / (2 of moles)` | من السعة الحرارية ÷ الكمّية |
-| `C_m = ΔH_m / ΔT` | `(58.2 of joulesPerMole) / rise` | من الطاقة المولية ÷ ارتفاع درجة الحرارة |
-| `Q = C_m · n · ΔT` | `nitrogen * sample * rise` | إجمالي الطاقة |
+| الرياضيات             | Kotlin                                                  | المعنى                                  |
+|-----------------------|---------------------------------------------------------|-----------------------------------------|
+| `J/(mol·K)`           | `joulesPerMoleKelvin`                                   | السعة الحرارية المولية، الوحدة الأساسية |
+| `kg·m²·s⁻²·mol⁻¹·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / moles / ΔK` | الأبعاد الأساسية                        |
+| `cal/(mol·K)`         | `caloriesPerMoleKelvin`                                 | سعرة لكل مول-كلفن                       |
+| `R`                   | `GAS_CONSTANT of joulesPerMoleKelvin`                   | ثابت الغاز المولي، 8.3145 J/(mol·K)     |
+| `C_m = C / n`         | `(58.2 of joulesPerKelvin) / (2 of moles)`              | من السعة الحرارية ÷ الكمّية              |
+| `C_m = ΔH_m / ΔT`     | `(58.2 of joulesPerMole) / rise`                        | من الطاقة المولية ÷ ارتفاع درجة الحرارة |
+| `Q = C_m · n · ΔT`    | `nitrogen * sample * rise`                              | إجمالي الطاقة                           |

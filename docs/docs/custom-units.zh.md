@@ -1,9 +1,11 @@
 # 添加自定义单位
 
-kunit 今天提供了多个单位组([距离](units/kinematics/distance.md)、[时间](units/kinematics/time.md)、[存储](units/information/storage.md)、
-[速度](units/kinematics/speed.md)、[数据传输率](units/information/datarate.md)),但整个引擎(`KUnit`、`KMixedUnitInstance`、`of`/`into`
-动词、前缀构建器)是通用且与组无关的。添加一个新的物理量意味着遵循相同的模式。本页逐步介绍如何添加一个演示性的
-**质量**组(`org.pcsoft.framework.kunit.mechanic.mass`)—— 一个仿照存储组的简单一维组。
+kunit 今天提供了多个单位组
+([距离](units/kinematics/distance.md)、[时间](units/kinematics/time.md)、[存储](units/information/storage.md)、
+[速度](units/kinematics/speed.md)、[数据传输率](units/information/datarate.md)),但整个引擎 (`KUnit`、`KMixedUnitInstance`、
+`of`/`into`
+动词、前缀构建器)是通用且与组无关的。添加一个新的物理量意味着遵循相同的模式。本页逐步介绍如何添加一个演示性的 **质量**组
+(`org.pcsoft.framework.kunit.mechanic.mass`)—— 一个仿照存储组的简单一维组。
 
 ## 1. 创建子包和 `KUnit` 枚举
 
@@ -37,9 +39,9 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. 创建包装器类
 
-包装器(`KMassUnitInstance`)通过**委托**(`KUnitMeasurable by instance`)封装一个 `KMixedUnitInstance`,并实现
-`KUnitInstance<KMassUnitInstance>`。它只手写 `KUnitInstance` 专属的成员(`plus`/`minus`/`compareTo`)、支撑 `of`
-的 `scaledBy` 重写,以及 `equals`/`hashCode`/`toString`。**没有** `valueAs`/`toString(target)` —— 读取是与组无关的
+包装器 (`KMassUnitInstance`)通过 **委托**(`KUnitMeasurable by instance`)封装一个 `KMixedUnitInstance`,并实现
+`KUnitInstance<KMassUnitInstance>`。它只手写 `KUnitInstance` 专属的成员 (`plus`/`minus`/`compareTo`)、支撑 `of`
+的 `scaledBy` 重写,以及 `equals`/`hashCode`/`toString`。 **没有** `valueAs`/`toString(target)` —— 读取是与组无关的
 `into` 动词。复制 `KStorageUnitInstance` 的形态。
 
 ```kotlin
@@ -126,7 +128,7 @@ val KPrefixBuilder.pounds: KMassUnitInstance get() = prefixedMass(this, KMassUni
 val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUnit.OUNCE)
 ```
 
-就是这样 —— 这已经免费给了你完整的 `+`、`-`、`*`、`/`、比较、SI 前缀构建器(`5 of milli.grams`),以及
+就是这样 —— 这已经免费给了你完整的 `+`、`-`、`*`、`/`、比较、SI 前缀构建器 (`5 of milli.grams`),以及
 `toUnit()`/`toMass()` 往返转换。
 
 ```kotlin
@@ -143,9 +145,9 @@ println(total into grams)
 val heavier = b > a          // true
 ```
 
-## 4.(可选)添加特殊/派生单位
+## 4. (可选)添加特殊/派生单位
 
-如果你的组有绑定到特定缩放的常用命名单位(如面积的公顷),将它们作为命名的值 1 实例添加 —— 不需要单独的目标类型:
+如果你的组有绑定到特定缩放的常用命名单位 (如面积的公顷),将它们作为命名的值 1 实例添加 —— 不需要单独的目标类型:
 
 ```kotlin
 package org.pcsoft.framework.kunit.mechanic.mass
@@ -165,7 +167,7 @@ println((2500 of grams) into tonnes) // 0.0025
 ## 5. 与其他组组合
 
 由于一切最终都汇入通用的 `KMixedUnitInstance` 引擎,你的新组立即可以通过 `*`/`/` 与任何其他组组合 —— 规则见
-[混合单位](mixed-units.md)。对于强类型的跨组结果(如 `mass / volume = density`),在 `K...UnitOperators.kt` 中
+[混合单位](mixed-units.md)。对于强类型的跨组结果 (如 `mass / volume = density`),在 `K...UnitOperators.kt` 中
 添加带类型的运算符扩展,仿照 `KSpeedUnitOperators.kt`。
 
 ```kotlin
@@ -179,11 +181,11 @@ val density = (5 of kilograms) / (2 of liters)
 
 ## 6. 命名与测试清单
 
-- 所有 public 类型以 `K` 开头(`KMassUnit`、`KMassUnitInstance` 等);值为 1 的裸令牌和前缀构建器属性扩展
-  (`kilograms`、`grams` 等)是例外,保持语言自然。
-- 用参数化的交叉矩阵测试流程覆盖该组,通过 `of`/`into` 构建(绝不使用原始枚举): 单位 → 单位转换,每个运算符
+- 所有 public 类型以 `K` 开头 (`KMassUnit`、`KMassUnitInstance` 等);值为 1 的裸令牌和前缀构建器属性扩展 (`kilograms`、
+  `grams` 等)是例外,保持语言自然。
+- 用参数化的交叉矩阵测试流程覆盖该组,通过 `of`/`into` 构建 (绝不使用原始枚举): 单位 → 单位转换,每个运算符
   和每个比较对每个单位对各一个方法,前缀构建器矩阵,`of` 类型保持,以及 `into` 错误用例 —— 参见 `../../.claude/CLAUDE.md`
   中的"参数化交叉矩阵测试流程"一节。
 - 用英文、以 Markdown 记录每个 public 成员,在有用处附上示例 —— 尤其是运算符。
-- 如果该组是量级受限的(如拒绝缩小前缀的存储),将其单位属性挂在 `KAugmentingPrefixBuilder`/
-  `KDiminishingPrefixBuilder` 而非基类 `KPrefixBuilder` 上,使不允许的前缀成为**编译错误**。
+- 如果该组是量级受限的 (如拒绝缩小前缀的存储),将其单位属性挂在 `KAugmentingPrefixBuilder`/
+  `KDiminishingPrefixBuilder` 而非基类 `KPrefixBuilder` 上,使不允许的前缀成为 **编译错误**。

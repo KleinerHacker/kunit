@@ -12,22 +12,18 @@
 
 package org.pcsoft.framework.kunit.kinematic.time
 
-import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.format
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.pow
 import java.time.Duration
 import java.time.temporal.ChronoUnit
 import kotlin.math.abs
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * `KTimeUnitInstance` surface: `of`/`into` construction and round-trip, incompatible-unit read failure,

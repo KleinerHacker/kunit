@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.resistivity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **electrical resistivity**, i.e. exactly four terms in the
@@ -145,9 +141,9 @@ fun KMixedUnitInstance.toResistivity(): KResistivityUnitInstance {
         "KMixedUnitInstance $this does not represent a pure resistivity (expected KMassUnit^1, KDistanceUnit^3, KTimeUnit^-3 and KElectricCurrentUnit^-2)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 3.0) *
-        Math.pow(timeTerm.unit.baseValue, -3.0) *
-        Math.pow(currentTerm.unit.baseValue, -2.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 3.0) *
+            Math.pow(timeTerm.unit.baseValue, -3.0) *
+            Math.pow(currentTerm.unit.baseValue, -2.0)
     return resistivityInstanceOf(gramBaseProduct / OHM_METER_MASS_REFERENCE)
 }

@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.specificheatcapacity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnit
@@ -126,11 +122,11 @@ fun KMixedUnitInstance.toSpecificHeatCapacity(): KSpecificHeatCapacityUnitInstan
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == -1 }
     check(units.size == 3 && distanceTerm != null && timeTerm != null && temperatureTerm != null) {
         "KMixedUnitInstance $this does not represent a pure specific heat capacity " +
-            "(expected KDistanceUnit^2, KTimeUnit^-2 and KTemperatureDifferenceUnit^-1)"
+                "(expected KDistanceUnit^2, KTimeUnit^-2 and KTemperatureDifferenceUnit^-1)"
     }
     val normalized = value *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -2.0) *
-        Math.pow(temperatureTerm.unit.baseValue, -1.0)
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -2.0) *
+            Math.pow(temperatureTerm.unit.baseValue, -1.0)
     return specificHeatCapacityInstanceOf(normalized)
 }

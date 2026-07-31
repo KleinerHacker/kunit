@@ -16,8 +16,8 @@ import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.KUnitInstance
 import org.pcsoft.framework.kunit.KUnitMeasurable
 import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **current density**, i.e. exactly two terms in the canonical
@@ -123,7 +123,7 @@ fun KMixedUnitInstance.toCurrentDensity(): KCurrentDensityUnitInstance {
     val distanceTerm = units.singleOrNull { it.unit is KDistanceUnit && it.exponent == -2 }
     check(units.size == 2 && currentTerm != null && distanceTerm != null) {
         "KMixedUnitInstance $this does not represent a pure current density " +
-            "(expected KElectricCurrentUnit^1 and KDistanceUnit^-2)"
+                "(expected KElectricCurrentUnit^1 and KDistanceUnit^-2)"
     }
     val normalized = value * currentTerm.unit.baseValue * Math.pow(distanceTerm.unit.baseValue, -2.0)
     return currentDensityInstanceOf(normalized)

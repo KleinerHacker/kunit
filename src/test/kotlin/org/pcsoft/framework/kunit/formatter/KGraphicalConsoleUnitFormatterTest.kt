@@ -14,9 +14,9 @@ package org.pcsoft.framework.kunit.formatter
 
 import org.pcsoft.framework.kunit.KUnitTerm
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
-import java.util.Locale
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -60,8 +60,8 @@ class KGraphicalConsoleUnitFormatterTest {
         val sup2 = renderSuperscriptExponent(2)
         // number "9.81" -> indent 5; numerator "m" width 1, denominator "s²" width 2, bar width 2.
         val expected = "     m\n" +
-            "9.81 $bar$bar\n" +
-            "     s$sup2"
+                "9.81 $bar$bar\n" +
+                "     s$sup2"
         assertEquals(expected, render(9.81, listOf(meter, perSecond2), pattern = "%.2f"))
     }
 
@@ -70,8 +70,8 @@ class KGraphicalConsoleUnitFormatterTest {
     fun `centred numerator and denominator`() {
         // numerator "m·g" width 3, denominator "s" width 1, bar width 3; number "1.0" -> indent 4.
         val expected = "    m${dot}g\n" +
-            "1.0 $bar$bar$bar\n" +
-            "     s"
+                "1.0 $bar$bar$bar\n" +
+                "     s"
         assertEquals(expected, render(1.0, listOf(meter, gram, perSecond)))
     }
 
@@ -95,8 +95,8 @@ class KGraphicalConsoleUnitFormatterTest {
         )
         // numerator "m×g" width 3, denominator "s" width 1, bar width 3; number "1.0" -> indent 4.
         val expected = "    m${cross}g\n" +
-            "1.0 $heavy$heavy$heavy\n" +
-            "     s"
+                "1.0 $heavy$heavy$heavy\n" +
+                "     s"
         assertEquals(expected, render(1.0, listOf(meter, gram, perSecond), config))
     }
 
@@ -123,8 +123,8 @@ class KGraphicalConsoleUnitFormatterTest {
         val config = KGraphicalConsoleFormatConfig(palette = palette)
         // number "1.0" -> indent 4; numerator "SmR" width 1, denominator "SsR" width 1, bar width 1.
         val expected = "    SmR\n" +
-            "N1.0R B${bar}R\n" +
-            "    SsR"
+                "N1.0R B${bar}R\n" +
+                "    SsR"
         assertEquals(
             expected,
             KGraphicalConsoleUnitFormatter(config)

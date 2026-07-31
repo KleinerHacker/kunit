@@ -12,10 +12,10 @@
 
 package org.pcsoft.framework.kunit.electric.resistivity
 
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 import org.pcsoft.framework.kunit.electric.resistance.KResistanceUnitInstance
 import org.pcsoft.framework.kunit.electric.resistance.resistanceInstanceOf
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 
 // Cross-unit operators between resistance, length and resistivity (`ρ = R · A / l`, where the geometry
 // factor `A / l` - a cross-section over a conductor length - is itself a length). They live in the

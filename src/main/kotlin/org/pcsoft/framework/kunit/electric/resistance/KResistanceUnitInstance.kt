@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.resistance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing an **electrical resistance**, i.e. exactly four terms in the
@@ -58,10 +54,12 @@ class KResistanceUnitInstance internal constructor(internal val instance: KMixed
      * ((1 of kilo.ohms) + (500 of ohms)).value // 1500.0
      * ```
      */
-    override operator fun plus(other: KResistanceUnitInstance): KResistanceUnitInstance = resistanceInstanceOf(value + other.value)
+    override operator fun plus(other: KResistanceUnitInstance): KResistanceUnitInstance =
+        resistanceInstanceOf(value + other.value)
 
     /** Subtracts two resistances. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KResistanceUnitInstance): KResistanceUnitInstance = resistanceInstanceOf(value - other.value)
+    override operator fun minus(other: KResistanceUnitInstance): KResistanceUnitInstance =
+        resistanceInstanceOf(value - other.value)
 
     /**
      * Multiplies two resistances, producing a new [KMixedUnitInstance] (no longer a "pure" resistance).
@@ -143,9 +141,9 @@ fun KMixedUnitInstance.toResistance(): KResistanceUnitInstance {
         "KMixedUnitInstance $this does not represent a pure resistance (expected KMassUnit^1, KDistanceUnit^2, KTimeUnit^-3 and KElectricCurrentUnit^-2)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -3.0) *
-        Math.pow(currentTerm.unit.baseValue, -2.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -3.0) *
+            Math.pow(currentTerm.unit.baseValue, -2.0)
     return resistanceInstanceOf(gramBaseProduct / OHM_MASS_REFERENCE)
 }

@@ -17,7 +17,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnitInstance
 import kotlin.test.Test

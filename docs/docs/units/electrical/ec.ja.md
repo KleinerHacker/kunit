@@ -9,18 +9,18 @@
 クロス単位の型付き結果もありません）で、`KElectricCurrentUnitInstance` は単一の
 `KElectricCurrentUnit.AMPERE` 項をラップし、常にアンペアに正規化して保持します。
 
-SI のアンペアに加えて、このグループは古典的な CGS 電流単位を 2 つ提供します。電磁単位系（EMU）の
-**ビオ**（アブアンペア、`1 Bi = 10 A`）と、静電単位系（ESU）の **スタットアンペア**
+SI のアンペアに加えて、このグループは古典的な CGS 電流単位を 2 つ提供します。電磁単位系（EMU）の **ビオ**（アブアンペア、
+`1 Bi = 10 A`）と、静電単位系（ESU）の **スタットアンペア**
 （`1 statA ≈ 3.335 641 × 10⁻¹⁰ A`）です。
 
 ## 単位
 
-| 系統 | 単位 | 列挙値 | 記号 | トークン | 1 単位のアンペア値 |
-|---|---|---|---|---:|---:|
-| SI | アンペア | `KElectricCurrentUnit.AMPERE` | `A` | `amperes` | 1.0 |
-| CGS | ビオ / アブアンペア | `KElectricCurrentUnit.BIOT` | `Bi`（`abA`） | `biot` / `abamperes` | 10 |
-| CGS | スタットアンペア | `KElectricCurrentUnit.STATAMPERE` | `statA` | `statamperes` | 3.335641e-10 |
-| 磁気回路 | アンペアターン | `KElectricCurrentUnit.AMPERE_TURN` | `At` | `ampereTurns` | 1.0 |
+| 系統     | 単位                | 列挙値                             | 記号          |             トークン | 1 単位のアンペア値 |
+|----------|---------------------|------------------------------------|---------------|---------------------:|-------------------:|
+| SI       | アンペア            | `KElectricCurrentUnit.AMPERE`      | `A`           |            `amperes` |                1.0 |
+| CGS      | ビオ / アブアンペア | `KElectricCurrentUnit.BIOT`        | `Bi`（`abA`） | `biot` / `abamperes` |                 10 |
+| CGS      | スタットアンペア    | `KElectricCurrentUnit.STATAMPERE`  | `statA`       |        `statamperes` |       3.335641e-10 |
+| 磁気回路 | アンペアターン      | `KElectricCurrentUnit.AMPERE_TURN` | `At`          |        `ampereTurns` |                1.0 |
 
 各 `トークン` は、`of`（生成）と `into`（読み取り）で使用する値 1 の `KElectricCurrentUnitInstance` です。
 
@@ -94,8 +94,8 @@ val b = (1 of biot) - (1 of amperes)   // KElectricCurrentUnitInstance: 9.0 A
 
 ## `pow` によるべき乗
 
-中置演算子 `pow` で整数のべき乗を計算します（Kotlin にはオーバーロード可能な `^` がありません）。電流グループ
-では `pow` は汎用の `KMixedUnitInstance` を返します（電流には次元付きのべき乗型がありません）:
+中置演算子 `pow` で整数のべき乗を計算します（Kotlin にはオーバーロード可能な `^` がありません）。電流グループ では `pow`
+は汎用の `KMixedUnitInstance` を返します（電流には次元付きのべき乗型がありません）:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -139,15 +139,15 @@ import org.pcsoft.framework.kunit.electric.current.*
 
 ## 記法
 
-下表は、この単位とその構成要素を数式表記と KUnit の Kotlin 表記でどう書くかを示します。指数は Unicode 上付き
-文字（`²`、`³`、`⁻¹`）を使い、`·` は乗算、`/` は分数を表します。
+下表は、この単位とその構成要素を数式表記と KUnit の Kotlin 表記でどう書くかを示します。指数は Unicode 上付き 文字（`²`、`³`、
+`⁻¹`）を使い、`·` は乗算、`/` は分数を表します。
 
-| 数式 | Kotlin | 意味 |
-|---|---|---|
-| `A` | `amperes` | 電流、基準単位（アンペア） |
-| `mA` | `milli.amperes` | ミリアンペア（アンペアに接頭辞を適用） |
-| `kA` | `kilo.amperes` | キロアンペア |
-| `Bi` | `biot` | ビオ / アブアンペア（10 A） |
-| `At` | `ampereTurns` | アンペアターン、起磁力 `Θ = N · I` |
+| 数式  | Kotlin             | 意味                                           |
+|-------|--------------------|------------------------------------------------|
+| `A`   | `amperes`          | 電流、基準単位（アンペア）                     |
+| `mA`  | `milli.amperes`    | ミリアンペア（アンペアに接頭辞を適用）         |
+| `kA`  | `kilo.amperes`     | キロアンペア                                   |
+| `Bi`  | `biot`             | ビオ / アブアンペア（10 A）                    |
+| `At`  | `ampereTurns`      | アンペアターン、起磁力 `Θ = N · I`             |
 | `kAt` | `kilo.ampereTurns` | 接頭辞付きアンペアターン（キロアンペアターン） |
-| `A²` | `amperes pow 2` | アンペアの 2 乗（汎用の混合単位） |
+| `A²`  | `amperes pow 2`    | アンペアの 2 乗（汎用の混合単位）              |

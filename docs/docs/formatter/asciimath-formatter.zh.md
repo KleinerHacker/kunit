@@ -7,18 +7,18 @@
 
 ## 生成内容
 
-`FRACTION` 样式将规整的单分母形式表示为 `a/b` 分数形式（必要时用括号括住分子或带幂的分母）；其余形式
-（以及整个 `EXPONENT` 样式）为用乘法符号连接、带符号指数的平铺乘积。无量纲值仅渲染数字。
+`FRACTION` 样式将规整的单分母形式表示为 `a/b` 分数形式（必要时用括号括住分子或带幂的分母）；其余形式 （以及整个 `EXPONENT`
+样式）为用乘法符号连接、带符号指数的平铺乘积。无量纲值仅渲染数字。
 
 ## 配置
 
 `KAsciiMathFormatConfig` 是值类型；可选择预设或自行构建：
 
-| 选项             | 取值                                      | 默认       |
-|------------------|------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `EXPONENT`                   | `FRACTION`|
-| `quoting`        | `QUOTED` (`"km"`), `BARE` (`km`)         | `QUOTED`  |
-| `multiplication` | `ASTERISK` (`*`), `TIMES` (`xx`), `SPACE` (空格) | `SPACE` |
+| 选项             | 取值                                             | 默认       |
+|------------------|--------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `EXPONENT`                           | `FRACTION` |
+| `quoting`        | `QUOTED` (`"km"`), `BARE` (`km`)                 | `QUOTED`   |
+| `multiplication` | `ASTERISK` (`*`), `TIMES` (`xx`), `SPACE` (空格) | `SPACE`    |
 
 预设：`DEFAULT`、`PLAIN`（用 `*` 连接的裸符号）。
 

@@ -6,25 +6,25 @@ Base unit: **joule per kelvin** (`KHeatCapacityUnit.BASE == KHeatCapacityUnit.JO
 Type: **constructed unit**
 
 Heat capacity is the energy an object absorbs per unit of temperature rise: `energy / temperature`
-(`J/K`). `KHeatCapacityUnitInstance` wraps a `KMixedUnitInstance` of exactly four terms in the canonical
-normal form `mass¹ · distance² · time⁻² · temperature⁻¹` (`kg·m²·s⁻²·K⁻¹`), always normalized to J/K.
+(`J/K`). `KHeatCapacityUnitInstance` wraps a `KMixedUnitInstance` of exactly four terms in the canonical normal form
+`mass¹ · distance² · time⁻² · temperature⁻¹` (`kg·m²·s⁻²·K⁻¹`), always normalized to J/K.
 
 !!! note "Temperature *difference*, never absolute temperature"
-    The temperature dimension is the **difference** group (`KTemperatureDifferenceUnit`, symbol `ΔK`),
-    never the affine absolute `KTemperatureUnit`. A heat capacity relates energy to a temperature
-    *interval*; an offset-carrying absolute scale (°C, °F) would be physically wrong in a quotient.
+The temperature dimension is the **difference** group (`KTemperatureDifferenceUnit`, symbol `ΔK`), never the affine
+absolute `KTemperatureUnit`. A heat capacity relates energy to a temperature *interval*; an offset-carrying absolute
+scale (°C, °F) would be physically wrong in a quotient.
 
-The same dimension `J/K` also describes **entropy** — see [entropy](entropy.md) for why that quantity
-shares this type rather than getting one of its own. Per unit of mass it becomes
+The same dimension `J/K` also describes **entropy** — see [entropy](entropy.md) for why that quantity shares this type
+rather than getting one of its own. Per unit of mass it becomes
 [specific heat capacity](specific-heat-capacity.md), per mole [molar heat capacity](molar-heat-capacity.md).
 
 ## Named units
 
-| Unit | Symbol | Token | 1 unit in J/K |
-|---|---|---:|---:|
-| Joule per kelvin | `J/K` | `joulesPerKelvin` | 1.0 |
-| Calorie per kelvin | `cal/K` | `caloriesPerKelvin` | 4.184 |
-| Btu per degree Fahrenheit | `Btu/°F` | `btusPerFahrenheit` | ≈ 1899.1005 |
+| Unit                      | Symbol   |               Token | 1 unit in J/K |
+|---------------------------|----------|--------------------:|--------------:|
+| Joule per kelvin          | `J/K`    |   `joulesPerKelvin` |           1.0 |
+| Calorie per kelvin        | `cal/K`  | `caloriesPerKelvin` |         4.184 |
+| Btu per degree Fahrenheit | `Btu/°F` | `btusPerFahrenheit` |   ≈ 1899.1005 |
 
 All accept the full SI prefix range (`kilo.joulesPerKelvin`, `kilo.caloriesPerKelvin`, …).
 
@@ -65,21 +65,21 @@ reachable into KTemperatureDifference.ofKelvin(1) // ≈ 23.9 K
 
 ## Computing with the core units (energy & temperature difference)
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `energy / temperatureDifference` | `KHeatCapacityUnitInstance` | heat capacity |
-| `heatCapacity * temperatureDifference` | `KEnergyUnitInstance` | energy required |
-| `temperatureDifference * heatCapacity` | `KEnergyUnitInstance` | energy (commutative) |
-| `energy / heatCapacity` | `KTemperatureDifferenceUnitInstance` | achievable temperature rise |
+| Expression                             | Result type                          | Meaning                     |
+|----------------------------------------|--------------------------------------|-----------------------------|
+| `energy / temperatureDifference`       | `KHeatCapacityUnitInstance`          | heat capacity               |
+| `heatCapacity * temperatureDifference` | `KEnergyUnitInstance`                | energy required             |
+| `temperatureDifference * heatCapacity` | `KEnergyUnitInstance`                | energy (commutative)        |
+| `energy / heatCapacity`                | `KTemperatureDifferenceUnitInstance` | achievable temperature rise |
 
 ## Decompositions
 
 Both decompositions produce the same typed, value-equal instance.
 
-| Decomposition | Form | Result |
-|---|---|---|
-| `energy / temperatureDifference` | typed operator | `KHeatCapacityUnitInstance` directly |
-| `mass · distance² · time⁻² · temperature⁻¹` | native expression + `toHeatCapacity()` | `KHeatCapacityUnitInstance` |
+| Decomposition                               | Form                                   | Result                               |
+|---------------------------------------------|----------------------------------------|--------------------------------------|
+| `energy / temperatureDifference`            | typed operator                         | `KHeatCapacityUnitInstance` directly |
+| `mass · distance² · time⁻² · temperature⁻¹` | native expression + `toHeatCapacity()` | `KHeatCapacityUnitInstance`          |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -105,8 +105,8 @@ val native = (
 typed == native // true - both are 1.0 J/K
 ```
 
-`toHeatCapacity()` recognises **only** the canonical normal form; any equivalent expression reduces onto
-it automatically, and a wrong shape throws `IllegalStateException`.
+`toHeatCapacity()` recognises **only** the canonical normal form; any equivalent expression reduces onto it
+automatically, and a wrong shape throws `IllegalStateException`.
 
 ## Operators
 
@@ -140,14 +140,16 @@ import org.pcsoft.framework.kunit.thermo.heatcapacity.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `J/K` | `joulesPerKelvin` | heat capacity, base unit — named token |
-| `kg·m²·s⁻²·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / ΔK` | same quantity in base dimensions |
-| `kJ/K` | `kilo.joulesPerKelvin` | kilojoule per kelvin |
-| `cal/K` | `caloriesPerKelvin` | calorie per kelvin |
-| `C = Q / ΔT` | `(4184 of joules) / rise` | heat capacity from energy ÷ temperature rise |
-| `Q = C · ΔT` | `kettle * rise` | energy from heat capacity × temperature rise |
-| `ΔT = Q / C` | `(100 of kilo.joules) / kettle` | temperature rise from energy ÷ heat capacity |
+| Mathematics     | Kotlin                                          | Meaning                                      |
+|-----------------|-------------------------------------------------|----------------------------------------------|
+| `J/K`           | `joulesPerKelvin`                               | heat capacity, base unit — named token       |
+| `kg·m²·s⁻²·K⁻¹` | `grams * (meters pow 2) / (seconds pow 2) / ΔK` | same quantity in base dimensions             |
+| `kJ/K`          | `kilo.joulesPerKelvin`                          | kilojoule per kelvin                         |
+| `cal/K`         | `caloriesPerKelvin`                             | calorie per kelvin                           |
+| `C = Q / ΔT`    | `(4184 of joules) / rise`                       | heat capacity from energy ÷ temperature rise |
+| `Q = C · ΔT`    | `kettle * rise`                                 | energy from heat capacity × temperature rise |
+| `ΔT = Q / C`    | `(100 of kilo.joules) / kettle`                 | temperature rise from energy ÷ heat capacity |

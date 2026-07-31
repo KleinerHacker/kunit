@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.mechanic.mass
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitDisplay
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 
 /**
  * A **mass** value: the "pure" wrapper of the mass group, a single [KMassUnit.BASE] (gram) term at

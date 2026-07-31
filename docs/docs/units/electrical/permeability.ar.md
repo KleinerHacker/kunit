@@ -8,9 +8,8 @@
 النفاذية وحدة **مركّبة**: التركيب `mass · length · time⁻² · current⁻²`
 (`kg·m·s⁻²·A⁻²` = `H/m`). يغلّف `KPermeabilityUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود —
 `KMassUnit.BASE` (غرام) بالأس `+1`، و`KDistanceUnit.BASE` (متر) بالأس `+1`، و`KTimeUnit.BASE` (ثانية)
-بالأس `-2`، و`KElectricCurrentUnit.BASE` (أمبير) بالأس `-2`. ولأن مكوّن الكتلة في المكتبة مطبَّع إلى
-**غرامات** (وليس كيلوغرامات)، يُقسَم الناتج القياسي على 1000 للوصول إلى هنري لكل متر؛ وتُطبَّع القيمة
-المخزّنة دائمًا إلى هنري لكل متر.
+بالأس `-2`، و`KElectricCurrentUnit.BASE` (أمبير) بالأس `-2`. ولأن مكوّن الكتلة في المكتبة مطبَّع إلى **غرامات** (وليس
+كيلوغرامات)، يُقسَم الناتج القياسي على 1000 للوصول إلى هنري لكل متر؛ وتُطبَّع القيمة المخزّنة دائمًا إلى هنري لكل متر.
 
 النفاذية `μ` هي الثابت المغناطيسي للمادة: تربط
 [كثافة التدفق المغناطيسي](magneticfluxdensity.ar.md) بـ
@@ -23,14 +22,14 @@
 تُنشأ النفاذية برمز مسمّى أو من تفكيك (انظر أدناه). تبقى الوحدات المسمّاة كرموز بقيمة 1 (تُستخدم مع
 `of`/`into`):
 
-| النفاذية | الرمز | الرمز البرمجي | 1 وحدة بـ H/m |
-|---|---|---:|---:|
-| هنري لكل متر | `H/m` | `henriesPerMeter` | 1.0 |
-| هنري لكل سنتيمتر | `H/cm` | `henriesPerCentimeter` | 100.0 |
-| نفاذية الفراغ `μ₀` | `H/m` | `vacuumPermeability` | 1.25663706127e-6 |
+| النفاذية           | الرمز  |          الرمز البرمجي |    1 وحدة بـ H/m |
+|--------------------|--------|-----------------------:|-----------------:|
+| هنري لكل متر       | `H/m`  |      `henriesPerMeter` |              1.0 |
+| هنري لكل سنتيمتر   | `H/cm` | `henriesPerCentimeter` |            100.0 |
+| نفاذية الفراغ `μ₀` | `H/m`  |   `vacuumPermeability` | 1.25663706127e-6 |
 
-تدعم الوحدات المسمّاة بادئات النظام الدولي عبر `KPrefixBuilder` (`micro.henriesPerMeter`، `milli.henriesPerMeter`،
-…). كما يتوفّر الثابت أيضًا باسم `KPermeabilityUnit.VACUUM_PERMEABILITY`.
+تدعم الوحدات المسمّاة بادئات النظام الدولي عبر `KPrefixBuilder` (`micro.henriesPerMeter`، `milli.henriesPerMeter`، …).
+كما يتوفّر الثابت أيضًا باسم `KPermeabilityUnit.VACUUM_PERMEABILITY`.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -48,11 +47,11 @@ mu into micro.henriesPerMeter         // 1.25663706127
 
 يمكن الوصول إلى النفاذية عبر عدة **تفكيكات مكافئة**، وجميعها تُنتج نفاذية متساوية القيمة:
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `inductance / length` | `KPermeabilityUnitInstance` | `μ = L · l / (N² · A)`، عامل الهندسة طول |
-| `magneticFluxDensity / magneticFieldStrength` | `KPermeabilityUnitInstance` | `μ = B / H` |
-| `mass·length/(time²·current²)` | عبر `.toPermeability()` | التعبير الأصلي القياسي `kg·m·s⁻²·A⁻²` |
+| التعبير                                       | نوع النتيجة                 | المعنى                                   |
+|-----------------------------------------------|-----------------------------|------------------------------------------|
+| `inductance / length`                         | `KPermeabilityUnitInstance` | `μ = L · l / (N² · A)`، عامل الهندسة طول |
+| `magneticFluxDensity / magneticFieldStrength` | `KPermeabilityUnitInstance` | `μ = B / H`                              |
+| `mass·length/(time²·current²)`                | عبر `.toPermeability()`     | التعبير الأصلي القياسي `kg·m·s⁻²·A⁻²`    |
 
 تُعيد الصيغ المكتوبة بأنواع صريحة نفاذية مباشرة. أما التعبير الأصلي بالكامل فيبقى `KMixedUnitInstance`
 عامًّا ويُضيَّق عبر `toPermeability()` (الذي يتعرّف فقط على الصيغة القياسية ويرمي
@@ -60,12 +59,12 @@ mu into micro.henriesPerMeter         // 1.25663706127
 
 تربط العمليات العكسية بين الحث والطول وكمّيتَي المجال المغناطيسي:
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `permeability * length` | `KInductanceUnitInstance` | `L = μ · N² · A / l` (تبادلي) |
-| `inductance / permeability` | `KLengthUnitInstance` | عامل الهندسة `N² · A / l = L / μ` |
-| `permeability * magneticFieldStrength` | `KMagneticFluxDensityUnitInstance` | `B = μ · H` (تبادلي) |
-| `magneticFluxDensity / permeability` | `KMagneticFieldStrengthUnitInstance` | `H = B / μ` |
+| التعبير                                | نوع النتيجة                          | المعنى                            |
+|----------------------------------------|--------------------------------------|-----------------------------------|
+| `permeability * length`                | `KInductanceUnitInstance`            | `L = μ · N² · A / l` (تبادلي)     |
+| `inductance / permeability`            | `KLengthUnitInstance`                | عامل الهندسة `N² · A / l = L / μ` |
+| `permeability * magneticFieldStrength` | `KMagneticFluxDensityUnitInstance`   | `B = μ · H` (تبادلي)              |
+| `magneticFluxDensity / permeability`   | `KMagneticFieldStrengthUnitInstance` | `H = B / μ`                       |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -116,14 +115,16 @@ import org.pcsoft.framework.kunit.electric.permeability.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف يونيكود العلوية (`²`، `⁻²`)، ويرمز `·` للضرب و `/` للكسر. وحيثما أمكن كتابة الكمية ككسر وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `⁻²`)، ويرمز `·` للضرب و `/` للكسر. وحيثما أمكن كتابة الكمية ككسر وكحاصل ضرب بأسس سالبة، تُذكر
+الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `H/m` | `henriesPerMeter` | النفاذية، الوحدة الأساسية (رمز مسمّى، هنري لكل متر) |
-| `μ₀` | `vacuumPermeability` | ثابت نفاذية الفراغ، 1.257 µH/m |
-| `B / H` | `(6 of teslas) / (3 of amperesPerMeter)` | النفاذية ككثافة تدفق على شدة مجال |
-| `L · l / (N²·A)` | `(10 of henries) / (5 of meters)` | النفاذية من الحث وهندسة الملف |
-| `kg·m/(s²·A²)` | `(kilo.grams * (meters pow 1)) / ((seconds pow 2) * (amperes pow 2))` | النفاذية ككتلة·طول / (زمن²·تيار²) (صيغة الكسر) |
-| `kg·m·s⁻²·A⁻²` | `kilo.grams * (meters pow 1) * (seconds pow -2) * (amperes pow -2)` | نفس النفاذية كحاصل ضرب خالص |
-| `µH/m` | `micro.henriesPerMeter` | نفاذية ببادئة (ميكروهنري لكل متر) |
+| الرياضيات        | Kotlin                                                                | المعنى                                             |
+|------------------|-----------------------------------------------------------------------|----------------------------------------------------|
+| `H/m`            | `henriesPerMeter`                                                     | النفاذية، الوحدة الأساسية (رمز مسمّى، هنري لكل متر) |
+| `μ₀`             | `vacuumPermeability`                                                  | ثابت نفاذية الفراغ، 1.257 µH/m                     |
+| `B / H`          | `(6 of teslas) / (3 of amperesPerMeter)`                              | النفاذية ككثافة تدفق على شدة مجال                  |
+| `L · l / (N²·A)` | `(10 of henries) / (5 of meters)`                                     | النفاذية من الحث وهندسة الملف                      |
+| `kg·m/(s²·A²)`   | `(kilo.grams * (meters pow 1)) / ((seconds pow 2) * (amperes pow 2))` | النفاذية ككتلة·طول / (زمن²·تيار²) (صيغة الكسر)     |
+| `kg·m·s⁻²·A⁻²`   | `kilo.grams * (meters pow 1) * (seconds pow -2) * (amperes pow -2)`   | نفس النفاذية كحاصل ضرب خالص                        |
+| `µH/m`           | `micro.henriesPerMeter`                                               | نفاذية ببادئة (ميكروهنري لكل متر)                  |

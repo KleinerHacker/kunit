@@ -15,32 +15,7 @@ package org.pcsoft.framework.kunit.electric.capacitance
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.pcsoft.framework.kunit.KPrefixBuilder
-import org.pcsoft.framework.kunit.atto
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.deca
-import org.pcsoft.framework.kunit.deci
-import org.pcsoft.framework.kunit.exa
-import org.pcsoft.framework.kunit.femto
-import org.pcsoft.framework.kunit.giga
-import org.pcsoft.framework.kunit.hecto
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.micro
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.peta
-import org.pcsoft.framework.kunit.pico
-import org.pcsoft.framework.kunit.quecto
-import org.pcsoft.framework.kunit.quetta
-import org.pcsoft.framework.kunit.ronna
-import org.pcsoft.framework.kunit.ronto
-import org.pcsoft.framework.kunit.tera
-import org.pcsoft.framework.kunit.yocto
-import org.pcsoft.framework.kunit.yotta
-import org.pcsoft.framework.kunit.zepto
-import org.pcsoft.framework.kunit.zetta
+import org.pcsoft.framework.kunit.*
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -75,9 +50,21 @@ class KCapacitanceUnitPrefixTest {
     fun `every capacitance unit has a prefixed property`() {
         val f = kilo.prefix.factor
         assertEquals(f * KCapacitanceUnit.FARAD.baseValue, (1 of kilo.farads).value, rel(f))
-        assertEquals(f * KCapacitanceUnit.ABFARAD.baseValue, (1 of kilo.abfarads).value, rel(f * KCapacitanceUnit.ABFARAD.baseValue))
-        assertEquals(f * KCapacitanceUnit.STATFARAD.baseValue, (1 of kilo.statfarads).value, rel(f * KCapacitanceUnit.STATFARAD.baseValue))
-        assertEquals(f * KCapacitanceUnit.JAR.baseValue, (1 of kilo.jars).value, rel(f * KCapacitanceUnit.JAR.baseValue))
+        assertEquals(
+            f * KCapacitanceUnit.ABFARAD.baseValue,
+            (1 of kilo.abfarads).value,
+            rel(f * KCapacitanceUnit.ABFARAD.baseValue)
+        )
+        assertEquals(
+            f * KCapacitanceUnit.STATFARAD.baseValue,
+            (1 of kilo.statfarads).value,
+            rel(f * KCapacitanceUnit.STATFARAD.baseValue)
+        )
+        assertEquals(
+            f * KCapacitanceUnit.JAR.baseValue,
+            (1 of kilo.jars).value,
+            rel(f * KCapacitanceUnit.JAR.baseValue)
+        )
     }
 
     /** The real-world electrolytic-capacitor notation `470 µF`. */

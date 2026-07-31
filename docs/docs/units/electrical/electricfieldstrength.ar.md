@@ -8,12 +8,11 @@
 شدة المجال الكهربائي وحدة **مركّبة**: التركيب `mass · length · time⁻³ · current⁻¹`
 (`kg·m·s⁻³·A⁻¹`). يغلّف `KElectricFieldStrengthUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود —
 `KMassUnit.BASE` (غرام) بالأس `+1`، و`KDistanceUnit.BASE` (متر) بالأس `+1`، و`KTimeUnit.BASE` (ثانية)
-بالأس `-3`، و`KElectricCurrentUnit.BASE` (أمبير) بالأس `-1`. ولأن مكوّن الكتلة في المكتبة مطبَّع إلى
-**غرامات** (وليس كيلوغرامات)، يُقسَم الناتج القياسي على 1000 للوصول إلى فولت لكل متر؛ وتُطبَّع القيمة
-المخزّنة دائمًا إلى فولت لكل متر.
+بالأس `-3`، و`KElectricCurrentUnit.BASE` (أمبير) بالأس `-1`. ولأن مكوّن الكتلة في المكتبة مطبَّع إلى **غرامات** (وليس
+كيلوغرامات)، يُقسَم الناتج القياسي على 1000 للوصول إلى فولت لكل متر؛ وتُطبَّع القيمة المخزّنة دائمًا إلى فولت لكل متر.
 
-شدة المجال `E` هي هبوط الجهد لكل وحدة طول، وهي في الوقت ذاته القوة المؤثرة على شحنة واحدة.
-وترتبط بـ[كثافة التدفق الكهربائي](electricfluxdensity.ar.md) عبر
+شدة المجال `E` هي هبوط الجهد لكل وحدة طول، وهي في الوقت ذاته القوة المؤثرة على شحنة واحدة. وترتبط
+بـ[كثافة التدفق الكهربائي](electricfluxdensity.ar.md) عبر
 [السماحية](permittivity.ar.md) (`D = ε · E`) وتدفع حاملات الشحنة بسرعة تُعطى بواسطة
 [الحركية الكهربائية](electricmobility.ar.md) الخاصة بها (`v = μ · E`).
 
@@ -22,11 +21,11 @@
 تُنشأ شدة المجال برمز مسمّى أو من تفكيك (انظر أدناه). تبقى الوحدات المسمّاة كرموز بقيمة 1 (تُستخدم مع
 `of`/`into`):
 
-| شدة المجال | الرمز | الرمز البرمجي | 1 وحدة بـ V/m |
-|---|---|---:|---:|
-| فولت لكل متر | `V/m` | `voltsPerMeter` | 1.0 |
-| فولت لكل سنتيمتر | `V/cm` | `voltsPerCentimeter` | 100.0 |
-| ستاتفولت لكل سنتيمتر (CGS-ESU) | `statV/cm` | `statvoltsPerCentimeter` | 29979.2458 |
+| شدة المجال                     | الرمز      |            الرمز البرمجي | 1 وحدة بـ V/m |
+|--------------------------------|------------|-------------------------:|--------------:|
+| فولت لكل متر                   | `V/m`      |          `voltsPerMeter` |           1.0 |
+| فولت لكل سنتيمتر               | `V/cm`     |     `voltsPerCentimeter` |         100.0 |
+| ستاتفولت لكل سنتيمتر (CGS-ESU) | `statV/cm` | `statvoltsPerCentimeter` |    29979.2458 |
 
 تدعم الوحدات المسمّاة بادئات النظام الدولي عبر `KPrefixBuilder` (`kilo.voltsPerMeter`، `mega.voltsPerMeter`،
 `kilo.voltsPerCentimeter`، …).
@@ -47,11 +46,11 @@ e into voltsPerMeter                   // 3.0e6
 
 يمكن الوصول إلى شدة المجال الكهربائي عبر عدة **تفكيكات مكافئة**، وجميعها تُنتج شدة مجال متساوية القيمة:
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `voltage / length` | `KElectricFieldStrengthUnitInstance` | `E = U / l`، هبوط الجهد لكل وحدة طول |
-| `force / charge` | `KElectricFieldStrengthUnitInstance` | `E = F / Q`، القوة المؤثرة على شحنة واحدة |
-| `mass·length/(time³·current)` | عبر `.toElectricFieldStrength()` | التعبير الأصلي القياسي `kg·m·s⁻³·A⁻¹` |
+| التعبير                       | نوع النتيجة                          | المعنى                                    |
+|-------------------------------|--------------------------------------|-------------------------------------------|
+| `voltage / length`            | `KElectricFieldStrengthUnitInstance` | `E = U / l`، هبوط الجهد لكل وحدة طول      |
+| `force / charge`              | `KElectricFieldStrengthUnitInstance` | `E = F / Q`، القوة المؤثرة على شحنة واحدة |
+| `mass·length/(time³·current)` | عبر `.toElectricFieldStrength()`     | التعبير الأصلي القياسي `kg·m·s⁻³·A⁻¹`     |
 
 تُعيد الصيغ المكتوبة بأنواع صريحة شدة مجال مباشرة. أما التعبير الأصلي بالكامل فيبقى `KMixedUnitInstance`
 عامًّا ويُضيَّق عبر `toElectricFieldStrength()` (الذي يتعرّف فقط على الصيغة القياسية ويرمي
@@ -59,12 +58,12 @@ e into voltsPerMeter                   // 3.0e6
 
 تربط العمليات العكسية بين الجهد والطول والقوة والشحنة وشدة المجال:
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `electricFieldStrength * length` | `KVoltageUnitInstance` | `U = E · l` (تبادلي) |
-| `voltage / electricFieldStrength` | `KLengthUnitInstance` | `l = U / E` |
-| `electricFieldStrength * charge` | `KForceUnitInstance` | `F = E · Q` (تبادلي) |
-| `force / electricFieldStrength` | `KChargeUnitInstance` | `Q = F / E` |
+| التعبير                           | نوع النتيجة            | المعنى               |
+|-----------------------------------|------------------------|----------------------|
+| `electricFieldStrength * length`  | `KVoltageUnitInstance` | `U = E · l` (تبادلي) |
+| `voltage / electricFieldStrength` | `KLengthUnitInstance`  | `l = U / E`          |
+| `electricFieldStrength * charge`  | `KForceUnitInstance`   | `F = E · Q` (تبادلي) |
+| `force / electricFieldStrength`   | `KChargeUnitInstance`  | `Q = F / E`          |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -114,13 +113,15 @@ import org.pcsoft.framework.kunit.electric.fieldstrength.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف يونيكود العلوية (`³`، `⁻¹`)، ويرمز `·` للضرب و `/` للكسر. وحيثما أمكن كتابة الكمية ككسر وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`³`، `⁻¹`)، ويرمز `·` للضرب و `/` للكسر. وحيثما أمكن كتابة الكمية ككسر وكحاصل ضرب بأسس سالبة، تُذكر
+الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `V/m` | `voltsPerMeter` | شدة المجال الكهربائي، الوحدة الأساسية (رمز مسمّى، فولت لكل متر) |
-| `U / l` | `(230 of volts) / (2 of milli.meters)` | شدة المجال من الجهد عبر مسافة |
-| `F / Q` | `(6 of newtons) / (3 of coulombs)` | شدة المجال كقوة لكل وحدة شحنة |
-| `kg·m/(s³·A)` | `(kilo.grams * (meters pow 1)) / ((seconds pow 3) * (amperes pow 1))` | شدة المجال ككتلة·طول / (زمن³·تيار) (صيغة الكسر) |
-| `kg·m·s⁻³·A⁻¹` | `kilo.grams * (meters pow 1) * (seconds pow -3) * (amperes pow -1)` | نفس شدة المجال كحاصل ضرب خالص |
-| `kV/m` | `kilo.voltsPerMeter` | شدة مجال ببادئة (كيلوفولت لكل متر) |
+| الرياضيات      | Kotlin                                                                | المعنى                                                         |
+|----------------|-----------------------------------------------------------------------|----------------------------------------------------------------|
+| `V/m`          | `voltsPerMeter`                                                       | شدة المجال الكهربائي، الوحدة الأساسية (رمز مسمّى، فولت لكل متر) |
+| `U / l`        | `(230 of volts) / (2 of milli.meters)`                                | شدة المجال من الجهد عبر مسافة                                  |
+| `F / Q`        | `(6 of newtons) / (3 of coulombs)`                                    | شدة المجال كقوة لكل وحدة شحنة                                  |
+| `kg·m/(s³·A)`  | `(kilo.grams * (meters pow 1)) / ((seconds pow 3) * (amperes pow 1))` | شدة المجال ككتلة·طول / (زمن³·تيار) (صيغة الكسر)                |
+| `kg·m·s⁻³·A⁻¹` | `kilo.grams * (meters pow 1) * (seconds pow -3) * (amperes pow -1)`   | نفس شدة المجال كحاصل ضرب خالص                                  |
+| `kV/m`         | `kilo.voltsPerMeter`                                                  | شدة مجال ببادئة (كيلوفولت لكل متر)                             |

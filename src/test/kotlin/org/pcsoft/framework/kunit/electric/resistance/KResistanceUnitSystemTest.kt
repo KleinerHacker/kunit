@@ -16,10 +16,10 @@ import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.*
-import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.electric.current.amperes
-import org.pcsoft.framework.kunit.mechanic.mass.grams
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
+import org.pcsoft.framework.kunit.mechanic.mass.grams
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -75,6 +75,9 @@ class KResistanceUnitSystemTest {
     /** `format` a resistance into its base dimensions g*m^2*s^-3*A^-2. */
     @Test
     fun `format compositions`() {
-        assertEquals("1.0 g*m^2*s^-3*A^-2", (1 of ohms) format (grams * (meters pow 2) / (seconds pow 3) / (amperes pow 2)))
+        assertEquals(
+            "1.0 g*m^2*s^-3*A^-2",
+            (1 of ohms) format (grams * (meters pow 2) / (seconds pow 3) / (amperes pow 2))
+        )
     }
 }

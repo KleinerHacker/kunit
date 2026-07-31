@@ -3,8 +3,7 @@
 [`format`](formatting.md) 動詞とパラメータ付き `toString` は、差し替え可能な `KUnitFormatter` を通じてテキストを
 描画します。付属の `KDefaultUnitFormatter` は `"10.8 km/h"` のようなプレーンテキストを生成しますが、まったく
 独自の描画を差し込めます。たとえばグラフィカルな数式レンダラー向けの **LaTeX** や **MathML**、HTML、任意の
-ドメイン固有表記などです。これにより kunit を、文字列を組版された数式へ変換するサードパーティのフレームワークへ
-容易に拡張できます。
+ドメイン固有表記などです。これにより kunit を、文字列を組版された数式へ変換するサードパーティのフレームワークへ 容易に拡張できます。
 
 ## 契約
 
@@ -26,8 +25,8 @@ data class KUnitFormatContext(
 すべては **1 つ**のコンテキストオブジェクトで渡されるため、インターフェースは実装を壊さずに加法的に拡張（新しい
 フィールドはデフォルト値を持つ）できます。よく使う構成要素として 2 つのヘルパーがあります。
 
-- `KUnitFormatContext.renderValue()` — 数値を描画します。`pattern` が `null` なら `Double.toString()`、
-  そうでなければ `String.format(locale, pattern, value)`。
+- `KUnitFormatContext.renderValue()` — 数値を描画します。`pattern` が `null` なら `Double.toString()`、 そうでなければ
+  `String.format(locale, pattern, value)`。
 - `KUnitTerm.displaySymbol` — 項の書かれたとおりの記号（`"km"`、`"h"`）。表示メタデータを尊重し、無ければ
   グループの基本記号にフォールバックします。
 
@@ -87,9 +86,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
 
 ## 注意
 
-- フォーマッターは**状態を持たない**（したがってスレッドセーフ）に保ちます。付属の `KDefaultUnitFormatter` は
-  素の `object` で、上記の `LatexFormatter` も同様です。
-- `KUnitFormatContext` は対象単位へ**変換済み**の値を受け取るため、フォーマッターは単位変換を行いません。描画
-  のみです。
+- フォーマッターは **状態を持たない**（したがってスレッドセーフ）に保ちます。付属の `KDefaultUnitFormatter` は 素の
+  `object` で、上記の `LatexFormatter` も同様です。
+- `KUnitFormatContext` は対象単位へ **変換済み**の値を受け取るため、フォーマッターは単位変換を行いません。描画 のみです。
 - `units` の項は表示メタデータ（`KUnitTerm.display`）を保持します。接頭辞付きや別名の単位（`km`、`mi`、`KiB`）が
   正しく描画されるよう、記号は必ず `displaySymbol` で読み取ってください。

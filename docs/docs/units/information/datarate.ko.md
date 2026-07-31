@@ -5,19 +5,18 @@
 
 유형: **구성된 단위**
 
-데이터 전송률은 **구성된** 단위입니다([속도](../kinematics/speed.md) 다음의 두 번째): 단일한 "실제" 양이 아니라
+데이터 전송률은 **구성된** 단위입니다 ([속도](../kinematics/speed.md) 다음의 두 번째): 단일한 "실제" 양이 아니라
 `storage · time⁻¹`(`B/s`)이라는 합성입니다. 따라서 `KDataRateUnitInstance`는 정확히 두 개의 항 — 지수 `+1`의
-`KStorageUnit.BASE`(바이트)와 지수 `-1`의 `KTimeUnit.BASE`(초) — 로 이루어진 `KMixedUnitInstance`를 감쌉니다.
-값은 어떤 단위나 저장 용량/시간 조합으로 생성되었든 관계없이 항상 초당 바이트로 정규화되어 저장됩니다.
+`KStorageUnit.BASE`(바이트)와 지수 `-1`의 `KTimeUnit.BASE`(초) — 로 이루어진 `KMixedUnitInstance`를 감쌉니다. 값은 어떤 단위나 저장 용량/시간 조합으로
+생성되었든 관계없이 항상 초당 바이트로 정규화되어 저장됩니다.
 
 ## 데이터 전송률 만들기
 
 데이터 전송률은 **저장 용량/시간 표현식**으로 만듭니다. 예: `100 of bytes / seconds`,
-`5 of mega.bytes / seconds`, `10 of kibi.bytes / seconds` — 각각 `KDataRateUnitInstance`를 생성합니다. 임의의
-저장 용량/시간 템플릿으로 다시 읽습니다(`r into (bits / seconds)`). `bytesPerSecond` 같은 철자로 쓴 복합 토큰은
-의도적으로 **없습니다**(그것들은 정확히 `bytes / seconds` 입니다).
+`5 of mega.bytes / seconds`, `10 of kibi.bytes / seconds` — 각각 `KDataRateUnitInstance`를 생성합니다. 임의의 저장 용량/시간 템플릿으로 다시
+읽습니다 (`r into (bits / seconds)`). `bytesPerSecond` 같은 철자로 쓴 복합 토큰은 의도적으로 **없습니다**(그것들은 정확히 `bytes / seconds` 입니다).
 
-기본 단위: 저장 용량 그룹과 일관되게 초당 *바이트*입니다. 네트워크에서 흔한 bit/s(`bps`)는 `0.125 B/s`이며,
+기본 단위: 저장 용량 그룹과 일관되게 초당 *바이트*입니다. 네트워크에서 흔한 bit/s (`bps`)는 `0.125 B/s`이며,
 "초당 메가비트"는 `1 of mega.bits / seconds` 입니다.
 
 ```kotlin
@@ -32,17 +31,16 @@ r.value                  // 100.0(B/s로 정규화)
 r into (bits / seconds)  // 800.0(bit/s로 다시 읽기)
 ```
 
-## 핵심 단위(저장 용량 & 시간)로 계산하기
+## 핵심 단위 (저장 용량 & 시간)로 계산하기
 
-데이터 전송률*이란* 저장 용량을 시간으로 나눈 것입니다. 세 가지 양 — 저장 용량, 시간, 데이터 전송률 — 사이를
-단순한 `*`와 `/`로 오갈 수 있으며, 각 결과는 **강하게 타입이 지정**됩니다.
+데이터 전송률 *이란* 저장 용량을 시간으로 나눈 것입니다. 세 가지 양 — 저장 용량, 시간, 데이터 전송률 — 사이를 단순한 `*`와 `/`로 오갈 수 있으며, 각 결과는 **강하게 타입이 지정**됩니다.
 
-| 표현식 | 결과 타입 | 의미 |
-|---|---|---|
-| `storage / time` | `KDataRateUnitInstance` | 전송률 = 양 / 시간 |
-| `data rate * time` | `KStorageUnitInstance` | 양 = 전송률 × 시간 |
-| `time * data rate` | `KStorageUnitInstance` | 양(교환 법칙) |
-| `storage / data rate` | `KTimeUnitInstance` | 시간 = 양 / 전송률 |
+| 표현식                | 결과 타입               | 의미               |
+|-----------------------|-------------------------|--------------------|
+| `storage / time`      | `KDataRateUnitInstance` | 전송률 = 양 / 시간 |
+| `data rate * time`    | `KStorageUnitInstance`  | 양 = 전송률 × 시간 |
+| `time * data rate`    | `KStorageUnitInstance`  | 양(교환 법칙)      |
+| `storage / data rate` | `KTimeUnitInstance`     | 시간 = 양 / 전송률 |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -72,9 +70,9 @@ time into minutes     // 1.0
 ```
 
 !!! warning "*순수한* 저장 용량 / 시간 형태만 데이터 전송률입니다"
-    `KMixedUnitInstance.toDataRate()`는 정확히 하나의 지수 `+1` 저장 용량 항과 하나의 지수 `-1` 시간 항을
-    요구합니다. `B²`(저장 용량 제곱), `B·s⁻²`, `B·s` 형태는 데이터 전송률이 아닙니다 — 변환은
-    `IllegalStateException`을 던집니다. 마찬가지로 `storage + data rate`(서로 다른 차원)는 컴파일 오류입니다.
+`KMixedUnitInstance.toDataRate()`는 정확히 하나의 지수 `+1` 저장 용량 항과 하나의 지수 `-1` 시간 항을 요구합니다. `B²`(저장 용량 제곱), `B·s⁻²`, `B·s` 형태는
+데이터 전송률이 아닙니다 — 변환은
+`IllegalStateException`을 던집니다. 마찬가지로 `storage + data rate`(서로 다른 차원)는 컴파일 오류입니다.
 
 ## 연산자
 
@@ -96,10 +94,10 @@ val b = (2 of bytes / seconds) - (8 of bits / seconds)   // 1 B/s
 val squared = (10 of bytes / seconds) * (2 of bytes / seconds) // KMixedUnitInstance, [B^2, s^-2]
 ```
 
-## SI 및 이진(IEC) 접두사
+## SI 및 이진 (IEC) 접두사
 
-데이터 전송률 그룹은 [저장 용량](storage.md) 그룹의 접두사 정책을 반영합니다(그 분자가 저장 용량이기 때문에):
-분자는 **증대** SI 빌더(`kilo`, `mega` 등) 또는 **이진** 빌더(`kibi`, `mebi` 등)를 사용합니다. 축소 빌더에는
+데이터 전송률 그룹은 [저장 용량](storage.md) 그룹의 접두사 정책을 반영합니다 (그 분자가 저장 용량이기 때문에):
+분자는 **증대** SI 빌더 (`kilo`, `mega` 등) 또는 **이진** 빌더 (`kibi`, `mebi` 등)를 사용합니다. 축소 빌더에는
 `bytes`/`bits` 프로퍼티가 없으므로 `milli.bytes / seconds`는 컴파일되지 않습니다.
 
 ```kotlin
@@ -138,12 +136,13 @@ import org.pcsoft.framework.kunit.it.datarate.*
 
 ## 표기법
 
-아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자(`²`, `³`, `⁻¹`)로 표기하며, `·`는 곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
+아래 표는 이 단위와 그 구성 요소를 수학적으로 어떻게 쓰는지, 그리고 KUnit을 사용해 Kotlin에서 어떻게 쓰는지를 비교합니다. 지수는 유니코드 위 첨자 (`²`, `³`, `⁻¹`)로 표기하며, `·`는
+곱셈, `/`는 분수를 나타냅니다. 하나의 양을 분수로도, 음의 지수를 사용한 곱으로도 쓸 수 있는 경우 두 가지 동등한 Kotlin 형식을 함께 표시합니다.
 
-| 수학 | Kotlin | 의미 |
-|---|---|---|
-| `B/s` | `bytes / seconds` | 데이터 전송률, 기본 단위(초당 바이트) — 분수 형식 |
-| `B·s⁻¹` | `bytes * (seconds pow -1)` | 같은 전송률을 음의 지수 곱으로 표현 |
-| `bit/s` | `bits / seconds` | 초당 비트 |
-| `MB/s` | `mega.bytes / seconds` | 초당 메가바이트 |
-| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | 저장 용량 ÷ 시간으로 생성 |
+| 수학           | Kotlin                             | 의미                                              |
+|----------------|------------------------------------|---------------------------------------------------|
+| `B/s`          | `bytes / seconds`                  | 데이터 전송률, 기본 단위(초당 바이트) — 분수 형식 |
+| `B·s⁻¹`        | `bytes * (seconds pow -1)`         | 같은 전송률을 음의 지수 곱으로 표현               |
+| `bit/s`        | `bits / seconds`                   | 초당 비트                                         |
+| `MB/s`         | `mega.bytes / seconds`             | 초당 메가바이트                                   |
+| `100 B / 10 s` | `(100 of bytes) / (10 of seconds)` | 저장 용량 ÷ 시간으로 생성                         |

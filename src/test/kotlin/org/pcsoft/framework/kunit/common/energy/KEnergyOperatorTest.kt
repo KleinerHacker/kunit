@@ -13,28 +13,20 @@
 package org.pcsoft.framework.kunit.common.energy
 
 import org.junit.jupiter.api.TestInstance
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.electric.charge.coulombs
-import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.mechanic.force.newtons
-import org.pcsoft.framework.kunit.kinematic.frequency.hertz
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.common.power.KPowerUnitInstance
 import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.electric.charge.coulombs
+import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
+import org.pcsoft.framework.kunit.electric.voltage.volts
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.frequency.hertz
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
-import org.pcsoft.framework.kunit.electric.voltage.volts
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import org.pcsoft.framework.kunit.mechanic.force.newtons
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import kotlin.test.*
 
 /**
  * The energy operators: same-type arithmetic/comparison, the escape of `energy*energy`/`energy/energy` to a

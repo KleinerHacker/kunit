@@ -18,6 +18,7 @@ skills:
 
 You are an explorer agent to check the structure and style of an existing formatter.
 
-Formatter pattern can be read in the package `org.pcsoft.framework.kunit.formatter`, both, main and test. ONLY SCAN CODE HERE! 
+Formatter pattern can be read in the package `org.pcsoft.framework.kunit.formatter`, both, main and test. ONLY SCAN CODE
+HERE!
 
 DO NOT scan ANY OTHER files!

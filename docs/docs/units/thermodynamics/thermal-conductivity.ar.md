@@ -1,7 +1,8 @@
 # الموصلية الحرارية
 
 الحزمة: `org.pcsoft.framework.kunit.thermo.conductivity`
-الوحدة الأساسية: **واط لكل متر-كلفن** (`KThermalConductivityUnit.BASE == KThermalConductivityUnit.WATT_PER_METER_KELVIN`)
+الوحدة الأساسية: **واط لكل متر-كلفن**
+(`KThermalConductivityUnit.BASE == KThermalConductivityUnit.WATT_PER_METER_KELVIN`)
 
 النوع: **وحدة مركّبة**
 
@@ -9,42 +10,41 @@
 [كثافة التدفّق الحراري](heat-flux-density.md) عبر مادّة موصليتها مضروبة في
 [تدرّج درجة الحرارة](temperature-gradient.md). الوحدة: `W/(m·K)`.
 
-يغلّف `KThermalConductivityUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود بالضبط بالصيغة
-القياسية `mass¹ · distance¹ · time⁻³ · temperature⁻¹` (`kg·m·s⁻³·K⁻¹`)، مطبَّعًا دائمًا إلى
-W/(m·K).
+يغلّف `KThermalConductivityUnitInstance` كائن `KMixedUnitInstance` مكوّن من أربعة حدود بالضبط بالصيغة القياسية
+`mass¹ · distance¹ · time⁻³ · temperature⁻¹` (`kg·m·s⁻³·K⁻¹`)، مطبَّعًا دائمًا إلى W/ (m·K).
 
 !!! note "اسم الحزمة مقابل اسم الصنف"
-    الحزمة هي `thermo.conductivity`، وليست `thermo.thermalconductivity` — إذ يجب ألّا تُكرِّر حزمة
-    الوحدة اسم حزمة مجالها. تحتفظ **الأصناف** بالمصطلح التقني الكامل
-    (`KThermalConductivityUnitInstance`)، وهو ما يميّزها عن `electric.conductivity`.
+الحزمة هي `thermo.conductivity`، وليست `thermo.thermalconductivity` — إذ يجب ألّا تُكرِّر حزمة الوحدة اسم حزمة مجالها.
+تحتفظ **الأصناف** بالمصطلح التقني الكامل (`KThermalConductivityUnitInstance`)، وهو ما يميّزها عن
+`electric.conductivity`.
 
-وعند القسمة على سماكة تصبح [معامل انتقال الحرارة](heat-transfer-coefficient.md)؛ والسماكة مقسومة
-عليها تعطي [المقاومة الحرارية](thermal-resistance.md) (قيمة R).
+وعند القسمة على سماكة تصبح [معامل انتقال الحرارة](heat-transfer-coefficient.md)؛ والسماكة مقسومة عليها
+تعطي [المقاومة الحرارية](thermal-resistance.md) (قيمة R).
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ W/(m·K) |
-|---|---|---:|---:|
-| واط لكل متر-كلفن | `W/(m·K)` | `wattsPerMeterKelvin` | 1.0 |
-| وحدة حرارية بريطانية لكل ساعة-قدم-°F | `Btu/(h·ft·°F)` | `btusPerHourFootFahrenheit` | ≈ 1.730735 |
-| سعرة لكل ثانية-سم-كلفن | `cal/(s·cm·K)` | `caloriesPerSecondCentimeterKelvin` | 418.4 |
+| الوحدة                               | الرمز           |                       الرمز البرمجي | 1 وحدة بـ W/(m·K) |
+|--------------------------------------|-----------------|------------------------------------:|------------------:|
+| واط لكل متر-كلفن                     | `W/(m·K)`       |               `wattsPerMeterKelvin` |               1.0 |
+| وحدة حرارية بريطانية لكل ساعة-قدم-°F | `Btu/(h·ft·°F)` |         `btusPerHourFootFahrenheit` |        ≈ 1.730735 |
+| سعرة لكل ثانية-سم-كلفن               | `cal/(s·cm·K)`  | `caloriesPerSecondCentimeterKelvin` |             418.4 |
 
 جميعها تدعم نطاق بادئات النظام الدولي الكامل — تُكتب موادّ العزل عادةً كـ
 `40 of milli.wattsPerMeterKelvin`.
 
 ## قيم نموذجية
 
-| المادّة | λ |
-|---|---:|
-| النحاس | 401 W/(m·K) |
-| الفولاذ | ≈ 50 W/(m·K) |
-| الزجاج | ≈ 1 W/(m·K) |
+| المادّة        |                            λ |
+|---------------|-----------------------------:|
+| النحاس        |                  401 W/(m·K) |
+| الفولاذ       |                 ≈ 50 W/(m·K) |
+| الزجاج        |                  ≈ 1 W/(m·K) |
 | الصوف المعدني | ≈ 0.04 W/(m·K) = 40 mW/(m·K) |
 
 ## مثال واقعي: فقد الحرارة عبر جدار معزول
 
-تفصل طبقة صوف معدني بسماكة 30 سم (λ = 0.04 W/(m·K)) غرفةً بدرجة 21 °C عن هواء خارجي بدرجة −5 °C.
-مساحة الجدار 12 m². كم من الحرارة تُفقد؟
+تفصل طبقة صوف معدني بسماكة 30 سم (λ = 0.04 W/ (m·K)) غرفةً بدرجة 21 °C عن هواء خارجي بدرجة −5 °C. مساحة الجدار 12 m². كم
+من الحرارة تُفقد؟
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -75,20 +75,20 @@ loss into watts                                 // ≈ 41.6 W
 
 ## الحساب باستخدام الوحدات المجاورة
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `heatFluxDensity / temperatureGradient` | `KThermalConductivityUnitInstance` | حلّ قانون فورييه لـ λ |
-| `thermalConductivity * temperatureGradient` | `KHeatFluxDensityUnitInstance` | قانون فورييه |
-| `temperatureGradient * thermalConductivity` | `KHeatFluxDensityUnitInstance` | نفسه (تبادلي) |
-| `heatFluxDensity / thermalConductivity` | `KTemperatureGradientUnitInstance` | التدرّج الضمني |
+| التعبير                                     | نوع النتيجة                        | المعنى               |
+|---------------------------------------------|------------------------------------|----------------------|
+| `heatFluxDensity / temperatureGradient`     | `KThermalConductivityUnitInstance` | حلّ قانون فورييه لـ λ |
+| `thermalConductivity * temperatureGradient` | `KHeatFluxDensityUnitInstance`     | قانون فورييه         |
+| `temperatureGradient * thermalConductivity` | `KHeatFluxDensityUnitInstance`     | نفسه (تبادلي)        |
+| `heatFluxDensity / thermalConductivity`     | `KTemperatureGradientUnitInstance` | التدرّج الضمني        |
 
 ## التفكيكات
 
 كلا التفكيكين يُنتجان نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `heatFluxDensity / temperatureGradient` | معامل مكتوب بنوع صريح | `KThermalConductivityUnitInstance` |
+| التفكيك                                    | الصيغة                                 | النتيجة                            |
+|--------------------------------------------|----------------------------------------|------------------------------------|
+| `heatFluxDensity / temperatureGradient`    | معامل مكتوب بنوع صريح                  | `KThermalConductivityUnitInstance` |
 | `mass · distance · time⁻³ · temperature⁻¹` | تعبير أصلي + `toThermalConductivity()` | `KThermalConductivityUnitInstance` |
 
 ```kotlin
@@ -138,15 +138,15 @@ import org.pcsoft.framework.kunit.thermo.conductivity.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `W/(m·K)` | `wattsPerMeterKelvin` | الموصلية الحرارية، الوحدة الأساسية |
-| `kg·m·s⁻³·K⁻¹` | `grams * meters / (seconds pow 3) / ΔK` | نفس الكمّية بالأبعاد الأساسية |
-| `mW/(m·K)` | `milli.wattsPerMeterKelvin` | ميلي واط لكل متر-كلفن (عزل) |
-| `q̇ = λ · ∇T` | `wool * gradient` | قانون فورييه |
-| `λ = q̇ / ∇T` | `(80 of wattsPerSquareMeter) / gradient` | الموصلية من التدفّق ÷ التدرّج |
-| `∇T = q̇ / λ` | `flux / wool` | التدرّج من التدفّق ÷ الموصلية |
+| الرياضيات      | Kotlin                                   | المعنى                             |
+|----------------|------------------------------------------|------------------------------------|
+| `W/(m·K)`      | `wattsPerMeterKelvin`                    | الموصلية الحرارية، الوحدة الأساسية |
+| `kg·m·s⁻³·K⁻¹` | `grams * meters / (seconds pow 3) / ΔK`  | نفس الكمّية بالأبعاد الأساسية       |
+| `mW/(m·K)`     | `milli.wattsPerMeterKelvin`              | ميلي واط لكل متر-كلفن (عزل)        |
+| `q̇ = λ · ∇T`   | `wool * gradient`                        | قانون فورييه                       |
+| `λ = q̇ / ∇T`   | `(80 of wattsPerSquareMeter) / gradient` | الموصلية من التدفّق ÷ التدرّج        |
+| `∇T = q̇ / λ`   | `flux / wool`                            | التدرّج من التدفّق ÷ الموصلية        |

@@ -12,20 +12,12 @@
 
 package org.pcsoft.framework.kunit.it.datarate
 
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.it.storage.bits
 import org.pcsoft.framework.kunit.it.storage.bytes
 import org.pcsoft.framework.kunit.it.storage.kibi
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertNotEquals
+import kotlin.test.*
 
 /**
  * `KDataRateUnitInstance` surface: a data rate is built as an expression (`bytes / seconds`, incl. a

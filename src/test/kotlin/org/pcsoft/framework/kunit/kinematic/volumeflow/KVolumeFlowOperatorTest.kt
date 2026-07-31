@@ -20,7 +20,6 @@ import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.kinematic.time.minutes
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs

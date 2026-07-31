@@ -12,11 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.currentdensity
 
-import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnitInstance
 import org.pcsoft.framework.kunit.electric.current.amperes
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow

@@ -12,18 +12,14 @@
 
 package org.pcsoft.framework.kunit.kinematic.speed
 
-import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.format
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.of
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertNotEquals
+import org.pcsoft.framework.kunit.of
+import kotlin.test.*
 
 /**
  * `KSpeedUnitInstance` surface: a speed is built as an expression (`kilo.meters / hours`), typed as a

@@ -61,10 +61,12 @@ class KDataRateUnitInstance internal constructor(internal val instance: KMixedUn
      * (1.bytesPerSecond + 8.bitsPerSecond).valueAs(KDataRateUnit.BYTES_PER_SECOND) // 2.0
      * ```
      */
-    override operator fun plus(other: KDataRateUnitInstance): KDataRateUnitInstance = KDataRateUnitInstance(instance + other.instance)
+    override operator fun plus(other: KDataRateUnitInstance): KDataRateUnitInstance =
+        KDataRateUnitInstance(instance + other.instance)
 
     /** Subtracts two data rates. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KDataRateUnitInstance): KDataRateUnitInstance = KDataRateUnitInstance(instance - other.instance)
+    override operator fun minus(other: KDataRateUnitInstance): KDataRateUnitInstance =
+        KDataRateUnitInstance(instance - other.instance)
 
     /**
      * Multiplies two data rates, producing a new [KMixedUnitInstance] (`B²·s⁻²`, no longer a "pure"
@@ -118,4 +120,9 @@ fun KMixedUnitInstance.toDataRate(): KDataRateUnitInstance {
 
 /** Builds a [KDataRateUnitInstance] from a value already expressed in bytes per second ([KDataRateUnit.BASE]). */
 internal fun dataRateUnitInstanceOf(bytesPerSecond: Double): KDataRateUnitInstance =
-    KDataRateUnitInstance(KMixedUnitInstance(bytesPerSecond, listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))))
+    KDataRateUnitInstance(
+        KMixedUnitInstance(
+            bytesPerSecond,
+            listOf(KUnitTerm(KStorageUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -1))
+        )
+    )

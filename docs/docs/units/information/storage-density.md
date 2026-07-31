@@ -6,17 +6,17 @@ Base unit: **byte per square meter** (`KStorageDensityUnit.BASE == KStorageDensi
 Type: **constructed unit**
 
 Storage density is a **constructed** unit: it is not a single "real" quantity but a composition,
-`storage · distance⁻²` (`B/m²`). `KStorageDensityUnitInstance` therefore wraps a `KMixedUnitInstance` of
-exactly two terms - one `KStorageUnit.BASE` (byte) at exponent `+1` and one `KDistanceUnit.BASE` (meter)
-at exponent `-2`. The value is always stored normalized to bytes per square meter, regardless of which
-unit or storage/area combination it was created from.
+`storage · distance⁻²` (`B/m²`). `KStorageDensityUnitInstance` therefore wraps a `KMixedUnitInstance` of exactly two
+terms - one `KStorageUnit.BASE` (byte) at exponent `+1` and one `KDistanceUnit.BASE` (meter)
+at exponent `-2`. The value is always stored normalized to bytes per square meter, regardless of which unit or
+storage/area combination it was created from.
 
 ## Building a storage density
 
 A storage density is built as a **storage-per-area expression**, e.g. `100 of bytes / area`,
-`5 of mega.bytes / area`. The area is any `KAreaUnitInstance` (e.g. `(1 of meters) * (1 of meters)`), so
-every SI/binary prefix and length unit combines freely. Read it back in any storage-per-area template
-(`d into (bits / area)`). There are deliberately **no** spelled-out composite tokens.
+`5 of mega.bytes / area`. The area is any `KAreaUnitInstance` (e.g. `(1 of meters) * (1 of meters)`), so every SI/binary
+prefix and length unit combines freely. Read it back in any storage-per-area template (`d into (bits / area)`). There
+are deliberately **no** spelled-out composite tokens.
 
 Base unit: a *byte* per square meter, consistent with the storage group. A "bit per square meter" is
 `0.125 B/m²`.
@@ -36,8 +36,8 @@ d into (bits / area)  // 800.0 (read back in bit/m²)
 
 ## Real-world example: areal density of an SSD die
 
-A flash die stores **256 GB** on a surface of **100 mm²**. Its areal storage density is the amount of
-data divided by the area:
+A flash die stores **256 GB** on a surface of **100 mm²**. Its areal storage density is the amount of data divided by
+the area:
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -58,15 +58,15 @@ density into (giga.bytes / (side * side))           // 256.0 (GB per 100 mm²)
 
 ## Computing with the core units (storage & area)
 
-A storage density *is* a storage amount divided by an area. Move between the three quantities - storage,
-area and storage density - with plain `*` and `/`; each result is **strongly typed**.
+A storage density *is* a storage amount divided by an area. Move between the three quantities - storage, area and
+storage density - with plain `*` and `/`; each result is **strongly typed**.
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `storage / area` | `KStorageDensityUnitInstance` | density = amount / area |
-| `storage density * area` | `KStorageUnitInstance` | amount = density × area |
-| `area * storage density` | `KStorageUnitInstance` | amount (commutative) |
-| `storage / storage density` | `KAreaUnitInstance` | area = amount / density |
+| Expression                  | Result type                   | Meaning                 |
+|-----------------------------|-------------------------------|-------------------------|
+| `storage / area`            | `KStorageDensityUnitInstance` | density = amount / area |
+| `storage density * area`    | `KStorageUnitInstance`        | amount = density × area |
+| `area * storage density`    | `KStorageUnitInstance`        | amount (commutative)    |
+| `storage / storage density` | `KAreaUnitInstance`           | area = amount / density |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -91,10 +91,9 @@ val a = (600 of bytes) / d      // KAreaUnitInstance (6 m²)
 ```
 
 !!! warning "Only a *pure* storage / area shape is a storage density"
-    `KMixedUnitInstance.toStorageDensity()` requires exactly one storage term at exponent `+1` and one
-    distance term at exponent `-2`. A `B²·m⁻²`, a `B·m⁻¹`, or a `B·m²` shape is not a storage density -
-    the conversion throws `IllegalStateException`. Likewise, `storage + storage density` (different
-    dimensions) is a compile error.
+`KMixedUnitInstance.toStorageDensity()` requires exactly one storage term at exponent `+1` and one distance term at
+exponent `-2`. A `B²·m⁻²`, a `B·m⁻¹`, or a `B·m²` shape is not a storage density - the conversion throws
+`IllegalStateException`. Likewise, `storage + storage density` (different dimensions) is a compile error.
 
 ## Operators
 
@@ -120,8 +119,8 @@ val squared = (10 of bytes / area) * (2 of bytes / area) // KMixedUnitInstance, 
 
 ## SI and binary (IEC) prefixes
 
-The storage-density group mirrors the [Storage](storage.md) group's prefix policy (its numerator is a
-storage amount): the numerator uses the **augmenting** SI builders (`kilo`, `mega`, …) or the **binary**
+The storage-density group mirrors the [Storage](storage.md) group's prefix policy (its numerator is a storage amount):
+the numerator uses the **augmenting** SI builders (`kilo`, `mega`, …) or the **binary**
 builders (`kibi`, `mebi`, …); the denominator (an area) uses any length unit and prefix.
 
 ```kotlin
@@ -157,12 +156,14 @@ val area = (1 of meters) * (1 of meters)
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `B/m²` | `bytes / area` | storage density, base unit (byte per square meter) — fraction form |
-| `B·m⁻²` | `bytes * (meters pow -2)` | same density as a product with a negative exponent |
-| `bit/m²` | `bits / area` | bit per square meter |
-| `kB/mm²` | `kilo.bytes / mm2` | kilobyte per square millimeter |
-| `256 GB / 100 mm²` | `(256 of giga.bytes) / (side * side)` | build from storage ÷ area |
+| Mathematics        | Kotlin                                | Meaning                                                            |
+|--------------------|---------------------------------------|--------------------------------------------------------------------|
+| `B/m²`             | `bytes / area`                        | storage density, base unit (byte per square meter) — fraction form |
+| `B·m⁻²`            | `bytes * (meters pow -2)`             | same density as a product with a negative exponent                 |
+| `bit/m²`           | `bits / area`                         | bit per square meter                                               |
+| `kB/mm²`           | `kilo.bytes / mm2`                    | kilobyte per square millimeter                                     |
+| `256 GB / 100 mm²` | `(256 of giga.bytes) / (side * side)` | build from storage ÷ area                                          |

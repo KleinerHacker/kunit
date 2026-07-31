@@ -1,25 +1,25 @@
 # MathML 格式化器
 
-`KMathMlUnitFormatter` 将数值渲染为**展示型 MathML**，可由浏览器和 MathJax 原生渲染。默认配置下，
+`KMathMlUnitFormatter` 将数值渲染为 **展示型 MathML**，可由浏览器和 MathJax 原生渲染。默认配置下，
 `3 of meters / seconds` 读作 `km/h` 时会得到一个内联 `<math>`，其中 `<mfrac>` 为 `<mi>km</mi>` 除以 `<mi>h</mi>`。
 
 它位于 `org.pcsoft.framework.kunit.formatter` 包中，是不可变且线程安全的 `class`。
 
 ## 生成内容
 
-`MFRAC` 样式将规整的单分母形式堆叠为 `<mfrac>`；其余形式（以及整个 `EXPONENT` 样式）为用乘法 `<mo>` 连接、
-带符号 `<msup>` 指数的平铺乘积。无量纲值仅渲染 `<mn>`。
+`MFRAC` 样式将规整的单分母形式堆叠为 `<mfrac>`；其余形式（以及整个 `EXPONENT` 样式）为用乘法 `<mo>` 连接、 带符号 `<msup>`
+指数的平铺乘积。无量纲值仅渲染 `<mn>`。
 
 ## 配置
 
 `KMathMlFormatConfig` 是值类型；可选择预设或自行构建：
 
-| 选项             | 取值                                      | 默认           |
-|------------------|------------------------------------------|----------------|
-| `fractionStyle`  | `MFRAC`, `EXPONENT`                      | `MFRAC`        |
-| `unitTag`        | `MI`, `MTEXT`                            | `MI`           |
+| 选项             | 取值                                                 | 默认              |
+|------------------|------------------------------------------------------|-------------------|
+| `fractionStyle`  | `MFRAC`, `EXPONENT`                                  | `MFRAC`           |
+| `unitTag`        | `MI`, `MTEXT`                                        | `MI`              |
 | `multiplication` | `MIDDLE_DOT` (`·`), `TIMES` (`×`), `INVISIBLE_TIMES` | `INVISIBLE_TIMES` |
-| `wrapper`        | `MATH_INLINE`, `MATH_BLOCK`, `FRAGMENT`  | `MATH_INLINE`  |
+| `wrapper`        | `MATH_INLINE`, `MATH_BLOCK`, `FRAGMENT`              | `MATH_INLINE`     |
 
 预设：`DEFAULT`、`INLINE`（内联 `<msup>` 指数）、`FRAGMENT`（无 `<math>` 根）。
 

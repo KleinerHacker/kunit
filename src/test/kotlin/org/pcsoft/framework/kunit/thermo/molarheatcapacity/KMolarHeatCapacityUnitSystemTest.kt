@@ -19,15 +19,9 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.amountofsubstance.moles
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KMolarHeatCapacityUnitInstance` surface: round-trip, equality, `toString`, operators, conversion. */
 class KMolarHeatCapacityUnitSystemTest {

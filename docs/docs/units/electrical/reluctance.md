@@ -8,29 +8,29 @@ Type: **constructed unit**
 Magnetic reluctance is a **constructed** unit: the composition `mass⁻¹ · length⁻² · time² · current²`
 (`kg⁻¹·m⁻²·s²·A²` = `A/Wb` = `H⁻¹`). `KReluctanceUnitInstance` wraps a `KMixedUnitInstance` of four terms —
 `KMassUnit.BASE` (gram) at `-1`, `KDistanceUnit.BASE` (meter) at `-2`, `KTimeUnit.BASE` (second) at `+2` and
-`KElectricCurrentUnit.BASE` (ampere) at `+2`. Because the mass component of the library is normalized to
-**grams** (not kilograms) and the mass exponent is negative, the canonical product is multiplied by 1000 to
-reach amperes per weber; the stored value is always normalized to amperes per weber.
+`KElectricCurrentUnit.BASE` (ampere) at `+2`. Because the mass component of the library is normalized to **grams** (not
+kilograms) and the mass exponent is negative, the canonical product is multiplied by 1000 to reach amperes per weber;
+the stored value is always normalized to amperes per weber.
 
-The reluctance `Rm` is the magnetic circuit's counterpart to the electrical [Resistance](resistance.md): it
-relates the magnetomotive force `Θ` (measured in ampere turns, see [Electric Current](ec.md)) to the
-resulting [Magnetic Flux](magneticflux.md) through Hopkinson's law `Θ = Rm · Φ`. Its reciprocal is the
-**permeance** `Λ`, which is measured in henries and therefore carried by the
+The reluctance `Rm` is the magnetic circuit's counterpart to the electrical [Resistance](resistance.md): it relates the
+magnetomotive force `Θ` (measured in ampere turns, see [Electric Current](ec.md)) to the
+resulting [Magnetic Flux](magneticflux.md) through Hopkinson's law `Θ = Rm · Φ`. Its reciprocal is the **permeance**
+`Λ`, which is measured in henries and therefore carried by the
 [Inductance](inductance.md) group.
 
 ## Building a reluctance
 
-Build a reluctance with a named token, or from a decomposition (see below). Named units survive as value-1
-tokens (used with `of`/`into`):
+Build a reluctance with a named token, or from a decomposition (see below). Named units survive as value-1 tokens (used
+with `of`/`into`):
 
-| Reluctance | Symbol | Token | 1 unit in A/Wb |
-|---|---|---:|---:|
-| Ampere per weber | `A/Wb` | `amperesPerWeber` | 1.0 |
-| Inverse henry | `H⁻¹` | `inverseHenries` | 1.0 |
-| Ampere turn per weber | `At/Wb` | `ampereTurnsPerWeber` | 1.0 |
+| Reluctance            | Symbol  |                 Token | 1 unit in A/Wb |
+|-----------------------|---------|----------------------:|---------------:|
+| Ampere per weber      | `A/Wb`  |     `amperesPerWeber` |            1.0 |
+| Inverse henry         | `H⁻¹`   |      `inverseHenries` |            1.0 |
+| Ampere turn per weber | `At/Wb` | `ampereTurnsPerWeber` |            1.0 |
 
-All three spellings describe the same quantity — the number of coil turns is a pure count — so they are
-value-equal; the distinct symbols document the point of view. Named units support the SI prefixes via
+All three spellings describe the same quantity — the number of coil turns is a pure count — so they are value-equal; the
+distinct symbols document the point of view. Named units support the SI prefixes via
 `KPrefixBuilder` (`mega.amperesPerWeber`, `kilo.inverseHenries`, …).
 
 ```kotlin
@@ -47,26 +47,25 @@ rm into amperesPerWeber               // 2.0e6
 
 ## Multiple decompositions
 
-Reluctance can be reached through several **equivalent decompositions**, all producing the same value-equal
-reluctance:
+Reluctance can be reached through several **equivalent decompositions**, all producing the same value-equal reluctance:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `current / magneticFlux` | `KReluctanceUnitInstance` | Hopkinson's law `Rm = Θ / Φ` |
-| `1 / inductance` | `KReluctanceUnitInstance` | the reciprocal of the permeance, `Rm = 1 / Λ` |
-| `(time²·current²)/(mass·length²)` | via `.toReluctance()` | native canonical `kg⁻¹·m⁻²·s²·A²` expression |
+| Expression                        | Result type               | Meaning                                       |
+|-----------------------------------|---------------------------|-----------------------------------------------|
+| `current / magneticFlux`          | `KReluctanceUnitInstance` | Hopkinson's law `Rm = Θ / Φ`                  |
+| `1 / inductance`                  | `KReluctanceUnitInstance` | the reciprocal of the permeance, `Rm = 1 / Λ` |
+| `(time²·current²)/(mass·length²)` | via `.toReluctance()`     | native canonical `kg⁻¹·m⁻²·s²·A²` expression  |
 
 The typed operator forms return a reluctance directly. The fully native expression stays a generic
-`KMixedUnitInstance` and is narrowed with `toReluctance()` (which recognises only the canonical normal form
-and throws `IllegalStateException` otherwise). All routes are value-equal.
+`KMixedUnitInstance` and is narrowed with `toReluctance()` (which recognises only the canonical normal form and throws
+`IllegalStateException` otherwise). All routes are value-equal.
 
 The inverse operators tie magnetomotive force, flux, permeance and reluctance together:
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `reluctance * magneticFlux` | `KElectricCurrentUnitInstance` | `Θ = Rm · Φ` (commutative) |
-| `current / reluctance` | `KMagneticFluxUnitInstance` | `Φ = Θ / Rm` |
-| `1 / reluctance` | `KInductanceUnitInstance` | the permeance `Λ = 1 / Rm` (in henries) |
+| Expression                  | Result type                    | Meaning                                 |
+|-----------------------------|--------------------------------|-----------------------------------------|
+| `reluctance * magneticFlux` | `KElectricCurrentUnitInstance` | `Θ = Rm · Φ` (commutative)              |
+| `current / reluctance`      | `KMagneticFluxUnitInstance`    | `Φ = Θ / Rm`                            |
+| `1 / reluctance`            | `KInductanceUnitInstance`      | the permeance `Λ = 1 / Rm` (in henries) |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -119,14 +118,16 @@ import org.pcsoft.framework.kunit.electric.reluctance.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `⁻²`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `⁻²`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written
+both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `A/Wb` | `amperesPerWeber` | reluctance, base unit (named token, ampere per weber) |
-| `H⁻¹` | `inverseHenries` | the reciprocal-inductance spelling of the same quantity |
-| `Θ / Φ` | `(6 of amperes) / (3 of webers)` | reluctance from Hopkinson's law |
-| `1 / Λ` | `1 / (0.5 of henries)` | reluctance as the reciprocal of the permeance |
-| `(s²·A²)/(kg·m²)` | `((seconds pow 2) * (amperes pow 2)) / (kilo.grams * (meters pow 2))` | reluctance as (time²·current²) / (mass·length²) (fraction form) |
-| `kg⁻¹·m⁻²·s²·A²` | `(kilo.grams pow -1) * (meters pow -2) * (seconds pow 2) * (amperes pow 2)` | same reluctance as a pure product |
-| `MA/Wb` | `mega.amperesPerWeber` | prefixed reluctance (megaampere per weber) |
+| Mathematics       | Kotlin                                                                      | Meaning                                                         |
+|-------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------|
+| `A/Wb`            | `amperesPerWeber`                                                           | reluctance, base unit (named token, ampere per weber)           |
+| `H⁻¹`             | `inverseHenries`                                                            | the reciprocal-inductance spelling of the same quantity         |
+| `Θ / Φ`           | `(6 of amperes) / (3 of webers)`                                            | reluctance from Hopkinson's law                                 |
+| `1 / Λ`           | `1 / (0.5 of henries)`                                                      | reluctance as the reciprocal of the permeance                   |
+| `(s²·A²)/(kg·m²)` | `((seconds pow 2) * (amperes pow 2)) / (kilo.grams * (meters pow 2))`       | reluctance as (time²·current²) / (mass·length²) (fraction form) |
+| `kg⁻¹·m⁻²·s²·A²`  | `(kilo.grams pow -1) * (meters pow -2) * (seconds pow 2) * (amperes pow 2)` | same reluctance as a pure product                               |
+| `MA/Wb`           | `mega.amperesPerWeber`                                                      | prefixed reluctance (megaampere per weber)                      |

@@ -5,21 +5,21 @@
 
 種別: **ネイティブ単位（native unit）**
 
-物質量はSIの7つの基本量の1つです — 直接測定可能で構成されていない量であり、そのため**ネイティブ単位**
+物質量はSIの7つの基本量の1つです — 直接測定可能で構成されていない量であり、そのため **ネイティブ単位**
 です。`KAmountOfSubstanceUnitInstance` は単純な一次元のラッパーです — `KAmountOfSubstanceUnit.BASE`
 (モル)の項を指数1として1つだけ持ち、常にモルに正規化されます。
 
-これは熱力学分野におけるあらゆる*モル*量の基礎です([モルエネルギー](molar-energy.md)、
+これは熱力学分野におけるあらゆる *モル*量の基礎です ([モルエネルギー](molar-energy.md)、
 [モル熱容量](molar-heat-capacity.md))。
 
 ## 名前付き単位
 
-| 単位 | 記号 | トークン | molでの1単位 |
-|---|---|---:|---:|
-| モル | `mol` | `moles` | 1.0 |
-| ポンドモル | `lbmol` | `poundMoles` | 453.59237 |
+| 単位       | 記号    |     トークン | molでの1単位 |
+|------------|---------|-------------:|-------------:|
+| モル       | `mol`   |      `moles` |          1.0 |
+| ポンドモル | `lbmol` | `poundMoles` |    453.59237 |
 
-どちらもSI接頭辞の全範囲をサポートします(`milli.moles`、`micro.moles`、`kilo.moles` など)。
+どちらもSI接頭辞の全範囲をサポートします (`milli.moles`、`micro.moles`、`kilo.moles` など)。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -37,9 +37,8 @@ n into milli.moles      // 2000.0
 
 ## アボガドロ定数
 
-このグループはアボガドロ定数の正確なSI値を `AVOGADRO_CONSTANT`(6.02214076e23 mol⁻¹)として公開し、
-インスタンスの便利メソッド `particleCount()` も提供します。どちらも単純な `Double` を返します。
-粒子数は無次元だからです。
+このグループはアボガドロ定数の正確なSI値を `AVOGADRO_CONSTANT`(6.02214076e23 mol⁻¹)として公開し、 インスタンスの便利メソッド
+`particleCount()` も提供します。どちらも単純な `Double` を返します。 粒子数は無次元だからです。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -51,7 +50,7 @@ AVOGADRO_CONSTANT             // 6.02214076e23
 
 ## 実例 — 食塩を溶かす
 
-塩化ナトリウム(モル質量 58.44 g/mol)25 gには何モルが含まれ、それは何個の式量単位に相当するでしょうか?
+塩化ナトリウム (モル質量 58.44 g/mol)25 gには何モルが含まれ、それは何個の式量単位に相当するでしょうか?
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -85,8 +84,8 @@ val rest  = (1 of moles) - (250 of milli.moles)   // 0.75 mol
 (1 of moles) == (1000 of milli.moles) // true
 ```
 
-物質量を他の量と乗算/除算すると、型付きの結果が存在しない限り汎用の混合単位エンジンに外れます —
-例えば `energy / amountOfSubstance` は型付きの[モルエネルギー](molar-energy.md)です。
+物質量を他の量と乗算/除算すると、型付きの結果が存在しない限り汎用の混合単位エンジンに外れます — 例えば
+`energy / amountOfSubstance` は型付きの[モルエネルギー](molar-energy.md)です。
 
 ## toString によるフォーマット
 
@@ -102,13 +101,14 @@ import org.pcsoft.framework.kunit.thermo.amountofsubstance.*
 
 ## 記法
 
-以下の表は、この単位が数学的にどう書かれ、KUnitを使ったKotlinでどう書かれるかを示します。指数はUnicodeの上付き文字（`²`、`³`、`⁻¹`）を使用し、`·` は乗算、`/` は分数を表します。
+以下の表は、この単位が数学的にどう書かれ、KUnitを使ったKotlinでどう書かれるかを示します。指数はUnicodeの上付き文字（`²`、`³`、
+`⁻¹`）を使用し、`·` は乗算、`/` は分数を表します。
 
-| 数学 | Kotlin | 意味 |
-|---|---|---|
-| `mol` | `moles` | 物質量、基本単位 |
-| `mmol` | `milli.moles` | ミリモル |
-| `kmol` | `kilo.moles` | キロモル |
-| `lbmol` | `poundMoles` | ポンドモル(帝国工学単位) |
-| `n = m / M` | `(sample.value / molarMass) of moles` | 質量÷モル質量から物質量 |
-| `N = n · N_A` | `n.particleCount()` | 物質量×アボガドロ定数から粒子数 |
+| 数学          | Kotlin                                | 意味                            |
+|---------------|---------------------------------------|---------------------------------|
+| `mol`         | `moles`                               | 物質量、基本単位                |
+| `mmol`        | `milli.moles`                         | ミリモル                        |
+| `kmol`        | `kilo.moles`                          | キロモル                        |
+| `lbmol`       | `poundMoles`                          | ポンドモル(帝国工学単位)        |
+| `n = m / M`   | `(sample.value / molarMass) of moles` | 質量÷モル質量から物質量         |
+| `N = n · N_A` | `n.particleCount()`                   | 物質量×アボガドロ定数から粒子数 |

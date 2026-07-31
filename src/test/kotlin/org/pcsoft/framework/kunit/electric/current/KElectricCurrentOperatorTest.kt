@@ -13,9 +13,9 @@
 package org.pcsoft.framework.kunit.electric.current
 
 import org.pcsoft.framework.kunit.div
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.times
-import org.pcsoft.framework.kunit.kinematic.time.seconds
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

@@ -1,9 +1,10 @@
 # カスタム単位の追加
 
-kunit は現在いくつかの単位グループを提供しています([距離](units/kinematics/distance.md)、[時間](units/kinematics/time.md)、
-[ストレージ](units/information/storage.md)、[速度](units/kinematics/speed.md)、[データ転送率](units/information/datarate.md))が、エンジン全体
-(`KUnit`、`KMixedUnitInstance`、`of`/`into` の動詞、接頭辞ビルダー)は汎用的でグループに依存しません。新しい
-物理量を追加するとは、同じパターンに従うことを意味します。このページでは、デモ用の**質量**グループ
+kunit は現在いくつかの単位グループを提供しています
+([距離](units/kinematics/distance.md)、[時間](units/kinematics/time.md)、
+[ストレージ](units/information/storage.md)、[速度](units/kinematics/speed.md)、[データ転送率](units/information/datarate.md))
+が、エンジン全体 (`KUnit`、`KMixedUnitInstance`、`of`/`into` の動詞、接頭辞ビルダー)は汎用的でグループに依存しません。新しい
+物理量を追加するとは、同じパターンに従うことを意味します。このページでは、デモ用の **質量**グループ
 (`org.pcsoft.framework.kunit.mechanic.mass`) — ストレージグループをモデルにした素朴な1次元グループ — の追加を順を追って
 説明します。
 
@@ -40,11 +41,11 @@ enum class KMassUnit(override val symbol: String, override val baseValue: Double
 
 ## 2. ラッパークラスを作成する
 
-ラッパー(`KMassUnitInstance`)は `KMixedUnitInstance` を**委譲**(`KUnitMeasurable by instance`)で
-カプセル化し、`KUnitInstance<KMassUnitInstance>` を実装します。`KUnitInstance` のみのメンバー
-(`plus`/`minus`/`compareTo`)と、`of` を支える `scaledBy` のオーバーライド、および
-`equals`/`hashCode`/`toString` だけを手書きします。`valueAs`/`toString(target)` は**ありません** — 読み取りは
-グループ非依存の `into` 動詞です。`KStorageUnitInstance` の形をコピーしてください。
+ラッパー (`KMassUnitInstance`)は `KMixedUnitInstance` を **委譲**(`KUnitMeasurable by instance`)で カプセル化し、
+`KUnitInstance<KMassUnitInstance>` を実装します。`KUnitInstance` のみのメンバー (`plus`/`minus`/`compareTo`)と、`of` を支える
+`scaledBy` のオーバーライド、および
+`equals`/`hashCode`/`toString` だけを手書きします。`valueAs`/`toString(target)` は **ありません** — 読み取りは グループ非依存の
+`into` 動詞です。`KStorageUnitInstance` の形をコピーしてください。
 
 ```kotlin
 package org.pcsoft.framework.kunit.mechanic.mass
@@ -131,7 +132,7 @@ val KPrefixBuilder.pounds: KMassUnitInstance get() = prefixedMass(this, KMassUni
 val KPrefixBuilder.ounces: KMassUnitInstance get() = prefixedMass(this, KMassUnit.OUNCE)
 ```
 
-これで完了です — これだけで完全な `+`、`-`、`*`、`/`、比較、SI 接頭辞ビルダー(`5 of milli.grams`)、
+これで完了です — これだけで完全な `+`、`-`、`*`、`/`、比較、SI 接頭辞ビルダー (`5 of milli.grams`)、
 `toUnit()`/`toMass()` の往復変換がすべて無料で手に入ります。
 
 ```kotlin
@@ -148,9 +149,9 @@ println(total into grams)
 val heavier = b > a          // true
 ```
 
-## 4.(任意)特殊/派生単位を追加する
+## 4. (任意)特殊/派生単位を追加する
 
-特定のスケーリングに結び付いた、よく使われる名前付き単位(面積のヘクタールのような)がグループにある場合は、
+特定のスケーリングに結び付いた、よく使われる名前付き単位 (面積のヘクタールのような)がグループにある場合は、
 名前付きの値1インスタンスとして追加します — 別のターゲット型は不要です:
 
 ```kotlin
@@ -172,7 +173,7 @@ println((2500 of grams) into tonnes) // 0.0025
 
 すべてが最終的に汎用の `KMixedUnitInstance` エンジンに集約されるため、新しいグループは `*`/`/` を介して他の任意の
 グループとすぐに組み合わせられます — ルールについては [混合単位](mixed-units.md) を参照してください。強く型付け
-されたグループ間の結果(`mass / volume = density` のような)については、`KSpeedUnitOperators.kt` を反映して
+されたグループ間の結果 (`mass / volume = density` のような)については、`KSpeedUnitOperators.kt` を反映して
 `K...UnitOperators.kt` に型付き演算子拡張を追加します。
 
 ```kotlin
@@ -186,13 +187,13 @@ val density = (5 of kilograms) / (2 of liters)
 
 ## 6. 命名とテストのチェックリスト
 
-- すべての public 型は `K` で始まります(`KMassUnit`、`KMassUnitInstance` など)。値1の bare トークンと接頭辞
-  ビルダーのプロパティ拡張(`kilograms`、`grams` など)は例外で、言語的に自然なままにします。
-- パラメータ化されたクロスマトリクステスト手順でグループをカバーします。`of`/`into` を通して構築し(生の enum は
+- すべての public 型は `K` で始まります (`KMassUnit`、`KMassUnitInstance` など)。値1の bare トークンと接頭辞 ビルダーのプロパティ拡張
+  (`kilograms`、`grams` など)は例外で、言語的に自然なままにします。
+- パラメータ化されたクロスマトリクステスト手順でグループをカバーします。`of`/`into` を通して構築し (生の enum は
   決して使わない): 単位 → 単位の変換、単位ペアごとに演算子ごと・比較ごとに1メソッド、接頭辞ビルダーマトリクス、
   `of` の型保存、`into` のエラーケース — `../../.claude/CLAUDE.md` の「パラメータ化クロスマトリクステスト手順」の節を参照して
   ください。
 - すべての public メンバーを英語で、Markdown で、有用な場合は例を添えてドキュメント化します — 特に演算子。
-- グループが大きさ制限付き(縮小接頭辞を拒否するストレージのような)である場合は、その単位プロパティを基底
+- グループが大きさ制限付き (縮小接頭辞を拒否するストレージのような)である場合は、その単位プロパティを基底
   `KPrefixBuilder` ではなく `KAugmentingPrefixBuilder`/`KDiminishingPrefixBuilder` に付け、許可されない接頭辞を
   **コンパイルエラー**にします。

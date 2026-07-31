@@ -15,32 +15,32 @@
 
 ## 単位
 
-| 系統 | 単位 | 列挙値 | 記号 | トークン | 1 単位のグラム値 |
-|---|---|---|---|---:|---:|
-| メートル法 | グラム | `KMassUnit.GRAM` | `g` | `grams` | 1.0 |
-| メートル法 | トン（メトリックトン） | `KMassUnit.TONNE` | `t` | `tonnes` | 1 000 000 |
-| メートル法 | カラット（メートル） | `KMassUnit.CARAT` | `ct` | `carats` | 0.2 |
-| 常衡 | グレーン | `KMassUnit.GRAIN` | `gr` | `grains` | 0.06479891 |
-| 常衡 | ドラム | `KMassUnit.DRAM` | `dr` | `drams` | 1.7718451953125 |
-| 常衡 | オンス | `KMassUnit.OUNCE` | `oz` | `ounces` | 28.349523125 |
-| 常衡 | ポンド | `KMassUnit.POUND` | `lb` | `pounds` | 453.59237 |
-| 常衡 | ストーン | `KMassUnit.STONE` | `st` | `stones` | 6350.29318 |
-| 常衡 | ハンドレッドウェイト US（ショート） | `KMassUnit.HUNDREDWEIGHT_US` | `cwt(US)` | `hundredweightsUS` | 45 359.237 |
-| 常衡 | ハンドレッドウェイト UK（ロング） | `KMassUnit.HUNDREDWEIGHT_UK` | `cwt(UK)` | `hundredweightsUK` | 50 802.34544 |
-| 常衡 | ショートトン（US） | `KMassUnit.SHORT_TON` | `ton(US)` | `shortTons` | 907 184.74 |
-| 常衡 | ロングトン（UK） | `KMassUnit.LONG_TON` | `ton(UK)` | `longTons` | 1 016 046.9088 |
-| 常衡 | スラグ | `KMassUnit.SLUG` | `slug` | `slugs` | 14 593.90294 |
-| トロイ | ペニーウェイト | `KMassUnit.PENNYWEIGHT` | `dwt` | `pennyweights` | 1.55517384 |
-| トロイ | トロイオンス | `KMassUnit.TROY_OUNCE` | `oz t` | `troyOunces` | 31.1034768 |
-| トロイ | トロイポンド | `KMassUnit.TROY_POUND` | `lb t` | `troyPounds` | 373.2417216 |
-| 歴史的 | ドイツポンド | `KMassUnit.GERMAN_POUND` | `Pfd` | `germanPounds` | 500 |
-| 歴史的 | ツェントナー | `KMassUnit.ZENTNER` | `Ztr` | `zentners` | 50 000 |
-| 歴史的 | ロート | `KMassUnit.LOT` | `Lot` | `lots` | 16.6666667 |
-| 地域 | 斤 | `KMassUnit.JIN` | `斤` | `jin` | 500 |
-| 地域 | 両 | `KMassUnit.LIANG` | `两` | `liang` | 50 |
-| 地域 | 匁 | `KMassUnit.MOMME` | `匁` | `momme` | 3.75 |
-| 地域 | 貫 | `KMassUnit.KAN` | `貫` | `kan` | 3750 |
-| 科学 | ダルトン（u） | `KMassUnit.DALTON` | `Da` | `daltons` | 1.6605390666e-24 |
+| 系統       | 単位                                | 列挙値                       | 記号      |           トークン | 1 単位のグラム値 |
+|------------|-------------------------------------|------------------------------|-----------|-------------------:|-----------------:|
+| メートル法 | グラム                              | `KMassUnit.GRAM`             | `g`       |            `grams` |              1.0 |
+| メートル法 | トン（メトリックトン）              | `KMassUnit.TONNE`            | `t`       |           `tonnes` |        1 000 000 |
+| メートル法 | カラット（メートル）                | `KMassUnit.CARAT`            | `ct`      |           `carats` |              0.2 |
+| 常衡       | グレーン                            | `KMassUnit.GRAIN`            | `gr`      |           `grains` |       0.06479891 |
+| 常衡       | ドラム                              | `KMassUnit.DRAM`             | `dr`      |            `drams` |  1.7718451953125 |
+| 常衡       | オンス                              | `KMassUnit.OUNCE`            | `oz`      |           `ounces` |     28.349523125 |
+| 常衡       | ポンド                              | `KMassUnit.POUND`            | `lb`      |           `pounds` |        453.59237 |
+| 常衡       | ストーン                            | `KMassUnit.STONE`            | `st`      |           `stones` |       6350.29318 |
+| 常衡       | ハンドレッドウェイト US（ショート） | `KMassUnit.HUNDREDWEIGHT_US` | `cwt(US)` | `hundredweightsUS` |       45 359.237 |
+| 常衡       | ハンドレッドウェイト UK（ロング）   | `KMassUnit.HUNDREDWEIGHT_UK` | `cwt(UK)` | `hundredweightsUK` |     50 802.34544 |
+| 常衡       | ショートトン（US）                  | `KMassUnit.SHORT_TON`        | `ton(US)` |        `shortTons` |       907 184.74 |
+| 常衡       | ロングトン（UK）                    | `KMassUnit.LONG_TON`         | `ton(UK)` |         `longTons` |   1 016 046.9088 |
+| 常衡       | スラグ                              | `KMassUnit.SLUG`             | `slug`    |            `slugs` |     14 593.90294 |
+| トロイ     | ペニーウェイト                      | `KMassUnit.PENNYWEIGHT`      | `dwt`     |     `pennyweights` |       1.55517384 |
+| トロイ     | トロイオンス                        | `KMassUnit.TROY_OUNCE`       | `oz t`    |       `troyOunces` |       31.1034768 |
+| トロイ     | トロイポンド                        | `KMassUnit.TROY_POUND`       | `lb t`    |       `troyPounds` |      373.2417216 |
+| 歴史的     | ドイツポンド                        | `KMassUnit.GERMAN_POUND`     | `Pfd`     |     `germanPounds` |              500 |
+| 歴史的     | ツェントナー                        | `KMassUnit.ZENTNER`          | `Ztr`     |         `zentners` |           50 000 |
+| 歴史的     | ロート                              | `KMassUnit.LOT`              | `Lot`     |             `lots` |       16.6666667 |
+| 地域       | 斤                                  | `KMassUnit.JIN`              | `斤`      |              `jin` |              500 |
+| 地域       | 両                                  | `KMassUnit.LIANG`            | `两`      |            `liang` |               50 |
+| 地域       | 匁                                  | `KMassUnit.MOMME`            | `匁`      |            `momme` |             3.75 |
+| 地域       | 貫                                  | `KMassUnit.KAN`              | `貫`      |              `kan` |             3750 |
+| 科学       | ダルトン（u）                       | `KMassUnit.DALTON`           | `Da`      |          `daltons` | 1.6605390666e-24 |
 
 各 `トークン` は `of`（構築）と `into`（読み取り）で使う値 1 の `KMassUnitInstance` です。
 
@@ -124,11 +124,13 @@ import org.pcsoft.framework.kunit.mechanic.mass.*
 
 ## 記法
 
-下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な Kotlin の両形式を併記します。
+下の表は、この単位とその構成要素を数学的にどう書くか、KUnit を用いて Kotlin でどう書くかを対比します。指数は Unicode
+の上付き文字（`²`、`³`、`⁻¹`）で表し、`·` は乗算、`/` は分数を表します。分数としても負の指数を用いた積としても書ける量については、同等な
+Kotlin の両形式を併記します。
 
-| 数学 | Kotlin | 意味 |
-|---|---|---|
-| `g` | `grams` | 質量、基本単位（グラム） |
-| `kg` | `kilo.grams` | キログラム（グラムに接頭辞を適用） |
-| `mg` | `milli.grams` | ミリグラム |
-| `g²` | `grams pow 2` | グラムの2乗（汎用混合単位） |
+| 数学 | Kotlin        | 意味                               |
+|------|---------------|------------------------------------|
+| `g`  | `grams`       | 質量、基本単位（グラム）           |
+| `kg` | `kilo.grams`  | キログラム（グラムに接頭辞を適用） |
+| `mg` | `milli.grams` | ミリグラム                         |
+| `g²` | `grams pow 2` | グラムの2乗（汎用混合単位）        |

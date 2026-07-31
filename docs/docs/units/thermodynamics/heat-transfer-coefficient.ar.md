@@ -1,43 +1,43 @@
 # معامل انتقال الحرارة
 
 الحزمة: `org.pcsoft.framework.kunit.thermo.heattransfercoefficient`
-الوحدة الأساسية: **واط لكل متر مربع-كلفن** (`KHeatTransferCoefficientUnit.BASE == KHeatTransferCoefficientUnit.WATT_PER_SQUARE_METER_KELVIN`)
+الوحدة الأساسية: **واط لكل متر مربع-كلفن**
+(`KHeatTransferCoefficientUnit.BASE == KHeatTransferCoefficientUnit.WATT_PER_SQUARE_METER_KELVIN`)
 
 النوع: **وحدة مركّبة**
 
-معامل انتقال الحرارة — في فيزياء المباني هو **قيمة U** — هو كثافة التدفّق الحراري التي يمرّرها عنصر
-لكل كلفن من فرق درجة الحرارة: `W/(m²·K)`. كلّما قلّت قيمة U، كان العزل أفضل.
+معامل انتقال الحرارة — في فيزياء المباني هو **قيمة U** — هو كثافة التدفّق الحراري التي يمرّرها عنصر لكل كلفن من فرق درجة
+الحرارة: `W/(m²·K)`. كلّما قلّت قيمة U، كان العزل أفضل.
 
-يغلّف `KHeatTransferCoefficientUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط
-بالصيغة القياسية `mass¹ · time⁻³ · temperature⁻¹` (`kg·s⁻³·K⁻¹`)، مطبَّعًا دائمًا إلى W/(m²·K). وكما
-في [كثافة التدفّق الحراري](heat-flux-density.md) تُلغي المساحة أبعاد الطول للواط، لذا لا تحمل الصيغة
-القياسية حدّ مسافة.
+يغلّف `KHeatTransferCoefficientUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط بالصيغة القياسية
+`mass¹ · time⁻³ · temperature⁻¹` (`kg·s⁻³·K⁻¹`)، مطبَّعًا دائمًا إلى W/ (m²·K). وكما
+في [كثافة التدفّق الحراري](heat-flux-density.md) تُلغي المساحة أبعاد الطول للواط، لذا لا تحمل الصيغة القياسية حدّ مسافة.
 
 مقلوبها هو [المقاومة الحرارية](thermal-resistance.md) (قيمة R)؛ وضربها في سماكة يجعلها
 [موصلية حرارية](thermal-conductivity.md).
 
 ## الوحدات المسمّاة
 
-| الوحدة | الرمز | الرمز البرمجي | 1 وحدة بـ W/(m²·K) |
-|---|---|---:|---:|
-| واط لكل متر مربع-كلفن | `W/(m²·K)` | `wattsPerSquareMeterKelvin` | 1.0 |
-| وحدة حرارية بريطانية لكل ساعة-قدم مربع-°F | `Btu/(h·ft²·°F)` | `btusPerHourSquareFootFahrenheit` | ≈ 5.678263 |
-| سعرة لكل ثانية-سم مربع-كلفن | `cal/(s·cm²·K)` | `caloriesPerSecondSquareCentimeterKelvin` | 41840.0 |
+| الوحدة                                    | الرمز            |                             الرمز البرمجي | 1 وحدة بـ W/(m²·K) |
+|-------------------------------------------|------------------|------------------------------------------:|-------------------:|
+| واط لكل متر مربع-كلفن                     | `W/(m²·K)`       |               `wattsPerSquareMeterKelvin` |                1.0 |
+| وحدة حرارية بريطانية لكل ساعة-قدم مربع-°F | `Btu/(h·ft²·°F)` |         `btusPerHourSquareFootFahrenheit` |         ≈ 5.678263 |
+| سعرة لكل ثانية-سم مربع-كلفن               | `cal/(s·cm²·K)`  | `caloriesPerSecondSquareCentimeterKelvin` |            41840.0 |
 
 جميعها تدعم نطاق بادئات النظام الدولي الكامل (`milli.wattsPerSquareMeterKelvin`، …).
 
 ## قيم U النموذجية
 
-| العنصر | U |
-|---|---:|
-| زجاج مفرد | ≈ 5.8 W/(m²·K) |
-| زجاج مزدوج | ≈ 2.8 W/(m²·K) |
-| زجاج ثلاثي | ≈ 0.7 … 1.3 W/(m²·K) |
-| جدار منزل موفّر للطاقة | ≈ 0.15 W/(m²·K) |
+| العنصر                |                    U |
+|-----------------------|---------------------:|
+| زجاج مفرد             |       ≈ 5.8 W/(m²·K) |
+| زجاج مزدوج            |       ≈ 2.8 W/(m²·K) |
+| زجاج ثلاثي            | ≈ 0.7 … 1.3 W/(m²·K) |
+| جدار منزل موفّر للطاقة |      ≈ 0.15 W/(m²·K) |
 
 ## مثال واقعي: فقد الحرارة عبر نافذة
 
-نافذة زجاجها ثلاثي بمساحة 2.4 m² وقيمة U = 1.3 W/(m²·K). درجة الحرارة 21 °C داخليًا و1 °C خارجيًا.
+نافذة زجاجها ثلاثي بمساحة 2.4 m² وقيمة U = 1.3 W/ (m²·K). درجة الحرارة 21 °C داخليًا و1 °C خارجيًا.
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -65,26 +65,26 @@ val single = 5.8 of wattsPerSquareMeterKelvin
 
 ## الحساب باستخدام الوحدات المجاورة
 
-| التعبير | نوع النتيجة | المعنى |
-|---|---|---|
-| `heatFluxDensity / temperatureDifference` | `KHeatTransferCoefficientUnitInstance` | قيمة U من قياس |
-| `thermalConductivity / length` | `KHeatTransferCoefficientUnitInstance` | قيمة U من المادّة + السماكة |
-| `heatTransferCoefficient * temperatureDifference` | `KHeatFluxDensityUnitInstance` | التدفّق عبر العنصر |
-| `temperatureDifference * heatTransferCoefficient` | `KHeatFluxDensityUnitInstance` | نفسه (تبادلي) |
-| `heatFluxDensity / heatTransferCoefficient` | `KTemperatureDifferenceUnitInstance` | الفرق الدافع |
-| `heatTransferCoefficient * length` | `KThermalConductivityUnitInstance` | موصلية المادّة |
-| `length * heatTransferCoefficient` | `KThermalConductivityUnitInstance` | نفسه (تبادلي) |
-| `thermalConductivity / heatTransferCoefficient` | `KLengthUnitInstance` | السماكة المطلوبة |
+| التعبير                                           | نوع النتيجة                            | المعنى                     |
+|---------------------------------------------------|----------------------------------------|----------------------------|
+| `heatFluxDensity / temperatureDifference`         | `KHeatTransferCoefficientUnitInstance` | قيمة U من قياس             |
+| `thermalConductivity / length`                    | `KHeatTransferCoefficientUnitInstance` | قيمة U من المادّة + السماكة |
+| `heatTransferCoefficient * temperatureDifference` | `KHeatFluxDensityUnitInstance`         | التدفّق عبر العنصر          |
+| `temperatureDifference * heatTransferCoefficient` | `KHeatFluxDensityUnitInstance`         | نفسه (تبادلي)              |
+| `heatFluxDensity / heatTransferCoefficient`       | `KTemperatureDifferenceUnitInstance`   | الفرق الدافع               |
+| `heatTransferCoefficient * length`                | `KThermalConductivityUnitInstance`     | موصلية المادّة              |
+| `length * heatTransferCoefficient`                | `KThermalConductivityUnitInstance`     | نفسه (تبادلي)              |
+| `thermalConductivity / heatTransferCoefficient`   | `KLengthUnitInstance`                  | السماكة المطلوبة           |
 
 ## التفكيكات
 
 جميع التفكيكات الثلاثة تُنتج نفس النسخة المحكومة بالنوع والمتساوية القيمة.
 
-| التفكيك | الصيغة | النتيجة |
-|---|---|---|
-| `heatFluxDensity / temperatureDifference` | معامل مكتوب بنوع صريح | `KHeatTransferCoefficientUnitInstance` |
-| `thermalConductivity / length` | معامل مكتوب بنوع صريح | `KHeatTransferCoefficientUnitInstance` |
-| `mass · time⁻³ · temperature⁻¹` | تعبير أصلي + `toHeatTransferCoefficient()` | `KHeatTransferCoefficientUnitInstance` |
+| التفكيك                                   | الصيغة                                     | النتيجة                                |
+|-------------------------------------------|--------------------------------------------|----------------------------------------|
+| `heatFluxDensity / temperatureDifference` | معامل مكتوب بنوع صريح                      | `KHeatTransferCoefficientUnitInstance` |
+| `thermalConductivity / length`            | معامل مكتوب بنوع صريح                      | `KHeatTransferCoefficientUnitInstance` |
+| `mass · time⁻³ · temperature⁻¹`           | تعبير أصلي + `toHeatTransferCoefficient()` | `KHeatTransferCoefficientUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -134,15 +134,15 @@ import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.*
 
 ## الترميز
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب
-الأسس بحروف يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر
-وكحاصل ضرب بأسس سالبة، تُذكر الصيغتان المتكافئتان في Kotlin.
+يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
+يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
+تُذكر الصيغتان المتكافئتان في Kotlin.
 
-| الرياضيات | Kotlin | المعنى |
-|---|---|---|
-| `W/(m²·K)` | `wattsPerSquareMeterKelvin` | معامل انتقال الحرارة (قيمة U)، الوحدة الأساسية |
-| `kg·s⁻³·K⁻¹` | `grams / (seconds pow 3) / ΔK` | نفس الكمّية بالأبعاد الأساسية |
-| `U = q̇ / ΔT` | `(26 of wattsPerSquareMeter) / drop` | قيمة U من التدفّق ÷ فرق درجة الحرارة |
-| `U = λ / d` | `(0.04 of wattsPerMeterKelvin) / (0.2 of meters)` | قيمة U من الموصلية ÷ السماكة |
-| `q̇ = U · ΔT` | `window * drop` | التدفّق من قيمة U × فرق درجة الحرارة |
-| `P = U · A · ΔT` | `(window * drop) * glass` | إجمالي فقد الحرارة |
+| الرياضيات        | Kotlin                                            | المعنى                                         |
+|------------------|---------------------------------------------------|------------------------------------------------|
+| `W/(m²·K)`       | `wattsPerSquareMeterKelvin`                       | معامل انتقال الحرارة (قيمة U)، الوحدة الأساسية |
+| `kg·s⁻³·K⁻¹`     | `grams / (seconds pow 3) / ΔK`                    | نفس الكمّية بالأبعاد الأساسية                   |
+| `U = q̇ / ΔT`     | `(26 of wattsPerSquareMeter) / drop`              | قيمة U من التدفّق ÷ فرق درجة الحرارة            |
+| `U = λ / d`      | `(0.04 of wattsPerMeterKelvin) / (0.2 of meters)` | قيمة U من الموصلية ÷ السماكة                   |
+| `q̇ = U · ΔT`     | `window * drop`                                   | التدفّق من قيمة U × فرق درجة الحرارة            |
+| `P = U · A · ΔT` | `(window * drop) * glass`                         | إجمالي فقد الحرارة                             |

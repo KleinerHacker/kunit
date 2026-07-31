@@ -52,10 +52,12 @@ class KDensityUnitInstance internal constructor(internal val instance: KMixedUni
      * Adds two densities, automatically converting between the constructing units since both operands are
      * always normalized to the same component base internally.
      */
-    override operator fun plus(other: KDensityUnitInstance): KDensityUnitInstance = KDensityUnitInstance(instance + other.instance)
+    override operator fun plus(other: KDensityUnitInstance): KDensityUnitInstance =
+        KDensityUnitInstance(instance + other.instance)
 
     /** Subtracts two densities. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KDensityUnitInstance): KDensityUnitInstance = KDensityUnitInstance(instance - other.instance)
+    override operator fun minus(other: KDensityUnitInstance): KDensityUnitInstance =
+        KDensityUnitInstance(instance - other.instance)
 
     /** Multiplies two densities, producing a new [KMixedUnitInstance] (no longer a "pure" density). */
     operator fun times(other: KDensityUnitInstance): KMixedUnitInstance = instance * other.instance

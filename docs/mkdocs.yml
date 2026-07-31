@@ -412,6 +412,7 @@ plugins:
 nav:
   - Home: index.md
   - Mixed Units: mixed-units.md
+  - Periodic Table: periodic-table.md
   - Adding Custom Units: custom-units.md
   - Formatter:
       - Overview: formatter/formatting.md
@@ -438,6 +439,24 @@ nav:
       - Pressure: units/mechanics/pressure.md
       - Density: units/mechanics/density.md
       - Area Density: units/mechanics/areadensity.md
+      - Linear Density: units/mechanics/linear-density.md
+      - Specific Volume: units/mechanics/specific-volume.md
+      - Mass Flow Rate: units/mechanics/mass-flow.md
+      - Momentum: units/mechanics/momentum.md
+      - Impulse: units/mechanics/impulse.md
+      - Angle: units/mechanics/angle.md
+      - Solid Angle: units/mechanics/solid-angle.md
+      - Angular Velocity: units/mechanics/angular-velocity.md
+      - Angular Acceleration: units/mechanics/angular-acceleration.md
+      - Moment of Inertia: units/mechanics/moment-of-inertia.md
+      - Angular Momentum: units/mechanics/angular-momentum.md
+      - Torque: units/mechanics/torque.md
+      - Dynamic Viscosity: units/mechanics/viscosity.md
+      - Kinematic Viscosity: units/mechanics/kinematic-viscosity.md
+      - Surface Tension: units/mechanics/surface-tension.md
+      - Stiffness: units/mechanics/stiffness.md
+      - Strain: units/mechanics/strain.md
+      - "Stress & Elastic Modulus": units/mechanics/stress.md
       - Power (Mechanics): units/mechanics/power.md
       - Energy (Mechanics): units/mechanics/energy.md
   - Electrical Engineering:
@@ -469,9 +488,9 @@ nav:
   - Thermodynamics:
       - Overview: units/thermodynamics/overview.md
       - Temperature:
-        - Overview: units/thermodynamics/temperature-overview.md
-        - Absolute Temperature: units/thermodynamics/temperature.md
-        - Temperature Difference: units/thermodynamics/temperature-difference.md
+          - Overview: units/thermodynamics/temperature-overview.md
+          - Absolute Temperature: units/thermodynamics/temperature.md
+          - Temperature Difference: units/thermodynamics/temperature-difference.md
       - Amount of Substance: units/thermodynamics/amount-of-substance.md
       - Power (Thermodynamics): units/thermodynamics/power.md
       - Energy (Thermodynamics): units/thermodynamics/energy.md
@@ -482,6 +501,8 @@ nav:
       - Molar Heat Capacity: units/thermodynamics/molar-heat-capacity.md
       - Specific Energy: units/thermodynamics/specific-energy.md
       - Molar Energy: units/thermodynamics/molar-energy.md
+      - Molar Mass: units/thermodynamics/molar-mass.md
+      - Molar Volume: units/thermodynamics/molar-volume.md
       - Heat Flux Density: units/thermodynamics/heat-flux-density.md
       - Thermal Conductivity: units/thermodynamics/thermal-conductivity.md
       - Heat Transfer Coefficient: units/thermodynamics/heat-transfer-coefficient.md

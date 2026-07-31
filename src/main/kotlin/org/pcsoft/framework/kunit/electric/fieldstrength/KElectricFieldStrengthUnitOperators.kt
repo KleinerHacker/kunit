@@ -14,13 +14,13 @@ package org.pcsoft.framework.kunit.electric.fieldstrength
 
 import org.pcsoft.framework.kunit.electric.charge.KChargeUnitInstance
 import org.pcsoft.framework.kunit.electric.charge.chargeInstanceOf
+import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
+import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
 import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
 import org.pcsoft.framework.kunit.mechanic.force.KForceUnitInstance
 import org.pcsoft.framework.kunit.mechanic.force.N_IN_BASE
 import org.pcsoft.framework.kunit.mechanic.force.forceUnitInstanceOf
-import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
-import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
 
 // Cross-unit operators around the electric field strength: the voltage decomposition (`E = U / l`) and the
 // force decomposition (`E = F / Q`). They live in the electricFieldStrength package because the group

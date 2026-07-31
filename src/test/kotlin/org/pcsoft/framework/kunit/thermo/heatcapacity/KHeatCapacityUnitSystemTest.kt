@@ -19,14 +19,8 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KHeatCapacityUnitInstance` surface: round-trip, equality, `toString`, operators, `toHeatCapacity`. */
 class KHeatCapacityUnitSystemTest {
@@ -67,9 +61,9 @@ class KHeatCapacityUnitSystemTest {
     fun `toHeatCapacity round-trip and failure`() {
         val kelvin = KTemperatureDifference.ofKelvin(1).toUnit()
         val raw = (1000 of grams).toUnit() *
-            ((1 of meters).toUnit() pow 2) /
-            ((1 of seconds).toUnit() pow 2) /
-            kelvin
+                ((1 of meters).toUnit() pow 2) /
+                ((1 of seconds).toUnit() pow 2) /
+                kelvin
         assertEquals(1.0, raw.toHeatCapacity() into joulesPerKelvin, 1e-9) // 1 kg·m²/(s²·K) = 1 J/K
 
         assertFailsWith<IllegalStateException> { (1000 of grams).toUnit().toHeatCapacity() }

@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.conductivity
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
@@ -122,12 +118,12 @@ fun KMixedUnitInstance.toThermalConductivity(): KThermalConductivityUnitInstance
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == -1 }
     check(units.size == 4 && massTerm != null && distanceTerm != null && timeTerm != null && temperatureTerm != null) {
         "KMixedUnitInstance $this does not represent a pure thermal conductivity " +
-            "(expected KMassUnit^1, KDistanceUnit^1, KTimeUnit^-3 and KTemperatureDifferenceUnit^-1)"
+                "(expected KMassUnit^1, KDistanceUnit^1, KTimeUnit^-3 and KTemperatureDifferenceUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        distanceTerm.unit.baseValue *
-        Math.pow(timeTerm.unit.baseValue, -3.0) *
-        Math.pow(temperatureTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            distanceTerm.unit.baseValue *
+            Math.pow(timeTerm.unit.baseValue, -3.0) *
+            Math.pow(temperatureTerm.unit.baseValue, -1.0)
     return thermalConductivityInstanceOf(gramBaseProduct / THERMAL_CONDUCTIVITY_MASS_REFERENCE)
 }

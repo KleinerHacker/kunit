@@ -14,21 +14,17 @@ package org.pcsoft.framework.kunit.electric.magneticfluxdensity
 
 import org.junit.jupiter.api.TestInstance
 import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.electric.current.amperes
-import org.pcsoft.framework.kunit.kilo
 import org.pcsoft.framework.kunit.electric.magneticflux.KMagneticFluxUnitInstance
 import org.pcsoft.framework.kunit.electric.magneticflux.webers
+import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.pow
-import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * The magnetic flux density operators: same-type arithmetic/comparison, the escape of

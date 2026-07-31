@@ -19,14 +19,8 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.amountofsubstance.moles
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KMolarEnergyUnitInstance` surface: round-trip, equality, `toString`, operators, `toMolarEnergy`. */
 class KMolarEnergyUnitSystemTest {
@@ -67,9 +61,9 @@ class KMolarEnergyUnitSystemTest {
     fun `toMolarEnergy round-trip and failure`() {
         val mol = (1 of moles).toUnit()
         val raw = (1000 of grams).toUnit() *
-            ((1 of meters).toUnit() pow 2) /
-            ((1 of seconds).toUnit() pow 2) /
-            mol
+                ((1 of meters).toUnit() pow 2) /
+                ((1 of seconds).toUnit() pow 2) /
+                mol
         assertEquals(1.0, raw.toMolarEnergy() into joulesPerMole, 1e-9)
 
         assertFailsWith<IllegalStateException> { (1000 of grams).toUnit().toMolarEnergy() }

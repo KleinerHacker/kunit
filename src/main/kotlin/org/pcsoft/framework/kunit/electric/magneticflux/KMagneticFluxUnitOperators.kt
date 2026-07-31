@@ -12,11 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.magneticflux
 
+import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
+import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
 import org.pcsoft.framework.kunit.kinematic.frequency.KFrequencyUnitInstance
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
 import org.pcsoft.framework.kunit.kinematic.time.timeUnitInstanceOf
-import org.pcsoft.framework.kunit.electric.voltage.KVoltageUnitInstance
-import org.pcsoft.framework.kunit.electric.voltage.voltageInstanceOf
 
 // Cross-unit operators between voltage, time, frequency and magnetic flux (Faraday's law of induction,
 // `Φ = U · t`). They live in the magneticflux package because flux depends on voltage and time (never the

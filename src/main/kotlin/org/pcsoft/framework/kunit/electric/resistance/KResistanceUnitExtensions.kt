@@ -32,7 +32,11 @@ val KPrefixBuilder.statohms: KResistanceUnitInstance get() = prefixedResistance(
 val KPrefixBuilder.abohms: KResistanceUnitInstance get() = prefixedResistance(this, KResistanceUnit.ABOHM)
 
 /** Prefixed international ohms, e.g. `milli.internationalOhms`. */
-val KPrefixBuilder.internationalOhms: KResistanceUnitInstance get() = prefixedResistance(this, KResistanceUnit.INTERNATIONAL_OHM)
+val KPrefixBuilder.internationalOhms: KResistanceUnitInstance
+    get() = prefixedResistance(
+        this,
+        KResistanceUnit.INTERNATIONAL_OHM
+    )
 
 /** Prefixed legal ohms, e.g. `milli.legalOhms`. */
 val KPrefixBuilder.legalOhms: KResistanceUnitInstance get() = prefixedResistance(this, KResistanceUnit.LEGAL_OHM)

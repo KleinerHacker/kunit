@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.specificenergy
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 
@@ -131,7 +127,7 @@ fun KMixedUnitInstance.toSpecificEnergy(): KSpecificEnergyUnitInstance {
         "KMixedUnitInstance $this does not represent a pure specific energy (expected KDistanceUnit^2 and KTimeUnit^-2)"
     }
     val normalized = value *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -2.0)
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -2.0)
     return specificEnergyInstanceOf(normalized)
 }

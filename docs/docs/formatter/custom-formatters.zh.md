@@ -1,9 +1,8 @@
 # 自定义格式化器
 
 [`format`](formatting.md) 动词和带参数的 `toString` 通过可插拔的 `KUnitFormatter` 渲染文本。随附的
-`KDefaultUnitFormatter` 生成诸如 `"10.8 km/h"` 的纯文本，但你可以插入完全自定义的渲染——例如为图形公式渲染器
-输出 **LaTeX** 或 **MathML**、HTML，或任何领域特定表示法。这使得 kunit 易于扩展到把字符串转换为排版公式的
-第三方框架。
+`KDefaultUnitFormatter` 生成诸如 `"10.8 km/h"` 的纯文本，但你可以插入完全自定义的渲染——例如为图形公式渲染器 输出
+**LaTeX** 或 **MathML**、HTML，或任何领域特定表示法。这使得 kunit 易于扩展到把字符串转换为排版公式的 第三方框架。
 
 ## 契约
 
@@ -22,8 +21,7 @@ data class KUnitFormatContext(
 )
 ```
 
-一切都通过**一个**上下文对象传入，因此该接口可以增量扩展（新字段带默认值）而不破坏你的实现。两个可复用的辅助
-函数涵盖常见的构建块：
+一切都通过 **一个**上下文对象传入，因此该接口可以增量扩展（新字段带默认值）而不破坏你的实现。两个可复用的辅助 函数涵盖常见的构建块：
 
 - `KUnitFormatContext.renderValue()` — 渲染数字：当 `pattern` 为 `null` 时用 `Double.toString()`，否则用
   `String.format(locale, pattern, value)`。
@@ -85,8 +83,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
 
 ## 注意事项
 
-- 让格式化器保持**无状态**，因而线程安全——随附的 `KDefaultUnitFormatter` 是普通 `object`，上面的
+- 让格式化器保持 **无状态**，因而线程安全——随附的 `KDefaultUnitFormatter` 是普通 `object`，上面的
   `LatexFormatter` 也是。
-- `KUnitFormatContext` 接收**已换算**为目标单位的值，因此格式化器从不自行进行单位换算——它只负责渲染。
-- `units` 各项携带显示元数据（`KUnitTerm.display`）；请始终通过 `displaySymbol` 读取符号，以便带前缀和别名的
-  单位（`km`、`mi`、`KiB`）正确渲染。
+- `KUnitFormatContext` 接收 **已换算**为目标单位的值，因此格式化器从不自行进行单位换算——它只负责渲染。
+- `units` 各项携带显示元数据（`KUnitTerm.display`）；请始终通过 `displaySymbol` 读取符号，以便带前缀和别名的 单位（`km`、`mi`、
+  `KiB`）正确渲染。

@@ -110,10 +110,10 @@ fun KMixedUnitInstance.toTemperatureGradient(): KTemperatureGradientUnitInstance
     val distanceTerm = units.singleOrNull { it.unit is KDistanceUnit && it.exponent == -1 }
     check(units.size == 2 && temperatureTerm != null && distanceTerm != null) {
         "KMixedUnitInstance $this does not represent a pure temperature gradient " +
-            "(expected KTemperatureDifferenceUnit^1 and KDistanceUnit^-1)"
+                "(expected KTemperatureDifferenceUnit^1 and KDistanceUnit^-1)"
     }
     val normalized = value *
-        temperatureTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, -1.0)
+            temperatureTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, -1.0)
     return temperatureGradientInstanceOf(normalized)
 }

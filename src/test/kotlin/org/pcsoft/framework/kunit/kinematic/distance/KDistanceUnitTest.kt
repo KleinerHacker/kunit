@@ -12,12 +12,12 @@
 
 package org.pcsoft.framework.kunit.kinematic.distance
 
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.milli
-import org.pcsoft.framework.kunit.of
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.milli
+import org.pcsoft.framework.kunit.of
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals

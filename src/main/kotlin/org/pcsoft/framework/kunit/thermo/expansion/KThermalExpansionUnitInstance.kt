@@ -109,7 +109,7 @@ fun KMixedUnitInstance.toThermalExpansion(): KThermalExpansionUnitInstance {
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == -1 }
     check(units.size == 1 && temperatureTerm != null) {
         "KMixedUnitInstance $this does not represent a pure thermal expansion coefficient " +
-            "(expected exactly one KTemperatureDifferenceUnit^-1 term)"
+                "(expected exactly one KTemperatureDifferenceUnit^-1 term)"
     }
     return thermalExpansionInstanceOf(value * Math.pow(temperatureTerm.unit.baseValue, -1.0))
 }

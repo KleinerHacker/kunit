@@ -12,27 +12,19 @@
 
 package org.pcsoft.framework.kunit.it.datarate
 
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import org.pcsoft.framework.kunit.KMixedUnitInstance
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.it.storage.KStorageUnit
 import org.pcsoft.framework.kunit.it.storage.KStorageUnitInstance
 import org.pcsoft.framework.kunit.it.storage.bits
 import org.pcsoft.framework.kunit.it.storage.bytes
-import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
-import org.pcsoft.framework.kunit.kinematic.time.KTimeUnitInstance
-import org.pcsoft.framework.kunit.kinematic.time.hours
-import org.pcsoft.framework.kunit.kinematic.time.minutes
-import org.pcsoft.framework.kunit.kinematic.time.seconds
-import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.pcsoft.framework.kunit.kinematic.time.*
+import org.pcsoft.framework.kunit.of
 import kotlin.math.abs
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * The typed cross-group data-rate operators: core→composed (`storage / time = data rate`) across a

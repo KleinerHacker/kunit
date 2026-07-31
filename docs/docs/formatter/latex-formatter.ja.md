@@ -1,7 +1,7 @@
 # LaTeX フォーマッター
 
-`KLatexUnitFormatter` は値を **LaTeX** の数式として描画し、MathJax・KaTeX・LaTeX 文書でそのまま利用できます。
-既定設定では `3 of meters / seconds` を `km/h` に読み替えると `1.5\,\frac{\mathrm{km}}{\mathrm{h}}` になります。
+`KLatexUnitFormatter` は値を **LaTeX** の数式として描画し、MathJax・KaTeX・LaTeX 文書でそのまま利用できます。 既定設定では
+`3 of meters / seconds` を `km/h` に読み替えると `1.5\,\frac{\mathrm{km}}{\mathrm{h}}` になります。
 
 `org.pcsoft.framework.kunit.formatter` パッケージにあり、不変でスレッドセーフな `class` です。
 
@@ -15,13 +15,13 @@
 
 `KLatexFormatConfig` は値型です。プリセットを選ぶか独自に構築します。
 
-| オプション        | 値                                        | 既定       |
-|------------------|------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `INLINE`                     | `FRACTION`|
-| `unitWrapper`    | `MATHRM`, `TEXT`, `NONE`                 | `MATHRM`  |
-| `multiplication` | `CDOT` (`\cdot`), `TIMES` (`\times`), `THIN_SPACE` (`\,`) | `CDOT` |
-| `delimiter`      | `DOLLAR` (`$…$`), `PARENTHESES` (`\(…\)`), `NONE` | `NONE` |
-| `spacing`        | `THIN` (`\,`), `NORMAL` (空白)            | `THIN`    |
+| オプション       | 値                                                        | 既定       |
+|------------------|-----------------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `INLINE`                                      | `FRACTION` |
+| `unitWrapper`    | `MATHRM`, `TEXT`, `NONE`                                  | `MATHRM`   |
+| `multiplication` | `CDOT` (`\cdot`), `TIMES` (`\times`), `THIN_SPACE` (`\,`) | `CDOT`     |
+| `delimiter`      | `DOLLAR` (`$…$`), `PARENTHESES` (`\(…\)`), `NONE`         | `NONE`     |
+| `spacing`        | `THIN` (`\,`), `NORMAL` (空白)                            | `THIN`     |
 
 プリセット: `DEFAULT`, `INLINE`（インライン積）, `PLAIN`（ラッパーなし・通常の空白）。
 

@@ -12,19 +12,10 @@
 
 package org.pcsoft.framework.kunit.kinematic.acceleration
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /** `KAccelerationUnitInstance` surface: `of`/`into` round-trip, equality, `toString`, same-type operators, conversions. */
 class KAccelerationUnitSystemTest {

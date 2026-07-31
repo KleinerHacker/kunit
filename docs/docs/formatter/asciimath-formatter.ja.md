@@ -15,11 +15,11 @@
 
 `KAsciiMathFormatConfig` は値型です。プリセットを選ぶか独自に構築します。
 
-| オプション        | 値                                        | 既定       |
-|------------------|------------------------------------------|-----------|
-| `fractionStyle`  | `FRACTION`, `EXPONENT`                   | `FRACTION`|
-| `quoting`        | `QUOTED` (`"km"`), `BARE` (`km`)         | `QUOTED`  |
-| `multiplication` | `ASTERISK` (`*`), `TIMES` (`xx`), `SPACE` (空白) | `SPACE` |
+| オプション       | 値                                               | 既定       |
+|------------------|--------------------------------------------------|------------|
+| `fractionStyle`  | `FRACTION`, `EXPONENT`                           | `FRACTION` |
+| `quoting`        | `QUOTED` (`"km"`), `BARE` (`km`)                 | `QUOTED`   |
+| `multiplication` | `ASTERISK` (`*`), `TIMES` (`xx`), `SPACE` (空白) | `SPACE`    |
 
 プリセット: `DEFAULT`, `PLAIN`（`*` で連結した裸の記号）。
 

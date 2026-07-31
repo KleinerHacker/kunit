@@ -12,11 +12,7 @@
 
 package org.pcsoft.framework.kunit.thermo.heattransfercoefficient
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnit
@@ -126,11 +122,11 @@ fun KMixedUnitInstance.toHeatTransferCoefficient(): KHeatTransferCoefficientUnit
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == -1 }
     check(units.size == 3 && massTerm != null && timeTerm != null && temperatureTerm != null) {
         "KMixedUnitInstance $this does not represent a pure heat transfer coefficient " +
-            "(expected KMassUnit^1, KTimeUnit^-3 and KTemperatureDifferenceUnit^-1)"
+                "(expected KMassUnit^1, KTimeUnit^-3 and KTemperatureDifferenceUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(timeTerm.unit.baseValue, -3.0) *
-        Math.pow(temperatureTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            Math.pow(timeTerm.unit.baseValue, -3.0) *
+            Math.pow(temperatureTerm.unit.baseValue, -1.0)
     return heatTransferCoefficientInstanceOf(gramBaseProduct / HEAT_TRANSFER_COEFFICIENT_MASS_REFERENCE)
 }

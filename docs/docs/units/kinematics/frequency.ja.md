@@ -14,13 +14,13 @@
 
 ## 単位
 
-| 単位 | 列挙値 | 記号 | トークン | 1 単位のヘルツ値 |
-|---|---|---|---:|---:|
-| ヘルツ | `KFrequencyUnit.HERTZ` | `Hz` | `hertz` | 1.0 |
-| 毎秒回転数 | `KFrequencyUnit.RPS` | `rps` | `rps` | 1.0 |
-| 毎秒フレーム数 | `KFrequencyUnit.FPS` | `fps` | `fps` | 1.0 |
-| 毎分回転数 | `KFrequencyUnit.RPM` | `rpm` | `rpm` | 1/60 |
-| 毎分拍数 | `KFrequencyUnit.BPM` | `bpm` | `bpm` | 1/60 |
+| 単位           | 列挙値                 | 記号  | トークン | 1 単位のヘルツ値 |
+|----------------|------------------------|-------|---------:|-----------------:|
+| ヘルツ         | `KFrequencyUnit.HERTZ` | `Hz`  |  `hertz` |              1.0 |
+| 毎秒回転数     | `KFrequencyUnit.RPS`   | `rps` |    `rps` |              1.0 |
+| 毎秒フレーム数 | `KFrequencyUnit.FPS`   | `fps` |    `fps` |              1.0 |
+| 毎分回転数     | `KFrequencyUnit.RPM`   | `rpm` |    `rpm` |             1/60 |
+| 毎分拍数       | `KFrequencyUnit.BPM`   | `bpm` |    `bpm` |             1/60 |
 
 各 `トークン` は `of`（構築）と `into`（読み取り）で使う値 1 の `KFrequencyUnitInstance` です。
 
@@ -73,8 +73,8 @@ val v = (2 of meters) * (5 of hertz) // KSpeedUnitInstance, 10 m/s（長さ * �
 
 ## 実世界の例：回転する車輪の周速度
 
-円周 **2 m** の車輪が **毎秒 5 回転** しています。円周に回転周波数を掛けると周速度（接地速度）が得られます。
-これは `length * frequency = speed` で、おなじみの `length / time = speed` の逆です。
+円周 **2 m** の車輪が **毎秒 5 回転** しています。円周に回転周波数を掛けると周速度（接地速度）が得られます。 これは
+`length * frequency = speed` で、おなじみの `length / time = speed` の逆です。
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -133,11 +133,12 @@ import org.pcsoft.framework.kunit.kinematic.frequency.*
 
 ## 記法
 
-下表は、この単位とその構成要素を数学的な記法と KUnit の Kotlin 記法で示します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`）を使い、`·` は乗算、`/` は分数を表します。分数と負の指数の積の両方で書ける場合は、両方の等価な Kotlin 形式を示します。
+下表は、この単位とその構成要素を数学的な記法と KUnit の Kotlin 記法で示します。指数は Unicode の上付き文字（`²`、`³`、`⁻¹`
+）を使い、`·` は乗算、`/` は分数を表します。分数と負の指数の積の両方で書ける場合は、両方の等価な Kotlin 形式を示します。
 
-| 数学 | Kotlin | 意味 |
-|---|---|---|
-| `Hz` | `hertz` | 周波数、基準単位（ヘルツ） |
-| `kHz` | `kilo.hertz` | キロヘルツ（ヘルツに接頭辞を適用） |
-| `1/s` = `s⁻¹` | `1 / (1 of seconds)` | 周期からの周波数（型付きヘルツ） |
-| `Hz²` | `hertz pow 2` | ヘルツの 2 乗（汎用混合単位） |
+| 数学          | Kotlin               | 意味                               |
+|---------------|----------------------|------------------------------------|
+| `Hz`          | `hertz`              | 周波数、基準単位（ヘルツ）         |
+| `kHz`         | `kilo.hertz`         | キロヘルツ（ヘルツに接頭辞を適用） |
+| `1/s` = `s⁻¹` | `1 / (1 of seconds)` | 周期からの周波数（型付きヘルツ）   |
+| `Hz²`         | `hertz pow 2`        | ヘルツの 2 乗（汎用混合単位）      |

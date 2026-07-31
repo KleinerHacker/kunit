@@ -12,18 +12,13 @@
 
 package org.pcsoft.framework.kunit.formatter
 
-import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.div
-import org.pcsoft.framework.kunit.format
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -48,7 +43,7 @@ class KConsoleUnitFormatterTest {
     fun `fraction notation`() {
         val v = 3 of meters / seconds
         val expected = col(classic.numberColor, "10.8") + " " +
-            col(classic.symbolColor, "km") + col(classic.operatorColor, "/") + col(classic.symbolColor, "h")
+                col(classic.symbolColor, "km") + col(classic.operatorColor, "/") + col(classic.symbolColor, "h")
         assertEquals(expected, v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter()))
     }
 
@@ -57,8 +52,8 @@ class KConsoleUnitFormatterTest {
     fun `denominator exponent`() {
         val v = 9.81 of meters / (seconds pow 2)
         val expected = col(classic.numberColor, "9.81") + " " +
-            col(classic.symbolColor, "m") + col(classic.operatorColor, "/") +
-            col(classic.symbolColor, "s") + col(classic.exponentColor, "^2")
+                col(classic.symbolColor, "m") + col(classic.operatorColor, "/") +
+                col(classic.symbolColor, "s") + col(classic.exponentColor, "^2")
         assertEquals(expected, v.format(meters / (seconds pow 2), "%.2f", Locale.US, KConsoleUnitFormatter()))
     }
 
@@ -77,9 +72,9 @@ class KConsoleUnitFormatterTest {
         )
         val star = col(classic.operatorColor, "*")
         val expected = col(classic.numberColor, "2.0") + " " +
-            col(classic.symbolColor, "m") + star +
-            col(classic.symbolColor, "s") + col(classic.exponentColor, "^-3") + star +
-            col(classic.symbolColor, "s") + col(classic.exponentColor, "^-2")
+                col(classic.symbolColor, "m") + star +
+                col(classic.symbolColor, "s") + col(classic.exponentColor, "^-3") + star +
+                col(classic.symbolColor, "s") + col(classic.exponentColor, "^-2")
         assertEquals(expected, KConsoleUnitFormatter().format(context))
     }
 
@@ -93,7 +88,7 @@ class KConsoleUnitFormatterTest {
             locale = Locale.US,
         )
         val expected = col(classic.numberColor, "2.0") + " " +
-            col(classic.symbolColor, "s") + col(classic.exponentColor, "^-1")
+                col(classic.symbolColor, "s") + col(classic.exponentColor, "^-1")
         assertEquals(expected, KConsoleUnitFormatter().format(context))
     }
 
@@ -143,7 +138,7 @@ class KConsoleUnitFormatterTest {
         val sup = 0x207B.toChar().toString() + 0x00B9.toChar().toString()
         val context = KUnitFormatContext(2.0, listOf(KUnitTerm(KTimeUnit.BASE, -1)), "%.1f", Locale.US)
         val expected = col(classic.numberColor, "2.0") + " " +
-            col(classic.symbolColor, "s") + col(classic.exponentColor, sup)
+                col(classic.symbolColor, "s") + col(classic.exponentColor, sup)
         val formatter = KConsoleUnitFormatter(classic, KConsoleFormatConfig.SUPERSCRIPT)
         assertEquals(expected, formatter.format(context))
     }
@@ -160,7 +155,7 @@ class KConsoleUnitFormatterTest {
         )
         val config = KConsoleFormatConfig(multiplication = KConsoleMultiplication.MIDDLE_DOT)
         val expected = col(classic.numberColor, "1") + " " +
-            col(classic.symbolColor, "m") + col(classic.operatorColor, dot) + col(classic.symbolColor, "s")
+                col(classic.symbolColor, "m") + col(classic.operatorColor, dot) + col(classic.symbolColor, "s")
         assertEquals(expected, KConsoleUnitFormatter(classic, config).format(context))
     }
 
@@ -176,7 +171,7 @@ class KConsoleUnitFormatterTest {
         )
         val config = KConsoleFormatConfig(division = KConsoleDivision.OBELUS)
         val expected = col(classic.numberColor, "10.8") + " " +
-            col(classic.symbolColor, "m") + col(classic.operatorColor, obelus) + col(classic.symbolColor, "s")
+                col(classic.symbolColor, "m") + col(classic.operatorColor, obelus) + col(classic.symbolColor, "s")
         assertEquals(expected, KConsoleUnitFormatter(classic, config).format(context))
     }
 }

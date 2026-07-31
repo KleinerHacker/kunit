@@ -12,10 +12,10 @@
 
 package org.pcsoft.framework.kunit.electric.currentdensity
 
-import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.areaOf
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnitInstance
 import org.pcsoft.framework.kunit.electric.current.electricCurrentOf
+import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.areaOf
 
 // Cross-group operators between electric current, area and current density (`J = I / A`). They live in the
 // currentdensity package because current density depends on electric current and distance (never the other

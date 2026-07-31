@@ -99,4 +99,9 @@ fun KMixedUnitInstance.toAcceleration(): KAccelerationUnitInstance {
 
 /** Builds a [KAccelerationUnitInstance] from a value already expressed in meters per second squared ([KAccelerationUnit.BASE]). */
 internal fun accelerationUnitInstanceOf(metersPerSecondSquared: Double): KAccelerationUnitInstance =
-    KAccelerationUnitInstance(KMixedUnitInstance(metersPerSecondSquared, listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -2))))
+    KAccelerationUnitInstance(
+        KMixedUnitInstance(
+            metersPerSecondSquared,
+            listOf(KUnitTerm(KDistanceUnit.BASE, 1), KUnitTerm(KTimeUnit.BASE, -2))
+        )
+    )

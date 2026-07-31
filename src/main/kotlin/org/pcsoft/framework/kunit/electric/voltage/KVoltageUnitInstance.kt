@@ -12,15 +12,11 @@
 
 package org.pcsoft.framework.kunit.electric.voltage
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.KUnitInstance
-import org.pcsoft.framework.kunit.KUnitMeasurable
-import org.pcsoft.framework.kunit.KUnitPrefix
-import org.pcsoft.framework.kunit.KUnitTerm
-import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.current.KElectricCurrentUnit
-import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
+import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 
 /**
  * Wraps a [KMixedUnitInstance] representing a **voltage**, i.e. exactly four terms in the canonical
@@ -59,10 +55,12 @@ class KVoltageUnitInstance internal constructor(internal val instance: KMixedUni
      * ((1 of kilo.volts) + (500 of volts)).value // 1500.0
      * ```
      */
-    override operator fun plus(other: KVoltageUnitInstance): KVoltageUnitInstance = voltageInstanceOf(value + other.value)
+    override operator fun plus(other: KVoltageUnitInstance): KVoltageUnitInstance =
+        voltageInstanceOf(value + other.value)
 
     /** Subtracts two voltages. See [plus] for the automatic unit conversion. */
-    override operator fun minus(other: KVoltageUnitInstance): KVoltageUnitInstance = voltageInstanceOf(value - other.value)
+    override operator fun minus(other: KVoltageUnitInstance): KVoltageUnitInstance =
+        voltageInstanceOf(value - other.value)
 
     /**
      * Multiplies two voltages, producing a new [KMixedUnitInstance] (no longer a "pure" voltage).
@@ -144,9 +142,9 @@ fun KMixedUnitInstance.toVoltage(): KVoltageUnitInstance {
         "KMixedUnitInstance $this does not represent a pure voltage (expected KMassUnit^1, KDistanceUnit^2, KTimeUnit^-3 and KElectricCurrentUnit^-1)"
     }
     val gramBaseProduct = value *
-        massTerm.unit.baseValue *
-        Math.pow(distanceTerm.unit.baseValue, 2.0) *
-        Math.pow(timeTerm.unit.baseValue, -3.0) *
-        Math.pow(currentTerm.unit.baseValue, -1.0)
+            massTerm.unit.baseValue *
+            Math.pow(distanceTerm.unit.baseValue, 2.0) *
+            Math.pow(timeTerm.unit.baseValue, -3.0) *
+            Math.pow(currentTerm.unit.baseValue, -1.0)
     return voltageInstanceOf(gramBaseProduct / VOLT_MASS_REFERENCE)
 }

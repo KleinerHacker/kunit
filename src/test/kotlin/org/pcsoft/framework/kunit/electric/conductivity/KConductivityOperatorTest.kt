@@ -13,27 +13,17 @@
 package org.pcsoft.framework.kunit.electric.conductivity
 
 import org.junit.jupiter.api.TestInstance
-import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.electric.conductance.KConductanceUnitInstance
 import org.pcsoft.framework.kunit.electric.conductance.siemens
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.electric.current.amperes
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
-import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.mega
-import org.pcsoft.framework.kunit.nano
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.electric.resistivity.KResistivityUnitInstance
 import org.pcsoft.framework.kunit.electric.resistivity.ohmMeters
+import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
+import org.pcsoft.framework.kunit.mechanic.mass.grams
+import kotlin.test.*
 
 /**
  * The conductivity operators: same-type arithmetic/comparison, the escape of `conductivity*conductivity`/

@@ -18,7 +18,6 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.conductivity.KThermalConductivityUnitInstance
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.KHeatFluxDensityUnitInstance
@@ -96,10 +95,10 @@ class KHeatTransferCoefficientOperatorTest {
         val viaFlux = (1 of wattsPerSquareMeter) / KTemperatureDifference.ofKelvin(1)
         val viaConductivity = (1 of wattsPerMeterKelvin) / (1 of meters)
         val native = (
-            (1000 of grams).toUnit() /
-                ((1 of seconds).toUnit() pow 3) /
-                KTemperatureDifference.ofKelvin(1).toUnit()
-            ).toHeatTransferCoefficient()
+                (1000 of grams).toUnit() /
+                        ((1 of seconds).toUnit() pow 3) /
+                        KTemperatureDifference.ofKelvin(1).toUnit()
+                ).toHeatTransferCoefficient()
 
         assertIs<KHeatTransferCoefficientUnitInstance>(viaFlux)
         assertIs<KHeatTransferCoefficientUnitInstance>(viaConductivity)

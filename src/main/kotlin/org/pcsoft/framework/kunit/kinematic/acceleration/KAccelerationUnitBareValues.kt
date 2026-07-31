@@ -23,4 +23,5 @@ package org.pcsoft.framework.kunit.kinematic.acceleration
 val gals: KAccelerationUnitInstance = accelerationUnitInstanceOf(KAccelerationUnit.GAL.baseValue)
 
 /** 1 standard gravity ([KAccelerationUnit.STANDARD_GRAVITY], 9.806 65 m/s²). */
-val standardGravities: KAccelerationUnitInstance = accelerationUnitInstanceOf(KAccelerationUnit.STANDARD_GRAVITY.baseValue)
+val standardGravities: KAccelerationUnitInstance =
+    accelerationUnitInstanceOf(KAccelerationUnit.STANDARD_GRAVITY.baseValue)

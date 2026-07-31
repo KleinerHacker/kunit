@@ -15,15 +15,11 @@ package org.pcsoft.framework.kunit.electric.linearchargedensity
 import org.junit.jupiter.api.TestInstance
 import org.pcsoft.framework.kunit.electric.charge.coulombs
 import org.pcsoft.framework.kunit.kinematic.distance.meters
+import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.micro
 import org.pcsoft.framework.kunit.milli
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.kinematic.time.seconds
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * `KLinearChargeDensityUnitInstance` surface: construction from an expression, `scaledBy`, same-type

@@ -12,11 +12,11 @@
 
 package org.pcsoft.framework.kunit.mechanic.areadensity
 
-import org.pcsoft.framework.kunit.mechanic.density.KDensityUnitInstance
-import org.pcsoft.framework.kunit.mechanic.density.toDensity
 import org.pcsoft.framework.kunit.kinematic.distance.KAreaUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
 import org.pcsoft.framework.kunit.kinematic.distance.toArea
+import org.pcsoft.framework.kunit.mechanic.density.KDensityUnitInstance
+import org.pcsoft.framework.kunit.mechanic.density.toDensity
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnitInstance
 import org.pcsoft.framework.kunit.mechanic.mass.toMass
 

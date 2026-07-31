@@ -7,24 +7,24 @@ Type: **constructed unit**
 
 Force is a **constructed** unit: the composition `mass · length · time⁻²` (`kg·m/s²`).
 `KForceUnitInstance` wraps a `KMixedUnitInstance` of three terms — `KMassUnit.BASE` (gram) at `+1`,
-`KDistanceUnit.BASE` (meter) at `+1` and `KTimeUnit.BASE` (second) at `-2`. Because the mass component of the
-library is normalized to **grams** (not kilograms), the newton is 1000× the raw component base; the stored
-value is the raw component value and readings in newtons divide by that fixed factor.
+`KDistanceUnit.BASE` (meter) at `+1` and `KTimeUnit.BASE` (second) at `-2`. Because the mass component of the library is
+normalized to **grams** (not kilograms), the newton is 1000× the raw component base; the stored value is the raw
+component value and readings in newtons divide by that fixed factor.
 
 ## Building a force
 
-Build a force from `mass * acceleration`, or with a named token. Named units survive as value-1 tokens (used
-with `of`/`into`):
+Build a force from `mass * acceleration`, or with a named token. Named units survive as value-1 tokens (used with `of`/
+`into`):
 
-| Force | Symbol | Token | 1 unit in N |
-|---|---|---:|---:|
-| Newton | `N` | `newtons` | 1.0 |
-| Dyne | `dyn` | `dynes` | 1.0e-5 |
-| Pound-force | `lbf` | `poundsForce` | 4.4482216152605 |
-| Pond (gram-force) | `p` | `ponds` | 9.80665e-3 |
+| Force             | Symbol |         Token |     1 unit in N |
+|-------------------|--------|--------------:|----------------:|
+| Newton            | `N`    |     `newtons` |             1.0 |
+| Dyne              | `dyn`  |       `dynes` |          1.0e-5 |
+| Pound-force       | `lbf`  | `poundsForce` | 4.4482216152605 |
+| Pond (gram-force) | `p`    |       `ponds` |      9.80665e-3 |
 
-The **kilopond / kilogram-force (kgf) is not a dedicated token** — it is `kilo.ponds`, just as the kilonewton
-is `kilo.newtons`. Named units support the SI prefixes via `KPrefixBuilder` (`kilo.newtons`, `mega.newtons`,
+The **kilopond / kilogram-force (kgf) is not a dedicated token** — it is `kilo.ponds`, just as the kilonewton is
+`kilo.newtons`. Named units support the SI prefixes via `KPrefixBuilder` (`kilo.newtons`, `mega.newtons`,
 `kilo.ponds`, …).
 
 ```kotlin
@@ -41,13 +41,13 @@ f into poundsForce           // ≈ 2.248
 
 ## Computing with the core units (mass & acceleration)
 
-| Expression | Result type | Meaning |
-|---|---|---|
-| `mass * acceleration` | `KForceUnitInstance` | force = m · a (Newton's second law) |
-| `acceleration * mass` | `KForceUnitInstance` | force (commutative) |
-| `force / mass` | `KAccelerationUnitInstance` | acceleration = F / m |
-| `force / acceleration` | `KMassUnitInstance` | mass = F / a |
-| `force / area` | `KPressureUnitInstance` | pressure (see Pressure) |
+| Expression             | Result type                 | Meaning                             |
+|------------------------|-----------------------------|-------------------------------------|
+| `mass * acceleration`  | `KForceUnitInstance`        | force = m · a (Newton's second law) |
+| `acceleration * mass`  | `KForceUnitInstance`        | force (commutative)                 |
+| `force / mass`         | `KAccelerationUnitInstance` | acceleration = F / m                |
+| `force / acceleration` | `KMassUnitInstance`         | mass = F / a                        |
+| `force / area`         | `KPressureUnitInstance`     | pressure (see Pressure)             |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -87,11 +87,13 @@ import org.pcsoft.framework.kunit.mechanic.force.*
 
 ## Notation
 
-The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
+The table below shows how this unit and its components are written mathematically versus in Kotlin with KUnit. Exponents
+use Unicode superscripts (`²`, `³`, `⁻¹`), `·` denotes multiplication and `/` a fraction. Where a quantity can be
+written both as a fraction and as a product with negative exponents, both equivalent Kotlin forms are listed.
 
-| Mathematics | Kotlin | Meaning |
-|---|---|---|
-| `N` | `newtons` | force, base unit (named token, newton) |
-| `kg·m/s²` | `kilo.grams * meters / (seconds pow 2)` | force as mass·length / time² (fraction form) |
-| `kg·m·s⁻²` | `kilo.grams * meters * (seconds pow -2)` | same force as a pure product |
-| `kN` | `kilo.newtons` | prefixed force (kilonewton) |
+| Mathematics | Kotlin                                   | Meaning                                      |
+|-------------|------------------------------------------|----------------------------------------------|
+| `N`         | `newtons`                                | force, base unit (named token, newton)       |
+| `kg·m/s²`   | `kilo.grams * meters / (seconds pow 2)`  | force as mass·length / time² (fraction form) |
+| `kg·m·s⁻²`  | `kilo.grams * meters * (seconds pow -2)` | same force as a pure product                 |
+| `kN`        | `kilo.newtons`                           | prefixed force (kilonewton)                  |

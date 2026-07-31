@@ -18,7 +18,10 @@ import org.pcsoft.framework.kunit.KPrefixBuilder
 // Amount of substance accepts *any* magnitude, so both the augmenting and the diminishing builders are
 // served by the common KPrefixBuilder base. Use with `of`/`into`, e.g. `250 of milli.moles`.
 
-private fun prefixedAmountOfSubstance(builder: KPrefixBuilder, unit: KAmountOfSubstanceUnit): KAmountOfSubstanceUnitInstance =
+private fun prefixedAmountOfSubstance(
+    builder: KPrefixBuilder,
+    unit: KAmountOfSubstanceUnit
+): KAmountOfSubstanceUnitInstance =
     amountOfSubstanceOf(builder.prefix.factor * unit.baseValue)
 
 /** Prefixed moles, e.g. `milli.moles` (mmol), `micro.moles` (µmol), `kilo.moles` (kmol). */

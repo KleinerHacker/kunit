@@ -25,4 +25,8 @@ private fun prefixedAcceleration(builder: KPrefixBuilder, unit: KAccelerationUni
 val KPrefixBuilder.gals: KAccelerationUnitInstance get() = prefixedAcceleration(this, KAccelerationUnit.GAL)
 
 /** Prefixed standard gravities, e.g. `milli.standardGravities`. */
-val KPrefixBuilder.standardGravities: KAccelerationUnitInstance get() = prefixedAcceleration(this, KAccelerationUnit.STANDARD_GRAVITY)
+val KPrefixBuilder.standardGravities: KAccelerationUnitInstance
+    get() = prefixedAcceleration(
+        this,
+        KAccelerationUnit.STANDARD_GRAVITY
+    )

@@ -19,7 +19,6 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnitInstance
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
 import org.pcsoft.framework.kunit.thermo.heatcapacity.KHeatCapacityUnitInstance
 import org.pcsoft.framework.kunit.thermo.heatcapacity.joulesPerKelvin
 import org.pcsoft.framework.kunit.thermo.specificenergy.KSpecificEnergyUnitInstance
@@ -97,10 +96,10 @@ class KSpecificHeatCapacityOperatorTest {
         val viaHeatCapacity = (1 of joulesPerKelvin) / (1 of kilo.grams)
         val viaSpecificEnergy = (1 of joulesPerKilogram) / KTemperatureDifference.ofKelvin(1)
         val native = (
-            ((1 of meters).toUnit() pow 2) /
-                ((1 of seconds).toUnit() pow 2) /
-                KTemperatureDifference.ofKelvin(1).toUnit()
-            ).toSpecificHeatCapacity()
+                ((1 of meters).toUnit() pow 2) /
+                        ((1 of seconds).toUnit() pow 2) /
+                        KTemperatureDifference.ofKelvin(1).toUnit()
+                ).toSpecificHeatCapacity()
 
         assertIs<KSpecificHeatCapacityUnitInstance>(viaHeatCapacity)
         assertIs<KSpecificHeatCapacityUnitInstance>(viaSpecificEnergy)
