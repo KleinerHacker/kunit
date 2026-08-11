@@ -31,9 +31,9 @@
 * The code fields mirror the MkDocs field folders (`kinematics`, `mechanics`, `electrical`,
   `thermodynamics`, `information`); `it` corresponds to `information`
 * A unit documented in MORE THAN ONE MkDocs field goes into `common` (currently energy, power)
-* Mehrwortige Unit-Paketnamen werden kleingeschrieben zusammengezogen und wiederholen den Fachgebietsnamen NICHT
-  (`thermo.conductivity`, nicht `thermo.thermalconductivity`); Klassennamen behalten den vollen Fachbegriff
-* Details und die Regel für neue Fachgebiete: `rules/package.md`
+* A multi-word unit package name is written as a single all-lowercase token and does NOT repeat the field name
+  (`thermo.conductivity`, not `thermo.thermalconductivity`); class names keep the full technical term
+* Details and the rule for new fields: `rules/package.md`
 
 # Unit Overview
 
