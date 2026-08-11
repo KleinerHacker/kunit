@@ -482,6 +482,7 @@ nav:
       - Charge Density: units/electrical/chargedensity.md
       - Resistivity: units/electrical/resistivity.md
       - Conductivity: units/electrical/conductivity.md
+      - Molar Conductivity: units/electrical/molarconductivity.md
       - Electric Field Strength: units/electrical/electricfieldstrength.md
       - Electric Flux Density: units/electrical/electricfluxdensity.md
       - Permittivity: units/electrical/permittivity.md
@@ -499,6 +500,9 @@ nav:
           - Absolute Temperature: units/thermodynamics/temperature.md
           - Temperature Difference: units/thermodynamics/temperature-difference.md
       - Amount of Substance: units/thermodynamics/amount-of-substance.md
+      - Concentration: units/thermodynamics/concentration.md
+      - Molality: units/thermodynamics/molality.md
+      - Catalytic Activity: units/thermodynamics/catalytic-activity.md
       - Power (Thermodynamics): units/thermodynamics/power.md
       - Energy (Thermodynamics): units/thermodynamics/energy.md
       - Heat Flow: units/thermodynamics/heat-flow.md

@@ -55,6 +55,34 @@
   `radiantIntensity / area`, `radiance * area = radiantIntensity` (and its commutative form) and
   `radiantIntensity / radiance = area`; `KMixedUnitInstance.toRadiance()`.
 
+- **New standardized unit Amount-of-Substance Concentration (`substance · length⁻³`).**
+  `…thermo.concentration` with base unit mole per cubic meter (`mol/m³`) and the tokens
+  `molesPerCubicMeter`, `molesPerLiter`, `molar` (the molarity `M`) and `millimolesPerLiter` (all
+  prefix-combinable). Typed operators `amountOfSubstance / volume`,
+  `concentration * volume = amountOfSubstance` (and its commutative form) and
+  `amountOfSubstance / concentration = volume`; `KMixedUnitInstance.toConcentration()`.
+
+- **New standardized unit Molality (`substance · mass⁻¹`).** `…thermo.molality` with base unit mole per
+  kilogram (`mol/kg`) and the tokens `molesPerKilogram`, `millimolesPerKilogram`. Typed operators
+  `amountOfSubstance / mass`, `molality * mass = amountOfSubstance` (and its commutative form) and
+  `amountOfSubstance / molality = mass`, plus the reciprocal relation to the molar mass
+  (`Number / molarMass = molality`, `Number / molality = molarMass`);
+  `KMixedUnitInstance.toMolality()`.
+
+- **New standardized unit Catalytic Activity (`substance · time⁻¹`).** `…thermo.catalyticactivity` with
+  base unit katal (`kat`) and the tokens `katals` and `enzymeUnits` (`U` = 1 µmol/min, both
+  prefix-combinable). Typed operators `amountOfSubstance / time`,
+  `catalyticActivity * time = amountOfSubstance` (and its commutative form) and
+  `amountOfSubstance / catalyticActivity = time`; `KMixedUnitInstance.toCatalyticActivity()`.
+
+- **New standardized unit Molar Conductivity (`mass⁻¹ · time³ · current² · substance⁻¹`).**
+  `…electric.molarconductivity` with base unit siemens square meter per mole (`S·m²/mol`) and the tokens
+  `siemensSquareMetersPerMole`, `siemensSquareCentimetersPerMole`. Typed operators
+  `conductivity / concentration`, `molarConductivity * concentration = conductivity` (and its commutative
+  form) and `conductivity / molarConductivity = concentration`;
+  `KMixedUnitInstance.toMolarConductivity()`. Same-type `+` implements Kohlrausch's law of independent ion
+  migration.
+
 - **New standardized unit Reciprocal Length (`length⁻¹`).** `…common.reciprocallength` with base unit
   reciprocal meter (`1/m`) and the tokens `reciprocalMeters`, `dioptres`, `reciprocalCentimeters`,
   `kaysers` (all prefix-combinable). Typed operators `Number / length`, `Number / reciprocalLength = length`

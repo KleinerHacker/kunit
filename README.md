@@ -259,6 +259,10 @@ unit group that exists in the framework - group, sub-package and base unit.
 | Radiant Intensity (constructed: mass·length²·time⁻³·solidAngle⁻¹)                | `org.pcsoft.framework.kunit.optic.radiantintensity`         | Watt per steradian (`KRadiantIntensityUnit.BASE`)                  |
 | Radiance (constructed: mass·time⁻³·solidAngle⁻¹)                                 | `org.pcsoft.framework.kunit.optic.radiance`                 | Watt per steradian square meter (`KRadianceUnit.BASE`)             |
 | Reciprocal Length (constructed: length⁻¹)                                        | `org.pcsoft.framework.kunit.common.reciprocallength`        | Reciprocal meter (`KReciprocalLengthUnit.BASE`)                    |
+| Concentration (constructed: substance·length⁻³)                                  | `org.pcsoft.framework.kunit.thermo.concentration`           | Mole per cubic meter (`KConcentrationUnit.BASE`)                   |
+| Molality (constructed: substance·mass⁻¹)                                         | `org.pcsoft.framework.kunit.thermo.molality`                | Mole per kilogram (`KMolalityUnit.BASE`)                           |
+| Catalytic Activity (constructed: substance·time⁻¹)                               | `org.pcsoft.framework.kunit.thermo.catalyticactivity`       | Katal (`KCatalyticActivityUnit.BASE`)                              |
+| Molar Conductivity (constructed: mass⁻¹·time³·current²·substance⁻¹)              | `org.pcsoft.framework.kunit.electric.molarconductivity`     | Siemens square meter per mole (`KMolarConductivityUnit.BASE`)      |
 
 > **Refractive power** (dioptre) and **wavenumber** share `KReciprocalLengthUnitInstance`, which is why the
 > group carries the neutral name `reciprocallength`; each reading has its own documentation page.
