@@ -37,11 +37,11 @@
 
 # Unit Overview
 
-* Die Übersicht ALLER existierenden Unit-Gruppen ist die Tabelle „Unit Groups" in `README.md`
-* Fragen nach dem Bestand („Welche Einheiten existieren bereits?") werden IMMER aus dieser Tabelle beantwortet,
-  NIEMALS durch Scannen von `src/`
-    * Skill: `unit-overview`, Agent: `overview-units`
-* Jede neue Unit-Gruppe MUSS ihre Zeile in derselben Änderung ergänzen; Umbenennungen und Entfernungen ebenso
+* The overview of ALL existing unit groups is the "Unit Groups" table in `README.md`
+* Questions about the inventory ("which units already exist?") MUST ALWAYS be answered from that table,
+  NEVER by scanning `src/`
+    * Skill: `unit-overview`, agent: `overview-units`
+* Every new unit group MUST add its row in the same change; renames and removals likewise
 * Details: `rules/unit-overview.md`
 
 # Communication Notes

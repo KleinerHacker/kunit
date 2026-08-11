@@ -24,16 +24,14 @@ Branch: `claude/missing-units-ls7evz`
 | `.claude/agents/unit-overview.md` anlegen      | erledigt     |
 | `.claude/CLAUDE.md` um Regelverweis ergänzen   | erledigt     |
 | `README.md`: STATUS.md-Verweis ersetzt         | erledigt     |
-| Agent-Probelauf                                | manuell geprüft |
+| Agent-Probelauf                                | erledigt     |
 
-Anmerkung zum Probelauf: Der Agent `overview-units` konnte in der laufenden Session nicht
-aufgerufen werden, weil Agent-Definitionen beim Session-Start geladen werden. Die beiden Probefälle
-wurden stattdessen manuell gegen die Quellen geprüft:
+Probelauf des Agents `overview-units`, beide Fälle korrekt beantwortet:
 
-* `torque` — keine eigene Zeile in der Unit-Groups-Tabelle; wird über die im Agent verankerte
-  Fallback-Regel (mkdocs-Nav prüfen) als `common.energy` aufgelöst
-* `candela` — in `README.md` und `docs/mkdocs.yml` nicht vorhanden, wird korrekt als fehlend
-  gemeldet (Verweis auf `create-unit`)
+* `torque` — keine eigene Zeile in der Unit-Groups-Tabelle; über die im Agent verankerte
+  Fallback-Regel als `common.energy` aufgelöst, inkl. Doku-Seite und Torque-Operatoren
+* `candela` — nicht vorhanden, korrekt als fehlend gemeldet mit Verweis auf `create-unit` und dem
+  Hinweis, dass dafür eine neue Basisdimension eingeführt werden muss
 
 Kein CHANGELOG-Eintrag: reine Tooling-/Regelwerksänderung ohne externe Wirkung.
 
