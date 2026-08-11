@@ -1,5 +1,67 @@
 # kunit Changelog
 
+## [Unreleased]
+
+### Added
+
+- **New subject area Optics (`org.pcsoft.framework.kunit.optic`).** Ten new unit groups covering photometry and
+  its radiometric counterparts, documented under `docs/docs/units/optics/`.
+
+- **New native unit Luminous Intensity - the seventh SI base unit.** `…optic.luminousintensity` with base unit
+  candela (`cd`, `KLuminousIntensityUnit.BASE`) and the tokens `candelas`, `hefnerCandles`,
+  `candlepower`, `carcels` (all prefix-combinable); `KMixedUnitInstance.toLuminousIntensity()`. With it KUnit
+  covers all seven SI base units.
+
+- **New standardized unit Luminous Flux (`luminousIntensity · solidAngle`).** `…optic.luminousflux` with base
+  unit lumen (`lm`) and the tokens `lumens`, `candelaSteradians`. Typed operators
+  `luminousIntensity * solidAngle` (and its commutative form), `luminousFlux / solidAngle` and
+  `luminousFlux / luminousIntensity`; `KMixedUnitInstance.toLuminousFlux()`.
+
+- **New standardized unit Illuminance (`luminousIntensity · solidAngle · length⁻²`).** `…optic.illuminance`
+  with base unit lux (`lx`) and the tokens `lux`, `phots`, `footCandles`, `nox`. Typed operators
+  `luminousFlux / area`, `illuminance * area = luminousFlux` (and its commutative form) and
+  `luminousFlux / illuminance = area`; `KMixedUnitInstance.toIlluminance()`.
+
+- **New standardized unit Luminance (`luminousIntensity · length⁻²`).** `…optic.luminance` with base unit
+  candela per square meter (`cd/m²`) and the tokens `candelasPerSquareMeter`, `nits`, `stilbs`,
+  `apostilbs`, `lamberts`, `footLamberts`. **Two typed decompositions** - `luminousIntensity / area` and
+  `illuminance / solidAngle` - plus `luminance * area = luminousIntensity`,
+  `luminance * solidAngle = illuminance` (both with commutative forms) and their inverses;
+  `KMixedUnitInstance.toLuminance()`.
+
+- **New standardized unit Luminous Energy (`luminousIntensity · solidAngle · time`).**
+  `…optic.luminousenergy` with base unit lumen second (`lm·s`) and the tokens `lumenSeconds`,
+  `talbots`, `lumenHours`. Typed operators `luminousFlux * time` (and its commutative form),
+  `luminousEnergy / time` and `luminousEnergy / luminousFlux`; `KMixedUnitInstance.toLuminousEnergy()`.
+
+- **New standardized unit Luminous Exposure (`luminousIntensity · solidAngle · length⁻² · time`).**
+  `…optic.luminousexposure` with base unit lux second (`lx·s`) and the tokens `luxSeconds`, `luxHours`.
+  Typed operators `illuminance * time` (and its commutative form), `luminousExposure / time` and
+  `luminousExposure / illuminance`; `KMixedUnitInstance.toLuminousExposure()`.
+
+- **New standardized unit Luminous Efficacy (`luminousIntensity · solidAngle · mass⁻¹ · length⁻² · time³`).**
+  `…optic.efficacy` with base unit lumen per watt (`lm/W`), the token `lumensPerWatt` and the constant
+  `MAX_LUMINOUS_EFFICACY` (683 lm/W). Typed operators `luminousFlux / power`,
+  `luminousEfficacy * power = luminousFlux` (and its commutative form) and
+  `luminousFlux / luminousEfficacy = power`; `KMixedUnitInstance.toLuminousEfficacy()`.
+
+- **New standardized unit Radiant Intensity (`mass · length² · time⁻³ · solidAngle⁻¹`).**
+  `…optic.radiantintensity` with base unit watt per steradian (`W/sr`) and the token `wattsPerSteradian`.
+  Typed operators `power / solidAngle`, `radiantIntensity * solidAngle = power` (and its commutative form)
+  and `power / radiantIntensity = solidAngle`; `KMixedUnitInstance.toRadiantIntensity()`.
+
+- **New standardized unit Radiance (`mass · time⁻³ · solidAngle⁻¹`).** `…optic.radiance` with base unit watt
+  per steradian square meter (`W/(sr·m²)`) and the token `wattsPerSteradianSquareMeter`. Typed operators
+  `radiantIntensity / area`, `radiance * area = radiantIntensity` (and its commutative form) and
+  `radiantIntensity / radiance = area`; `KMixedUnitInstance.toRadiance()`.
+
+- **New standardized unit Reciprocal Length (`length⁻¹`).** `…common.reciprocallength` with base unit
+  reciprocal meter (`1/m`) and the tokens `reciprocalMeters`, `dioptres`, `reciprocalCentimeters`,
+  `kaysers` (all prefix-combinable). Typed operators `Number / length`, `Number / reciprocalLength = length`
+  and `reciprocalLength * length = Double`; `KMixedUnitInstance.toReciprocalLength()`. The group lives in
+  `common` because it serves two subject areas: the **dioptre** (refractive power, optics) and the
+  **wavenumber** (spectroscopy), which share one normal form and therefore one type.
+
 ## [0.8.0]
 
 ### Added

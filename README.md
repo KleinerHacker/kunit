@@ -249,7 +249,20 @@ unit group that exists in the framework - group, sub-package and base unit.
 | Dynamic Viscosity (constructed: mass·length⁻¹·time⁻¹)                            | `org.pcsoft.framework.kunit.mechanic.viscosity`             | Pascal second (`KViscosityUnit.BASE`)                              |
 | Force per Length (constructed: mass·time⁻²)                                      | `org.pcsoft.framework.kunit.mechanic.lineforce`             | Newton per meter (`KLineForceUnit.BASE`)                           |
 | Strain (constructed: dimensionless)                                              | `org.pcsoft.framework.kunit.mechanic.strain`                | Plain ratio (`KStrainUnit.BASE`)                                   |
+| Luminous Intensity                                                               | `org.pcsoft.framework.kunit.optic.luminousintensity`        | Candela (`KLuminousIntensityUnit.BASE`)                            |
+| Luminous Flux (constructed: luminousIntensity·solidAngle)                        | `org.pcsoft.framework.kunit.optic.luminousflux`             | Lumen (`KLuminousFluxUnit.BASE`)                                   |
+| Illuminance (constructed: luminousIntensity·solidAngle·length⁻²)                 | `org.pcsoft.framework.kunit.optic.illuminance`              | Lux (`KIlluminanceUnit.BASE`)                                      |
+| Luminance (constructed: luminousIntensity·length⁻²)                              | `org.pcsoft.framework.kunit.optic.luminance`                | Candela per square meter (`KLuminanceUnit.BASE`)                   |
+| Luminous Energy (constructed: luminousIntensity·solidAngle·time)                 | `org.pcsoft.framework.kunit.optic.luminousenergy`           | Lumen second (`KLuminousEnergyUnit.BASE`)                          |
+| Luminous Exposure (constructed: luminousIntensity·solidAngle·length⁻²·time)      | `org.pcsoft.framework.kunit.optic.luminousexposure`         | Lux second (`KLuminousExposureUnit.BASE`)                          |
+| Luminous Efficacy (constructed: luminousIntensity·solidAngle·mass⁻¹·length⁻²·time³) | `org.pcsoft.framework.kunit.optic.efficacy`               | Lumen per watt (`KLuminousEfficacyUnit.BASE`)                      |
+| Radiant Intensity (constructed: mass·length²·time⁻³·solidAngle⁻¹)                | `org.pcsoft.framework.kunit.optic.radiantintensity`         | Watt per steradian (`KRadiantIntensityUnit.BASE`)                  |
+| Radiance (constructed: mass·time⁻³·solidAngle⁻¹)                                 | `org.pcsoft.framework.kunit.optic.radiance`                 | Watt per steradian square meter (`KRadianceUnit.BASE`)             |
+| Reciprocal Length (constructed: length⁻¹)                                        | `org.pcsoft.framework.kunit.common.reciprocallength`        | Reciprocal meter (`KReciprocalLengthUnit.BASE`)                    |
 
+> **Refractive power** (dioptre) and **wavenumber** share `KReciprocalLengthUnitInstance`, which is why the
+> group carries the neutral name `reciprocallength`; each reading has its own documentation page.
+>
 > **Entropy** shares `KHeatCapacityUnitInstance` and **heat flow** shares `KPowerUnitInstance` — a
 > canonical base-dimension normal form must map to exactly one type, so that the `toX()` form recognition
 > stays unambiguous. Both have their own documentation page.

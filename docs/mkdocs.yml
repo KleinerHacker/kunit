@@ -457,6 +457,7 @@ nav:
       - Moment of Inertia: units/mechanics/moment-of-inertia.md
       - Angular Momentum: units/mechanics/angular-momentum.md
       - Torque: units/mechanics/torque.md
+      - Wavenumber: units/mechanics/wavenumber.md
       - Dynamic Viscosity: units/mechanics/viscosity.md
       - Kinematic Viscosity: units/mechanics/kinematic-viscosity.md
       - Surface Tension: units/mechanics/surface-tension.md
@@ -516,6 +517,18 @@ nav:
       - Thermal Expansion: units/thermodynamics/thermal-expansion.md
       - Temperature Gradient: units/thermodynamics/temperature-gradient.md
       - Thermal Diffusivity: units/thermodynamics/thermal-diffusivity.md
+  - Optics:
+      - Overview: units/optics/overview.md
+      - Luminous Intensity: units/optics/luminous-intensity.md
+      - Luminous Flux: units/optics/luminous-flux.md
+      - Illuminance: units/optics/illuminance.md
+      - Luminance: units/optics/luminance.md
+      - Luminous Energy: units/optics/luminous-energy.md
+      - Luminous Exposure: units/optics/luminous-exposure.md
+      - Luminous Efficacy: units/optics/luminous-efficacy.md
+      - Radiant Intensity: units/optics/radiant-intensity.md
+      - Radiance: units/optics/radiance.md
+      - Dioptre: units/optics/dioptre.md
   - Information Technology:
       - Overview: units/information/overview.md
       - Storage: units/information/storage.md
