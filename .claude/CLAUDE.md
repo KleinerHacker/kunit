@@ -35,6 +35,15 @@
   (`thermo.conductivity`, nicht `thermo.thermalconductivity`); Klassennamen behalten den vollen Fachbegriff
 * Details und die Regel für neue Fachgebiete: `rules/package.md`
 
+# Unit Overview
+
+* Die Übersicht ALLER existierenden Unit-Gruppen ist die Tabelle „Unit Groups" in `README.md`
+* Fragen nach dem Bestand („Welche Einheiten existieren bereits?") werden IMMER aus dieser Tabelle beantwortet,
+  NIEMALS durch Scannen von `src/`
+    * Skill: `unit-overview`, Agent: `overview-units`
+* Jede neue Unit-Gruppe MUSS ihre Zeile in derselben Änderung ergänzen; Umbenennungen und Entfernungen ebenso
+* Details: `rules/unit-overview.md`
+
 # Communication Notes
 
 * Every output the AI writes to the console must be in German

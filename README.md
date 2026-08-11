@@ -164,7 +164,8 @@ val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
 
 ## What does the framework currently support?
 
-Current implementation status (see [STATUS.md](STATUS.md) for details):
+Current implementation status. The [Unit Groups](#unit-groups) table below is the authoritative overview of every
+unit group that exists in the framework - group, sub-package and base unit.
 
 ### Root Engine
 
