@@ -25,7 +25,7 @@
 | 열유속밀도 | 구성     | 선형량           | `W/m²`      | [열유속밀도](heat-flux-density.md)         |
 | 열전도율   | 구성     | 선형량           | `W/(m·K)`   | [열전도율](thermal-conductivity.md)        |
 | 열전달계수 | 구성     | 선형량           | `W/(m²·K)`  | [열전달계수](heat-transfer-coefficient.md) |
-| 열저항     | 구성     | 선형량           | `m²·K/W`    | [열저항](thermal-resistance.md)            |
+| 열저항     | 구성     | 선형량           | `m²·K/W`    | [열저항](thermal-insulance.md)            |
 | 열팽창     | 구성     | 선형량           | `1/K`       | [열팽창](thermal-expansion.md)             |
 | 온도 구배  | 구성     | 선형량           | `K/m`       | [온도 구배](temperature-gradient.md)       |
 | 열확산율   | 구성     | 선형량           | `m²/s`      | [열확산율](thermal-diffusivity.md)         |
@@ -170,7 +170,7 @@ KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK" (구간)
 * [온도 구배](temperature-gradient.md) — `K/m`, 전도의 원동력.
 * [열전도율](thermal-conductivity.md) — `W/(m·K)`, 푸리에의 법칙.
 * [열전달계수](heat-transfer-coefficient.md) — `W/(m²·K)`, 건축 물리학의 U-값.
-* [열저항](thermal-resistance.md) — `m²·K/W`, R-값; 직렬 층은 서로 더해집니다.
+* [열저항](thermal-insulance.md) — `m²·K/W`, R-값; 직렬 층은 서로 더해집니다.
 * [열확산율](thermal-diffusivity.md) — `m²/s`, 온도 변화가 얼마나 빠르게 전파되는지.
 
 ### 열에 대한 반응

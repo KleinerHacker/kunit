@@ -13,7 +13,7 @@
 (`kg·s⁻³·K⁻¹`)にちょうど3つの項からなる `KMixedUnitInstance` をラップし、常に W/ (m²·K) に正規化されます。
 [熱流束密度](heat-flux-density.md)と同様に、面積がワットの長さ次元を打ち消すため、正規形には距離の項が ありません。
 
-その逆数は[熱抵抗](thermal-resistance.md)(R値)です。厚さを掛けると[熱伝導率](thermal-conductivity.md)
+その逆数は[熱抵抗](thermal-insulance.md)(R値)です。厚さを掛けると[熱伝導率](thermal-conductivity.md)
 になります。
 
 ## 名前付き単位

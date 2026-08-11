@@ -13,7 +13,7 @@
 （`kg·s⁻³·K⁻¹`），始终以 W/ (m²·K) 归一化。与[热流密度](heat-flux-density.md)
 一样，面积抵消了瓦特中的长度维度，因此正规形式不携带长度项。
 
-它的倒数是[热阻](thermal-resistance.md)（R 值）；乘以厚度就变成
+它的倒数是[热阻](thermal-insulance.md)（R 值）；乘以厚度就变成
 [热导率](thermal-conductivity.md)。
 
 ## 命名单位

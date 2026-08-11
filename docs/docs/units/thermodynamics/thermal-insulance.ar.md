@@ -1,8 +1,8 @@
 # المقاومة الحرارية (قيمة R)
 
-الحزمة: `org.pcsoft.framework.kunit.thermo.resistance`
+الحزمة: `org.pcsoft.framework.kunit.thermo.insulance`
 الوحدة الأساسية: **متر مربع-كلفن لكل واط**
-(`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
+(`KThermalInsulanceUnit.BASE == KThermalInsulanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
 
 النوع: **وحدة مركّبة**
 
@@ -10,12 +10,12 @@
 لـ [معامل انتقال الحرارة](heat-transfer-coefficient.md) (قيمة U)، وهي الصيغة التي تُباع بها منتجات العزل فعليًا، لأنّ
 قيم R للطبقات المتسلسلة تُجمَع ببساطة **جمعًا**.
 
-يغلّف `KThermalResistanceUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط بالصيغة القياسية
+يغلّف `KThermalInsulanceUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط بالصيغة القياسية
 `mass⁻¹ · time³ · temperature¹` (`kg⁻¹·s³·K`)، مطبَّعًا دائمًا إلى m²·K/W.
 
 !!! note "اسم الحزمة مقابل اسم الصنف"
 الحزمة هي `thermo.resistance`، وليست `thermo.thermalresistance` — إذ يجب ألّا تُكرِّر حزمة الوحدة اسم حزمة مجالها. تحتفظ
-**الأصناف** بالمصطلح التقني الكامل (`KThermalResistanceUnitInstance`)، وهو ما يميّزها عن `electric.resistance`.
+**الأصناف** بالمصطلح التقني الكامل (`KThermalInsulanceUnitInstance`)، وهو ما يميّزها عن `electric.resistance`.
 
 ## الوحدات المسمّاة
 
@@ -43,7 +43,7 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
 import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
@@ -68,15 +68,15 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | التعبير                                     | نوع النتيجة                            | المعنى                |
 |---------------------------------------------|----------------------------------------|-----------------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | R من القياس           |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | R من المادّة + السماكة |
+| `temperatureDifference / heatFluxDensity`   | `KThermalInsulanceUnitInstance`       | R من القياس           |
+| `length / thermalConductivity`              | `KThermalInsulanceUnitInstance`       | R من المادّة + السماكة |
 | `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | الفرق المستمرّ         |
 | `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | نفسه (تبادلي)         |
 | `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | التدفّق الناتج         |
 | `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | السماكة المطلوبة      |
 | `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | نفسه (تبادلي)         |
 | `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | الموصلية الضمنية      |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | R من U                |
+| `1 / heatTransferCoefficient`               | `KThermalInsulanceUnitInstance`       | R من U                |
 | `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | U من R                |
 
 يُعرَّف المعاملان المقلوبان بدقّة، بحيث تُعيد `1 / u` و`1 / r` قيمةً **محكومة بالنوع** بدلًا من الوحدة المختلطة العامّة
@@ -88,9 +88,9 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | التفكيك                                   | الصيغة                               | النتيجة                          |
 |-------------------------------------------|--------------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | معامل مكتوب بنوع صريح                | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | معامل مكتوب بنوع صريح                | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | تعبير أصلي + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| `temperatureDifference / heatFluxDensity` | معامل مكتوب بنوع صريح                | `KThermalInsulanceUnitInstance` |
+| `length / thermalConductivity`            | معامل مكتوب بنوع صريح                | `KThermalInsulanceUnitInstance` |
+| `mass⁻¹ · time³ · temperature¹`           | تعبير أصلي + `toThermalInsulance()` | `KThermalInsulanceUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -100,7 +100,7 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
@@ -109,7 +109,7 @@ val native = (
     ((1 of seconds).toUnit() pow 3) *
         KTemperatureDifference.ofKelvin(1).toUnit() /
         (1000 of grams).toUnit()
-    ).toThermalResistance()
+    ).toThermalInsulance()
 
 viaFlux == viaThickness // true
 viaFlux == native       // true - جميعها 1.0 m²·K/W
@@ -121,7 +121,7 @@ viaFlux == native       // true - جميعها 1.0 m²·K/W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
 (1 of squareMeterKelvinPerWatt) > (5 of tog)      // true (5 tog = 0.5 m²·K/W)
@@ -133,7 +133,7 @@ val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 (5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
 "R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."

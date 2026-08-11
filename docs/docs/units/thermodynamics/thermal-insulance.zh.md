@@ -1,7 +1,7 @@
 # 热阻（R 值）
 
-包：`org.pcsoft.framework.kunit.thermo.resistance`
-基本单位： **平方米-开尔文每瓦特**（`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`）
+包：`org.pcsoft.framework.kunit.thermo.insulance`
+基本单位： **平方米-开尔文每瓦特**（`KThermalInsulanceUnit.BASE == KThermalInsulanceUnit.SQUARE_METER_KELVIN_PER_WATT`）
 
 类型： **构造单位**
 
@@ -9,13 +9,13 @@
 [传热系数](heat-transfer-coefficient.md)（U 值）的倒数，也是保温产品实际 出售时所用的形式，因为串联层的 R 值可以简单地
 **相加**。
 
-`KThermalResistanceUnitInstance` 包装了一个恰好由三项组成的
+`KThermalInsulanceUnitInstance` 包装了一个恰好由三项组成的
 `KMixedUnitInstance`，处于规范正规形式 `mass⁻¹ · time³ · temperature¹`
 （`kg⁻¹·s³·K`），始终以 m²·K/W 归一化。
 
 !!! note "包名与类名的区别"
 包名是 `thermo.resistance`，而非 `thermo.thermalresistance` —— 单位包 不得重复其所属领域包的名称。 **类型**
-保留完整的技术术语 （`KThermalResistanceUnitInstance`），这将它与 `electric.resistance`
+保留完整的技术术语 （`KThermalInsulanceUnitInstance`），这将它与 `electric.resistance`
 区分开来。
 
 ## 命名单位
@@ -44,7 +44,7 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
 import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
@@ -69,15 +69,15 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | 表达式                                      | 结果类型                               | 含义                   |
 |---------------------------------------------|----------------------------------------|------------------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | 由测量得到 R 值        |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | 由材料 + 厚度得到 R 值 |
+| `temperatureDifference / heatFluxDensity`   | `KThermalInsulanceUnitInstance`       | 由测量得到 R 值        |
+| `length / thermalConductivity`              | `KThermalInsulanceUnitInstance`       | 由材料 + 厚度得到 R 值 |
 | `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | 维持的温差             |
 | `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | 相同（可交换）         |
 | `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | 得到的热流密度         |
 | `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | 所需厚度               |
 | `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | 相同（可交换）         |
 | `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | 隐含的导热率           |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | 由 U 得到 R            |
+| `1 / heatTransferCoefficient`               | `KThermalInsulanceUnitInstance`       | 由 U 得到 R            |
 | `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | 由 R 得到 U            |
 
 这两个倒数操作符被窄化声明，因此 `1 / u` 与 `1 / r` 返回的是 **类型化**值， 而非通用的 `Number.div` 与分组无关时会产生的混合单位。
@@ -88,9 +88,9 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | 分解方式                                  | 形式                           | 结果                             |
 |-------------------------------------------|--------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | 类型化操作符                   | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | 类型化操作符                   | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | 原生 + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| `temperatureDifference / heatFluxDensity` | 类型化操作符                   | `KThermalInsulanceUnitInstance` |
+| `length / thermalConductivity`            | 类型化操作符                   | `KThermalInsulanceUnitInstance` |
+| `mass⁻¹ · time³ · temperature¹`           | 原生 + `toThermalInsulance()` | `KThermalInsulanceUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -100,7 +100,7 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
@@ -109,7 +109,7 @@ val native = (
     ((1 of seconds).toUnit() pow 3) *
         KTemperatureDifference.ofKelvin(1).toUnit() /
         (1000 of grams).toUnit()
-    ).toThermalResistance()
+    ).toThermalInsulance()
 
 viaFlux == viaThickness // true
 viaFlux == native       // true —— 全部都是 1.0 m²·K/W
@@ -121,7 +121,7 @@ viaFlux == native       // true —— 全部都是 1.0 m²·K/W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
 (1 of squareMeterKelvinPerWatt) > (5 of tog)      // true（5 tog = 0.5 m²·K/W）
@@ -133,7 +133,7 @@ val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 (5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
 "R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."

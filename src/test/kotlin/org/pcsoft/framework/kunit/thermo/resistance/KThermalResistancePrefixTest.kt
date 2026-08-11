@@ -30,33 +30,25 @@ class KThermalResistancePrefixTest {
         femto to 1e-15, atto to 1e-18, zepto to 1e-21, yocto to 1e-24, ronto to 1e-27, quecto to 1e-30,
     )
 
-    private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-15)
+    private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-40)
     private fun prefixArgs(): List<Array<Any>> = prefixes.map { arrayOf<Any>(it.first, it.second) }
 
     @ParameterizedTest
     @MethodSource("prefixArgs")
-    fun `si prefix on square meter kelvin per watt`(builder: KPrefixBuilder, factor: Double) {
-        assertEquals(factor, (1 of builder.squareMeterKelvinPerWatt).value, rel(factor))
+    fun `si prefix on kelvins per watt`(builder: KPrefixBuilder, factor: Double) {
+        assertEquals(factor, (1 of builder.kelvinsPerWatt).value, rel(factor))
     }
 
     @ParameterizedTest
     @MethodSource("prefixArgs")
-    fun `si prefix on imperial r value`(builder: KPrefixBuilder, factor: Double) {
-        val expected = factor / 5.678263341113489
-        assertEquals(expected, (1 of builder.hourSquareFootFahrenheitPerBtu).value, rel(expected))
+    fun `si prefix on degrees celsius per watt`(builder: KPrefixBuilder, factor: Double) {
+        assertEquals(factor, (1 of builder.degreesCelsiusPerWatt).value, rel(factor))
     }
 
     @ParameterizedTest
     @MethodSource("prefixArgs")
-    fun `si prefix on clo`(builder: KPrefixBuilder, factor: Double) {
-        val expected = factor * 0.155
-        assertEquals(expected, (1 of builder.clo).value, rel(expected))
-    }
-
-    @ParameterizedTest
-    @MethodSource("prefixArgs")
-    fun `si prefix on tog`(builder: KPrefixBuilder, factor: Double) {
-        val expected = factor * 0.1
-        assertEquals(expected, (1 of builder.tog).value, rel(expected))
+    fun `si prefix on hour fahrenheit per btu`(builder: KPrefixBuilder, factor: Double) {
+        val expected = factor * 1.8956342406
+        assertEquals(expected, (1 of builder.hourFahrenheitPerBtu).value, rel(expected))
     }
 }

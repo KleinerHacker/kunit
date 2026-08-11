@@ -19,7 +19,7 @@
 `electric.conductivity`.
 
 وعند القسمة على سماكة تصبح [معامل انتقال الحرارة](heat-transfer-coefficient.md)؛ والسماكة مقسومة عليها
-تعطي [المقاومة الحرارية](thermal-resistance.md) (قيمة R).
+تعطي [المقاومة الحرارية](thermal-insulance.md) (قيمة R).
 
 ## الوحدات المسمّاة
 

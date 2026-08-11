@@ -13,7 +13,7 @@
 `KMixedUnitInstance`를 감싸며, 항상 W/ (m²·K)로 정규화됩니다.
 [열유속밀도](heat-flux-density.md)와 마찬가지로 면적이 와트의 길이 차원을 상쇄하므로, 정규 형식에는 거리 항이 없습니다.
 
-그 역수는 [열저항](thermal-resistance.md)(R-값)이며, 두께를 곱하면 [열전도율](thermal-conductivity.md)이 됩니다.
+그 역수는 [열저항](thermal-insulance.md)(R-값)이며, 두께를 곱하면 [열전도율](thermal-conductivity.md)이 됩니다.
 
 ## 이름이 붙은 단위
 

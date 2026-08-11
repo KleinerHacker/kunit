@@ -14,26 +14,23 @@ package org.pcsoft.framework.kunit.thermo.resistance
 
 import org.pcsoft.framework.kunit.KPrefixBuilder
 
-// Prefixed, value-1 thermal resistance templates: one property per named unit on the prefix builder.
-// Use with `of`/`into`, e.g. `500 of milli.squareMeterKelvinPerWatt`.
+// Prefixed, value-1 absolute thermal resistance templates: one property per named unit on the prefix
+// builder. Use with `of`/`into`, e.g. `250 of milli.kelvinsPerWatt`.
 
 private fun prefixedThermalResistance(
     builder: KPrefixBuilder,
-    unit: KThermalResistanceUnit,
-): KThermalResistanceUnitInstance = thermalResistanceInstanceOf(builder.prefix.factor * unit.baseValue)
+    unit: KThermalResistanceUnit
+): KThermalResistanceUnitInstance =
+    thermalResistanceInstanceOf(builder.prefix.factor * unit.baseValue)
 
-/** Prefixed square meter-kelvin per watt, e.g. `milli.squareMeterKelvinPerWatt`, `kilo.squareMeterKelvinPerWatt`. */
-val KPrefixBuilder.squareMeterKelvinPerWatt: KThermalResistanceUnitInstance
-    get() = prefixedThermalResistance(this, KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT)
+/** Prefixed kelvins per watt, e.g. `milli.kelvinsPerWatt`, `kilo.kelvinsPerWatt`. */
+val KPrefixBuilder.kelvinsPerWatt: KThermalResistanceUnitInstance
+    get() = prefixedThermalResistance(this, KThermalResistanceUnit.KELVIN_PER_WATT)
 
-/** Prefixed imperial R-value units, e.g. `milli.hourSquareFootFahrenheitPerBtu`. */
-val KPrefixBuilder.hourSquareFootFahrenheitPerBtu: KThermalResistanceUnitInstance
-    get() = prefixedThermalResistance(this, KThermalResistanceUnit.HOUR_SQUARE_FOOT_FAHRENHEIT_PER_BTU)
+/** Prefixed degrees Celsius per watt, e.g. `milli.degreesCelsiusPerWatt`. */
+val KPrefixBuilder.degreesCelsiusPerWatt: KThermalResistanceUnitInstance
+    get() = prefixedThermalResistance(this, KThermalResistanceUnit.DEGREE_CELSIUS_PER_WATT)
 
-/** Prefixed clo, e.g. `milli.clo`. */
-val KPrefixBuilder.clo: KThermalResistanceUnitInstance
-    get() = prefixedThermalResistance(this, KThermalResistanceUnit.CLO)
-
-/** Prefixed tog, e.g. `milli.tog`. */
-val KPrefixBuilder.tog: KThermalResistanceUnitInstance
-    get() = prefixedThermalResistance(this, KThermalResistanceUnit.TOG)
+/** Prefixed hour degrees-Fahrenheit per Btu, e.g. `kilo.hourFahrenheitPerBtu`. */
+val KPrefixBuilder.hourFahrenheitPerBtu: KThermalResistanceUnitInstance
+    get() = prefixedThermalResistance(this, KThermalResistanceUnit.HOUR_FAHRENHEIT_PER_BTU)

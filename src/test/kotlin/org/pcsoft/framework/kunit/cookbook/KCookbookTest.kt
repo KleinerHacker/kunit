@@ -75,7 +75,7 @@ import org.pcsoft.framework.kunit.thermo.molarenergy.*
 import org.pcsoft.framework.kunit.thermo.molarheatcapacity.*
 import org.pcsoft.framework.kunit.thermo.molarmass.*
 import org.pcsoft.framework.kunit.thermo.molarvolume.*
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.specificenergy.*
 import org.pcsoft.framework.kunit.thermo.specificheatcapacity.*
 import org.pcsoft.framework.kunit.thermo.temperature.*
@@ -1370,13 +1370,13 @@ class KCookbookTest {
 
     /** Thermal resistance in all its forms. */
     @Test
-    fun `thermal resistance`() {
+    fun `thermal insulance (R-value)`() {
         val r = (0.2 of meters) / (0.035 of wattsPerMeterKelvin)
-        assertIs<KThermalResistanceUnitInstance>(r)
+        assertIs<KThermalInsulanceUnitInstance>(r)
         assertEquals(0.2 / 0.035, r into squareMeterKelvinPerWatt, 1e-9)
 
         val fromU = 1 / (0.175 of wattsPerSquareMeterKelvin)
-        assertIs<KThermalResistanceUnitInstance>(fromU)
+        assertIs<KThermalInsulanceUnitInstance>(fromU)
         assertEquals(1.0 / 0.175, fromU into squareMeterKelvinPerWatt, 1e-9)
 
         val u = 1 / (5.714285714285714 of squareMeterKelvinPerWatt)
@@ -1396,7 +1396,7 @@ class KCookbookTest {
         assertEquals(21.0, delta.value, 1e-9)
 
         val resistance = KTemperatureDifference.ofKelvin(21) / (3.675 of wattsPerSquareMeter)
-        assertIs<KThermalResistanceUnitInstance>(resistance)
+        assertIs<KThermalInsulanceUnitInstance>(resistance)
         assertEquals(5.714285714285714, resistance into squareMeterKelvinPerWatt, 1e-9)
 
         val flux = KTemperatureDifference.ofKelvin(21) / (5.714285714285714 of squareMeterKelvinPerWatt)
@@ -1404,12 +1404,12 @@ class KCookbookTest {
         assertEquals(3.675, flux into wattsPerSquareMeter, 1e-9)
 
         assertEquals(
-            5.714285714285714 / KThermalResistanceUnit.TOG.baseValue,
+            5.714285714285714 / KThermalInsulanceUnit.TOG.baseValue,
             (5.714285714285714 of squareMeterKelvinPerWatt) into tog,
             1e-9,
         )
         assertEquals(
-            5.714285714285714 / KThermalResistanceUnit.CLO.baseValue,
+            5.714285714285714 / KThermalInsulanceUnit.CLO.baseValue,
             (5.714285714285714 of squareMeterKelvinPerWatt) into clo,
             1e-9,
         )
@@ -1673,7 +1673,7 @@ class KCookbookTest {
         assertEquals((copper.specificHeatCapacity into joulesPerKilogramKelvin) * 5.0, capacity into joulesPerKelvin, 1e-6)
 
         val resistance = (2 of milli.meters) / copper.thermalConductivity!!
-        assertIs<KThermalResistanceUnitInstance>(resistance)
+        assertIs<KThermalInsulanceUnitInstance>(resistance)
         assertTrue((resistance into squareMeterKelvinPerWatt) > 0.0)
 
         val wire = copper.electricalResistivity!! / (1 of milli.meters)

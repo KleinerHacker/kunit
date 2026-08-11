@@ -1,8 +1,8 @@
 # 熱抵抗 (R値)
 
-パッケージ: `org.pcsoft.framework.kunit.thermo.resistance`
+パッケージ: `org.pcsoft.framework.kunit.thermo.insulance`
 基本単位: **平方メートルケルビン毎ワット**
-(`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
+(`KThermalInsulanceUnit.BASE == KThermalInsulanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
 
 種別: **構成単位（constructed unit）**
 
@@ -10,12 +10,12 @@
 [熱伝達率](heat-transfer-coefficient.md)(U値)の正確な逆数であり、直列の層のR値が単純に **加算される**
 ため、断熱材が実際に販売される際に使われる形式です。
 
-`KThermalResistanceUnitInstance` は正準の正規形 `mass⁻¹ · time³ · temperature¹`(`kg⁻¹·s³·K`)に ちょうど3つの項からなる
+`KThermalInsulanceUnitInstance` は正準の正規形 `mass⁻¹ · time³ · temperature¹`(`kg⁻¹·s³·K`)に ちょうど3つの項からなる
 `KMixedUnitInstance` をラップし、常に m²·K/W に正規化されます。
 
 !!! note "パッケージ名とクラス名"
 パッケージは `thermo.resistance` であり、`thermo.thermalresistance` ではありません — 単位パッケージ
-はその分野パッケージの名前を繰り返してはなりません。 **型**は完全な技術用語 (`KThermalResistanceUnitInstance`)
+はその分野パッケージの名前を繰り返してはなりません。 **型**は完全な技術用語 (`KThermalInsulanceUnitInstance`)
 を保持しており、これによって `electric.resistance` と区別されます。
 
 ## 名前付き単位
@@ -44,7 +44,7 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
 import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
@@ -69,15 +69,15 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | 式                                          | 結果の型                               | 意味             |
 |---------------------------------------------|----------------------------------------|------------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | 測定からのR      |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | 材料+厚さからのR |
+| `temperatureDifference / heatFluxDensity`   | `KThermalInsulanceUnitInstance`       | 測定からのR      |
+| `length / thermalConductivity`              | `KThermalInsulanceUnitInstance`       | 材料+厚さからのR |
 | `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | 持続する温度差   |
 | `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | 同じ(可換)       |
 | `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | 結果としての流束 |
 | `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | 必要な厚さ       |
 | `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | 同じ(可換)       |
 | `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | 暗黙の伝導率     |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | UからR           |
+| `1 / heatTransferCoefficient`               | `KThermalInsulanceUnitInstance`       | UからR           |
 | `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | RからU           |
 
 2つの逆数演算子は狭く宣言されているため、`1 / u` と `1 / r` はグループに依存しない `Number.div` が 生成するであろう汎用の混合単位ではなく、
@@ -89,9 +89,9 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | 分解表現                                  | 形式                                 | 結果                             |
 |-------------------------------------------|--------------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | 型付き演算子                         | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | 型付き演算子                         | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | ネイティブ + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| `temperatureDifference / heatFluxDensity` | 型付き演算子                         | `KThermalInsulanceUnitInstance` |
+| `length / thermalConductivity`            | 型付き演算子                         | `KThermalInsulanceUnitInstance` |
+| `mass⁻¹ · time³ · temperature¹`           | ネイティブ + `toThermalInsulance()` | `KThermalInsulanceUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -101,7 +101,7 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
@@ -110,7 +110,7 @@ val native = (
     ((1 of seconds).toUnit() pow 3) *
         KTemperatureDifference.ofKelvin(1).toUnit() /
         (1000 of grams).toUnit()
-    ).toThermalResistance()
+    ).toThermalInsulance()
 
 viaFlux == viaThickness // true
 viaFlux == native       // true - すべて 1.0 m²·K/W
@@ -122,7 +122,7 @@ viaFlux == native       // true - すべて 1.0 m²·K/W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
 (1 of squareMeterKelvinPerWatt) > (5 of tog)      // true(5 tog = 0.5 m²·K/W)
@@ -134,7 +134,7 @@ val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 (5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
 "R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."

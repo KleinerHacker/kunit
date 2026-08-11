@@ -1,8 +1,8 @@
 # तापीय प्रतिरोध (R-मान)
 
-पैकेज: `org.pcsoft.framework.kunit.thermo.resistance`
+पैकेज: `org.pcsoft.framework.kunit.thermo.insulance`
 मूल इकाई: **वर्ग मीटर-केल्विन प्रति वाट**
-(`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
+(`KThermalInsulanceUnit.BASE == KThermalInsulanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
 
 प्रकार: **संघटित इकाई**
 
@@ -10,12 +10,12 @@
 यह [ऊष्मा स्थानांतरण गुणांक](heat-transfer-coefficient.md) (U-मान) का ठीक व्युत्क्रम है, और वह रूप है जिसमें इन्सुलेशन
 उत्पाद वास्तव में बेचे जाते हैं, क्योंकि श्रेणी में लगी परतों के R-मान बस **जुड़ जाते हैं**।
 
-`KThermalResistanceUnitInstance` एक `KMixedUnitInstance` को लपेटता है जिसमें विहित सामान्य रूप
+`KThermalInsulanceUnitInstance` एक `KMixedUnitInstance` को लपेटता है जिसमें विहित सामान्य रूप
 `mass⁻¹ · time³ · temperature¹` (`kg⁻¹·s³·K`) में ठीक तीन पद होते हैं, जो हमेशा m²·K/W में सामान्यीकृत रहता है।
 
 !!! note "पैकेज नाम बनाम क्लास नाम"
 पैकेज `thermo.resistance` है, `thermo.thermalresistance` नहीं — किसी यूनिट पैकेज को अपने फील्ड पैकेज का नाम दोहराना नहीं
-चाहिए। **टाइप्स** पूरा तकनीकी शब्द बनाए रखते हैं (`KThermalResistanceUnitInstance`), जो इन्हें `electric.resistance` से
+चाहिए। **टाइप्स** पूरा तकनीकी शब्द बनाए रखते हैं (`KThermalInsulanceUnitInstance`), जो इन्हें `electric.resistance` से
 अलग करता है।
 
 ## नामित इकाइयाँ
@@ -45,7 +45,7 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
 import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
@@ -70,15 +70,15 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | व्यंजक                                         | परिणाम प्रकार                               | अर्थ            |
 |---------------------------------------------|----------------------------------------|---------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | माप से R        |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | सामग्री + मोटाई से R |
+| `temperatureDifference / heatFluxDensity`   | `KThermalInsulanceUnitInstance`       | माप से R        |
+| `length / thermalConductivity`              | `KThermalInsulanceUnitInstance`       | सामग्री + मोटाई से R |
 | `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | स्थायी अंतर        |
 | `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | वही (क्रमविनिमेय)   |
 | `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | परिणामी फ्लक्स       |
 | `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | आवश्यक मोटाई      |
 | `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | वही (क्रमविनिमेय)   |
 | `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | निहित चालकता      |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | U से R         |
+| `1 / heatTransferCoefficient`               | `KThermalInsulanceUnitInstance`       | U से R         |
 | `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | R से U         |
 
 दोनों व्युत्क्रम संकारक संकीर्ण रूप से घोषित किए गए हैं, ताकि `1 / u` और `1 / r` एक **टाइप किया गया**
@@ -90,9 +90,9 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | अपघटन                                     | रूप                           | परिणाम                             |
 |-------------------------------------------|------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | टाइप किया गया संकारक               | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | टाइप किया गया संकारक               | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | मूल + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| `temperatureDifference / heatFluxDensity` | टाइप किया गया संकारक               | `KThermalInsulanceUnitInstance` |
+| `length / thermalConductivity`            | टाइप किया गया संकारक               | `KThermalInsulanceUnitInstance` |
+| `mass⁻¹ · time³ · temperature¹`           | मूल + `toThermalInsulance()` | `KThermalInsulanceUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -102,7 +102,7 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
@@ -111,7 +111,7 @@ val native = (
     ((1 of seconds).toUnit() pow 3) *
         KTemperatureDifference.ofKelvin(1).toUnit() /
         (1000 of grams).toUnit()
-    ).toThermalResistance()
+    ).toThermalInsulance()
 
 viaFlux == viaThickness // true
 viaFlux == native       // true - सभी 1.0 m²·K/W हैं
@@ -123,7 +123,7 @@ viaFlux == native       // true - सभी 1.0 m²·K/W हैं
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
 (1 of squareMeterKelvinPerWatt) > (5 of tog)      // true (5 tog = 0.5 m²·K/W)
@@ -135,7 +135,7 @@ val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 (5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
 "R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."

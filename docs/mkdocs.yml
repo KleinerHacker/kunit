@@ -517,7 +517,11 @@ nav:
       - Heat Flux Density: units/thermodynamics/heat-flux-density.md
       - Thermal Conductivity: units/thermodynamics/thermal-conductivity.md
       - Heat Transfer Coefficient: units/thermodynamics/heat-transfer-coefficient.md
+      - Thermal Insulance: units/thermodynamics/thermal-insulance.md
       - Thermal Resistance: units/thermodynamics/thermal-resistance.md
+      - Thermal Conductance: units/thermodynamics/thermal-conductance.md
+      - Volumetric Heat Capacity: units/thermodynamics/volumetric-heat-capacity.md
+      - Dose Rate: units/thermodynamics/dose-rate.md
       - Thermal Expansion: units/thermodynamics/thermal-expansion.md
       - Temperature Gradient: units/thermodynamics/temperature-gradient.md
       - Thermal Diffusivity: units/thermodynamics/thermal-diffusivity.md

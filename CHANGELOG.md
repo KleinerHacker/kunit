@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### Changed (breaking)
+
+- **`thermo.resistance` renamed to `thermo.insulance`.** The group with base unit `m²·K/W` describes the
+  **R-value** (thermal insulance), not the absolute thermal resistance, and the name is now used for the
+  quantity that actually carries it. `KThermalResistanceUnit` → `KThermalInsulanceUnit`,
+  `KThermalResistanceUnitInstance` → `KThermalInsulanceUnitInstance`,
+  `KMixedUnitInstance.toThermalResistance()` → `KMixedUnitInstance.toThermalInsulance()`. The tokens
+  (`squareMeterKelvinPerWatt`, `hourSquareFootFahrenheitPerBtu`, `clo`, `tog`) and all values are
+  unchanged - only the package and the type names move. The name `thermo.resistance` /
+  `KThermalResistanceUnit` now refers to the **new** absolute thermal resistance group (`K/W`) below.
+  Migration: replace the import `…thermo.resistance` with `…thermo.insulance` and rename the type.
+
 ### Added
 
 - **New subject area Optics (`org.pcsoft.framework.kunit.optic`).** Ten new unit groups covering photometry and
@@ -54,6 +66,35 @@
   per steradian square meter (`W/(sr·m²)`) and the token `wattsPerSteradianSquareMeter`. Typed operators
   `radiantIntensity / area`, `radiance * area = radiantIntensity` (and its commutative form) and
   `radiantIntensity / radiance = area`; `KMixedUnitInstance.toRadiance()`.
+
+- **New standardized unit Absolute Thermal Resistance (`mass⁻¹ · length⁻² · time³ · temperature`).**
+  `…thermo.resistance` with base unit kelvin per watt (`K/W`) and the tokens `kelvinsPerWatt`,
+  `degreesCelsiusPerWatt`, `hourFahrenheitPerBtu` (all prefix-combinable). Typed operators
+  `temperatureDifference / power`, `thermalResistance * power = temperatureDifference` (and its
+  commutative form) and `temperatureDifference / thermalResistance = power`;
+  `KMixedUnitInstance.toThermalResistance()`. Same-type `+` is the series connection of a thermal chain.
+
+- **New standardized unit Thermal Conductance (`mass · length² · time⁻³ · temperature⁻¹`).**
+  `…thermo.conductance` with base unit watt per kelvin (`W/K`) and the tokens `wattsPerKelvin`,
+  `btusPerHourFahrenheit`. Typed operators `power / temperatureDifference`,
+  `thermalConductance * temperatureDifference = power` (and its commutative form),
+  `power / thermalConductance = temperatureDifference` and the reciprocal relations
+  `Number / thermalResistance = thermalConductance`, `Number / thermalConductance = thermalResistance`;
+  `KMixedUnitInstance.toThermalConductance()`.
+
+- **New standardized unit Volumetric Heat Capacity (`mass · length⁻¹ · time⁻² · temperature⁻¹`).**
+  `…thermo.volumetricheatcapacity` with base unit `J/(m³·K)` and the tokens
+  `joulesPerCubicMeterKelvin`, `caloriesPerCubicCentimeterKelvin`. **Two typed decompositions** -
+  `heatCapacity / volume` and `specificHeatCapacity * density` - plus
+  `volumetricHeatCapacity * volume = heatCapacity` (with commutative form) and their inverses;
+  `KMixedUnitInstance.toVolumetricHeatCapacity()`.
+
+- **New standardized unit Dose Rate (`length² · time⁻³`).** `…thermo.doserate` with base unit gray per
+  second (`Gy/s`) and the tokens `graysPerSecond`, `graysPerHour`, `sievertsPerSecond`,
+  `sievertsPerHour` (all prefix-combinable). Typed operators `specificEnergy / time`,
+  `doseRate * time = specificEnergy` (and its commutative form) and `specificEnergy / doseRate = time`;
+  `KMixedUnitInstance.toDoseRate()`. The absorbed dose itself is the specific energy group
+  (`1 Gy = 1 J/kg`).
 
 - **New standardized unit Amount-of-Substance Concentration (`substance · length⁻³`).**
   `…thermo.concentration` with base unit mole per cubic meter (`mol/m³`) and the tokens

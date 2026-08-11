@@ -1,19 +1,19 @@
 # 열저항 (Thermal Resistance, R-값)
 
-패키지: `org.pcsoft.framework.kunit.thermo.resistance`
-기본 단위: **와트당 제곱미터-켈빈** (`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
+패키지: `org.pcsoft.framework.kunit.thermo.insulance`
+기본 단위: **와트당 제곱미터-켈빈** (`KThermalInsulanceUnit.BASE == KThermalInsulanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
 
 유형: **구성된 단위**
 
 열저항 — **R-값** — 은 어떤 층이 열의 흐름에 얼마나 강하게 저항하는지를 나타냅니다: `m²·K/W`. 이는
 [열전달계수](heat-transfer-coefficient.md)(U-값)의 정확한 역수이며, 직렬로 연결된 층들의 R-값이 단순히 **합산**되기 때문에 단열 제품이 실제로 판매되는 형태이기도 합니다.
 
-`KThermalResistanceUnitInstance`는 정규 형식 `mass⁻¹ · time³ · temperature¹` (`kg⁻¹·s³·K`)의 정확히 세 항으로 이루어진
+`KThermalInsulanceUnitInstance`는 정규 형식 `mass⁻¹ · time³ · temperature¹` (`kg⁻¹·s³·K`)의 정확히 세 항으로 이루어진
 `KMixedUnitInstance`를 감싸며, 항상 m²·K/W로 정규화됩니다.
 
 !!! note "패키지 이름 대 클래스 이름"
 패키지는 `thermo.resistance`이며, `thermo.thermalresistance`가 아닙니다 — 단위 패키지는 그 분야 패키지의 이름을 반복해서는 안 됩니다. **타입**은 전체 기술 용어
-(`KThermalResistanceUnitInstance`)를 유지하며, 이것이 `electric.resistance`와 구분되는 지점입니다.
+(`KThermalInsulanceUnitInstance`)를 유지하며, 이것이 `electric.resistance`와 구분되는 지점입니다.
 
 ## 이름이 붙은 단위
 
@@ -40,7 +40,7 @@ import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
 import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
@@ -65,15 +65,15 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | 식                                          | 결과 타입                              | 의미                |
 |---------------------------------------------|----------------------------------------|---------------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | 측정으로부터 R      |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | 물질 + 두께로부터 R |
+| `temperatureDifference / heatFluxDensity`   | `KThermalInsulanceUnitInstance`       | 측정으로부터 R      |
+| `length / thermalConductivity`              | `KThermalInsulanceUnitInstance`       | 물질 + 두께로부터 R |
 | `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | 유지되는 온도 차    |
 | `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | 동일(교환 법칙)     |
 | `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | 결과 유속           |
 | `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | 필요한 두께         |
 | `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | 동일(교환 법칙)     |
 | `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | 유도된 전도율       |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | U로부터 R           |
+| `1 / heatTransferCoefficient`               | `KThermalInsulanceUnitInstance`       | U로부터 R           |
 | `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | R로부터 U           |
 
 두 역수 연산자는 좁게 선언되어 있어, `1 / u`와 `1 / r`은 그룹에 무관한 `Number.div`가 만들어 낼 일반적인 혼합 단위가 아니라 **타입이 지정된** 값을 반환합니다.
@@ -84,9 +84,9 @@ val wall = (10 of meters) * (2.5 of meters) // 25 m²
 
 | 분해                                      | 형식                               | 결과                             |
 |-------------------------------------------|------------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | 타입이 지정된 연산자               | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | 타입이 지정된 연산자               | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | 네이티브 + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| `temperatureDifference / heatFluxDensity` | 타입이 지정된 연산자               | `KThermalInsulanceUnitInstance` |
+| `length / thermalConductivity`            | 타입이 지정된 연산자               | `KThermalInsulanceUnitInstance` |
+| `mass⁻¹ · time³ · temperature¹`           | 네이티브 + `toThermalInsulance()` | `KThermalInsulanceUnitInstance` |
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
@@ -96,7 +96,7 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
 import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
 import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 
 val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
@@ -105,7 +105,7 @@ val native = (
     ((1 of seconds).toUnit() pow 3) *
         KTemperatureDifference.ofKelvin(1).toUnit() /
         (1000 of grams).toUnit()
-    ).toThermalResistance()
+    ).toThermalInsulance()
 
 viaFlux == viaThickness // true
 viaFlux == native       // true - 모두 1.0 m²·K/W
@@ -117,7 +117,7 @@ viaFlux == native       // true - 모두 1.0 m²·K/W
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
 (1 of squareMeterKelvinPerWatt) > (5 of tog)      // true (5 tog = 0.5 m²·K/W)
@@ -129,7 +129,7 @@ val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.thermo.resistance.*
+import org.pcsoft.framework.kunit.thermo.insulance.*
 
 (5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
 "R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."

@@ -12,36 +12,53 @@
 
 package org.pcsoft.framework.kunit.thermo.resistance
 
-import org.pcsoft.framework.kunit.*
+import org.pcsoft.framework.kunit.KMixedUnitInstance
+import org.pcsoft.framework.kunit.KUnitInstance
+import org.pcsoft.framework.kunit.KUnitMeasurable
+import org.pcsoft.framework.kunit.KUnitPrefix
+import org.pcsoft.framework.kunit.KUnitTerm
+import org.pcsoft.framework.kunit.kinematic.distance.KDistanceUnit
 import org.pcsoft.framework.kunit.kinematic.time.KTimeUnit
 import org.pcsoft.framework.kunit.mechanic.mass.KMassUnit
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnit
 
 /**
- * Wraps a [KMixedUnitInstance] representing a **thermal resistance** (the *R-value*), i.e. exactly three
- * terms in the canonical normal form `mass⁻¹ · time³ · temperature¹` (`kg⁻¹·s³·K` = `m²·K/W`). The [value]
- * is always normalized internally to m²·K/W ([KThermalResistanceUnit.BASE]).
+ * Wraps a [KMixedUnitInstance] representing an **absolute thermal resistance** (temperature difference per
+ * heat flow), i.e. exactly four terms in the canonical normal form - [KMassUnit.BASE] (gram) at exponent
+ * `-1`, [KDistanceUnit.BASE] (meter) at exponent `-2`, [KTimeUnit.BASE] (second) at exponent `+3` and
+ * [KTemperatureDifferenceUnit.BASE] at exponent `+1` (`kg⁻¹·m⁻²·s³·K` = `K/W`).
  *
- * Thermal resistance is the exact reciprocal of the heat transfer coefficient (U-value); `1 / u` and
- * `1 / r` convert between the two with a typed result.
+ * Absolute thermal resistance is a *constructed* unit group with one decomposition, funnelling into
+ * [thermalResistanceInstanceOf]:
+ * * `temperatureDifference / power` (typed operator, see `KThermalResistanceUnitOperators.kt`)
  *
- * The temperature dimension is the **difference** group ([KTemperatureDifferenceUnit]).
+ * Resistances in series **add up**, which is exactly what the same-type `+` does - the standard way to sum
+ * a junction-to-case, case-to-heatsink and heatsink-to-air chain.
+ *
+ * Instances are additionally created via the bare tokens in `KThermalResistanceUnitBareValues.kt` (e.g.
+ * `2.5 of kelvinsPerWatt`), the prefixed templates in `KThermalResistanceUnitExtensions.kt`, or
+ * [toThermalResistance].
  *
  * Example:
  * ```kotlin
- * val batt = 5 of squareMeterKelvinPerWatt // a thick insulation batt
+ * val r = KTemperatureDifference.ofKelvin(30) / (12 of watts) // 2.5 K/W
+ * r into kelvinsPerWatt
  * ```
  */
 class KThermalResistanceUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
     KUnitInstance<KThermalResistanceUnitInstance>, KUnitMeasurable by instance {
 
-    /** Returns a new thermal resistance with [value] (m²·K/W) scaled by [factor]. */
+    /**
+     * Returns a new thermal resistance with [value] (K/W) scaled by [factor]. Backs number-times-unit
+     * construction (`2.5 of kelvinsPerWatt`).
+     */
     override fun scaledBy(factor: Double): KThermalResistanceUnitInstance =
         thermalResistanceInstanceOf(value * factor)
 
     /**
-     * Adds two thermal resistances - the physically meaningful operation for layers in series, where the
-     * R-values simply add up. Different [KThermalResistanceUnit]s are converted automatically.
+     * Adds two thermal resistances - the series connection of a thermal chain. Automatically converts
+     * between different [KThermalResistanceUnit]s since both operands are always normalized to
+     * [KThermalResistanceUnit.BASE] (K/W) internally.
      */
     override operator fun plus(other: KThermalResistanceUnitInstance): KThermalResistanceUnitInstance =
         thermalResistanceInstanceOf(value + other.value)
@@ -50,77 +67,92 @@ class KThermalResistanceUnitInstance internal constructor(internal val instance:
     override operator fun minus(other: KThermalResistanceUnitInstance): KThermalResistanceUnitInstance =
         thermalResistanceInstanceOf(value - other.value)
 
-    /** Multiplies two thermal resistances, producing a new [KMixedUnitInstance]. */
+    /** Multiplies two thermal resistances, producing a new [KMixedUnitInstance] (no longer a "pure" one). */
     operator fun times(other: KThermalResistanceUnitInstance): KMixedUnitInstance = instance * other.instance
 
     /** Divides two thermal resistances, producing a new (dimensionless) [KMixedUnitInstance]. */
     operator fun div(other: KThermalResistanceUnitInstance): KMixedUnitInstance = instance / other.instance
 
-    /** Compares two thermal resistances by their normalized [value] (m²·K/W). */
+    /** Compares two thermal resistances by their normalized [value] (K/W). */
     override operator fun compareTo(other: KThermalResistanceUnitInstance): Int = value.compareTo(other.value)
 
-    /** Structural equality by normalized [value] (m²·K/W). */
-    override fun equals(other: Any?): Boolean = other is KThermalResistanceUnitInstance && value == other.value
+    /**
+     * Structural equality by normalized [value]: two thermal resistances are equal iff they represent the
+     * same quantity (e.g. `(1 of kelvinsPerWatt) == (1 of degreesCelsiusPerWatt)`).
+     */
+    override fun equals(other: Any?): Boolean =
+        other is KThermalResistanceUnitInstance && value == other.value
 
     override fun hashCode(): Int = value.hashCode()
 
-    /** Base-unit representation, e.g. `"5.0 m²·K/W"`. */
+    /** Base-unit representation in K/W, e.g. `"2.5 K/W"`. */
     override fun toString(): String = "$value ${KThermalResistanceUnit.BASE.symbol}"
 }
 
-// --- Canonical reference --------------------------------------------------------------------------
-
-// Bridges the gram-based canonical product to m²·K/W. Unlike the other thermodynamic groups the mass
-// exponent here is *negative* (-1), so the bridge multiplies rather than divides:
-// gramProduct / KILO^-1 == gramProduct * KILO.
-internal val THERMAL_RESISTANCE_MASS_REFERENCE: Double = KUnitPrefix.KILO.factor
+// The watt's SI definition uses the *kilogram* as its mass dimension, whereas the mass group's base unit is
+// the gram. The canonical normal form is therefore stored with the mass group's base term (gram), and this
+// factor bridges a gram-based canonical product to kelvins per watt. The mass exponent is *negative* (-1)
+// here, so the bridge is applied as `pow(reference, -1.0)` (like the siemens).
+internal val KELVIN_PER_WATT_MASS_REFERENCE: Double = KUnitPrefix.KILO.factor
 
 // --- Factory helper (single creation source; constructor stays internal) -------------------------
 
 /**
- * Builds a [KThermalResistanceUnitInstance] from a value already expressed in m²·K/W
+ * Builds a [KThermalResistanceUnitInstance] from a value already expressed in kelvins per watt
  * ([KThermalResistanceUnit.BASE]).
  *
  * This is the single creation source that every decomposition must funnel into: it assembles the canonical
- * normal-form [KMixedUnitInstance] with the three terms `mass⁻¹`, `time³`, `temperature¹`.
+ * normal-form [KMixedUnitInstance] with the four terms `mass⁻¹`, `distance⁻²`, `time³` and `temperature¹`
+ * (each in its group's base unit).
  */
-internal fun thermalResistanceInstanceOf(squareMeterKelvinPerWatt: Double): KThermalResistanceUnitInstance =
+internal fun thermalResistanceInstanceOf(kelvinsPerWatt: Double): KThermalResistanceUnitInstance =
     KThermalResistanceUnitInstance(
         KMixedUnitInstance(
-            squareMeterKelvinPerWatt,
+            kelvinsPerWatt,
             listOf(
                 KUnitTerm(KMassUnit.BASE, -1),
+                KUnitTerm(KDistanceUnit.BASE, -2),
                 KUnitTerm(KTimeUnit.BASE, 3),
                 KUnitTerm(KTemperatureDifferenceUnit.BASE, 1),
             ),
         ),
     )
 
-/** Builds a value-1 [KThermalResistanceUnitInstance] for the given [unit]. */
+/**
+ * Builds a value-1 [KThermalResistanceUnitInstance] for the given [unit] (its
+ * [KThermalResistanceUnit.baseValue] K/W).
+ */
 internal fun thermalResistanceOfUnit(unit: KThermalResistanceUnit): KThermalResistanceUnitInstance =
     thermalResistanceInstanceOf(unit.baseValue)
 
 // --- Conversion from the generic engine ----------------------------------------------------------
 
 /**
- * Converts this mixed unit to a "pure" thermal resistance, as long as it matches the canonical normal
- * form: exactly one [KMassUnit] term at exponent `-1`, one [KTimeUnit] term at `+3` and one
- * [KTemperatureDifferenceUnit] term at `+1` (order independent).
+ * Converts this mixed unit to a "pure" absolute thermal resistance, as long as it matches the canonical
+ * normal form: exactly one [KMassUnit] term at exponent `-1`, one [KDistanceUnit] term at exponent `-2`,
+ * one [KTimeUnit] term at exponent `+3` and one [KTemperatureDifferenceUnit] term at exponent `+1` (order
+ * independent). The terms are normalized over their [org.pcsoft.framework.kunit.KUnit.baseValue]s and
+ * bridged from the gram-based product to the kilogram-based watt.
  *
- * @throws IllegalStateException if this instance is not a canonical `mass⁻¹·time³·temperature¹` thermal
- * resistance.
+ * @throws IllegalStateException if this instance is not a canonical
+ * `mass⁻¹·distance⁻²·time³·temperature` thermal resistance.
  */
 fun KMixedUnitInstance.toThermalResistance(): KThermalResistanceUnitInstance {
     val massTerm = units.singleOrNull { it.unit is KMassUnit && it.exponent == -1 }
+    val distanceTerm = units.singleOrNull { it.unit is KDistanceUnit && it.exponent == -2 }
     val timeTerm = units.singleOrNull { it.unit is KTimeUnit && it.exponent == 3 }
     val temperatureTerm = units.singleOrNull { it.unit is KTemperatureDifferenceUnit && it.exponent == 1 }
-    check(units.size == 3 && massTerm != null && timeTerm != null && temperatureTerm != null) {
-        "KMixedUnitInstance $this does not represent a pure thermal resistance " +
-                "(expected KMassUnit^-1, KTimeUnit^3 and KTemperatureDifferenceUnit^1)"
+    check(
+        units.size == 4 && massTerm != null && distanceTerm != null &&
+                timeTerm != null && temperatureTerm != null
+    ) {
+        "KMixedUnitInstance $this does not represent a pure thermal resistance (expected one KMassUnit^-1, " +
+                "one KDistanceUnit^-2, one KTimeUnit^3 and one KTemperatureDifferenceUnit^1 term)"
     }
     val gramBaseProduct = value *
             Math.pow(massTerm.unit.baseValue, -1.0) *
+            Math.pow(distanceTerm.unit.baseValue, -2.0) *
             Math.pow(timeTerm.unit.baseValue, 3.0) *
             temperatureTerm.unit.baseValue
-    return thermalResistanceInstanceOf(gramBaseProduct * THERMAL_RESISTANCE_MASS_REFERENCE)
+    return thermalResistanceInstanceOf(gramBaseProduct / Math.pow(KELVIN_PER_WATT_MASS_REFERENCE, -1.0))
 }
