@@ -11,8 +11,8 @@ Branch: `claude/missing-units-ls7evz`
 | 1     | Neues Fachgebiet Optik (`optic` / `optics`) | **erledigt** |
 | 2     | Chemie                                      | **erledigt** |
 | 3     | Thermodynamik (inkl. Breaking Change)       | **erledigt** |
-| 4     | Mechanik & Kinematik                        |    in Arbeit |
-| 5     | Elektrotechnik                              |        offen |
+| 4     | Mechanik & Kinematik                        | **erledigt** |
+| 5     | Elektrotechnik                              |    in Arbeit |
 | 6     | Strahlungs-Doku                             |        offen |
 
 ## Phase 7 — Regelwerk (erledigt)
@@ -66,6 +66,20 @@ Breaking Change: `thermo.resistance` → `thermo.insulance` (`KThermalResistance
 | Volumetric Heat Capacity | `thermo.volumetricheatcapacity`  | `J/(m³·K)`   |
 | Dose Rate                | `thermo.doserate`                | `Gy/s`       |
 
+## Phase 4 — Mechanik & Kinematik (erledigt)
+
+| Gruppe                | Package                          | Basiseinheit |
+|-----------------------|----------------------------------|--------------|
+| Jerk                  | `kinematic.jerk`                 | `m/s³`       |
+| Specific Weight       | `mechanic.specificweight`        | `N/m³`       |
+| Compressibility       | `mechanic.compressibility`       | `1/Pa`       |
+| Acoustic Impedance    | `mechanic.acousticimpedance`     | `Pa·s/m`     |
+| Second Moment of Area | `kinematic.distance` (Leaf, m⁴)  | `m⁴`         |
+
+`KSecondMomentOfAreaUnitInstance` ist die neue Exponenten-4-Leaf neben Length/Area/Volume;
+`area * area`, `volume * length` und `length * volume` liefern jetzt diesen typisierten Leaf statt der
+generischen `KDistanceUnitInstance` (Verengung, quellkompatibel).
+
 ## Hinweis zur lokalen Verifikation
 
 Das Projekt fordert `jvmToolchain(25)`, der Container hat nur JDK 21 und der Toolchain-Download ist
@@ -74,6 +88,5 @@ setzt (`-I <scratchpad>/jdk21.init.gradle`). Das Repository bleibt unverändert.
 
 ## Nächster Schritt
 
-Phase 4 — Mechanik & Kinematik: `kinematic.jerk` (m/s³) als erste Gruppe, danach
-`mechanic.specificweight`, `mechanic.compressibility`, `mechanic.acousticimpedance` und die
-Exponenten-Spezialisierung `KSecondMomentOfAreaUnitInstance` (m⁴) in `kinematic.distance`.
+Phase 5 — Elektrotechnik: `electric.magneticmoment` (A·m²), `electric.flux` (V·m),
+`electric.elastance` (1/F) und `electric.specificcharge` (C/kg, deckt zugleich die Ionendosis ab).

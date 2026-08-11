@@ -66,7 +66,8 @@ class KLengthUnitInstance internal constructor(instance: KMixedUnitInstance) :
     operator fun times(other: KAreaUnitInstance): KVolumeUnitInstance = volumeOf(value * other.value)
 
     /** `length * volume = m⁴`, outside `{1,2,3}`, hence the general [KDistanceUnitInstance]. */
-    operator fun times(other: KVolumeUnitInstance): KDistanceUnitInstance = distanceOf(value * other.value, 4)
+    operator fun times(other: KVolumeUnitInstance): KSecondMomentOfAreaUnitInstance =
+        secondMomentOfAreaOf(value * other.value)
 
     /** `length / length` is dimensionless (exponent 0), hence a raw [KMixedUnitInstance]. */
     operator fun div(other: KLengthUnitInstance): KMixedUnitInstance = instance / other.instance

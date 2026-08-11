@@ -67,6 +67,42 @@
   `radiantIntensity / area`, `radiance * area = radiantIntensity` (and its commutative form) and
   `radiantIntensity / radiance = area`; `KMixedUnitInstance.toRadiance()`.
 
+- **New exponent-4 leaf Second Moment of Area (`length⁴`).** `KSecondMomentOfAreaUnitInstance` joins
+  `KLengthUnitInstance`/`KAreaUnitInstance`/`KVolumeUnitInstance` in
+  `…kinematic.distance`, with the tokens `quarticMeters`, `quarticCentimeters`,
+  `quarticMillimeters`, `quarticInches` (all prefix-combinable) and
+  `KMixedUnitInstance.toSecondMomentOfArea()`. Same-type `+`/`-`/comparison make
+  `secondMomentOfArea + area` a compile error; `secondMomentOfArea / length = volume` (the section
+  modulus), `/ area = area`, `/ volume = length`. The products `area * area`, `volume * length` and
+  `length * volume` now return this **typed leaf** instead of the general `KDistanceUnitInstance` - a
+  narrowing, so existing source keeps compiling.
+
+- **New standardized unit Jerk (`length · time⁻³`).** `…kinematic.jerk` with base unit meter per second
+  cubed (`m/s³`) and the tokens `metersPerSecondCubed`, `standardGravitiesPerSecond`,
+  `feetPerSecondCubed` (all prefix-combinable). Typed operators `acceleration / time`,
+  `jerk * time = acceleration` (and its commutative form) and `acceleration / jerk = time`;
+  `KMixedUnitInstance.toJerk()`.
+
+- **New standardized unit Specific Weight (`mass · length⁻² · time⁻²`).** `…mechanic.specificweight`
+  with base unit newton per cubic meter (`N/m³`) and the tokens `newtonsPerCubicMeter`,
+  `kilonewtonsPerCubicMeter`, `poundsForcePerCubicFoot`. **Two typed decompositions** -
+  `force / volume` and `density * acceleration` (`γ = ρ · g`) - plus
+  `specificWeight * volume = force` (with commutative form) and their inverses;
+  `KMixedUnitInstance.toSpecificWeight()`.
+
+- **New standardized unit Compressibility (`mass⁻¹ · length · time²`).** `…mechanic.compressibility`
+  with base unit reciprocal pascal (`1/Pa`) and the tokens `reciprocalPascals`, `reciprocalBars`,
+  `reciprocalAtmospheres`. Typed operators `Number / pressure = compressibility` (the reciprocal of the
+  bulk modulus), `Number / compressibility = pressure` and
+  `compressibility * pressure = Double` (the relative volume change);
+  `KMixedUnitInstance.toCompressibility()`.
+
+- **New standardized unit Specific Acoustic Impedance (`mass · length⁻² · time⁻¹`).**
+  `…mechanic.acousticimpedance` with base unit pascal second per meter (`Pa·s/m`) and the tokens
+  `pascalSecondsPerMeter`, `rayls`, `cgsRayls`. **Two typed decompositions** - `pressure / speed` and
+  `density * speed` (`Z = ρ · c`) - plus `acousticImpedance * speed = pressure` (with commutative form)
+  and their inverses; `KMixedUnitInstance.toAcousticImpedance()`.
+
 - **New standardized unit Absolute Thermal Resistance (`mass⁻¹ · length⁻² · time³ · temperature`).**
   `…thermo.resistance` with base unit kelvin per watt (`K/W`) and the tokens `kelvinsPerWatt`,
   `degreesCelsiusPerWatt`, `hourFahrenheitPerBtu` (all prefix-combinable). Typed operators

@@ -437,6 +437,7 @@ nav:
       - Frequency: units/kinematics/frequency.md
       - Speed: units/kinematics/speed.md
       - Acceleration: units/kinematics/acceleration.md
+      - Jerk: units/kinematics/jerk.md
       - Volumetric Flow: units/kinematics/volume-flow.md
   - Mechanics:
       - Overview: units/mechanics/overview.md
@@ -447,6 +448,10 @@ nav:
       - Area Density: units/mechanics/areadensity.md
       - Linear Density: units/mechanics/linear-density.md
       - Specific Volume: units/mechanics/specific-volume.md
+      - Specific Weight: units/mechanics/specific-weight.md
+      - Compressibility: units/mechanics/compressibility.md
+      - Acoustic Impedance: units/mechanics/acoustic-impedance.md
+      - Second Moment of Area: units/mechanics/second-moment-of-area.md
       - Mass Flow Rate: units/mechanics/mass-flow.md
       - Momentum: units/mechanics/momentum.md
       - Impulse: units/mechanics/impulse.md

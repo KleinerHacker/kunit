@@ -45,7 +45,8 @@ class KVolumeUnitInstance internal constructor(instance: KMixedUnitInstance) :
     override operator fun compareTo(other: KVolumeUnitInstance): Int = value.compareTo(other.value)
 
     /** `volume * length = m⁴`, hence the general [KDistanceUnitInstance]. */
-    operator fun times(other: KLengthUnitInstance): KDistanceUnitInstance = distanceOf(value * other.value, 4)
+    operator fun times(other: KLengthUnitInstance): KSecondMomentOfAreaUnitInstance =
+        secondMomentOfAreaOf(value * other.value)
 
     /** `volume * area = m⁵`, hence the general [KDistanceUnitInstance]. */
     operator fun times(other: KAreaUnitInstance): KDistanceUnitInstance = distanceOf(value * other.value, 5)

@@ -25,8 +25,9 @@ import org.pcsoft.framework.kunit.KUnitTerm
  * - [KLengthUnitInstance] - exponent 1 (a length)
  * - [KAreaUnitInstance] - exponent 2 (an area)
  * - [KVolumeUnitInstance] - exponent 3 (a volume)
+ * - [KSecondMomentOfAreaUnitInstance] - exponent 4 (a second moment of area)
  *
- * Results whose exponent falls **outside** `{1, 2, 3}` (e.g. `m⁴`, `m⁻¹`) are represented by this base
+ * Results whose exponent falls **outside** `{1, 2, 3, 4}` (e.g. `m⁵`, `m⁻¹`) are represented by this base
  * type directly; a dimensionless result (exponent 0) drops to a raw [KMixedUnitInstance].
  *
  * By design the base type is **not additive**: it exposes **no** `plus`/`minus`/`compareTo`. Those live
@@ -50,7 +51,10 @@ import org.pcsoft.framework.kunit.KUnitTerm
 open class KDistanceUnitInstance internal constructor(internal val instance: KMixedUnitInstance) :
     KUnitMeasurable by instance {
 
-    /** The single term's exponent (1 for a length, 2 for an area, 3 for a volume, 4+/negative for the general type). */
+    /**
+     * The single term's exponent (1 for a length, 2 for an area, 3 for a volume, 4 for a second moment of
+     * area, 5+/negative for the general type).
+     */
     val exponent: Int get() = instance.units.single().exponent
 
     /**
@@ -172,6 +176,7 @@ internal fun distanceOf(value: Double, exponent: Int, display: KUnitDisplay? = n
         1 -> KLengthUnitInstance(instance)
         2 -> KAreaUnitInstance(instance)
         3 -> KVolumeUnitInstance(instance)
+        4 -> KSecondMomentOfAreaUnitInstance(instance)
         else -> KDistanceUnitInstance(instance)
     }
 }
