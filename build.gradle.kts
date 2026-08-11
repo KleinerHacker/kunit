@@ -35,7 +35,7 @@ dependencies {
     testImplementation(kotlin("test"))
     // Real JUnit Jupiter parameterized tests (@ParameterizedTest/@MethodSource). The BOM aligns the
     // version with the Jupiter artifacts already pulled transitively by kotlin("test") on the JUnit Platform.
-    testImplementation(platform("org.junit:junit-bom:6.1.2"))
+    testImplementation(platform("org.junit:junit-bom:6.1.3"))
     testImplementation("org.junit.jupiter:junit-jupiter-params")
 }
 
