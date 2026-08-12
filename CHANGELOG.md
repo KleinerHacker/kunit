@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.9.0]
+
 ### Changed (breaking)
 
 - **`thermo.resistance` renamed to `thermo.insulance`.** The group with base unit `m²·K/W` describes the
