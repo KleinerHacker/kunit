@@ -6,8 +6,8 @@
 类型： **原生单位**
 
 `KTimeUnitInstance` 是对 [
-`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)
-的 100 % 封装: `Duration` 是唯一的真实来源 (纳秒精确),并且完整的 `Duration` API 都被转发。在此之上,它
+`kotlin.time.Duration`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/)
+的 100 % 封装: `Duration` 是唯一的真实来源,并且完整的 `Duration` API 都被转发。在此之上,它
 提供与其他所有"纯"单位包装器相同的表面 (`value`/`+`/`-`/`*`/`/`/`toString`/`toUnit` 以及 `of`/`into` 动词),
 因此时间值可以接入通用的混合单位引擎 (例如 `length / time` = 速度)。值始终归一化为秒后存储。
 
@@ -62,23 +62,23 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 
 ## 比较与相等性
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` 通过底层的 `Duration`(纳秒精确)比较两个 `KTimeUnitInstance`。由于时间值 的指数始终为
+`==`、`!=`、`<`、`<=`、`>`、`>=` 通过底层的 `Duration` 比较两个 `KTimeUnitInstance`。由于时间值 的指数始终为
 1,不会出现像长度的面积/体积那样的指数不匹配错误。
 
-## `java.time.Duration` 包装器
+## `kotlin.time.Duration` 包装器
 
 `KTimeUnitInstance` 是对 `Duration` 的即插即用外观: 可以获取被包装的 `Duration`、包装一个已有的 `Duration`, 或直接使用被转发的
 `Duration` 方法 (返回 `Duration` 的方法返回 `KTimeUnitInstance`;查询方法直接透传)。
 
 ```kotlin
-import java.time.Duration
+import kotlin.time.Duration.Companion.minutes as durationMinutes
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
-t.toDuration()                  // PT1H30M
-Duration.ofMinutes(90).toTime() into hours // 1.5
+t.toKotlinDuration()                 // 1h 30m
+90.durationMinutes.toTime() into hours // 1.5
 
 // 转发的修改方法返回 KTimeUnitInstance
 t.plusHours(1) into hours       // 2.5
@@ -88,6 +88,22 @@ t.negated().isNegative()        // true
 t.toHours()             // 1
 t.toMinutesPart()       // 30
 t.dividedBy(30 of minutes) // 3
+```
+
+### `java.time` 互操作 (仅限 JVM)
+
+在 JVM 上,`java.time` 桥接作为 JVM 源集中的扩展函数提供,因此 JVM 代码可以继续使用
+`java.time.Duration`:
+
+```kotlin
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+val t = 90 of minutes
+t.toDuration()                             // PT1H30M
+Duration.ofMinutes(90).toTime() into hours // 1.5
+t.plus(1, ChronoUnit.MINUTES) into minutes // 91.0
+t.truncatedTo(ChronoUnit.HOURS) into hours // 1.0
 ```
 
 ## <a name="si"></a>SI 前缀
@@ -111,10 +127,11 @@ val t = 2 of hours
 t into milli.seconds  // 7 200 000.0(ms)
 ```
 
-!!! note "Duration 范围"
-由于值由 `java.time.Duration`(整数秒存储为 `Long`,纳秒分辨率)支撑,`KTimeUnitInstance` 只能忠实地 表示大约
-`[1 ns, Long.MAX 秒]`(≈ 2920 亿年)范围内的量级。像对日应用 `quetta` 这样的极端前缀会超出此 范围,而亚纳秒值会舍入为零。通用的
-`KMixedUnitInstance`/前缀层本身基于 `Double`,不受影响 —— 只有转换为 Duration 支撑的包装器时才受范围限制。
+!!! note "Duration 范围与分辨率"
+由于值由 `kotlin.time.Duration` 支撑,`KTimeUnitInstance` 只有在大约 ±146 年以内才是纳秒精确的,超出该范围后
+切换为毫秒分辨率,最大可达约 ±1.46 亿年。像对日应用 `quetta` 这样的极端前缀会超出此范围,而亚纳秒值会舍入为
+零。通用的 `KMixedUnitInstance`/前缀层本身基于 `Double`,不受影响 —— 只有转换为 Duration 支撑的包装器时才受
+范围限制。
 
 ## toString 格式化
 

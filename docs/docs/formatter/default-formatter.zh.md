@@ -13,15 +13,16 @@
 
 ### 数值
 
-- 没有模式时，原始 `Double` 通过 `Double.toString()` 输出。
-- 使用 `java.util.Formatter` 模式（以及可选的 `Locale`）时，数值通过
-  `String.format(locale, pattern, value)` 渲染。该模式 **仅** 影响数值，绝不影响单位部分。
+- 没有模式时，原始 `Double` 以 kunit 自身的可移植纯文本形式（`10.8`、`5.0`、`1.0E7`）输出 —— 与平台自身的
+  `Double.toString()` 不同，它在任何目标平台上都是相同的。
+- 使用数字模式（以及可选的 `KLocale`）时，模式仅应用于数值，绝不影响单位部分。支持的模式见
+  [输出格式化](formatting.md)。
 
 | 调用                                                 | 渲染的数值           |
 |------------------------------------------------------|----------------------|
 | `format(kilo.meters / hours)`                        | `10.799999999999999` |
 | `format(kilo.meters / hours, "%.1f")`                | `10.8`               |
-| `format(kilo.meters / hours, "%.1f", Locale.GERMAN)` | `10,8`               |
+| `format(kilo.meters / hours, "%.1f", KLocale.DE_DE)` | `10,8`               |
 
 ### 单位部分
 
@@ -70,7 +71,7 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
 // "9.81 m/s²"
 ```
 
@@ -84,12 +85,12 @@ import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // 显式格式化器，结果与默认调用相同
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // 不带目标，用默认格式化器渲染基准单位
 (5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"

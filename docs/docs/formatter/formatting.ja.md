@@ -28,19 +28,61 @@ v format kilo.meters / hours       // "10.799999999999999 km/h"
 
 ## 数値の書式：パターンとロケール
 
-中置形式は生の `Double` を描画します。 **数値部分**を丸めたりローカライズするには、
-[`java.util.Formatter`](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html) のパターンと 任意の `Locale`
-を取る `format` オーバーロードを使います。
+中置形式は生の `Double` を描画します。 **数値部分**を丸めたりローカライズするには、数値パターンと任意の
+`KLocale` を取る `format` オーバーロードを使います。
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KLocale
+
+v.format(kilo.meters / hours, "%.1f")                 // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.DE_DE)  // "10,8 km/h"
+```
+
+パターンは **数値のみ**に影響し、単位部分は変わりません。無効なパターンは `IllegalArgumentException` を、
+互換性のない対象次元は（`into` と同様に）`IllegalStateException` をスローします。
+
+### `KLocale`
+
+Kotlin には共通のロケール API がありません — `java.util.Locale` は JVM 上にのみ存在します — そのため kunit は数値の
+書き方（小数点の区切り文字、桁区切り文字、桁区切りの単位）に関する独自の最小限の記述を持っています。この規約が
+値とともに運ばれるため、**同じパターンはどのターゲット上でも同じ文字列を描画します**。
+
+`KLocale.ROOT`（ドット小数点、カンマ区切り）が既定値です。事前定義された定数は一般的なケースをカバーします：
+`EN_US`、`EN_GB`、`DE_DE`、`FR_FR`、`ES_ES`、`IT_IT`、`PT_BR`、`NL_NL`、`RU_RU`、`JA_JP`、`ZH_CN`、`KO_KR`、
+`AR_SA`、`HI_IN`（インドの 3-then-2 桁区切りをモデル化しています）。それ以外の規約は `KLocale` を直接構築することで
+表現できます。
+
+JVM 上では `java.util.Locale` も引き続き使用できます。これを受け取るオーバーロードは JVM ソースセットで利用可能で、
+`toKLocale()` を介して変換されます。
 
 ```kotlin
 import java.util.Locale
 
-v.format(kilo.meters / hours, "%.1f")                // "10.8 km/h"
-v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.GERMANY) // "10,8 km/h"（JVM のみ）
 ```
 
-パターンは **数値のみ**に影響し、単位部分は変わりません。無効なパターンは `java.util.IllegalFormatException` を、
-互換性のない対象次元は（`into` と同様に）`IllegalStateException` をスローします。
+### サポートされるパターン
+
+パターンは単一の数値に適用される printf のサブセットです。
+
+```
+%[flags][width][.precision]conversion
+```
+
+| 部分       | 意味                                                                             |
+|------------|----------------------------------------------------------------------------------|
+| flags      | `-` 左揃え・`+` 常に符号・空白で正の値を表現・`0` ゼロ埋め・`,` 桁区切り          |
+| width      | 文字数の最小合計                                                                  |
+| precision  | 小数部の桁数（変換指定 `f`、`e`、`E`）                                            |
+| conversion | `f` 固定小数点・`e`/`E` 指数表記・`d` 整数・`s` そのまま出力                      |
+
+`%%` はリテラルのパーセント記号を出力し、変換指定の前後にあるリテラルテキストはそのままコピーされます。
+
+```kotlin
+(1500 of meters).toString("%,.2f", KLocale.EN_US) // "1,500.00 m"
+(1500 of meters).toString("%,.2f", KLocale.DE_DE) // "1.500,00 m"
+(1500 of meters).toString("%.2e", KLocale.EN_US)  // "1.50e+03 m"
+```
 
 ## 分数表記と積表記
 
@@ -60,8 +102,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 基本単位出力に適用します。これは対象なしの `format` 動詞です。
 
 ```kotlin
-(3 of meters / seconds).toString("%.2f", Locale.US) // "3.00 m/s"
-(1500 of meters).toString("%.1f", Locale.US)        // "1500.0 m"
+(3 of meters / seconds).toString("%.2f", KLocale.EN_US) // "3.00 m/s"
+(1500 of meters).toString("%.1f", KLocale.EN_US)        // "1500.0 m"
 ```
 
 ## 実世界の例
@@ -72,14 +114,14 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.*
 import org.pcsoft.framework.kunit.kinematic.time.*
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val distance = 10 of kilo.meters
 val time = 50 of minutes
 val speed = distance / time                    // KSpeedUnitInstance
 
-println(speed.format(kilo.meters / hours, "%.1f", Locale.US)) // "12.0 km/h"
-println(speed.format(meters / seconds, "%.2f", Locale.US))    // "3.33 m/s"
+println(speed.format(kilo.meters / hours, "%.1f", KLocale.EN_US)) // "12.0 km/h"
+println(speed.format(meters / seconds, "%.2f", KLocale.EN_US))    // "3.33 m/s"
 ```
 
 ## カスタム描画

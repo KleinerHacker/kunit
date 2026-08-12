@@ -6,8 +6,8 @@
 النوع: **وحدة أصلية**
 
 `KTimeUnitInstance` غلاف بنسبة 100 % حول [
-`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html):
-فالـ `Duration` هو المصدر الوحيد للحقيقة (دقيق حتى النانوثانية)، وتُمرَّر واجهة `Duration` كاملةً. وفوق ذلك يقدّم السطح
+`kotlin.time.Duration`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/):
+فالـ `Duration` هو المصدر الوحيد للحقيقة، وتُمرَّر واجهة `Duration` كاملةً. وفوق ذلك يقدّم السطح
 نفسه مثل كل غلاف وحدة «نقيّة» آخر (`value`/`+`/`-`/`*`/`/`/`toString`/`toUnit` إضافةً إلى فِعلَي `of`/`into`)، فتنخرط
 قيمة الزمن في محرّك الوحدات المختلطة العامّ (مثلًا `length / time` = سرعة). تُخزَّن القيمة دائمًا مُطبَّعة إلى الثواني.
 
@@ -63,23 +63,23 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 
 ## المقارنات والمساواة
 
-تقارن `==`، `!=`، `<`، `<=`، `>`، `>=` قيمتَي `KTimeUnitInstance` عبر `Duration` الأساسي (دقيق حتى النانوثانية). وبما
+تقارن `==`، `!=`، `<`، `<=`، `>`، `>=` قيمتَي `KTimeUnitInstance` عبر `Duration` الأساسي. وبما
 أنّ قيمة الزمن دائمًا عند أُسّ 1، فلا خطأ عدم تطابق أُسّ كما في مساحات/أحجام الطول.
 
-## غلاف `java.time.Duration`
+## غلاف `kotlin.time.Duration`
 
 `KTimeUnitInstance` واجهة بديلة مباشرة فوق `Duration`: احصل على الـ `Duration` المُغلَّف، أو غلِّف واحدًا قائمًا،
 واستخدم طرق `Duration` المُمرَّرة مباشرةً (التي تُعيد `Duration` تُعيد `KTimeUnitInstance`؛ وطرق الاستعلام تمرّ كما هي).
 
 ```kotlin
-import java.time.Duration
+import kotlin.time.Duration.Companion.minutes as durationMinutes
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
-t.toDuration()                  // PT1H30M
-Duration.ofMinutes(90).toTime() into hours // 1.5
+t.toKotlinDuration()                 // 1h 30m
+90.durationMinutes.toTime() into hours // 1.5
 
 // الطرق المُعدِّلة المُمرَّرة تُعيد KTimeUnitInstance
 t.plusHours(1) into hours       // 2.5
@@ -89,6 +89,22 @@ t.negated().isNegative()        // true
 t.toHours()             // 1
 t.toMinutesPart()       // 30
 t.dividedBy(30 of minutes) // 3
+```
+
+### تفاعل `java.time` (JVM فقط)
+
+على JVM يتوفّر جسر `java.time` كدوال امتداد من مجموعة مصادر JVM، لذا يمكن لكود JVM الاستمرار في استخدام
+`java.time.Duration`:
+
+```kotlin
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+val t = 90 of minutes
+t.toDuration()                             // PT1H30M
+Duration.ofMinutes(90).toTime() into hours // 1.5
+t.plus(1, ChronoUnit.MINUTES) into minutes // 91.0
+t.truncatedTo(ChronoUnit.HOURS) into hours // 1.0
 ```
 
 ## بادئات SI
@@ -112,10 +128,10 @@ val t = 2 of hours
 t into milli.seconds  // 7 200 000.0 (ms)
 ```
 
-!!! note "مدى Duration"
-لأنّ القيمة مدعومة بـ `java.time.Duration` (ثوانٍ صحيحة مخزّنة كـ `Long`، بدقّة نانوثانية)، لا يمكن لـ
-`KTimeUnitInstance` أن يمثّل بأمانة إلّا مقادير ضمن نحو `[1 ns, Long.MAX seconds]`
-(≈ 292 مليار سنة). البادئات المتطرّفة مثل `quetta` مطبَّقة على الأيّام تتجاوز هذا المدى، والقيم دون النانوثانية تُقرّب
+!!! note "مدى ودقّة Duration"
+لأنّ القيمة مدعومة بـ `kotlin.time.Duration`، لا يكون `KTimeUnitInstance` دقيقًا حتى النانوثانية إلّا ضمن نحو
+±146 عامًا، وينتقل إلى دقّة الميلي ثانية بعد ذلك، حتى حدّ أقصى يبلغ نحو ±146 مليون سنة. البادئات المتطرّفة مثل
+`quetta` مطبَّقة على الأيّام تتجاوز هذا المدى، والقيم دون النانوثانية تُقرّب
 إلى الصفر. أمّا طبقة `KMixedUnitInstance`/البادئات العامّة نفسها فمبنيّة على
 `Double` وغير متأثّرة — التحويل إلى الغلاف المدعوم بـ Duration فقط هو المحدود المدى.
 

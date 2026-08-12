@@ -16,15 +16,16 @@ interface KUnitFormatter {
 data class KUnitFormatContext(
     val value: Double,            // 대상 단위로 이미 변환된 숫자
     val units: List<KUnitTerm>,   // 대상 차원의 항(접두사/지수 표시 메타데이터 포함)
-    val pattern: String? = null,  // 숫자용 선택적 java.util.Formatter 패턴
-    val locale: Locale = Locale.getDefault(),
+    val pattern: String? = null,  // 숫자용 선택적 숫자 패턴 (printf 하위 집합), "출력 서식" 참고
+    val locale: KLocale = KLocale.ROOT,
 )
 ```
 
 모든 것이 **하나의** 컨텍스트 객체로 전달되므로, 인터페이스는 구현을 깨지 않고 가산적으로 확장 (새 필드는 기본값 보유)할 수 있습니다. 흔한 구성 요소를 위한 두 가지 재사용 도우미가 있습니다.
 
-- `KUnitFormatContext.renderValue()` — 숫자를 렌더링합니다. `pattern` 이 `null` 이면 `Double.toString()`, 아니면
-  `String.format(locale, pattern, value)`.
+- `KUnitFormatContext.renderValue()` — 숫자를 렌더링합니다. `pattern` 이 `null` 이면 이식 가능한 평문 형식
+  (`5.0`, `1.0E7`), 아니면 `locale` 아래 해당 패턴을 적용합니다. 두 경로 모두 어떤 대상에서도 동일한 문자열을
+  생성합니다.
 - `KUnitTerm.displaySymbol` — 항이 작성된 그대로의 기호 (`"km"`, `"h"`). 표시 메타데이터를 존중하며, 없으면 그룹 기본 기호로 대체합니다.
 
 항의 `exponent` 는 거듭제곱을 나타냅니다 (양수 = 분자, 음수 = 분모). 지수를 어떻게 렌더링할지는 포매터가 결정합니다.
@@ -68,12 +69,12 @@ import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // 사용자 정의 포매터로 대상 단위로 서식 지정
-v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, LatexFormatter)
 // "10.8\,\frac{\mathrm{km}}{\mathrm{h}}"
 
 // 또는 대상 없이 기본 단위 렌더링

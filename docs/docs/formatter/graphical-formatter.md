@@ -45,7 +45,7 @@ import org.pcsoft.framework.kunit.kinematic.distance.kilo
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 150 of kilo.meters / (6000 of seconds)   // 25 m/s
 
@@ -53,11 +53,11 @@ val v = 150 of kilo.meters / (6000 of seconds)   // 25 m/s
 //      km
 // 90.0 ──
 //      h
-println(v.format(kilo.meters / hours, "%.1f", Locale.US, KGraphicalConsoleUnitFormatter()))
+println(v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KGraphicalConsoleUnitFormatter()))
 
 // a heavy ASCII-free bar and cross products
 val config = KGraphicalConsoleFormatConfig(fractionBar = KGraphicalFractionBar.HEAVY)
-println(v.format(kilo.meters / hours, "%.1f", Locale.US, KGraphicalConsoleUnitFormatter(config)))
+println(v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KGraphicalConsoleUnitFormatter(config)))
 ```
 
 To emit a completely different notation, see [Custom Formatter](custom-formatters.md).

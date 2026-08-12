@@ -11,9 +11,11 @@
  */
 
 import com.github.jk1.license.render.ReportRenderer
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("jvm") version "2.4.10"
+    kotlin("multiplatform") version "2.4.10"
+    `maven-publish`
     id("org.jetbrains.kotlinx.kover") version "0.9.9"
     id("org.jetbrains.dokka") version "2.2.0"
     id("com.github.jk1.dependency-license-report") version "3.1.4"
@@ -25,27 +27,113 @@ plugins {
 }
 
 group = "org.pcsoft.framework"
-version = "1.0-SNAPSHOT"
+
+// A release passes the tag as -PreleaseVersion=<tag>; a local build stays on the snapshot.
+version = (project.findProperty("releaseVersion") as String?)?.takeIf { it.isNotBlank() } ?: "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation(kotlin("test"))
-    // Real JUnit Jupiter parameterized tests (@ParameterizedTest/@MethodSource). The BOM aligns the
-    // version with the Jupiter artifacts already pulled transitively by kotlin("test") on the JUnit Platform.
-    testImplementation(platform("org.junit:junit-bom:6.1.3"))
-    testImplementation("org.junit.jupiter:junit-jupiter-params")
-}
-
 kotlin {
     jvmToolchain(25)
+
+    // Gives the intermediate source sets (nativeMain, appleMain, ...) for free, so platform-specific
+    // code can be added later without restructuring the build.
+    applyDefaultHierarchyTemplate()
+
+    jvm {
+        compilerOptions {
+            // JVM-only flag: strict JSR-305 nullability handling for Java interop.
+            freeCompilerArgs.add("-Xjsr305=strict")
+        }
+    }
+
+    js {
+        browser()
+        nodejs()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        nodejs()
+    }
+
+    linuxX64()
+    mingwX64()
+    macosX64()
+    macosArm64()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xannotation-default-target=param-property")
+    }
+
+    sourceSets {
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
+    }
 }
 
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
+// The API documentation shipped alongside every artifact. Maven clients look for a `javadoc` classifier,
+// so the Dokka HTML output is packed under that name.
+val dokkaHtmlJar = tasks.register<Jar>("dokkaHtmlJar") {
+    group = "documentation"
+    description = "Packs the Dokka HTML documentation as the publications' javadoc artifact"
+    dependsOn("dokkaGeneratePublicationHtml")
+    from(layout.buildDirectory.dir("dokka/html"))
+    archiveClassifier.set("javadoc")
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
+    // Applies to every publication the Kotlin Multiplatform plugin creates: the root module plus one per
+    // target (kunit-jvm, kunit-js, kunit-wasm-js, kunit-linuxx64, ...).
+    publications.withType<MavenPublication>().configureEach {
+        artifact(dokkaHtmlJar)
+
+        pom {
+            name.set("kunit")
+            description.set(
+                "Kotlin Unit Framework - calculate with real physical units in Double precision instead of bare numbers"
+            )
+            url.set("https://github.com/KleinerHacker/kunit")
+
+            licenses {
+                license {
+                    name.set("The Apache License, Version 2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+
+            developers {
+                developer {
+                    id.set("KleinerHacker")
+                    name.set("KleinerHacker alias Pfeiffer C Soft")
+                    url.set("https://github.com/KleinerHacker")
+                }
+            }
+
+            scm {
+                connection.set("scm:git:https://github.com/KleinerHacker/kunit.git")
+                developerConnection.set("scm:git:ssh://git@github.com/KleinerHacker/kunit.git")
+                url.set("https://github.com/KleinerHacker/kunit")
+            }
+        }
     }
 }
 
@@ -64,7 +152,8 @@ kover {
 licenseReport {
     outputDir = layout.buildDirectory.dir("licences").get().asFile.absolutePath
 
-    configurations = arrayOf("runtimeClasspath")
+    // Multiplatform: the JVM target's runtime classpath replaces the single-target `runtimeClasspath`.
+    configurations = arrayOf("jvmRuntimeClasspath")
 
     renderers = arrayOf<ReportRenderer>(
         com.github.jk1.license.render.JsonReportRenderer(),
@@ -72,7 +161,7 @@ licenseReport {
     )
 }
 
-plugins.withId("org.jetbrains.kotlin.jvm") {
+plugins.withId("org.jetbrains.kotlin.multiplatform") {
     plugins.withId("app.cash.licensee") {
         extensions.configure<app.cash.licensee.LicenseeExtension> {
             listOf(

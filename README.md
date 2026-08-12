@@ -16,6 +16,51 @@
 Kotlin Unit Framework to calculate with different units in Kotlin (and Java) - calculate with real physical units in
 `Double` precision instead of bare numbers.
 
+## Supported Platforms
+
+kunit is a **Kotlin Multiplatform** library with no runtime dependencies. All units, operators and formatters live in
+the common source set and behave identically on every target:
+
+| Target        | Variants                                                          |
+|---------------|-------------------------------------------------------------------|
+| JVM           | toolchain 25                                                      |
+| JS            | browser, Node.js                                                  |
+| Wasm/JS       | browser, Node.js                                                  |
+| Native        | `linuxX64`, `mingwX64`, `macosX64`, `macosArm64`                   |
+| Native (iOS)  | `iosX64`, `iosArm64`, `iosSimulatorArm64`                          |
+
+Releases are published to **GitHub Packages**. Declare the repository and add the dependency:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("org.pcsoft.framework:kunit:<version>")
+}
+```
+
+> **GitHub Packages always requires authentication**, even for a public package — that is a GitHub restriction, not a
+> project one. Use a personal access token with the `read:packages` scope, e.g. via `gpr.user`/`gpr.token` in your
+> `~/.gradle/gradle.properties`.
+
+Gradle resolves the right platform artifact through the module metadata. **Maven and other build tools that do not read
+Gradle module metadata must reference the platform artifact directly** — the published artifact ids are `kunit`
+(root module), `kunit-jvm`, `kunit-js`, `kunit-wasm-js`, `kunit-linuxx64`, `kunit-mingwx64`, `kunit-macosx64`,
+`kunit-macosarm64`, `kunit-iosx64`, `kunit-iosarm64` and `kunit-iossimulatorarm64`.
+
+A few JVM-only conveniences (the `java.util.Locale` overloads of `format`/`toString`, and the `java.time.Duration`
+interop of the time unit) live in the JVM source set and are available to JVM and Java consumers only. The common API
+uses `KLocale` and `kotlin.time.Duration` instead.
+
 ## Checkout & Build
 
 ```bash
@@ -29,8 +74,8 @@ The project uses Gradle (the wrapper is included in the repository, no local Gra
 # Build
 ./gradlew build          # Windows: gradlew.bat build
 
-# Run tests only
-./gradlew test            # Windows: gradlew.bat test
+# Run tests only (multiplatform aggregate; a plain `test` task does not exist)
+./gradlew allTests        # Windows: gradlew.bat allTests
 ```
 
 A JDK capable of resolving toolchain 25 is required (the `foojay-resolver` plugin downloads it automatically if needed).

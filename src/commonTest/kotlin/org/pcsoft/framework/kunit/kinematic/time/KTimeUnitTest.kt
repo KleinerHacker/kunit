@@ -1,0 +1,46 @@
+/*
+ * Copyright (c) KleinerHacker alias Pfeiffer C Soft 2026.
+ * This work is licensed under the Apache License, Version 2.0.
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, this software is distributed on an “AS IS” BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations.
+ */
+
+package org.pcsoft.framework.kunit.kinematic.time
+
+import kotlin.math.abs
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcsoft.framework.kunit.forEachCase
+import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.of
+
+/** The concrete time units (`KTimeUnitBareValues` + `KTimeUnitExtensions`): the full conversion matrix. */
+class KTimeUnitTest {
+
+    private val timeTokens: List<Pair<KTimeUnitInstance, Double>> = listOf(
+        seconds to KTimeUnit.SECOND.baseValue,
+        minutes to KTimeUnit.MINUTE.baseValue,
+        hours to KTimeUnit.HOUR.baseValue,
+        days to KTimeUnit.DAY.baseValue
+    )
+
+    private fun rel(e: Double) = (abs(e) * 1e-9).coerceAtLeast(1e-12)
+    private fun pairs(): List<Array<Any>> =
+        timeTokens.flatMap { a -> timeTokens.map { b -> arrayOf<Any>(a.first, a.second, b.first, b.second) } }
+
+    /** Every time unit converts into every other as `n * from.base / to.base`. */
+    @Test
+    fun `conversion matrix`() = forEachCase(pairs()) { case ->
+        `conversion matrix`(case[0] as KTimeUnitInstance, case[1] as Double, case[2] as KTimeUnitInstance, case[3] as Double)
+    }
+
+    private fun `conversion matrix`(from: KTimeUnitInstance, fb: Double, to: KTimeUnitInstance, tb: Double) {
+        val expected = 5.0 * fb / tb
+        assertEquals(expected, (5 of from) into to, rel(expected))
+    }
+}

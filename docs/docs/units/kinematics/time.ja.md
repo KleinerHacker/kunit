@@ -6,8 +6,8 @@
 種別: **ネイティブ単位**
 
 `KTimeUnitInstance` は [
-`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)
-を 100 % ラップしたものです: `Duration` が唯一の真実の源 (ナノ秒精度)であり、`Duration` の完全な API が
+`kotlin.time.Duration`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/)
+を 100 % ラップしたものです: `Duration` が唯一の真実の源であり、`Duration` の完全な API が
 転送されます。その上で、他のすべての「純粋な」単位ラッパーと同じ表面 (`value`/`+`/`-`/`*`/`/`/`toString`/
 `toUnit` と `of`/`into` の動詞)を提供するため、時間の値は汎用の混合単位エンジンに組み込めます (例:
 `length / time` = 速度)。値は常に秒に正規化されて保存されます。
@@ -64,24 +64,24 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 
 ## 比較と等価性
 
-`==`、`!=`、`<`、`<=`、`>`、`>=` は2つの `KTimeUnitInstance` を、その基礎となる `Duration`(ナノ秒精度)で
+`==`、`!=`、`<`、`<=`、`>`、`>=` は2つの `KTimeUnitInstance` を、その基礎となる `Duration` で
 比較します。時間の値は常に指数1であるため、長さの面積/体積のような指数不一致エラーは発生しません。
 
-## `java.time.Duration` ラッパー
+## `kotlin.time.Duration` ラッパー
 
 `KTimeUnitInstance` は `Duration` に対するドロップインのファサードです: ラップされた `Duration` を取得したり、
 既存のものをラップしたり、転送された `Duration` メソッドを直接使用したりできます (`Duration` を返すものは
 `KTimeUnitInstance` を返し、クエリメソッドはそのまま通過します)。
 
 ```kotlin
-import java.time.Duration
+import kotlin.time.Duration.Companion.minutes as durationMinutes
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
-t.toDuration()                  // PT1H30M
-Duration.ofMinutes(90).toTime() into hours // 1.5
+t.toKotlinDuration()                 // 1h 30m
+90.durationMinutes.toTime() into hours // 1.5
 
 // 転送されたミューテータは KTimeUnitInstance を返す
 t.plusHours(1) into hours       // 2.5
@@ -91,6 +91,22 @@ t.negated().isNegative()        // true
 t.toHours()             // 1
 t.toMinutesPart()       // 30
 t.dividedBy(30 of minutes) // 3
+```
+
+### `java.time` 相互運用 (JVM のみ)
+
+JVM 上では `java.time` ブリッジが JVM ソースセットの拡張関数として利用可能なため、JVM のコードは引き続き
+`java.time.Duration` を使用できます。
+
+```kotlin
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+val t = 90 of minutes
+t.toDuration()                             // PT1H30M
+Duration.ofMinutes(90).toTime() into hours // 1.5
+t.plus(1, ChronoUnit.MINUTES) into minutes // 91.0
+t.truncatedTo(ChronoUnit.HOURS) into hours // 1.0
 ```
 
 ## <a name="si"></a>SI 接頭辞
@@ -115,9 +131,9 @@ val t = 2 of hours
 t into milli.seconds  // 7 200 000.0(ms)
 ```
 
-!!! note "Duration の範囲"
-値は `java.time.Duration`(整数秒を `Long` として保存、ナノ秒分解能)で裏付けられているため、
-`KTimeUnitInstance` はおおよそ `[1 ns, Long.MAX 秒]`(≈ 2920 億年)の範囲内の大きさしか忠実に表現できません。
+!!! note "Duration の範囲と分解能"
+値は `kotlin.time.Duration` で裏付けられているため、`KTimeUnitInstance` はおおよそ ±146 年までの範囲では
+ナノ秒精度ですが、それを超えるとミリ秒分解能に切り替わり、最大でおよそ ±1 億 4600 万年まで表現できます。
 `quetta` を日に適用するような極端な接頭辞はこの範囲を超え、ナノ秒未満の値はゼロに丸められます。汎用の
 `KMixedUnitInstance`/接頭辞層自体は `Double` ベースであり影響を受けません — 範囲が制限されるのは Duration に
 裏付けられたラッパーへの変換のみです。

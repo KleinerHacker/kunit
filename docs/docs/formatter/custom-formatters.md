@@ -18,16 +18,16 @@ interface KUnitFormatter {
 data class KUnitFormatContext(
     val value: Double,            // number, already converted into the target unit(s)
     val units: List<KUnitTerm>,   // target dimension's terms (with prefix/exponent display metadata)
-    val pattern: String? = null,  // optional java.util.Formatter pattern for the number
-    val locale: Locale = Locale.getDefault(),
+    val pattern: String? = null,  // optional number pattern (printf subset), see "Formatting Output"
+    val locale: KLocale = KLocale.ROOT,
 )
 ```
 
 Everything is passed in **one** context object so the interface can grow additively (new fields get defaults) without
 breaking your implementation. Two reusable helpers cover the common building blocks:
 
-- `KUnitFormatContext.renderValue()` — renders the number: plain `Double.toString()` when `pattern` is
-  `null`, otherwise `String.format(locale, pattern, value)`.
+- `KUnitFormatContext.renderValue()` — renders the number: the portable plain form (`5.0`, `1.0E7`) when `pattern` is
+  `null`, otherwise the pattern applied under `locale`. Both paths produce the same string on every target.
 - `KUnitTerm.displaySymbol` — the written-down symbol of a term (`"km"`, `"h"`), honouring its display metadata; falls
   back to the group base symbol when there is none.
 
@@ -74,12 +74,12 @@ import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // format into a target unit with a custom formatter
-v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, LatexFormatter)
 // "10.8\,\frac{\mathrm{km}}{\mathrm{h}}"
 
 // or render the base units with a custom formatter (no target)

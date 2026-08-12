@@ -15,15 +15,16 @@
 
 ### 数値
 
-- パターンなしの場合、生の `Double` が `Double.toString()` で出力されます。
-- `java.util.Formatter` パターン（および任意の `Locale`）を指定した場合、数値は
-  `String.format(locale, pattern, value)` で描画されます。パターンは **数値のみ** に影響し、単位部には 影響しません。
+- パターンなしの場合、生の `Double` は kunit 独自の可搬なプレーン形式（`10.8`、`5.0`、`1.0E7`）で出力されます —
+  これはプラットフォーム自身の `Double.toString()` とは異なり、どのターゲットでも同一です。
+- 数値パターン（および任意の `KLocale`）を指定した場合、パターンは数値のみに適用され、単位部には決して 影響しません。
+  対応するパターンについては [出力の書式設定](formatting.md) を参照してください。
 
 | 呼び出し                                             | 描画される数値       |
 |------------------------------------------------------|----------------------|
 | `format(kilo.meters / hours)`                        | `10.799999999999999` |
 | `format(kilo.meters / hours, "%.1f")`                | `10.8`               |
-| `format(kilo.meters / hours, "%.1f", Locale.GERMAN)` | `10,8`               |
+| `format(kilo.meters / hours, "%.1f", KLocale.DE_DE)` | `10,8`               |
 
 ### 単位部
 
@@ -74,7 +75,7 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
 // "9.81 m/s²"
 ```
 
@@ -89,12 +90,12 @@ import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // 明示的なフォーマッター、デフォルト呼び出しと同じ結果
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // ターゲットなしで基準単位をデフォルトフォーマッターで描画
 (5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"

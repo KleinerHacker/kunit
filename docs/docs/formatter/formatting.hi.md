@@ -29,20 +29,62 @@ v format kilo.meters / hours       // "10.799999999999999 km/h"
 
 ## संख्या स्वरूपण: पैटर्न और लोकेल
 
-इनफ़िक्स रूप कच्चा `Double` प्रस्तुत करता है। **संख्यात्मक भाग** को गोल करने या स्थानीयकृत करने के लिए
-[`java.util.Formatter`](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html) पैटर्न और वैकल्पिक
-`Locale` लेने वाले `format` ओवरलोड का उपयोग करें:
+इनफ़िक्स रूप कच्चा `Double` प्रस्तुत करता है। **संख्यात्मक भाग** को गोल करने या स्थानीयकृत करने के लिए संख्या पैटर्न
+और वैकल्पिक `KLocale` लेने वाले `format` ओवरलोड का उपयोग करें:
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KLocale
+
+v.format(kilo.meters / hours, "%.1f")                 // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.DE_DE)  // "10,8 km/h"
+```
+
+पैटर्न **केवल** संख्या को प्रभावित करता है; इकाई भाग अपरिवर्तित रहता है। अमान्य पैटर्न
+`IllegalArgumentException` फेंकता है, और असंगत लक्ष्य आयाम (`into` की तरह) `IllegalStateException`
+फेंकता है।
+
+### `KLocale`
+
+Kotlin के पास कोई समान लोकेल API नहीं है — `java.util.Locale` केवल JVM पर मौजूद है — इसलिए kunit यह अपना स्वयं का
+न्यूनतम विवरण रखता है कि किसी संख्या को कैसे लिखा जाए: दशमलव विभाजक, समूहन विभाजक और समूहन आकार। चूँकि ये परंपराएँ
+मान के साथ ही आगे बढ़ती हैं, **एक ही पैटर्न किसी भी लक्ष्य पर वही स्ट्रिंग प्रस्तुत करता है**।
+
+`KLocale.ROOT` (बिंदु दशमलव, अल्पविराम समूहन) डिफ़ॉल्ट है। पूर्वनिर्धारित स्थिरांक सामान्य मामलों को कवर करते हैं:
+`EN_US`, `EN_GB`, `DE_DE`, `FR_FR`, `ES_ES`, `IT_IT`, `PT_BR`, `NL_NL`, `RU_RU`, `JA_JP`, `ZH_CN`, `KO_KR`,
+`AR_SA` और `HI_IN` (जो भारतीय 3-then-2 समूहन को दर्शाता है)। कोई भी अन्य परंपरा सीधे `KLocale` का निर्माण करके
+व्यक्त की जा सकती है।
+
+JVM पर `java.util.Locale` अभी भी काम करता है: इसे लेने वाले ओवरलोड JVM सोर्स सेट में उपलब्ध हैं और `toKLocale()`
+के माध्यम से रूपांतरित होते हैं।
 
 ```kotlin
 import java.util.Locale
 
-v.format(kilo.meters / hours, "%.1f")                // "10.8 km/h"
-v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.GERMANY) // "10,8 km/h" (केवल JVM)
 ```
 
-पैटर्न **केवल** संख्या को प्रभावित करता है; इकाई भाग अपरिवर्तित रहता है। अमान्य पैटर्न
-`java.util.IllegalFormatException` फेंकता है, और असंगत लक्ष्य आयाम (`into` की तरह) `IllegalStateException`
-फेंकता है।
+### समर्थित पैटर्न
+
+पैटर्न एकल संख्यात्मक मान पर लागू होने वाला printf का एक उपसमुच्चय है:
+
+```
+%[flags][width][.precision]conversion
+```
+
+| भाग        | अर्थ                                                                            |
+|------------|-----------------------------------------------------------------------------------|
+| flags      | `-` बाएँ-संरेखण · `+` हमेशा चिह्न · धनात्मक के लिए स्थान · `0` शून्य-भरण · `,` समूहन |
+| width      | कुल वर्णों की न्यूनतम संख्या                                                      |
+| precision  | दशमलव अंकों की संख्या (रूपांतरण `f`, `e`, `E`)                                    |
+| conversion | `f` स्थिर-बिंदु · `e`/`E` वैज्ञानिक · `d` पूर्णांक · `s` सादी प्रस्तुति            |
+
+`%%` एक शाब्दिक प्रतिशत चिह्न उत्सर्जित करता है, और रूपांतरण के आसपास का शाब्दिक पाठ ज्यों-का-त्यों कॉपी किया जाता है।
+
+```kotlin
+(1500 of meters).toString("%,.2f", KLocale.EN_US) // "1,500.00 m"
+(1500 of meters).toString("%,.2f", KLocale.DE_DE) // "1.500,00 m"
+(1500 of meters).toString("%.2e", KLocale.EN_US)  // "1.50e+03 m"
+```
 
 ## भिन्न बनाम गुणनफल संकेतन
 
@@ -62,8 +104,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 आउटपुट पर लागू करता है — यह बिना लक्ष्य वाली `format` क्रिया है:
 
 ```kotlin
-(3 of meters / seconds).toString("%.2f", Locale.US) // "3.00 m/s"
-(1500 of meters).toString("%.1f", Locale.US)        // "1500.0 m"
+(3 of meters / seconds).toString("%.2f", KLocale.EN_US) // "3.00 m/s"
+(1500 of meters).toString("%.1f", KLocale.EN_US)        // "1500.0 m"
 ```
 
 ## वास्तविक उदाहरण
@@ -74,14 +116,14 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.*
 import org.pcsoft.framework.kunit.kinematic.time.*
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val distance = 10 of kilo.meters
 val time = 50 of minutes
 val speed = distance / time                    // KSpeedUnitInstance
 
-println(speed.format(kilo.meters / hours, "%.1f", Locale.US)) // "12.0 km/h"
-println(speed.format(meters / seconds, "%.2f", Locale.US))    // "3.33 m/s"
+println(speed.format(kilo.meters / hours, "%.1f", KLocale.EN_US)) // "12.0 km/h"
+println(speed.format(meters / seconds, "%.2f", KLocale.EN_US))    // "3.33 m/s"
 ```
 
 ## कस्टम प्रस्तुति

@@ -18,16 +18,17 @@ interface KUnitFormatter {
 data class KUnitFormatContext(
     val value: Double,            // संख्या, पहले से लक्ष्य इकाई में परिवर्तित
     val units: List<KUnitTerm>,   // लक्ष्य आयाम के पद (उपसर्ग/घातांक प्रदर्शन मेटाडेटा सहित)
-    val pattern: String? = null,  // संख्या के लिए वैकल्पिक java.util.Formatter पैटर्न
-    val locale: Locale = Locale.getDefault(),
+    val pattern: String? = null,  // संख्या के लिए वैकल्पिक संख्या पैटर्न (printf का उपसमुच्चय), "आउटपुट स्वरूपण" देखें
+    val locale: KLocale = KLocale.ROOT,
 )
 ```
 
 सब कुछ **एक** संदर्भ ऑब्जेक्ट में पास होता है ताकि इंटरफ़ेस आपके कार्यान्वयन को तोड़े बिना योगात्मक रूप से बढ़ सके (नए
 फ़ील्ड डिफ़ॉल्ट मान लेते हैं)। सामान्य निर्माण-खंडों के लिए दो पुनः-प्रयोज्य सहायक हैं:
 
-- `KUnitFormatContext.renderValue()` — संख्या प्रस्तुत करता है: `pattern` के `null` होने पर
-  `Double.toString()`, अन्यथा `String.format(locale, pattern, value)`।
+- `KUnitFormatContext.renderValue()` — संख्या प्रस्तुत करता है: `pattern` के `null` होने पर पोर्टेबल सादा रूप
+  (`5.0`, `1.0E7`), अन्यथा `locale` के तहत पैटर्न लागू किया जाता है। दोनों मार्ग किसी भी लक्ष्य पर वही स्ट्रिंग
+  उत्पन्न करते हैं।
 - `KUnitTerm.displaySymbol` — पद का लिखा-हुआ चिह्न (`"km"`, `"h"`), प्रदर्शन मेटाडेटा का सम्मान करते हुए; न होने पर समूह
   के आधार-चिह्न पर लौटता है।
 
@@ -73,12 +74,12 @@ import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // कस्टम फ़ॉर्मैटर के साथ लक्ष्य इकाई में स्वरूपण
-v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, LatexFormatter)
 // "10.8\,\frac{\mathrm{km}}{\mathrm{h}}"
 
 // या बिना लक्ष्य के आधार इकाइयाँ प्रस्तुत करें

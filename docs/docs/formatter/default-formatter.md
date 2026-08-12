@@ -16,15 +16,16 @@ A rendered string has two parts: the **number** and the **unit part**, separated
 
 ### The number
 
-- Without a pattern, the raw `Double` is printed via `Double.toString()`.
-- With a `java.util.Formatter` pattern (and optional `Locale`), the number is rendered via
-  `String.format(locale, pattern, value)`. The pattern affects **only** the number, never the unit part.
+- Without a pattern, the raw `Double` is printed in kunit's portable plain form (`10.8`, `5.0`, `1.0E7`) — identical on
+  every target, unlike the platform's own `Double.toString()`.
+- With a number pattern (and optional `KLocale`), the pattern is applied to the number only, never to the unit part.
+  See [Formatting Output](formatting.md) for the supported patterns.
 
 | Call                                                 | Number rendered      |
 |------------------------------------------------------|----------------------|
 | `format(kilo.meters / hours)`                        | `10.799999999999999` |
 | `format(kilo.meters / hours, "%.1f")`                | `10.8`               |
-| `format(kilo.meters / hours, "%.1f", Locale.GERMAN)` | `10,8`               |
+| `format(kilo.meters / hours, "%.1f", KLocale.DE_DE)` | `10,8`               |
 
 ### The unit part
 
@@ -77,7 +78,7 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
 // "9.81 m/s²"
 ```
 
@@ -92,12 +93,12 @@ import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // explicit formatter, same result as the default call
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // base-unit rendering with the default formatter and no target
 (5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"

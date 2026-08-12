@@ -17,16 +17,16 @@ interface KUnitFormatter {
 data class KUnitFormatContext(
     val value: Double,            // الرقم، مُحوَّل بالفعل إلى الوحدة الهدف
     val units: List<KUnitTerm>,   // حدود البُعد الهدف (ببيانات عرض البادئة/الأس)
-    val pattern: String? = null,  // نمط java.util.Formatter اختياري للرقم
-    val locale: Locale = Locale.getDefault(),
+    val pattern: String? = null,  // نمط رقمي اختياري (مجموعة فرعية من printf) للرقم، راجع "تنسيق الإخراج"
+    val locale: KLocale = KLocale.ROOT,
 )
 ```
 
 يُمرَّر كل شيء في كائن سياق **واحد** حتى تنمو الواجهة إضافيًا (تأخذ الحقول الجديدة قيمًا افتراضية) دون كسر تنفيذك. تغطي
 دالتان مساعدتان قابلتان لإعادة الاستخدام اللبنات الشائعة:
 
-- `KUnitFormatContext.renderValue()` — يعرض الرقم: `Double.toString()` عندما يكون `pattern` قيمته `null`، وإلا
-  `String.format(locale, pattern, value)`.
+- `KUnitFormatContext.renderValue()` — يعرض الرقم: الصيغة النصية القابلة للنقل (`5.0`، `1.0E7`) عندما يكون
+  `pattern` قيمته `null`، وإلا يُطبَّق النمط تحت `locale`. ينتج كلا المسارين نفس السلسلة على أي هدف.
 - `KUnitTerm.displaySymbol` — رمز الحد كما كُتب (`"km"`، `"h"`)، مع احترام بيانات العرض؛ ويعود إلى رمز أساس المجموعة عند
   عدم وجودها.
 
@@ -71,12 +71,12 @@ import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // التنسيق إلى وحدة هدف بمنسّق مخصص
-v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, LatexFormatter)
 // "10.8\,\frac{\mathrm{km}}{\mathrm{h}}"
 
 // أو عرض الوحدات الأساسية بمنسّق مخصص (بلا هدف)

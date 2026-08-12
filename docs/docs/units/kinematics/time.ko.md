@@ -6,8 +6,8 @@
 유형: **네이티브 단위**
 
 `KTimeUnitInstance`는 [
-`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)
-을 100 % 감싼 래퍼입니다: `Duration`이 유일한 진실의 원천 (나노초 정밀도)이며 전체 `Duration` API가 그대로 전달됩니다. 그 위에 다른 모든 "순수" 단위 래퍼와 동일한 표면
+`kotlin.time.Duration`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/)
+을 100 % 감싼 래퍼입니다: `Duration`이 유일한 진실의 원천이며 전체 `Duration` API가 그대로 전달됩니다. 그 위에 다른 모든 "순수" 단위 래퍼와 동일한 표면
 (`value`/`+`/`-`/`*`/`/`/`toString`/
 `toUnit` 및 `of`/`into` 동사)을 제공하므로, 시간 값은 범용 혼합 단위 엔진에 연결됩니다 (예:
 `length / time` = 속도). 값은 항상 초로 정규화되어 저장됩니다.
@@ -62,23 +62,23 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 
 ## 비교와 동등성
 
-`==`, `!=`, `<`, `<=`, `>`, `>=`는 두 `KTimeUnitInstance`를 그 기반이 되는 `Duration`(나노초 정밀도)으로 비교합니다. 시간 값은 항상 지수 1이므로 길이의
+`==`, `!=`, `<`, `<=`, `>`, `>=`는 두 `KTimeUnitInstance`를 그 기반이 되는 `Duration`으로 비교합니다. 시간 값은 항상 지수 1이므로 길이의
 면적/부피처럼 지수 불일치 오류는 발생하지 않습니다.
 
-## `java.time.Duration` 래퍼
+## `kotlin.time.Duration` 래퍼
 
 `KTimeUnitInstance`는 `Duration`에 대한 드롭인 파사드입니다: 감싼 `Duration`을 얻거나, 기존 `Duration`을 감싸거나, 전달된 `Duration` 메서드를 직접 사용할 수
 있습니다 (`Duration`을 반환하는 것은 `KTimeUnitInstance`를 반환하고, 조회 메서드는 그대로 통과합니다).
 
 ```kotlin
-import java.time.Duration
+import kotlin.time.Duration.Companion.minutes as durationMinutes
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
-t.toDuration()                  // PT1H30M
-Duration.ofMinutes(90).toTime() into hours // 1.5
+t.toKotlinDuration()                 // 1h 30m
+90.durationMinutes.toTime() into hours // 1.5
 
 // 전달된 뮤테이터는 KTimeUnitInstance를 반환
 t.plusHours(1) into hours       // 2.5
@@ -88,6 +88,22 @@ t.negated().isNegative()        // true
 t.toHours()             // 1
 t.toMinutesPart()       // 30
 t.dividedBy(30 of minutes) // 3
+```
+
+### `java.time` 상호 운용 (JVM 전용)
+
+JVM에서는 `java.time` 브리지가 JVM 소스 세트의 확장 함수로 제공되므로, JVM 코드는 계속
+`java.time.Duration`을 사용할 수 있습니다:
+
+```kotlin
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+val t = 90 of minutes
+t.toDuration()                             // PT1H30M
+Duration.ofMinutes(90).toTime() into hours // 1.5
+t.plus(1, ChronoUnit.MINUTES) into minutes // 91.0
+t.truncatedTo(ChronoUnit.HOURS) into hours // 1.0
 ```
 
 ## <a name="si"></a>SI 접두사
@@ -111,9 +127,9 @@ val t = 2 of hours
 t into milli.seconds  // 7 200 000.0(ms)
 ```
 
-!!! note "Duration 범위"
-값이 `java.time.Duration`(정수 초를 `Long`으로 저장, 나노초 해상도)으로 뒷받침되므로,
-`KTimeUnitInstance`는 대략 `[1 ns, Long.MAX 초]`(≈ 2920억 년) 범위 내의 크기만 충실하게 표현할 수 있습니다.
+!!! note "Duration 범위 및 해상도"
+값이 `kotlin.time.Duration`으로 뒷받침되므로, `KTimeUnitInstance`는 대략 ±146년까지는 나노초 정밀도이며 그
+이상에서는 밀리초 해상도로 전환되어 최대 약 ±1억 4600만 년까지 표현할 수 있습니다.
 `quetta`를 일에 적용하는 것과 같은 극단적인 접두사는 이 범위를 초과하며, 나노초 미만 값은 0으로 반올림됩니다. 범용 `KMixedUnitInstance`/접두사 계층 자체는 `Double` 기반이며 영향을
 받지 않습니다 — 범위가 제한되는 것은 Duration 기반 래퍼로의 변환뿐입니다.
 

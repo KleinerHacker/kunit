@@ -37,11 +37,11 @@ import org.pcsoft.framework.kunit.kinematic.distance.kilo
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 150 of kilo.meters / (6000 of seconds)   // 25 m/s
 
-v.format(kilo.meters / hours, "%.1f", Locale.US, KMathMlUnitFormatter())
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KMathMlUnitFormatter())
 // <math display="inline"><mn>90.0</mn><mo>⁢</mo>
 //   <mfrac><mrow><mi>km</mi></mrow><mrow><mi>h</mi></mrow></mfrac></math>
 ```
@@ -50,7 +50,7 @@ Acceleration (`a = m/s²`) puts the exponent into an `<msup>` inside the fractio
 
 ```kotlin
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KMathMlUnitFormatter())
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KMathMlUnitFormatter())
 // <math display="inline"><mn>9.81</mn><mo>⁢</mo>
 //   <mfrac><mrow><mi>m</mi></mrow><mrow><msup><mi>s</mi><mn>2</mn></msup></mrow></mfrac></math>
 ```
