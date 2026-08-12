@@ -12,25 +12,17 @@
 
 package org.pcsoft.framework.kunit.thermo.resistance
 
-// Value-1 thermal resistance templates for the named units of the group, used with `of`/`into`
-// (`5 of squareMeterKelvinPerWatt`, `r into hourSquareFootFahrenheitPerBtu`).
+// Value-1 absolute thermal resistance templates for the named units of the group, used with `of`/`into`
+// (`2.5 of kelvinsPerWatt`). Prefixed forms live in KThermalResistanceUnitExtensions.kt.
 
-/**
- * 1 square meter-kelvin per watt ([KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT]), the group's
- * base unit (the metric R-value / RSI).
- */
-val squareMeterKelvinPerWatt: KThermalResistanceUnitInstance =
-    thermalResistanceOfUnit(KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT)
+/** 1 K/W ([KThermalResistanceUnit.KELVIN_PER_WATT]), the group's base unit. */
+val kelvinsPerWatt: KThermalResistanceUnitInstance =
+    thermalResistanceOfUnit(KThermalResistanceUnit.KELVIN_PER_WATT)
 
-/**
- * 1 imperial R-value unit ([KThermalResistanceUnit.HOUR_SQUARE_FOOT_FAHRENHEIT_PER_BTU],
- * ≈ 0.176110 m²·K/W). A US "R-30" batt is `30 of hourSquareFootFahrenheitPerBtu`.
- */
-val hourSquareFootFahrenheitPerBtu: KThermalResistanceUnitInstance =
-    thermalResistanceOfUnit(KThermalResistanceUnit.HOUR_SQUARE_FOOT_FAHRENHEIT_PER_BTU)
+/** 1 °C/W ([KThermalResistanceUnit.DEGREE_CELSIUS_PER_WATT]), the datasheet spelling; = 1 K/W. */
+val degreesCelsiusPerWatt: KThermalResistanceUnitInstance =
+    thermalResistanceOfUnit(KThermalResistanceUnit.DEGREE_CELSIUS_PER_WATT)
 
-/** 1 clo ([KThermalResistanceUnit.CLO], 0.155 m²·K/W), the clothing insulation unit. */
-val clo: KThermalResistanceUnitInstance = thermalResistanceOfUnit(KThermalResistanceUnit.CLO)
-
-/** 1 tog ([KThermalResistanceUnit.TOG], 0.1 m²·K/W), the textile/duvet insulation unit. */
-val tog: KThermalResistanceUnitInstance = thermalResistanceOfUnit(KThermalResistanceUnit.TOG)
+/** 1 h·°F/Btu ([KThermalResistanceUnit.HOUR_FAHRENHEIT_PER_BTU], ≈ 1.8956 K/W). */
+val hourFahrenheitPerBtu: KThermalResistanceUnitInstance =
+    thermalResistanceOfUnit(KThermalResistanceUnit.HOUR_FAHRENHEIT_PER_BTU)

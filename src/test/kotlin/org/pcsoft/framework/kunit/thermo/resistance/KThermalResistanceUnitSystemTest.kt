@@ -12,12 +12,10 @@
 
 package org.pcsoft.framework.kunit.thermo.resistance
 
-import org.pcsoft.framework.kunit.KMixedUnitInstance
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.kilo
+import org.pcsoft.framework.kunit.*
+import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 import kotlin.test.*
 
@@ -26,57 +24,54 @@ class KThermalResistanceUnitSystemTest {
 
     @Test
     fun `construction and round-trip`() {
-        assertEquals(5.0, (5 of squareMeterKelvinPerWatt) into squareMeterKelvinPerWatt, 1e-12)
-        assertEquals(0.005, (5 of squareMeterKelvinPerWatt) into kilo.squareMeterKelvinPerWatt, 1e-15)
-        assertEquals(
-            30.0,
-            (30.0 / 5.678263341113489 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu,
-            1e-9,
-        )
+        assertEquals(2.5, (2.5 of kelvinsPerWatt) into kelvinsPerWatt, 1e-12)
+        assertEquals(2500.0, (2.5 of kelvinsPerWatt) into milli.kelvinsPerWatt, 1e-9)
+        assertEquals(1.0, (1.8956342406 of kelvinsPerWatt) into hourFahrenheitPerBtu, 1e-9)
     }
 
     @Test
     fun `equals and hashCode`() {
-        assertEquals(1 of squareMeterKelvinPerWatt, 10 of tog)
-        assertEquals((1 of squareMeterKelvinPerWatt).hashCode(), (10 of tog).hashCode())
-        assertFalse((1 of squareMeterKelvinPerWatt) == (2 of squareMeterKelvinPerWatt))
-        assertFalse((1 of squareMeterKelvinPerWatt).equals(1.0))
+        assertEquals(1 of kelvinsPerWatt, 1000 of milli.kelvinsPerWatt)
+        assertEquals((1 of kelvinsPerWatt).hashCode(), (1000 of milli.kelvinsPerWatt).hashCode())
+        assertFalse((1 of kelvinsPerWatt) == (2 of kelvinsPerWatt))
+        assertFalse((1 of kelvinsPerWatt).equals(1.0))
     }
 
     @Test
     fun `toString base unit`() {
-        assertEquals("5.0 m²·K/W", (5 of squareMeterKelvinPerWatt).toString())
+        assertEquals("2.5 K/W", (2.5 of kelvinsPerWatt).toString())
     }
 
-    /** Layers in series simply add their R-values - the physically meaningful same-type operator. */
+    /** A thermal chain in series: junction-to-case + case-to-sink + sink-to-air. */
     @Test
     fun `same-type operators`() {
-        val a = 10 of squareMeterKelvinPerWatt
-        val b = 4 of squareMeterKelvinPerWatt
-        assertEquals(6.0, (a - b) into squareMeterKelvinPerWatt, 1e-9)
-        assertEquals(14.0, (a + b) into squareMeterKelvinPerWatt, 1e-9)
-        assertTrue(a > b)
-        assertIs<KMixedUnitInstance>(a * b)
-        assertIs<KMixedUnitInstance>(a / b)
+        val junctionToCase = 0.5 of kelvinsPerWatt
+        val caseToSink = 0.2 of kelvinsPerWatt
+        val sinkToAir = 1.8 of kelvinsPerWatt
+        assertEquals(2.5, (junctionToCase + caseToSink + sinkToAir) into kelvinsPerWatt, 1e-9)
+        assertEquals(1.6, (sinkToAir - caseToSink) into kelvinsPerWatt, 1e-9)
+        assertTrue(sinkToAir > junctionToCase)
+        assertIs<KMixedUnitInstance>(junctionToCase * caseToSink)
+        assertIs<KMixedUnitInstance>(junctionToCase / caseToSink)
     }
 
-    /** A canonical mass⁻¹·time³·temperature mixed unit converts back; wrong shapes fail. */
+    /**
+     * The native `kg⁻¹·m⁻²·s³·K` form converts back. The expression is assembled from unit templates, so the
+     * raw mixed value is the gram-based product the bridge expects.
+     */
     @Test
     fun `toThermalResistance round-trip and failure`() {
-        val kelvin = KTemperatureDifference.ofKelvin(1).toUnit()
-        val g = (1000 of grams).toUnit()
-        val s3 = (1 of seconds).toUnit() pow 3
-        assertEquals(
-            1.0,
-            (s3 * kelvin / g).toThermalResistance() into squareMeterKelvinPerWatt,
-            1e-9,
-        )
+        val kelvinTerm = KTemperatureDifference.ofKelvin(1).toUnit()
+        val raw = 1 of (seconds pow 3) * kelvinTerm / kilo.grams.toUnit() / (meters pow 2)
+        assertEquals(1.0, raw.toThermalResistance() into kelvinsPerWatt, 1e-9)
 
-        assertFailsWith<IllegalStateException> { g.toThermalResistance() }
-        assertFailsWith<IllegalStateException> { (s3 * kelvin / (g pow 2)).toThermalResistance() }
+        // The same expression on plain grams is 1000 times larger.
+        val rawGram = 1 of (seconds pow 3) * kelvinTerm / grams.toUnit() / (meters pow 2)
+        assertEquals(1000.0, rawGram.toThermalResistance() into kelvinsPerWatt, 1e-6)
+
+        assertFailsWith<IllegalStateException> { (1 of meters).toUnit().toThermalResistance() }
         assertFailsWith<IllegalStateException> {
-            (((1 of seconds).toUnit() pow 2) * kelvin / g).toThermalResistance()
+            (1 of (seconds pow 3) * kelvinTerm / kilo.grams.toUnit()).toThermalResistance()
         }
-        assertFailsWith<IllegalStateException> { (s3 * (kelvin pow 2) / g).toThermalResistance() }
     }
 }

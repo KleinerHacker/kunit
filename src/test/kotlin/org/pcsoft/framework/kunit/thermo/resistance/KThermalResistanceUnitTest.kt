@@ -17,47 +17,45 @@ import org.pcsoft.framework.kunit.of
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-/** Every named thermal resistance token carries the correct m²·K/W factor. */
+/** Every named absolute thermal resistance token carries the correct K/W factor. */
 class KThermalResistanceUnitTest {
 
     @Test
-    fun `named tokens in square meter kelvin per watt`() {
-        assertEquals(1.0, (1 of squareMeterKelvinPerWatt) into squareMeterKelvinPerWatt, 1e-12)
-        assertEquals(
-            1.0 / 5.678263341113489,
-            (1 of hourSquareFootFahrenheitPerBtu) into squareMeterKelvinPerWatt,
-            1e-12,
-        )
-        assertEquals(0.155, (1 of clo) into squareMeterKelvinPerWatt, 1e-12)
-        assertEquals(0.1, (1 of tog) into squareMeterKelvinPerWatt, 1e-12)
+    fun `named tokens in kelvins per watt`() {
+        assertEquals(1.0, (1 of kelvinsPerWatt) into kelvinsPerWatt, 1e-12)
+        assertEquals(1.0, (1 of degreesCelsiusPerWatt) into kelvinsPerWatt, 1e-12)
+        assertEquals(1.8956342406, (1 of hourFahrenheitPerBtu) into kelvinsPerWatt, 1e-9)
+    }
+
+    /** A temperature *difference* of 1 °C is 1 K, so both spellings coincide. */
+    @Test
+    fun `celsius per watt equals kelvin per watt`() {
+        assertEquals(1 of kelvinsPerWatt, 1 of degreesCelsiusPerWatt)
     }
 
     @Test
     fun `enum entries expose symbol and base value`() {
-        assertEquals("m²·K/W", KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT.symbol)
-        assertEquals(1.0, KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT.baseValue, 1e-12)
-        assertEquals("h·ft²·°F/Btu", KThermalResistanceUnit.HOUR_SQUARE_FOOT_FAHRENHEIT_PER_BTU.symbol)
-        assertEquals(
-            1.0 / 5.678263341113489,
-            KThermalResistanceUnit.HOUR_SQUARE_FOOT_FAHRENHEIT_PER_BTU.baseValue,
-            1e-12,
-        )
-        assertEquals("clo", KThermalResistanceUnit.CLO.symbol)
-        assertEquals(0.155, KThermalResistanceUnit.CLO.baseValue, 1e-12)
-        assertEquals("tog", KThermalResistanceUnit.TOG.symbol)
-        assertEquals(0.1, KThermalResistanceUnit.TOG.baseValue, 1e-12)
+        assertEquals("K/W", KThermalResistanceUnit.KELVIN_PER_WATT.symbol)
+        assertEquals(1.0, KThermalResistanceUnit.KELVIN_PER_WATT.baseValue, 1e-12)
+        assertEquals("°C/W", KThermalResistanceUnit.DEGREE_CELSIUS_PER_WATT.symbol)
+        assertEquals(1.0, KThermalResistanceUnit.DEGREE_CELSIUS_PER_WATT.baseValue, 1e-12)
+        assertEquals("h*°F/Btu", KThermalResistanceUnit.HOUR_FAHRENHEIT_PER_BTU.symbol)
+        assertEquals(1.8956342406, KThermalResistanceUnit.HOUR_FAHRENHEIT_PER_BTU.baseValue, 1e-9)
     }
 
     @Test
     fun `base unit marker`() {
-        assertEquals(KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT, KThermalResistanceUnit.BASE)
+        assertEquals(KThermalResistanceUnit.KELVIN_PER_WATT, KThermalResistanceUnit.BASE)
         assertEquals(1.0, KThermalResistanceUnit.BASE.baseValue, 1e-12)
-        assertEquals("m²·K/W", KThermalResistanceUnit.BASE.symbol)
+        assertEquals("K/W", KThermalResistanceUnit.BASE.symbol)
     }
 
-    /** A clo is exactly 1.55 tog - the two textile scales relate by their base values. */
     @Test
-    fun `clo and tog relate`() {
-        assertEquals(1.55, (1 of clo) into tog, 1e-12)
+    fun `enum entries are complete`() {
+        assertEquals(3, KThermalResistanceUnit.entries.size)
+        assertEquals(
+            listOf("K/W", "°C/W", "h*°F/Btu"),
+            KThermalResistanceUnit.entries.map { it.symbol },
+        )
     }
 }

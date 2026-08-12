@@ -1,157 +1,107 @@
-# 熱抵抗 (R値)
+# 絶対熱抵抗
 
 パッケージ: `org.pcsoft.framework.kunit.thermo.resistance`
-基本単位: **平方メートルケルビン毎ワット**
-(`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
+基本単位: **ケルビン毎ワット** (`KThermalResistanceUnit.BASE == KThermalResistanceUnit.KELVIN_PER_WATT`)
 
 種別: **構成単位（constructed unit）**
 
-熱抵抗 — **R値** — は、ある層がどれだけ強く熱の流れに抵抗するかを表します: `m²·K/W`。これは
-[熱伝達率](heat-transfer-coefficient.md)(U値)の正確な逆数であり、直列の層のR値が単純に **加算される**
-ため、断熱材が実際に販売される際に使われる形式です。
+部品の絶対熱抵抗 `R` は、そこを流れる熱量あたりに維持される温度差です: `R = ΔT / P`、単位は `K/W` で
+測定されます。これは**個々の対象物**を表します — このヒートシンク、このトランジスタパッケージ、この
+サイズのこの壁、というように。
 
-`KThermalResistanceUnitInstance` は正準の正規形 `mass⁻¹ · time³ · temperature¹`(`kg⁻¹·s³·K`)に ちょうど3つの項からなる
-`KMixedUnitInstance` をラップし、常に m²·K/W に正規化されます。
+その正準の正規形は `mass⁻¹ · length⁻² · time³ · temperature` です。
 
-!!! note "パッケージ名とクラス名"
-パッケージは `thermo.resistance` であり、`thermo.thermalresistance` ではありません — 単位パッケージ
-はその分野パッケージの名前を繰り返してはなりません。 **型**は完全な技術用語 (`KThermalResistanceUnitInstance`)
-を保持しており、これによって `electric.resistance` と区別されます。
+!!! warning "熱抵抗係数（thermal insulance）とは異なります"
+    このグループを [熱抵抗係数](thermal-insulance.md) `m²·K/W`(R値)と混同しないでください。これは
+    同じ概念を**単位面積あたり**で正規化したものです。両者は面積の係数だけ異なり、正規形も型も異な
+    ります。バージョン0.8.0以前は `thermo.resistance` / `KThermalResistanceUnit` という名前は熱抵抗
+    係数を指していましたが、現在はこのグループを指します。
 
 ## 名前付き単位
 
-| 単位                              | 記号           |                         トークン | m²·K/Wでの1単位 |
-|-----------------------------------|----------------|---------------------------------:|----------------:|
-| 平方メートルケルビン毎ワット(RSI) | `m²·K/W`       |       `squareMeterKelvinPerWatt` |             1.0 |
-| インペリアルR値                   | `h·ft²·°F/Btu` | `hourSquareFootFahrenheitPerBtu` |      ≈ 0.176110 |
-| クロ                              | `clo`          |                            `clo` |           0.155 |
-| トグ                              | `tog`          |                            `tog` |             0.1 |
+| 単位                       | 記号       |                       トークン | K/Wでの1単位 |
+|----------------------------|------------|------------------------:|--------------:|
+| ケルビン毎ワット            | `K/W`      |         `kelvinsPerWatt` |           1.0 |
+| 摂氏度毎ワット              | `°C/W`     |  `degreesCelsiusPerWatt` |           1.0 |
+| 時間°F毎Btu                | `h*°F/Btu` |    `hourFahrenheitPerBtu` |     ≈ 1.89563 |
 
-米国の "R-30" バットは `30 of hourSquareFootFahrenheitPerBtu` ≈ 5.28 m²·K/W です。ビジネススーツは 約1
-cloで、掛け布団はトグで評価されます (1 clo = 1.55 tog)。すべての単位がSI接頭辞の全範囲をサポート します。
-
-## 実例 — 層ごとの断熱壁
-
-壁は20 cmのミネラルウール (λ = 0.04 W/ (m·K))と12 cmのレンガ (λ = 0.8 W/ (m·K))から構成されています。 合計のR値、結果としてのU値、そして
-ΔT = 25 K における熱損失はどうなるでしょうか?
-
-```kotlin
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.common.power.watts
-import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
-import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
-import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-
-val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
-val brick = (12 of centi.meters) / (0.8 of wattsPerMeterKelvin)   // 0.15 m²·K/W
-
-val total = wool + brick                    // 直列の層は加算される
-total into squareMeterKelvinPerWatt         // 5.15 m²·K/W
-total into hourSquareFootFahrenheitPerBtu   // ≈ 29.2("R-29"の壁)
-
-val u = 1 / total                           // KHeatTransferCoefficientUnitInstance
-u into wattsPerSquareMeterKelvin            // ≈ 0.194 W/(m²·K)
-
-val drop = KTemperatureDifference.ofKelvin(25)
-val flux = drop / total                     // KHeatFluxDensityUnitInstance
-flux into wattsPerSquareMeter               // ≈ 4.85 W/m²
-
-val wall = (10 of meters) * (2.5 of meters) // 25 m²
-(flux * wall) into watts                    // ≈ 121 W
-```
-
-## 隣接単位での計算
-
-| 式                                          | 結果の型                               | 意味             |
-|---------------------------------------------|----------------------------------------|------------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | 測定からのR      |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | 材料+厚さからのR |
-| `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | 持続する温度差   |
-| `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | 同じ(可換)       |
-| `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | 結果としての流束 |
-| `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | 必要な厚さ       |
-| `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | 同じ(可換)       |
-| `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | 暗黙の伝導率     |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | UからR           |
-| `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | RからU           |
-
-2つの逆数演算子は狭く宣言されているため、`1 / u` と `1 / r` はグループに依存しない `Number.div` が 生成するであろう汎用の混合単位ではなく、
-**型付き**の値を返します。
+1 °Cの温度**差**は1 Kなので、半導体やヒートシンクのデータシートで使われる表記である
+`degreesCelsiusPerWatt` は数値的に `kelvinsPerWatt` と同一です。すべてのトークンが全SI接頭辞を
+サポートします。
 
 ## 分解表現
 
-3つの分解表現すべてが同じ値として等しい型付きインスタンスを生成します。
+このグループには一つの分解表現があり、その両方の形式が同じ型付きで値が等しいインスタンスを生成します。
+このグループは質量の項を持つため、ネイティブ形式は**単位テンプレート**から組み立てられます: 生の混合値
+はグラム基準の積であり、型付きインスタンスはその値を名前付き単位で保持します。
 
-| 分解表現                                  | 形式                                 | 結果                             |
-|-------------------------------------------|--------------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | 型付き演算子                         | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | 型付き演算子                         | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | ネイティブ + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| 形式             | 式                                                            |
+|------------------|------------------------------------------------------------------------|
+| 型付き演算子   | `temperatureDifference / power`                                        |
+| ネイティブ (`toX()`) | `(2.5 of s³ · K / kilo.grams / m²).toThermalResistance()`              |
 
 ```kotlin
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
+import org.pcsoft.framework.kunit.*
+import org.pcsoft.framework.kunit.common.power.watts
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
-import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-
-val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
-val viaThickness = (1 of meters) / (1 of wattsPerMeterKelvin)
-val native = (
-    ((1 of seconds).toUnit() pow 3) *
-        KTemperatureDifference.ofKelvin(1).toUnit() /
-        (1000 of grams).toUnit()
-    ).toThermalResistance()
-
-viaFlux == viaThickness // true
-viaFlux == native       // true - すべて 1.0 m²·K/W
-```
-
-## 演算子
-
-`+` と `-` はここではまさに物理的に意味のある演算です: 直列の層はそれぞれのR値を加算します。
-
-```kotlin
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.thermo.resistance.*
 
-val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
-(1 of squareMeterKelvinPerWatt) > (5 of tog)      // true(5 tog = 0.5 m²·K/W)
-(1 of squareMeterKelvinPerWatt) == (10 of tog)    // true
+val typed = KTemperatureDifference.ofKelvin(30) / (12 of watts)
+val kelvinTerm = KTemperatureDifference.ofKelvin(1).toUnit()
+val native = (2.5 of (seconds pow 3) * kelvinTerm / kilo.grams.toUnit() / (meters pow 2))
+    .toThermalResistance()
+
+typed == native            // true
+typed into kelvinsPerWatt  // 2.5
 ```
 
-## toString によるフォーマット
+## グループでの計算
+
+| 式                                        | 結果の型                            | 意味              |
+|-------------------------------------------|----------------------------------------|----------------------|
+| `temperatureDifference / power`           | `KThermalResistanceUnitInstance`       | `R = ΔT / P`         |
+| `thermalResistance * power`               | `KTemperatureDifferenceUnitInstance`   | `ΔT = R · P`         |
+| `temperatureDifference / thermalResistance` | `KPowerUnitInstance`                 | 生じる熱流 |
+| `thermalResistance + …`                   | `KThermalResistanceUnitInstance`       | 直列の熱抵抗 |
+| `1 / thermalResistance`                   | `KThermalConductanceUnitInstance`      | `G = 1 / R`          |
+
+熱抵抗は**直列で加算されます** — これはグループの同型演算 `+` がまさに行うことです。
+
+## 実例 — ヒートシンクの予算
+
+あるパワートランジスタは **12 W** を放散します。熱経路はジャンクション-ケース間が0.5 K/W、
+ケース-ヒートシンク間が0.2 °C/W、ヒートシンク-大気間が1.8 K/Wです。ジャンクションは周囲温度から
+どれだけ上昇するでしょうか?
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 import org.pcsoft.framework.kunit.thermo.resistance.*
 
-(5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
-"R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."
+val chain = (0.5 of kelvinsPerWatt) + (0.2 of degreesCelsiusPerWatt) + (1.8 of kelvinsPerWatt)
+chain into kelvinsPerWatt                                   // 2.5
+
+val rise = chain * (12 of watts)                            // KTemperatureDifferenceUnitInstance
+rise into KTemperatureDifference.ofKelvin(1)                // 周囲温度から30.0 K上昇
+
+// 25 Kの上限に対してどれだけの電力を放散できるか?
+val budget = KTemperatureDifference.ofKelvin(25) / chain    // KPowerUnitInstance
+budget into watts                                            // 10.0 W
 ```
 
-## 記法
+## 値のセマンティクス
 
-以下の表は、この単位およびその構成要素が数学的にどう書かれ、KUnitを使ったKotlinでどう書かれるかを示します。指数はUnicodeの上付き文字（
-`²`、`³`、`⁻¹`）を使用し、`·` は乗算、`/` は分数を表します。分数と負の指数を用いた積の両方で表記可能な量については、両方の等価なKotlin表現を記載しています。
+`equals`/`hashCode` は**正規化されたK/W値**を比較するため、
+`(1 of kelvinsPerWatt) == (1 of degreesCelsiusPerWatt)` となります。`toString()` は値を基本単位で
+表示します: `"2.5 K/W"`。
 
-| 数学                | Kotlin                                                 | 意味                  |
-|---------------------|--------------------------------------------------------|-----------------------|
-| `m²·K/W`            | `squareMeterKelvinPerWatt`                             | 熱抵抗(R値)、基本単位 |
-| `kg⁻¹·s³·K`         | `(seconds pow 3) * ΔK / grams`                         | 同じ量を基本次元で    |
-| `h·ft²·°F/Btu`      | `hourSquareFootFahrenheitPerBtu`                       | インペリアルR値       |
-| `R = d / λ`         | `(20 of centi.meters) / (0.04 of wattsPerMeterKelvin)` | 厚さ÷伝導率からR      |
-| `R = ΔT / q̇`        | `drop / (4 of wattsPerSquareMeter)`                    | 温度差÷流束からR      |
-| `R_total = R₁ + R₂` | `wool + brick`                                         | 直列の層              |
-| `U = 1 / R`         | `1 / total`                                            | R値からU値            |
-| `q̇ = ΔT / R`        | `drop / total`                                         | 温度差÷Rから流束      |
+## 関連項目
+
+* [熱抵抗係数](thermal-insulance.ja.md) — 同じ概念を単位面積あたりで表したもの(R値)。
+* [熱コンダクタンス](thermal-conductance.ja.md) — その逆数の量。
+* [熱力学の概要](overview.ja.md)

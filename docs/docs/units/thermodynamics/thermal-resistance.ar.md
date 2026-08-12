@@ -1,157 +1,109 @@
-# المقاومة الحرارية (قيمة R)
+# المقاومة الحرارية المطلقة
 
 الحزمة: `org.pcsoft.framework.kunit.thermo.resistance`
-الوحدة الأساسية: **متر مربع-كلفن لكل واط**
-(`KThermalResistanceUnit.BASE == KThermalResistanceUnit.SQUARE_METER_KELVIN_PER_WATT`)
+الوحدة الأساسية: **كلفن لكل واط** (`KThermalResistanceUnit.BASE == KThermalResistanceUnit.KELVIN_PER_WATT`)
 
 النوع: **وحدة مركّبة**
 
-المقاومة الحرارية — **قيمة R** — تُبيّن مدى مقاومة طبقة ما لتدفّق الحرارة: `m²·K/W`. وهي المقلوب التام
-لـ [معامل انتقال الحرارة](heat-transfer-coefficient.md) (قيمة U)، وهي الصيغة التي تُباع بها منتجات العزل فعليًا، لأنّ
-قيم R للطبقات المتسلسلة تُجمَع ببساطة **جمعًا**.
+المقاومة الحرارية المطلقة `R` لأحد المكوّنات هي فرق درجة الحرارة الذي يحافظ عليه لكل وحدة من الحرارة
+المارّة عبره: `R = ΔT / P`، تُقاس بـ `K/W`. وهي تصف **جسمًا بأكمله** — هذا المشتّت الحراري، هذا
+غلاف الترانزستور، هذا الجدار بهذا الحجم بعينه.
 
-يغلّف `KThermalResistanceUnitInstance` كائن `KMixedUnitInstance` مكوّن من ثلاثة حدود بالضبط بالصيغة القياسية
-`mass⁻¹ · time³ · temperature¹` (`kg⁻¹·s³·K`)، مطبَّعًا دائمًا إلى m²·K/W.
+الصيغة القياسية لهذه المجموعة هي `mass⁻¹ · length⁻² · time³ · temperature`.
 
-!!! note "اسم الحزمة مقابل اسم الصنف"
-الحزمة هي `thermo.resistance`، وليست `thermo.thermalresistance` — إذ يجب ألّا تُكرِّر حزمة الوحدة اسم حزمة مجالها. تحتفظ
-**الأصناف** بالمصطلح التقني الكامل (`KThermalResistanceUnitInstance`)، وهو ما يميّزها عن `electric.resistance`.
+!!! warning "ليست نفسها المقاومة الحرارية للعزل"
+    لا تخلط بين هذه المجموعة وبين [مقاومة العزل الحراري](thermal-insulance.md) `m²·K/W` (قيمة R)،
+    وهي الفكرة نفسها لكن مُطبَّعة **لكل وحدة مساحة**. تختلف الاثنتان بمعامل المساحة، ولهما صيغتان
+    قياسيتان مختلفتان وبالتالي نوعان مختلفان. حتى الإصدار 0.8.0 وشاملًا إياه، كان الاسم
+    `thermo.resistance` / `KThermalResistanceUnit` يشير إلى مقاومة العزل تلك؛ أمّا الآن فهو يشير
+    إلى هذه المجموعة.
 
 ## الوحدات المسمّاة
 
-| الوحدة                      | الرمز          |                    الرمز البرمجي | 1 وحدة بـ m²·K/W |
-|-----------------------------|----------------|---------------------------------:|-----------------:|
-| متر مربع-كلفن لكل واط (RSI) | `m²·K/W`       |       `squareMeterKelvinPerWatt` |              1.0 |
-| قيمة R الإمبراطورية         | `h·ft²·°F/Btu` | `hourSquareFootFahrenheitPerBtu` |       ≈ 0.176110 |
-| كلو                         | `clo`          |                            `clo` |            0.155 |
-| توغ                         | `tog`          |                            `tog` |              0.1 |
+| الوحدة                       | الرمز       |                    الرمز البرمجي | 1 وحدة بـ K/W |
+|----------------------------|------------|------------------------:|--------------:|
+| كلفن لكل واط            | `K/W`      |         `kelvinsPerWatt` |           1.0 |
+| درجة مئوية لكل واط    | `°C/W`     |  `degreesCelsiusPerWatt` |           1.0 |
+| ساعة·°F لكل Btu                | `h*°F/Btu` |    `hourFahrenheitPerBtu` |     ≈ 1.89563 |
 
-لُفافة عزل أمريكية "R-30" تعادل `30 of hourSquareFootFahrenheitPerBtu` ≈ 5.28 m²·K/W. بدلة عمل تعادل نحو 1 clo؛ وتُصنَّف
-اللحف بوحدة توغ (1 clo = 1.55 tog). تدعم جميع الوحدات نطاق بادئات النظام الدولي الكامل.
-
-## مثال واقعي: جدار معزول، طبقة بطبقة
-
-يتكوّن جدار من 20 cm صوف معدني (λ = 0.04 W/ (m·K)) و12 cm طوب (λ = 0.8 W/ (m·K)). ما إجمالي قيمة R، وقيمة U الناتجة،
-والفقد الحراري عند ΔT = 25 K؟
-
-```kotlin
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.into
-import org.pcsoft.framework.kunit.centi
-import org.pcsoft.framework.kunit.common.power.watts
-import org.pcsoft.framework.kunit.kinematic.distance.meters
-import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
-import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.wattsPerSquareMeterKelvin
-import org.pcsoft.framework.kunit.thermo.resistance.*
-import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-
-val wool  = (20 of centi.meters) / (0.04 of wattsPerMeterKelvin)  // 5.0 m²·K/W
-val brick = (12 of centi.meters) / (0.8 of wattsPerMeterKelvin)   // 0.15 m²·K/W
-
-val total = wool + brick                    // الطبقات المتسلسلة تُجمَع
-total into squareMeterKelvinPerWatt         // 5.15 m²·K/W
-total into hourSquareFootFahrenheitPerBtu   // ≈ 29.2 (جدار "R-29")
-
-val u = 1 / total                           // KHeatTransferCoefficientUnitInstance
-u into wattsPerSquareMeterKelvin            // ≈ 0.194 W/(m²·K)
-
-val drop = KTemperatureDifference.ofKelvin(25)
-val flux = drop / total                     // KHeatFluxDensityUnitInstance
-flux into wattsPerSquareMeter               // ≈ 4.85 W/m²
-
-val wall = (10 of meters) * (2.5 of meters) // 25 m²
-(flux * wall) into watts                    // ≈ 121 W
-```
-
-## الحساب باستخدام الوحدات المجاورة
-
-| التعبير                                     | نوع النتيجة                            | المعنى                |
-|---------------------------------------------|----------------------------------------|-----------------------|
-| `temperatureDifference / heatFluxDensity`   | `KThermalResistanceUnitInstance`       | R من القياس           |
-| `length / thermalConductivity`              | `KThermalResistanceUnitInstance`       | R من المادّة + السماكة |
-| `thermalResistance * heatFluxDensity`       | `KTemperatureDifferenceUnitInstance`   | الفرق المستمرّ         |
-| `heatFluxDensity * thermalResistance`       | `KTemperatureDifferenceUnitInstance`   | نفسه (تبادلي)         |
-| `temperatureDifference / thermalResistance` | `KHeatFluxDensityUnitInstance`         | التدفّق الناتج         |
-| `thermalResistance * thermalConductivity`   | `KLengthUnitInstance`                  | السماكة المطلوبة      |
-| `thermalConductivity * thermalResistance`   | `KLengthUnitInstance`                  | نفسه (تبادلي)         |
-| `length / thermalResistance`                | `KThermalConductivityUnitInstance`     | الموصلية الضمنية      |
-| `1 / heatTransferCoefficient`               | `KThermalResistanceUnitInstance`       | R من U                |
-| `1 / thermalResistance`                     | `KHeatTransferCoefficientUnitInstance` | U من R                |
-
-يُعرَّف المعاملان المقلوبان بدقّة، بحيث تُعيد `1 / u` و`1 / r` قيمةً **محكومة بالنوع** بدلًا من الوحدة المختلطة العامّة
-التي كان سيُنتجها `Number.div` غير المرتبط بالمجموعة.
+فرق درجة الحرارة البالغ 1 °C يساوي 1 K، لذا فإنّ `degreesCelsiusPerWatt` — وهي الصيغة المستخدَمة في
+أوراق بيانات أشباه الموصلات والمشتّتات الحرارية — تُطابق عدديًا `kelvinsPerWatt`. تدعم جميع الرموز
+البرمجية نطاق بادئات النظام الدولي الكامل.
 
 ## التفكيكات
 
-كلّ التفكيكات الثلاثة تُنتج نفس النسخة المحكومة بالنوع والمتساوية القيمة.
+تحتوي هذه المجموعة على تفكيك واحد، وتُنتج صيغتاه كلتاهما نفس النسخة المحكومة بالنوع والمتساوية القيمة.
+تُبنى الصيغة الأصلية من **قوالب الوحدات** لأنّ هذه المجموعة تحمل حدًّا للكتلة: القيمة المختلطة الخام
+هي الناتج القائم على الغرام، بينما تُخزِّن النسخة المحكومة بالنوع قيمتها بالوحدة المسمّاة.
 
-| التفكيك                                   | الصيغة                               | النتيجة                          |
-|-------------------------------------------|--------------------------------------|----------------------------------|
-| `temperatureDifference / heatFluxDensity` | معامل مكتوب بنوع صريح                | `KThermalResistanceUnitInstance` |
-| `length / thermalConductivity`            | معامل مكتوب بنوع صريح                | `KThermalResistanceUnitInstance` |
-| `mass⁻¹ · time³ · temperature¹`           | تعبير أصلي + `toThermalResistance()` | `KThermalResistanceUnitInstance` |
+| الصيغة             | التعبير                                                            |
+|------------------|------------------------------------------------------------------------|
+| معامل مكتوب بنوع صريح   | `temperatureDifference / power`                                        |
+| تعبير أصلي (`toX()`) | `(2.5 of s³ · K / kilo.grams / m²).toThermalResistance()`              |
 
 ```kotlin
-import org.pcsoft.framework.kunit.of
-import org.pcsoft.framework.kunit.pow
+import org.pcsoft.framework.kunit.*
+import org.pcsoft.framework.kunit.common.power.watts
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.seconds
 import org.pcsoft.framework.kunit.mechanic.mass.grams
-import org.pcsoft.framework.kunit.thermo.conductivity.wattsPerMeterKelvin
-import org.pcsoft.framework.kunit.thermo.heatfluxdensity.wattsPerSquareMeter
-import org.pcsoft.framework.kunit.thermo.resistance.*
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
-
-val viaFlux      = KTemperatureDifference.ofKelvin(1) / (1 of wattsPerSquareMeter)
-val viaThickness = (1 of meters) / (1 of wattsPerMeterKelvin)
-val native = (
-    ((1 of seconds).toUnit() pow 3) *
-        KTemperatureDifference.ofKelvin(1).toUnit() /
-        (1000 of grams).toUnit()
-    ).toThermalResistance()
-
-viaFlux == viaThickness // true
-viaFlux == native       // true - جميعها 1.0 m²·K/W
-```
-
-## العمليات
-
-`+` و`-` هما تمامًا العملية ذات المعنى الفيزيائي هنا: الطبقات المتسلسلة تجمع قيم R الخاصّة بها.
-
-```kotlin
-import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.thermo.resistance.*
 
-val series = (5 of squareMeterKelvinPerWatt) + (0.15 of squareMeterKelvinPerWatt) // 5.15
-(1 of squareMeterKelvinPerWatt) > (5 of tog)      // true (5 tog = 0.5 m²·K/W)
-(1 of squareMeterKelvinPerWatt) == (10 of tog)    // true
+val typed = KTemperatureDifference.ofKelvin(30) / (12 of watts)
+val kelvinTerm = KTemperatureDifference.ofKelvin(1).toUnit()
+val native = (2.5 of (seconds pow 3) * kelvinTerm / kilo.grams.toUnit() / (meters pow 2))
+    .toThermalResistance()
+
+typed == native            // true
+typed into kelvinsPerWatt  // 2.5
 ```
 
-## تنسيق toString
+## الحساب باستخدام هذه المجموعة
+
+| التعبير                                | نوع النتيجة                            | المعنى              |
+|-------------------------------------------|----------------------------------------|----------------------|
+| `temperatureDifference / power`           | `KThermalResistanceUnitInstance`       | `R = ΔT / P`         |
+| `thermalResistance * power`               | `KTemperatureDifferenceUnitInstance`   | `ΔT = R · P`         |
+| `temperatureDifference / thermalResistance` | `KPowerUnitInstance`                 | التدفّق الحراري الناتج |
+| `thermalResistance + …`                   | `KThermalResistanceUnitInstance`       | مقاومات متسلسلة |
+| `1 / thermalResistance`                   | `KThermalConductanceUnitInstance`      | `G = 1 / R`          |
+
+المقاومات الحرارية **تُجمَع عند التسلسل** — وهذا بالضبط ما تفعله العملية `+` من النوع نفسه لهذه
+المجموعة.
+
+## مثال واقعي — ميزانية مشتّت حراري
+
+يبدّد ترانزستور طاقة **12 W**. السلسلة الحرارية هي 0.5 K/W من الوصلة إلى الغلاف، و0.2 °C/W من
+الغلاف إلى المشتّت الحراري، و1.8 K/W من المشتّت الحراري إلى الهواء. كم سترتفع درجة حرارة الوصلة عن
+درجة حرارة المحيط؟
 
 ```kotlin
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
+import org.pcsoft.framework.kunit.common.power.watts
+import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifference
 import org.pcsoft.framework.kunit.thermo.resistance.*
 
-(5 of squareMeterKelvinPerWatt).toString()                                        // "5.0 m²·K/W"
-"R-${(5 of squareMeterKelvinPerWatt) into hourSquareFootFahrenheitPerBtu}"        // "R-28.39..."
+val chain = (0.5 of kelvinsPerWatt) + (0.2 of degreesCelsiusPerWatt) + (1.8 of kelvinsPerWatt)
+chain into kelvinsPerWatt                                   // 2.5
+
+val rise = chain * (12 of watts)                            // KTemperatureDifferenceUnitInstance
+rise into KTemperatureDifference.ofKelvin(1)                // أعلى من المحيط بـ 30.0 K
+
+// كم من الطاقة يمكنه تبديدها ضمن حدّ 25 K؟
+val budget = KTemperatureDifference.ofKelvin(25) / chain    // KPowerUnitInstance
+budget into watts                                            // 10.0 W
 ```
 
-## الترميز
+## دلالة القيمة
 
-يبيّن الجدول أدناه كيف تُكتب هذه الوحدة ومكوّناتها رياضيًا مقابل كتابتها في Kotlin باستخدام KUnit. تُكتب الأسس بحروف
-يونيكود العلوية (`²`، `³`، `⁻¹`)، ويرمز `·` للضرب و`/` للكسر. وحيثما أمكن كتابة الكمّية ككسر وكحاصل ضرب بأسس سالبة،
-تُذكر الصيغتان المتكافئتان في Kotlin.
+يقارن `equals`/`hashCode` **قيمة K/W المطبَّعة**، لذا
+`(1 of kelvinsPerWatt) == (1 of degreesCelsiusPerWatt)`. يعرض `toString()` القيمة بالوحدة
+الأساسية: `"2.5 K/W"`.
 
-| الرياضيات           | Kotlin                                                 | المعنى                                      |
-|---------------------|--------------------------------------------------------|---------------------------------------------|
-| `m²·K/W`            | `squareMeterKelvinPerWatt`                             | المقاومة الحرارية (قيمة R)، الوحدة الأساسية |
-| `kg⁻¹·s³·K`         | `(seconds pow 3) * ΔK / grams`                         | نفس الكمّية بالأبعاد الأساسية                |
-| `h·ft²·°F/Btu`      | `hourSquareFootFahrenheitPerBtu`                       | قيمة R الإمبراطورية                         |
-| `R = d / λ`         | `(20 of centi.meters) / (0.04 of wattsPerMeterKelvin)` | R من السماكة ÷ الموصلية                     |
-| `R = ΔT / q̇`        | `drop / (4 of wattsPerSquareMeter)`                    | R من الفرق ÷ التدفّق                         |
-| `R_total = R₁ + R₂` | `wool + brick`                                         | الطبقات المتسلسلة                           |
-| `U = 1 / R`         | `1 / total`                                            | قيمة U من قيمة R                            |
-| `q̇ = ΔT / R`        | `drop / total`                                         | التدفّق من الفرق ÷ R                         |
+## انظر أيضًا
+
+* [مقاومة العزل الحراري](thermal-insulance.ar.md) — الفكرة نفسها لكن لكل وحدة مساحة (قيمة R).
+* [الموصلية الحرارية](thermal-conductance.ar.md) — الكمّية المقلوبة لها.
+* [نظرة عامة على الديناميكا الحرارية](overview.ar.md)

@@ -1,5 +1,202 @@
 # kunit Changelog
 
+## [Unreleased]
+
+### Changed (breaking)
+
+- **`thermo.resistance` renamed to `thermo.insulance`.** The group with base unit `m²·K/W` describes the
+  **R-value** (thermal insulance), not the absolute thermal resistance, and the name is now used for the
+  quantity that actually carries it. `KThermalResistanceUnit` → `KThermalInsulanceUnit`,
+  `KThermalResistanceUnitInstance` → `KThermalInsulanceUnitInstance`,
+  `KMixedUnitInstance.toThermalResistance()` → `KMixedUnitInstance.toThermalInsulance()`. The tokens
+  (`squareMeterKelvinPerWatt`, `hourSquareFootFahrenheitPerBtu`, `clo`, `tog`) and all values are
+  unchanged - only the package and the type names move. The name `thermo.resistance` /
+  `KThermalResistanceUnit` now refers to the **new** absolute thermal resistance group (`K/W`) below.
+  Migration: replace the import `…thermo.resistance` with `…thermo.insulance` and rename the type.
+
+### Added
+
+- **New subject area Optics (`org.pcsoft.framework.kunit.optic`).** Ten new unit groups covering photometry and
+  its radiometric counterparts, documented under `docs/docs/units/optics/`.
+
+- **New native unit Luminous Intensity - the seventh SI base unit.** `…optic.luminousintensity` with base unit
+  candela (`cd`, `KLuminousIntensityUnit.BASE`) and the tokens `candelas`, `hefnerCandles`,
+  `candlepower`, `carcels` (all prefix-combinable); `KMixedUnitInstance.toLuminousIntensity()`. With it KUnit
+  covers all seven SI base units.
+
+- **New standardized unit Luminous Flux (`luminousIntensity · solidAngle`).** `…optic.luminousflux` with base
+  unit lumen (`lm`) and the tokens `lumens`, `candelaSteradians`. Typed operators
+  `luminousIntensity * solidAngle` (and its commutative form), `luminousFlux / solidAngle` and
+  `luminousFlux / luminousIntensity`; `KMixedUnitInstance.toLuminousFlux()`.
+
+- **New standardized unit Illuminance (`luminousIntensity · solidAngle · length⁻²`).** `…optic.illuminance`
+  with base unit lux (`lx`) and the tokens `lux`, `phots`, `footCandles`, `nox`. Typed operators
+  `luminousFlux / area`, `illuminance * area = luminousFlux` (and its commutative form) and
+  `luminousFlux / illuminance = area`; `KMixedUnitInstance.toIlluminance()`.
+
+- **New standardized unit Luminance (`luminousIntensity · length⁻²`).** `…optic.luminance` with base unit
+  candela per square meter (`cd/m²`) and the tokens `candelasPerSquareMeter`, `nits`, `stilbs`,
+  `apostilbs`, `lamberts`, `footLamberts`. **Two typed decompositions** - `luminousIntensity / area` and
+  `illuminance / solidAngle` - plus `luminance * area = luminousIntensity`,
+  `luminance * solidAngle = illuminance` (both with commutative forms) and their inverses;
+  `KMixedUnitInstance.toLuminance()`.
+
+- **New standardized unit Luminous Energy (`luminousIntensity · solidAngle · time`).**
+  `…optic.luminousenergy` with base unit lumen second (`lm·s`) and the tokens `lumenSeconds`,
+  `talbots`, `lumenHours`. Typed operators `luminousFlux * time` (and its commutative form),
+  `luminousEnergy / time` and `luminousEnergy / luminousFlux`; `KMixedUnitInstance.toLuminousEnergy()`.
+
+- **New standardized unit Luminous Exposure (`luminousIntensity · solidAngle · length⁻² · time`).**
+  `…optic.luminousexposure` with base unit lux second (`lx·s`) and the tokens `luxSeconds`, `luxHours`.
+  Typed operators `illuminance * time` (and its commutative form), `luminousExposure / time` and
+  `luminousExposure / illuminance`; `KMixedUnitInstance.toLuminousExposure()`.
+
+- **New standardized unit Luminous Efficacy (`luminousIntensity · solidAngle · mass⁻¹ · length⁻² · time³`).**
+  `…optic.efficacy` with base unit lumen per watt (`lm/W`), the token `lumensPerWatt` and the constant
+  `MAX_LUMINOUS_EFFICACY` (683 lm/W). Typed operators `luminousFlux / power`,
+  `luminousEfficacy * power = luminousFlux` (and its commutative form) and
+  `luminousFlux / luminousEfficacy = power`; `KMixedUnitInstance.toLuminousEfficacy()`.
+
+- **New standardized unit Radiant Intensity (`mass · length² · time⁻³ · solidAngle⁻¹`).**
+  `…optic.radiantintensity` with base unit watt per steradian (`W/sr`) and the token `wattsPerSteradian`.
+  Typed operators `power / solidAngle`, `radiantIntensity * solidAngle = power` (and its commutative form)
+  and `power / radiantIntensity = solidAngle`; `KMixedUnitInstance.toRadiantIntensity()`.
+
+- **New standardized unit Radiance (`mass · time⁻³ · solidAngle⁻¹`).** `…optic.radiance` with base unit watt
+  per steradian square meter (`W/(sr·m²)`) and the token `wattsPerSteradianSquareMeter`. Typed operators
+  `radiantIntensity / area`, `radiance * area = radiantIntensity` (and its commutative form) and
+  `radiantIntensity / radiance = area`; `KMixedUnitInstance.toRadiance()`.
+
+- **New standardized unit Magnetic Dipole Moment (`current · length²`).** `…electric.magneticmoment` with
+  base unit ampere square meter (`A·m²`) and the tokens `ampereSquareMeters`, `joulesPerTesla`,
+  `bohrMagnetons`, `nuclearMagnetons` (all prefix-combinable). Typed operators `current * area` (and its
+  commutative form), `magneticMoment / area = current` and `magneticMoment / current = area`;
+  `KMixedUnitInstance.toMagneticMoment()`.
+
+- **New standardized unit Electric Flux (`mass · length³ · time⁻³ · current⁻¹`).** `…electric.flux` with
+  base unit volt meter (`V·m`) and the tokens `voltMeters`, `voltCentimeters`. Typed operators
+  `electricFieldStrength * area` (and its commutative form), `electricFlux / area` and
+  `electricFlux / electricFieldStrength`; `KMixedUnitInstance.toElectricFlux()`.
+
+- **New standardized unit Elastance (`mass · length² · time⁻⁴ · current⁻²`).** `…electric.elastance` with
+  base unit reciprocal farad (`F⁻¹`) and the tokens `reciprocalFarads`, `darafs`. Typed operators
+  `voltage / charge`, `elastance * charge = voltage` (and its commutative form),
+  `voltage / elastance = charge` and the reciprocal relations
+  `Number / capacitance = elastance`, `Number / elastance = capacitance`;
+  `KMixedUnitInstance.toElastance()`. Same-type `+` is the series connection of capacitors.
+
+- **New standardized unit Specific Charge (`current · time · mass⁻¹`).** `…electric.specificcharge` with
+  base unit coulomb per kilogram (`C/kg`), the tokens `coulombsPerKilogram` and `roentgens` (both
+  prefix-combinable) and the constant `ELECTRON_SPECIFIC_CHARGE`. Typed operators `charge / mass`,
+  `specificCharge * mass = charge` (and its commutative form) and `charge / specificCharge = mass`;
+  `KMixedUnitInstance.toSpecificCharge()`. The group also carries the **ionisation dose** (exposure)
+  reading of radiation protection.
+
+- **New documentation pages for the radiation quantities** that share an existing type: activity
+  (becquerel → `kinematic.frequency`), absorbed dose (gray) and dose equivalent (sievert) (both →
+  `thermo.specificenergy`) and exposure (roentgen → `electric.specificcharge`). No new types - a single
+  base-dimension normal form maps to a single type, so each page explains the shared reading.
+
+- **New exponent-4 leaf Second Moment of Area (`length⁴`).** `KSecondMomentOfAreaUnitInstance` joins
+  `KLengthUnitInstance`/`KAreaUnitInstance`/`KVolumeUnitInstance` in
+  `…kinematic.distance`, with the tokens `quarticMeters`, `quarticCentimeters`,
+  `quarticMillimeters`, `quarticInches` (all prefix-combinable) and
+  `KMixedUnitInstance.toSecondMomentOfArea()`. Same-type `+`/`-`/comparison make
+  `secondMomentOfArea + area` a compile error; `secondMomentOfArea / length = volume` (the section
+  modulus), `/ area = area`, `/ volume = length`. The products `area * area`, `volume * length` and
+  `length * volume` now return this **typed leaf** instead of the general `KDistanceUnitInstance` - a
+  narrowing, so existing source keeps compiling.
+
+- **New standardized unit Jerk (`length · time⁻³`).** `…kinematic.jerk` with base unit meter per second
+  cubed (`m/s³`) and the tokens `metersPerSecondCubed`, `standardGravitiesPerSecond`,
+  `feetPerSecondCubed` (all prefix-combinable). Typed operators `acceleration / time`,
+  `jerk * time = acceleration` (and its commutative form) and `acceleration / jerk = time`;
+  `KMixedUnitInstance.toJerk()`.
+
+- **New standardized unit Specific Weight (`mass · length⁻² · time⁻²`).** `…mechanic.specificweight`
+  with base unit newton per cubic meter (`N/m³`) and the tokens `newtonsPerCubicMeter`,
+  `kilonewtonsPerCubicMeter`, `poundsForcePerCubicFoot`. **Two typed decompositions** -
+  `force / volume` and `density * acceleration` (`γ = ρ · g`) - plus
+  `specificWeight * volume = force` (with commutative form) and their inverses;
+  `KMixedUnitInstance.toSpecificWeight()`.
+
+- **New standardized unit Compressibility (`mass⁻¹ · length · time²`).** `…mechanic.compressibility`
+  with base unit reciprocal pascal (`1/Pa`) and the tokens `reciprocalPascals`, `reciprocalBars`,
+  `reciprocalAtmospheres`. Typed operators `Number / pressure = compressibility` (the reciprocal of the
+  bulk modulus), `Number / compressibility = pressure` and
+  `compressibility * pressure = Double` (the relative volume change);
+  `KMixedUnitInstance.toCompressibility()`.
+
+- **New standardized unit Specific Acoustic Impedance (`mass · length⁻² · time⁻¹`).**
+  `…mechanic.acousticimpedance` with base unit pascal second per meter (`Pa·s/m`) and the tokens
+  `pascalSecondsPerMeter`, `rayls`, `cgsRayls`. **Two typed decompositions** - `pressure / speed` and
+  `density * speed` (`Z = ρ · c`) - plus `acousticImpedance * speed = pressure` (with commutative form)
+  and their inverses; `KMixedUnitInstance.toAcousticImpedance()`.
+
+- **New standardized unit Absolute Thermal Resistance (`mass⁻¹ · length⁻² · time³ · temperature`).**
+  `…thermo.resistance` with base unit kelvin per watt (`K/W`) and the tokens `kelvinsPerWatt`,
+  `degreesCelsiusPerWatt`, `hourFahrenheitPerBtu` (all prefix-combinable). Typed operators
+  `temperatureDifference / power`, `thermalResistance * power = temperatureDifference` (and its
+  commutative form) and `temperatureDifference / thermalResistance = power`;
+  `KMixedUnitInstance.toThermalResistance()`. Same-type `+` is the series connection of a thermal chain.
+
+- **New standardized unit Thermal Conductance (`mass · length² · time⁻³ · temperature⁻¹`).**
+  `…thermo.conductance` with base unit watt per kelvin (`W/K`) and the tokens `wattsPerKelvin`,
+  `btusPerHourFahrenheit`. Typed operators `power / temperatureDifference`,
+  `thermalConductance * temperatureDifference = power` (and its commutative form),
+  `power / thermalConductance = temperatureDifference` and the reciprocal relations
+  `Number / thermalResistance = thermalConductance`, `Number / thermalConductance = thermalResistance`;
+  `KMixedUnitInstance.toThermalConductance()`.
+
+- **New standardized unit Volumetric Heat Capacity (`mass · length⁻¹ · time⁻² · temperature⁻¹`).**
+  `…thermo.volumetricheatcapacity` with base unit `J/(m³·K)` and the tokens
+  `joulesPerCubicMeterKelvin`, `caloriesPerCubicCentimeterKelvin`. **Two typed decompositions** -
+  `heatCapacity / volume` and `specificHeatCapacity * density` - plus
+  `volumetricHeatCapacity * volume = heatCapacity` (with commutative form) and their inverses;
+  `KMixedUnitInstance.toVolumetricHeatCapacity()`.
+
+- **New standardized unit Dose Rate (`length² · time⁻³`).** `…thermo.doserate` with base unit gray per
+  second (`Gy/s`) and the tokens `graysPerSecond`, `graysPerHour`, `sievertsPerSecond`,
+  `sievertsPerHour` (all prefix-combinable). Typed operators `specificEnergy / time`,
+  `doseRate * time = specificEnergy` (and its commutative form) and `specificEnergy / doseRate = time`;
+  `KMixedUnitInstance.toDoseRate()`. The absorbed dose itself is the specific energy group
+  (`1 Gy = 1 J/kg`).
+
+- **New standardized unit Amount-of-Substance Concentration (`substance · length⁻³`).**
+  `…thermo.concentration` with base unit mole per cubic meter (`mol/m³`) and the tokens
+  `molesPerCubicMeter`, `molesPerLiter`, `molar` (the molarity `M`) and `millimolesPerLiter` (all
+  prefix-combinable). Typed operators `amountOfSubstance / volume`,
+  `concentration * volume = amountOfSubstance` (and its commutative form) and
+  `amountOfSubstance / concentration = volume`; `KMixedUnitInstance.toConcentration()`.
+
+- **New standardized unit Molality (`substance · mass⁻¹`).** `…thermo.molality` with base unit mole per
+  kilogram (`mol/kg`) and the tokens `molesPerKilogram`, `millimolesPerKilogram`. Typed operators
+  `amountOfSubstance / mass`, `molality * mass = amountOfSubstance` (and its commutative form) and
+  `amountOfSubstance / molality = mass`, plus the reciprocal relation to the molar mass
+  (`Number / molarMass = molality`, `Number / molality = molarMass`);
+  `KMixedUnitInstance.toMolality()`.
+
+- **New standardized unit Catalytic Activity (`substance · time⁻¹`).** `…thermo.catalyticactivity` with
+  base unit katal (`kat`) and the tokens `katals` and `enzymeUnits` (`U` = 1 µmol/min, both
+  prefix-combinable). Typed operators `amountOfSubstance / time`,
+  `catalyticActivity * time = amountOfSubstance` (and its commutative form) and
+  `amountOfSubstance / catalyticActivity = time`; `KMixedUnitInstance.toCatalyticActivity()`.
+
+- **New standardized unit Molar Conductivity (`mass⁻¹ · time³ · current² · substance⁻¹`).**
+  `…electric.molarconductivity` with base unit siemens square meter per mole (`S·m²/mol`) and the tokens
+  `siemensSquareMetersPerMole`, `siemensSquareCentimetersPerMole`. Typed operators
+  `conductivity / concentration`, `molarConductivity * concentration = conductivity` (and its commutative
+  form) and `conductivity / molarConductivity = concentration`;
+  `KMixedUnitInstance.toMolarConductivity()`. Same-type `+` implements Kohlrausch's law of independent ion
+  migration.
+
+- **New standardized unit Reciprocal Length (`length⁻¹`).** `…common.reciprocallength` with base unit
+  reciprocal meter (`1/m`) and the tokens `reciprocalMeters`, `dioptres`, `reciprocalCentimeters`,
+  `kaysers` (all prefix-combinable). Typed operators `Number / length`, `Number / reciprocalLength = length`
+  and `reciprocalLength * length = Double`; `KMixedUnitInstance.toReciprocalLength()`. The group lives in
+  `common` because it serves two subject areas: the **dioptre** (refractive power, optics) and the
+  **wavenumber** (spectroscopy), which share one normal form and therefore one type.
+
 ## [0.8.0]
 
 ### Added

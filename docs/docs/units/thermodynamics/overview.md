@@ -27,7 +27,7 @@ quantities of every heat balance: the heat itself (energy) and the rate at which
 | Heat Flux Density         | constructed | linear quantity               | `W/m²`        | [Heat Flux Density](heat-flux-density.md)                 |
 | Thermal Conductivity      | constructed | linear quantity               | `W/(m·K)`     | [Thermal Conductivity](thermal-conductivity.md)           |
 | Heat Transfer Coefficient | constructed | linear quantity               | `W/(m²·K)`    | [Heat Transfer Coefficient](heat-transfer-coefficient.md) |
-| Thermal Resistance        | constructed | linear quantity               | `m²·K/W`      | [Thermal Resistance](thermal-resistance.md)               |
+| Thermal Resistance        | constructed | linear quantity               | `m²·K/W`      | [Thermal Resistance](thermal-insulance.md)               |
 | Thermal Expansion         | constructed | linear quantity               | `1/K`         | [Thermal Expansion](thermal-expansion.md)                 |
 | Temperature Gradient      | constructed | linear quantity               | `K/m`         | [Temperature Gradient](temperature-gradient.md)           |
 | Thermal Diffusivity       | constructed | linear quantity               | `m²/s`        | [Thermal Diffusivity](thermal-diffusivity.md)             |
@@ -181,7 +181,7 @@ deliberately distinct from an absolute point.
 * [Temperature Gradient](temperature-gradient.md) — `K/m`, the driver of conduction.
 * [Thermal Conductivity](thermal-conductivity.md) — `W/(m·K)`, Fourier's law.
 * [Heat Transfer Coefficient](heat-transfer-coefficient.md) — `W/(m²·K)`, the building-physics U-value.
-* [Thermal Resistance](thermal-resistance.md) — `m²·K/W`, the R-value; layers in series add up.
+* [Thermal Resistance](thermal-insulance.md) — `m²·K/W`, the R-value; layers in series add up.
 * [Thermal Diffusivity](thermal-diffusivity.md) — `m²/s`, how fast a temperature change propagates.
 
 ### Reacting to heat

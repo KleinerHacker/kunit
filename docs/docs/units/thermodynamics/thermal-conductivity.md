@@ -19,7 +19,7 @@ distinguishes them from
 `electric.conductivity`.
 
 Divided by a thickness this becomes a [heat transfer coefficient](heat-transfer-coefficient.md); the thickness divided
-by it is the [thermal resistance](thermal-resistance.md) (R-value).
+by it is the [thermal resistance](thermal-insulance.md) (R-value).
 
 ## Named units
 

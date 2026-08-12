@@ -15,43 +15,41 @@ package org.pcsoft.framework.kunit.thermo.resistance
 import org.pcsoft.framework.kunit.KUnit
 
 /**
- * Enumerates concrete units of thermal resistance - the *R-value* (a *constructed* quantity:
- * mass⁻¹ · time³ · temperature). [baseValue] is the factor to convert into the group's base unit
- * ([BASE], square meter-kelvin per watt): `1 unit = baseValue * m²·K/W`.
+ * Enumerates concrete units of **absolute thermal resistance** (temperature difference sustained per heat
+ * flow; a *constructed* quantity: mass⁻¹ · length⁻² · time³ · temperature). [baseValue] is the factor to
+ * convert into the group's base unit ([BASE], kelvin per watt): `1 unit = baseValue * K/W`.
  *
- * Note the package is named `resistance` (not `thermalresistance`): a unit package must not repeat its
- * field package's name. The types keep the full technical term, distinguishing them from
- * `electric.resistance`.
+ * This describes a **whole component** - a heat sink, a transistor package, a wall of a given size. Do not
+ * confuse it with the
+ * [thermal insulance][org.pcsoft.framework.kunit.thermo.insulance.KThermalInsulanceUnit] (`m²·K/W`), which
+ * is the same idea normalized per unit of area.
  *
  * Example:
  * ```kotlin
- * KThermalResistanceUnit.CLO.baseValue // 0.155 (the clothing insulation unit)
+ * KThermalResistanceUnit.HOUR_FAHRENHEIT_PER_BTU.baseValue // ≈ 1.8956 (1 h·°F/Btu in K/W)
  * ```
  */
 enum class KThermalResistanceUnit(override val symbol: String, override val baseValue: Double) : KUnit {
-    /**
-     * Square meter-kelvin per watt ("m²·K/W"), the SI base unit of thermal resistance - the metric
-     * R-value, often written RSI; [baseValue] = 1.0 by definition.
-     */
-    SQUARE_METER_KELVIN_PER_WATT("m²·K/W", 1.0),
+    /** Kelvin per watt ("K/W"), the coherent SI unit of absolute thermal resistance; [baseValue] = 1.0. */
+    KELVIN_PER_WATT("K/W", 1.0),
 
     /**
-     * Imperial R-value ("h·ft²·°F/Btu"), the reciprocal of the imperial U-value:
-     * 1 h·ft²·°F/Btu ≈ 0.176110 m²·K/W. A US "R-30" batt is 30 of these.
+     * Degree Celsius per watt ("°C/W"), the spelling used on heat-sink and semiconductor datasheets.
+     * A temperature *difference* of 1 °C is 1 K, so this is numerically identical to [KELVIN_PER_WATT].
      */
-    HOUR_SQUARE_FOOT_FAHRENHEIT_PER_BTU("h·ft²·°F/Btu", 1.0 / 5.678263341113489),
+    DEGREE_CELSIUS_PER_WATT("°C/W", 1.0),
 
-    /** Clo ("clo"), the clothing insulation unit: 1 clo = 0.155 m²·K/W (a typical business suit). */
-    CLO("clo", 0.155),
-
-    /** Tog ("tog"), the textile insulation unit: 1 tog = 0.1 m²·K/W (duvet ratings). */
-    TOG("tog", 0.1);
+    /**
+     * Hour degree-Fahrenheit per British thermal unit ("h*°F/Btu"), the imperial thermal ohm.
+     * 1 h·°F/Btu ≈ 1.8956 K/W.
+     */
+    HOUR_FAHRENHEIT_PER_BTU("h*°F/Btu", 1.8956342406);
 
     companion object {
         /**
-         * The base unit of the thermal resistance group: [SQUARE_METER_KELVIN_PER_WATT]. All internal
-         * values of [KThermalResistanceUnitInstance] are normalized to m²·K/W.
+         * The base unit of the absolute thermal-resistance group: [KELVIN_PER_WATT]. All internal values of
+         * [KThermalResistanceUnitInstance] are normalized to kelvins per watt.
          */
-        val BASE: KThermalResistanceUnit = SQUARE_METER_KELVIN_PER_WATT
+        val BASE: KThermalResistanceUnit = KELVIN_PER_WATT
     }
 }

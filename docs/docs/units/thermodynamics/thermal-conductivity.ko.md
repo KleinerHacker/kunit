@@ -16,7 +16,7 @@
 (`KThermalConductivityUnitInstance`)를 유지하며, 이것이 `electric.conductivity`와 구분되는 지점입니다.
 
 두께로 나누면 이는 [열전달계수](heat-transfer-coefficient.md)가 되며, 그것으로 두께를 나누면
-[열저항](thermal-resistance.md)(R-값)이 됩니다.
+[열저항](thermal-insulance.md)(R-값)이 됩니다.
 
 ## 이름이 붙은 단위
 

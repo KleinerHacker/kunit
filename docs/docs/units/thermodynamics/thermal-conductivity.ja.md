@@ -19,7 +19,7 @@
 (`KThermalConductivityUnitInstance`)を保持しており、これによって `electric.conductivity` と 区別されます。
 
 厚さで割ると[熱伝達率](heat-transfer-coefficient.md)になり、厚さをこれで割ると
-[熱抵抗](thermal-resistance.md)(R値)になります。
+[熱抵抗](thermal-insulance.md)(R値)になります。
 
 ## 名前付き単位
 

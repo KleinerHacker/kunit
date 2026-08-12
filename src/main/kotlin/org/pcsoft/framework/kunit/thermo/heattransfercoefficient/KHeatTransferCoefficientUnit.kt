@@ -20,7 +20,7 @@ import org.pcsoft.framework.kunit.KUnit
  * ([BASE], watt per square meter-kelvin): `1 unit = baseValue * W/(m²·K)`.
  *
  * In building physics this quantity is the **U-value**; its reciprocal is the R-value
- * (see the thermal resistance group).
+ * (see the thermal insulance group).
  *
  * Example:
  * ```kotlin

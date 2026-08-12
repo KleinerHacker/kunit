@@ -12,114 +12,48 @@
 
 package org.pcsoft.framework.kunit.thermo.resistance
 
-import org.pcsoft.framework.kunit.kinematic.distance.KLengthUnitInstance
-import org.pcsoft.framework.kunit.kinematic.distance.lengthOf
-import org.pcsoft.framework.kunit.thermo.conductivity.KThermalConductivityUnitInstance
-import org.pcsoft.framework.kunit.thermo.conductivity.thermalConductivityInstanceOf
-import org.pcsoft.framework.kunit.thermo.heatfluxdensity.KHeatFluxDensityUnitInstance
-import org.pcsoft.framework.kunit.thermo.heatfluxdensity.heatFluxDensityInstanceOf
-import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.KHeatTransferCoefficientUnitInstance
-import org.pcsoft.framework.kunit.thermo.heattransfercoefficient.heatTransferCoefficientInstanceOf
+import org.pcsoft.framework.kunit.common.power.KPowerUnitInstance
+import org.pcsoft.framework.kunit.common.power.powerInstanceOf
 import org.pcsoft.framework.kunit.thermo.temperature.KTemperatureDifferenceUnitInstance
 import org.pcsoft.framework.kunit.thermo.temperature.temperatureDifferenceOf
 
-// Cross-group operators for the two decompositions of a thermal resistance -
-// `temperatureDifference / heatFluxDensity` and `length / thermalConductivity` - plus their inverses and
-// the reciprocal relation to the heat transfer coefficient (U-value).
-
-// --- Decomposition 1: temperature difference per heat flux density -------------------------------
+// Cross-group operators for the decomposition of the absolute thermal resistance -
+// `temperatureDifference / power` - plus its inverses. They live in the thermal resistance package because
+// it may depend on temperature/power (the reverse must never happen).
 
 /**
- * Divides a temperature difference by a heat flux density to obtain a [KThermalResistanceUnitInstance]
- * (`temperatureDifference / heatFluxDensity = R-value`).
+ * Divides a temperature difference by a heat flow to obtain a [KThermalResistanceUnitInstance]
+ * (`temperatureDifference / power = thermal resistance`).
+ *
+ * Example:
+ * ```kotlin
+ * val r = KTemperatureDifference.ofKelvin(30) / (12 of watts) // 2.5 K/W
+ * ```
  */
 operator fun KTemperatureDifferenceUnitInstance.div(
-    other: KHeatFluxDensityUnitInstance,
+    other: KPowerUnitInstance
 ): KThermalResistanceUnitInstance = thermalResistanceInstanceOf(value / other.value)
 
 /**
- * Multiplies a thermal resistance by a heat flux density to obtain the temperature difference it sustains
- * (`R-value * heatFluxDensity = temperatureDifference`).
+ * Multiplies a thermal resistance by a heat flow to obtain the temperature difference it sustains
+ * (`thermal resistance * power = temperatureDifference`).
  */
 operator fun KThermalResistanceUnitInstance.times(
-    other: KHeatFluxDensityUnitInstance,
+    other: KPowerUnitInstance
 ): KTemperatureDifferenceUnitInstance = temperatureDifferenceOf(value * other.value)
 
 /**
- * Multiplies a heat flux density by a thermal resistance to obtain the temperature difference; the
- * commutative counterpart of [KThermalResistanceUnitInstance.times].
- */
-operator fun KHeatFluxDensityUnitInstance.times(
-    other: KThermalResistanceUnitInstance,
-): KTemperatureDifferenceUnitInstance = temperatureDifferenceOf(value * other.value)
-
-/**
- * Divides a temperature difference by a thermal resistance to obtain the heat flux density
- * (`temperatureDifference / R-value = heatFluxDensity`).
- */
-operator fun KTemperatureDifferenceUnitInstance.div(
-    other: KThermalResistanceUnitInstance,
-): KHeatFluxDensityUnitInstance = heatFluxDensityInstanceOf(value / other.value)
-
-// --- Decomposition 2: thickness per thermal conductivity -----------------------------------------
-
-/**
- * Divides a thickness by a thermal conductivity to obtain a [KThermalResistanceUnitInstance]
- * (`length / thermalConductivity = R-value`) - the way an insulation layer's R-value is computed. This is
- * the second, equivalent decomposition; it yields the same typed, value-equal result as
- * `temperatureDifference / heatFluxDensity`.
- */
-operator fun KLengthUnitInstance.div(
-    other: KThermalConductivityUnitInstance,
-): KThermalResistanceUnitInstance = thermalResistanceInstanceOf(value / other.value)
-
-/**
- * Multiplies a thermal resistance by a thermal conductivity to obtain the corresponding thickness
- * (`R-value * thermalConductivity = length`).
- */
-operator fun KThermalResistanceUnitInstance.times(
-    other: KThermalConductivityUnitInstance,
-): KLengthUnitInstance = lengthOf(value * other.value)
-
-/**
- * Multiplies a thermal conductivity by a thermal resistance to obtain the thickness; the commutative
+ * Multiplies a heat flow by a thermal resistance to obtain the temperature difference; the commutative
  * counterpart of [KThermalResistanceUnitInstance.times].
  */
-operator fun KThermalConductivityUnitInstance.times(
-    other: KThermalResistanceUnitInstance,
-): KLengthUnitInstance = lengthOf(value * other.value)
+operator fun KPowerUnitInstance.times(
+    other: KThermalResistanceUnitInstance
+): KTemperatureDifferenceUnitInstance = temperatureDifferenceOf(value * other.value)
 
 /**
- * Divides a thickness by a thermal resistance to obtain the material's thermal conductivity
- * (`length / R-value = thermalConductivity`).
+ * Divides a temperature difference by a thermal resistance to obtain the heat flow it drives
+ * (`temperatureDifference / thermal resistance = power`).
  */
-operator fun KLengthUnitInstance.div(
-    other: KThermalResistanceUnitInstance,
-): KThermalConductivityUnitInstance = thermalConductivityInstanceOf(value / other.value)
-
-// --- Reciprocal relation to the heat transfer coefficient (U-value) ------------------------------
-
-/**
- * Inverts a heat transfer coefficient into the corresponding thermal resistance (`R = 1 / U`), returning a
- * **typed** [KThermalResistanceUnitInstance]. This narrower overload wins over the group-agnostic
- * `Number.div(KUnitMeasurable)`, which would only produce a raw mixed unit.
- *
- * Example:
- * ```kotlin
- * val r = 1 / (1.3 of wattsPerSquareMeterKelvin) // ≈ 0.769 m²·K/W
- * ```
- */
-operator fun Number.div(unit: KHeatTransferCoefficientUnitInstance): KThermalResistanceUnitInstance =
-    thermalResistanceInstanceOf(this.toDouble() / unit.value)
-
-/**
- * Inverts a thermal resistance into the corresponding heat transfer coefficient (`U = 1 / R`), returning a
- * **typed** [KHeatTransferCoefficientUnitInstance] - the counterpart of the [Number.div] above.
- *
- * Example:
- * ```kotlin
- * val u = 1 / (5 of squareMeterKelvinPerWatt) // 0.2 W/(m²·K)
- * ```
- */
-operator fun Number.div(unit: KThermalResistanceUnitInstance): KHeatTransferCoefficientUnitInstance =
-    heatTransferCoefficientInstanceOf(this.toDouble() / unit.value)
+operator fun KTemperatureDifferenceUnitInstance.div(
+    other: KThermalResistanceUnitInstance
+): KPowerUnitInstance = powerInstanceOf(value / other.value)

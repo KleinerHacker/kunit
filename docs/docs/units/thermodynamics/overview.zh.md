@@ -26,7 +26,7 @@
 | 热流密度 | 构成 | 线性量         | `W/m²`       | [热流密度](heat-flux-density.md)         |
 | 热导率   | 构成 | 线性量         | `W/(m·K)`    | [热导率](thermal-conductivity.md)        |
 | 传热系数 | 构成 | 线性量         | `W/(m²·K)`   | [传热系数](heat-transfer-coefficient.md) |
-| 热阻     | 构成 | 线性量         | `m²·K/W`     | [热阻](thermal-resistance.md)            |
+| 热阻     | 构成 | 线性量         | `m²·K/W`     | [热阻](thermal-insulance.md)            |
 | 热膨胀   | 构成 | 线性量         | `1/K`        | [热膨胀](thermal-expansion.md)           |
 | 温度梯度 | 构成 | 线性量         | `K/m`        | [温度梯度](temperature-gradient.md)      |
 | 热扩散率 | 构成 | 线性量         | `m²/s`       | [热扩散率](thermal-diffusivity.md)       |
@@ -171,7 +171,7 @@ KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK"(区间)
 * [温度梯度](temperature-gradient.md) —— `K/m`,传导的驱动力。
 * [热导率](thermal-conductivity.md) —— `W/(m·K)`,傅里叶定律。
 * [传热系数](heat-transfer-coefficient.md) —— `W/(m²·K)`,建筑物理学中的 U 值。
-* [热阻](thermal-resistance.md) —— `m²·K/W`,R 值;多层叠加时可直接相加。
+* [热阻](thermal-insulance.md) —— `m²·K/W`,R 值;多层叠加时可直接相加。
 * [热扩散率](thermal-diffusivity.md) —— `m²/s`,温度变化传播的速度。
 
 ### 对热的响应

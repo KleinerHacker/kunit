@@ -164,7 +164,8 @@ val area = Math.PI * (r * r)     // KAreaUnitInstance: π·r² ≈ 0.04524 m²
 
 ## What does the framework currently support?
 
-Current implementation status (see [STATUS.md](STATUS.md) for details):
+Current implementation status. The [Unit Groups](#unit-groups) table below is the authoritative overview of every
+unit group that exists in the framework - group, sub-package and base unit.
 
 ### Root Engine
 
@@ -232,7 +233,20 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Heat Flux Density (constructed: mass·time⁻³)                                     | `org.pcsoft.framework.kunit.thermo.heatfluxdensity`         | Watt per square meter (`KHeatFluxDensityUnit.BASE`)                |
 | Thermal Conductivity (constructed: mass·length·time⁻³·temperature⁻¹)             | `org.pcsoft.framework.kunit.thermo.conductivity`            | Watt per meter-kelvin (`KThermalConductivityUnit.BASE`)            |
 | Heat Transfer Coefficient (constructed: mass·time⁻³·temperature⁻¹)               | `org.pcsoft.framework.kunit.thermo.heattransfercoefficient` | Watt per square meter-kelvin (`KHeatTransferCoefficientUnit.BASE`) |
-| Thermal Resistance (constructed: mass⁻¹·time³·temperature)                       | `org.pcsoft.framework.kunit.thermo.resistance`              | Square meter-kelvin per watt (`KThermalResistanceUnit.BASE`)       |
+| Thermal Insulance / R-value (constructed: mass⁻¹·time³·temperature)              | `org.pcsoft.framework.kunit.thermo.insulance`              | Square meter-kelvin per watt (`KThermalInsulanceUnit.BASE`)       |
+| Thermal Resistance (constructed: mass⁻¹·length⁻²·time³·temperature)              | `org.pcsoft.framework.kunit.thermo.resistance`             | Kelvin per watt (`KThermalResistanceUnit.BASE`)                    |
+| Thermal Conductance (constructed: mass·length²·time⁻³·temperature⁻¹)             | `org.pcsoft.framework.kunit.thermo.conductance`            | Watt per kelvin (`KThermalConductanceUnit.BASE`)                   |
+| Volumetric Heat Capacity (constructed: mass·length⁻¹·time⁻²·temperature⁻¹)       | `org.pcsoft.framework.kunit.thermo.volumetricheatcapacity` | Joule per cubic meter kelvin (`KVolumetricHeatCapacityUnit.BASE`)  |
+| Dose Rate (constructed: length²·time⁻³)                                          | `org.pcsoft.framework.kunit.thermo.doserate`               | Gray per second (`KDoseRateUnit.BASE`)                             |
+| Jerk (constructed: length·time⁻³)                                                | `org.pcsoft.framework.kunit.kinematic.jerk`                | Meter per second cubed (`KJerkUnit.BASE`)                          |
+| Specific Weight (constructed: mass·length⁻²·time⁻²)                              | `org.pcsoft.framework.kunit.mechanic.specificweight`       | Newton per cubic meter (`KSpecificWeightUnit.BASE`)                |
+| Compressibility (constructed: mass⁻¹·length·time²)                               | `org.pcsoft.framework.kunit.mechanic.compressibility`      | Reciprocal pascal (`KCompressibilityUnit.BASE`)                    |
+| Acoustic Impedance (constructed: mass·length⁻²·time⁻¹)                           | `org.pcsoft.framework.kunit.mechanic.acousticimpedance`    | Pascal second per meter (`KAcousticImpedanceUnit.BASE`)            |
+| Second Moment of Area (constructed: length⁴)                                     | `org.pcsoft.framework.kunit.kinematic.distance`            | Quartic meter (exponent-4 leaf of the distance group)              |
+| Magnetic Moment (constructed: current·length²)                                    | `org.pcsoft.framework.kunit.electric.magneticmoment`       | Ampere square meter (`KMagneticMomentUnit.BASE`)                   |
+| Electric Flux (constructed: mass·length³·time⁻³·current⁻¹)                        | `org.pcsoft.framework.kunit.electric.flux`                 | Volt meter (`KElectricFluxUnit.BASE`)                              |
+| Elastance (constructed: mass·length²·time⁻⁴·current⁻²)                            | `org.pcsoft.framework.kunit.electric.elastance`            | Reciprocal farad (`KElastanceUnit.BASE`)                           |
+| Specific Charge (constructed: current·time·mass⁻¹)                                | `org.pcsoft.framework.kunit.electric.specificcharge`       | Coulomb per kilogram (`KSpecificChargeUnit.BASE`)                  |
 | Thermal Expansion (constructed: temperature⁻¹)                                   | `org.pcsoft.framework.kunit.thermo.expansion`               | Per kelvin (`KThermalExpansionUnit.BASE`)                          |
 | Temperature Gradient (constructed: temperature·length⁻¹)                         | `org.pcsoft.framework.kunit.thermo.temperaturegradient`     | Kelvin per meter (`KTemperatureGradientUnit.BASE`)                 |
 | Diffusivity (constructed: length²·time⁻¹)                                        | `org.pcsoft.framework.kunit.common.diffusivity`             | Square meter per second (`KDiffusivityUnit.BASE`)                  |
@@ -248,7 +262,28 @@ Current implementation status (see [STATUS.md](STATUS.md) for details):
 | Dynamic Viscosity (constructed: mass·length⁻¹·time⁻¹)                            | `org.pcsoft.framework.kunit.mechanic.viscosity`             | Pascal second (`KViscosityUnit.BASE`)                              |
 | Force per Length (constructed: mass·time⁻²)                                      | `org.pcsoft.framework.kunit.mechanic.lineforce`             | Newton per meter (`KLineForceUnit.BASE`)                           |
 | Strain (constructed: dimensionless)                                              | `org.pcsoft.framework.kunit.mechanic.strain`                | Plain ratio (`KStrainUnit.BASE`)                                   |
+| Luminous Intensity                                                               | `org.pcsoft.framework.kunit.optic.luminousintensity`        | Candela (`KLuminousIntensityUnit.BASE`)                            |
+| Luminous Flux (constructed: luminousIntensity·solidAngle)                        | `org.pcsoft.framework.kunit.optic.luminousflux`             | Lumen (`KLuminousFluxUnit.BASE`)                                   |
+| Illuminance (constructed: luminousIntensity·solidAngle·length⁻²)                 | `org.pcsoft.framework.kunit.optic.illuminance`              | Lux (`KIlluminanceUnit.BASE`)                                      |
+| Luminance (constructed: luminousIntensity·length⁻²)                              | `org.pcsoft.framework.kunit.optic.luminance`                | Candela per square meter (`KLuminanceUnit.BASE`)                   |
+| Luminous Energy (constructed: luminousIntensity·solidAngle·time)                 | `org.pcsoft.framework.kunit.optic.luminousenergy`           | Lumen second (`KLuminousEnergyUnit.BASE`)                          |
+| Luminous Exposure (constructed: luminousIntensity·solidAngle·length⁻²·time)      | `org.pcsoft.framework.kunit.optic.luminousexposure`         | Lux second (`KLuminousExposureUnit.BASE`)                          |
+| Luminous Efficacy (constructed: luminousIntensity·solidAngle·mass⁻¹·length⁻²·time³) | `org.pcsoft.framework.kunit.optic.efficacy`               | Lumen per watt (`KLuminousEfficacyUnit.BASE`)                      |
+| Radiant Intensity (constructed: mass·length²·time⁻³·solidAngle⁻¹)                | `org.pcsoft.framework.kunit.optic.radiantintensity`         | Watt per steradian (`KRadiantIntensityUnit.BASE`)                  |
+| Radiance (constructed: mass·time⁻³·solidAngle⁻¹)                                 | `org.pcsoft.framework.kunit.optic.radiance`                 | Watt per steradian square meter (`KRadianceUnit.BASE`)             |
+| Reciprocal Length (constructed: length⁻¹)                                        | `org.pcsoft.framework.kunit.common.reciprocallength`        | Reciprocal meter (`KReciprocalLengthUnit.BASE`)                    |
+| Concentration (constructed: substance·length⁻³)                                  | `org.pcsoft.framework.kunit.thermo.concentration`           | Mole per cubic meter (`KConcentrationUnit.BASE`)                   |
+| Molality (constructed: substance·mass⁻¹)                                         | `org.pcsoft.framework.kunit.thermo.molality`                | Mole per kilogram (`KMolalityUnit.BASE`)                           |
+| Catalytic Activity (constructed: substance·time⁻¹)                               | `org.pcsoft.framework.kunit.thermo.catalyticactivity`       | Katal (`KCatalyticActivityUnit.BASE`)                              |
+| Molar Conductivity (constructed: mass⁻¹·time³·current²·substance⁻¹)              | `org.pcsoft.framework.kunit.electric.molarconductivity`     | Siemens square meter per mole (`KMolarConductivityUnit.BASE`)      |
 
+> **Activity** (becquerel) shares `KFrequencyUnitInstance`, **absorbed dose** (gray) and **dose equivalent**
+> (sievert) share `KSpecificEnergyUnitInstance`, and the **ionisation dose** (roentgen) shares
+> `KSpecificChargeUnitInstance` - each with its own documentation page.
+>
+> **Refractive power** (dioptre) and **wavenumber** share `KReciprocalLengthUnitInstance`, which is why the
+> group carries the neutral name `reciprocallength`; each reading has its own documentation page.
+>
 > **Entropy** shares `KHeatCapacityUnitInstance` and **heat flow** shares `KPowerUnitInstance` — a
 > canonical base-dimension normal form must map to exactly one type, so that the `toX()` form recognition
 > stays unambiguous. Both have their own documentation page.

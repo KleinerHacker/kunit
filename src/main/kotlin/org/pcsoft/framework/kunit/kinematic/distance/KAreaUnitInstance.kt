@@ -47,8 +47,9 @@ class KAreaUnitInstance internal constructor(instance: KMixedUnitInstance) :
     /** `area * length = volume` (m²·m = m³). */
     operator fun times(other: KLengthUnitInstance): KVolumeUnitInstance = volumeOf(value * other.value)
 
-    /** `area * area = m⁴`, hence the general [KDistanceUnitInstance]. */
-    operator fun times(other: KAreaUnitInstance): KDistanceUnitInstance = distanceOf(value * other.value, 4)
+    /** `area * area = m⁴`, the typed [KSecondMomentOfAreaUnitInstance]. */
+    operator fun times(other: KAreaUnitInstance): KSecondMomentOfAreaUnitInstance =
+        secondMomentOfAreaOf(value * other.value)
 
     /** `area * volume = m⁵`, hence the general [KDistanceUnitInstance]. */
     operator fun times(other: KVolumeUnitInstance): KDistanceUnitInstance = distanceOf(value * other.value, 5)

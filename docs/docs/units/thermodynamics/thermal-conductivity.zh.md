@@ -19,7 +19,7 @@
 `electric.conductivity` 的区别所在。
 
 除以厚度即得到[传热系数](heat-transfer-coefficient.md)；厚度除以它就是
-[热阻](thermal-resistance.md)（R 值）。
+[热阻](thermal-insulance.md)（R 值）。
 
 ## 命名单位
 

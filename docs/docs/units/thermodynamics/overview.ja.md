@@ -27,7 +27,7 @@
 | 熱流束密度     | 構成       | 線形量           | `W/m²`         | [熱流束密度](heat-flux-density.md)       |
 | 熱伝導率       | 構成       | 線形量           | `W/(m·K)`      | [熱伝導率](thermal-conductivity.md)      |
 | 熱伝達率       | 構成       | 線形量           | `W/(m²·K)`     | [熱伝達率](heat-transfer-coefficient.md) |
-| 熱抵抗         | 構成       | 線形量           | `m²·K/W`       | [熱抵抗](thermal-resistance.md)          |
+| 熱抵抗         | 構成       | 線形量           | `m²·K/W`       | [熱抵抗](thermal-insulance.md)          |
 | 熱膨張率       | 構成       | 線形量           | `1/K`          | [熱膨張率](thermal-expansion.md)         |
 | 温度勾配       | 構成       | 線形量           | `K/m`          | [温度勾配](temperature-gradient.md)      |
 | 熱拡散率       | 構成       | 線形量           | `m²/s`         | [熱拡散率](thermal-diffusivity.md)       |
@@ -177,7 +177,7 @@ KTemperatureDifference.ofKelvin(20).toString()   // "20.0 ΔK"(区間)
 * [温度勾配](temperature-gradient.md) — `K/m`、伝導の駆動力。
 * [熱伝導率](thermal-conductivity.md) — `W/(m·K)`、フーリエの法則。
 * [熱伝達率](heat-transfer-coefficient.md) — `W/(m²·K)`、建築物理学のU値。
-* [熱抵抗](thermal-resistance.md) — `m²·K/W`、R値。層が直列に加算される。
+* [熱抵抗](thermal-insulance.md) — `m²·K/W`、R値。層が直列に加算される。
 * [熱拡散率](thermal-diffusivity.md) — `m²/s`、温度変化がどれだけ速く伝わるか。
 
 ### 熱への反応

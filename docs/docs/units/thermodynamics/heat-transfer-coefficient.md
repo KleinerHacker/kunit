@@ -14,7 +14,7 @@ kelvin of temperature difference: `W/(m²·K)`. The lower the U-value, the bette
 for [heat flux density](heat-flux-density.md) the area cancels the watt's length dimensions, so the normal form carries
 no distance term.
 
-Its reciprocal is the [thermal resistance](thermal-resistance.md) (R-value); multiplied by a thickness it becomes
+Its reciprocal is the [thermal resistance](thermal-insulance.md) (R-value); multiplied by a thickness it becomes
 a [thermal conductivity](thermal-conductivity.md).
 
 ## Named units
