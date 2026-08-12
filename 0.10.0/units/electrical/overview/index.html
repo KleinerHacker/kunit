@@ -1,0 +1,5547 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Kotlin Unit Framework to calculate with different units in Kotlin (and Java)">
+      
+      
+      
+        <link rel="canonical" href="https://kleinerhacker.github.io/kunit/latest/0.10.0/units/electrical/overview/">
+      
+      
+        <link rel="prev" href="../../mechanics/energy/">
+      
+      
+        <link rel="next" href="../ec/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../../ko/units/electrical/overview/" hreflang="ko">
+        
+          <link rel="alternate" href="../../../zh/units/electrical/overview/" hreflang="zh">
+        
+          <link rel="alternate" href="../../../ja/units/electrical/overview/" hreflang="ja">
+        
+          <link rel="alternate" href="../../../ar/units/electrical/overview/" hreflang="ar">
+        
+          <link rel="alternate" href="../../../hi/units/electrical/overview/" hreflang="hi">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Overview - KUnit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#electrical-engineering-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="KUnit" class="md-header__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KUnit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../ko/units/electrical/overview/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../zh/units/electrical/overview/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../ja/units/electrical/overview/" hreflang="ja" class="md-select__link">
+              日本語
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../ar/units/electrical/overview/" hreflang="ar" class="md-select__link">
+              العربية
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../hi/units/electrical/overview/" hreflang="hi" class="md-select__link">
+              हिन्दी
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KleinerHacker/kunit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="KUnit" class="md-nav__button md-logo" aria-label="KUnit" data-md-component="logo">
+      
+  <img src="../../../assets/images/icon-light.png" alt="logo">
+
+    </a>
+    KUnit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KleinerHacker/kunit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kunit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mixed-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mixed Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../periodic-table/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periodic Table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custom-units/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adding Custom Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatter
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Formatter
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/default-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Default Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/console-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Console Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/graphical-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphical Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/latex-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LaTeX Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/mathml-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MathML Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/asciimath-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AsciiMath Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/typst-formatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typst Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../formatter/custom-formatters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Formatter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kinematics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kinematics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/frequency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frequency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/speed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/acceleration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceleration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/jerk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jerk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kinematics/volume-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volumetric Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mechanics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/mass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/force/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Force
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/pressure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pressure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/areadensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Area Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/linear-density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/specific-volume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Volume
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/specific-weight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Weight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/compressibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compressibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/acoustic-impedance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acoustic Impedance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/second-moment-of-area/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Second Moment of Area
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/mass-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mass Flow Rate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/momentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/impulse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impulse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/angle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/solid-angle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solid Angle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/angular-velocity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular Velocity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/angular-acceleration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular Acceleration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/moment-of-inertia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moment of Inertia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/angular-momentum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular Momentum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/torque/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Torque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/wavenumber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wavenumber
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/viscosity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dynamic Viscosity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/kinematic-viscosity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kinematic Viscosity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/surface-tension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface Tension
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/stiffness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stiffness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/strain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stress & Elastic Modulus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power (Mechanics)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy (Mechanics)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electrical Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Electrical Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#units-in-this-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Units in this topic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohms-law-as-typed-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ohm's law as typed operators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-typed-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further typed operators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-ohms-law-around-one-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — Ohm's law around one circuit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-from-mains-power-to-consumed-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — from mains power to consumed energy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#printing-a-value-tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Printing a value (toString)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-go-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to go next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electric Current
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voltage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voltage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resistance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../charge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Charge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conductance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../magneticfieldstrength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Field Strength
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capacitance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capacitance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inductance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../magneticflux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../magneticfluxdensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Flux Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../currentdensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chargedensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Charge Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resistivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resistivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conductivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conductivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../molarconductivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Conductivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../magneticmoment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Moment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../electricflux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electric Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specificcharge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Charge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../electricfieldstrength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electric Field Strength
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../electricfluxdensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electric Flux Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permittivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permittivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permeability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permeability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linearchargedensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear Charge Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reluctance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Reluctance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../electricmobility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electric Mobility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../electricdipolemoment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electric Dipole Moment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power (Electrical)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy (Electrical)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermodynamics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Thermodynamics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temperature
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Absolute Temperature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature-difference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature Difference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/amount-of-substance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Amount of Substance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concentration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/molality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/catalytic-activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catalytic Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power (Thermodynamics)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy (Thermodynamics)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/heat-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entropy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/specific-heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/molar-heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/specific-energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specific Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/molar-energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/molar-mass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Mass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/molar-volume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molar Volume
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/heat-flux-density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Flux Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/thermal-conductivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Conductivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/heat-transfer-coefficient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Transfer Coefficient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/thermal-insulance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Insulance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/thermal-resistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Resistance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/thermal-conductance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Conductance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/volumetric-heat-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volumetric Heat Capacity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/dose-rate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dose Rate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/absorbed-dose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Absorbed Dose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/dose-equivalent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dose Equivalent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/exposure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exposure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/thermal-expansion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Expansion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/temperature-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature Gradient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thermodynamics/thermal-diffusivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thermal Diffusivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/luminous-intensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luminous Intensity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/luminous-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luminous Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/illuminance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Illuminance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/luminance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luminance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/luminous-energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luminous Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/luminous-exposure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luminous Exposure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/luminous-efficacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luminous Efficacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/radiant-intensity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Radiant Intensity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/radiance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Radiance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optics/dioptre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dioptre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Information Technology
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Information Technology
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/datarate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Rate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information/storage-density/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Density
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dokka/html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../licences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#units-in-this-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Units in this topic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohms-law-as-typed-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ohm's law as typed operators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-typed-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further typed operators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-ohms-law-around-one-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — Ohm's law around one circuit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-from-mains-power-to-consumed-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — from mains power to consumed energy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#printing-a-value-tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Printing a value (toString)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-go-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to go next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="electrical-engineering-overview">Electrical Engineering — Overview<a class="headerlink" href="#electrical-engineering-overview" title="Permanent link">&para;</a></h1>
+<p>Packages: <code>org.pcsoft.framework.kunit.electric.ec</code>, <code>…voltage</code>, <code>…resistance</code>, <code>…charge</code>, <code>…conductance</code>,
+<code>…magneticfieldstrength</code>, <code>…capacitance</code>, <code>…inductance</code>, <code>…magneticflux</code>, <code>…magneticfluxdensity</code>,
+<code>…currentdensity</code>, <code>…chargedensity</code>, <code>…resistivity</code>, <code>…conductivity</code>, <code>…power</code>, <code>…energy</code></p>
+<p>Electrical engineering ties together the current flowing through a circuit, the voltage driving it, and the resistance
+opposing it. These three are bound by <strong>Ohm's law</strong>, and KUnit expresses that law directly as typed <code>*</code> and <code>/</code>
+operators: one <strong>native</strong> base quantity (electric current) and the quantities <strong>constructed</strong> from the base dimensions
+(voltage, resistance, charge, conductance and magnetic field strength).</p>
+<h2 id="units-in-this-topic">Units in this topic<a class="headerlink" href="#units-in-this-topic" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Unit</th>
+<th>Type</th>
+<th>Base unit</th>
+<th>Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Electric Current</td>
+<td>native</td>
+<td>ampere (<code>A</code>)</td>
+<td><a href="../ec/">Electric Current</a></td>
+</tr>
+<tr>
+<td>Voltage</td>
+<td>constructed</td>
+<td>volt (<code>V</code>)</td>
+<td><a href="../voltage/">Voltage</a></td>
+</tr>
+<tr>
+<td>Resistance</td>
+<td>constructed</td>
+<td>ohm (<code>Ω</code>)</td>
+<td><a href="../resistance/">Resistance</a></td>
+</tr>
+<tr>
+<td>Charge</td>
+<td>constructed</td>
+<td>coulomb (<code>C</code>)</td>
+<td><a href="../charge/">Charge</a></td>
+</tr>
+<tr>
+<td>Conductance</td>
+<td>constructed</td>
+<td>siemens (<code>S</code>)</td>
+<td><a href="../conductance/">Conductance</a></td>
+</tr>
+<tr>
+<td>Magnetic Field Strength</td>
+<td>constructed</td>
+<td>ampere per meter (<code>A/m</code>)</td>
+<td><a href="../magneticfieldstrength/">Magnetic Field Strength</a></td>
+</tr>
+<tr>
+<td>Capacitance</td>
+<td>constructed</td>
+<td>farad (<code>F</code>)</td>
+<td><a href="../capacitance/">Capacitance</a></td>
+</tr>
+<tr>
+<td>Inductance</td>
+<td>constructed</td>
+<td>henry (<code>H</code>)</td>
+<td><a href="../inductance/">Inductance</a></td>
+</tr>
+<tr>
+<td>Magnetic Flux</td>
+<td>constructed</td>
+<td>weber (<code>Wb</code>)</td>
+<td><a href="../magneticflux/">Magnetic Flux</a></td>
+</tr>
+<tr>
+<td>Magnetic Flux Density</td>
+<td>constructed</td>
+<td>tesla (<code>T</code>)</td>
+<td><a href="../magneticfluxdensity/">Magnetic Flux Density</a></td>
+</tr>
+<tr>
+<td>Current Density</td>
+<td>constructed</td>
+<td>ampere per square meter (<code>A/m²</code>)</td>
+<td><a href="../currentdensity/">Current Density</a></td>
+</tr>
+<tr>
+<td>Charge Density</td>
+<td>constructed</td>
+<td>coulomb per cubic meter (<code>C/m³</code>)</td>
+<td><a href="../chargedensity/">Charge Density</a></td>
+</tr>
+<tr>
+<td>Resistivity</td>
+<td>constructed</td>
+<td>ohm meter (<code>Ω·m</code>)</td>
+<td><a href="../resistivity/">Resistivity</a></td>
+</tr>
+<tr>
+<td>Conductivity</td>
+<td>constructed</td>
+<td>siemens per meter (<code>S/m</code>)</td>
+<td><a href="../conductivity/">Conductivity</a></td>
+</tr>
+<tr>
+<td>Electric Field Strength</td>
+<td>constructed</td>
+<td>volt per meter (<code>V/m</code>)</td>
+<td><a href="../electricfieldstrength/">Electric Field Strength</a></td>
+</tr>
+<tr>
+<td>Electric Flux Density</td>
+<td>constructed</td>
+<td>coulomb per square meter (<code>C/m²</code>)</td>
+<td><a href="../electricfluxdensity/">Electric Flux Density</a></td>
+</tr>
+<tr>
+<td>Permittivity</td>
+<td>constructed</td>
+<td>farad per meter (<code>F/m</code>)</td>
+<td><a href="../permittivity/">Permittivity</a></td>
+</tr>
+<tr>
+<td>Permeability</td>
+<td>constructed</td>
+<td>henry per meter (<code>H/m</code>)</td>
+<td><a href="../permeability/">Permeability</a></td>
+</tr>
+<tr>
+<td>Linear Charge Density</td>
+<td>constructed</td>
+<td>coulomb per meter (<code>C/m</code>)</td>
+<td><a href="../linearchargedensity/">Linear Charge Density</a></td>
+</tr>
+<tr>
+<td>Magnetic Reluctance</td>
+<td>constructed</td>
+<td>ampere per weber (<code>A/Wb</code>)</td>
+<td><a href="../reluctance/">Magnetic Reluctance</a></td>
+</tr>
+<tr>
+<td>Electric Mobility</td>
+<td>constructed</td>
+<td>square meter per volt second (<code>m²/(V·s)</code>)</td>
+<td><a href="../electricmobility/">Electric Mobility</a></td>
+</tr>
+<tr>
+<td>Electric Dipole Moment</td>
+<td>constructed</td>
+<td>coulomb meter (<code>C·m</code>)</td>
+<td><a href="../electricdipolemoment/">Electric Dipole Moment</a></td>
+</tr>
+<tr>
+<td>Power</td>
+<td>constructed</td>
+<td>watt (<code>W</code>)</td>
+<td><a href="../power/">Power (Electrical)</a></td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>constructed</td>
+<td>joule (<code>J</code>)</td>
+<td><a href="../energy/">Energy (Electrical)</a></td>
+</tr>
+</tbody>
+</table>
+<p>Power and energy are technically <strong>one</strong> quantity each, shared with other subject areas; they are documented per field
+and cross-reference each other (<a href="../../mechanics/power/">Power (Mechanics)</a>,
+<a href="../../thermodynamics/power/">Power (Thermodynamics)</a>, <a href="../../mechanics/energy/">Energy (Mechanics)</a>,
+<a href="../../thermodynamics/energy/">Energy (Thermodynamics)</a>).</p>
+<h2 id="ohms-law-as-typed-operators">Ohm's law as typed operators<a class="headerlink" href="#ohms-law-as-typed-operators" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resistance * current</code></td>
+<td>Voltage</td>
+<td><code>U = R · I</code></td>
+</tr>
+<tr>
+<td><code>current * resistance</code></td>
+<td>Voltage</td>
+<td><code>U = R · I</code> (commutative)</td>
+</tr>
+<tr>
+<td><code>voltage / current</code></td>
+<td>Resistance</td>
+<td><code>R = U / I</code></td>
+</tr>
+<tr>
+<td><code>voltage / resistance</code></td>
+<td>Electric Current</td>
+<td><code>I = U / R</code></td>
+</tr>
+<tr>
+<td><code>current / voltage</code></td>
+<td>Conductance</td>
+<td><code>G = I / U</code></td>
+</tr>
+<tr>
+<td><code>1 / resistance</code></td>
+<td>Conductance</td>
+<td><code>G = 1 / R</code></td>
+</tr>
+<tr>
+<td><code>1 / conductance</code></td>
+<td>Resistance</td>
+<td><code>R = 1 / G</code></td>
+</tr>
+<tr>
+<td><code>conductance * voltage</code></td>
+<td>Electric Current</td>
+<td><code>I = G · U</code></td>
+</tr>
+<tr>
+<td><code>current / conductance</code></td>
+<td>Voltage</td>
+<td><code>U = I / G</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="further-typed-operators">Further typed operators<a class="headerlink" href="#further-typed-operators" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>current * time</code></td>
+<td>Charge</td>
+<td><code>Q = I · t</code></td>
+</tr>
+<tr>
+<td><code>current / frequency</code></td>
+<td>Charge</td>
+<td><code>Q = I / f</code></td>
+</tr>
+<tr>
+<td><code>charge / time</code></td>
+<td>Electric Current</td>
+<td><code>I = Q / t</code></td>
+</tr>
+<tr>
+<td><code>charge / current</code></td>
+<td>Time</td>
+<td><code>t = Q / I</code></td>
+</tr>
+<tr>
+<td><code>current / length</code></td>
+<td>Magnetic Field Strength</td>
+<td><code>H = I / l</code></td>
+</tr>
+<tr>
+<td><code>field strength * length</code></td>
+<td>Electric Current</td>
+<td><code>I = H · l</code></td>
+</tr>
+<tr>
+<td><code>charge / voltage</code></td>
+<td>Capacitance</td>
+<td><code>C = Q / U</code></td>
+</tr>
+<tr>
+<td><code>capacitance * voltage</code></td>
+<td>Charge</td>
+<td><code>Q = C · U</code></td>
+</tr>
+<tr>
+<td><code>voltage * time</code></td>
+<td>Magnetic Flux</td>
+<td><code>Φ = U · t</code></td>
+</tr>
+<tr>
+<td><code>flux / time</code></td>
+<td>Voltage</td>
+<td><code>U = Φ / t</code></td>
+</tr>
+<tr>
+<td><code>flux / current</code></td>
+<td>Inductance</td>
+<td><code>L = Φ / I</code></td>
+</tr>
+<tr>
+<td><code>inductance * current</code></td>
+<td>Magnetic Flux</td>
+<td><code>Φ = L · I</code></td>
+</tr>
+<tr>
+<td><code>resistance / frequency</code></td>
+<td>Inductance</td>
+<td><code>L = X / ω</code></td>
+</tr>
+<tr>
+<td><code>flux / area</code></td>
+<td>Magnetic Flux Density</td>
+<td><code>B = Φ / A</code></td>
+</tr>
+<tr>
+<td><code>flux density * area</code></td>
+<td>Magnetic Flux</td>
+<td><code>Φ = B · A</code></td>
+</tr>
+<tr>
+<td><code>current / area</code></td>
+<td>Current Density</td>
+<td><code>J = I / A</code></td>
+</tr>
+<tr>
+<td><code>current density * area</code></td>
+<td>Electric Current</td>
+<td><code>I = J · A</code></td>
+</tr>
+<tr>
+<td><code>charge / volume</code></td>
+<td>Charge Density</td>
+<td><code>ρ = Q / V</code></td>
+</tr>
+<tr>
+<td><code>charge density * volume</code></td>
+<td>Charge</td>
+<td><code>Q = ρ · V</code></td>
+</tr>
+<tr>
+<td><code>resistance * length</code></td>
+<td>Resistivity</td>
+<td><code>ρ = R · A / l</code></td>
+</tr>
+<tr>
+<td><code>1 / resistivity</code></td>
+<td>Conductivity</td>
+<td><code>σ = 1 / ρ</code></td>
+</tr>
+<tr>
+<td><code>1 / conductivity</code></td>
+<td>Resistivity</td>
+<td><code>ρ = 1 / σ</code></td>
+</tr>
+<tr>
+<td><code>conductance / length</code></td>
+<td>Conductivity</td>
+<td><code>σ = G · l / A</code></td>
+</tr>
+<tr>
+<td><code>conductivity * length</code></td>
+<td>Conductance</td>
+<td><code>G = σ · A / l</code></td>
+</tr>
+<tr>
+<td><code>voltage * current</code></td>
+<td>Power</td>
+<td><code>P = U · I</code></td>
+</tr>
+<tr>
+<td><code>power / voltage</code></td>
+<td>Electric Current</td>
+<td><code>I = P / U</code></td>
+</tr>
+<tr>
+<td><code>power / current</code></td>
+<td>Voltage</td>
+<td><code>U = P / I</code></td>
+</tr>
+<tr>
+<td><code>power * time</code></td>
+<td>Energy</td>
+<td><code>W = P · t</code></td>
+</tr>
+<tr>
+<td><code>energy / time</code></td>
+<td>Power</td>
+<td><code>P = W / t</code></td>
+</tr>
+<tr>
+<td><code>charge * voltage</code></td>
+<td>Energy</td>
+<td><code>W = Q · U</code></td>
+</tr>
+<tr>
+<td><code>energy / charge</code></td>
+<td>Voltage</td>
+<td><code>U = W / Q</code></td>
+</tr>
+<tr>
+<td><code>voltage / length</code></td>
+<td>Electric Field Strength</td>
+<td><code>E = U / l</code></td>
+</tr>
+<tr>
+<td><code>force / charge</code></td>
+<td>Electric Field Strength</td>
+<td><code>E = F / Q</code></td>
+</tr>
+<tr>
+<td><code>field strength * length</code></td>
+<td>Voltage</td>
+<td><code>U = E · l</code></td>
+</tr>
+<tr>
+<td><code>field strength * charge</code></td>
+<td>Force</td>
+<td><code>F = E · Q</code></td>
+</tr>
+<tr>
+<td><code>charge / area</code></td>
+<td>Electric Flux Density</td>
+<td><code>D = Q / A</code></td>
+</tr>
+<tr>
+<td><code>flux density * area</code></td>
+<td>Charge</td>
+<td><code>Q = D · A</code></td>
+</tr>
+<tr>
+<td><code>flux density / field strength</code></td>
+<td>Permittivity</td>
+<td><code>ε = D / E</code></td>
+</tr>
+<tr>
+<td><code>permittivity * field strength</code></td>
+<td>Electric Flux Density</td>
+<td><code>D = ε · E</code></td>
+</tr>
+<tr>
+<td><code>capacitance / length</code></td>
+<td>Permittivity</td>
+<td><code>ε = C · d / A</code></td>
+</tr>
+<tr>
+<td><code>permittivity * length</code></td>
+<td>Capacitance</td>
+<td><code>C = ε · A / d</code></td>
+</tr>
+<tr>
+<td><code>magnetic flux density / magnetic field strength</code></td>
+<td>Permeability</td>
+<td><code>μ = B / H</code></td>
+</tr>
+<tr>
+<td><code>permeability * magnetic field strength</code></td>
+<td>Magnetic Flux Density</td>
+<td><code>B = μ · H</code></td>
+</tr>
+<tr>
+<td><code>inductance / length</code></td>
+<td>Permeability</td>
+<td><code>μ = L · l / (N² · A)</code></td>
+</tr>
+<tr>
+<td><code>permeability * length</code></td>
+<td>Inductance</td>
+<td><code>L = μ · N² · A / l</code></td>
+</tr>
+<tr>
+<td><code>charge / length</code></td>
+<td>Linear Charge Density</td>
+<td><code>λ = Q / l</code></td>
+</tr>
+<tr>
+<td><code>linear charge density * length</code></td>
+<td>Charge</td>
+<td><code>Q = λ · l</code></td>
+</tr>
+<tr>
+<td><code>current / magnetic flux</code></td>
+<td>Magnetic Reluctance</td>
+<td><code>Rm = Θ / Φ</code></td>
+</tr>
+<tr>
+<td><code>reluctance * magnetic flux</code></td>
+<td>Electric Current</td>
+<td><code>Θ = Rm · Φ</code></td>
+</tr>
+<tr>
+<td><code>1 / inductance</code></td>
+<td>Magnetic Reluctance</td>
+<td><code>Rm = 1 / Λ</code></td>
+</tr>
+<tr>
+<td><code>1 / reluctance</code></td>
+<td>Inductance</td>
+<td><code>Λ = 1 / Rm</code></td>
+</tr>
+<tr>
+<td><code>speed / field strength</code></td>
+<td>Electric Mobility</td>
+<td><code>μ = v / E</code></td>
+</tr>
+<tr>
+<td><code>mobility * field strength</code></td>
+<td>Speed</td>
+<td><code>v = μ · E</code></td>
+</tr>
+<tr>
+<td><code>charge * length</code></td>
+<td>Electric Dipole Moment</td>
+<td><code>p = Q · d</code></td>
+</tr>
+<tr>
+<td><code>dipole moment / charge</code></td>
+<td>Length</td>
+<td><code>d = p / Q</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each result is the correct typed quantity — no raw mixed unit is assembled by hand. Voltage, resistance, charge,
+conductance and magnetic field strength additionally recognise their fully <strong>native</strong>
+decomposition (<code>kg·m²·s⁻³·A⁻¹</code>, <code>kg·m²·s⁻³·A⁻²</code>, <code>A·s</code>, <code>kg⁻¹·m⁻²·s³·A²</code>, <code>A·m⁻¹</code>) via <code>toVoltage()</code> /
+<code>toResistance()</code> / <code>toCharge()</code> / <code>toConductance()</code> / <code>toMagneticFieldStrength()</code>. The same holds for the newer groups:
+<code>toCapacitance()</code> (<code>kg⁻¹·m⁻²·s⁴·A²</code>), <code>toInductance()</code> (<code>kg·m²·s⁻²·A⁻²</code>), <code>toMagneticFlux()</code>
+(<code>kg·m²·s⁻²·A⁻¹</code>), <code>toMagneticFluxDensity()</code> (<code>kg·s⁻²·A⁻¹</code>), <code>toCurrentDensity()</code> (<code>A·m⁻²</code>),
+<code>toChargeDensity()</code> (<code>A·s·m⁻³</code>), <code>toResistivity()</code> (<code>kg·m³·s⁻³·A⁻²</code>), <code>toConductivity()</code>
+(<code>kg⁻¹·m⁻³·s³·A²</code>), <code>toPower()</code> (<code>kg·m²·s⁻³</code>) and <code>toEnergy()</code> (<code>kg·m²·s⁻²</code>). The field, material and magnetic-circuit
+groups follow the same pattern: <code>toElectricFieldStrength()</code> (<code>kg·m·s⁻³·A⁻¹</code>),
+<code>toElectricFluxDensity()</code> (<code>A·s·m⁻²</code>), <code>toPermittivity()</code> (<code>kg⁻¹·m⁻³·s⁴·A²</code>), <code>toPermeability()</code>
+(<code>kg·m·s⁻²·A⁻²</code>), <code>toLinearChargeDensity()</code> (<code>A·s·m⁻¹</code>), <code>toReluctance()</code> (<code>kg⁻¹·m⁻²·s²·A²</code>),
+<code>toElectricMobility()</code> (<code>kg⁻¹·s²·A</code>) and <code>toElectricDipoleMoment()</code> (<code>A·s·m</code>).</p>
+<p>Some quantities are <strong>dimensionally identical</strong> to an existing group and are therefore carried by that group rather than
+by one of their own — only the symbol differs to document the reading:</p>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Group</th>
+<th>Symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impedance <code>Z</code>, reactance <code>X</code></td>
+<td><a href="../resistance/">Resistance</a></td>
+<td><code>Ω</code></td>
+</tr>
+<tr>
+<td>Admittance <code>Y</code>, susceptance <code>B</code></td>
+<td><a href="../conductance/">Conductance</a></td>
+<td><code>S</code> (<code>℧</code>)</td>
+</tr>
+<tr>
+<td>Apparent power <code>S</code>, reactive power <code>Q</code></td>
+<td><a href="../power/">Power (Electrical)</a></td>
+<td><code>VA</code>, <code>var</code></td>
+</tr>
+<tr>
+<td>Magnetomotive force <code>Θ</code></td>
+<td><a href="../ec/">Electric Current</a></td>
+<td><code>At</code></td>
+</tr>
+<tr>
+<td>Electric flux <code>Ψ</code></td>
+<td><a href="../charge/">Charge</a></td>
+<td><code>C</code></td>
+</tr>
+<tr>
+<td>Permeance <code>Λ</code></td>
+<td><a href="../inductance/">Inductance</a></td>
+<td><code>H</code></td>
+</tr>
+<tr>
+<td>Surface charge density <code>σ</code></td>
+<td><a href="../electricfluxdensity/">Electric Flux Density</a></td>
+<td><code>C/m²</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="worked-example-ohms-law-around-one-circuit">Worked example — Ohm's law around one circuit<a class="headerlink" href="#worked-example-ohms-law-around-one-circuit" title="Permanent link">&para;</a></h2>
+<p>A load drops <strong>230 V</strong> while drawing <strong>2 A</strong>. Its resistance is <code>R = U / I</code>; feeding that resistance back with the
+current reproduces the voltage <code>U = R · I</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.current.amperes</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.voltage.volts</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.resistance.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">230</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">volts</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">amperes</span><span class="p">)</span><span class="w">   </span><span class="c1">// KResistanceUnitInstance, 115 Ω</span>
+<span class="n">r</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">ohms</span><span class="w">                               </span><span class="c1">// 115.0</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">amperes</span><span class="p">)</span><span class="w">                </span><span class="c1">// KVoltageUnitInstance</span>
+<span class="n">u</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">volts</span><span class="w">                              </span><span class="c1">// 230.0</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">230</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">volts</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">115</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">ohms</span><span class="p">)</span><span class="w">    </span><span class="c1">// KElectricCurrentUnitInstance</span>
+<span class="n">i</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">amperes</span><span class="w">                            </span><span class="c1">// 2.0</span>
+</code></pre></div>
+<h2 id="worked-example-from-mains-power-to-consumed-energy">Worked example — from mains power to consumed energy<a class="headerlink" href="#worked-example-from-mains-power-to-consumed-energy" title="Permanent link">&para;</a></h2>
+<p>A <strong>230 V</strong> socket feeding a <strong>10 A</strong> load delivers <code>P = U · I</code>; running it for three hours consumes
+<code>W = P · t</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.current.amperes</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.voltage.volts</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kinematic.time.hours</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.power.*</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.common.energy.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">230</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">volts</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">10</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">amperes</span><span class="p">)</span><span class="w">  </span><span class="c1">// KPowerUnitInstance</span>
+<span class="n">p</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">watts</span><span class="w">                         </span><span class="c1">// 2.3</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">3</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">hours</span><span class="p">)</span><span class="w">                  </span><span class="c1">// KEnergyUnitInstance</span>
+<span class="n">w</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">joules</span><span class="w">                        </span><span class="c1">// 24840.0</span>
+</code></pre></div>
+<h2 id="printing-a-value-tostring">Printing a value (<code>toString</code>)<a class="headerlink" href="#printing-a-value-tostring" title="Permanent link">&para;</a></h2>
+<p><code>toString()</code> renders a value in its group's <strong>base unit</strong> (value + symbol); for any other unit, read it with <code>into</code>
+inside a string template and append the symbol yourself:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.of</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.into</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.kilo</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.pcsoft.framework.kunit.electric.voltage.*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">230</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">volts</span>
+<span class="n">u</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w">               </span><span class="c1">// &quot;230.0 V&quot; (base unit)</span>
+<span class="s">&quot;</span><span class="si">${</span><span class="n">u</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">kilo</span><span class="p">.</span><span class="na">volts</span><span class="si">}</span><span class="s"> kV&quot;</span><span class="w">  </span><span class="c1">// &quot;0.23 kV&quot;</span>
+</code></pre></div>
+<h2 id="notation">Notation<a class="headerlink" href="#notation" title="Permanent link">&para;</a></h2>
+<p>The table shows Ohm's law mathematically versus in Kotlin with KUnit. Exponents use Unicode superscripts (<code>²</code>, <code>⁻¹</code>),
+<code>·</code> denotes multiplication and <code>/</code> a fraction.</p>
+<table>
+<thead>
+<tr>
+<th>Mathematics</th>
+<th>Kotlin</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>R = U / I</code></td>
+<td><code>(230 of volts) / (2 of amperes)</code></td>
+<td>resistance from voltage ÷ current</td>
+</tr>
+<tr>
+<td><code>U = R · I</code></td>
+<td><code>r * (2 of amperes)</code></td>
+<td>voltage from resistance × current</td>
+</tr>
+<tr>
+<td><code>I = U / R</code></td>
+<td><code>(230 of volts) / (115 of ohms)</code></td>
+<td>current from voltage ÷ resistance</td>
+</tr>
+<tr>
+<td><code>Ω = kg·m²·s⁻³·A⁻²</code></td>
+<td><code>kilo.grams * (meters pow 2) * (seconds pow -3) * (amperes pow -2)</code></td>
+<td>resistance as its native normal form</td>
+</tr>
+</tbody>
+</table>
+<h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../ec/">Electric Current</a> — the native ampere group (plus the CGS biot and statampere).</li>
+<li><a href="../voltage/">Voltage</a> — the volt, and its decompositions <code>R · I</code> and the native form.</li>
+<li><a href="../resistance/">Resistance</a> — the ohm, <code>U / I</code>, and the inverse Ohm's-law operators.</li>
+<li><a href="../charge/">Charge</a> — the coulomb, <code>I · t</code>, and the battery-capacity ampere hour.</li>
+<li><a href="../conductance/">Conductance</a> — the siemens, <code>1 / R</code>, and <code>I / U</code>.</li>
+<li><a href="../magneticfieldstrength/">Magnetic Field Strength</a> — ampere per meter, <code>I / l</code>, and the oersted.</li>
+<li><a href="../capacitance/">Capacitance</a> — the farad, <code>Q / U</code>, and the CGS abfarad/statfarad.</li>
+<li><a href="../inductance/">Inductance</a> — the henry, <code>Φ / I</code>, and the reactance form <code>X / ω</code>.</li>
+<li><a href="../magneticflux/">Magnetic Flux</a> — the weber, <code>U · t</code>, and the maxwell.</li>
+<li><a href="../magneticfluxdensity/">Magnetic Flux Density</a> — the tesla, <code>Φ / A</code>, and the gauss.</li>
+<li><a href="../currentdensity/">Current Density</a> — ampere per square meter, <code>I / A</code>, for wire sizing.</li>
+<li><a href="../chargedensity/">Charge Density</a> — coulomb per cubic meter, <code>Q / V</code>.</li>
+<li><a href="../resistivity/">Resistivity</a> — the ohm meter, <code>R · A / l</code>, the material property behind a resistance.</li>
+<li><a href="../conductivity/">Conductivity</a> — siemens per meter, <code>1 / ρ</code>, and <code>G · l / A</code>.</li>
+<li><a href="../power/">Power (Electrical)</a> — the watt, <code>U · I</code>, and the horsepower units.</li>
+<li><a href="../energy/">Energy (Electrical)</a> — the joule, <code>Q · U</code>, <code>P · t</code>, and the kilowatt hour as <code>kilo.watts * hours</code>.</li>
+<li><a href="../electricfieldstrength/">Electric Field Strength</a> — volt per meter, <code>U / l</code>, and <code>F / Q</code>.</li>
+<li><a href="../electricfluxdensity/">Electric Flux Density</a> — coulomb per square meter, <code>Q / A</code>, also the surface charge density
+  <code>σ</code>.</li>
+<li><a href="../permittivity/">Permittivity</a> — farad per meter, <code>D / E</code>, and the vacuum constant <code>ε₀</code>.</li>
+<li><a href="../permeability/">Permeability</a> — henry per meter, <code>B / H</code>, and the vacuum constant <code>μ₀</code>.</li>
+<li><a href="../linearchargedensity/">Linear Charge Density</a> — coulomb per meter, <code>Q / l</code>, for wires and filaments.</li>
+<li><a href="../reluctance/">Magnetic Reluctance</a> — ampere per weber, Hopkinson's law <code>Θ / Φ</code>, and the permeance <code>1 / Λ</code>.</li>
+<li><a href="../electricmobility/">Electric Mobility</a> — square meter per volt second, <code>v / E</code>, for semiconductors.</li>
+<li><a href="../electricdipolemoment/">Electric Dipole Moment</a> — coulomb meter, <code>Q · d</code>, and the debye.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
