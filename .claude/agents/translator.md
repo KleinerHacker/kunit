@@ -1,6 +1,7 @@
 ---
 name: translator-doc
 description: Translate MKDocs documentation from english language to another
+
 model: sonnet
 effort: low
 

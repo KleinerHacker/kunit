@@ -137,6 +137,76 @@ plugins:
             Energy (Thermodynamics): 열에너지 (열역학)
             API Docs: API 문서
             Licences: 라이선스
+            Periodic Table: 주기율표
+            Jerk: 저크
+            Activity: 방사능
+            Volumetric Flow: 체적 유량
+            Linear Density: 선밀도
+            Specific Volume: 비체적
+            Specific Weight: 비중량
+            Compressibility: 압축률
+            Acoustic Impedance: 음향 임피던스
+            Second Moment of Area: 단면 2차 모멘트
+            Mass Flow Rate: 질량 유량
+            Momentum: 운동량
+            Impulse: 충격량
+            Angle: 각도
+            Solid Angle: 입체각
+            Angular Velocity: 각속도
+            Angular Acceleration: 각가속도
+            Moment of Inertia: 관성 모멘트
+            Angular Momentum: 각운동량
+            Torque: 토크
+            Wavenumber: 파수
+            Dynamic Viscosity: 동점성 계수
+            Kinematic Viscosity: 동점도
+            Surface Tension: 표면 장력
+            Stiffness: 강성
+            Strain: 변형률
+            "Stress & Elastic Modulus": 응력 및 탄성 계수
+            Molar Conductivity: 몰 전도도
+            Magnetic Moment: 자기 모멘트
+            Electric Flux: 전기 선속
+            Elastance: 엘라스턴스
+            Specific Charge: 비전하
+            Amount of Substance: 물질량
+            Concentration: 농도
+            Molality: 몰랄 농도
+            Catalytic Activity: 촉매 활성도
+            Heat Flow: 열류
+            Heat Capacity: 열용량
+            Entropy: 엔트로피
+            Specific Heat Capacity: 비열
+            Molar Heat Capacity: 몰 열용량
+            Specific Energy: 비에너지
+            Molar Energy: 몰 에너지
+            Molar Mass: 몰 질량
+            Molar Volume: 몰 부피
+            Heat Flux Density: 열유속 밀도
+            Thermal Conductivity: 열전도율
+            Heat Transfer Coefficient: 열전달 계수
+            Thermal Insulance: 열저항 (단열)
+            Thermal Resistance: 열저항
+            Thermal Conductance: 열전도도
+            Volumetric Heat Capacity: 체적 열용량
+            Dose Rate: 선량률
+            Absorbed Dose: 흡수 선량
+            Dose Equivalent: 등가 선량
+            Exposure: 조사선량
+            Thermal Expansion: 열팽창
+            Temperature Gradient: 온도 구배
+            Thermal Diffusivity: 열확산율
+            Optics: 광학
+            Luminous Intensity: 광도
+            Luminous Flux: 광속
+            Illuminance: 조도
+            Luminance: 휘도
+            Luminous Energy: 광량
+            Luminous Exposure: 노출량
+            Luminous Efficacy: 발광 효율
+            Radiant Intensity: 복사 강도
+            Radiance: 복사 휘도
+            Dioptre: 디옵터
         - locale: zh
           name: 中文
           build: true
@@ -206,6 +276,76 @@ plugins:
             Energy (Thermodynamics): 热能（热力学）
             API Docs: API 文档
             Licences: 许可证
+            Periodic Table: 元素周期表
+            Jerk: 加加速度
+            Activity: 放射性活度
+            Volumetric Flow: 体积流量
+            Linear Density: 线密度
+            Specific Volume: 比容
+            Specific Weight: 比重
+            Compressibility: 压缩率
+            Acoustic Impedance: 声阻抗
+            Second Moment of Area: 截面二次矩
+            Mass Flow Rate: 质量流量
+            Momentum: 动量
+            Impulse: 冲量
+            Angle: 角度
+            Solid Angle: 立体角
+            Angular Velocity: 角速度
+            Angular Acceleration: 角加速度
+            Moment of Inertia: 转动惯量
+            Angular Momentum: 角动量
+            Torque: 转矩
+            Wavenumber: 波数
+            Dynamic Viscosity: 动力粘度
+            Kinematic Viscosity: 运动粘度
+            Surface Tension: 表面张力
+            Stiffness: 刚度
+            Strain: 应变
+            "Stress & Elastic Modulus": 应力与弹性模量
+            Molar Conductivity: 摩尔电导率
+            Magnetic Moment: 磁矩
+            Electric Flux: 电通量
+            Elastance: 倒电容
+            Specific Charge: 比电荷
+            Amount of Substance: 物质的量
+            Concentration: 浓度
+            Molality: 质量摩尔浓度
+            Catalytic Activity: 催化活度
+            Heat Flow: 热流量
+            Heat Capacity: 热容
+            Entropy: 熵
+            Specific Heat Capacity: 比热容
+            Molar Heat Capacity: 摩尔热容
+            Specific Energy: 比能
+            Molar Energy: 摩尔能
+            Molar Mass: 摩尔质量
+            Molar Volume: 摩尔体积
+            Heat Flux Density: 热流密度
+            Thermal Conductivity: 导热系数
+            Heat Transfer Coefficient: 传热系数
+            Thermal Insulance: 热阻（隔热）
+            Thermal Resistance: 热阻
+            Thermal Conductance: 热导
+            Volumetric Heat Capacity: 体积热容
+            Dose Rate: 剂量率
+            Absorbed Dose: 吸收剂量
+            Dose Equivalent: 剂量当量
+            Exposure: 照射量
+            Thermal Expansion: 热膨胀系数
+            Temperature Gradient: 温度梯度
+            Thermal Diffusivity: 热扩散率
+            Optics: 光学
+            Luminous Intensity: 发光强度
+            Luminous Flux: 光通量
+            Illuminance: 照度
+            Luminance: 亮度
+            Luminous Energy: 光能
+            Luminous Exposure: 曝光量
+            Luminous Efficacy: 发光效率
+            Radiant Intensity: 辐射强度
+            Radiance: 辐射亮度
+            Dioptre: 屈光度
         - locale: ja
           name: 日本語
           build: true
@@ -275,6 +415,76 @@ plugins:
             Energy (Thermodynamics): 熱エネルギー（熱力学）
             API Docs: API ドキュメント
             Licences: ライセンス
+            Periodic Table: 周期表
+            Jerk: 躍度
+            Activity: 放射能
+            Volumetric Flow: 体積流量
+            Linear Density: 線密度
+            Specific Volume: 比容積
+            Specific Weight: 比重量
+            Compressibility: 圧縮率
+            Acoustic Impedance: 音響インピーダンス
+            Second Moment of Area: 断面二次モーメント
+            Mass Flow Rate: 質量流量
+            Momentum: 運動量
+            Impulse: 力積
+            Angle: 角度
+            Solid Angle: 立体角
+            Angular Velocity: 角速度
+            Angular Acceleration: 角加速度
+            Moment of Inertia: 慣性モーメント
+            Angular Momentum: 角運動量
+            Torque: トルク
+            Wavenumber: 波数
+            Dynamic Viscosity: 粘度
+            Kinematic Viscosity: 動粘度
+            Surface Tension: 表面張力
+            Stiffness: 剛性
+            Strain: ひずみ
+            "Stress & Elastic Modulus": 応力と弾性係数
+            Molar Conductivity: モル伝導率
+            Magnetic Moment: 磁気モーメント
+            Electric Flux: 電束
+            Elastance: エラスタンス
+            Specific Charge: 比電荷
+            Amount of Substance: 物質量
+            Concentration: 濃度
+            Molality: 質量モル濃度
+            Catalytic Activity: 触媒活性
+            Heat Flow: 熱流
+            Heat Capacity: 熱容量
+            Entropy: エントロピー
+            Specific Heat Capacity: 比熱容量
+            Molar Heat Capacity: モル熱容量
+            Specific Energy: 比エネルギー
+            Molar Energy: モルエネルギー
+            Molar Mass: モル質量
+            Molar Volume: モル体積
+            Heat Flux Density: 熱流束密度
+            Thermal Conductivity: 熱伝導率
+            Heat Transfer Coefficient: 熱伝達率
+            Thermal Insulance: 熱絶縁性
+            Thermal Resistance: 熱抵抗
+            Thermal Conductance: 熱コンダクタンス
+            Volumetric Heat Capacity: 体積熱容量
+            Dose Rate: 線量率
+            Absorbed Dose: 吸収線量
+            Dose Equivalent: 線量当量
+            Exposure: 照射線量
+            Thermal Expansion: 熱膨張
+            Temperature Gradient: 温度勾配
+            Thermal Diffusivity: 熱拡散率
+            Optics: 光学
+            Luminous Intensity: 光度
+            Luminous Flux: 光束
+            Illuminance: 照度
+            Luminance: 輝度
+            Luminous Energy: 光エネルギー
+            Luminous Exposure: 光露光量
+            Luminous Efficacy: 発光効率
+            Radiant Intensity: 放射強度
+            Radiance: 放射輝度
+            Dioptre: ディオプター
         - locale: ar
           name: العربية
           build: true
@@ -344,6 +554,76 @@ plugins:
             Energy (Thermodynamics): الطاقة الحرارية (الديناميكا الحرارية)
             API Docs: وثائق API
             Licences: التراخيص
+            Periodic Table: الجدول الدوري
+            Jerk: الوثبة
+            Activity: النشاط الإشعاعي
+            Volumetric Flow: التدفق الحجمي
+            Linear Density: الكثافة الخطية
+            Specific Volume: الحجم النوعي
+            Specific Weight: الوزن النوعي
+            Compressibility: قابلية الانضغاط
+            Acoustic Impedance: الممانعة الصوتية
+            Second Moment of Area: عزم القصور الذاتي للمساحة
+            Mass Flow Rate: معدل التدفق الكتلي
+            Momentum: كمية الحركة
+            Impulse: الدفع
+            Angle: الزاوية
+            Solid Angle: الزاوية المجسمة
+            Angular Velocity: السرعة الزاوية
+            Angular Acceleration: التسارع الزاوي
+            Moment of Inertia: عزم القصور الذاتي
+            Angular Momentum: الزخم الزاوي
+            Torque: عزم الدوران
+            Wavenumber: العدد الموجي
+            Dynamic Viscosity: اللزوجة الديناميكية
+            Kinematic Viscosity: اللزوجة الحركية
+            Surface Tension: التوتر السطحي
+            Stiffness: الصلابة
+            Strain: الانفعال
+            "Stress & Elastic Modulus": الإجهاد ومعامل المرونة
+            Molar Conductivity: الموصلية المولارية
+            Magnetic Moment: العزم المغناطيسي
+            Electric Flux: التدفق الكهربائي
+            Elastance: المرونة الكهربائية
+            Specific Charge: الشحنة النوعية
+            Amount of Substance: كمية المادة
+            Concentration: التركيز
+            Molality: المولالية
+            Catalytic Activity: النشاط التحفيزي
+            Heat Flow: التدفق الحراري
+            Heat Capacity: السعة الحرارية
+            Entropy: الإنتروبيا
+            Specific Heat Capacity: السعة الحرارية النوعية
+            Molar Heat Capacity: السعة الحرارية المولارية
+            Specific Energy: الطاقة النوعية
+            Molar Energy: الطاقة المولارية
+            Molar Mass: الكتلة المولارية
+            Molar Volume: الحجم المولاري
+            Heat Flux Density: كثافة التدفق الحراري
+            Thermal Conductivity: الموصلية الحرارية
+            Heat Transfer Coefficient: معامل انتقال الحرارة
+            Thermal Insulance: العزل الحراري
+            Thermal Resistance: المقاومة الحرارية
+            Thermal Conductance: المواصلة الحرارية
+            Volumetric Heat Capacity: السعة الحرارية الحجمية
+            Dose Rate: معدل الجرعة
+            Absorbed Dose: الجرعة الممتصة
+            Dose Equivalent: الجرعة المكافئة
+            Exposure: التعرض الإشعاعي
+            Thermal Expansion: التمدد الحراري
+            Temperature Gradient: تدرج درجة الحرارة
+            Thermal Diffusivity: الانتشارية الحرارية
+            Optics: البصريات
+            Luminous Intensity: شدة الإضاءة
+            Luminous Flux: التدفق الضوئي
+            Illuminance: الاستضاءة
+            Luminance: السطوع
+            Luminous Energy: الطاقة الضوئية
+            Luminous Exposure: التعرض الضوئي
+            Luminous Efficacy: الفعالية الضوئية
+            Radiant Intensity: الشدة الإشعاعية
+            Radiance: الإشعاع النوعي
+            Dioptre: الديوبتر
         - locale: hi
           name: हिन्दी
           build: true
@@ -413,6 +693,76 @@ plugins:
             Energy (Thermodynamics): ऊष्मा ऊर्जा (ऊष्मागतिकी)
             API Docs: API दस्तावेज़
             Licences: लाइसेंस
+            Periodic Table: आवर्त सारणी
+            Jerk: झटका
+            Activity: सक्रियता
+            Volumetric Flow: आयतन प्रवाह
+            Linear Density: रैखिक घनत्व
+            Specific Volume: विशिष्ट आयतन
+            Specific Weight: विशिष्ट भार
+            Compressibility: संपीड्यता
+            Acoustic Impedance: ध्वनिक प्रतिबाधा
+            Second Moment of Area: क्षेत्र का द्वितीय आघूर्ण
+            Mass Flow Rate: द्रव्यमान प्रवाह दर
+            Momentum: संवेग
+            Impulse: आवेग
+            Angle: कोण
+            Solid Angle: घन कोण
+            Angular Velocity: कोणीय वेग
+            Angular Acceleration: कोणीय त्वरण
+            Moment of Inertia: जड़त्व आघूर्ण
+            Angular Momentum: कोणीय संवेग
+            Torque: बल आघूर्ण
+            Wavenumber: तरंग संख्या
+            Dynamic Viscosity: गतिक श्यानता
+            Kinematic Viscosity: गतिज श्यानता
+            Surface Tension: पृष्ठ तनाव
+            Stiffness: दृढ़ता
+            Strain: विकृति
+            "Stress & Elastic Modulus": प्रतिबल और प्रत्यास्थता गुणांक
+            Molar Conductivity: मोलर चालकता
+            Magnetic Moment: चुंबकीय आघूर्ण
+            Electric Flux: विद्युत फ्लक्स
+            Elastance: प्रत्यास्थता (विद्युत)
+            Specific Charge: विशिष्ट आवेश
+            Amount of Substance: पदार्थ की मात्रा
+            Concentration: सांद्रता
+            Molality: मोललता
+            Catalytic Activity: उत्प्रेरक सक्रियता
+            Heat Flow: ऊष्मा प्रवाह
+            Heat Capacity: ऊष्मा धारिता
+            Entropy: एन्ट्रॉपी
+            Specific Heat Capacity: विशिष्ट ऊष्मा धारिता
+            Molar Heat Capacity: मोलर ऊष्मा धारिता
+            Specific Energy: विशिष्ट ऊर्जा
+            Molar Energy: मोलर ऊर्जा
+            Molar Mass: मोलर द्रव्यमान
+            Molar Volume: मोलर आयतन
+            Heat Flux Density: ऊष्मा फ्लक्स घनत्व
+            Thermal Conductivity: तापीय चालकता
+            Heat Transfer Coefficient: ऊष्मा स्थानांतरण गुणांक
+            Thermal Insulance: तापीय रोधन
+            Thermal Resistance: तापीय प्रतिरोध
+            Thermal Conductance: तापीय चालकता (समग्र)
+            Volumetric Heat Capacity: आयतनिक ऊष्मा धारिता
+            Dose Rate: खुराक दर
+            Absorbed Dose: अवशोषित खुराक
+            Dose Equivalent: तुल्य खुराक
+            Exposure: विकिरण अनावरण
+            Thermal Expansion: तापीय प्रसार
+            Temperature Gradient: तापमान प्रवणता
+            Thermal Diffusivity: तापीय विसरणशीलता
+            Optics: प्रकाशिकी
+            Luminous Intensity: ज्योति तीव्रता
+            Luminous Flux: ज्योति फ्लक्स
+            Illuminance: प्रदीप्ति
+            Luminance: दीप्ति
+            Luminous Energy: ज्योति ऊर्जा
+            Luminous Exposure: ज्योति अनावरण
+            Luminous Efficacy: ज्योति प्रभावशीलता
+            Radiant Intensity: विकिरण तीव्रता
+            Radiance: विकिरण दीप्ति
+            Dioptre: डायोप्टर
 
 nav:
   - Home: index.md
