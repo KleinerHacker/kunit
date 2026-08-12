@@ -1,8 +1,8 @@
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+!**/src/commonMain/**/build/
+!**/src/commonTest/**/build/
 .claude/plans
 
 ### IntelliJ IDEA ###
@@ -11,8 +11,8 @@ build/
 *.iml
 *.ipr
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+!**/src/commonMain/**/out/
+!**/src/commonTest/**/out/
 
 ### Kotlin ###
 .kotlin
@@ -26,8 +26,8 @@ out/
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+!**/src/commonMain/**/bin/
+!**/src/commonTest/**/bin/
 
 ### NetBeans ###
 /nbproject/private/

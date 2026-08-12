@@ -34,11 +34,11 @@ import org.pcsoft.framework.kunit.kinematic.distance.kilo
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 150 of kilo.meters / (6000 of seconds)   // 25 m/s
 
-v.format(kilo.meters / hours, "%.1f", Locale.US, KAsciiMathUnitFormatter())
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KAsciiMathUnitFormatter())
 // 90.0 "km"/"h"
 ```
 
@@ -46,7 +46,7 @@ v.format(kilo.meters / hours, "%.1f", Locale.US, KAsciiMathUnitFormatter())
 
 ```kotlin
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KAsciiMathUnitFormatter())
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KAsciiMathUnitFormatter())
 // 9.81 "m"/("s"^2)
 ```
 

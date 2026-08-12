@@ -55,15 +55,15 @@ import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // डिफ़ॉल्ट CLASSIC पैलेट
-v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter())
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KConsoleUnitFormatter())
 
 // पूर्वपरिभाषित पैलेट
-v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleColorPalette.VIVID))
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KConsoleUnitFormatter(KConsoleColorPalette.VIVID))
 
 // बिना लक्ष्य के आधार इकाई में रेंडरिंग
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))

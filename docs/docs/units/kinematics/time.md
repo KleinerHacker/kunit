@@ -6,8 +6,8 @@ Base unit: **second** (`KTimeUnit.BASE == KTimeUnit.SECOND`)
 Type: **native unit**
 
 `KTimeUnitInstance` is a 100 % wrapper around [
-`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html):
-the `Duration` is the single source of truth (nanosecond-exact), and the full `Duration` API is forwarded. On top of
+`kotlin.time.Duration`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/):
+the `Duration` is the single source of truth, and the full `Duration` API is forwarded. On top of
 that it offers the same surface as every other "pure" unit wrapper (`value`/`+`/`-`/`*`/`/`/`toString`/`toUnit` plus the
 `of`/`into` verbs), so a time value plugs into the generic mixed-unit engine (e.g. `length / time` = speed). The value
 is always stored normalized to seconds.
@@ -68,21 +68,21 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 (nanosecond-exact). Since a time value is always exponent 1, there is no exponent-mismatch error as there is for length
 areas/volumes.
 
-## The `java.time.Duration` wrapper
+## The `kotlin.time.Duration` wrapper
 
 `KTimeUnitInstance` is a drop-in facade over `Duration`: obtain the wrapped `Duration`, wrap an existing one, and use
 the forwarded `Duration` methods directly (those returning a `Duration` return a
 `KTimeUnitInstance`; query methods pass through).
 
 ```kotlin
-import java.time.Duration
+import kotlin.time.Duration.Companion.minutes as durationMinutes
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
-t.toDuration()                  // PT1H30M
-Duration.ofMinutes(90).toTime() into hours // 1.5
+t.toKotlinDuration()                 // 1h 30m
+90.durationMinutes.toTime() into hours // 1.5
 
 // forwarded mutators return KTimeUnitInstance
 t.plusHours(1) into hours       // 2.5
@@ -92,6 +92,22 @@ t.negated().isNegative()        // true
 t.toHours()             // 1
 t.toMinutesPart()       // 30
 t.dividedBy(30 of minutes) // 3
+```
+
+### `java.time` interop (JVM only)
+
+On the JVM the `java.time` bridge is available as extension functions from the JVM source set, so JVM code can keep
+using `java.time.Duration`:
+
+```kotlin
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+val t = 90 of minutes
+t.toDuration()                             // PT1H30M
+Duration.ofMinutes(90).toTime() into hours // 1.5
+t.plus(1, ChronoUnit.MINUTES) into minutes // 91.0
+t.truncatedTo(ChronoUnit.HOURS) into hours // 1.0
 ```
 
 ## SI prefixes
@@ -116,12 +132,12 @@ val t = 2 of hours
 t into milli.seconds  // 7 200 000.0 (ms)
 ```
 
-!!! note "Duration range"
-Because the value is backed by `java.time.Duration` (whole seconds stored as a `Long`, nanosecond resolution), a
-`KTimeUnitInstance` can only faithfully represent magnitudes within roughly
-`[1 ns, Long.MAX seconds]` (≈ 292 billion years). Extreme prefixes such as `quetta` applied to days exceed this range,
-and sub-nanosecond values round to zero. The generic `KMixedUnitInstance`/prefix layer itself is `Double`-based and
-unaffected - only the conversion into the Duration-backed wrapper is range-limited.
+!!! note "Duration range and resolution"
+Because the value is backed by `kotlin.time.Duration`, a `KTimeUnitInstance` is nanosecond-exact only up to roughly
+±146 years and switches to millisecond resolution beyond that, up to a maximum of about ±146 million years. Extreme
+prefixes such as `quetta` applied to days exceed this range, and sub-nanosecond values round to zero. The generic
+`KMixedUnitInstance`/prefix layer itself is `Double`-based and unaffected - only the conversion into the
+Duration-backed wrapper is range-limited.
 
 ## toString formatting
 

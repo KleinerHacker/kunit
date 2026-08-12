@@ -38,14 +38,14 @@ import org.pcsoft.framework.kunit.kinematic.distance.kilo
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 150 of kilo.meters / (6000 of seconds)   // 25 m/s
 
-v.format(kilo.meters / hours, "%.1f", Locale.US, KLatexUnitFormatter())
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KLatexUnitFormatter())
 // 90.0\,\frac{\mathrm{km}}{\mathrm{h}}
 
-v.format(kilo.meters / hours, "%.1f", Locale.US, KLatexUnitFormatter(KLatexFormatConfig.INLINE))
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KLatexUnitFormatter(KLatexFormatConfig.INLINE))
 // 90.0\,\mathrm{km}\cdot\mathrm{h}^{-1}
 ```
 
@@ -53,7 +53,7 @@ Acceleration (`a = m/s²`) shows the powered denominator inside the fraction:
 
 ```kotlin
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KLatexUnitFormatter())
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KLatexUnitFormatter())
 // 9.81\,\frac{\mathrm{m}}{\mathrm{s}^{2}}
 ```
 

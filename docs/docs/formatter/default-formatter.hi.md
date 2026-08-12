@@ -15,16 +15,16 @@
 
 ### संख्या
 
-- पैटर्न के बिना, कच्चा `Double` `Double.toString()` के माध्यम से मुद्रित होता है।
-- `java.util.Formatter` पैटर्न (और वैकल्पिक `Locale`) के साथ, संख्या
-  `String.format(locale, pattern, value)` के माध्यम से रेंडर होती है। पैटर्न **केवल** संख्या को प्रभावित करता है, इकाई
-  भाग को कभी नहीं।
+- पैटर्न के बिना, कच्चा `Double` kunit के अपने पोर्टेबल सादे रूप (`10.8`, `5.0`, `1.0E7`) में मुद्रित होता है — जो
+  प्लेटफ़ॉर्म के अपने `Double.toString()` के विपरीत हर लक्ष्य पर समान रहता है।
+- संख्या पैटर्न (और वैकल्पिक `KLocale`) के साथ, पैटर्न केवल संख्या पर लागू होता है और इकाई भाग को कभी प्रभावित नहीं
+  करता। समर्थित पैटर्न के लिए [आउटपुट स्वरूपण](formatting.md) देखें।
 
 | कॉल                                                   | रेंडर की गई संख्या          |
 |------------------------------------------------------|----------------------|
 | `format(kilo.meters / hours)`                        | `10.799999999999999` |
 | `format(kilo.meters / hours, "%.1f")`                | `10.8`               |
-| `format(kilo.meters / hours, "%.1f", Locale.GERMAN)` | `10,8`               |
+| `format(kilo.meters / hours, "%.1f", KLocale.DE_DE)` | `10,8`               |
 
 ### इकाई भाग
 
@@ -76,7 +76,7 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
 // "9.81 m/s²"
 ```
 
@@ -91,12 +91,12 @@ import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // स्पष्ट फ़ॉर्मैटर, डिफ़ॉल्ट कॉल के समान परिणाम
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // लक्ष्य के बिना डिफ़ॉल्ट फ़ॉर्मैटर से आधार इकाइयाँ रेंडर करें
 (5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"

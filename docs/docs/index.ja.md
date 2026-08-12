@@ -108,6 +108,54 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²
 ```
 
+## サポートされるプラットフォーム
+
+kunit はランタイム依存関係を持たない **Kotlin マルチプラットフォーム** ライブラリです。すべての単位、演算子、
+フォーマッターはコモンソースセットにあり、どのターゲットでも同一に動作します。
+
+| ターゲット      | バリアント                                               |
+|-----------------|-----------------------------------------------------------|
+| JVM             | ツールチェーン 25                                          |
+| JS              | ブラウザ、Node.js                                          |
+| Wasm/JS         | ブラウザ、Node.js                                          |
+| Native          | `linuxX64`、`mingwX64`、`macosX64`、`macosArm64`           |
+| Native (iOS)    | `iosX64`、`iosArm64`、`iosSimulatorArm64`                  |
+
+リリースは **GitHub Packages** で公開されています。リポジトリを宣言し、依存関係を追加してください:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("org.pcsoft.framework:kunit:<version>")
+}
+```
+
+!!! note "GitHub Packages には認証が必要です"
+GitHub Packages は、公開パッケージであっても常に認証情報を必要とします — これはプロジェクトの制約ではなく GitHub の制約です。
+`read:packages` スコープを持つ個人アクセストークンを使用してください。例えば `~/.gradle/gradle.properties` の
+`gpr.user`/`gpr.token` として設定します。
+
+Gradle はモジュールメタデータを通じて正しいプラットフォームアーティファクトを解決します。**Gradle
+モジュールメタデータを読み取らない Maven やその他のビルドツールは、プラットフォームアーティファクトを直接
+参照する必要があります** — 公開されているアーティファクト ID は `kunit`(ルートモジュール)、`kunit-jvm`、
+`kunit-js`、`kunit-wasm-js`、`kunit-linuxx64`、`kunit-mingwx64`、`kunit-macosx64`、`kunit-macosarm64`、
+`kunit-iosx64`、`kunit-iosarm64`、`kunit-iossimulatorarm64` です。
+
+いくつかの JVM 専用の便利機能 — `format`/`toString` の `java.util.Locale` オーバーロード（
+[出力の書式設定](formatter/formatting.md) を参照）と、[時間単位](units/kinematics/time.md) の
+`java.time.Duration` との相互運用 — は JVM ソースセットにあります。共通 API は代わりに `KLocale` と
+`kotlin.time.Duration` を使用します。
+
 ## チェックアウトとビルド
 
 ```bash
@@ -121,8 +169,8 @@ kunit は Gradle を使用します (ラッパーはリポジトリに含まれ�
 # ビルド
 ./gradlew build          # Windows: gradlew.bat build
 
-# テストのみ実行
-./gradlew test            # Windows: gradlew.bat test
+# テストのみ実行 (マルチプラットフォームの集約タスク; 単純な `test` タスクは存在しません)
+./gradlew allTests        # Windows: gradlew.bat allTests
 ```
 
 ツールチェーン 25 を解決できる JDK が必要です (必要に応じて `foojay-resolver` プラグインが自動的に ダウンロードします)。

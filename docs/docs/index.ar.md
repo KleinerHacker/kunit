@@ -109,6 +109,53 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance، m·s⁻²
 ```
 
+## المنصات المدعومة
+
+kunit مكتبة **Kotlin متعددة المنصّات** بلا تبعيات وقت تشغيل. تعيش كل الوحدات والمعاملات والمنسّقات في مجموعة
+المصادر المشتركة وتتصرّف بشكل متطابق على أي هدف:
+
+| الهدف           | الأصناف                                                  |
+|-----------------|-----------------------------------------------------------|
+| JVM             | سلسلة الأدوات 25                                          |
+| JS              | المتصفح، Node.js                                          |
+| Wasm/JS         | المتصفح، Node.js                                          |
+| Native          | `linuxX64`، `mingwX64`، `macosX64`، `macosArm64`           |
+| Native (iOS)    | `iosX64`، `iosArm64`، `iosSimulatorArm64`                  |
+
+تُنشَر الإصدارات على **GitHub Packages**. عرّف المستودع وأضِف التبعية:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("org.pcsoft.framework:kunit:<version>")
+}
+```
+
+!!! note "تتطلّب GitHub Packages مصادقة"
+تتطلّب GitHub Packages دائمًا بيانات اعتماد، حتى للحزمة العامة — هذا قيد من GitHub، لا من المشروع. استخدم رمز
+وصول شخصي بنطاق `read:packages`، مثلًا عبر `gpr.user`/`gpr.token` في ملف
+`~/.gradle/gradle.properties` الخاص بك.
+
+يحلّ Gradle القطعة الصحيحة الخاصة بالمنصّة عبر بيانات وحدة Gradle الوصفية. **يجب على Maven وأدوات البناء الأخرى
+التي لا تقرأ بيانات وحدة Gradle الوصفية الرجوع إلى قطعة المنصّة مباشرةً** — معرّفات القطع المنشورة هي `kunit`
+(الوحدة الجذرية)، و`kunit-jvm`، و`kunit-js`، و`kunit-wasm-js`، و`kunit-linuxx64`، و`kunit-mingwx64`،
+و`kunit-macosx64`، و`kunit-macosarm64`، و`kunit-iosx64`، و`kunit-iosarm64`، و`kunit-iossimulatorarm64`.
+
+تعيش بضع تسهيلات خاصة بـ JVM فقط — تحميلات `java.util.Locale` الزائدة لـ `format`/`toString` (راجع
+[تنسيق الإخراج](formatter/formatting.md)) وتفاعل `java.time.Duration` الخاص بـ
+[وحدة الزمن](units/kinematics/time.md) — في مجموعة مصادر JVM. تستخدم الواجهة المشتركة بدلًا من ذلك `KLocale`
+و`kotlin.time.Duration`.
+
 ## السحب والبناء
 
 ```bash
@@ -122,8 +169,8 @@ cd kunit
 # البناء
 ./gradlew build          # Windows: gradlew.bat build
 
-# تشغيل الاختبارات فقط
-./gradlew test            # Windows: gradlew.bat test
+# تشغيل الاختبارات فقط (مهمّة تجميعية متعدّدة المنصّات؛ لا توجد مهمّة `test` بسيطة)
+./gradlew allTests        # Windows: gradlew.bat allTests
 ```
 
 يلزم توفّر JDK قادر على حلّ سلسلة الأدوات 25 (يُنزّله المكوّن الإضافي `foojay-resolver` تلقائيًا عند الحاجة).

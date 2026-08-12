@@ -101,6 +101,52 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²
 ```
 
+## 지원 플랫폼
+
+kunit은 런타임 의존성이 없는 **Kotlin 멀티플랫폼** 라이브러리입니다. 모든 단위, 연산자, 포매터는 공통 소스
+세트에 있으며 어떤 대상에서도 동일하게 동작합니다:
+
+| 대상            | 변형                                                    |
+|-----------------|-----------------------------------------------------------|
+| JVM             | 툴체인 25                                                  |
+| JS              | 브라우저, Node.js                                          |
+| Wasm/JS         | 브라우저, Node.js                                          |
+| Native          | `linuxX64`, `mingwX64`, `macosX64`, `macosArm64`           |
+| Native (iOS)    | `iosX64`, `iosArm64`, `iosSimulatorArm64`                  |
+
+릴리스는 **GitHub Packages**에 게시됩니다. 리포지토리를 선언하고 의존성을 추가하세요:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("org.pcsoft.framework:kunit:<version>")
+}
+```
+
+!!! note "GitHub Packages는 인증이 필요합니다"
+GitHub Packages는 공개 패키지라 하더라도 항상 자격 증명을 요구합니다 — 이는 프로젝트의 제약이 아니라 GitHub의 제약입니다.
+`read:packages` 범위를 가진 개인 액세스 토큰을 사용하세요. 예를 들어 `~/.gradle/gradle.properties`의
+`gpr.user`/`gpr.token`을 통해서입니다.
+
+Gradle은 모듈 메타데이터를 통해 올바른 플랫폼 아티팩트를 해석합니다. **Gradle 모듈 메타데이터를 읽지 않는
+Maven 및 기타 빌드 도구는 플랫폼 아티팩트를 직접 참조해야 합니다** — 게시된 아티팩트 id는 `kunit`(루트 모듈),
+`kunit-jvm`, `kunit-js`, `kunit-wasm-js`, `kunit-linuxx64`, `kunit-mingwx64`, `kunit-macosx64`,
+`kunit-macosarm64`, `kunit-iosx64`, `kunit-iosarm64`, `kunit-iossimulatorarm64`입니다.
+
+몇 가지 JVM 전용 편의 기능 — `format`/`toString`의 `java.util.Locale` 오버로드([출력 서식](formatter/formatting.md)
+참고)와 [시간 단위](units/kinematics/time.md)의 `java.time.Duration` 상호 운용 — 는 JVM 소스 세트에 있습니다.
+공통 API는 대신 `KLocale`과 `kotlin.time.Duration`을 사용합니다.
+
 ## 체크아웃 및 빌드
 
 ```bash
@@ -114,8 +160,8 @@ kunit은 Gradle을 사용합니다 (래퍼가 저장소에 포함되어 있어 �
 # 빌드
 ./gradlew build          # Windows: gradlew.bat build
 
-# 테스트만 실행
-./gradlew test            # Windows: gradlew.bat test
+# 테스트만 실행 (멀티플랫폼 집계 작업; 단순한 `test` 작업은 존재하지 않습니다)
+./gradlew allTests        # Windows: gradlew.bat allTests
 ```
 
 툴체인 25를 해결할 수 있는 JDK가 필요합니다 (필요한 경우 `foojay-resolver` 플러그인이 자동으로 다운로드합니다).

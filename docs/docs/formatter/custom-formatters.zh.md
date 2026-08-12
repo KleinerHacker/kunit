@@ -16,15 +16,15 @@ interface KUnitFormatter {
 data class KUnitFormatContext(
     val value: Double,            // 已换算为目标单位的数字
     val units: List<KUnitTerm>,   // 目标量纲的各项（带前缀/指数显示元数据）
-    val pattern: String? = null,  // 数字的可选 java.util.Formatter 模式
-    val locale: Locale = Locale.getDefault(),
+    val pattern: String? = null,  // 数字的可选数字模式（printf 子集），见“输出格式化”
+    val locale: KLocale = KLocale.ROOT,
 )
 ```
 
 一切都通过 **一个**上下文对象传入，因此该接口可以增量扩展（新字段带默认值）而不破坏你的实现。两个可复用的辅助 函数涵盖常见的构建块：
 
-- `KUnitFormatContext.renderValue()` — 渲染数字：当 `pattern` 为 `null` 时用 `Double.toString()`，否则用
-  `String.format(locale, pattern, value)`。
+- `KUnitFormatContext.renderValue()` — 渲染数字：当 `pattern` 为 `null` 时使用可移植的纯文本形式
+  （`5.0`、`1.0E7`），否则在 `locale` 下应用该模式。两条路径在任何目标平台上都会生成相同的字符串。
 - `KUnitTerm.displaySymbol` — 项被写出时的符号（`"km"`、`"h"`），尊重显示元数据；没有时回退到组的基本符号。
 
 项的 `exponent` 表示幂（正 = 分子，负 = 分母）；如何渲染指数由格式化器决定。
@@ -68,12 +68,12 @@ import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // 用自定义格式化器格式化为目标单位
-v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, LatexFormatter)
 // "10.8\,\frac{\mathrm{km}}{\mathrm{h}}"
 
 // 或用自定义格式化器渲染基本单位（无目标）

@@ -55,15 +55,15 @@ import org.pcsoft.framework.kunit.formatter.KConsoleUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // default CLASSIC palette
-v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter())
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KConsoleUnitFormatter())
 
 // a predefined palette
-v.format(kilo.meters / hours, "%.1f", Locale.US, KConsoleUnitFormatter(KConsoleColorPalette.VIVID))
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KConsoleUnitFormatter(KConsoleColorPalette.VIVID))
 
 // base-unit rendering with no target
 (5 of meters).toString(pattern = "%.1f", formatter = KConsoleUnitFormatter(KConsoleColorPalette.MONOCHROME))

@@ -25,19 +25,59 @@ v format kilo.meters / hours       // "10.799999999999999 km/h"
 
 ## 数字格式：模式与区域设置
 
-中缀形式渲染原始 `Double`。要对 **数字部分**进行舍入或本地化，请使用带
-[`java.util.Formatter`](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html) 模式和可选
-`Locale` 的 `format` 重载：
+中缀形式渲染原始 `Double`。要对 **数字部分**进行舍入或本地化，请使用带数字模式和可选 `KLocale` 的
+`format` 重载：
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KLocale
+
+v.format(kilo.meters / hours, "%.1f")                 // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.DE_DE)  // "10,8 km/h"
+```
+
+模式 **只**影响数字，单位部分不变。无效模式会抛出 `IllegalArgumentException`，不兼容的目标量纲会（与
+`into` 一样）抛出 `IllegalStateException`。
+
+### `KLocale`
+
+Kotlin 没有通用的区域设置 API —— `java.util.Locale` 仅存在于 JVM 上 —— 因此 kunit 携带了自己的、对数字书写方式
+的最小化描述：小数分隔符、分组分隔符和分组大小。由于这些约定随值一起传递，**同一个模式在任何目标平台上都会渲染出
+相同的字符串**。
+
+`KLocale.ROOT`（点号小数、逗号分组）是默认值。预定义的常量涵盖了常见情形：
+`EN_US`、`EN_GB`、`DE_DE`、`FR_FR`、`ES_ES`、`IT_IT`、`PT_BR`、`NL_NL`、`RU_RU`、`JA_JP`、`ZH_CN`、`KO_KR`、
+`AR_SA` 和 `HI_IN`（对应印度式的 3-then-2 分组）。其他任何约定都可以通过直接构造 `KLocale` 来表达。
+
+在 JVM 上，`java.util.Locale` 仍然可用：接受它的重载在 JVM 源代码集中提供，并通过 `toKLocale()` 转换。
 
 ```kotlin
 import java.util.Locale
 
-v.format(kilo.meters / hours, "%.1f")                // "10.8 km/h"
-v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.GERMANY) // "10,8 km/h"（仅限 JVM）
 ```
 
-模式 **只**影响数字，单位部分不变。无效模式会抛出 `java.util.IllegalFormatException`，不兼容的目标量纲会（与
-`into` 一样）抛出 `IllegalStateException`。
+### 支持的模式
+
+模式是应用于单个数字值的 printf 子集：
+
+```
+%[flags][width][.precision]conversion
+```
+
+| 部分       | 含义                                                                        |
+|------------|-----------------------------------------------------------------------------|
+| flags      | `-` 左对齐 · `+` 始终显示符号 · 空格表示正数 · `0` 补零 · `,` 分组          |
+| width      | 字符总数的最小值                                                             |
+| precision  | 小数位数（转换符 `f`、`e`、`E`）                                             |
+| conversion | `f` 定点 · `e`/`E` 科学计数法 · `d` 整数 · `s` 原样渲染                     |
+
+`%%` 输出一个字面百分号，转换符周围的字面文本会原样复制。
+
+```kotlin
+(1500 of meters).toString("%,.2f", KLocale.EN_US) // "1,500.00 m"
+(1500 of meters).toString("%,.2f", KLocale.DE_DE) // "1.500,00 m"
+(1500 of meters).toString("%.2e", KLocale.EN_US)  // "1.50e+03 m"
+```
 
 ## 分数表示与乘积表示
 
@@ -57,8 +97,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 `format` 动词：
 
 ```kotlin
-(3 of meters / seconds).toString("%.2f", Locale.US) // "3.00 m/s"
-(1500 of meters).toString("%.1f", Locale.US)        // "1500.0 m"
+(3 of meters / seconds).toString("%.2f", KLocale.EN_US) // "3.00 m/s"
+(1500 of meters).toString("%.1f", KLocale.EN_US)        // "1500.0 m"
 ```
 
 ## 实际示例
@@ -69,14 +109,14 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.*
 import org.pcsoft.framework.kunit.kinematic.time.*
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val distance = 10 of kilo.meters
 val time = 50 of minutes
 val speed = distance / time                    // KSpeedUnitInstance
 
-println(speed.format(kilo.meters / hours, "%.1f", Locale.US)) // "12.0 km/h"
-println(speed.format(meters / seconds, "%.2f", Locale.US))    // "3.33 m/s"
+println(speed.format(kilo.meters / hours, "%.1f", KLocale.EN_US)) // "12.0 km/h"
+println(speed.format(meters / seconds, "%.2f", KLocale.EN_US))    // "3.33 m/s"
 ```
 
 ## 自定义渲染

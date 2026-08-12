@@ -6,8 +6,8 @@
 प्रकार: **नेटिव इकाई**
 
 `KTimeUnitInstance` [
-`java.time.Duration`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html)
-के चारों ओर 100 % रैपर है: `Duration` सत्य का एकमात्र स्रोत है (नैनोसेकंड-सटीक), और पूरा `Duration` API अग्रेषित होता
+`kotlin.time.Duration`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/)
+के चारों ओर 100 % रैपर है: `Duration` सत्य का एकमात्र स्रोत है, और पूरा `Duration` API अग्रेषित होता
 है। इसके ऊपर यह हर अन्य «शुद्ध» इकाई रैपर के समान सतह प्रदान करता है (`value`/`+`/`-`/`*`/`/`/`toString`/`toUnit` तथा
 `of`/`into` क्रियाएँ), इसलिए एक समय मान सामान्य मिश्रित-इकाई इंजन में जुड़ता है (जैसे `length / time` = चाल)। मान सदैव
 सेकंड में प्रसामान्यीकृत संग्रहित होता है।
@@ -64,25 +64,25 @@ val ratio = (10 of seconds) / (2 of seconds)           // KMixedUnitInstance: va
 
 ## तुलनाएँ और समता
 
-`==`, `!=`, `<`, `<=`, `>`, `>=` दो `KTimeUnitInstance` की उनके अंतर्निहित `Duration` (नैनोसेकंड-सटीक) से तुलना करते
+`==`, `!=`, `<`, `<=`, `>`, `>=` दो `KTimeUnitInstance` की उनके अंतर्निहित `Duration` से तुलना करते
 हैं। चूँकि एक समय मान सदैव घातांक 1 होता है, वहाँ घातांक-बेमेल त्रुटि नहीं होती जैसी लंबाई क्षेत्रफल/आयतन के लिए होती
 है।
 
-## `java.time.Duration` रैपर
+## `kotlin.time.Duration` रैपर
 
 `KTimeUnitInstance`, `Duration` के ऊपर एक ड्रॉप-इन मुखौटा है: लिपटा हुआ `Duration` प्राप्त करें, किसी मौजूदा को लपेटें,
 और अग्रेषित `Duration` विधियों का सीधे उपयोग करें (जो `Duration` लौटाती हैं वे
 `KTimeUnitInstance` लौटाती हैं; क्वेरी विधियाँ पास-थ्रू होती हैं)।
 
 ```kotlin
-import java.time.Duration
+import kotlin.time.Duration.Companion.minutes as durationMinutes
 import org.pcsoft.framework.kunit.of
 import org.pcsoft.framework.kunit.into
 import org.pcsoft.framework.kunit.kinematic.time.*
 
 val t = 90 of minutes
-t.toDuration()                  // PT1H30M
-Duration.ofMinutes(90).toTime() into hours // 1.5
+t.toKotlinDuration()                 // 1h 30m
+90.durationMinutes.toTime() into hours // 1.5
 
 // अग्रेषित परिवर्तक KTimeUnitInstance लौटाते हैं
 t.plusHours(1) into hours       // 2.5
@@ -92,6 +92,22 @@ t.negated().isNegative()        // true
 t.toHours()             // 1
 t.toMinutesPart()       // 30
 t.dividedBy(30 of minutes) // 3
+```
+
+### `java.time` इंटरऑप (केवल JVM)
+
+JVM पर `java.time` ब्रिज JVM सोर्स-सेट से एक्सटेंशन फ़ंक्शन के रूप में उपलब्ध है, इसलिए JVM कोड
+`java.time.Duration` का उपयोग जारी रख सकता है:
+
+```kotlin
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+val t = 90 of minutes
+t.toDuration()                             // PT1H30M
+Duration.ofMinutes(90).toTime() into hours // 1.5
+t.plus(1, ChronoUnit.MINUTES) into minutes // 91.0
+t.truncatedTo(ChronoUnit.HOURS) into hours // 1.0
 ```
 
 ## SI उपसर्ग
@@ -116,10 +132,10 @@ val t = 2 of hours
 t into milli.seconds  // 7 200 000.0 (ms)
 ```
 
-!!! note "Duration परास"
-चूँकि मान `java.time.Duration` (पूर्ण सेकंड `Long` के रूप में संग्रहित, नैनोसेकंड विभेदन) द्वारा समर्थित है, एक
-`KTimeUnitInstance` केवल लगभग `[1 ns, Long.MAX seconds]` (≈ 292 अरब वर्ष) के भीतर के परिमाणों को विश्वसनीय रूप से
-प्रस्तुत कर सकता है। दिनों पर लागू `quetta` जैसे चरम उपसर्ग इस परास से अधिक होते हैं, और उप-नैनोसेकंड मान शून्य पर
+!!! note "Duration परास और विभेदन"
+चूँकि मान `kotlin.time.Duration` द्वारा समर्थित है, एक `KTimeUnitInstance` केवल लगभग ±146 वर्षों तक ही
+नैनोसेकंड-सटीक है और उससे आगे मिलीसेकंड विभेदन पर स्विच हो जाता है, अधिकतम लगभग ±14.6 करोड़ वर्षों तक। दिनों पर लागू
+`quetta` जैसे चरम उपसर्ग इस परास से अधिक होते हैं, और उप-नैनोसेकंड मान शून्य पर
 पूर्णांकित होते हैं। सामान्य `KMixedUnitInstance`/उपसर्ग परत स्वयं `Double`-आधारित और अप्रभावित है — केवल
 Duration-समर्थित रैपर में रूपांतरण परास-सीमित है।
 

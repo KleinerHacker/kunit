@@ -110,6 +110,53 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²
 ```
 
+## समर्थित प्लेटफ़ॉर्म
+
+kunit एक ऐसी **Kotlin मल्टीप्लेटफ़ॉर्म** लाइब्रेरी है जिसमें कोई रनटाइम निर्भरता नहीं है। सभी इकाइयाँ, संकारक और
+फ़ॉर्मैटर सामान्य सोर्स-सेट में रहते हैं और हर लक्ष्य पर समान रूप से व्यवहार करते हैं:
+
+| लक्ष्य          | वेरिएंट                                                   |
+|-----------------|-----------------------------------------------------------|
+| JVM             | टूलचेन 25                                                  |
+| JS              | ब्राउज़र, Node.js                                          |
+| Wasm/JS         | ब्राउज़र, Node.js                                          |
+| Native          | `linuxX64`, `mingwX64`, `macosX64`, `macosArm64`           |
+| Native (iOS)    | `iosX64`, `iosArm64`, `iosSimulatorArm64`                  |
+
+रिलीज़ **GitHub Packages** पर प्रकाशित की जाती हैं। रिपॉज़िटरी घोषित करें और निर्भरता जोड़ें:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("org.pcsoft.framework:kunit:<version>")
+}
+```
+
+!!! note "GitHub Packages को प्रमाणीकरण की आवश्यकता है"
+GitHub Packages को हमेशा क्रेडेंशियल की आवश्यकता होती है, चाहे पैकेज सार्वजनिक ही क्यों न हो — यह एक GitHub प्रतिबंध है,
+परियोजना का नहीं। `read:packages` स्कोप वाले पर्सनल एक्सेस टोकन का उपयोग करें, उदाहरण के लिए अपने
+`~/.gradle/gradle.properties` में `gpr.user`/`gpr.token` के माध्यम से।
+
+Gradle मॉड्यूल मेटाडेटा के माध्यम से सही प्लेटफ़ॉर्म आर्टिफ़ैक्ट को हल करता है। **Maven और अन्य बिल्ड टूल जो Gradle
+मॉड्यूल मेटाडेटा नहीं पढ़ते, उन्हें प्लेटफ़ॉर्म आर्टिफ़ैक्ट को सीधे संदर्भित करना होगा** — प्रकाशित आर्टिफ़ैक्ट id हैं
+`kunit` (रूट मॉड्यूल), `kunit-jvm`, `kunit-js`, `kunit-wasm-js`, `kunit-linuxx64`, `kunit-mingwx64`,
+`kunit-macosx64`, `kunit-macosarm64`, `kunit-iosx64`, `kunit-iosarm64` और `kunit-iossimulatorarm64`।
+
+कुछ केवल-JVM सुविधाएँ — `format`/`toString` के `java.util.Locale` ओवरलोड (देखें
+[आउटपुट स्वरूपण](formatter/formatting.md)) और [समय इकाई](units/kinematics/time.md) का
+`java.time.Duration` इंटरऑप — JVM सोर्स-सेट में रहती हैं। सामान्य API इसके बजाय `KLocale` और
+`kotlin.time.Duration` का उपयोग करता है।
+
 ## चेकआउट और बिल्ड
 
 ```bash
@@ -123,8 +170,8 @@ kunit Gradle का उपयोग करता है (रैपर रिप�
 # बिल्ड
 ./gradlew build          # Windows: gradlew.bat build
 
-# केवल परीक्षण चलाएँ
-./gradlew test            # Windows: gradlew.bat test
+# केवल परीक्षण चलाएँ (मल्टीप्लेटफ़ॉर्म एग्रीगेट कार्य; कोई सादा `test` कार्य मौजूद नहीं है)
+./gradlew allTests        # Windows: gradlew.bat allTests
 ```
 
 टूलचेन 25 को हल करने में सक्षम एक JDK आवश्यक है (`foojay-resolver` प्लगइन आवश्यकता होने पर इसे स्वचालित रूप से डाउनलोड

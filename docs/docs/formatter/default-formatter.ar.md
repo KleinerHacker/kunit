@@ -15,15 +15,16 @@
 
 ### الرقم
 
-- بدون نمط، يُطبع `Double` الخام عبر `Double.toString()`.
-- مع نمط `java.util.Formatter` (و`Locale` اختياري)، يُعرض الرقم عبر
-  `String.format(locale, pattern, value)`. يؤثر النمط على **الرقم فقط**، ولا يؤثر أبدًا على جزء الوحدة.
+- بدون نمط، يُطبع `Double` الخام بصيغة kunit النصية القابلة للنقل (`10.8`، `5.0`، `1.0E7`) — وهي مطابقة على أي هدف،
+  بخلاف `Double.toString()` الخاصة بالمنصة نفسها.
+- مع نمط رقمي (و`KLocale` اختياري)، يُطبَّق النمط على الرقم فقط، ولا يؤثر أبدًا على جزء الوحدة. راجع
+  [تنسيق الإخراج](formatting.md) للاطلاع على الأنماط المدعومة.
 
 | الاستدعاء                                            | الرقم المعروض        |
 |------------------------------------------------------|----------------------|
 | `format(kilo.meters / hours)`                        | `10.799999999999999` |
 | `format(kilo.meters / hours, "%.1f")`                | `10.8`               |
-| `format(kilo.meters / hours, "%.1f", Locale.GERMAN)` | `10,8`               |
+| `format(kilo.meters / hours, "%.1f", KLocale.DE_DE)` | `10,8`               |
 
 ### جزء الوحدة
 
@@ -74,7 +75,7 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
 // "9.81 m/s²"
 ```
 
@@ -89,12 +90,12 @@ import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // مُنسِّق صريح، نفس نتيجة الاستدعاء الافتراضي
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // عرض الوحدات الأساسية بالمُنسِّق الافتراضي دون هدف
 (5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"

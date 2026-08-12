@@ -29,8 +29,15 @@ jobs:
       - name: Check licences
         run: ./gradlew licensee --stacktrace --info
 
+  # Build and test in parallel on all three host families: a host can only run the tests of its own native
+  # targets, so only the matrix covers macOS/iOS and Windows.
   build:
-    runs-on: ubuntu-latest
+    name: build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
@@ -46,13 +53,16 @@ jobs:
           cache: gradle
 
       - name: Make Gradle wrapper executable
+        if: runner.os != 'Windows'
         run: chmod +x ./gradlew
 
       - name: Build
-        run: ./gradlew build -x test --stacktrace --info
+        run: ./gradlew build -x allTests --stacktrace --info
 
+      # `allTests` is the multiplatform aggregate; a plain `test` task no longer exists.
+      # On a Linux runner this covers jvm, js, wasmJs and linuxX64.
       - name: Run tests
-        run: ./gradlew test --stacktrace --info
+        run: ./gradlew allTests --stacktrace --info
 
   # Build the docs as a generation test (mkdocs --strict) on every push and PR.
   # No deployment here — that only happens for pushes (see deploy-snapshot-docs).

@@ -13,15 +13,16 @@
 
 ### 숫자
 
-- 패턴이 없으면 원시 `Double` 이 `Double.toString()` 으로 출력됩니다.
-- `java.util.Formatter` 패턴 (및 선택적 `Locale`)을 지정하면 숫자는
-  `String.format(locale, pattern, value)` 로 렌더링됩니다. 패턴은 **숫자에만** 영향을 주며 단위 부분에는 영향을 주지 않습니다.
+- 패턴이 없으면 원시 `Double` 은 kunit 자체의 이식 가능한 평문 형식(`10.8`, `5.0`, `1.0E7`)으로 출력됩니다 —
+  플랫폼 자체의 `Double.toString()` 과 달리 모든 대상에서 동일합니다.
+- 숫자 패턴(및 선택적 `KLocale`)을 지정하면 패턴은 숫자에만 적용되며 단위 부분에는 결코 영향을 주지 않습니다.
+  지원되는 패턴은 [출력 서식](formatting.md) 을 참고하세요.
 
 | 호출                                                 | 렌더링된 숫자        |
 |------------------------------------------------------|----------------------|
 | `format(kilo.meters / hours)`                        | `10.799999999999999` |
 | `format(kilo.meters / hours, "%.1f")`                | `10.8`               |
-| `format(kilo.meters / hours, "%.1f", Locale.GERMAN)` | `10,8`               |
+| `format(kilo.meters / hours, "%.1f", KLocale.DE_DE)` | `10,8`               |
 
 ### 단위 부분
 
@@ -71,7 +72,7 @@ import org.pcsoft.framework.kunit.formatter.KDefaultFormatConfig
 import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 
 (9.81 of meters / (seconds pow 2))
-    .format(meters / (seconds pow 2), "%.2f", Locale.US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
+    .format(meters / (seconds pow 2), "%.2f", KLocale.EN_US, KDefaultUnitFormatter(KDefaultFormatConfig.SUPERSCRIPT))
 // "9.81 m/s²"
 ```
 
@@ -85,12 +86,12 @@ import org.pcsoft.framework.kunit.formatter.KDefaultUnitFormatter
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // 명시적 포매터, 기본 호출과 동일한 결과
-v.format(kilo.meters / hours, "%.1f", Locale.US, KDefaultUnitFormatter()) // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, KDefaultUnitFormatter()) // "10.8 km/h"
 
 // 타깃 없이 기본 포매터로 기준 단위 렌더링
 (5 of meters).toString(pattern = null, formatter = KDefaultUnitFormatter()) // "5.0 m"

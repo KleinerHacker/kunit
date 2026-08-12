@@ -2,6 +2,66 @@
 
 ## [Unreleased]
 
+## [0.10.0]
+
+### Changed (breaking)
+
+- **kunit is now a Kotlin Multiplatform library.** Besides the JVM it targets JS (browser, Node.js),
+  Wasm/JS (browser, Node.js) and native (`linuxX64`, `mingwX64`, `macosX64`, `macosArm64`, `iosX64`,
+  `iosArm64`, `iosSimulatorArm64`). All units, operators and formatters live in the common source set and
+  behave identically on every target; the library still has no runtime dependencies.
+  Migration for Gradle users: none - the module metadata resolves the platform artifact. **Maven and other
+  build tools that do not read Gradle module metadata must reference the platform artifact directly**, e.g.
+  `org.pcsoft.framework:kunit-jvm` instead of `org.pcsoft.framework:kunit`.
+
+- **`java.util.Locale` replaced by `KLocale` in the common formatting API.** `KUnitFormatContext.locale`, the
+  `format` overload and the parameterised `toString` now take
+  `org.pcsoft.framework.kunit.formatter.KLocale`, which carries the decimal separator, the grouping separator
+  and the grouping sizes. Predefined constants: `ROOT`, `EN_US`, `EN_GB`, `DE_DE`, `FR_FR`, `ES_ES`, `IT_IT`,
+  `PT_BR`, `NL_NL`, `RU_RU`, `JA_JP`, `ZH_CN`, `KO_KR`, `AR_SA`, `HI_IN`.
+  On the JVM the `java.util.Locale` overloads remain available (they convert via the new
+  `Locale.toKLocale()`), so JVM call sites keep working; the JVM overloads have no default for `locale`.
+  Migration outside the JVM: replace `Locale.US` with `KLocale.EN_US`, `Locale.GERMANY`/`Locale.GERMAN` with
+  `KLocale.DE_DE`, and `Locale.getDefault()` with an explicit `KLocale`.
+
+- **The default locale is now `KLocale.ROOT` instead of the machine's default locale.** Formatting without an
+  explicit locale is deterministic and no longer depends on the environment.
+
+- **An invalid number pattern now throws `IllegalArgumentException`** instead of
+  `java.util.IllegalFormatException`, which exists on the JVM only.
+
+- **The number pattern is a printf subset instead of a full `java.util.Formatter` pattern.** Supported are the
+  conversions `f`, `e`, `E`, `d` and `s`, the flags `-`, `+`, space, `0` and `,`, a width and a precision, plus
+  `%%` and literal text. Other conversions raise `IllegalArgumentException`.
+
+- **`KTimeUnitInstance` is backed by `kotlin.time.Duration` instead of `java.time.Duration`.** The whole facade
+  (`toDays()`, `plusMinutes()`, `multipliedBy()`, …) keeps its signatures; `plus`/`minus` now take a
+  `kotlin.time.Duration` or a `DurationUnit`, and `toKotlinDuration()` returns the backing value.
+  The `java.time` interop (`toDuration()`, `java.time.Duration.toTime()`, the `Duration`/`TemporalUnit`
+  overloads of `plus`/`minus`, and `truncatedTo(TemporalUnit)`) stays available on the JVM as extension
+  functions in the JVM source set - Kotlin call sites only need the import, Java call sites become static
+  calls. Note that `kotlin.time.Duration` is nanosecond-exact up to roughly ±146 years and switches to
+  millisecond resolution beyond that.
+
+### Added
+
+- **Releases are published to GitHub Packages.** A tag push now deploys all platform artifacts to
+  `https://maven.pkg.github.com/KleinerHacker/kunit` before the GitHub release entry is created. Published
+  artifact ids: `kunit` (root module with the Gradle module metadata), `kunit-jvm`, `kunit-js`,
+  `kunit-wasm-js`, `kunit-linuxx64`, `kunit-mingwx64`, `kunit-macosx64`, `kunit-macosarm64`, `kunit-iosx64`,
+  `kunit-iosarm64`, `kunit-iossimulatorarm64`. Each artifact carries a POM with licence, developer and SCM
+  metadata plus a `javadoc` jar containing the Dokka HTML documentation.
+  Note that GitHub Packages requires authentication even for a public package - consumers need a personal
+  access token with the `read:packages` scope.
+
+### Changed
+
+- **Unformatted numbers render identically on every target.** A value's `toString()` and the pattern-less
+  `format` no longer delegate to the platform's `Double.toString()` (Kotlin/JS renders `1.0` as `"1"` and
+  switches to the exponential form at other magnitudes), but to kunit's own portable rendering: plain notation
+  with at least one fraction digit for `1e-3 <= |value| < 1e7`, scientific notation `d.dddEn` outside that
+  range. On the JVM the output is unchanged.
+
 ## [0.9.0]
 
 ### Changed (breaking)

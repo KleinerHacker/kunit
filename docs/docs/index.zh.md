@@ -102,6 +102,51 @@ import org.pcsoft.framework.kunit.kinematic.time.seconds
 val accel = 10 of meters / (seconds pow 2)   // KMixedUnitInstance, m·s⁻²
 ```
 
+## 支持的平台
+
+kunit 是一个没有运行时依赖的 **Kotlin 多平台**库。所有单位、运算符和格式化器都位于公共源集中,在任何目标平台上
+行为一致:
+
+| 目标            | 变体                                                    |
+|-----------------|-----------------------------------------------------------|
+| JVM             | 工具链 25                                                  |
+| JS              | 浏览器、Node.js                                            |
+| Wasm/JS         | 浏览器、Node.js                                            |
+| Native          | `linuxX64`、`mingwX64`、`macosX64`、`macosArm64`           |
+| Native (iOS)    | `iosX64`、`iosArm64`、`iosSimulatorArm64`                  |
+
+发布版本发布在 **GitHub Packages** 上。请声明仓库并添加依赖:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/KleinerHacker/kunit")
+        credentials {
+            username = providers.gradleProperty("gpr.user").get()
+            password = providers.gradleProperty("gpr.token").get()
+        }
+    }
+}
+
+dependencies {
+    implementation("org.pcsoft.framework:kunit:<version>")
+}
+```
+
+!!! note "GitHub Packages 需要身份验证"
+GitHub Packages 始终需要凭据,即使是公共包也不例外 —— 这是 GitHub 的限制,而非本项目的限制。请使用具有
+`read:packages` 作用域的个人访问令牌,例如通过 `~/.gradle/gradle.properties` 中的 `gpr.user`/`gpr.token` 配置。
+
+Gradle 通过模块元数据解析正确的平台构件。**不读取 Gradle 模块元数据的 Maven 和其他构建工具必须直接引用平台
+构件** —— 已发布的构件 id 有 `kunit`(根模块)、`kunit-jvm`、`kunit-js`、`kunit-wasm-js`、
+`kunit-linuxx64`、`kunit-mingwx64`、`kunit-macosx64`、`kunit-macosarm64`、`kunit-iosx64`、
+`kunit-iosarm64` 和 `kunit-iossimulatorarm64`。
+
+一些仅限 JVM 的便利功能 —— `format`/`toString` 的 `java.util.Locale` 重载(见
+[输出格式化](formatter/formatting.md))以及[时间单位](units/kinematics/time.md)的 `java.time.Duration`
+互操作 —— 位于 JVM 源集中。公共 API 则使用 `KLocale` 和 `kotlin.time.Duration`。
+
 ## 检出与构建
 
 ```bash
@@ -115,8 +160,8 @@ kunit 使用 Gradle (包装器已包含在仓库中,无需本地安装 Gradle):
 # 构建
 ./gradlew build          # Windows: gradlew.bat build
 
-# 仅运行测试
-./gradlew test            # Windows: gradlew.bat test
+# 仅运行测试 (多平台聚合任务;不存在单纯的 `test` 任务)
+./gradlew allTests        # Windows: gradlew.bat allTests
 ```
 
 需要一个能够解析工具链 25 的 JDK (如有需要,`foojay-resolver` 插件会自动下载)。

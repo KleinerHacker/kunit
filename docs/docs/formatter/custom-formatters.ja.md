@@ -17,16 +17,17 @@ interface KUnitFormatter {
 data class KUnitFormatContext(
     val value: Double,            // 対象単位へ変換済みの数値
     val units: List<KUnitTerm>,   // 対象次元の項（接頭辞・指数の表示メタデータ付き）
-    val pattern: String? = null,  // 数値用の任意の java.util.Formatter パターン
-    val locale: Locale = Locale.getDefault(),
+    val pattern: String? = null,  // 数値用の任意の数値パターン（printf のサブセット）、「出力の書式設定」を参照
+    val locale: KLocale = KLocale.ROOT,
 )
 ```
 
 すべては **1 つ**のコンテキストオブジェクトで渡されるため、インターフェースは実装を壊さずに加法的に拡張（新しい
 フィールドはデフォルト値を持つ）できます。よく使う構成要素として 2 つのヘルパーがあります。
 
-- `KUnitFormatContext.renderValue()` — 数値を描画します。`pattern` が `null` なら `Double.toString()`、 そうでなければ
-  `String.format(locale, pattern, value)`。
+- `KUnitFormatContext.renderValue()` — 数値を描画します。`pattern` が `null` なら可搬なプレーン形式（`5.0`、
+  `1.0E7`）、そうでなければ `locale` の下でパターンを適用します。どちらの経路も、どのターゲットでも同じ文字列を
+  生成します。
 - `KUnitTerm.displaySymbol` — 項の書かれたとおりの記号（`"km"`、`"h"`）。表示メタデータを尊重し、無ければ
   グループの基本記号にフォールバックします。
 
@@ -71,12 +72,12 @@ import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.meters
 import org.pcsoft.framework.kunit.kinematic.time.hours
 import org.pcsoft.framework.kunit.kinematic.time.seconds
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val v = 3 of meters / seconds
 
 // カスタムフォーマッターで対象単位へ整形
-v.format(kilo.meters / hours, "%.1f", Locale.US, LatexFormatter)
+v.format(kilo.meters / hours, "%.1f", KLocale.EN_US, LatexFormatter)
 // "10.8\,\frac{\mathrm{km}}{\mathrm{h}}"
 
 // または対象なしで基本単位を描画

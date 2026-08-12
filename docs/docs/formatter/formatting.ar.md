@@ -28,18 +28,60 @@ v format kilo.meters / hours       // "10.799999999999999 km/h"
 
 ## تنسيق الأرقام: النمط والإعدادات المحلية
 
-يعرض الشكل الوسطي قيمة `Double` الخام. لتقريب **الجزء الرقمي** أو تعريبه، استخدم تحميل `format` الزائد مع نمط
-[`java.util.Formatter`](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html) و`Locale` اختياري:
+يعرض الشكل الوسطي قيمة `Double` الخام. لتقريب **الجزء الرقمي** أو تعريبه، استخدم تحميل `format` الزائد مع نمط رقمي
+وكائن `KLocale` اختياري:
+
+```kotlin
+import org.pcsoft.framework.kunit.formatter.KLocale
+
+v.format(kilo.meters / hours, "%.1f")                 // "10.8 km/h"
+v.format(kilo.meters / hours, "%.1f", KLocale.DE_DE)  // "10,8 km/h"
+```
+
+يؤثر النمط في **الرقم فقط**؛ ويبقى جزء الوحدة كما هو. النمط غير الصالح يطلق
+`IllegalArgumentException`، والبُعد الهدف غير المتوافق يطلق (كما في `into`) `IllegalStateException`.
+
+### `KLocale`
+
+لا تملك Kotlin واجهة برمجة مشتركة للإعدادات المحلية — إذ لا توجد `java.util.Locale` إلا على JVM — لذا تحمل kunit
+وصفها الأدنى الخاص لكيفية كتابة الرقم: فاصل الأعشار، وفاصل التجميع، وأحجام التجميع. وبما أن هذه الاصطلاحات تنتقل مع
+القيمة، فإن **النمط نفسه يُنتج نفس السلسلة على أي هدف**.
+
+`KLocale.ROOT` (فاصلة عشرية نقطة، وتجميع بفاصلة) هو الافتراضي. تغطي الثوابت المُعرَّفة مسبقًا الحالات الشائعة:
+`EN_US`، `EN_GB`، `DE_DE`، `FR_FR`، `ES_ES`، `IT_IT`، `PT_BR`، `NL_NL`، `RU_RU`، `JA_JP`، `ZH_CN`، `KO_KR`،
+`AR_SA` و`HI_IN` (التي تنمذج التجميع الهندي 3-then-2). يمكن التعبير عن أي اصطلاح آخر عبر بناء `KLocale` مباشرةً.
+
+على JVM لا يزال `java.util.Locale` يعمل: التحميلات الزائدة التي تقبله متوفرة في مجموعة مصادر JVM وتُحوَّل عبر
+`toKLocale()`.
 
 ```kotlin
 import java.util.Locale
 
-v.format(kilo.meters / hours, "%.1f")                // "10.8 km/h"
-v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
+v.format(kilo.meters / hours, "%.1f", Locale.GERMANY) // "10,8 km/h" (JVM فقط)
 ```
 
-يؤثر النمط في **الرقم فقط**؛ ويبقى جزء الوحدة كما هو. النمط غير الصالح يطلق
-`java.util.IllegalFormatException`، والبُعد الهدف غير المتوافق يطلق (كما في `into`) `IllegalStateException`.
+### الأنماط المدعومة
+
+النمط هو مجموعة فرعية من printf تُطبَّق على القيمة الرقمية الواحدة:
+
+```
+%[flags][width][.precision]conversion
+```
+
+| الجزء       | المعنى                                                                          |
+|-------------|----------------------------------------------------------------------------------|
+| flags       | `-` محاذاة يسرى · `+` إشارة دائمًا · مسافة للقيم الموجبة · `0` حشو بالأصفار · `,` تجميع |
+| width       | الحد الأدنى لإجمالي عدد المحارف                                                  |
+| precision   | عدد الخانات العشرية (لمحوّلات `f` و`e` و`E`)                                     |
+| conversion  | `f` ثابت · `e`/`E` علمي · `d` عدد صحيح · `s` عرض مباشر                          |
+
+يُصدر `%%` علامة نسبة مئوية حرفية، ويُنسَخ النص الحرفي حول المحوّل كما هو.
+
+```kotlin
+(1500 of meters).toString("%,.2f", KLocale.EN_US) // "1,500.00 m"
+(1500 of meters).toString("%,.2f", KLocale.DE_DE) // "1.500,00 m"
+(1500 of meters).toString("%.2e", KLocale.EN_US)  // "1.50e+03 m"
+```
 
 ## الترميز الكسري مقابل ترميز الجداء
 
@@ -59,8 +101,8 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 بالوحدة الأساسية — وهو الفعل `format` دون هدف:
 
 ```kotlin
-(3 of meters / seconds).toString("%.2f", Locale.US) // "3.00 m/s"
-(1500 of meters).toString("%.1f", Locale.US)        // "1500.0 m"
+(3 of meters / seconds).toString("%.2f", KLocale.EN_US) // "3.00 m/s"
+(1500 of meters).toString("%.1f", KLocale.EN_US)        // "1500.0 m"
 ```
 
 ## مثال واقعي
@@ -71,14 +113,14 @@ v.format(kilo.meters / hours, "%.1f", Locale.GERMAN) // "10,8 km/h"
 import org.pcsoft.framework.kunit.*
 import org.pcsoft.framework.kunit.kinematic.distance.*
 import org.pcsoft.framework.kunit.kinematic.time.*
-import java.util.Locale
+import org.pcsoft.framework.kunit.formatter.KLocale
 
 val distance = 10 of kilo.meters
 val time = 50 of minutes
 val speed = distance / time                    // KSpeedUnitInstance
 
-println(speed.format(kilo.meters / hours, "%.1f", Locale.US)) // "12.0 km/h"
-println(speed.format(meters / seconds, "%.2f", Locale.US))    // "3.33 m/s"
+println(speed.format(kilo.meters / hours, "%.1f", KLocale.EN_US)) // "12.0 km/h"
+println(speed.format(meters / seconds, "%.2f", KLocale.EN_US))    // "3.33 m/s"
 ```
 
 ## عرض مخصص
