@@ -67,6 +67,36 @@
   `radiantIntensity / area`, `radiance * area = radiantIntensity` (and its commutative form) and
   `radiantIntensity / radiance = area`; `KMixedUnitInstance.toRadiance()`.
 
+- **New standardized unit Magnetic Dipole Moment (`current · length²`).** `…electric.magneticmoment` with
+  base unit ampere square meter (`A·m²`) and the tokens `ampereSquareMeters`, `joulesPerTesla`,
+  `bohrMagnetons`, `nuclearMagnetons` (all prefix-combinable). Typed operators `current * area` (and its
+  commutative form), `magneticMoment / area = current` and `magneticMoment / current = area`;
+  `KMixedUnitInstance.toMagneticMoment()`.
+
+- **New standardized unit Electric Flux (`mass · length³ · time⁻³ · current⁻¹`).** `…electric.flux` with
+  base unit volt meter (`V·m`) and the tokens `voltMeters`, `voltCentimeters`. Typed operators
+  `electricFieldStrength * area` (and its commutative form), `electricFlux / area` and
+  `electricFlux / electricFieldStrength`; `KMixedUnitInstance.toElectricFlux()`.
+
+- **New standardized unit Elastance (`mass · length² · time⁻⁴ · current⁻²`).** `…electric.elastance` with
+  base unit reciprocal farad (`F⁻¹`) and the tokens `reciprocalFarads`, `darafs`. Typed operators
+  `voltage / charge`, `elastance * charge = voltage` (and its commutative form),
+  `voltage / elastance = charge` and the reciprocal relations
+  `Number / capacitance = elastance`, `Number / elastance = capacitance`;
+  `KMixedUnitInstance.toElastance()`. Same-type `+` is the series connection of capacitors.
+
+- **New standardized unit Specific Charge (`current · time · mass⁻¹`).** `…electric.specificcharge` with
+  base unit coulomb per kilogram (`C/kg`), the tokens `coulombsPerKilogram` and `roentgens` (both
+  prefix-combinable) and the constant `ELECTRON_SPECIFIC_CHARGE`. Typed operators `charge / mass`,
+  `specificCharge * mass = charge` (and its commutative form) and `charge / specificCharge = mass`;
+  `KMixedUnitInstance.toSpecificCharge()`. The group also carries the **ionisation dose** (exposure)
+  reading of radiation protection.
+
+- **New documentation pages for the radiation quantities** that share an existing type: activity
+  (becquerel → `kinematic.frequency`), absorbed dose (gray) and dose equivalent (sievert) (both →
+  `thermo.specificenergy`) and exposure (roentgen → `electric.specificcharge`). No new types - a single
+  base-dimension normal form maps to a single type, so each page explains the shared reading.
+
 - **New exponent-4 leaf Second Moment of Area (`length⁴`).** `KSecondMomentOfAreaUnitInstance` joins
   `KLengthUnitInstance`/`KAreaUnitInstance`/`KVolumeUnitInstance` in
   `…kinematic.distance`, with the tokens `quarticMeters`, `quarticCentimeters`,

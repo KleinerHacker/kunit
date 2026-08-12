@@ -438,6 +438,7 @@ nav:
       - Speed: units/kinematics/speed.md
       - Acceleration: units/kinematics/acceleration.md
       - Jerk: units/kinematics/jerk.md
+      - Activity: units/kinematics/activity.md
       - Volumetric Flow: units/kinematics/volume-flow.md
   - Mechanics:
       - Overview: units/mechanics/overview.md
@@ -488,6 +489,10 @@ nav:
       - Resistivity: units/electrical/resistivity.md
       - Conductivity: units/electrical/conductivity.md
       - Molar Conductivity: units/electrical/molarconductivity.md
+      - Magnetic Moment: units/electrical/magneticmoment.md
+      - Electric Flux: units/electrical/electricflux.md
+      - Elastance: units/electrical/elastance.md
+      - Specific Charge: units/electrical/specificcharge.md
       - Electric Field Strength: units/electrical/electricfieldstrength.md
       - Electric Flux Density: units/electrical/electricfluxdensity.md
       - Permittivity: units/electrical/permittivity.md
@@ -527,6 +532,9 @@ nav:
       - Thermal Conductance: units/thermodynamics/thermal-conductance.md
       - Volumetric Heat Capacity: units/thermodynamics/volumetric-heat-capacity.md
       - Dose Rate: units/thermodynamics/dose-rate.md
+      - Absorbed Dose: units/thermodynamics/absorbed-dose.md
+      - Dose Equivalent: units/thermodynamics/dose-equivalent.md
+      - Exposure: units/thermodynamics/exposure.md
       - Thermal Expansion: units/thermodynamics/thermal-expansion.md
       - Temperature Gradient: units/thermodynamics/temperature-gradient.md
       - Thermal Diffusivity: units/thermodynamics/thermal-diffusivity.md

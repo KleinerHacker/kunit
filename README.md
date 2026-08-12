@@ -243,6 +243,10 @@ unit group that exists in the framework - group, sub-package and base unit.
 | Compressibility (constructed: mass⁻¹·length·time²)                               | `org.pcsoft.framework.kunit.mechanic.compressibility`      | Reciprocal pascal (`KCompressibilityUnit.BASE`)                    |
 | Acoustic Impedance (constructed: mass·length⁻²·time⁻¹)                           | `org.pcsoft.framework.kunit.mechanic.acousticimpedance`    | Pascal second per meter (`KAcousticImpedanceUnit.BASE`)            |
 | Second Moment of Area (constructed: length⁴)                                     | `org.pcsoft.framework.kunit.kinematic.distance`            | Quartic meter (exponent-4 leaf of the distance group)              |
+| Magnetic Moment (constructed: current·length²)                                    | `org.pcsoft.framework.kunit.electric.magneticmoment`       | Ampere square meter (`KMagneticMomentUnit.BASE`)                   |
+| Electric Flux (constructed: mass·length³·time⁻³·current⁻¹)                        | `org.pcsoft.framework.kunit.electric.flux`                 | Volt meter (`KElectricFluxUnit.BASE`)                              |
+| Elastance (constructed: mass·length²·time⁻⁴·current⁻²)                            | `org.pcsoft.framework.kunit.electric.elastance`            | Reciprocal farad (`KElastanceUnit.BASE`)                           |
+| Specific Charge (constructed: current·time·mass⁻¹)                                | `org.pcsoft.framework.kunit.electric.specificcharge`       | Coulomb per kilogram (`KSpecificChargeUnit.BASE`)                  |
 | Thermal Expansion (constructed: temperature⁻¹)                                   | `org.pcsoft.framework.kunit.thermo.expansion`               | Per kelvin (`KThermalExpansionUnit.BASE`)                          |
 | Temperature Gradient (constructed: temperature·length⁻¹)                         | `org.pcsoft.framework.kunit.thermo.temperaturegradient`     | Kelvin per meter (`KTemperatureGradientUnit.BASE`)                 |
 | Diffusivity (constructed: length²·time⁻¹)                                        | `org.pcsoft.framework.kunit.common.diffusivity`             | Square meter per second (`KDiffusivityUnit.BASE`)                  |
@@ -273,6 +277,10 @@ unit group that exists in the framework - group, sub-package and base unit.
 | Catalytic Activity (constructed: substance·time⁻¹)                               | `org.pcsoft.framework.kunit.thermo.catalyticactivity`       | Katal (`KCatalyticActivityUnit.BASE`)                              |
 | Molar Conductivity (constructed: mass⁻¹·time³·current²·substance⁻¹)              | `org.pcsoft.framework.kunit.electric.molarconductivity`     | Siemens square meter per mole (`KMolarConductivityUnit.BASE`)      |
 
+> **Activity** (becquerel) shares `KFrequencyUnitInstance`, **absorbed dose** (gray) and **dose equivalent**
+> (sievert) share `KSpecificEnergyUnitInstance`, and the **ionisation dose** (roentgen) shares
+> `KSpecificChargeUnitInstance` - each with its own documentation page.
+>
 > **Refractive power** (dioptre) and **wavenumber** share `KReciprocalLengthUnitInstance`, which is why the
 > group carries the neutral name `reciprocallength`; each reading has its own documentation page.
 >

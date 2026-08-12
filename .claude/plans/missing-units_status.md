@@ -12,8 +12,8 @@ Branch: `claude/missing-units-ls7evz`
 | 2     | Chemie                                      | **erledigt** |
 | 3     | Thermodynamik (inkl. Breaking Change)       | **erledigt** |
 | 4     | Mechanik & Kinematik                        | **erledigt** |
-| 5     | Elektrotechnik                              |    in Arbeit |
-| 6     | Strahlungs-Doku                             |        offen |
+| 5     | Elektrotechnik                              | **erledigt** |
+| 6     | Strahlungs-Doku                             | **erledigt** |
 
 ## Phase 7 — Regelwerk (erledigt)
 
@@ -80,6 +80,27 @@ Breaking Change: `thermo.resistance` → `thermo.insulance` (`KThermalResistance
 `area * area`, `volume * length` und `length * volume` liefern jetzt diesen typisierten Leaf statt der
 generischen `KDistanceUnitInstance` (Verengung, quellkompatibel).
 
+## Phase 5 — Elektrotechnik (erledigt)
+
+| Gruppe          | Package                       | Basiseinheit |
+|-----------------|-------------------------------|--------------|
+| Magnetic Moment | `electric.magneticmoment`     | `A·m²`       |
+| Electric Flux   | `electric.flux`               | `V·m`        |
+| Elastance       | `electric.elastance`          | `1/F`        |
+| Specific Charge | `electric.specificcharge`     | `C/kg`       |
+
+## Phase 6 — Strahlungs-Doku (erledigt)
+
+Vier reine Doku-Seiten ohne neue Typen, je mit Abschnitt „warum kein eigener Typ":
+
+* `kinematics/activity.md` — Becquerel als Lesart von `kinematic.frequency`
+* `thermodynamics/absorbed-dose.md` — Gray als Lesart von `thermo.specificenergy`
+* `thermodynamics/dose-equivalent.md` — Sievert, ebenfalls `thermo.specificenergy`
+* `thermodynamics/exposure.md` — Ionendosis als Lesart von `electric.specificcharge`
+  (der Roentgen ist ein benanntes Token dieser Gruppe)
+
+Die Dosisleistung wird von der in Phase 3 angelegten Gruppe `thermo.doserate` bedient.
+
 ## Hinweis zur lokalen Verifikation
 
 Das Projekt fordert `jvmToolchain(25)`, der Container hat nur JDK 21 und der Toolchain-Download ist
@@ -88,5 +109,6 @@ setzt (`-I <scratchpad>/jdk21.init.gradle`). Das Repository bleibt unverändert.
 
 ## Nächster Schritt
 
-Phase 5 — Elektrotechnik: `electric.magneticmoment` (A·m²), `electric.flux` (V·m),
-`electric.elastance` (1/F) und `electric.specificcharge` (C/kg, deckt zugleich die Ionendosis ab).
+Alle sieben Phasen sind abgeschlossen. Offen bleibt nur, was der User ausdrücklich anstoßen muss:
+Übersetzungen der neuen MkDocs-Seiten in die fünf weiteren Sprachen (laut CLAUDE.md ausschließlich
+auf ausdrücklichen Wunsch) und ein Build-Lauf auf JDK 25 (hier nur mit JDK 21 verifizierbar).
