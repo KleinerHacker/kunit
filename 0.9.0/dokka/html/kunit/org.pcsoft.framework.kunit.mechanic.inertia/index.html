@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.mechanic.inertia</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.mechanic.inertia////PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.mechanic.inertia</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-515232203%2FClasslikes%2F-251573632" anchor-label="KInertiaUnit" id="-515232203%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-inertia-unit/index.html"><span>KInertia</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-515232203%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-inertia-unit/index.html">KInertiaUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-inertia-unit/index.html">KInertiaUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of the <strong>moment of inertia</strong> (a <i>constructed</i> quantity: mass · length²). <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.inertia/KInertiaUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-inertia-unit/-companion/-b-a-s-e.html">BASE</a>, kilogram meter squared): <code class="lang-kotlin">1 unit = baseValue * kg·m²</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1094825760%2FClasslikes%2F-251573632" anchor-label="KInertiaUnitInstance" id="1094825760%2FClasslikes%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-inertia-unit-instance/index.html"><span>KInertia</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1094825760%2FClasslikes%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing a <strong>moment of inertia</strong>, i.e. exactly two terms in the canonical normal form - <a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit/-companion/-b-a-s-e.html">KMassUnit.BASE</a> (gram) at exponent <code class="lang-kotlin">+1</code> and <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/-companion/-b-a-s-e.html">KDistanceUnit.BASE</a> (meter) at exponent <code class="lang-kotlin">+2</code> (<code class="lang-kotlin">g·m²</code>). The <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.inertia/KInertiaUnitInstance/value/#/PointingToDeclaration/">value</span> is the raw component value; readings in kg·m² (<a href="-k-inertia-unit/-companion/-b-a-s-e.html">KInertiaUnit.BASE</a>) divide by <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.inertia//KGM2_IN_BASE/#/PointingToDeclaration/">KGM2_IN_BASE</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-517649948%2FProperties%2F-251573632" anchor-label="gramCentimetersSquared" id="-517649948%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gram-centimeters-squared.html"><span>gram</span><wbr></wbr><span>Centimeters</span><wbr></wbr><span><span>Squared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-517649948%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="gram-centimeters-squared.html">gramCentimetersSquared</a><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">1 g·cm² (<a href="-k-inertia-unit/-g-r-a-m_-c-e-n-t-i-m-e-t-e-r-s_-s-q-u-a-r-e-d/index.html">KInertiaUnit.GRAM_CENTIMETERS_SQUARED</a>, the CGS unit, 1e-7 kg·m²).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1054648500%2FProperties%2F-251573632" anchor-label="gramCentimetersSquared" id="-1054648500%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gram-centimeters-squared.html"><span>gram</span><wbr></wbr><span>Centimeters</span><wbr></wbr><span><span>Squared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1054648500%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="gram-centimeters-squared.html">gramCentimetersSquared</a><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed g·cm², e.g. <code class="lang-kotlin">kilo.gramCentimetersSquared</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="660347934%2FProperties%2F-251573632" anchor-label="kilogramMetersSquared" id="660347934%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilogram-meters-squared.html"><span>kilogram</span><wbr></wbr><span>Meters</span><wbr></wbr><span><span>Squared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="660347934%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="kilogram-meters-squared.html">kilogramMetersSquared</a><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">1 kg·m² (<a href="-k-inertia-unit/-k-i-l-o-g-r-a-m_-m-e-t-e-r-s_-s-q-u-a-r-e-d/index.html">KInertiaUnit.KILOGRAM_METERS_SQUARED</a>), the group's base unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="573492818%2FProperties%2F-251573632" anchor-label="kilogramMetersSquared" id="573492818%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilogram-meters-squared.html"><span>kilogram</span><wbr></wbr><span>Meters</span><wbr></wbr><span><span>Squared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="573492818%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="kilogram-meters-squared.html">kilogramMetersSquared</a><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed kg·m², e.g. <code class="lang-kotlin">milli.kilogramMetersSquared</code>, <code class="lang-kotlin">kilo.kilogramMetersSquared</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-365222518%2FProperties%2F-251573632" anchor-label="poundFeetSquared" id="-365222518%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pound-feet-squared.html"><span>pound</span><wbr></wbr><span>Feet</span><wbr></wbr><span><span>Squared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-365222518%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="pound-feet-squared.html">poundFeetSquared</a><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">1 lb·ft² (<a href="-k-inertia-unit/-p-o-u-n-d_-f-e-e-t_-s-q-u-a-r-e-d/index.html">KInertiaUnit.POUND_FEET_SQUARED</a>, ≈ 0.0421401 kg·m²).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1816113562%2FProperties%2F-251573632" anchor-label="poundFeetSquared" id="-1816113562%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pound-feet-squared.html"><span>pound</span><wbr></wbr><span>Feet</span><wbr></wbr><span><span>Squared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1816113562%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="pound-feet-squared.html">poundFeetSquared</a><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed lb·ft², e.g. <code class="lang-kotlin">kilo.poundFeetSquared</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-947344205%2FFunctions%2F-251573632" anchor-label="div" id="-947344205%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-947344205%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a moment of inertia by the area to obtain the mass (<code class="lang-kotlin">inertia / area = mass</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a moment of inertia by its mass to obtain the squared radius of gyration (<code class="lang-kotlin">inertia / mass = area</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="855426132%2FFunctions%2F-251573632" anchor-label="times" id="855426132%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="855426132%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies an area by a mass to obtain a moment of inertia (<code class="lang-kotlin">area * mass = inertia</code>); the commutative counterpart of <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.mass/KMassUnitInstance/times/#org.pcsoft.framework.kunit.KMixedUnitInstance/PointingToDeclaration/">KMassUnitInstance.times</span>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a mass by an area to obtain a moment of inertia (<code class="lang-kotlin">mass * area = inertia</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1123081495%2FFunctions%2F-251573632" anchor-label="toInertia" id="1123081495%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-inertia.html"><span>to</span><wbr></wbr><span><span>Inertia</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1123081495%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-inertia.html"><span class="token function">toInertia</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; moment of inertia, as long as it matches the canonical normal form: exactly one <a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+2</code> (order independent). This is also the native decomposition <code class="lang-kotlin">mass * length²</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
