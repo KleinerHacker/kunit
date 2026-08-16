@@ -13,6 +13,9 @@
 > [AR](https://kleinerhacker.github.io/kunit/ar/) ·
 > [HI](https://kleinerhacker.github.io/kunit/hi/)).
 
+> 🤖 **AI disclosure (EU transparency):** The code and documentation of this project were created with the help of AI
+> and reviewed by a human.
+
 Kotlin Unit Framework to calculate with different units in Kotlin (and Java) - calculate with real physical units in
 `Double` precision instead of bare numbers.
 

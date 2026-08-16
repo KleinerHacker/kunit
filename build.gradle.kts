@@ -109,7 +109,8 @@ publishing {
         pom {
             name.set("kunit")
             description.set(
-                "Kotlin Unit Framework - calculate with real physical units in Double precision instead of bare numbers"
+                "Kotlin Unit Framework - calculate with real physical units in Double precision instead of bare " +
+                        "numbers. Code and documentation created with the help of AI."
             )
             url.set("https://github.com/KleinerHacker/kunit")
 

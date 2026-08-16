@@ -1,5 +1,5 @@
 site_name: KUnit
-site_description: Kotlin Unit Framework to calculate with different units in Kotlin (and Java)
+site_description: Kotlin Unit Framework to calculate with different units in Kotlin (and Java) - code and documentation created with the help of AI
 # Must include the mike version segment (here the "latest" alias). mkdocs-static-i18n
 # derives the language-selector links on the landing pages from site_url's path; without
 # the version segment those links point to /ko/, /zh/, ... at the domain root (404 under

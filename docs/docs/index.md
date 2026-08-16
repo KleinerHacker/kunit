@@ -1,5 +1,9 @@
 # KUnit
 
+!!! info "AI disclosure (EU transparency)"
+
+    The code and documentation of this project were created with the help of AI and reviewed by a human.
+
 **KUnit** is a Kotlin framework (usable from Java as well) for calculating with physical units instead of bare numbers.
 Instead of tracking meters, miles, or square meters as plain `Double` values and hoping every call site agrees on the
 unit, `kunit` carries the unit alongside the value and does the conversion, multiplication and dimensional bookkeeping
