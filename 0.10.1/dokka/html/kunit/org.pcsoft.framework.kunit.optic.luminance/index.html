@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.optic.luminance</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.optic.luminance////PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.optic.luminance</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1314602990%2FClasslikes%2F1558683979" anchor-label="KLuminanceUnit" id="-1314602990%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-luminance-unit/index.html"><span>KLuminance</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1314602990%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-luminance-unit/index.html">KLuminanceUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-luminance-unit/index.html">KLuminanceUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of <strong>luminance</strong> (luminous intensity per emitting area; a <i>constructed</i> quantity: luminousIntensity · length⁻²). <span data-unresolved-link="org.pcsoft.framework.kunit.optic.luminance/KLuminanceUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-luminance-unit/-companion/-b-a-s-e.html">BASE</a>, candela per square meter, commonly called <i>nit</i>): <code class="lang-kotlin">1 unit = baseValue * cd/m²</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-644932611%2FClasslikes%2F1558683979" anchor-label="KLuminanceUnitInstance" id="-644932611%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-luminance-unit-instance/index.html"><span>KLuminance</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-644932611%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing a <strong>luminance</strong> (luminous intensity per emitting area), i.e. exactly two terms in the canonical normal form - <a href="../org.pcsoft.framework.kunit.optic.luminousintensity/-k-luminous-intensity-unit/-companion/-b-a-s-e.html">KLuminousIntensityUnit.BASE</a> (candela) at exponent <code class="lang-kotlin">+1</code> and <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/-companion/-b-a-s-e.html">KDistanceUnit.BASE</a> (meter) at exponent <code class="lang-kotlin">-2</code> (<code class="lang-kotlin">cd·m⁻²</code>). Both components are stored in their group's base unit, so the raw component base <i>is</i> the named base unit (<a href="-k-luminance-unit/-c-a-n-d-e-l-a_-p-e-r_-s-q-u-a-r-e_-m-e-t-e-r/index.html">KLuminanceUnit.CANDELA_PER_SQUARE_METER</a>) and no bridging factor is needed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-62316823%2FProperties%2F1558683979" anchor-label="apostilbs" id="-62316823%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="apostilbs.html"><span><span>apostilbs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-62316823%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="apostilbs.html">apostilbs</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 asb (<a href="-k-luminance-unit/-a-p-o-s-t-i-l-b/index.html">KLuminanceUnit.APOSTILB</a>, 1/π cd/m²).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1551029273%2FProperties%2F1558683979" anchor-label="apostilbs" id="-1551029273%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="apostilbs.html"><span><span>apostilbs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1551029273%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="apostilbs.html">apostilbs</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed apostilbs, e.g. <code class="lang-kotlin">kilo.apostilbs</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="685059712%2FProperties%2F1558683979" anchor-label="candelasPerSquareMeter" id="685059712%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="candelas-per-square-meter.html"><span>candelas</span><wbr></wbr><span>Per</span><wbr></wbr><span>Square</span><wbr></wbr><span><span>Meter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="685059712%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="candelas-per-square-meter.html">candelasPerSquareMeter</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 cd/m² (<a href="-k-luminance-unit/-c-a-n-d-e-l-a_-p-e-r_-s-q-u-a-r-e_-m-e-t-e-r/index.html">KLuminanceUnit.CANDELA_PER_SQUARE_METER</a>), the group's base unit; also called <i>nit</i>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1330663984%2FProperties%2F1558683979" anchor-label="candelasPerSquareMeter" id="1330663984%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="candelas-per-square-meter.html"><span>candelas</span><wbr></wbr><span>Per</span><wbr></wbr><span>Square</span><wbr></wbr><span><span>Meter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1330663984%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="candelas-per-square-meter.html">candelasPerSquareMeter</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed candelas per square meter, e.g. <code class="lang-kotlin">kilo.candelasPerSquareMeter</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="984618776%2FProperties%2F1558683979" anchor-label="footLamberts" id="984618776%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="foot-lamberts.html"><span>foot</span><wbr></wbr><span><span>Lamberts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="984618776%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="foot-lamberts.html">footLamberts</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 fL (<a href="-k-luminance-unit/-f-o-o-t_-l-a-m-b-e-r-t/index.html">KLuminanceUnit.FOOT_LAMBERT</a>, ≈ 3.4263 cd/m²).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1225657192%2FProperties%2F1558683979" anchor-label="footLamberts" id="-1225657192%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="foot-lamberts.html"><span>foot</span><wbr></wbr><span><span>Lamberts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1225657192%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="foot-lamberts.html">footLamberts</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed foot-lamberts, e.g. <code class="lang-kotlin">kilo.footLamberts</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1223965338%2FProperties%2F1558683979" anchor-label="lamberts" id="-1223965338%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lamberts.html"><span><span>lamberts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1223965338%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="lamberts.html">lamberts</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 L (<a href="-k-luminance-unit/-l-a-m-b-e-r-t/index.html">KLuminanceUnit.LAMBERT</a>, 10⁴/π cd/m²).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1477954038%2FProperties%2F1558683979" anchor-label="lamberts" id="-1477954038%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lamberts.html"><span><span>lamberts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1477954038%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="lamberts.html">lamberts</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed lamberts, e.g. <code class="lang-kotlin">milli.lamberts</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1982511266%2FProperties%2F1558683979" anchor-label="nits" id="1982511266%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nits.html"><span><span>nits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1982511266%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="nits.html">nits</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 nit - the display-industry name for <a href="-k-luminance-unit/-c-a-n-d-e-l-a_-p-e-r_-s-q-u-a-r-e_-m-e-t-e-r/index.html">KLuminanceUnit.CANDELA_PER_SQUARE_METER</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-810609074%2FProperties%2F1558683979" anchor-label="nits" id="-810609074%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nits.html"><span><span>nits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-810609074%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="nits.html">nits</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed nits, e.g. <code class="lang-kotlin">kilo.nits</code> - the display-industry spelling of <code class="lang-kotlin">kilo.candelasPerSquareMeter</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2026694617%2FProperties%2F1558683979" anchor-label="stilbs" id="-2026694617%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stilbs.html"><span><span>stilbs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2026694617%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="stilbs.html">stilbs</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">1 sb (<a href="-k-luminance-unit/-s-t-i-l-b/index.html">KLuminanceUnit.STILB</a>, 10 000 cd/m²).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-302894999%2FProperties%2F1558683979" anchor-label="stilbs" id="-302894999%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stilbs.html"><span><span>stilbs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-302894999%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="stilbs.html">stilbs</a><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed stilbs, e.g. <code class="lang-kotlin">milli.stilbs</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1461422023%2FFunctions%2F1558683979" anchor-label="div" id="1461422023%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1461422023%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.optic.illuminance/-k-illuminance-unit-instance/index.html">KIlluminanceUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.solidangle/-k-solid-angle-unit-instance/index.html">KSolidAngleUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Divides an illuminance by a solid angle to obtain the luminance (<code class="lang-kotlin">illuminance / solidAngle = luminance</code>) - the second decomposition of this group, yielding the same typed, value-equal result as <code class="lang-kotlin">luminousIntensity / area</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.optic.illuminance/-k-illuminance-unit-instance/index.html">KIlluminanceUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.solidangle/-k-solid-angle-unit-instance/index.html">KSolidAngleUnitInstance</a></div><div class="brief "><p class="paragraph">Divides an illuminance by a luminance to obtain the solid angle it is spread over (<code class="lang-kotlin">illuminance / luminance = solidAngle</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.optic.luminousintensity/-k-luminous-intensity-unit-instance/index.html">KLuminousIntensityUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a luminous intensity by an area to obtain a <a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a> (<code class="lang-kotlin">luminousIntensity / area = luminance</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.optic.luminousintensity/-k-luminous-intensity-unit-instance/index.html">KLuminousIntensityUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a luminous intensity by a luminance to obtain the emitting area (<code class="lang-kotlin">luminousIntensity / luminance = area</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-835898484%2FFunctions%2F1558683979" anchor-label="times" id="-835898484%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-835898484%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.optic.luminousintensity/-k-luminous-intensity-unit-instance/index.html">KLuminousIntensityUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies an area by a luminance to obtain the luminous intensity; the commutative counterpart of <a href="-k-luminance-unit-instance/times.html">KLuminanceUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.solidangle/-k-solid-angle-unit-instance/index.html">KSolidAngleUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.optic.illuminance/-k-illuminance-unit-instance/index.html">KIlluminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a solid angle by a luminance to obtain the illuminance; the commutative counterpart of <a href="-k-luminance-unit-instance/times.html">KLuminanceUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-area-unit-instance/index.html">KAreaUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.optic.luminousintensity/-k-luminous-intensity-unit-instance/index.html">KLuminousIntensityUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a luminance by an area to obtain the luminous intensity it emits (<code class="lang-kotlin">luminance * area = luminousIntensity</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.solidangle/-k-solid-angle-unit-instance/index.html">KSolidAngleUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.optic.illuminance/-k-illuminance-unit-instance/index.html">KIlluminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a luminance by a solid angle to obtain the illuminance (<code class="lang-kotlin">luminance * solidAngle = illuminance</code>) - the inverse of the <code class="lang-kotlin">illuminance / solidAngle</code> decomposition.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1966038618%2FFunctions%2F1558683979" anchor-label="toLuminance" id="1966038618%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-luminance.html"><span>to</span><wbr></wbr><span><span>Luminance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1966038618%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-luminance.html"><span class="token function">toLuminance</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-luminance-unit-instance/index.html">KLuminanceUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; luminance, as long as it matches the canonical luminance normal form: exactly one <a href="../org.pcsoft.framework.kunit.optic.luminousintensity/-k-luminous-intensity-unit/index.html">KLuminousIntensityUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized over their <a href="../org.pcsoft.framework.kunit/-k-unit/base-value.html">org.pcsoft.framework.kunit.KUnit.baseValue</a>s, so the result is expressed in cd/m² regardless of which concrete units the terms were tagged with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

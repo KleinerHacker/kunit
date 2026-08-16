@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.formatter</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/jvmMain">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/jvmMain"
+                                       data-filter=":/jvmMain"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.formatter////PointingToDeclaration//-70828756">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.formatter</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="599220911%2FClasslikes%2F1558683979" anchor-label="KAsciiMathFormatConfig" id="599220911%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-ascii-math-format-config/index.html"><span>KAscii</span><wbr></wbr><span>Math</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="599220911%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-ascii-math-format-config/index.html">KAsciiMathFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>fractionStyle<span class="token operator">: </span><a href="-k-ascii-math-fraction-style/index.html">KAsciiMathFractionStyle</a><span class="token operator"> = </span>KAsciiMathFractionStyle.FRACTION<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>quoting<span class="token operator">: </span><a href="-k-ascii-math-unit-quoting/index.html">KAsciiMathUnitQuoting</a><span class="token operator"> = </span>KAsciiMathUnitQuoting.QUOTED<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-ascii-math-multiplication/index.html">KAsciiMathMultiplication</a><span class="token operator"> = </span>KAsciiMathMultiplication.SPACE</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-ascii-math-unit-formatter/index.html">KAsciiMathUnitFormatter</a>. It is a plain value type; applications can pick a preset (<a href="-k-ascii-math-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a>, <a href="-k-ascii-math-format-config/-companion/-p-l-a-i-n.html">PLAIN</a>) or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2096054613%2FClasslikes%2F1558683979" anchor-label="KAsciiMathFractionStyle" id="-2096054613%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-ascii-math-fraction-style/index.html"><span>KAscii</span><wbr></wbr><span>Math</span><wbr></wbr><span>Fraction</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2096054613%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-ascii-math-fraction-style/index.html">KAsciiMathFractionStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-ascii-math-fraction-style/index.html">KAsciiMathFractionStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-ascii-math-unit-formatter/index.html">KAsciiMathUnitFormatter</a> arranges numerator and denominator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="5484578%2FClasslikes%2F1558683979" anchor-label="KAsciiMathMultiplication" id="5484578%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-ascii-math-multiplication/index.html"><span>KAscii</span><wbr></wbr><span>Math</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="5484578%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-ascii-math-multiplication/index.html">KAsciiMathMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-ascii-math-multiplication/index.html">KAsciiMathMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication marker the <a href="-k-ascii-math-unit-formatter/index.html">KAsciiMathUnitFormatter</a> places between product terms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1244250188%2FClasslikes%2F1558683979" anchor-label="KAsciiMathUnitFormatter" id="-1244250188%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-ascii-math-unit-formatter/index.html"><span>KAscii</span><wbr></wbr><span>Math</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1244250188%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-ascii-math-unit-formatter/index.html">KAsciiMathUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-ascii-math-format-config/index.html">KAsciiMathFormatConfig</a><span class="token operator"> = </span>KAsciiMathFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">A <a href="-k-unit-formatter/index.html">KUnitFormatter</a> that renders a value as <strong>AsciiMath</strong>, the concise input syntax of MathJax. With the default configuration <code class="lang-kotlin">3 of meters / seconds</code> read into <code class="lang-kotlin">km/h</code> becomes <code class="lang-kotlin">10.8 &quot;km&quot;/&quot;h&quot;</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="490868325%2FClasslikes%2F1558683979" anchor-label="KAsciiMathUnitQuoting" id="490868325%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-ascii-math-unit-quoting/index.html"><span>KAscii</span><wbr></wbr><span>Math</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Quoting</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="490868325%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-ascii-math-unit-quoting/index.html">KAsciiMathUnitQuoting</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-ascii-math-unit-quoting/index.html">KAsciiMathUnitQuoting</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-ascii-math-unit-formatter/index.html">KAsciiMathUnitFormatter</a> renders a unit symbol so it is set as upright text.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1773136754%2FClasslikes%2F1558683979" anchor-label="KConsoleColorPalette" id="1773136754%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-color-palette/index.html"><span>KConsole</span><wbr></wbr><span>Color</span><wbr></wbr><span><span>Palette</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1773136754%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-console-color-palette/index.html">KConsoleColorPalette</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>numberColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>symbolColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>operatorColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>exponentColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>reset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>RESET</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The set of ANSI SGR escape sequences a <a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a> uses to colour the four visual roles of a rendered value: the numeric magnitude, the unit symbols, the operators (<code class="lang-kotlin">*</code>, <code class="lang-kotlin">/</code>) and the exponent markers (<code class="lang-kotlin">^n</code>). Each role holds the <strong>introducer</strong> sequence (e.g. the cyan <code class="lang-kotlin">ESC[36m</code>); the shared <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KConsoleColorPalette//#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToCallableParameters(4)/">reset</span> sequence is appended after every coloured fragment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-752567683%2FClasslikes%2F1558683979" anchor-label="KConsoleDivision" id="-752567683%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-division/index.html"><span>KConsole</span><wbr></wbr><span><span>Division</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-752567683%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-console-division/index.html">KConsoleDivision</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-console-division/index.html">KConsoleDivision</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The division sign the <a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a> places between numerator and denominator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="456336246%2FClasslikes%2F1558683979" anchor-label="KConsoleExponentStyle" id="456336246%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-exponent-style/index.html"><span>KConsole</span><wbr></wbr><span>Exponent</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="456336246%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-console-exponent-style/index.html">KConsoleExponentStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-console-exponent-style/index.html">KConsoleExponentStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a> renders a unit exponent.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1018694127%2FClasslikes%2F1558683979" anchor-label="KConsoleFormatConfig" id="-1018694127%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-format-config/index.html"><span>KConsole</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1018694127%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-console-format-config/index.html">KConsoleFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>exponentStyle<span class="token operator">: </span><a href="-k-console-exponent-style/index.html">KConsoleExponentStyle</a><span class="token operator"> = </span>KConsoleExponentStyle.CARET<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-console-multiplication/index.html">KConsoleMultiplication</a><span class="token operator"> = </span>KConsoleMultiplication.ASTERISK<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>division<span class="token operator">: </span><a href="-k-console-division/index.html">KConsoleDivision</a><span class="token operator"> = </span>KConsoleDivision.SLASH<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>functionSymbols<span class="token operator">: </span><a href="-k-console-function-symbols/index.html">KConsoleFunctionSymbols</a><span class="token operator"> = </span>KConsoleFunctionSymbols.UNICODE</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a> (independent of its colour <a href="-k-console-color-palette/index.html">KConsoleColorPalette</a>): the exponent style, the multiplication and division signs and the function-symbol table. Applications can pick the <a href="-k-console-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a> preset or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="118431285%2FClasslikes%2F1558683979" anchor-label="KConsoleFunctionSymbols" id="118431285%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-function-symbols/index.html"><span>KConsole</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Symbols</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="118431285%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-console-function-symbols/index.html">KConsoleFunctionSymbols</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>squareRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>cubeRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fourthRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>generalRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>plusMinus<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>infinity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>degree<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The mathematical function symbols a <a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a> uses where a function representation applies (e.g. a root). With purely integer exponents no such representation occurs, so this table is a prepared, user-overridable configuration rather than something applied to standard unit rendering.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-32705788%2FClasslikes%2F1558683979" anchor-label="KConsoleMultiplication" id="-32705788%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-multiplication/index.html"><span>KConsole</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-32705788%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-console-multiplication/index.html">KConsoleMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-console-multiplication/index.html">KConsoleMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication sign the <a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a> places between product terms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="139991186%2FClasslikes%2F1558683979" anchor-label="KConsoleUnitFormatter" id="139991186%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-console-unit-formatter/index.html"><span>KConsole</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="139991186%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-console-unit-formatter/index.html">KConsoleUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>palette<span class="token operator">: </span><a href="-k-console-color-palette/index.html">KConsoleColorPalette</a><span class="token operator"> = </span>KConsoleColorPalette.CLASSIC<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-console-format-config/index.html">KConsoleFormatConfig</a><span class="token operator"> = </span>KConsoleFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">A <a href="-k-unit-formatter/index.html">KUnitFormatter</a> that renders a value for an ANSI-capable terminal: it produces the <strong>same</strong> notation as <a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a> (<code class="lang-kotlin">&quot;10.8 km/h&quot;</code>, <code class="lang-kotlin">&quot;m^2&quot;</code>, <code class="lang-kotlin">&quot;m*s^-3*A^-2&quot;</code>), but wraps each visual role in the ANSI SGR colours of a <a href="-k-console-color-palette/index.html">KConsoleColorPalette</a> - the numeric magnitude, the unit symbols, the operators (<code class="lang-kotlin">*</code>, <code class="lang-kotlin">/</code>) and the exponent markers (<code class="lang-kotlin">^n</code>) each get their own colour.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="841944787%2FClasslikes%2F1558683979" anchor-label="KDefaultDivision" id="841944787%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-default-division/index.html"><span>KDefault</span><wbr></wbr><span><span>Division</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="841944787%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-default-division/index.html">KDefaultDivision</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-default-division/index.html">KDefaultDivision</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The division sign the <a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a> places between numerator and denominator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2084443360%2FClasslikes%2F1558683979" anchor-label="KDefaultExponentStyle" id="2084443360%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-default-exponent-style/index.html"><span>KDefault</span><wbr></wbr><span>Exponent</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2084443360%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-default-exponent-style/index.html">KDefaultExponentStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-default-exponent-style/index.html">KDefaultExponentStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a> renders a unit exponent.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="834940775%2FClasslikes%2F1558683979" anchor-label="KDefaultFormatConfig" id="834940775%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-default-format-config/index.html"><span>KDefault</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="834940775%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-default-format-config/index.html">KDefaultFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>exponentStyle<span class="token operator">: </span><a href="-k-default-exponent-style/index.html">KDefaultExponentStyle</a><span class="token operator"> = </span>KDefaultExponentStyle.CARET<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-default-multiplication/index.html">KDefaultMultiplication</a><span class="token operator"> = </span>KDefaultMultiplication.ASTERISK<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>division<span class="token operator">: </span><a href="-k-default-division/index.html">KDefaultDivision</a><span class="token operator"> = </span>KDefaultDivision.SLASH<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>functionSymbols<span class="token operator">: </span><a href="-k-default-function-symbols/index.html">KDefaultFunctionSymbols</a><span class="token operator"> = </span>KDefaultFunctionSymbols.UNICODE</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a>: the exponent style, the multiplication and division signs and the function-symbol table. It is a plain value type; applications can pick a preset (<a href="-k-default-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a>, <a href="-k-default-format-config/-companion/-s-u-p-e-r-s-c-r-i-p-t.html">SUPERSCRIPT</a>) or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1361272095%2FClasslikes%2F1558683979" anchor-label="KDefaultFunctionSymbols" id="1361272095%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-default-function-symbols/index.html"><span>KDefault</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Symbols</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1361272095%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-default-function-symbols/index.html">KDefaultFunctionSymbols</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>squareRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>cubeRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fourthRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>generalRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>plusMinus<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>infinity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>degree<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The mathematical function symbols a <a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a> uses where a function representation applies (e.g. a root). With purely integer exponents no such representation occurs, so this table is a prepared, user-overridable configuration rather than something applied to standard unit rendering.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1100992806%2FClasslikes%2F1558683979" anchor-label="KDefaultMultiplication" id="-1100992806%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-default-multiplication/index.html"><span>KDefault</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1100992806%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-default-multiplication/index.html">KDefaultMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-default-multiplication/index.html">KDefaultMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication sign the <a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a> places between product terms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1768098300%2FClasslikes%2F1558683979" anchor-label="KDefaultUnitFormatter" id="1768098300%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-default-unit-formatter/index.html"><span>KDefault</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1768098300%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-default-unit-formatter/index.html">KDefaultUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-default-format-config/index.html">KDefaultFormatConfig</a><span class="token operator"> = </span>KDefaultFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">The library's built-in plain-text formatter and the default of every <code class="lang-kotlin">formatter</code> parameter (so <code class="lang-kotlin">format</code>/<code class="lang-kotlin">toString</code> behave identically whether or not a formatter is passed explicitly).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1560872005%2FClasslikes%2F1558683979" anchor-label="KGraphicalConsoleColorPalette" id="1560872005%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-graphical-console-color-palette/index.html"><span>KGraphical</span><wbr></wbr><span>Console</span><wbr></wbr><span>Color</span><wbr></wbr><span><span>Palette</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1560872005%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-graphical-console-color-palette/index.html">KGraphicalConsoleColorPalette</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>numberColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>symbolColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>operatorColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>exponentColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>barColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>reset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>RESET</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The ANSI SGR escape sequences a <a href="-k-graphical-console-unit-formatter/index.html">KGraphicalConsoleUnitFormatter</a> uses to colour the five visual roles of a multi-line rendered value: the numeric magnitude, the unit symbols, the multiplication operators, the (superscript) exponents and the fraction bar. Each role holds the <strong>introducer</strong> sequence (e.g. the cyan <code class="lang-kotlin">ESC[36m</code>); the shared <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KGraphicalConsoleColorPalette//#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToCallableParameters(5)/">reset</span> is appended after every coloured fragment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1230958876%2FClasslikes%2F1558683979" anchor-label="KGraphicalConsoleFormatConfig" id="-1230958876%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-graphical-console-format-config/index.html"><span>KGraphical</span><wbr></wbr><span>Console</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1230958876%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-graphical-console-format-config/index.html">KGraphicalConsoleFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>palette<span class="token operator">: </span><a href="-k-graphical-console-color-palette/index.html">KGraphicalConsoleColorPalette</a><span class="token operator"> = </span>KGraphicalConsoleColorPalette.CLASSIC<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fractionBar<span class="token operator">: </span><a href="-k-graphical-fraction-bar/index.html">KGraphicalFractionBar</a><span class="token operator"> = </span>KGraphicalFractionBar.LINE<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-graphical-multiplication/index.html">KGraphicalMultiplication</a><span class="token operator"> = </span>KGraphicalMultiplication.MIDDLE_DOT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>functionSymbols<span class="token operator">: </span><a href="-k-graphical-function-symbols/index.html">KGraphicalFunctionSymbols</a><span class="token operator"> = </span>KGraphicalFunctionSymbols.UNICODE</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-graphical-console-unit-formatter/index.html">KGraphicalConsoleUnitFormatter</a>: the colour <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KGraphicalConsoleFormatConfig//#org.pcsoft.framework.kunit.formatter.KGraphicalConsoleColorPalette#org.pcsoft.framework.kunit.formatter.KGraphicalFractionBar#org.pcsoft.framework.kunit.formatter.KGraphicalMultiplication#org.pcsoft.framework.kunit.formatter.KGraphicalFunctionSymbols/PointingToCallableParameters(0)/">palette</span>, the fraction-bar character, the multiplication sign and the function-symbol table. Applications can pick the <a href="-k-graphical-console-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a> preset or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2145248737%2FClasslikes%2F1558683979" anchor-label="KGraphicalConsoleUnitFormatter" id="-2145248737%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-graphical-console-unit-formatter/index.html"><span>KGraphical</span><wbr></wbr><span>Console</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2145248737%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-graphical-console-unit-formatter/index.html">KGraphicalConsoleUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-graphical-console-format-config/index.html">KGraphicalConsoleFormatConfig</a><span class="token operator"> = </span>KGraphicalConsoleFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">A <a href="-k-unit-formatter/index.html">KUnitFormatter</a> that renders a value <strong>graphically over several lines</strong> for an ANSI-capable terminal: a fraction is drawn as a real two-dimensional stack - numerator, a horizontal bar, denominator - with the value on the bar (middle) line, and exponents are always set as real Unicode superscript digits. Every visual role is coloured through a <a href="-k-graphical-console-color-palette/index.html">KGraphicalConsoleColorPalette</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1274069149%2FClasslikes%2F1558683979" anchor-label="KGraphicalFractionBar" id="-1274069149%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-graphical-fraction-bar/index.html"><span>KGraphical</span><wbr></wbr><span>Fraction</span><wbr></wbr><span><span>Bar</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1274069149%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-graphical-fraction-bar/index.html">KGraphicalFractionBar</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-graphical-fraction-bar/index.html">KGraphicalFractionBar</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The character the <a href="-k-graphical-console-unit-formatter/index.html">KGraphicalConsoleUnitFormatter</a> repeats to draw the horizontal fraction bar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1612377585%2FClasslikes%2F1558683979" anchor-label="KGraphicalFunctionSymbols" id="1612377585%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-graphical-function-symbols/index.html"><span>KGraphical</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Symbols</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1612377585%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-graphical-function-symbols/index.html">KGraphicalFunctionSymbols</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>squareRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>cubeRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fourthRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>generalRoot<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>plusMinus<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>infinity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>degree<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The mathematical function symbols a <a href="-k-graphical-console-unit-formatter/index.html">KGraphicalConsoleUnitFormatter</a> uses where a function representation applies (e.g. a root). With purely integer exponents no such representation occurs, so this table is a prepared, user-overridable configuration rather than something applied to standard unit rendering.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-123061304%2FClasslikes%2F1558683979" anchor-label="KGraphicalMultiplication" id="-123061304%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-graphical-multiplication/index.html"><span>KGraphical</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-123061304%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-graphical-multiplication/index.html">KGraphicalMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-graphical-multiplication/index.html">KGraphicalMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication sign the <a href="-k-graphical-console-unit-formatter/index.html">KGraphicalConsoleUnitFormatter</a> places between numerator (or denominator) terms. Division itself is drawn as the visual fraction bar, not a sign.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-530453684%2FClasslikes%2F1558683979" anchor-label="KLatexDelimiter" id="-530453684%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-delimiter/index.html"><span>KLatex</span><wbr></wbr><span><span>Delimiter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-530453684%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-latex-delimiter/index.html">KLatexDelimiter</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-latex-delimiter/index.html">KLatexDelimiter</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The math delimiters the <a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a> wraps the whole expression in.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1206497866%2FClasslikes%2F1558683979" anchor-label="KLatexFormatConfig" id="-1206497866%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-format-config/index.html"><span>KLatex</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1206497866%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-latex-format-config/index.html">KLatexFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>fractionStyle<span class="token operator">: </span><a href="-k-latex-fraction-style/index.html">KLatexFractionStyle</a><span class="token operator"> = </span>KLatexFractionStyle.FRACTION<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>unitWrapper<span class="token operator">: </span><a href="-k-latex-unit-wrapper/index.html">KLatexUnitWrapper</a><span class="token operator"> = </span>KLatexUnitWrapper.MATHRM<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-latex-multiplication/index.html">KLatexMultiplication</a><span class="token operator"> = </span>KLatexMultiplication.CDOT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>delimiter<span class="token operator">: </span><a href="-k-latex-delimiter/index.html">KLatexDelimiter</a><span class="token operator"> = </span>KLatexDelimiter.NONE<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>spacing<span class="token operator">: </span><a href="-k-latex-spacing/index.html">KLatexSpacing</a><span class="token operator"> = </span>KLatexSpacing.THIN</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a>. It is a plain value type; applications can pick a preset (<a href="-k-latex-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a>, <a href="-k-latex-format-config/-companion/-i-n-l-i-n-e.html">INLINE</a>, <a href="-k-latex-format-config/-companion/-p-l-a-i-n.html">PLAIN</a>) or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2056205444%2FClasslikes%2F1558683979" anchor-label="KLatexFractionStyle" id="2056205444%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-fraction-style/index.html"><span>KLatex</span><wbr></wbr><span>Fraction</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2056205444%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-latex-fraction-style/index.html">KLatexFractionStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-latex-fraction-style/index.html">KLatexFractionStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a> arranges numerator and denominator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-123472535%2FClasslikes%2F1558683979" anchor-label="KLatexMultiplication" id="-123472535%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-multiplication/index.html"><span>KLatex</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-123472535%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-latex-multiplication/index.html">KLatexMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-latex-multiplication/index.html">KLatexMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication marker the <a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a> places between product terms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="620499216%2FClasslikes%2F1558683979" anchor-label="KLatexSpacing" id="620499216%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-spacing/index.html"><span>KLatex</span><wbr></wbr><span><span>Spacing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="620499216%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-latex-spacing/index.html">KLatexSpacing</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-latex-spacing/index.html">KLatexSpacing</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The spacing the <a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a> inserts between the numeric value and the unit part.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1386957427%2FClasslikes%2F1558683979" anchor-label="KLatexUnitFormatter" id="-1386957427%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-unit-formatter/index.html"><span>KLatex</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1386957427%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-latex-format-config/index.html">KLatexFormatConfig</a><span class="token operator"> = </span>KLatexFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">A <a href="-k-unit-formatter/index.html">KUnitFormatter</a> that renders a value as <strong>LaTeX</strong> math, ready for MathJax, KaTeX or a LaTeX document. With the default configuration <code class="lang-kotlin">3 of meters / seconds</code> read into <code class="lang-kotlin">km/h</code> becomes <code class="lang-kotlin">1.5\,\frac{\mathrm{km}}{\mathrm{h}}</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2001766244%2FClasslikes%2F1558683979" anchor-label="KLatexUnitWrapper" id="2001766244%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-latex-unit-wrapper/index.html"><span>KLatex</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Wrapper</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2001766244%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-latex-unit-wrapper/index.html">KLatexUnitWrapper</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-latex-unit-wrapper/index.html">KLatexUnitWrapper</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-latex-unit-formatter/index.html">KLatexUnitFormatter</a> wraps a unit symbol so it is set upright rather than as math variables.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="98577447%2FClasslikes%2F1558683979" anchor-label="KLocale" id="98577447%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-locale/index.html"><span><span>KLocale</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="98577447%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-locale/index.html">KLocale</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>tag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>decimalSeparator<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>groupingSeparator<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>groupingSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">3</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>secondaryGroupingSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>groupingSize</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The multiplatform replacement for <code class="lang-kotlin">java.util.Locale</code> in the formatting layer: the handful of numeric conventions a <a href="-k-unit-formatter/index.html">KUnitFormatter</a> actually needs, and nothing else.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="873387713%2FClasslikes%2F1558683979" anchor-label="KMathMlFormatConfig" id="873387713%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-math-ml-format-config/index.html"><span>KMath</span><wbr></wbr><span>Ml</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="873387713%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-math-ml-format-config/index.html">KMathMlFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>fractionStyle<span class="token operator">: </span><a href="-k-math-ml-fraction-style/index.html">KMathMlFractionStyle</a><span class="token operator"> = </span>KMathMlFractionStyle.MFRAC<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>unitTag<span class="token operator">: </span><a href="-k-math-ml-unit-tag/index.html">KMathMlUnitTag</a><span class="token operator"> = </span>KMathMlUnitTag.MI<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-math-ml-multiplication/index.html">KMathMlMultiplication</a><span class="token operator"> = </span>KMathMlMultiplication.INVISIBLE_TIMES<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>wrapper<span class="token operator">: </span><a href="-k-math-ml-wrapper/index.html">KMathMlWrapper</a><span class="token operator"> = </span>KMathMlWrapper.MATH_INLINE</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-math-ml-unit-formatter/index.html">KMathMlUnitFormatter</a>. It is a plain value type; applications can pick a preset (<a href="-k-math-ml-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a>, <a href="-k-math-ml-format-config/-companion/-i-n-l-i-n-e.html">INLINE</a>, <a href="-k-math-ml-format-config/-companion/-f-r-a-g-m-e-n-t.html">FRAGMENT</a>) or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2108148953%2FClasslikes%2F1558683979" anchor-label="KMathMlFractionStyle" id="2108148953%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-math-ml-fraction-style/index.html"><span>KMath</span><wbr></wbr><span>Ml</span><wbr></wbr><span>Fraction</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2108148953%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-math-ml-fraction-style/index.html">KMathMlFractionStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-math-ml-fraction-style/index.html">KMathMlFractionStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-math-ml-unit-formatter/index.html">KMathMlUnitFormatter</a> arranges numerator and denominator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1486776244%2FClasslikes%2F1558683979" anchor-label="KMathMlMultiplication" id="1486776244%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-math-ml-multiplication/index.html"><span>KMath</span><wbr></wbr><span>Ml</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1486776244%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-math-ml-multiplication/index.html">KMathMlMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-math-ml-multiplication/index.html">KMathMlMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication operator the <a href="-k-math-ml-unit-formatter/index.html">KMathMlUnitFormatter</a> emits inside an <code class="lang-kotlin">&lt;mo&gt;</code> between product terms and between the value and its units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1335013918%2FClasslikes%2F1558683979" anchor-label="KMathMlUnitFormatter" id="-1335013918%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-math-ml-unit-formatter/index.html"><span>KMath</span><wbr></wbr><span>Ml</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1335013918%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-math-ml-unit-formatter/index.html">KMathMlUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-math-ml-format-config/index.html">KMathMlFormatConfig</a><span class="token operator"> = </span>KMathMlFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">A <a href="-k-unit-formatter/index.html">KUnitFormatter</a> that renders a value as <strong>Presentation MathML</strong>, rendered natively by browsers and by MathJax. With the default configuration <code class="lang-kotlin">3 of meters / seconds</code> read into <code class="lang-kotlin">km/h</code> becomes an inline <code class="lang-kotlin">&lt;math&gt;</code> with an <code class="lang-kotlin">&lt;mfrac&gt;</code> of <code class="lang-kotlin">&lt;mi&gt;km&lt;/mi&gt;</code> over <code class="lang-kotlin">&lt;mi&gt;h&lt;/mi&gt;</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1423060654%2FClasslikes%2F1558683979" anchor-label="KMathMlUnitTag" id="-1423060654%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-math-ml-unit-tag/index.html"><span>KMath</span><wbr></wbr><span>Ml</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Tag</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1423060654%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-math-ml-unit-tag/index.html">KMathMlUnitTag</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-math-ml-unit-tag/index.html">KMathMlUnitTag</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The MathML element the <a href="-k-math-ml-unit-formatter/index.html">KMathMlUnitFormatter</a> uses for a unit symbol.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1258019115%2FClasslikes%2F1558683979" anchor-label="KMathMlWrapper" id="-1258019115%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-math-ml-wrapper/index.html"><span>KMath</span><wbr></wbr><span>Ml</span><wbr></wbr><span><span>Wrapper</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1258019115%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-math-ml-wrapper/index.html">KMathMlWrapper</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-math-ml-wrapper/index.html">KMathMlWrapper</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-math-ml-unit-formatter/index.html">KMathMlUnitFormatter</a> wraps the produced markup.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1181016986%2FClasslikes%2F1558683979" anchor-label="KTypstDelimiter" id="-1181016986%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-typst-delimiter/index.html"><span>KTypst</span><wbr></wbr><span><span>Delimiter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1181016986%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-typst-delimiter/index.html">KTypstDelimiter</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-typst-delimiter/index.html">KTypstDelimiter</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The math delimiters the <a href="-k-typst-unit-formatter/index.html">KTypstUnitFormatter</a> wraps the whole expression in.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1049579100%2FClasslikes%2F1558683979" anchor-label="KTypstFormatConfig" id="1049579100%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-typst-format-config/index.html"><span>KTypst</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1049579100%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-typst-format-config/index.html">KTypstFormatConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>fractionStyle<span class="token operator">: </span><a href="-k-typst-fraction-style/index.html">KTypstFractionStyle</a><span class="token operator"> = </span>KTypstFractionStyle.FRACTION<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>unitStyle<span class="token operator">: </span><a href="-k-typst-unit-style/index.html">KTypstUnitStyle</a><span class="token operator"> = </span>KTypstUnitStyle.UPRIGHT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>multiplication<span class="token operator">: </span><a href="-k-typst-multiplication/index.html">KTypstMultiplication</a><span class="token operator"> = </span>KTypstMultiplication.SPACE<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>delimiter<span class="token operator">: </span><a href="-k-typst-delimiter/index.html">KTypstDelimiter</a><span class="token operator"> = </span>KTypstDelimiter.MATH</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The rendering options of the <a href="-k-typst-unit-formatter/index.html">KTypstUnitFormatter</a>. It is a plain value type; applications can pick a preset (<a href="-k-typst-format-config/-companion/-d-e-f-a-u-l-t.html">DEFAULT</a>, <a href="-k-typst-format-config/-companion/-f-r-a-g-m-e-n-t.html">FRAGMENT</a>) or build their own.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1019852642%2FClasslikes%2F1558683979" anchor-label="KTypstFractionStyle" id="-1019852642%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-typst-fraction-style/index.html"><span>KTypst</span><wbr></wbr><span>Fraction</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1019852642%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-typst-fraction-style/index.html">KTypstFractionStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-typst-fraction-style/index.html">KTypstFractionStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-typst-unit-formatter/index.html">KTypstUnitFormatter</a> arranges numerator and denominator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-991992689%2FClasslikes%2F1558683979" anchor-label="KTypstMultiplication" id="-991992689%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-typst-multiplication/index.html"><span>KTypst</span><wbr></wbr><span><span>Multiplication</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-991992689%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-typst-multiplication/index.html">KTypstMultiplication</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-typst-multiplication/index.html">KTypstMultiplication</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The multiplication marker the <a href="-k-typst-unit-formatter/index.html">KTypstUnitFormatter</a> places between product terms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-168048217%2FClasslikes%2F1558683979" anchor-label="KTypstUnitFormatter" id="-168048217%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-typst-unit-formatter/index.html"><span>KTypst</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-168048217%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-typst-unit-formatter/index.html">KTypstUnitFormatter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="-k-typst-format-config/index.html">KTypstFormatConfig</a><span class="token operator"> = </span>KTypstFormatConfig.DEFAULT</span></span><span class="token punctuation">)</span> : <a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">A <a href="-k-unit-formatter/index.html">KUnitFormatter</a> that renders a value as <strong>Typst</strong> math. With the default configuration <code class="lang-kotlin">3 of meters / seconds</code> read into <code class="lang-kotlin">km/h</code> becomes <code class="lang-kotlin">$1.5 upright(&quot;km&quot;)/upright(&quot;h&quot;)$</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1692753568%2FClasslikes%2F1558683979" anchor-label="KTypstUnitStyle" id="1692753568%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-typst-unit-style/index.html"><span>KTypst</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1692753568%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-typst-unit-style/index.html">KTypstUnitStyle</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-typst-unit-style/index.html">KTypstUnitStyle</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">How the <a href="-k-typst-unit-formatter/index.html">KTypstUnitFormatter</a> renders a unit symbol so it is set upright.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="541294861%2FClasslikes%2F1558683979" anchor-label="KUnitFormatContext" id="541294861%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit-format-context/index.html"><span>KUnit</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="541294861%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-k-unit-format-context/index.html">KUnitFormatContext</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>units<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../org.pcsoft.framework.kunit/-k-unit-term/index.html">KUnitTerm</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pattern<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>locale<span class="token operator">: </span><a href="-k-locale/index.html">KLocale</a><span class="token operator"> = </span>KLocale.ROOT</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Everything a <a href="-k-unit-formatter/index.html">KUnitFormatter</a> needs to render one measured value as text: the numeric <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KUnitFormatContext//#kotlin.Double#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]#kotlin.String?#org.pcsoft.framework.kunit.formatter.KLocale/PointingToCallableParameters(0)/">value</span> <strong>already expressed in the target unit(s)</strong> together with the <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KUnitFormatContext//#kotlin.Double#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]#kotlin.String?#org.pcsoft.framework.kunit.formatter.KLocale/PointingToCallableParameters(1)/">units</span> describing that target dimension, plus the optional number <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KUnitFormatContext//#kotlin.Double#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]#kotlin.String?#org.pcsoft.framework.kunit.formatter.KLocale/PointingToCallableParameters(2)/">pattern</span> and <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KUnitFormatContext//#kotlin.Double#kotlin.collections.List[org.pcsoft.framework.kunit.KUnitTerm]#kotlin.String?#org.pcsoft.framework.kunit.formatter.KLocale/PointingToCallableParameters(3)/">locale</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1119374277%2FClasslikes%2F1558683979" anchor-label="KUnitFormatter" id="-1119374277%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-unit-formatter/index.html"><span>KUnit</span><wbr></wbr><span><span>Formatter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1119374277%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-k-unit-formatter/index.html">KUnitFormatter</a></div><div class="brief "><p class="paragraph">The extension point for turning a measured value into text. Implement it to plug a completely custom rendering into both the <code class="lang-kotlin">format</code> verb and the value-formatting <code class="lang-kotlin">toString</code> overload - for example to emit LaTeX/MathML for a graphical formula renderer, HTML, or a domain-specific notation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1765086908%2FProperties%2F1558683979" anchor-label="displaySymbol" id="1765086908%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="display-symbol.html"><span>display</span><wbr></wbr><span><span>Symbol</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1765086908%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-unit-term/index.html">KUnitTerm</a><span class="token punctuation">.</span><a href="display-symbol.html">displaySymbol</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The rendered unit symbol of this term, honouring its cosmetic <a href="../org.pcsoft.framework.kunit/-k-unit-term/display.html">KUnitTerm.display</a> metadata: the written-down symbol (<code class="lang-kotlin">&quot;km&quot;</code>, <code class="lang-kotlin">&quot;h&quot;</code>) when a display is present, otherwise the group base unit's symbol (<code class="lang-kotlin">&quot;m&quot;</code>, <code class="lang-kotlin">&quot;s&quot;</code>). The exponent is <strong>not</strong> included - a formatter decides how to render it.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="2031217577%2FFunctions%2F1558683979" anchor-label="renderValue" id="2031217577%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="render-value.html"><span>render</span><wbr></wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2031217577%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-k-unit-format-context/index.html">KUnitFormatContext</a><span class="token punctuation">.</span><a href="render-value.html"><span class="token function">renderValue</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Renders <a href="-k-unit-format-context/value.html">KUnitFormatContext.value</a> as a string: the plain <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/to-string.html">Double.toString</a> when <a href="-k-unit-format-context/pattern.html">KUnitFormatContext.pattern</a> is <code class="lang-kotlin">null</code>, otherwise the pattern applied under the context's <a href="-k-unit-format-context/locale.html">KUnitFormatContext.locale</a>. The unformatted form is rendered portably (<code class="lang-kotlin">5.0</code>, not JS's <code class="lang-kotlin">5</code>), so the result is identical on every target.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1087483169%2FFunctions%2F2112555339" anchor-label="toKLocale" id="1087483169%2FFunctions%2F2112555339" data-filterable-set=":/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/jvmMain" data-filterable-set=":/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-k-locale.html"><span>to</span><wbr></wbr><span><span>KLocale</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1087483169%2FFunctions%2F2112555339"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":/jvmMain" data-filterable-set=":/jvmMain" data-active="" data-toggle=":/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Locale.html">Locale</a><span class="token punctuation">.</span><a href="to-k-locale.html"><span class="token function">toKLocale</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-locale/index.html">KLocale</a></div><div class="brief "><p class="paragraph">Derives the <a href="-k-locale/index.html">KLocale</a> matching this <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Locale.html">java.util.Locale</a>: decimal separator, grouping separator and grouping size are read from the platform's locale data, so JVM code can keep using <code class="lang-kotlin">java.util.Locale</code> while the formatting itself runs on the common implementation.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

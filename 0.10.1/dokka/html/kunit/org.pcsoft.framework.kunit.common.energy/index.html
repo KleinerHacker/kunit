@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.common.energy</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.common.energy////PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.common.energy</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-808977132%2FClasslikes%2F1558683979" anchor-label="KEnergyUnit" id="-808977132%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-energy-unit/index.html"><span>KEnergy</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-808977132%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-energy-unit/index.html">KEnergyUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-energy-unit/index.html">KEnergyUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of <strong>energy</strong> (a <i>constructed</i> quantity: <code class="lang-kotlin">mass¹ · distance² · time⁻²</code>, i.e. <code class="lang-kotlin">kg·m²·s⁻²</code>). <span data-unresolved-link="org.pcsoft.framework.kunit.common.energy/KEnergyUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-energy-unit/-companion/-b-a-s-e.html">BASE</a>, joule): <code class="lang-kotlin">1 unit = baseValue * J</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1683081473%2FClasslikes%2F1558683979" anchor-label="KEnergyUnitInstance" id="-1683081473%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-energy-unit-instance/index.html"><span>KEnergy</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1683081473%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing an <strong>energy</strong> (work, heat), i.e. exactly three terms in the canonical normal form <code class="lang-kotlin">mass¹ · distance² · time⁻²</code> (<code class="lang-kotlin">kg·m²·s⁻²</code>). The <span data-unresolved-link="org.pcsoft.framework.kunit.common.energy/KEnergyUnitInstance/value/#/PointingToDeclaration/">value</span> is always normalized internally to joules (<a href="-k-energy-unit/-companion/-b-a-s-e.html">KEnergyUnit.BASE</a>), regardless of which <a href="-k-energy-unit/index.html">KEnergyUnit</a>, SI <a href="../org.pcsoft.framework.kunit/-k-unit-prefix/index.html">KUnitPrefix</a>, or mass/length/time combination it was constructed from.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1111911849%2FProperties%2F1558683979" anchor-label="britishThermalUnits" id="-1111911849%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="british-thermal-units.html"><span>british</span><wbr></wbr><span>Thermal</span><wbr></wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1111911849%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="british-thermal-units.html">britishThermalUnits</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">1 British thermal unit (<a href="-k-energy-unit/-b-r-i-t-i-s-h_-t-h-e-r-m-a-l_-u-n-i-t/index.html">KEnergyUnit.BRITISH_THERMAL_UNIT</a>, 1055.05585262 J).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-461968327%2FProperties%2F1558683979" anchor-label="britishThermalUnits" id="-461968327%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="british-thermal-units.html"><span>british</span><wbr></wbr><span>Thermal</span><wbr></wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-461968327%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="british-thermal-units.html">britishThermalUnits</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed British thermal units, e.g. <code class="lang-kotlin">kilo.britishThermalUnits</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-662427262%2FProperties%2F1558683979" anchor-label="calories" id="-662427262%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="calories.html"><span><span>calories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-662427262%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="calories.html">calories</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">1 thermochemical calorie (<a href="-k-energy-unit/-c-a-l-o-r-i-e/index.html">KEnergyUnit.CALORIE</a>, 4.184 J).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-448650898%2FProperties%2F1558683979" anchor-label="calories" id="-448650898%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="calories.html"><span><span>calories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-448650898%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="calories.html">calories</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed calories, e.g. <code class="lang-kotlin">kilo.calories</code> (the &quot;food calorie&quot;, 4184 J).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1874147522%2FProperties%2F1558683979" anchor-label="electronVolts" id="1874147522%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="electron-volts.html"><span>electron</span><wbr></wbr><span><span>Volts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1874147522%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="electron-volts.html">electronVolts</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">1 electron volt (<a href="-k-energy-unit/-e-l-e-c-t-r-o-n_-v-o-l-t/index.html">KEnergyUnit.ELECTRON_VOLT</a>, 1.602176634e-19 J).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="547043886%2FProperties%2F1558683979" anchor-label="electronVolts" id="547043886%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="electron-volts.html"><span>electron</span><wbr></wbr><span><span>Volts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="547043886%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="electron-volts.html">electronVolts</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed electron volts, e.g. <code class="lang-kotlin">mega.electronVolts</code> (MeV).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2010571535%2FProperties%2F1558683979" anchor-label="ergs" id="2010571535%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ergs.html"><span><span>ergs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2010571535%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="ergs.html">ergs</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">1 erg (<a href="-k-energy-unit/-e-r-g/index.html">KEnergyUnit.ERG</a>, CGS, 1e-7 J).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1615972993%2FProperties%2F1558683979" anchor-label="ergs" id="1615972993%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ergs.html"><span><span>ergs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1615972993%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="ergs.html">ergs</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed ergs, e.g. <code class="lang-kotlin">mega.ergs</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2043509630%2FProperties%2F1558683979" anchor-label="joules" id="2043509630%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="joules.html"><span><span>joules</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2043509630%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="joules.html">joules</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">1 joule (<a href="-k-energy-unit/-j-o-u-l-e/index.html">KEnergyUnit.JOULE</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-678937870%2FProperties%2F1558683979" anchor-label="joules" id="-678937870%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="joules.html"><span><span>joules</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-678937870%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="joules.html">joules</a><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed joules, e.g. <code class="lang-kotlin">kilo.joules</code> = 1000 J, <code class="lang-kotlin">mega.joules</code> = 1e6 J.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1795088373%2FFunctions%2F1558683979" anchor-label="div" id="-1795088373%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1795088373%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">power<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for time - <code class="lang-kotlin">energy / power = time</code> (<code class="lang-kotlin">t = W / P</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">charge<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.electric.charge/-k-charge-unit-instance/index.html">KChargeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.electric.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for voltage - <code class="lang-kotlin">energy / charge = voltage</code> (<code class="lang-kotlin">U = W / Q</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">time<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for power - <code class="lang-kotlin">energy / time = power</code> (<code class="lang-kotlin">P = W / t</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angularAcceleration<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.angularacceleration/-k-angular-acceleration-unit-instance/index.html">KAngularAccelerationUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.inertia/-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for the moment of inertia - <code class="lang-kotlin">torque / angularacceleration = inertia</code> (<code class="lang-kotlin">J = M / α</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inertia<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.inertia/-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.angularacceleration/-k-angular-acceleration-unit-instance/index.html">KAngularAccelerationUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for the angular acceleration - <code class="lang-kotlin">torque / inertia = angularacceleration</code> (<code class="lang-kotlin">α = M / J</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">torque<span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.angularvelocity/-k-angular-velocity-unit-instance/index.html">KAngularVelocityUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for the angular velocity - <code class="lang-kotlin">power / torque = angularvelocity</code> (<code class="lang-kotlin">ω = P / M</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">frequency<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.frequency/-k-frequency-unit-instance/index.html">KFrequencyUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Inverse-time form of decomposition A: <code class="lang-kotlin">power / frequency = energy</code> (dividing by a frequency mirrors a multiplication by a time, <code class="lang-kotlin">1/Hz = s</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angularVelocity<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.angularvelocity/-k-angular-velocity-unit-instance/index.html">KAngularVelocityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Solved for the torque - <code class="lang-kotlin">power / angularvelocity = torque</code> (<code class="lang-kotlin">M = P / ω</code>), the everyday drivetrain formula.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="450616740%2FFunctions%2F1558683979" anchor-label="times" id="450616740%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="450616740%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angularVelocity<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.angularvelocity/-k-angular-velocity-unit-instance/index.html">KAngularVelocityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a></div><div class="brief "><p class="paragraph">Decomposition D - rotational power: <code class="lang-kotlin">torque · angularvelocity = power</code> (<code class="lang-kotlin">P = M · ω</code>). The receiver is read as a torque in N·m, the result is a mechanical power in watts.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">time<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Decomposition A - energy as power over time: <code class="lang-kotlin">power · time = energy</code> (<code class="lang-kotlin">W = P · t</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.electric.charge/-k-charge-unit-instance/index.html">KChargeUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">voltage<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.electric.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Decomposition C - electrical energy: <code class="lang-kotlin">charge · voltage = energy</code> (<code class="lang-kotlin">W = Q · U</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.electric.voltage/-k-voltage-unit-instance/index.html">KVoltageUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">charge<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.electric.charge/-k-charge-unit-instance/index.html">KChargeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Commutative form of <a href="../org.pcsoft.framework.kunit.electric.charge/-k-charge-unit-instance/times.html">KChargeUnitInstance.times</a> - <code class="lang-kotlin">voltage · charge = energy</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-length-unit-instance/index.html">KLengthUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">force<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.force/-k-force-unit-instance/index.html">KForceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Commutative form of <a href="../org.pcsoft.framework.kunit.mechanic.force/-k-force-unit-instance/times.html">KForceUnitInstance.times</a> - <code class="lang-kotlin">length · force = energy</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">power<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Commutative form of <a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/times.html">KPowerUnitInstance.times</a> - <code class="lang-kotlin">time · power = energy</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.angularacceleration/-k-angular-acceleration-unit-instance/index.html">KAngularAccelerationUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inertia<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.inertia/-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Commutative form of <a href="../org.pcsoft.framework.kunit.mechanic.inertia/-k-inertia-unit-instance/times.html">KInertiaUnitInstance.times</a> - <code class="lang-kotlin">angularacceleration · inertia = torque</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.angularvelocity/-k-angular-velocity-unit-instance/index.html">KAngularVelocityUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">torque<span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.common.power/-k-power-unit-instance/index.html">KPowerUnitInstance</a></div><div class="brief "><p class="paragraph">Commutative form of <a href="-k-energy-unit-instance/times.html">KEnergyUnitInstance.times</a> - <code class="lang-kotlin">angularvelocity · torque = power</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.force/-k-force-unit-instance/index.html">KForceUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">length<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-length-unit-instance/index.html">KLengthUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Decomposition B - mechanical work: <code class="lang-kotlin">force · length = energy</code> (<code class="lang-kotlin">W = F · s</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.inertia/-k-inertia-unit-instance/index.html">KInertiaUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angularAcceleration<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.angularacceleration/-k-angular-acceleration-unit-instance/index.html">KAngularAccelerationUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Rotational Newton's second law - <code class="lang-kotlin">inertia * angularacceleration = torque</code> (<code class="lang-kotlin">M = J · α</code>). The moment of inertia stores its raw component in <code class="lang-kotlin">g·m²</code>, so the bridge to kg·m² is <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.inertia//KGM2_IN_BASE/#/PointingToDeclaration/">KGM2_IN_BASE</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-597846474%2FFunctions%2F1558683979" anchor-label="toEnergy" id="-597846474%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-energy.html"><span>to</span><wbr></wbr><span><span>Energy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-597846474%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-energy.html"><span class="token function">toEnergy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-energy-unit-instance/index.html">KEnergyUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; energy value, as long as it matches the canonical energy normal form: exactly one <a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code>, one <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+2</code> and one <a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-2</code> (order independent). The terms are normalized over their <a href="../org.pcsoft.framework.kunit/-k-unit/base-value.html">org.pcsoft.framework.kunit.KUnit.baseValue</a>s, so the resulting energy is expressed in joules regardless of which concrete mass/length/time units the terms were tagged with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

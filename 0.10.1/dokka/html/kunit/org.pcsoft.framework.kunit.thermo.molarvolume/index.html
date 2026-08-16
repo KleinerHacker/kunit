@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.thermo.molarvolume</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.thermo.molarvolume////PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.thermo.molarvolume</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1034426508%2FClasslikes%2F1558683979" anchor-label="KMolarVolumeUnit" id="-1034426508%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-molar-volume-unit/index.html"><span>KMolar</span><wbr></wbr><span>Volume</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1034426508%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-molar-volume-unit/index.html">KMolarVolumeUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-molar-volume-unit/index.html">KMolarVolumeUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of <strong>molar volume</strong> (volume per amount of substance; a <i>constructed</i> quantity: length³ · substance⁻¹). <span data-unresolved-link="org.pcsoft.framework.kunit.thermo.molarvolume/KMolarVolumeUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-molar-volume-unit/-companion/-b-a-s-e.html">BASE</a>, cubic meter per mole): <code class="lang-kotlin">1 unit = baseValue * m³/mol</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1235369633%2FClasslikes%2F1558683979" anchor-label="KMolarVolumeUnitInstance" id="-1235369633%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-molar-volume-unit-instance/index.html"><span>KMolar</span><wbr></wbr><span>Volume</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1235369633%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing a <strong>molar volume</strong> (volume per amount of substance), i.e. exactly two terms in the canonical normal form - <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/-companion/-b-a-s-e.html">KDistanceUnit.BASE</a> (meter) at exponent <code class="lang-kotlin">+3</code> and <a href="../org.pcsoft.framework.kunit.thermo.amountofsubstance/-k-amount-of-substance-unit/-companion/-b-a-s-e.html">KAmountOfSubstanceUnit.BASE</a> (mole) at exponent <code class="lang-kotlin">-1</code> (<code class="lang-kotlin">m³·mol⁻¹</code>). Both components are stored in their group's base unit, so the raw component base <i>is</i> the named base unit (<a href="-k-molar-volume-unit/-c-u-b-i-c_-m-e-t-e-r-s_-p-e-r_-m-o-l-e/index.html">KMolarVolumeUnit.CUBIC_METERS_PER_MOLE</a>) and no bridging factor is needed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1398103718%2FProperties%2F1558683979" anchor-label="cubicCentimetersPerMole" id="1398103718%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cubic-centimeters-per-mole.html"><span>cubic</span><wbr></wbr><span>Centimeters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Mole</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1398103718%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="cubic-centimeters-per-mole.html">cubicCentimetersPerMole</a><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">1 cm³/mol (<a href="-k-molar-volume-unit/-c-u-b-i-c_-c-e-n-t-i-m-e-t-e-r-s_-p-e-r_-m-o-l-e/index.html">KMolarVolumeUnit.CUBIC_CENTIMETERS_PER_MOLE</a>, 1e-6 m³/mol).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="130811082%2FProperties%2F1558683979" anchor-label="cubicCentimetersPerMole" id="130811082%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cubic-centimeters-per-mole.html"><span>cubic</span><wbr></wbr><span>Centimeters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Mole</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="130811082%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="cubic-centimeters-per-mole.html">cubicCentimetersPerMole</a><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed cubic centimeters per mole, e.g. <code class="lang-kotlin">kilo.cubicCentimetersPerMole</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1657904569%2FProperties%2F1558683979" anchor-label="cubicMetersPerMole" id="1657904569%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cubic-meters-per-mole.html"><span>cubic</span><wbr></wbr><span>Meters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Mole</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1657904569%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="cubic-meters-per-mole.html">cubicMetersPerMole</a><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">1 m³/mol (<a href="-k-molar-volume-unit/-c-u-b-i-c_-m-e-t-e-r-s_-p-e-r_-m-o-l-e/index.html">KMolarVolumeUnit.CUBIC_METERS_PER_MOLE</a>), the group's base unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="140875543%2FProperties%2F1558683979" anchor-label="cubicMetersPerMole" id="140875543%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cubic-meters-per-mole.html"><span>cubic</span><wbr></wbr><span>Meters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Mole</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="140875543%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="cubic-meters-per-mole.html">cubicMetersPerMole</a><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed cubic meters per mole, e.g. <code class="lang-kotlin">milli.cubicMetersPerMole</code> (= l/mol).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-893029708%2FProperties%2F1558683979" anchor-label="litersPerMole" id="-893029708%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="liters-per-mole.html"><span>liters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Mole</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-893029708%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="liters-per-mole.html">litersPerMole</a><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">1 l/mol (<a href="-k-molar-volume-unit/-l-i-t-e-r-s_-p-e-r_-m-o-l-e/index.html">KMolarVolumeUnit.LITERS_PER_MOLE</a>, 0.001 m³/mol).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-32810884%2FProperties%2F1558683979" anchor-label="litersPerMole" id="-32810884%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="liters-per-mole.html"><span>liters</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Mole</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-32810884%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="liters-per-mole.html">litersPerMole</a><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed liters per mole, e.g. <code class="lang-kotlin">milli.litersPerMole</code> (ml/mol).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-658697857%2FProperties%2F1558683979" anchor-label="MOLAR_VOLUME_IDEAL_GAS_STP" id="-658697857%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-o-l-a-r_-v-o-l-u-m-e_-i-d-e-a-l_-g-a-s_-s-t-p.html"><span>MOLAR_</span><wbr></wbr><span>VOLUME_</span><wbr></wbr><span>IDEAL_</span><wbr></wbr><span>GAS_</span><wbr></wbr><span>STP</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-658697857%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-o-l-a-r_-v-o-l-u-m-e_-i-d-e-a-l_-g-a-s_-s-t-p.html">MOLAR_VOLUME_IDEAL_GAS_STP</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.02271095464</span></div><div class="brief "><p class="paragraph">The <strong>molar volume of an ideal gas at standard conditions</strong> (STP: 0 °C, 100 kPa) in cubic meters per mole: 0.022711 m³/mol = 22.711 l/mol. Exposed as a plain <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a> in <a href="-k-molar-volume-unit/-companion/-b-a-s-e.html">KMolarVolumeUnit.BASE</a> units so it can be used with any construction form (<code class="lang-kotlin">MOLAR_VOLUME_IDEAL_GAS_STP of cubicMetersPerMole</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1727814855%2FFunctions%2F1558683979" anchor-label="div" id="-1727814855%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1727814855%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.amountofsubstance/-k-amount-of-substance-unit-instance/index.html">KAmountOfSubstanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a volume by an amount of substance to obtain a <a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a> (<code class="lang-kotlin">volume / amountOfSubstance = molar volume</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.amountofsubstance/-k-amount-of-substance-unit-instance/index.html">KAmountOfSubstanceUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a volume by a molar volume to obtain the amount of substance it holds (<code class="lang-kotlin">volume / molar volume = amountOfSubstance</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.molarmass/-k-molar-mass-unit-instance/index.html">KMolarMassUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a molar mass by a density to obtain the molar volume (<code class="lang-kotlin">molarMass / density = molar volume</code>) - the second decomposition of this group, yielding the same typed, value-equal result as <code class="lang-kotlin">volume / amountOfSubstance</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.molarmass/-k-molar-mass-unit-instance/index.html">KMolarMassUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a molar mass by a molar volume to obtain the density (<code class="lang-kotlin">molar mass / molar volume = density</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-651844500%2FFunctions%2F1558683979" anchor-label="times" id="-651844500%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-651844500%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.molarmass/-k-molar-mass-unit-instance/index.html">KMolarMassUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a density by a molar volume to obtain the molar mass; the commutative counterpart of <a href="-k-molar-volume-unit-instance/times.html">KMolarVolumeUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.thermo.amountofsubstance/-k-amount-of-substance-unit-instance/index.html">KAmountOfSubstanceUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies an amount of substance by a molar volume to obtain the total volume; the commutative counterpart of <a href="-k-molar-volume-unit-instance/times.html">KMolarVolumeUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.molarmass/-k-molar-mass-unit-instance/index.html">KMolarMassUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a molar volume by a density to obtain the molar mass (<code class="lang-kotlin">molar volume * density = molar mass</code>) - the inverse of the <code class="lang-kotlin">molarMass / density</code> decomposition.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.thermo.amountofsubstance/-k-amount-of-substance-unit-instance/index.html">KAmountOfSubstanceUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-volume-unit-instance/index.html">KVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a molar volume by an amount of substance to obtain the total volume (<code class="lang-kotlin">molar volume * amountOfSubstance = volume</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-481669960%2FFunctions%2F1558683979" anchor-label="toMolarVolume" id="-481669960%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-molar-volume.html"><span>to</span><wbr></wbr><span>Molar</span><wbr></wbr><span><span>Volume</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-481669960%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-molar-volume.html"><span class="token function">toMolarVolume</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-molar-volume-unit-instance/index.html">KMolarVolumeUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; molar volume, as long as it matches the canonical molar volume normal form: exactly one <a href="../org.pcsoft.framework.kunit.kinematic.distance/-k-distance-unit/index.html">KDistanceUnit</a> term at exponent <code class="lang-kotlin">+3</code> and one <a href="../org.pcsoft.framework.kunit.thermo.amountofsubstance/-k-amount-of-substance-unit/index.html">KAmountOfSubstanceUnit</a> term at exponent <code class="lang-kotlin">-1</code> (order independent). The terms are normalized over their <a href="../org.pcsoft.framework.kunit/-k-unit/base-value.html">org.pcsoft.framework.kunit.KUnit.baseValue</a>s, so the result is expressed in m³/mol regardless of which concrete units the terms were tagged with.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

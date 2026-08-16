@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Companion</title>
+    <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="kunit::org.pcsoft.framework.kunit.formatter/KLocale.Companion///PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../../../index.html">kunit</a><span class="delimiter">/</span><a href="../../index.html">org.pcsoft.framework.kunit.formatter</a><span class="delimiter">/</span><a href="../index.html">KLocale</a><span class="delimiter">/</span><span class="current">Companion</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Companion</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Companion</a></div><p class="paragraph">The predefined locales shipped with the library.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-721881656%2FProperties%2F1558683979" anchor-label="AR_SA" id="-721881656%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-r_-s-a.html"><span>AR_</span><wbr></wbr><span>SA</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-721881656%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-a-r_-s-a.html">AR_SA</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Arabic (Saudi Arabia) in the Latin numbering system (<code class="lang-kotlin">ar-SA-u-nu-latn</code>): <code class="lang-kotlin">1,234.56</code>. The library never substitutes digit glyphs, so the Arabic-Indic numbering system is intentionally not modelled.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1771417413%2FProperties%2F1558683979" anchor-label="DE_DE" id="1771417413%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-d-e_-d-e.html"><span>DE_</span><wbr></wbr><span>DE</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1771417413%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-d-e_-d-e.html">DE_DE</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">German (Germany): <code class="lang-kotlin">1.234,56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2072470445%2FProperties%2F1558683979" anchor-label="EN_GB" id="-2072470445%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-n_-g-b.html"><span>EN_</span><wbr></wbr><span>GB</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2072470445%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-e-n_-g-b.html">EN_GB</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">English (United Kingdom): <code class="lang-kotlin">1,234.56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-967439376%2FProperties%2F1558683979" anchor-label="EN_US" id="-967439376%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-n_-u-s.html"><span>EN_</span><wbr></wbr><span>US</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-967439376%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-e-n_-u-s.html">EN_US</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">English (United States): <code class="lang-kotlin">1,234.56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2853275%2FProperties%2F1558683979" anchor-label="ES_ES" id="-2853275%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-s_-e-s.html"><span>ES_</span><wbr></wbr><span>ES</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2853275%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-e-s_-e-s.html">ES_ES</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Spanish (Spain): <code class="lang-kotlin">1.234,56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="245955365%2FProperties%2F1558683979" anchor-label="FR_FR" id="245955365%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-r_-f-r.html"><span>FR_</span><wbr></wbr><span>FR</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="245955365%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-f-r_-f-r.html">FR_FR</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">French (France): <code class="lang-kotlin">1 234,56</code> (narrow no-break space as grouping separator).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1086402465%2FProperties%2F1558683979" anchor-label="HI_IN" id="1086402465%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-h-i_-i-n.html"><span>HI_</span><wbr></wbr><span>IN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1086402465%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-h-i_-i-n.html">HI_IN</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Hindi (India): <code class="lang-kotlin">12,34,567.89</code> - the Indian numbering system groups the last three digits and every further <strong>two</strong> digits (see <span data-unresolved-link="org.pcsoft.framework.kunit.formatter/KLocale//#kotlin.String#kotlin.Char#kotlin.Char#kotlin.Int#kotlin.Int/PointingToCallableParameters(4)/">secondaryGroupingSize</span>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="318021509%2FProperties%2F1558683979" anchor-label="IT_IT" id="318021509%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-t_-i-t.html"><span>IT_</span><wbr></wbr><span>IT</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="318021509%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-i-t_-i-t.html">IT_IT</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Italian (Italy): <code class="lang-kotlin">1.234,56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="882842070%2FProperties%2F1558683979" anchor-label="JA_JP" id="882842070%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-j-a_-j-p.html"><span>JA_</span><wbr></wbr><span>JP</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="882842070%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-j-a_-j-p.html">JA_JP</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Japanese (Japan): <code class="lang-kotlin">1,234.56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1263666302%2FProperties%2F1558683979" anchor-label="KO_KR" id="-1263666302%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-o_-k-r.html"><span>KO_</span><wbr></wbr><span>KR</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1263666302%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-k-o_-k-r.html">KO_KR</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Korean (Korea): <code class="lang-kotlin">1,234.56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-610299803%2FProperties%2F1558683979" anchor-label="NL_NL" id="-610299803%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-l_-n-l.html"><span>NL_</span><wbr></wbr><span>NL</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-610299803%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-n-l_-n-l.html">NL_NL</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Dutch (Netherlands): <code class="lang-kotlin">1.234,56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2101136039%2FProperties%2F1558683979" anchor-label="PT_BR" id="-2101136039%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-t_-b-r.html"><span>PT_</span><wbr></wbr><span>BR</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2101136039%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-p-t_-b-r.html">PT_BR</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Portuguese (Brazil): <code class="lang-kotlin">1.234,56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="770585748%2FProperties%2F1558683979" anchor-label="ROOT" id="770585748%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-o-o-t.html"><span><span>ROOT</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="770585748%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-r-o-o-t.html">ROOT</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">The locale-independent default: <code class="lang-kotlin">.</code> as decimal separator, <code class="lang-kotlin">,</code> as grouping separator. Used whenever no locale is given, so unqualified formatting is deterministic on every platform (unlike <code class="lang-kotlin">java.util.Locale.getDefault()</code>, which depends on the machine).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1208579717%2FProperties%2F1558683979" anchor-label="RU_RU" id="1208579717%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-u_-r-u.html"><span>RU_</span><wbr></wbr><span>RU</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1208579717%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-r-u_-r-u.html">RU_RU</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Russian (Russia): <code class="lang-kotlin">1 234,56</code> (no-break space as grouping separator).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-877725752%2FProperties%2F1558683979" anchor-label="ZH_CN" id="-877725752%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-z-h_-c-n.html"><span>ZH_</span><wbr></wbr><span>CN</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-877725752%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-z-h_-c-n.html">ZH_CN</a><span class="token operator">: </span><a href="../index.html">KLocale</a></div><div class="brief "><p class="paragraph">Chinese (China): <code class="lang-kotlin">1,234.56</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

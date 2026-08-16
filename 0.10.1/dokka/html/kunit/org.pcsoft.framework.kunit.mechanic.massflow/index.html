@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.pcsoft.framework.kunit.mechanic.massflow</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kunit
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kunit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kunit::org.pcsoft.framework.kunit.mechanic.massflow////PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../index.html">kunit</a><span class="delimiter">/</span><span class="current">org.pcsoft.framework.kunit.mechanic.massflow</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-997241767%2FClasslikes%2F1558683979" anchor-label="KMassFlowUnit" id="-997241767%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-mass-flow-unit/index.html"><span>KMass</span><wbr></wbr><span>Flow</span><wbr></wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-997241767%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-k-mass-flow-unit/index.html">KMassFlowUnit</a> : <a href="../org.pcsoft.framework.kunit/-k-unit/index.html">KUnit</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-k-mass-flow-unit/index.html">KMassFlowUnit</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Enumerates concrete units of <strong>mass flow rate</strong> (a <i>constructed</i> quantity: mass · time⁻¹). <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.massflow/KMassFlowUnit//#kotlin.String#kotlin.Double/PointingToCallableParameters(1)/">baseValue</span> is the factor to convert into the group's base unit (<a href="-k-mass-flow-unit/-companion/-b-a-s-e.html">BASE</a>, kilogram per second): <code class="lang-kotlin">1 unit = baseValue * kg/s</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-299339452%2FClasslikes%2F1558683979" anchor-label="KMassFlowUnitInstance" id="-299339452%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-mass-flow-unit-instance/index.html"><span>KMass</span><wbr></wbr><span>Flow</span><wbr></wbr><span>Unit</span><wbr></wbr><span><span>Instance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-299339452%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a> : <a href="../org.pcsoft.framework.kunit/-k-unit-instance/index.html">KUnitInstance</a><span class="token operator">&lt;</span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a><span class="token operator">&gt; </span>, <a href="../org.pcsoft.framework.kunit/-k-unit-measurable/index.html">KUnitMeasurable</a></div><div class="brief "><p class="paragraph">Wraps a <a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a> representing a <strong>mass flow rate</strong>, i.e. exactly two terms in the canonical normal form - <a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit/-companion/-b-a-s-e.html">KMassUnit.BASE</a> (gram) at exponent <code class="lang-kotlin">+1</code> and <a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit/-companion/-b-a-s-e.html">KTimeUnit.BASE</a> (second) at exponent <code class="lang-kotlin">-1</code> (<code class="lang-kotlin">g·s⁻¹</code>). The <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.massflow/KMassFlowUnitInstance/value/#/PointingToDeclaration/">value</span> is the raw component value; readings in kg/s (<a href="-k-mass-flow-unit/-companion/-b-a-s-e.html">KMassFlowUnit.BASE</a>) divide by <span data-unresolved-link="org.pcsoft.framework.kunit.mechanic.massflow//KGS_IN_BASE/#/PointingToDeclaration/">KGS_IN_BASE</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1816257938%2FProperties%2F1558683979" anchor-label="gramsPerSecond" id="1816257938%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grams-per-second.html"><span>grams</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1816257938%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="grams-per-second.html">gramsPerSecond</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">1 g/s (<a href="-k-mass-flow-unit/-g-r-a-m-s_-p-e-r_-s-e-c-o-n-d/index.html">KMassFlowUnit.GRAMS_PER_SECOND</a>, 0.001 kg/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1283770530%2FProperties%2F1558683979" anchor-label="gramsPerSecond" id="-1283770530%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grams-per-second.html"><span>grams</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1283770530%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="grams-per-second.html">gramsPerSecond</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed g/s, e.g. <code class="lang-kotlin">milli.gramsPerSecond</code> (mg/s), <code class="lang-kotlin">micro.gramsPerSecond</code> (µg/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1322354527%2FProperties%2F1558683979" anchor-label="kilogramsPerHour" id="-1322354527%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilograms-per-hour.html"><span>kilograms</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1322354527%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="kilograms-per-hour.html">kilogramsPerHour</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">1 kg/h (<a href="-k-mass-flow-unit/-k-i-l-o-g-r-a-m-s_-p-e-r_-h-o-u-r/index.html">KMassFlowUnit.KILOGRAMS_PER_HOUR</a>, 1/3600 kg/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1954423087%2FProperties%2F1558683979" anchor-label="kilogramsPerHour" id="1954423087%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilograms-per-hour.html"><span>kilograms</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1954423087%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="kilograms-per-hour.html">kilogramsPerHour</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed kg/h, e.g. <code class="lang-kotlin">kilo.kilogramsPerHour</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1246283247%2FProperties%2F1558683979" anchor-label="kilogramsPerSecond" id="-1246283247%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilograms-per-second.html"><span>kilograms</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1246283247%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="kilograms-per-second.html">kilogramsPerSecond</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">1 kg/s (<a href="-k-mass-flow-unit/-k-i-l-o-g-r-a-m-s_-p-e-r_-s-e-c-o-n-d/index.html">KMassFlowUnit.KILOGRAMS_PER_SECOND</a>), the group's base unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1303790145%2FProperties%2F1558683979" anchor-label="kilogramsPerSecond" id="-1303790145%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kilograms-per-second.html"><span>kilograms</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1303790145%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="kilograms-per-second.html">kilogramsPerSecond</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed kg/s, e.g. <code class="lang-kotlin">milli.kilogramsPerSecond</code>, <code class="lang-kotlin">kilo.kilogramsPerSecond</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1232262663%2FProperties%2F1558683979" anchor-label="poundsPerHour" id="-1232262663%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pounds-per-hour.html"><span>pounds</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1232262663%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="pounds-per-hour.html">poundsPerHour</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">1 lb/h (<a href="-k-mass-flow-unit/-p-o-u-n-d-s_-p-e-r_-h-o-u-r/index.html">KMassFlowUnit.POUNDS_PER_HOUR</a>, 0.45359237/3600 kg/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="358929111%2FProperties%2F1558683979" anchor-label="poundsPerHour" id="358929111%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pounds-per-hour.html"><span>pounds</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="358929111%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="pounds-per-hour.html">poundsPerHour</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed lb/h, e.g. <code class="lang-kotlin">kilo.poundsPerHour</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-567347863%2FProperties%2F1558683979" anchor-label="poundsPerSecond" id="-567347863%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pounds-per-second.html"><span>pounds</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-567347863%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="pounds-per-second.html">poundsPerSecond</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">1 lb/s (<a href="-k-mass-flow-unit/-p-o-u-n-d-s_-p-e-r_-s-e-c-o-n-d/index.html">KMassFlowUnit.POUNDS_PER_SECOND</a>, 0.45359237 kg/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1270176409%2FProperties%2F1558683979" anchor-label="poundsPerSecond" id="-1270176409%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pounds-per-second.html"><span>pounds</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1270176409%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="pounds-per-second.html">poundsPerSecond</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed lb/s, e.g. <code class="lang-kotlin">kilo.poundsPerSecond</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1262278139%2FProperties%2F1558683979" anchor-label="tonnesPerHour" id="1262278139%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tonnes-per-hour.html"><span>tonnes</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1262278139%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tonnes-per-hour.html">tonnesPerHour</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">1 t/h (<a href="-k-mass-flow-unit/-t-o-n-n-e-s_-p-e-r_-h-o-u-r/index.html">KMassFlowUnit.TONNES_PER_HOUR</a>, 1000/3600 kg/s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1611731221%2FProperties%2F1558683979" anchor-label="tonnesPerHour" id="1611731221%2FProperties%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tonnes-per-hour.html"><span>tonnes</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1611731221%2FProperties%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../org.pcsoft.framework.kunit/-k-prefix-builder/index.html">KPrefixBuilder</a><span class="token punctuation">.</span><a href="tonnes-per-hour.html">tonnesPerHour</a><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Prefixed t/h, e.g. <code class="lang-kotlin">kilo.tonnesPerHour</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1679539540%2FFunctions%2F1558683979" anchor-label="div" id="1679539540%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1679539540%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a mass by a time to obtain the mass flow rate (<code class="lang-kotlin">mass / time = massflow</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a mass by a mass flow to obtain the required time (<code class="lang-kotlin">mass / massflow = time</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.volumeflow/-k-volume-flow-unit-instance/index.html">KVolumeFlowUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a mass flow by the volumetric flow to obtain the density (<code class="lang-kotlin">massflow / volumeflow = density</code>).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a><span class="token punctuation">.</span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.volumeflow/-k-volume-flow-unit-instance/index.html">KVolumeFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Divides a mass flow by the density to obtain the volumetric flow (<code class="lang-kotlin">massflow / density = volumeflow</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-703988232%2FFunctions%2F1558683979" anchor-label="times" id="-703988232%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-703988232%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a time by a mass flow to obtain the transported mass (<code class="lang-kotlin">time * massflow = mass</code>); the commutative counterpart of <a href="-k-mass-flow-unit-instance/times.html">KMassFlowUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.kinematic.volumeflow/-k-volume-flow-unit-instance/index.html">KVolumeFlowUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a volumetric flow by a density to obtain the mass flow (<code class="lang-kotlin">volumeflow * density = massflow</code>); the commutative counterpart of <a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/times.html">KDensityUnitInstance.times</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit.mechanic.density/-k-density-unit-instance/index.html">KDensityUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.volumeflow/-k-volume-flow-unit-instance/index.html">KVolumeFlowUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a density by a volumetric flow to obtain the mass flow (<code class="lang-kotlin">density * volumeflow = massflow</code>) - the second decomposition of the very same quantity.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a><span class="token punctuation">.</span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit-instance/index.html">KTimeUnitInstance</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit-instance/index.html">KMassUnitInstance</a></div><div class="brief "><p class="paragraph">Multiplies a mass flow by a time to obtain the transported mass (<code class="lang-kotlin">massflow * time = mass</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="608254097%2FFunctions%2F1558683979" anchor-label="toMassFlow" id="608254097%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-mass-flow.html"><span>to</span><wbr></wbr><span>Mass</span><wbr></wbr><span><span>Flow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="608254097%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../org.pcsoft.framework.kunit/-k-mixed-unit-instance/index.html">KMixedUnitInstance</a><span class="token punctuation">.</span><a href="to-mass-flow.html"><span class="token function">toMassFlow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-k-mass-flow-unit-instance/index.html">KMassFlowUnitInstance</a></div><div class="brief "><p class="paragraph">Converts this mixed unit to a &quot;pure&quot; mass flow, as long as it matches the canonical normal form: exactly one <a href="../org.pcsoft.framework.kunit.mechanic.mass/-k-mass-unit/index.html">KMassUnit</a> term at exponent <code class="lang-kotlin">+1</code> and one <a href="../org.pcsoft.framework.kunit.kinematic.time/-k-time-unit/index.html">KTimeUnit</a> term at exponent <code class="lang-kotlin">-1</code> (order independent).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
