@@ -1,7 +1,9 @@
 ---
-name: Prefix
+name: prefix
 description: Prefix support for each unit
 ---
+
+> **Verbindliche Regel:** vor der Arbeit `.claude/ruleset/architecture-prefix.md` lesen und einhalten.
 
 # Prefixes
 

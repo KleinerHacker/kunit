@@ -8,6 +8,7 @@ tools:
   - Read
   - Glob
   - Grep
+  - Skill
 
 skills:
   - unit-overview
@@ -20,7 +21,7 @@ You are a lookup agent that determines which unit groups already exist in the fr
 # Source
 
 Read the **Unit Groups** table in `README.md`, section *What does the framework currently support?*. That
-table is the single source of truth (see `rules/unit-overview.md`).
+table is the single source of truth (see `.claude/ruleset/unit-overview.md`).
 
 You MAY additionally read `CHANGELOG.md` (when the question is about *when* something was added) and
 `docs/mkdocs.yml` (when the question is about documentation pages, or to catch a quantity that is documented

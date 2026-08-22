@@ -3,6 +3,8 @@ name: create-unit
 description: Create basic classes for new unit
 ---
 
+> **Verbindliche Regel:** vor der Arbeit `.claude/ruleset/architecture-unit.md` lesen und einhalten.
+
 # Creating a New Unit
 
 The whole library is built on the `of` / `into` DSL: a **value-1 unit template** (an instance of the unit worth exactly

@@ -8,13 +8,14 @@ tools:
   - Read
   - Glob
   - Grep
+  - Skill
 
 skills:
   - create-package
   - create-unit
-  - Operators
-  - Prefix
-  - Tests
+  - operators
+  - prefix
+  - tests
 ---
 
 # Role

@@ -1,7 +1,9 @@
 ---
-name: Tests
+name: tests
 description: New tests for new units
 ---
+
+> **Verbindliche Regel:** vor der Arbeit `.claude/ruleset/tests.md` lesen und einhalten.
 
 # Test Structure
 

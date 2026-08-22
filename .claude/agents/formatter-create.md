@@ -10,10 +10,11 @@ tools:
   - Edit
   - Glob
   - Grep
+  - Skill
 
 skills:
   - create-formatter
-  - Tests
+  - tests
 ---
 
 # Role

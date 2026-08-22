@@ -10,11 +10,12 @@ tools:
   - Edit
   - Glob
   - Grep
+  - Skill
 
 skills:
   - create-unit
-  - Prefix
-  - Tests
+  - prefix
+  - tests
 ---
 
 # Role

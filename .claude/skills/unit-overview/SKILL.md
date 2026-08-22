@@ -3,6 +3,8 @@ name: unit-overview
 description: Look up which units already exist in the framework
 ---
 
+> **Verbindliche Regel:** vor der Arbeit `.claude/ruleset/unit-overview.md` lesen und einhalten.
+
 # Looking Up Existing Units
 
 Use this skill whenever the question is about the current inventory:
@@ -15,7 +17,7 @@ Use this skill whenever the question is about the current inventory:
 ## Where to look
 
 The one authoritative overview is the **Unit Groups** table in `README.md`, section
-*What does the framework currently support?* (see `rules/unit-overview.md`).
+*What does the framework currently support?* (see `.claude/ruleset/unit-overview.md`).
 
 Read that table. Do NOT scan `src/` - scanning project code is forbidden by the global rules, and the table
 is the maintained answer.

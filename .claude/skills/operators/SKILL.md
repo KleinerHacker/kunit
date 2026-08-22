@@ -1,7 +1,9 @@
 ---
-name: Operators
+name: operators
 description: Operator functions all units MUST HAVE
 ---
+
+> **Verbindliche Regel:** vor der Arbeit `.claude/ruleset/operators.md` lesen und einhalten.
 
 ## Operators
 

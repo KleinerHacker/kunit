@@ -3,6 +3,8 @@ name: periodic-table
 description: Handle with updates in the periodic table if new unit was created
 ---
 
+> **Verbindliche Regel:** vor der Arbeit `.claude/ruleset/architecture-periodic-table.md` lesen und einhalten.
+
 # Periodic Table
 
 * the table is represented as an enumeration
