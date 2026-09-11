@@ -14,7 +14,7 @@ import com.github.jk1.license.render.ReportRenderer
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform") version "2.4.10"
+    kotlin("multiplatform") version "2.4.20"
     `maven-publish`
     id("org.jetbrains.kotlinx.kover") version "0.9.9"
     id("org.jetbrains.dokka") version "2.2.0"
