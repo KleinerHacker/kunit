@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 plugins {
     kotlin("multiplatform") version "2.4.10"
     `maven-publish`
-    id("org.jetbrains.kotlinx.kover") version "0.9.9"
+    id("org.jetbrains.kotlinx.kover") version "0.9.11"
     id("org.jetbrains.dokka") version "2.2.0"
     id("com.github.jk1.dependency-license-report") version "3.1.4"
     // Pinned to 3.2.2: 3.2.3+ regressed on Gradle 9 — io.spring.dependency-management observes
