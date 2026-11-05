@@ -18,7 +18,7 @@ plugins {
     `maven-publish`
     id("org.jetbrains.kotlinx.kover") version "0.9.9"
     id("org.jetbrains.dokka") version "2.2.0"
-    id("com.github.jk1.dependency-license-report") version "3.1.4"
+    id("com.github.jk1.dependency-license-report") version "3.1.5"
     // Pinned to 3.2.2: 3.2.3+ regressed on Gradle 9 — io.spring.dependency-management observes
     // the `cyclonedxDirectBom` configuration as a variant before the plugin registers its artifacts,
     // which Gradle 9 then rejects ("Cannot mutate ... consumed as a variant"). See cyclonedx #821.
